@@ -137,14 +137,16 @@ async function runQuery() {
   }
 }
 
+const MAX_RENDER = 20000; // safety ceiling so a runaway query can't freeze the tab
+
 function renderResult({ columns, rows }) {
-  const capped = rows.slice(0, 500); // don't paint tens of thousands of DOM cells
+  const capped = rows.slice(0, MAX_RENDER);
   const head = `<thead><tr>${columns.map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead>`;
   const body = capped
     .map((r) => `<tr>${columns.map((c) => `<td class="font-mono">${cell(r[c])}</td>`).join("")}</tr>`)
     .join("");
   const note = rows.length > capped.length
-    ? `<tfoot><tr><td colspan="${columns.length}">showing first ${capped.length} of ${rows.length.toLocaleString()} rows</td></tr></tfoot>`
+    ? `<tfoot><tr><td colspan="${columns.length}">showing first ${capped.length.toLocaleString()} of ${rows.length.toLocaleString()} rows — scroll, or add a LIMIT / filter</td></tr></tfoot>`
     : "";
   $("#resultTable").innerHTML = head + `<tbody>${body}</tbody>` + note;
 }
