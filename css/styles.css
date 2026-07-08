@@ -55,13 +55,6 @@ a { color: inherit; text-decoration: none; }
   gap: 0.6rem;
 }
 
-.section-num {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  color: var(--text-dim);
-  letter-spacing: 0.05em;
-}
-
 /* ---------- Layout primitives ---------- */
 .wrap {
   width: 100%;
@@ -82,6 +75,16 @@ section { padding-block: var(--space-2xl); }
   flex-wrap: wrap;
 }
 .section-head h2 { font-size: var(--step-3); }
+
+.section-lead {
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin-top: calc(var(--space-lg) * -1 + var(--space-xs));
+  margin-bottom: var(--space-md);
+  font-size: var(--step-0);
+}
+.section-lead a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color .2s var(--ease); }
+.section-lead a:hover { border-color: var(--accent); }
 
 /* ---------- Buttons ---------- */
 .btn {
