@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Copilot — Thang Luu</title>
+  <meta name="description" content="A browser-native data workbench: profile any dataset, query it with real SQL (DuckDB-WASM), and chart the result — zero backend. Opens on live stock-market data refreshed daily by a GitHub Actions pipeline.">
+
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/reset.css">
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="wrap nav">
+      <a href="../../index.html" class="brand"><i class="fa-solid fa-arrow-left-long"></i> Thang<span class="dot">.</span></a>
+      <div class="header-right">
+        <span class="app-title font-mono">data-copilot</span>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap app-main">
+    <section class="intro">
+      <h1>Data Copilot</h1>
+      <p class="lead">Drop in a CSV — or explore the live market dataset — and the browser
+        <strong>profiles it, runs real SQL on it, and charts the result.</strong>
+        The whole engine (DuckDB) runs in this tab. Nothing is uploaded anywhere.</p>
+    </section>
+
+    <!-- Dataset bar -->
+    <section class="dataset-bar" id="datasetBar">
+      <div class="ds-active">
+        <span class="ds-dot"></span>
+        <div>
+          <div class="ds-name" id="dsName">Loading engine…</div>
+          <div class="ds-meta font-mono" id="dsMeta">booting DuckDB-WASM</div>
+        </div>
+      </div>
+      <div class="ds-actions">
+        <button class="btn btn-ghost" id="btnStocks"><i class="fa-solid fa-chart-line"></i> Live market data</button>
+        <label class="btn btn-ghost" for="csvInput"><i class="fa-solid fa-file-arrow-up"></i> Drop / choose CSV</label>
+        <input type="file" id="csvInput" accept=".csv,text/csv" hidden>
+      </div>
+    </section>
+
+    <div class="health-banner" id="healthBanner" hidden></div>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist">
+      <button class="tab is-active" data-tab="profile" role="tab"><i class="fa-solid fa-magnifying-glass-chart"></i> Profile</button>
+      <button class="tab" data-tab="query" role="tab"><i class="fa-solid fa-terminal"></i> Query</button>
+      <button class="tab" data-tab="chart" role="tab"><i class="fa-solid fa-chart-area"></i> Chart</button>
+    </nav>
+
+    <!-- Profile panel -->
+    <section class="panel is-active" id="panel-profile" role="tabpanel">
+      <div class="table-scroll">
+        <table class="profile-table" id="profileTable"><tbody><tr><td>Profiling…</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <!-- Query panel -->
+    <section class="panel" id="panel-query" role="tabpanel">
+      <div class="examples" id="examples"></div>
+      <div class="editor">
+        <textarea id="sql" spellcheck="false" rows="6"></textarea>
+        <div class="editor-bar">
+          <button class="btn btn-primary" id="runBtn"><i class="fa-solid fa-play"></i> Run <kbd>⌘⏎</kbd></button>
+          <span class="run-status font-mono" id="runStatus"></span>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="result-table" id="resultTable"></table>
+      </div>
+    </section>
+
+    <!-- Chart panel -->
+    <section class="panel" id="panel-chart" role="tabpanel">
+      <div class="chart-controls">
+        <label>X <select id="xSel"></select></label>
+        <label>Y <select id="ySel"></select></label>
+        <label>Series <select id="seriesSel"></select></label>
+      </div>
+      <div class="chart-host" id="chartHost"></div>
+      <p class="chart-hint font-mono">Charts plot the current <strong>Query</strong> result. Run a query, then come here.</p>
+    </section>
+
+    <footer class="app-foot">
+      <span class="font-mono">Built with DuckDB-WASM · data via a GitHub Actions cron · no backend</span>
+      <a href="https://github.com/thangldw/thangldw.github.io/tree/master/apps/data-copilot" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Source</a>
+    </footer>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
