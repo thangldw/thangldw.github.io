@@ -1,0 +1,85 @@
+/* ============================================================
+   Design Tokens
+   One source of truth for color, type, spacing and motion.
+   Themes are just different values on the same variable names,
+   swapped via [data-theme] on <html>.
+   ============================================================ */
+
+:root {
+  /* Type scale (fluid, clamps between mobile and desktop) */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --step--1: clamp(0.83rem, 0.79rem + 0.20vw, 0.94rem);
+  --step-0:  clamp(1.00rem, 0.93rem + 0.33vw, 1.19rem);
+  --step-1:  clamp(1.25rem, 1.13rem + 0.60vw, 1.62rem);
+  --step-2:  clamp(1.56rem, 1.36rem + 1.02vw, 2.19rem);
+  --step-3:  clamp(1.95rem, 1.62rem + 1.65vw, 2.98rem);
+  --step-4:  clamp(2.44rem, 1.91rem + 2.62vw, 4.05rem);
+  --step-5:  clamp(3.05rem, 2.24rem + 4.07vw, 5.61rem);
+
+  /* Spacing */
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* Layout */
+  --content-width: 72rem;
+  --radius: 14px;
+  --radius-sm: 9px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.5s;
+}
+
+/* -------- Dark theme (default) -------- */
+:root,
+:root[data-theme='dark'] {
+  --bg:        #0b0c0f;
+  --bg-soft:   #101319;
+  --surface:   #151922;
+  --surface-2: #1b2029;
+  --border:    #262c38;
+  --border-strong: #333a49;
+
+  --text:      #eef1f6;
+  --text-muted:#9aa3b2;
+  --text-dim:  #6b7385;
+
+  --accent:      #7c9cff;
+  --accent-soft: #a9bdff;
+  --accent-ink:  #0b0c0f;   /* text sitting on the accent */
+  --accent-glow: rgba(124, 156, 255, 0.16);
+
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 40px -12px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+
+/* -------- Light theme -------- */
+:root[data-theme='light'] {
+  --bg:        #f7f8fa;
+  --bg-soft:   #ffffff;
+  --surface:   #ffffff;
+  --surface-2: #f1f3f7;
+  --border:    #e4e7ee;
+  --border-strong: #d3d8e2;
+
+  --text:      #14171d;
+  --text-muted:#525a68;
+  --text-dim:  #838b99;
+
+  --accent:      #3a5bd9;
+  --accent-soft: #2f4dc0;
+  --accent-ink:  #ffffff;
+  --accent-glow: rgba(58, 91, 217, 0.12);
+
+  --shadow: 0 1px 2px rgba(20,23,29,.06), 0 14px 40px -18px rgba(20,23,29,.22);
+  color-scheme: light;
+}
