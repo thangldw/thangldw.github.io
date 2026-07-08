@@ -1,55 +1,301 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="dark">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Thang Luu | Minimalist</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thang Luu — Principal Data & AI Engineer</title>
+  <meta name="description" content="Thang Luu — Principal Data & AI Engineer and Forward Deployed Engineer. I embed with teams to design data platforms and ship production AI systems.">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thang Luu — Principal Data & AI Engineer">
+  <meta property="og:description" content="Forward Deployed Engineer shipping production data & AI systems.">
+  <meta property="og:url" content="https://thangldw.github.io">
+
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/white-grey.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Set theme before paint to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
-	<main>
-		<div class="intro">Hi there, I'm Thang!</div>
-		<div class="tagline">A passionate data-driven problem solver, a minimalist lifestyle, and a lover of iPhoneography<br>Becoming the most valuable professional provider
-		</div>
-		<!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-		<div class="icons-social">
-      <a target="_blank" href="https://www.linkedin.com/in/thangldw">
-        <i class="fab fa-linkedin" aria-hidden="true" title="LinkedIn"></i>
-        <span class="sr-only">LinkedIn</span>
-      </a>
-			<a target="_blank" href="https://github.com/thangldw">
-        <i class="fa-brands fa-github-alt" aria-hidden="true" title="Github"></i>
-        <span class="sr-only">Github</span>
-      </a>
-      <a target="_blank" href="https://twitter.com/realtluu">
-        <i class="fa-brands fa-square-x-twitter" aria-hidden="true" title="Twitter"></i>
-        <span class="sr-only">Twitter</span>
-      </a>
-      <a target="_blank" href="https://www.instagram.com/realtluu">
-        <i class="fa-brands fa-square-instagram" aria-hidden="true" title="Twitter"></i>
-        <span class="sr-only">Instagram</span>
-      </a>
-      <a target="_blank" href="https://www.hackerrank.com/thangldw">
-        <i class="fa-brands fa-hackerrank" aria-hidden="true" title="Hackerrank"></i>
-        <span class="sr-only">Hackerrank</span>
-      </a>
-      <a target="_blank" href="https://dev.to/tluu">
-        <i class="fab fa-dev" aria-hidden="true" title="DEV Community"></i>
-        <span class="sr-only">DEV Community</span>
-      </a>
-      <a target="_blank" href="">
-        <i class="fa-solid fa-bookmark" aria-hidden="true" title="DEV Community"></i>
-        <span class="sr-only">Substack</span>
-      </a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="wrap nav">
+      <a href="#top" class="brand">Thang<span class="dot">.</span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#approach" class="nav-link">Approach</a>
+        <a href="#skills" class="nav-link">Stack</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+      </nav>
     </div>
-	</main>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero wrap">
+      <div class="reveal">
+        <!-- EDIT: flip availability copy on/off as needed -->
+        <span class="eyebrow"><span class="pulse"></span> Open to Principal / Staff & FDE roles</span>
+      </div>
+      <h1 class="reveal">Thang Luu</h1>
+      <p class="lead reveal">I turn AI ambition into <span class="accent">production systems.</span></p>
+      <p class="sub reveal">
+        Principal Data &amp; AI Engineer and Forward Deployed Engineer. I embed with
+        teams to scope the real problem, design the data platform, and ship
+        LLM-powered products from prototype to production — then make them
+        maintainable once I hand them over.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get in touch</a>
+        <!-- EDIT: point this at your real CV file, e.g. assets/thang-luu-cv.pdf -->
+        <a href="#" class="btn btn-ghost" download><i class="fa-solid fa-arrow-down" aria-hidden="true"></i> Download CV</a>
+      </div>
+
+      <!-- Social links -->
+      <div class="socials reveal">
+        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/thangldw" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a>
+        <a target="_blank" rel="noopener" href="https://github.com/thangldw" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="sr-only">GitHub</span></a>
+        <a target="_blank" rel="noopener" href="https://twitter.com/realtluu" title="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i><span class="sr-only">X (Twitter)</span></a>
+        <a target="_blank" rel="noopener" href="https://www.hackerrank.com/thangldw" title="HackerRank"><i class="fa-brands fa-hackerrank" aria-hidden="true"></i><span class="sr-only">HackerRank</span></a>
+        <a target="_blank" rel="noopener" href="https://dev.to/tluu" title="DEV Community"><i class="fab fa-dev" aria-hidden="true"></i><span class="sr-only">DEV Community</span></a>
+      </div>
+
+      <!-- EDIT: replace these with your real headline numbers -->
+      <div class="metrics reveal">
+        <div class="metric"><span class="num">8+</span><div class="label">Years shipping data &amp; AI</div></div>
+        <div class="metric"><span class="num">20+</span><div class="label">Production systems delivered</div></div>
+        <div class="metric"><span class="num">10+</span><div class="label">Customer teams embedded with</div></div>
+        <div class="metric"><span class="num">∞</span><div class="label">Problems reframed, then solved</div></div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <span class="section-num">01</span>
+          <h2>About</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <!-- EDIT: your story, in your voice -->
+            <p>I'm a <strong>data-driven problem solver</strong> who works at the seam between engineering and the business. My favorite work starts in ambiguity — a messy dataset, a vague AI ambition, a customer who knows the pain but not the solution — and ends with something running in production that people rely on.</p>
+            <p>As a <strong>Forward Deployed Engineer</strong>, I don't hand off a spec and disappear. I sit with the team, learn their domain, and build alongside them: the pipelines, the models, the LLM systems, and the guardrails that make them safe to trust.</p>
+            <p>I care about <strong>leverage over output</strong> — the smallest system that solves the real problem, documented so the next engineer can own it. Minimalist by temperament, pragmatic by trade.</p>
+          </div>
+          <aside class="about-aside">
+            <h4>At a glance</h4>
+            <p><strong>Focus</strong><br>Data platforms · Applied AI / LLMs · FDE delivery</p>
+            <p style="margin-top:1rem"><strong>Ways I work</strong><br>Embedded delivery · Prototype→production · Mentoring &amp; enablement</p>
+            <p style="margin-top:1rem"><strong>Based</strong><br><!-- EDIT -->Remote-first · Open to relocation</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section id="approach">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <span class="section-num">02</span>
+          <h2>How I work</h2>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+            <h3>Embed &amp; discover</h3>
+            <p>I start where the problem lives — with the users and the data. Before writing code I reframe the ask until the real constraint is clear. Most AI projects fail on the problem, not the model.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-cubes-stacked" aria-hidden="true"></i></div>
+            <h3>Build &amp; ship</h3>
+            <p>Production-grade from day one: reliable pipelines, evaluated models, LLM systems with retrieval and guardrails, deployed on cloud infra that won't page you at 3am. Fast, but not fragile.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></div>
+            <h3>Scale &amp; enable</h3>
+            <p>The deliverable isn't code — it's a capable team. I document, mentor, and hand over systems people understand and can extend long after I'm gone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS / STACK ============ -->
+    <section id="skills">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <span class="section-num">03</span>
+          <h2>Stack</h2>
+        </div>
+        <!-- EDIT: prune to what you actually use — depth beats a long list -->
+        <div class="card-grid">
+          <div class="skill-group">
+            <h4>// AI &amp; Machine Learning</h4>
+            <div class="tags">
+              <span class="tag">LLMs / RAG</span><span class="tag">Fine-tuning</span><span class="tag">PyTorch</span>
+              <span class="tag">Agents</span><span class="tag">Vector DBs</span><span class="tag">Evals</span>
+              <span class="tag">Hugging Face</span><span class="tag">scikit-learn</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// Data Engineering</h4>
+            <div class="tags">
+              <span class="tag">Spark</span><span class="tag">dbt</span><span class="tag">Airflow</span>
+              <span class="tag">Kafka</span><span class="tag">Snowflake</span><span class="tag">BigQuery</span>
+              <span class="tag">Delta Lake</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// Cloud &amp; Platform</h4>
+            <div class="tags">
+              <span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Azure</span>
+              <span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span>
+              <span class="tag">CI/CD</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// Languages</h4>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">TypeScript</span>
+              <span class="tag">Scala</span><span class="tag">Bash</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <section id="work">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <span class="section-num">04</span>
+          <h2>Selected work</h2>
+        </div>
+
+        <!-- EDIT: replace each block with a real project. Lead with impact. -->
+        <article class="work-item">
+          <div class="work-meta">2024<br>FDE</div>
+          <div class="work-body">
+            <h3 class="work-title">LLM copilot for an enterprise support team</h3>
+            <p>Embedded with a customer's ops team to replace manual triage with a retrieval-augmented assistant grounded in their knowledge base — with evals and human-in-the-loop guardrails before it touched a customer.</p>
+            <div class="work-impact">
+              <div><span class="num">-60%</span><span class="label">Time-to-resolution</span></div>
+              <div><span class="num">3 wks</span><span class="label">Prototype → production</span></div>
+            </div>
+            <div class="work-stack tags">
+              <span class="tag">Python</span><span class="tag">RAG</span><span class="tag">Vector DB</span><span class="tag">AWS</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-meta">2023<br>Data platform</div>
+          <div class="work-body">
+            <h3 class="work-title">Real-time data platform from scratch</h3>
+            <p>Designed and shipped a streaming lakehouse that unified fragmented sources into one governed layer, giving analysts and ML models a single reliable source of truth.</p>
+            <div class="work-impact">
+              <div><span class="num">10x</span><span class="label">Faster data freshness</span></div>
+              <div><span class="num">40+</span><span class="label">Downstream consumers</span></div>
+            </div>
+            <div class="work-stack tags">
+              <span class="tag">Spark</span><span class="tag">Kafka</span><span class="tag">dbt</span><span class="tag">Snowflake</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-meta">2022<br>ML</div>
+          <div class="work-body">
+            <h3 class="work-title">Production ML for demand forecasting</h3>
+            <p>Took a notebook model to a monitored, retrained, deployed service with clear ownership — the kind of unglamorous MLOps that decides whether ML actually earns its keep.</p>
+            <div class="work-impact">
+              <div><span class="num">+18%</span><span class="label">Forecast accuracy</span></div>
+              <div><span class="num">$XM</span><span class="label">Inventory saved</span></div>
+            </div>
+            <div class="work-stack tags">
+              <span class="tag">Python</span><span class="tag">MLflow</span><span class="tag">Kubernetes</span><span class="tag">GCP</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <span class="section-num">05</span>
+          <h2>Experience</h2>
+        </div>
+        <!-- EDIT: your real roles -->
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2023 — Present</div>
+            <h3>Principal / Forward Deployed Engineer</h3>
+            <div class="tl-org">Company name</div>
+            <p>Lead embedded delivery of data &amp; AI systems for enterprise customers — from discovery to production and handover.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2020 — 2023</div>
+            <h3>Senior Data / ML Engineer</h3>
+            <div class="tl-org">Company name</div>
+            <p>Built the data platform and shipped ML services powering core product decisions.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-date">2017 — 2020</div>
+            <h3>Data Engineer</h3>
+            <div class="tl-org">Company name</div>
+            <p>Designed pipelines and analytics foundations that scaled with the business.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact">
+      <div class="wrap contact reveal">
+        <span class="section-num">06</span>
+        <h2>Let's build something.</h2>
+        <p>Have a hard data or AI problem — or a role where an embedded engineer would move the needle? I'd love to hear about it.</p>
+        <a class="email-link" href="mailto:thangldw@gmail.com">thangldw@gmail.com</a>
+        <div class="socials" style="justify-content:center; margin-top: var(--space-lg)">
+          <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/thangldw" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a>
+          <a target="_blank" rel="noopener" href="https://github.com/thangldw" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="sr-only">GitHub</span></a>
+          <a target="_blank" rel="noopener" href="https://twitter.com/realtluu" title="X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i><span class="sr-only">X (Twitter)</span></a>
+          <a target="_blank" rel="noopener" href="https://dev.to/tluu" title="DEV Community"><i class="fab fa-dev" aria-hidden="true"></i><span class="sr-only">DEV Community</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Thang Luu</span>
+      <span class="font-mono">Built minimal. Deployed on GitHub Pages.</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
-
-<i class=""></i>
