@@ -2,11 +2,13 @@
 import { initDuckDB, loadParquet, loadCSV, query } from "./duckdb.js";
 import { profileTable, healthSummary } from "./profile.js";
 import { lineChart } from "./charts.js";
+import { interpret, ASK_EXAMPLES } from "./ask.js";
 
 const $ = (sel) => document.querySelector(sel);
 
 const state = {
   table: "stocks",
+  tickers: [],
   lastResult: { columns: [], rows: [] },
 };
 
@@ -62,6 +64,7 @@ async function boot() {
   wireEditor();
   wireCSV();
   wireChartControls();
+  wireAsk();
 
   try {
     await initDuckDB();
@@ -83,9 +86,67 @@ async function loadStocks() {
     ? `${meta.row_count.toLocaleString()} rows · ${meta.tickers.length} tickers · ${meta.date_min} → ${meta.date_max} · updated ${meta.last_updated.slice(0, 10)}`
     : "stocks.parquet";
 
+  state.tickers = meta?.tickers || [];
+  $("#ask").hidden = false;               // the NL layer is stock-schema-specific
+  renderAskExamples();
+
   renderExamples(STOCK_EXAMPLES);
   $("#sql").value = STOCK_EXAMPLES[0].sql;
   await Promise.all([refreshProfile(), runQuery()]);
+}
+
+// --- Ask: keyless natural language → SQL ------------------------------------
+function wireAsk() {
+  $("#askBtn").addEventListener("click", ask);
+  $("#askInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); ask(); }
+  });
+}
+
+function renderAskExamples() {
+  const box = $("#askExamples");
+  box.innerHTML = ASK_EXAMPLES.map((s) => `<button class="ask-chip">${esc(s)}</button>`).join("");
+  wireAskChips(box);
+}
+
+function wireAskChips(container) {
+  container.querySelectorAll(".ask-chip").forEach((c) =>
+    c.addEventListener("click", () => { $("#askInput").value = c.textContent; ask(); })
+  );
+}
+
+async function ask() {
+  const q = $("#askInput").value.trim();
+  if (!q) return;
+  const res = interpret(q, { tickers: state.tickers });
+  const explain = $("#askExplain");
+  explain.hidden = false;
+
+  if (res.suggestions) {
+    explain.className = "ask-explain miss";
+    explain.innerHTML = `<i class="fa-solid fa-circle-question"></i> Not sure what to run — try: ` +
+      res.suggestions.slice(0, 4).map((s) => `<button class="ask-chip">${esc(s)}</button>`).join("");
+    wireAskChips(explain);
+    return;
+  }
+
+  explain.className = "ask-explain hit";
+  explain.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Interpreted as <strong>${esc(res.intent)}</strong> — here's the SQL it wrote:`;
+  $("#sql").value = res.sql;
+  await runQuery();
+
+  if (res.chart) {
+    setSel("#xSel", res.chart.xKey);
+    setSel("#ySel", res.chart.yKey);
+    setSel("#seriesSel", res.chart.seriesKey || "(none)");
+    document.querySelector('.tab[data-tab="chart"]').click();
+    drawChart();
+  }
+}
+
+function setSel(sel, val) {
+  const el = $(sel);
+  if (el && [...el.options].some((o) => o.value === val)) el.value = val;
 }
 
 // --- profile ----------------------------------------------------------------
@@ -198,6 +259,7 @@ async function ingestCSV(file) {
   const text = await file.text();
   await loadCSV(text, "user_data");
   state.table = "user_data";
+  $("#ask").hidden = true;                // NL layer only maps the stock schema
   $("#dsName").textContent = file.name;
   $("#dsMeta").textContent = `${(file.size / 1024).toFixed(1)} KB · loaded in-browser`;
   renderExamples([{ label: "Preview", sql: "SELECT * FROM user_data LIMIT 100;" }]);
