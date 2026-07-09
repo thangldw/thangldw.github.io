@@ -1,11 +1,12 @@
 {
-  "last_updated": "2026-07-08T23:39:13Z",
+  "last_updated": "2026-07-09T04:43:33Z",
   "source": "Yahoo Finance chart API (public, keyless)",
   "range": "2y",
   "interval": "1d",
-  "row_count": 5445,
-  "date_min": "2024-07-08",
-  "date_max": "2026-07-08",
+  "row_count": 5446,
+  "date_min": "2024-07-09",
+  "date_max": "2026-07-09",
+  "duration_s": 8.9,
   "tickers": [
     {
       "ticker": "AAPL",
@@ -61,6 +62,85 @@
       "ticker": "^GSPC",
       "name": "S&P 500",
       "market": "US"
+    }
+  ],
+  "coverage": [
+    {
+      "ticker": "6758.T",
+      "name": "Sony",
+      "rows": 488,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-09"
+    },
+    {
+      "ticker": "7203.T",
+      "name": "Toyota",
+      "rows": 488,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-09"
+    },
+    {
+      "ticker": "8306.T",
+      "name": "MUFG",
+      "rows": 488,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-09"
+    },
+    {
+      "ticker": "9984.T",
+      "name": "SoftBank Group",
+      "rows": 488,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-09"
+    },
+    {
+      "ticker": "AAPL",
+      "name": "Apple",
+      "rows": 501,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-08"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon",
+      "rows": 501,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-08"
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet",
+      "rows": 501,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-08"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft",
+      "rows": 501,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-08"
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA",
+      "rows": 501,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-08"
+    },
+    {
+      "ticker": "^GSPC",
+      "name": "S&P 500",
+      "rows": 501,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-08"
+    },
+    {
+      "ticker": "^N225",
+      "name": "Nikkei 225",
+      "rows": 488,
+      "date_min": "2024-07-09",
+      "date_max": "2026-07-09"
     }
   ],
   "failed": []
