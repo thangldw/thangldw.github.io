@@ -70,6 +70,37 @@ a { color: inherit; text-decoration: none; }
 .health-banner.ok { background: color-mix(in srgb, #5ecb9e 12%, transparent); color: #5ecb9e; }
 .health-banner.warn { background: color-mix(in srgb, #f6a94a 14%, transparent); color: #f6a94a; }
 
+/* --- ask (natural-language → SQL) --- */
+.ask { margin-bottom: var(--space-md); }
+.ask-bar {
+  display: flex; align-items: center; gap: .6rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: .35em .5em .35em .9em; transition: border-color .2s, box-shadow .2s;
+}
+.ask-bar:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.ask-bar > i { color: var(--accent); }
+.ask-bar input {
+  flex: 1; background: none; border: none; color: var(--text);
+  font-family: var(--font-sans); font-size: var(--step-0); padding: .5em 0;
+}
+.ask-bar input:focus { outline: none; }
+.ask-bar input::placeholder { color: var(--text-dim); }
+.ask-bar .btn-primary { padding: .5em .75em; }
+.ask-examples { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: var(--space-xs); }
+.ask-chip {
+  background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
+  padding: .3em .7em; border-radius: 999px; font-size: var(--step--1); cursor: pointer; transition: all .2s;
+}
+.ask-chip:hover { border-color: var(--accent); color: var(--accent); }
+.ask-explain {
+  margin-top: var(--space-sm); font-size: var(--step--1); padding: .6em .9em; border-radius: var(--radius-sm);
+  display: flex; align-items: center; gap: .5em; flex-wrap: wrap;
+}
+.ask-explain.hit { background: var(--accent-glow); color: var(--accent-soft); }
+.ask-explain.hit strong { color: var(--text); }
+.ask-explain.miss { background: color-mix(in srgb, #f6a94a 12%, transparent); color: #f6a94a; }
+.ask-explain .ask-chip { background: transparent; }
+
 /* --- tabs --- */
 .tabs { display: flex; gap: .25rem; border-bottom: 1px solid var(--border); margin-bottom: var(--space-md); }
 .tab {
