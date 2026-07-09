@@ -95,6 +95,7 @@
     <option value="unknown">Chỉ ôn thẻ chưa thuộc</option>
   </select>
   <button class="shuffle-btn" id="shuffleBtn">🔀 Trộn</button>
+  <button class="shuffle-btn" id="resetBtn" title="Xóa toàn bộ tiến độ đã lưu">🗑️ Xóa tiến độ</button>
 </div>
 
 <div class="progress-wrap">
@@ -262,6 +263,38 @@ let unknown = new Set();
 let flipped = false;
 let activeList = order.slice();
 
+// ---- Lưu tiến độ vào localStorage ----
+// Chỉ lưu tiến độ học thật (thẻ đã thuộc / chưa thuộc); pos & activeList là state
+// phiên xem nên không lưu. Set không JSON hoá trực tiếp → chuyển qua mảng.
+const STORAGE_KEY = 'flashcard-n1-progress';
+const STORAGE_VERSION = 1;
+
+function saveProgress(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      v: STORAGE_VERSION,
+      n: data.length,
+      known: Array.from(known),
+      unknown: Array.from(unknown)
+    }));
+  }catch(e){ /* storage đầy / bị chặn — bỏ qua, không làm vỡ app */ }
+}
+
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const saved = JSON.parse(raw);
+    // Bỏ qua nếu schema hoặc số thẻ đổi → tránh khôi phục sai index.
+    if(saved.v !== STORAGE_VERSION || saved.n !== data.length) return;
+    const inRange = i => Number.isInteger(i) && i >= 0 && i < data.length;
+    known = new Set((saved.known || []).filter(inRange));
+    unknown = new Set((saved.unknown || []).filter(inRange));
+  }catch(e){ /* dữ liệu hỏng — bỏ qua */ }
+}
+
+loadProgress();
+
 const cardEl = document.getElementById('card');
 const idxLabel = document.getElementById('idxLabel');
 const frontPattern = document.getElementById('frontPattern');
@@ -334,12 +367,22 @@ document.getElementById('prevBtn').onclick = prev;
 document.getElementById('btnKnow').onclick = ()=>{
   const i = activeList[pos];
   known.add(i); unknown.delete(i);
+  saveProgress();
   next();
 };
 document.getElementById('btnUnknow').onclick = ()=>{
   const i = activeList[pos];
   unknown.add(i); known.delete(i);
+  saveProgress();
   next();
+};
+
+document.getElementById('resetBtn').onclick = ()=>{
+  if(!confirm('Xóa toàn bộ tiến độ đã lưu (đã thuộc / chưa thuộc)?')) return;
+  known.clear(); unknown.clear();
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  pos = 0;
+  renderCard();
 };
 
 document.getElementById('shuffleBtn').onclick = ()=>{
