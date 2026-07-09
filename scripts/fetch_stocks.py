@@ -84,6 +84,7 @@ def to_rows(payload: dict, name: str, market: str) -> pd.DataFrame:
 
 
 def main() -> int:
+    t_start = time.monotonic()
     frames: list[pd.DataFrame] = []
     failed: list[str] = []
     for symbol, name, market in TICKERS:
@@ -106,24 +107,61 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     data.to_parquet(OUT_DIR / "stocks.parquet", index=False, compression="zstd")
 
+    # Per-ticker coverage — powers the observability page's completeness/freshness view.
+    names = {t: n for (t, n, m) in TICKERS}
+    coverage = [
+        {
+            "ticker": tk,
+            "name": names.get(tk, tk),
+            "rows": int(len(g)),
+            "date_min": g["date"].min().strftime("%Y-%m-%d"),
+            "date_max": g["date"].max().strftime("%Y-%m-%d"),
+        }
+        for tk, g in data.groupby("ticker", sort=False)
+    ]
+
+    duration_s = round(time.monotonic() - t_start, 1)
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
     meta = {
-        "last_updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "last_updated": now_iso,
         "source": "Yahoo Finance chart API (public, keyless)",
         "range": RANGE,
         "interval": INTERVAL,
         "row_count": int(len(data)),
         "date_min": data["date"].min().strftime("%Y-%m-%d"),
         "date_max": data["date"].max().strftime("%Y-%m-%d"),
+        "duration_s": duration_s,
         "tickers": [
             {"ticker": t, "name": n, "market": m}
             for (t, n, m) in TICKERS if t not in failed
         ],
+        "coverage": coverage,
         "failed": failed,
     }
     (OUT_DIR / "meta.json").write_text(json.dumps(meta, indent=2))
 
+    # Append this execution to the run log (kept to the last 200 runs) so the
+    # observability page can chart pipeline history — the "visible ELT" story.
+    runs_path = OUT_DIR / "runs.json"
+    try:
+        runs = json.loads(runs_path.read_text())
+        if not isinstance(runs, list):
+            runs = []
+    except (FileNotFoundError, ValueError):
+        runs = []
+    runs.append({
+        "ts": now_iso,
+        "row_count": int(len(data)),
+        "ticker_count": len(meta["tickers"]),
+        "failed_count": len(failed),
+        "date_max": meta["date_max"],
+        "duration_s": duration_s,
+    })
+    runs_path.write_text(json.dumps(runs[-200:], indent=2))
+
     print(f"\nwrote {len(data):,} rows across {len(meta['tickers'])} tickers "
-          f"({meta['date_min']} → {meta['date_max']})")
+          f"({meta['date_min']} → {meta['date_max']}) in {duration_s}s")
     return 0
 
 
