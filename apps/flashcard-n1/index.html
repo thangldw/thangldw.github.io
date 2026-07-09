@@ -1,88 +1,95 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<title>Flashcard Ngữ pháp N1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N1 Flashcards — thang.</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/tokens.css">
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <style>
-  :root{
-    --bg:#f5f1fc; --card:#ffffff; --accent:#9b7fe0; --accent2:#c9a6f7;
-    --text:#3a2e5c; --muted:#8b7bb0; --good:#16a87e; --bad:#e0568f;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; min-height:100vh; background:linear-gradient(160deg,#f5f1fc,#ece3fb 60%,#f5f1fc);
-    font-family:'Hiragino Sans','Noto Sans JP',ui-sans-serif,system-ui,sans-serif;
-    color:var(--text); display:flex; flex-direction:column; align-items:center; padding:24px 16px 60px;
-  }
-  h1{font-size:20px; font-weight:700; margin:4px 0 2px; letter-spacing:.5px; color:#5b3fa0;}
-  .sub{color:var(--muted); font-size:13px; margin-bottom:18px;}
-  .progress-wrap{width:100%; max-width:480px; margin-bottom:14px;}
-  .progress-bar{height:6px; background:#e3d9f7; border-radius:4px; overflow:hidden;}
-  .progress-fill{height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width .3s;}
-  .stats{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-top:6px;}
-  .stats span.good{color:var(--good); font-weight:600;}
-  .stats span.bad{color:var(--bad); font-weight:600;}
+  body{ background:var(--bg); color:var(--text); font-family:var(--font-sans); font-size:var(--step-0);
+    line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap{ width:min(34rem, 100% - 2*var(--space-md)); margin-inline:auto; }
+  .app-main{ padding-block:var(--space-lg) var(--space-2xl); }
 
-  .card-area{width:100%; max-width:480px; perspective:1400px; margin-bottom:20px;}
-  .card{
-    position:relative; width:100%; min-height:320px; cursor:pointer;
-    transform-style:preserve-3d; transition:transform .5s cubic-bezier(.4,.2,.2,1);
-  }
-  .card.flipped{transform:rotateY(180deg);}
-  .face{
-    position:absolute; inset:0; backface-visibility:hidden; border-radius:18px;
-    padding:26px 22px; display:flex; flex-direction:column;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
-  }
-  .front{
-    background:linear-gradient(135deg,#e4d6fa,#d3bcf5); justify-content:center; align-items:center; text-align:center;
-    border:1px solid #d8c4f2;
-  }
-  .front .idx{position:absolute; top:14px; left:18px; font-size:12px; color:#7c5fb8;}
-  .front .pattern{font-size:30px; font-weight:800; line-height:1.3; color:#4b2e8c;}
-  .front .hint{margin-top:14px; font-size:12px; color:#7c5fb8;}
-  .back{
-    background:linear-gradient(135deg,#ffffff,#f3ebfd); transform:rotateY(180deg);
-    overflow-y:auto; border:1px solid #d8c4f2;
-  }
-  .back .pattern-sm{font-size:18px; font-weight:700; color:var(--accent); margin-bottom:8px;}
-  .back .meaning{font-size:15px; font-weight:600; margin-bottom:10px; color:#3a2e5c; line-height:1.5;}
-  .back .ex{font-size:13.5px; color:var(--text); background:#f0e6fb; border-radius:10px; padding:10px 12px; margin-bottom:8px; line-height:1.55;}
-  .back .ex .jp{color:#9a5fb0;}
-  .back .ex .vn{color:var(--muted); display:block; margin-top:3px;}
-  .back .note{font-size:12px; color:#6b4fa0; margin-top:8px; font-style:italic; background:#f0e6fb; border-left:3px solid var(--accent); border-radius:6px; padding:8px 10px; line-height:1.5;}
+  .intro{ text-align:center; margin-bottom:var(--space-lg); }
+  .intro h1{ font-family:var(--font-display); font-size:var(--step-2); letter-spacing:-.01em; }
+  .intro h1 .jp-title{ font-family:'Noto Sans JP',var(--font-sans); color:var(--text-dim); font-weight:500; margin-left:.35em; }
+  .intro .sub{ color:var(--text-muted); font-size:var(--step--1); margin-top:var(--space-2xs); }
 
-  .controls{display:flex; gap:10px; width:100%; max-width:480px; flex-wrap:wrap; justify-content:center;}
-  button{
-    border:none; border-radius:12px; padding:12px 18px; font-size:14px; font-weight:600;
-    cursor:pointer; transition:transform .15s, opacity .2s;
-  }
-  button:active{transform:scale(.95);}
-  .btn-nav{background:#e4d6fa; color:#4b2e8c;}
-  .btn-flip{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff;}
-  .btn-know{background:rgba(22,168,126,.12); color:var(--good); border:1px solid var(--good);}
-  .btn-unknow{background:rgba(224,86,143,.12); color:var(--bad); border:1px solid var(--bad);}
-  .row2{display:flex; gap:10px; width:100%; max-width:480px; margin-top:10px;}
-  .row2 button{flex:1;}
-  .topbar{display:flex; gap:8px; width:100%; max-width:480px; margin-bottom:10px; flex-wrap:wrap;}
-  select{
-    background:#ffffff; color:var(--text); border:1px solid #d8c4f2; border-radius:10px;
-    padding:8px 10px; font-size:13px; flex:1;
-  }
-  .shuffle-btn{background:#e4d6fa; color:#5b3fa0; font-size:13px; padding:8px 14px;}
-  .done-screen{text-align:center; max-width:480px;}
-  .done-screen .big{font-size:40px; margin-bottom:6px;}
-  .restart-btn{background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#fff; margin-top:14px;}
-  .hidden{display:none;}
-  @media (max-width:420px){
-    .front .pattern{font-size:24px;}
-  }
+  .topbar{ display:flex; gap:.5rem; margin-bottom:var(--space-sm); flex-wrap:wrap; }
+  select{ background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:var(--radius-sm);
+    padding:.55em .7em; font-size:var(--step--1); flex:1; font-family:var(--font-sans); }
+  select:focus{ outline:none; border-color:var(--accent); }
+
+  button{ border:1px solid transparent; border-radius:var(--radius-sm); padding:.6em 1em; font-size:var(--step--1);
+    font-weight:600; cursor:pointer; font-family:var(--font-sans);
+    transition:transform .15s var(--ease), background .2s, border-color .2s, color .2s, filter .2s; }
+  button:active{ transform:scale(.96); }
+  .shuffle-btn{ background:var(--surface); border-color:var(--border); color:var(--text-muted); flex:0 0 auto; font-weight:500; }
+  .shuffle-btn:hover{ border-color:var(--border-strong); color:var(--text); }
+
+  .progress-wrap{ margin-bottom:var(--space-md); }
+  .progress-bar{ height:6px; background:var(--surface-2); border-radius:4px; overflow:hidden; }
+  .progress-fill{ height:100%; background:var(--accent); width:0%; transition:width .3s var(--ease); }
+  .stats{ display:flex; justify-content:space-between; font-size:var(--step--1); color:var(--text-dim);
+    margin-top:var(--space-2xs); font-family:var(--font-mono); }
+  .stats span.good{ color:#5ecb9e; font-weight:600; }
+  .stats span.bad{ color:#e46a8b; font-weight:600; }
+
+  .card-area{ perspective:1400px; margin-bottom:var(--space-md); }
+  .card{ position:relative; width:100%; min-height:340px; cursor:pointer;
+    transform-style:preserve-3d; transition:transform .5s var(--ease); }
+  .card.flipped{ transform:rotateY(180deg); }
+  .face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--radius);
+    padding:var(--space-md); display:flex; flex-direction:column;
+    background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow); }
+  .front{ justify-content:center; align-items:center; text-align:center; }
+  .front .idx{ position:absolute; top:14px; left:16px; font-size:var(--step--1); color:var(--text-dim); font-family:var(--font-mono); }
+  .front .pattern{ font-family:'Noto Sans JP',var(--font-sans); font-size:var(--step-2); font-weight:700; line-height:1.35; color:var(--text); }
+  .front .hint{ margin-top:var(--space-sm); font-size:var(--step--1); color:var(--text-dim); }
+  .back{ transform:rotateY(180deg); overflow-y:auto; }
+  .back .pattern-sm{ font-family:'Noto Sans JP',var(--font-sans); font-size:var(--step-0); font-weight:700; color:var(--accent); margin-bottom:var(--space-xs); }
+  .back .meaning{ font-size:var(--step-0); font-weight:500; margin-bottom:var(--space-sm); color:var(--text); line-height:1.55; }
+  .back .ex{ font-family:'Noto Sans JP',var(--font-sans); font-size:var(--step--1); color:var(--text); background:var(--surface-2);
+    border-radius:var(--radius-sm); padding:.7em .8em; margin-bottom:var(--space-2xs); line-height:1.6; }
+  .back .ex .jp{ color:var(--accent-soft); }
+  .back .ex .vn{ color:var(--text-muted); display:block; margin-top:3px; }
+  .back .note{ font-size:var(--step--1); color:var(--text-muted); margin-top:var(--space-xs); font-style:italic;
+    background:var(--surface-2); border-left:3px solid var(--accent); border-radius:6px; padding:.6em .8em; line-height:1.55; }
+
+  .controls{ display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; }
+  .btn-nav{ background:var(--surface); border-color:var(--border); color:var(--text-muted); }
+  .btn-nav:hover{ border-color:var(--border-strong); color:var(--text); }
+  .btn-flip{ background:var(--accent); color:var(--accent-ink); }
+  .btn-flip:hover{ filter:brightness(1.08); }
+  .btn-know{ background:color-mix(in srgb,#5ecb9e 12%,transparent); color:#5ecb9e; border-color:color-mix(in srgb,#5ecb9e 40%,transparent); }
+  .btn-unknow{ background:color-mix(in srgb,#e46a8b 12%,transparent); color:#e46a8b; border-color:color-mix(in srgb,#e46a8b 40%,transparent); }
+  .row2{ display:flex; gap:.5rem; margin-top:var(--space-sm); }
+  .row2 button{ flex:1; }
+  .done-screen{ text-align:center; }
+  .done-screen .big{ font-size:40px; margin-bottom:6px; }
+  .restart-btn{ background:var(--accent); color:var(--accent-ink); margin-top:var(--space-sm); }
+  .hidden{ display:none; }
+  @media (max-width:420px){ .front .pattern{ font-size:var(--step-1); } }
 </style>
 </head>
 <body>
+<main class="app-main wrap">
 
-<h1>📘 Flashcard Ngữ pháp N1</h1>
-<div class="sub" id="subtitle">99 mẫu ngữ pháp N1 + 8 mẫu 限り (107 thẻ) — bấm vào thẻ để xem nghĩa</div>
+<section class="intro">
+  <h1>N1 Flashcards <span class="jp-title">文法</span></h1>
+  <div class="sub" id="subtitle">99 mẫu ngữ pháp N1 + 8 mẫu 限り (107 thẻ) — bấm vào thẻ để xem nghĩa</div>
+</section>
 
 <div class="topbar">
   <select id="rangeSelect">
@@ -136,6 +143,7 @@
   <div class="sub" id="doneStats"></div>
   <button class="restart-btn" id="restartBtn">Ôn lại từ đầu</button>
 </div>
+</main>
 
 <script>
 const data = [
