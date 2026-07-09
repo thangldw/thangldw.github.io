@@ -230,18 +230,11 @@ function wireChartControls() {
 }
 
 function wireTheme() {
-  const btn = $("#themeToggle");
-  const icon = btn.querySelector("i");
-  const set = (t) => {
-    document.documentElement.setAttribute("data-theme", t);
-    localStorage.setItem("theme", t);
-    icon.className = t === "dark" ? "fa-solid fa-moon" : "fa-solid fa-sun";
+  // The shared site header (js/site-header.js) owns the toggle button; we just
+  // redraw the chart so its themed colors follow when the theme flips.
+  document.addEventListener("themechange", () => {
     if (state.lastResult.rows.length) drawChart();
-  };
-  set(document.documentElement.getAttribute("data-theme"));
-  btn.addEventListener("click", () =>
-    set(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark")
-  );
+  });
 }
 
 function renderExamples(examples) {
