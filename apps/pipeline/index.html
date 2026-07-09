@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Observability — thang.</title>
+  <meta name="description" content="The ELT job behind Data Copilot, instrumented: freshness, per-ticker coverage, run history, and data-quality at a glance. Refreshed daily by a GitHub Actions cron.">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css">
+
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: var(--step-0); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .font-mono { font-family: var(--font-mono); }
+    .wrap { width: min(var(--content-width), 100% - 2 * var(--space-md)); margin-inline: auto; }
+    a { color: inherit; text-decoration: none; }
+    a.link { color: var(--accent); }
+    a.link:hover { text-decoration: underline; }
+
+    .main { padding-block: var(--space-lg) var(--space-2xl); }
+    .intro { max-width: 46rem; margin-bottom: var(--space-lg); }
+    .intro .eyebrow { display: inline-flex; align-items: center; gap: .5em; color: var(--text-dim); font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: .04em; text-transform: uppercase; }
+    .intro h1 { font-family: var(--font-display); font-size: var(--step-3); letter-spacing: -.02em; margin-top: var(--space-xs); }
+    .intro .lead { color: var(--text-muted); font-size: var(--step-1); margin-top: var(--space-sm); }
+    .intro .lead strong { color: var(--text); font-weight: 600; }
+
+    section { margin-bottom: var(--space-xl); }
+    h2 { font-family: var(--font-display); font-size: var(--step-1); margin-bottom: var(--space-sm); }
+    .muted { color: var(--text-dim); font-size: var(--step--1); }
+
+    /* stat cards */
+    .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: var(--space-sm); }
+    .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-sm) var(--space-md); }
+    .stat .k { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: var(--text-dim); }
+    .stat .v { font-family: var(--font-display); font-size: var(--step-2); margin-top: .2em; line-height: 1.1; }
+    .stat .sub { color: var(--text-muted); font-size: var(--step--1); margin-top: .1em; }
+    .stat.ok { border-color: color-mix(in srgb, #5ecb9e 40%, transparent); }
+    .stat.ok .v { color: #5ecb9e; }
+    .stat.warn { border-color: color-mix(in srgb, #f6a94a 45%, transparent); }
+    .stat.warn .v { color: #f6a94a; }
+    .stat.bad { border-color: color-mix(in srgb, #e46a8b 45%, transparent); }
+    .stat.bad .v { color: #e46a8b; }
+
+    /* coverage bars */
+    .cov { display: flex; flex-direction: column; gap: .4rem; }
+    .cov-row { display: grid; grid-template-columns: 9rem 1fr auto; align-items: center; gap: var(--space-sm); font-size: var(--step--1); }
+    .cov-row .tk { font-family: var(--font-mono); color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cov-row .bar { height: 10px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
+    .cov-row .bar > span { display: block; height: 100%; background: var(--accent); border-radius: 5px; }
+    .cov-row .meta { font-family: var(--font-mono); color: var(--text-dim); white-space: nowrap; }
+    .cov-row.lag .bar > span { background: #f6a94a; }
+    .cov-row.lag .meta { color: #f6a94a; }
+
+    /* chart host */
+    .chart-host { border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md); background: var(--bg-soft); }
+    .chart-host .grid { stroke: var(--border); stroke-width: 1; }
+    .chart-host .axis-label { fill: var(--text-dim); font-family: var(--font-mono); font-size: 11px; }
+    .chart-host .chart-empty { color: var(--text-dim); text-align: center; padding: var(--space-lg); }
+
+    /* table */
+    .table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+    table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
+    thead th { background: var(--surface-2); text-align: left; font-weight: 600; padding: .6em .8em; color: var(--text-muted); white-space: nowrap; border-bottom: 1px solid var(--border); }
+    tbody td { padding: .5em .8em; border-bottom: 1px solid var(--border); white-space: nowrap; font-family: var(--font-mono); }
+    tbody tr:hover { background: var(--surface); }
+
+    /* pipeline meta card */
+    .pipe { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md); display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--space-md); }
+    .pipe .field .k { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); }
+    .pipe .field .v { margin-top: .2em; }
+
+    .foot { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--border); color: var(--text-dim); font-size: var(--step--1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-sm); }
+    @media (max-width: 560px){ .cov-row { grid-template-columns: 6.5rem 1fr; } .cov-row .meta { grid-column: 2; text-align: right; } }
+  </style>
+</head>
+<body>
+  <main class="wrap main">
+    <section class="intro">
+      <span class="eyebrow">Data engineering · observability</span>
+      <h1>Pipeline Observability</h1>
+      <p class="lead">The ELT job behind <a class="link" href="/apps/data-copilot/">Data Copilot</a>, <strong>instrumented</strong>.
+        A GitHub Actions cron extracts market data daily, transforms it to Parquet, and commits it — this page watches that job:
+        freshness, per-ticker coverage, and run history.</p>
+    </section>
+
+    <section>
+      <h2>Status</h2>
+      <div class="stats" id="stats"><div class="stat"><div class="k">loading…</div></div></div>
+    </section>
+
+    <section>
+      <h2>Per-ticker coverage</h2>
+      <p class="muted" id="covNote">Rows fetched and latest date per instrument — a lagging bar means that ticker is behind the freshest date.</p>
+      <div class="cov" id="cov"></div>
+    </section>
+
+    <section>
+      <h2>Run history <span class="muted" id="runCount"></span></h2>
+      <div class="chart-host" id="chart"></div>
+      <div class="table-scroll" style="margin-top: var(--space-sm)">
+        <table id="runsTable"></table>
+      </div>
+    </section>
+
+    <section>
+      <h2>The pipeline</h2>
+      <div class="pipe">
+        <div class="field"><div class="k">Schedule</div><div class="v font-mono">cron · 21:30 UTC daily</div></div>
+        <div class="field"><div class="k">Source</div><div class="v" id="srcField">—</div></div>
+        <div class="field"><div class="k">Transform</div><div class="v font-mono">Yahoo → tidy long → Parquet (zstd)</div></div>
+        <div class="field"><div class="k">Code</div><div class="v">
+          <a class="link" href="https://github.com/thangldw/thangldw.github.io/blob/master/.github/workflows/refresh-stocks.yml" target="_blank" rel="noopener">workflow.yml</a>
+          &nbsp;·&nbsp;
+          <a class="link" href="https://github.com/thangldw/thangldw.github.io/blob/master/scripts/fetch_stocks.py" target="_blank" rel="noopener">fetch_stocks.py</a>
+        </div></div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span class="font-mono">No backend · the job commits its own telemetry</span>
+      <a class="link" href="/apps/">← All apps</a>
+    </footer>
+  </main>
+
+  <script type="module">
+    import { lineChart } from "/apps/data-copilot/js/charts.js";
+
+    const $ = (s) => document.querySelector(s);
+    const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+    const daysBetween = (iso) => Math.floor((Date.now() - new Date(iso + "T00:00:00Z").getTime()) / 86400000);
+
+    function relTime(iso) {
+      const s = Math.floor((Date.now() - new Date(iso).getTime()) / 1000);
+      if (s < 3600) return Math.max(1, Math.floor(s / 60)) + "m ago";
+      if (s < 86400) return Math.floor(s / 3600) + "h ago";
+      return Math.floor(s / 86400) + "d ago";
+    }
+
+    async function boot() {
+      const base = "/apps/data-copilot/data/";
+      const [meta, runs] = await Promise.all([
+        fetch(base + "meta.json").then(r => r.json()),
+        fetch(base + "runs.json").then(r => r.json()).catch(() => []),
+      ]);
+
+      renderStatus(meta, runs);
+      renderCoverage(meta);
+      renderRuns(runs);
+      $("#srcField").textContent = meta.source || "—";
+    }
+
+    // ── TODO(thang): the freshness verdict is a judgement call ─────────────
+    // Given `days` = calendar days since the newest data point, decide the health
+    // label + severity. Markets close on weekends/holidays, so a naive "1 day = stale"
+    // is wrong: a Monday run can legitimately be 3 days behind Friday's close.
+    // Return { level: "ok" | "warn" | "bad", label: string }.
+    // A reasonable default is below — tune the thresholds to how you'd actually
+    // want to be alerted (e.g. treat a 3-day lag over a weekend as fine, but flag
+    // a 6-day gap as a real pipeline failure).
+    function freshnessVerdict(days) {
+      if (days <= 1) return { level: "ok", label: "fresh" };
+      if (days <= 4) return { level: "warn", label: "weekend/holiday lag" };
+      return { level: "bad", label: "stale — check the cron" };
+    }
+    // ───────────────────────────────────────────────────────────────────────
+
+    function statCard(k, v, sub, cls = "") {
+      return `<div class="stat ${cls}"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div>`;
+    }
+
+    function renderStatus(meta, runs) {
+      const days = daysBetween(meta.date_max);
+      const fresh = freshnessVerdict(days);
+      const lastRun = runs.length ? runs[runs.length - 1] : null;
+      const failed = (meta.failed || []).length;
+      const cards = [
+        statCard("Freshness", days === 0 ? "today" : days + "d", fresh.label, fresh.level),
+        statCard("Last run", lastRun ? relTime(lastRun.ts) : "—", lastRun ? lastRun.ts.slice(0, 10) : ""),
+        statCard("Rows", meta.row_count.toLocaleString(), meta.date_min + " → " + meta.date_max),
+        statCard("Tickers", String((meta.tickers || []).length), (meta.coverage || []).length + " with data"),
+        statCard("Run time", (meta.duration_s ?? "—") + "s", "last extraction"),
+        statCard("Failures", String(failed), failed ? (meta.failed || []).join(", ") : "all tickers OK", failed ? "bad" : "ok"),
+      ];
+      $("#stats").innerHTML = cards.join("");
+    }
+
+    function renderCoverage(meta) {
+      const cov = (meta.coverage || []).slice();
+      if (!cov.length) { $("#cov").innerHTML = `<p class="muted">No coverage data.</p>`; return; }
+      const maxRows = Math.max(...cov.map(c => c.rows));
+      const freshestT = new Date(meta.date_max + "T00:00:00Z").getTime();
+      // Only flag a ticker as lagging at ≥2 days behind: a 1-day gap between,
+      // say, a Tokyo close and a not-yet-closed US session is normal, not a fault.
+      const lagDays = (d) => Math.round((freshestT - new Date(d + "T00:00:00Z").getTime()) / 86400000);
+      $("#cov").innerHTML = cov
+        .sort((a, b) => b.rows - a.rows)
+        .map(c => {
+          const lag = lagDays(c.date_max) >= 2;
+          const pct = Math.round((c.rows / maxRows) * 100);
+          return `<div class="cov-row ${lag ? "lag" : ""}">
+            <span class="tk" title="${esc(c.name)}">${esc(c.ticker)}</span>
+            <span class="bar"><span style="width:${pct}%"></span></span>
+            <span class="meta">${c.rows.toLocaleString()} · ${esc(c.date_max)}${lag ? " ⚠" : ""}</span>
+          </div>`;
+        }).join("");
+    }
+
+    function renderRuns(runs) {
+      $("#runCount").textContent = runs.length ? `· ${runs.length} logged` : "";
+
+      // Rows-over-time chart — only meaningful once history accrues.
+      if (runs.length >= 2) {
+        lineChart($("#chart"), runs, { xKey: "ts", yKey: "row_count" });
+      } else {
+        $("#chart").innerHTML = `<p class="chart-empty">History builds with each daily run — ${runs.length} logged so far.<br>Come back after a few crons to see rows over time.</p>`;
+      }
+
+      const head = `<thead><tr><th>run (UTC)</th><th>rows</th><th>tickers</th><th>failed</th><th>latest date</th><th>duration</th></tr></thead>`;
+      const body = runs.slice().reverse().slice(0, 60).map(r => `<tr>
+        <td>${esc((r.ts || "").replace("T", " ").replace("Z", ""))}</td>
+        <td>${(r.row_count ?? 0).toLocaleString()}</td>
+        <td>${r.ticker_count ?? "—"}</td>
+        <td>${r.failed_count ?? 0}</td>
+        <td>${esc(r.date_max || "—")}</td>
+        <td>${r.duration_s ?? "—"}s</td>
+      </tr>`).join("");
+      $("#runsTable").innerHTML = head + `<tbody>${body}</tbody>`;
+    }
+
+    // redraw chart on theme flip (colors follow tokens)
+    document.addEventListener("themechange", () => {
+      const runs = window.__runs;
+      if (runs && runs.length >= 2) lineChart($("#chart"), runs, { xKey: "ts", yKey: "row_count" });
+    });
+
+    boot().then(() => {
+      fetch("/apps/data-copilot/data/runs.json").then(r => r.json()).then(r => { window.__runs = r; }).catch(() => {});
+    }).catch(err => {
+      $("#stats").innerHTML = `<div class="stat bad"><div class="k">error</div><div class="v" style="font-size:var(--step-0)">${esc(String(err))}</div></div>`;
+    });
+  </script>
+  <script src="/js/site-header.js"></script>
+</body>
+</html>
