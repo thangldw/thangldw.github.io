@@ -28,9 +28,9 @@
   <main class="wrap app-main">
     <section class="intro">
       <h1>Data Copilot</h1>
-      <p class="lead">Drop in a CSV — or explore the live market dataset — and the browser
-        <strong>profiles it, runs real SQL on it, and charts the result.</strong>
-        The whole engine (DuckDB) runs in this tab. Nothing is uploaded anywhere.</p>
+      <p class="lead"><strong>Ask a question in plain English</strong> — or drop in a CSV — and the browser
+        turns it into real SQL, runs it (DuckDB), and charts the result.
+        No server, no API key: the whole engine runs in this tab.</p>
     </section>
 
     <!-- Dataset bar -->
@@ -50,6 +50,18 @@
     </section>
 
     <div class="health-banner" id="healthBanner" hidden></div>
+
+    <!-- Ask: keyless natural-language → SQL -->
+    <section class="ask" id="ask" hidden>
+      <div class="ask-bar">
+        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+        <input id="askInput" type="text" autocomplete="off" spellcheck="false"
+               placeholder="Ask in plain English — “top 5 by return”, “compare Toyota and Sony”, “volatility”…">
+        <button class="btn btn-primary" id="askBtn"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="ask-examples" id="askExamples"></div>
+      <div class="ask-explain" id="askExplain" hidden></div>
+    </section>
 
     <!-- Tabs -->
     <nav class="tabs" role="tablist">
