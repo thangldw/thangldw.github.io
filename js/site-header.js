@@ -46,6 +46,14 @@
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-toggle{border-color:#e4e7ee;color:#14171d;background:#ffffff;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
+    /* shared footer — injected only on sub-pages that don't ship their own */
+    ".tw-footer{width:100%;align-self:stretch;flex:0 0 auto;margin-top:auto;border-top:1px solid #262c38;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;}",
+    "html[data-theme='light'] .tw-footer{border-top-color:#e4e7ee;}",
+    ".tw-footer .tw-fwrap{width:min(1152px,100% - 48px);margin-inline:auto;padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#6b7385;font-size:13px;}",
+    "html[data-theme='light'] .tw-footer .tw-fwrap{color:#838b99;}",
+    ".tw-footer .tw-fmono{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;}",
+    ".tw-footer a{color:inherit;text-decoration:none;}",
+    ".tw-footer a:hover{color:#7c9cff;}",
     "@media(max-width:560px){.tw-header .tw-nav{gap:1rem;}.tw-header .tw-nav a.tw-section{display:none;}}",
   ].join("");
 
