@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N1 文法② — thang.</title>
+<meta name="description" content="JLPT N1 Mondai 6 (文の文法② · sắp xếp câu / điền ★) — 420 câu luyện tập hợp nhất, có giải thích tiếng Việt và điểm ngữ pháp. Tiến độ lưu trong trình duyệt.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/tokens.css">
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<style>
+  body{ background:var(--bg); color:var(--text); font-family:var(--font-sans); font-size:var(--step-0);
+    line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; align-items:center; }
+  .container{ width:100%; max-width:46rem; padding:var(--space-md) var(--space-md) var(--space-2xl);
+    --ok:#5ecb9e; --no:#e46a8b; --amber:#f6a94a; }
+  .jp{ font-family:'Noto Sans JP',var(--font-sans); }
+
+  /* intro */
+  .intro{ text-align:center; margin-bottom:var(--space-lg); }
+  .intro h1{ font-family:'Noto Serif JP',var(--font-display),serif; font-size:var(--step-3); letter-spacing:-.01em; }
+  .intro h1 .en{ font-family:var(--font-display); color:var(--text-dim); font-weight:500; margin-left:.4em; font-size:.6em; }
+  .intro .sub{ color:var(--text-muted); font-size:var(--step--1); margin-top:var(--space-2xs); }
+  .intro .instr{ font-family:'Noto Sans JP',var(--font-sans); color:var(--text-dim); font-size:var(--step--1); margin-top:var(--space-xs); }
+
+  /* menu */
+  .resume{ background:var(--surface); border:1px solid var(--amber); border-radius:var(--radius); padding:var(--space-sm) var(--space-md);
+    margin-bottom:var(--space-md); display:flex; align-items:center; justify-content:space-between; gap:var(--space-sm); flex-wrap:wrap; }
+  .resume .rt{ font-size:var(--step--1); color:var(--text-muted); } .resume .rt b{ color:var(--amber); }
+  .section-label{ font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; color:var(--text-dim); margin-bottom:var(--space-xs); }
+  .set-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr)); gap:.5rem; margin-bottom:var(--space-md); }
+  .set-btn{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.7em .4em; cursor:pointer;
+    text-align:center; transition:all .15s var(--ease); }
+  .set-btn:hover{ border-color:var(--accent); transform:translateY(-2px); }
+  .set-btn.saved{ border-color:var(--amber); }
+  .set-btn .num{ font-family:var(--font-display); font-weight:700; display:block; }
+  .set-btn .range{ font-size:.68rem; color:var(--text-dim); font-family:var(--font-mono); }
+  .menu-foot{ font-size:var(--step--1); color:var(--text-dim); }
+  .btn-txt{ background:none; border:none; color:var(--accent); cursor:pointer; font-size:var(--step--1); font-family:var(--font-sans); padding:0; }
+  .btn-txt:hover{ text-decoration:underline; }
+
+  /* quiz */
+  #screen-quiz,#screen-result{ display:none; }
+  .back-link{ display:inline-block; color:var(--text-muted); font-size:var(--step--1); cursor:pointer; margin-bottom:var(--space-sm); }
+  .back-link:hover{ color:var(--accent); }
+  .qhead{ display:flex; justify-content:space-between; align-items:center; gap:var(--space-sm); flex-wrap:wrap;
+    font-size:var(--step--1); color:var(--text-muted); font-family:var(--font-mono); margin-bottom:.5em; }
+  .qhead b{ color:var(--text); }
+  .bar{ height:5px; background:var(--surface-2); border-radius:3px; overflow:hidden; margin-bottom:var(--space-md); }
+  .bar-fill{ height:100%; background:var(--accent); width:0; transition:width .3s var(--ease); }
+
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:var(--space-md); box-shadow:var(--shadow); }
+  .qnum{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); }
+  .sentence{ font-family:'Noto Sans JP',sans-serif; font-size:1.15rem; line-height:2; color:var(--text); margin:var(--space-xs) 0 var(--space-md); }
+  .blank{ display:inline-block; min-width:2.2em; text-align:center; border-bottom:2px solid var(--border-strong); margin:0 .15em; color:var(--text-dim); }
+  .blank.star{ color:var(--accent); border-bottom-color:var(--accent); font-weight:700; }
+
+  .choices{ display:grid; gap:.5rem; }
+  .choice-btn{ font-family:'Noto Sans JP',sans-serif; text-align:left; background:var(--surface-2); border:1px solid var(--border);
+    border-radius:var(--radius-sm); padding:.7em .9em; font-size:1rem; color:var(--text); cursor:pointer; transition:all .15s; }
+  .choice-btn:hover:not(:disabled){ border-color:var(--border-strong); }
+  .choice-btn:disabled{ cursor:default; }
+  .choice-btn.correct{ border-color:var(--ok); background:color-mix(in srgb,var(--ok) 15%,var(--surface)); color:var(--ok); font-weight:600; }
+  .choice-btn.wrong{ border-color:var(--no); background:color-mix(in srgb,var(--no) 15%,var(--surface)); color:var(--no); }
+
+  .explain{ display:none; margin-top:var(--space-md); }
+  .explain.show{ display:block; animation:fade .3s var(--ease); }
+  @keyframes fade{ from{opacity:0;transform:translateY(4px);} to{opacity:1;transform:none;} }
+  .badge{ font-family:var(--font-mono); font-size:var(--step--1); display:inline-block; border-radius:999px; padding:.2em .7em; margin:0 .4em .4em 0; }
+  .badge.order{ background:var(--accent-glow); color:var(--accent-soft); }
+  .badge.grammar{ background:color-mix(in srgb,var(--amber) 14%,transparent); color:var(--amber); font-family:'Noto Sans JP',var(--font-mono); }
+  .full{ font-family:'Noto Sans JP',sans-serif; font-size:1.02rem; line-height:1.9; color:var(--text); background:var(--surface-2);
+    border-radius:var(--radius-sm); padding:.7em .9em; margin:.4em 0; }
+  .vi{ color:var(--text-muted); font-size:var(--step--1); margin-bottom:.6em; }
+  .steps{ border-top:1px solid var(--border); padding-top:.6em; }
+  .step{ font-size:var(--step--1); color:var(--text-muted); line-height:1.7; margin-bottom:.3em; }
+  .step b{ color:var(--accent-soft); }
+
+  .navrow{ display:flex; gap:.5rem; justify-content:space-between; margin-top:var(--space-md); }
+  .navbtn{ font-family:var(--font-sans); font-weight:600; font-size:var(--step--1); border:1px solid transparent; border-radius:var(--radius-sm);
+    padding:.6em 1.1em; cursor:pointer; transition:all .15s; }
+  .navbtn.primary{ background:var(--accent); color:var(--accent-ink); }
+  .navbtn.primary:hover{ filter:brightness(1.08); }
+  .navbtn.secondary{ background:var(--surface); border-color:var(--border); color:var(--text-muted); }
+  .navbtn.secondary:hover:not(:disabled){ border-color:var(--border-strong); color:var(--text); }
+  .navbtn:disabled{ opacity:.4; cursor:default; }
+  .navbtn.hidden{ display:none; }
+
+  /* result */
+  .result{ text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:var(--space-lg); }
+  .result .score{ font-family:var(--font-display); font-size:var(--step-4); line-height:1; color:var(--accent); }
+  .result .pct{ color:var(--text-muted); margin:.3em 0 var(--space-md); }
+  .result .actions{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; }
+
+  @media(max-width:480px){ .set-grid{ grid-template-columns:repeat(3,1fr); } .sentence{ font-size:1.05rem; } }
+</style>
+</head>
+<body>
+<main class="container app-main">
+
+  <section class="intro">
+    <h1>文の文法②<span class="en">N1 · Mondai 6</span></h1>
+    <div class="sub">Sắp xếp câu &amp; điền ★ · 420 câu (2 bộ hợp nhất)</div>
+    <div class="instr jp">＿＿の言葉として、最もよいものを１・２・３・４から一つ選びなさい。</div>
+  </section>
+
+  <div id="screen-menu"></div>
+
+  <section id="screen-quiz">
+    <span class="back-link" id="backToSets">← Danh sách set</span>
+    <div class="qhead">
+      <span id="setLabel">Set 1</span>
+      <span>Câu <b id="curNum">1</b> / <span id="totalNum">20</span></span>
+      <span>Đúng: <b id="scoreNum">0</b></span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <div id="quizArea"></div>
+  </section>
+
+  <section id="screen-result"></section>
+
+</main>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const Q = window.QUIZ_DATA || [];
+  const TOTAL = Q.length;
+  const SET_SIZE = 20;
+  const NUM_SETS = Math.ceil(TOTAL / SET_SIZE);
+  const KEY = 'n1_mondai6_progress';
+
+  let currentSet = 0, idxInSet = 0, score = 0, answered = false, setData = [];
+
+  const $ = (s) => document.getElementById(s);
+  const esc = (s) => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify({set:currentSet, idx:idxInSet, score})); }catch(e){} }
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)); }catch(e){ return null; } }
+  function clear(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+
+  function show(screen){
+    $('screen-menu').style.display = screen==='menu' ? 'block' : 'none';
+    $('screen-quiz').style.display = screen==='quiz' ? 'block' : 'none';
+    $('screen-result').style.display = screen==='result' ? 'block' : 'none';
+  }
+
+  function renderMenu(){
+    const saved = load();
+    let html = '';
+    if(saved && saved.set < NUM_SETS){
+      html += `<div class="resume">
+        <span class="rt">Tiếp tục Set <b>${saved.set+1}</b> — câu ${saved.set*SET_SIZE + (saved.idx||0) + 1}</span>
+        <span>
+          <button class="navbtn primary" id="resumeBtn">Tiếp tục →</button>
+          <button class="btn-txt" id="clearBtn" style="margin-left:.6em">Xóa tiến độ</button>
+        </span>
+      </div>`;
+    }
+    html += `<div class="section-label">Chọn set (mỗi set 20 câu)</div><div class="set-grid">`;
+    for(let s=0; s<NUM_SETS; s++){
+      const start = s*SET_SIZE + 1;
+      const end = Math.min((s+1)*SET_SIZE, TOTAL);
+      const isSaved = saved && saved.set === s;
+      html += `<div class="set-btn ${isSaved?'saved':''}" data-set="${s}">
+        <span class="num">Set ${s+1}</span>
+        <span class="range">${start}–${end}</span>
+      </div>`;
+    }
+    html += `</div><div class="menu-foot">💡 ${TOTAL} câu · ${NUM_SETS} set. Tiến độ được <b>tự động lưu</b> trong trình duyệt này.</div>`;
+    $('screen-menu').innerHTML = html;
+
+    document.querySelectorAll('.set-btn').forEach(b =>
+      b.addEventListener('click', () => startSet(+b.dataset.set)));
+    if(saved && saved.set < NUM_SETS){
+      $('resumeBtn').addEventListener('click', () => startSet(saved.set, saved.idx, saved.score));
+      $('clearBtn').addEventListener('click', () => { clear(); renderMenu(); });
+    }
+    show('menu');
+  }
+
+  function startSet(setIndex, resumeIdx, resumeScore){
+    currentSet = setIndex;
+    idxInSet = resumeIdx || 0;
+    score = resumeScore || 0;
+    setData = Q.slice(setIndex*SET_SIZE, setIndex*SET_SIZE + SET_SIZE);
+    const start = setIndex*SET_SIZE + 1;
+    const end = Math.min((setIndex+1)*SET_SIZE, TOTAL);
+    $('setLabel').textContent = `Set ${setIndex+1} (câu ${start}–${end})`;
+    $('totalNum').textContent = setData.length;
+    $('scoreNum').textContent = score;
+    show('quiz');
+    render();
+    window.scrollTo(0,0);
+  }
+
+  function render(){
+    const q = setData[idxInSet];
+    answered = false;
+    save();
+    $('curNum').textContent = idxInSet+1;
+    $('barFill').style.width = (idxInSet/setData.length*100) + '%';
+
+    let blanks = '';
+    for(let p=1; p<=4; p++){
+      blanks += `<span class="blank ${p===q.star?'star':''}">${p===q.star?'★':'…'}</span>`;
+    }
+    const steps = q.steps.map((s,i)=>`<div class="step"><b>${i+1}.</b> ${esc(s)}</div>`).join('');
+    const isFirst = idxInSet===0;
+
+    $('quizArea').innerHTML = `
+      <div class="card">
+        <span class="qnum">Câu ${q.n}</span>
+        <div class="sentence">${esc(q.pre)}${blanks}${esc(q.post)}</div>
+        <div class="choices" id="choiceWrap">
+          ${q.choices.map((c,i)=>`<button class="choice-btn jp" data-i="${i+1}">${i+1}. ${esc(c)}</button>`).join('')}
+        </div>
+        <div class="explain" id="explainBox">
+          <div>
+            <span class="badge order">Thứ tự đúng: ${esc(q.orderDisp)}</span>
+            <span class="badge grammar">📌 ${esc(q.grammar)}</span>
+          </div>
+          <div class="full">${esc(q.full)}</div>
+          <div class="vi">🇻🇳 ${esc(q.vi)}</div>
+          <div class="steps">${steps}</div>
+        </div>
+        <div class="navrow">
+          <button class="navbtn secondary" id="prevBtn" ${isFirst?'disabled':''}>← Câu trước</button>
+          <button class="navbtn primary hidden" id="nextBtn"></button>
+        </div>
+      </div>`;
+
+    document.querySelectorAll('.choice-btn').forEach(b => b.addEventListener('click', () => onAnswer(b, q)));
+    $('prevBtn').addEventListener('click', prev);
+    $('nextBtn').addEventListener('click', next);
+  }
+
+  function onAnswer(btn, q){
+    if(answered) return;
+    answered = true;
+    const picked = +btn.dataset.i;
+    const correct = q.order[q.star-1];          // choice number that belongs in the ★ slot
+    document.querySelectorAll('.choice-btn').forEach(b => {
+      const i = +b.dataset.i;
+      if(i===correct) b.classList.add('correct');
+      else if(i===picked) b.classList.add('wrong');
+      b.disabled = true;
+    });
+    if(picked===correct) score++;
+    $('scoreNum').textContent = score;
+    save();
+    $('explainBox').classList.add('show');
+    const nb = $('nextBtn');
+    nb.textContent = idxInSet === setData.length-1 ? 'Xem kết quả →' : 'Câu tiếp theo →';
+    nb.classList.remove('hidden');
+  }
+
+  function next(){
+    if(idxInSet < setData.length-1){ idxInSet++; render(); window.scrollTo(0,0); }
+    else showResult();
+  }
+  function prev(){ if(idxInSet>0){ idxInSet--; render(); window.scrollTo(0,0); } }
+
+  function showResult(){
+    const pct = Math.round(score/setData.length*100);
+    const msg = pct>=80 ? 'よくできました！' : pct>=50 ? 'その調子で！' : 'もう一度がんばろう！';
+    $('screen-result').innerHTML = `
+      <div class="result">
+        <div class="score">${score}<span style="color:var(--text-dim);font-size:.5em"> / ${setData.length}</span></div>
+        <div class="pct">${pct}% đúng · <span class="jp">${msg}</span></div>
+        <div class="actions">
+          <button class="navbtn primary" id="retryBtn">Làm lại set này</button>
+          <button class="navbtn secondary" id="backBtn">Chọn set khác</button>
+        </div>
+      </div>`;
+    show('result');
+    window.scrollTo(0,0);
+    $('retryBtn').addEventListener('click', () => startSet(currentSet));
+    $('backBtn').addEventListener('click', renderMenu);
+  }
+
+  $('backToSets').addEventListener('click', renderMenu);
+  renderMenu();
+})();
+</script>
+<script src="/js/site-header.js"></script>
+</body>
+</html>
