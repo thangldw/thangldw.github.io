@@ -112,6 +112,18 @@
 
     document.body.insertAdjacentHTML("afterbegin", header.outerHTML);
 
+    // shared footer — only on pages that don't ship their own <footer>
+    if (!document.querySelector("footer")) {
+      var footer = document.createElement("footer");
+      footer.className = "tw-footer";
+      footer.innerHTML =
+        '<div class="tw-fwrap">' +
+        '<span class="tw-fmono">Built by Thang Luu · Tokyo</span>' +
+        '<a href="/apps/">← Back to apps</a>' +
+        "</div>";
+      document.body.appendChild(footer);
+    }
+
     document.getElementById("tw-toggle").addEventListener("click", function () {
       var root = document.documentElement;
       var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
