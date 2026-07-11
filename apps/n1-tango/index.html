@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f7f5f0;
+  --bg: #f7f8fa;
   --ink: #1a1612;
   --muted: #8a847a;
-  --line: #e8e3db;
+  --line: #e4e7ee;
   --accent: #c8401a;
   --accent2: #2563a8;
   --gold: #b8860b;
@@ -23,26 +23,27 @@ html,body{height:100%;overflow:hidden;font-family:'Lexend',sans-serif;background
 /* ── HEADER ── */
 #appHeader{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  background:var(--ink);
+  background:#ffffff;
+  border-bottom:1px solid var(--line);
   padding:12px 16px 10px;
   display:flex;align-items:center;gap:10px;
 }
 #appHeader h1{
   font-family:'Noto Serif JP',serif;
   font-size:1rem;font-weight:900;
-  color:#f7f5f0;letter-spacing:.08em;
+  color:var(--ink);letter-spacing:.08em;
   flex:1;
 }
 .progress-wrap{display:flex;align-items:center;gap:8px;}
-.progress-text{font-size:.65rem;color:#a09890;white-space:nowrap;}
-.progress-bar{width:80px;height:4px;background:#333;border-radius:2px;overflow:hidden;}
+.progress-text{font-size:.65rem;color:#525a68;white-space:nowrap;}
+.progress-bar{width:80px;height:4px;background:var(--line);border-radius:2px;overflow:hidden;}
 .progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;}
 
 /* ── NAV TABS ── */
 nav#tabNav{
   position:fixed;top:52px;left:0;right:0;z-index:99;
-  background:var(--ink);
-  border-bottom:2px solid #333;
+  background:#ffffff;
+  border-bottom:2px solid var(--line);
   display:flex;overflow-x:auto;gap:0;
   scrollbar-width:none;
 }
@@ -51,7 +52,7 @@ nav#tabNav::-webkit-scrollbar{display:none;}
   flex-shrink:0;
   padding:8px 14px;
   font-size:.65rem;font-weight:600;
-  color:#666;cursor:pointer;
+  color:#525a68;cursor:pointer;
   border-bottom:2px solid transparent;
   margin-bottom:-2px;
   white-space:nowrap;
@@ -59,7 +60,7 @@ nav#tabNav::-webkit-scrollbar{display:none;}
   letter-spacing:.04em;
 }
 .tab.active{color:var(--accent);border-bottom-color:var(--accent);}
-.tab:hover{color:#aaa;}
+.tab:hover{color:var(--ink);}
 
 /* ── MAIN CONTENT ── */
 main{
