@@ -10,6 +10,8 @@ html[lang="ja"] {
   --font-display: 'Space Grotesk', 'Noto Sans JP', var(--font-sans);
 }
 html[lang="ja"] body { line-height: 1.85; }
+/* Japanese snippets embedded in non-Japanese pages */
+html:not([lang="ja"]) [lang="ja"] { font-family: 'Inter', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif; }
 html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3 { line-height: 1.25; }
 
 html {
