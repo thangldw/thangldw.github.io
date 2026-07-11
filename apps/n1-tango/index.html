@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>N1 単語帳 — thang.</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f5f0;
+  --ink: #1a1612;
+  --muted: #8a847a;
+  --line: #e8e3db;
+  --accent: #c8401a;
+  --accent2: #2563a8;
+  --gold: #b8860b;
+  --green: #1a7a4a;
+  --tag-h: 28px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;font-family:'Lexend',sans-serif;background:var(--bg);color:var(--ink);}
+
+/* ── HEADER ── */
+#appHeader{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--ink);
+  padding:12px 16px 10px;
+  display:flex;align-items:center;gap:10px;
+}
+#appHeader h1{
+  font-family:'Noto Serif JP',serif;
+  font-size:1rem;font-weight:900;
+  color:#f7f5f0;letter-spacing:.08em;
+  flex:1;
+}
+.progress-wrap{display:flex;align-items:center;gap:8px;}
+.progress-text{font-size:.65rem;color:#a09890;white-space:nowrap;}
+.progress-bar{width:80px;height:4px;background:#333;border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;}
+
+/* ── NAV TABS ── */
+nav#tabNav{
+  position:fixed;top:52px;left:0;right:0;z-index:99;
+  background:var(--ink);
+  border-bottom:2px solid #333;
+  display:flex;overflow-x:auto;gap:0;
+  scrollbar-width:none;
+}
+nav#tabNav::-webkit-scrollbar{display:none;}
+.tab{
+  flex-shrink:0;
+  padding:8px 14px;
+  font-size:.65rem;font-weight:600;
+  color:#666;cursor:pointer;
+  border-bottom:2px solid transparent;
+  margin-bottom:-2px;
+  white-space:nowrap;
+  transition:all .2s;
+  letter-spacing:.04em;
+}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.tab:hover{color:#aaa;}
+
+/* ── MAIN CONTENT ── */
+main{
+  position:fixed;top:88px;bottom:0;left:0;right:0;
+  overflow-y:auto;
+  padding:16px 14px 80px;
+}
+
+/* ── PAGE ── */
+.page{display:none;}
+.page.active{display:block;}
+
+.page-header{
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:2px solid var(--ink);
+}
+.page-header h2{
+  font-family:'Noto Serif JP',serif;
+  font-size:1.3rem;font-weight:900;
+  line-height:1.2;
+}
+.page-header .subtitle{
+  font-size:.7rem;color:var(--muted);
+  margin-top:3px;letter-spacing:.06em;
+}
+.page-header .count{
+  display:inline-block;
+  background:var(--ink);color:#f7f5f0;
+  font-size:.6rem;font-weight:700;
+  padding:2px 8px;border-radius:20px;
+  margin-top:6px;
+}
+
+/* ── GROUP ── */
+.group{margin-bottom:20px;}
+.group-label{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:8px;
+}
+.kanji-badge{
+  font-family:'Noto Serif JP',serif;
+  font-size:.85rem;font-weight:900;
+  color:white;
+  background:var(--accent);
+  padding:2px 10px;
+  border-radius:4px;
+  letter-spacing:.05em;
+}
+.kanji-badge.blue{background:var(--accent2);}
+.kanji-badge.green{background:var(--green);}
+.kanji-badge.gold{background:var(--gold);}
+.kanji-badge.dark{background:#333;}
+.group-name{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:.06em;}
+
+/* ── WORD ROW ── */
+.word-list{
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow:hidden;
+  background:white;
+  box-shadow:0 1px 4px rgba(0,0,0,.05);
+}
+.word-row{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:0;
+  padding:9px 12px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  transition:background .15s;
+}
+.word-row:last-child{border-bottom:none;}
+.word-row:active{background:#f0ede8;}
+
+.kanji{
+  font-family:'Noto Serif JP',serif;
+  font-weight:700;
+  font-size:1.05rem;
+  min-width:90px;
+  line-height:1.3;
+}
+/* highlight shared kanji */
+.hl{color:var(--accent);position:relative;}
+.hl.blue{color:var(--accent2);}
+.hl.green{color:var(--green);}
+.hl.gold{color:var(--gold);}
+
+.reading{
+  font-size:.65rem;color:var(--muted);
+  padding:0 8px;
+  line-height:1.4;
+}
+.meaning{
+  font-size:.7rem;color:#444;
+  text-align:right;
+  line-height:1.4;
+  max-width:130px;
+}
+
+/* ── EXPAND detail ── */
+.word-detail{
+  display:none;
+  background:#faf8f4;
+  padding:8px 12px 10px;
+  border-bottom:1px solid var(--line);
+  font-size:.68rem;color:#555;
+  line-height:1.6;
+}
+.word-detail.open{display:block;}
+.word-detail .ex{color:var(--accent2);font-style:italic;}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:white;
+  border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px 16px;
+  gap:12px;
+}
+.btn{
+  flex:1;padding:10px;border:none;border-radius:8px;
+  font-family:'Lexend',sans-serif;font-size:.75rem;font-weight:600;
+  cursor:pointer;transition:all .15s;
+}
+.btn-outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);}
+.btn-outline:active{background:var(--ink);color:white;}
+.btn-primary{background:var(--ink);color:white;}
+.btn-primary:active{opacity:.8;}
+
+/* ── QUIZ MODE ── */
+.quiz-card{
+  background:white;border-radius:14px;
+  border:1px solid var(--line);
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+  padding:28px 20px;
+  text-align:center;
+  margin-bottom:16px;
+}
+.quiz-word{
+  font-family:'Noto Serif JP',serif;
+  font-size:2.8rem;font-weight:900;
+  margin-bottom:8px;
+  line-height:1;
+}
+.quiz-hint{font-size:.7rem;color:var(--muted);margin-bottom:20px;}
+.quiz-reveal{
+  background:var(--bg);border-radius:8px;
+  padding:14px;margin-top:12px;
+  display:none;
+}
+.quiz-reveal.open{display:block;}
+.quiz-reading{font-size:.9rem;color:var(--accent2);font-weight:600;margin-bottom:4px;}
+.quiz-meaning{font-size:.85rem;color:var(--ink);}
+.reveal-btn{
+  width:100%;padding:12px;
+  background:var(--accent);color:white;border:none;
+  border-radius:8px;font-family:'Lexend',sans-serif;
+  font-size:.8rem;font-weight:700;cursor:pointer;
+  margin-top:8px;
+}
+.reveal-btn:active{opacity:.8;}
+.quiz-nav{display:flex;gap:10px;margin-top:12px;}
+.quiz-nav .btn{padding:12px;}
+.quiz-counter{text-align:center;font-size:.7rem;color:var(--muted);margin-bottom:12px;}
+
+.page-intro{
+  background:white;border-radius:10px;
+  border:1px solid var(--line);
+  padding:12px 14px;
+  margin-bottom:16px;
+  font-size:.72rem;color:#555;
+  line-height:1.6;
+}
+.page-intro strong{color:var(--ink);}
+</style>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<style>
+/* site-shell integration: convert fixed app-shell to normal flow */
+html,body{height:auto;overflow:visible;}
+#appHeader{position:sticky;top:72px;left:auto;right:auto;z-index:98;}
+nav#tabNav{position:sticky;top:124px;left:auto;right:auto;z-index:97;}
+main#mainContent{position:static;overflow:visible;padding:16px 14px 90px;}
+body{padding-bottom:64px;} /* keep injected footer clear of the fixed bottom nav */
+</style>
+</head>
+<body>
+
+<header id="appHeader">
+  <h1>📖 JLPT N1 単語帳</h1>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+    <span class="progress-text" id="progText">0/309</span>
+  </div>
+</header>
+
+<nav id="tabNav">
+  <div class="tab active" data-page="0">🌿 Thiên Nhiên</div>
+  <div class="tab" data-page="1">⚖️ Pháp Lý</div>
+  <div class="tab" data-page="2">🏗️ Hành Động</div>
+  <div class="tab" data-page="3">💭 Tâm Lý</div>
+  <div class="tab" data-page="4">🏠 Gia Đình & XH</div>
+  <div class="tab" data-page="5">💰 Kinh Tế</div>
+  <div class="tab" data-page="6">🔬 Khoa Học</div>
+  <div class="tab" data-page="7">📚 Học Thuật</div>
+  <div class="tab" data-page="8">🗾 Địa Điểm</div>
+  <div class="tab" data-page="9">⚡ Quiz</div>
+</nav>
+
+<main id="mainContent">
+
+<!-- ════════ PAGE 0: THIÊN NHIÊN ════════ -->
+<div class="page active" id="page-0">
+  <div class="page-header">
+    <h2>🌿 Thiên Nhiên & Địa Lý</h2>
+    <div class="subtitle">Thời tiết · Địa hình · Nước · Nông nghiệp</div>
+    <span class="count">44 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">雨・天</span><span class="group-name">THỜI TIẾT — chữ 雨/天 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl">雨</span>雲</span><span class="reading">あまぐも</span><span class="meaning">Mây mưa</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">雨</span>天</span><span class="reading">うてん</span><span class="meaning">Trời mưa</span></div>
+      <div class="word-row"><span class="kanji">梅<span class="hl">雨</span></span><span class="reading">つゆ</span><span class="meaning">Mùa mưa</span></div>
+      <div class="word-row"><span class="kanji">稲光</span><span class="reading">いなびかり</span><span class="meaning">Ánh chớp</span></div>
+      <div class="word-row"><span class="kanji">雪崩</span><span class="reading">なだれ</span><span class="meaning">Lở tuyết</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">日</span>和</span><span class="reading">ひより</span><span class="meaning">Thời tiết tốt</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">日</span>夜</span><span class="reading">にちや</span><span class="meaning">Ngày đêm</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">日</span>向</span><span class="reading">ひなた</span><span class="meaning">Chỗ có nắng</span></div>
+      <div class="word-row"><span class="kanji">西<span class="hl">日</span></span><span class="reading">にしび</span><span class="meaning">Nắng chiều</span></div>
+      <div class="word-row"><span class="kanji">夕暮れ</span><span class="reading">ゆうぐれ</span><span class="meaning">Hoàng hôn</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">山・丘</span><span class="group-name">ĐỊA HÌNH — chữ 山 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">丘陵</span><span class="reading">きゅうりょう</span><span class="meaning">Đồi núi</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl blue">山</span>腹</span><span class="reading">さんぷく</span><span class="meaning">Sườn núi</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl blue">山</span>岳</span><span class="reading">さんがく</span><span class="meaning">Núi cao</span></div>
+      <div class="word-row"><span class="kanji">北極</span><span class="reading">ほっきょく</span><span class="meaning">Bắc Cực</span></div>
+      <div class="word-row"><span class="kanji">極限</span><span class="reading">きょくげん</span><span class="meaning">Cực hạn</span></div>
+      <div class="word-row"><span class="kanji">砂漠</span><span class="reading">さばく</span><span class="meaning">Sa mạc</span></div>
+      <div class="word-row"><span class="kanji">砂利</span><span class="reading">じゃり</span><span class="meaning">Sỏi</span></div>
+      <div class="word-row"><span class="kanji">岩石</span><span class="reading">がんせき</span><span class="meaning">Đá tảng</span></div>
+      <div class="word-row"><span class="kanji">河川</span><span class="reading">かせん</span><span class="meaning">Sông ngòi</span></div>
+      <div class="word-row"><span class="kanji">海抜</span><span class="reading">かいばつ</span><span class="meaning">Độ cao mực biển</span></div>
+      <div class="word-row"><span class="kanji">遠方</span><span class="reading">えんぽう</span><span class="meaning">Phương xa</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">水・洪</span><span class="group-name">NƯỚC — chữ 水 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">洪<span class="hl green">水</span></span><span class="reading">こうずい</span><span class="meaning">Lũ lụt</span></div>
+      <div class="word-row"><span class="kanji">降<span class="hl green">水</span></span><span class="reading">こうすい</span><span class="meaning">Lượng mưa</span></div>
+      <div class="word-row"><span class="kanji">潜<span class="hl green">水</span></span><span class="reading">せんすい</span><span class="meaning">Lặn</span></div>
+      <div class="word-row"><span class="kanji">津波</span><span class="reading">つなみ</span><span class="meaning">Sóng thần</span></div>
+      <div class="word-row"><span class="kanji">沈没</span><span class="reading">ちんぼつ</span><span class="meaning">Chìm</span></div>
+      <div class="word-row"><span class="kanji">沈殿</span><span class="reading">ちんでん</span><span class="meaning">Lắng đọng, kết tủa</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">農・漁</span><span class="group-name">NÔNG NGHIỆP — chữ 作 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">耕<span class="hl gold">作</span></span><span class="reading">こうさく</span><span class="meaning">Canh tác</span></div>
+      <div class="word-row"><span class="kanji">豊<span class="hl gold">作</span></span><span class="reading">ほうさく</span><span class="meaning">Được mùa</span></div>
+      <div class="word-row"><span class="kanji">凶<span class="hl gold">作</span></span><span class="reading">きょうさく</span><span class="meaning">Mất mùa</span></div>
+      <div class="word-row"><span class="kanji">駄<span class="hl gold">作</span></span><span class="reading">ださく</span><span class="meaning">Sản phẩm tệ</span></div>
+      <div class="word-row"><span class="kanji">漁獲</span><span class="reading">ぎょかく</span><span class="meaning">Sản lượng đánh bắt</span></div>
+      <div class="word-row"><span class="kanji">捕鯨</span><span class="reading">ほげい</span><span class="meaning">Đánh bắt cá voi</span></div>
+      <div class="word-row"><span class="kanji">発芽</span><span class="reading">はつが</span><span class="meaning">Nảy mầm</span></div>
+      <div class="word-row"><span class="kanji">飢餓</span><span class="reading">きが</span><span class="meaning">Nạn đói</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">自然その他</span><span class="group-name">TỰ NHIÊN KHÁC</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">惑星</span><span class="reading">わくせい</span><span class="meaning">Hành tinh</span></div>
+      <div class="word-row"><span class="kanji">花弁</span><span class="reading">はなびら</span><span class="meaning">Cánh hoa</span></div>
+      <div class="word-row"><span class="kanji">黴菌</span><span class="reading">ばいきん</span><span class="meaning">Vi khuẩn, nấm mốc</span></div>
+      <div class="word-row"><span class="kanji">微塵</span><span class="reading">みじん</span><span class="meaning">Hạt bụi</span></div>
+      <div class="word-row"><span class="kanji">焚き火</span><span class="reading">たきび</span><span class="meaning">Lửa trại</span></div>
+      <div class="word-row"><span class="kanji">磁石</span><span class="reading">じしゃく</span><span class="meaning">Nam châm</span></div>
+      <div class="word-row"><span class="kanji">磁気</span><span class="reading">じき</span><span class="meaning">Từ trường</span></div>
+      <div class="word-row"><span class="kanji">磁器</span><span class="reading">じき</span><span class="meaning">⚠️ Đồ gốm sứ (đồng âm!)</span></div>
+      <div class="word-row"><span class="kanji">弾力</span><span class="reading">だんりょく</span><span class="meaning">Đàn hồi</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 1: PHÁP LÝ ════════ -->
+<div class="page" id="page-1">
+  <div class="page-header">
+    <h2>⚖️ Pháp Lý & Xã Hội</h2>
+    <div class="subtitle">Kiện tụng · Tội phạm · Quyết định · Quy tắc</div>
+    <span class="count">38 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">訴・控</span><span class="group-name">KIỆN TỤNG — chữ 訴/控 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl">訴</span>訟</span><span class="reading">そしょう</span><span class="meaning">Kiện tụng</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">控</span>訴</span><span class="reading">こうそ</span><span class="meaning">Kháng cáo</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">控</span>除</span><span class="reading">こうじょ</span><span class="meaning">Khấu trừ</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">控</span>室</span><span class="reading">ひかえしつ</span><span class="meaning">Phòng chờ</span></div>
+      <div class="word-row"><span class="kanji">証拠</span><span class="reading">しょうこ</span><span class="meaning">Chứng cứ</span></div>
+      <div class="word-row"><span class="kanji">目撃</span><span class="reading">もくげき</span><span class="meaning">Chứng kiến</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">害・迫・妨</span><span class="group-name">CẢN TRỞ / ÁP BỨC — chữ 害 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">妨<span class="hl blue">害</span></span><span class="reading">ぼうがい</span><span class="meaning">Ngăn cản, quấy rối</span></div>
+      <div class="word-row"><span class="kanji">迫<span class="hl blue">害</span></span><span class="reading">はくがい</span><span class="meaning">Áp bức, bức hại</span></div>
+      <div class="word-row"><span class="kanji">危<span class="hl blue">害</span></span><span class="reading">きがい</span><span class="meaning">Gây hại, phá hủy</span></div>
+      <div class="word-row"><span class="kanji">阻<span class="hl blue">害</span></span><span class="reading">そがい</span><span class="meaning">Cản trở</span></div>
+      <div class="word-row"><span class="kanji">侵犯</span><span class="reading">しんぱん</span><span class="meaning">Xâm phạm</span></div>
+      <div class="word-row"><span class="kanji">脅迫</span><span class="reading">きょうはく</span><span class="meaning">Đe dọa, cưỡng ép</span></div>
+      <div class="word-row"><span class="kanji">侮辱</span><span class="reading">ぶじょく</span><span class="meaning">Sỉ nhục</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">処・施</span><span class="group-name">XỬ LÝ / THI HÀNH</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl green">処</span>分</span><span class="reading">しょぶん</span><span class="meaning">Xử lý, vứt bỏ</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl green">処</span>罰</span><span class="reading">しょばつ</span><span class="meaning">Xử phạt</span></div>
+      <div class="word-row"><span class="kanji">措置</span><span class="reading">そち</span><span class="meaning">Biện pháp</span></div>
+      <div class="word-row"><span class="kanji">施行</span><span class="reading">しこう</span><span class="meaning">Thi hành (luật)</span></div>
+      <div class="word-row"><span class="kanji">試行</span><span class="reading">しこう ⚠️</span><span class="meaning">Thử nghiệm (đồng âm)</span></div>
+      <div class="word-row"><span class="kanji">布告</span><span class="reading">ふこく</span><span class="meaning">Sắc lệnh, bố cáo</span></div>
+      <div class="word-row"><span class="kanji">勧告</span><span class="reading">かんこく</span><span class="meaning">Khuyến cáo</span></div>
+      <div class="word-row"><span class="kanji">干渉</span><span class="reading">かんしょう</span><span class="meaning">Can thiệp</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">詐・欺</span><span class="group-name">TỘI PHẠM & GIAN LẬN</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">詐欺</span><span class="reading">さぎ</span><span class="meaning">Lừa đảo</span></div>
+      <div class="word-row"><span class="kanji">捕虜</span><span class="reading">ほりょ</span><span class="meaning">Tù binh</span></div>
+      <div class="word-row"><span class="kanji">人質</span><span class="reading">ひとじち</span><span class="meaning">Con tin</span></div>
+      <div class="word-row"><span class="kanji">追跡</span><span class="reading">ついせき</span><span class="meaning">Truy đuổi, truy vết</span></div>
+      <div class="word-row"><span class="kanji">暴露</span><span class="reading">ばくろ</span><span class="meaning">Phơi bày</span></div>
+      <div class="word-row"><span class="kanji">没収</span><span class="reading">ぼっしゅう</span><span class="meaning">Tịch thu</span></div>
+      <div class="word-row"><span class="kanji">腐敗</span><span class="reading">ふはい</span><span class="meaning">Thối nát, tham nhũng</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">禁・辞</span><span class="group-name">TỪ CHỐI / CẤM KỴ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">禁物</span><span class="reading">きんもつ</span><span class="meaning">Điều cấm kỵ</span></div>
+      <div class="word-row"><span class="kanji">辞退</span><span class="reading">じたい</span><span class="meaning">Từ chối, xin rút</span></div>
+      <div class="word-row"><span class="kanji">取捨</span><span class="reading">しゅしゃ</span><span class="meaning">Lựa chọn, chọn lọc</span></div>
+      <div class="word-row"><span class="kanji">絶版</span><span class="reading">ぜっぱん</span><span class="meaning">Ngừng xuất bản</span></div>
+      <div class="word-row"><span class="kanji">封鎖</span><span class="reading">ふうさ</span><span class="meaning">Phong tỏa</span></div>
+      <div class="word-row"><span class="kanji">束縛</span><span class="reading">そくばく</span><span class="meaning">Ràng buộc, kiềm chế</span></div>
+      <div class="word-row"><span class="kanji">潔白</span><span class="reading">けっぱく</span><span class="meaning">Trong sạch, vô tội</span></div>
+      <div class="word-row"><span class="kanji">矛盾</span><span class="reading">むじゅん</span><span class="meaning">Mâu thuẫn</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 2: HÀNH ĐỘNG ════════ -->
+<div class="page" id="page-2">
+  <div class="page-header">
+    <h2>🏗️ Hành Động & Vận Động</h2>
+    <div class="subtitle">Di chuyển · Phá hủy · Xây dựng · Thoát khỏi</div>
+    <span class="count">45 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">行・走</span><span class="group-name">HÀNH ĐỘNG — chữ 行 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">走<span class="hl">行</span></span><span class="reading">そうこう</span><span class="meaning">Chạy xe, di chuyển</span></div>
+      <div class="word-row"><span class="kanji">強<span class="hl">行</span></span><span class="reading">きょうこう</span><span class="meaning">Cưỡng ép, bắt buộc</span></div>
+      <div class="word-row"><span class="kanji">修<span class="hl">行</span></span><span class="reading">しゅぎょう</span><span class="meaning">Tu hành, rèn luyện</span></div>
+      <div class="word-row"><span class="kanji">従事</span><span class="reading">じゅうじ</span><span class="meaning">Tham gia công việc</span></div>
+      <div class="word-row"><span class="kanji">起工</span><span class="reading">きこう</span><span class="meaning">Khởi công</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">突・脱・越</span><span class="group-name">VƯỢT QUA / THOÁT RA</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">突破</span><span class="reading">とっぱ</span><span class="meaning">Đột phá, vượt qua</span></div>
+      <div class="word-row"><span class="kanji">脱出</span><span class="reading">だっしゅつ</span><span class="meaning">Thoát ra, trốn ra</span></div>
+      <div class="word-row"><span class="kanji">越境</span><span class="reading">えっきょう</span><span class="meaning">Vượt biên giới</span></div>
+      <div class="word-row"><span class="kanji">上陸</span><span class="reading">じょうりく</span><span class="meaning">Đổ bộ, lên bờ</span></div>
+      <div class="word-row"><span class="kanji">噴出</span><span class="reading">ふんしゅつ</span><span class="meaning">Phun trào</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">破・壊・没</span><span class="group-name">PHÁ HỦY / SỤP ĐỔ — chữ 落/没 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">破棄</span><span class="reading">はき</span><span class="meaning">Vứt bỏ, hủy bỏ</span></div>
+      <div class="word-row"><span class="kanji">破壊</span><span class="reading">はかい</span><span class="meaning">Phá hủy</span></div>
+      <div class="word-row"><span class="kanji">墜落</span><span class="reading">ついらく</span><span class="meaning">Rơi (tai nạn)</span></div>
+      <div class="word-row"><span class="kanji">没落</span><span class="reading">ぼつらく</span><span class="meaning">Suy thoái, sụp đổ</span></div>
+      <div class="word-row"><span class="kanji">紛失</span><span class="reading">ふんしつ</span><span class="meaning">Làm mất</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">転・逆・再</span><span class="group-name">BIẾN ĐỔI / PHỤC HỒI</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">逆転</span><span class="reading">ぎゃくてん</span><span class="meaning">Đảo ngược</span></div>
+      <div class="word-row"><span class="kanji">逆立</span><span class="reading">さかだち</span><span class="meaning">Trồng cây chuối</span></div>
+      <div class="word-row"><span class="kanji">挽回</span><span class="reading">ばんかい</span><span class="meaning">Lấy lại, khôi phục</span></div>
+      <div class="word-row"><span class="kanji">復旧</span><span class="reading">ふっきゅう</span><span class="meaning">Khôi phục</span></div>
+      <div class="word-row"><span class="kanji">再建</span><span class="reading">さいけん</span><span class="meaning">Tái thiết</span></div>
+      <div class="word-row"><span class="kanji">変革</span><span class="reading">へんかく</span><span class="meaning">Cải cách, biến đổi</span></div>
+      <div class="word-row"><span class="kanji">退化</span><span class="reading">たいか</span><span class="meaning">Thoái hóa, suy thoái</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">合・均</span><span class="group-name">KẾT HỢP / CÂN BẰNG — chữ 合 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl dark">合</span>流</span><span class="reading">ごうりゅう</span><span class="meaning">Hợp lại</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">合</span>致</span><span class="reading">がっち</span><span class="meaning">Phù hợp</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">合</span>併</span><span class="reading">がっぺい</span><span class="meaning">Sáp nhập</span></div>
+      <div class="word-row"><span class="kanji">合間</span><span class="reading">あいま</span><span class="meaning">Khoảng thời gian trống</span></div>
+      <div class="word-row"><span class="kanji">均衡</span><span class="reading">きんこう</span><span class="meaning">Cân bằng</span></div>
+      <div class="word-row"><span class="kanji">折衷</span><span class="reading">せっちゅう</span><span class="meaning">Dung hòa, pha trộn</span></div>
+      <div class="word-row"><span class="kanji">斡旋</span><span class="reading">あっせん</span><span class="meaning">Làm trung gian</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">手・腕</span><span class="group-name">TAY / KỸ NĂNG — chữ 手 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl">手</span>分け</span><span class="reading">てわけ</span><span class="meaning">Phân chia công việc</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">手</span>当</span><span class="reading">てあて</span><span class="meaning">Trợ cấp, phụ cấp</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">手</span>際</span><span class="reading">てぎわ</span><span class="meaning">Kỹ năng khéo léo</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">手</span>配</span><span class="reading">てはい</span><span class="meaning">Sắp xếp, bố trí</span></div>
+      <div class="word-row"><span class="kanji">勝手</span><span class="reading">かって</span><span class="meaning">Tùy tiện</span></div>
+      <div class="word-row"><span class="kanji">腕前</span><span class="reading">うでまえ</span><span class="meaning">Tay nghề, trình độ</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 3: TÂM LÝ ════════ -->
+<div class="page" id="page-3">
+  <div class="page-header">
+    <h2>💭 Tâm Lý & Tính Cách</h2>
+    <div class="subtitle">Cảm xúc · Tính cách · Nhận thức · Thái độ</div>
+    <span class="count">42 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">心・本</span><span class="group-name">TÂM HỒN — chữ 心 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">真<span class="hl">心</span></span><span class="reading">まごころ</span><span class="meaning">Chân thành</span></div>
+      <div class="word-row"><span class="kanji">本<span class="hl">心</span></span><span class="reading">ほんしん</span><span class="meaning">Tâm ý thật</span></div>
+      <div class="word-row"><span class="kanji">細<span class="hl">心</span></span><span class="reading">さいしん</span><span class="meaning">Cẩn thận, thận trọng</span></div>
+      <div class="word-row"><span class="kanji">心地</span><span class="reading">ここち</span><span class="meaning">Cảm giác, tâm địa</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">感覚・気分</span><span class="group-name">CẢM GIÁC / CẢM XÚC</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">衝撃</span><span class="reading">しょうげき</span><span class="meaning">Cú sốc, va chạm</span></div>
+      <div class="word-row"><span class="kanji">郷愁</span><span class="reading">きょうしゅう</span><span class="meaning">Nỗi nhớ quê hương</span></div>
+      <div class="word-row"><span class="kanji">憂鬱</span><span class="reading">ゆううつ</span><span class="meaning">U sầu</span></div>
+      <div class="word-row"><span class="kanji">嫉妬</span><span class="reading">しっと</span><span class="meaning">Ghen tỵ</span></div>
+      <div class="word-row"><span class="kanji">寒気</span><span class="reading">さむけ</span><span class="meaning">Cảm giác lạnh run</span></div>
+      <div class="word-row"><span class="kanji">愛嬌</span><span class="reading">あいきょう</span><span class="meaning">Duyên dáng, dễ mến</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">謙・勤・怠</span><span class="group-name">TÍNH CÁCH TỐT / XẤU</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">謙虚</span><span class="reading">けんきょ</span><span class="meaning">Khiêm tốn</span></div>
+      <div class="word-row"><span class="kanji">高尚</span><span class="reading">こうしょう</span><span class="meaning">Cao thượng, cao quý</span></div>
+      <div class="word-row"><span class="kanji">勤勉</span><span class="reading">きんべん</span><span class="meaning">Siêng năng</span></div>
+      <div class="word-row"><span class="kanji">怠惰</span><span class="reading">たいだ</span><span class="meaning">Lười biếng</span></div>
+      <div class="word-row"><span class="kanji">陰湿</span><span class="reading">いんしつ</span><span class="meaning">Thâm hiểm, nham hiểm</span></div>
+      <div class="word-row"><span class="kanji">気障</span><span class="reading">きざ</span><span class="meaning">Kiêu, làm màu</span></div>
+      <div class="word-row"><span class="kanji">物好き</span><span class="reading">ものずき</span><span class="meaning">Tò mò, thích chuyện lạ</span></div>
+      <div class="word-row"><span class="kanji">奔放</span><span class="reading">ほんぽう</span><span class="meaning">Phóng khoáng</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">気後・後回</span><span class="group-name">THÁI ĐỘ / HÀNH VI</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">気後れ</span><span class="reading">きおくれ</span><span class="meaning">Ngại ngùng, chùn bước</span></div>
+      <div class="word-row"><span class="kanji">後回し</span><span class="reading">あとまわし</span><span class="meaning">Để sau, trì hoãn</span></div>
+      <div class="word-row"><span class="kanji">固執</span><span class="reading">こしつ</span><span class="meaning">Cố chấp, bảo thủ</span></div>
+      <div class="word-row"><span class="kanji">執着</span><span class="reading">しゅうちゃく</span><span class="meaning">Chấp niệm, lưu luyến</span></div>
+      <div class="word-row"><span class="kanji">辛抱</span><span class="reading">しんぼう</span><span class="meaning">Chịu đựng, nhẫn nại</span></div>
+      <div class="word-row"><span class="kanji">模索</span><span class="reading">もさく</span><span class="meaning">Mò mẫm, tìm kiếm</span></div>
+      <div class="word-row"><span class="kanji">予断</span><span class="reading">よだん</span><span class="meaning">Phán đoán sớm</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">一・目</span><span class="group-name">NHÌN / THẤY — chữ 目/一 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl dark">目</span>撃</span><span class="reading">もくげき</span><span class="meaning">Chứng kiến</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">目</span>途</span><span class="reading">めど</span><span class="meaning">Mục tiêu, triển vọng</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">目</span>論見</span><span class="reading">もくろみ</span><span class="meaning">Kế hoạch, toan tính</span></div>
+      <div class="word-row"><span class="kanji">目の当たり</span><span class="reading">まのあたり</span><span class="meaning">Tận mắt, trước mắt</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">一</span>目</span><span class="reading">ひとめ</span><span class="meaning">Thoáng nhìn</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">一</span>見</span><span class="reading">いっけん</span><span class="meaning">Nhìn qua, có vẻ</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">一</span>切</span><span class="reading">いっさい</span><span class="meaning">Hoàn toàn, tất cả</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl dark">一</span>身上</span><span class="reading">いっしんじょう</span><span class="meaning">Sự nghiệp cá nhân</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">享・発揮</span><span class="group-name">PHÁT HUY / HƯỞNG THỤ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">発揮</span><span class="reading">はっき</span><span class="meaning">Phát huy, thể hiện</span></div>
+      <div class="word-row"><span class="kanji">享受</span><span class="reading">きょうじゅ</span><span class="meaning">Hưởng thụ</span></div>
+      <div class="word-row"><span class="kanji">把握</span><span class="reading">はあく</span><span class="meaning">Nắm bắt, hiểu rõ</span></div>
+      <div class="word-row"><span class="kanji">誇大</span><span class="reading">こだい</span><span class="meaning">Phóng đại</span></div>
+      <div class="word-row"><span class="kanji">賛美</span><span class="reading">さんび</span><span class="meaning">Tán dương</span></div>
+      <div class="word-row"><span class="kanji">余所見</span><span class="reading">よそみ</span><span class="meaning">Lơ đãng</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 4: GIA ĐÌNH & XÃ HỘI ════════ -->
+<div class="page" id="page-4">
+  <div class="page-header">
+    <h2>🏠 Gia Đình & Xã Hội</h2>
+    <div class="subtitle">Gia đình · Quan hệ · Địa vị · Tôn giáo</div>
+    <span class="count">40 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">母・子</span><span class="group-name">GIA ĐÌNH — chữ 母/子 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">乳<span class="hl">母</span></span><span class="reading">うば</span><span class="meaning">Vú nuôi</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">母</span>屋</span><span class="reading">おもや</span><span class="meaning">Nhà chính</span></div>
+      <div class="word-row"><span class="kanji">分<span class="hl">母</span></span><span class="reading">ぶんぼ</span><span class="meaning">Mẫu số</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">子</span>息</span><span class="reading">しそく</span><span class="meaning">Con trai</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">子</span>守</span><span class="reading">こもり</span><span class="meaning">Trông trẻ</span></div>
+      <div class="word-row"><span class="kanji">親父</span><span class="reading">おやじ</span><span class="meaning">Bố, ông già</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">名・著・署</span><span class="group-name">TÊN TUỔI / DANH TIẾNG — chữ 名 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl blue">名</span>誉</span><span class="reading">めいよ</span><span class="meaning">Vinh danh</span></div>
+      <div class="word-row"><span class="kanji">著<span class="hl blue">名</span></span><span class="reading">ちょめい</span><span class="meaning">Nổi tiếng</span></div>
+      <div class="word-row"><span class="kanji">署<span class="hl blue">名</span></span><span class="reading">しょめい</span><span class="meaning">Chữ ký</span></div>
+      <div class="word-row"><span class="kanji">襲<span class="hl blue">名</span></span><span class="reading">しゅうめい</span><span class="meaning">Kế thừa tên</span></div>
+      <div class="word-row"><span class="kanji">著書</span><span class="reading">ちょしょ</span><span class="meaning">Tác phẩm</span></div>
+      <div class="word-row"><span class="kanji">巨匠</span><span class="reading">きょしょう</span><span class="meaning">Bậc thầy</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">衆・族</span><span class="group-name">TẦNG LỚP / TỔ CHỨC</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">群<span class="hl green">衆</span></span><span class="reading">ぐんしゅう</span><span class="meaning">Đám đông, quần chúng</span></div>
+      <div class="word-row"><span class="kanji">大<span class="hl green">衆</span></span><span class="reading">たいしゅう</span><span class="meaning">Đại chúng</span></div>
+      <div class="word-row"><span class="kanji">貴族</span><span class="reading">きぞく</span><span class="meaning">Quý tộc</span></div>
+      <div class="word-row"><span class="kanji">既婚者</span><span class="reading">きこんしゃ</span><span class="meaning">Người đã kết hôn</span></div>
+      <div class="word-row"><span class="kanji">仲人</span><span class="reading">なこうど</span><span class="meaning">Người mai mối</span></div>
+      <div class="word-row"><span class="kanji">使用人</span><span class="reading">しようにん</span><span class="meaning">Người giúp việc</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">遇・境</span><span class="group-name">HOÀN CẢNH / ĐỐI ĐÃI — chữ 遇 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">境<span class="hl gold">遇</span></span><span class="reading">きょうぐう</span><span class="meaning">Hoàn cảnh, thân phận</span></div>
+      <div class="word-row"><span class="kanji">待<span class="hl gold">遇</span></span><span class="reading">たいぐう</span><span class="meaning">Đối đãi</span></div>
+      <div class="word-row"><span class="kanji">間柄</span><span class="reading">あいだがら</span><span class="meaning">Quan hệ giữa người</span></div>
+      <div class="word-row"><span class="kanji">昇進</span><span class="reading">しょうしん</span><span class="meaning">Thăng chức</span></div>
+      <div class="word-row"><span class="kanji">任務</span><span class="reading">にんむ</span><span class="meaning">Nhiệm vụ</span></div>
+      <div class="word-row"><span class="kanji">責務</span><span class="reading">せきむ</span><span class="meaning">Trách nhiệm</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">宗・仏</span><span class="group-name">TÔN GIÁO / VĂN HÓA</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">宗教</span><span class="reading">しゅうきょう</span><span class="meaning">Tôn giáo</span></div>
+      <div class="word-row"><span class="kanji">仏像</span><span class="reading">ぶつぞう</span><span class="meaning">Tượng Phật</span></div>
+      <div class="word-row"><span class="kanji">道場</span><span class="reading">どうじょう</span><span class="meaning">Võ đường</span></div>
+      <div class="word-row"><span class="kanji">墓地</span><span class="reading">ぼち</span><span class="meaning">Nghĩa trang</span></div>
+      <div class="word-row"><span class="kanji">横綱</span><span class="reading">よこづな</span><span class="meaning">Nhà vô địch sumo</span></div>
+      <div class="word-row"><span class="kanji">土俵</span><span class="reading">どひょう</span><span class="meaning">Sàn đấu sumo</span></div>
+      <div class="word-row"><span class="kanji">茶湯</span><span class="reading">ちゃとう</span><span class="meaning">Nước nóng pha trà</span></div>
+      <div class="word-row"><span class="kanji">真珠</span><span class="reading">しんじゅ</span><span class="meaning">Ngọc trai</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">介・辛</span><span class="group-name">CHĂM SÓC / CHỊU ĐỰNG</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">介抱</span><span class="reading">かいほう</span><span class="meaning">Chăm sóc, hỗ trợ</span></div>
+      <div class="word-row"><span class="kanji">辛抱</span><span class="reading">しんぼう</span><span class="meaning">Chịu đựng, nhẫn nại</span></div>
+      <div class="word-row"><span class="kanji">扶養</span><span class="reading">ふよう</span><span class="meaning">Nuôi dưỡng</span></div>
+      <div class="word-row"><span class="kanji">厄介</span><span class="reading">やっかい</span><span class="meaning">Phiền phức, gánh nặng</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 5: KINH TẾ ════════ -->
+<div class="page" id="page-5">
+  <div class="page-header">
+    <h2>💰 Kinh Tế & Tài Chính</h2>
+    <div class="subtitle">Tiền bạc · Mua bán · Trừ khấu · Lợi hại</div>
+    <span class="count">28 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">差・値引</span><span class="group-name">KHẤU TRỪ / GIẢM GIÁ — chữ 引 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">差し<span class="hl">引</span>き</span><span class="reading">さしひき</span><span class="meaning">Khấu trừ, trừ đi</span></div>
+      <div class="word-row"><span class="kanji">値<span class="hl">引</span>き</span><span class="reading">ねびき</span><span class="meaning">Giảm giá</span></div>
+      <div class="word-row"><span class="kanji">控除</span><span class="reading">こうじょ</span><span class="meaning">Khấu trừ (thuế)</span></div>
+      <div class="word-row"><span class="kanji">削減</span><span class="reading">さくげん</span><span class="meaning">Cắt giảm</span></div>
+      <div class="word-row"><span class="kanji">軽減</span><span class="reading">けいげん</span><span class="meaning">Giảm nhẹ</span></div>
+      <div class="word-row"><span class="kanji">減少</span><span class="reading">げんしょう</span><span class="meaning">Giảm bớt</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">満・月</span><span class="group-name">THANH TOÁN / SỐ DƯ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">月賦</span><span class="reading">げっぷ</span><span class="meaning">Trả góp hàng tháng</span></div>
+      <div class="word-row"><span class="kanji">残高</span><span class="reading">ざんだか</span><span class="meaning">Số dư</span></div>
+      <div class="word-row"><span class="kanji">滞納</span><span class="reading">たいのう</span><span class="meaning">Chậm thanh toán</span></div>
+      <div class="word-row"><span class="kanji">実費</span><span class="reading">じっぴ</span><span class="meaning">Chi phí thực tế</span></div>
+      <div class="word-row"><span class="kanji">格差</span><span class="reading">かくさ</span><span class="meaning">Khoảng cách, chênh lệch</span></div>
+      <div class="word-row"><span class="kanji">小銭</span><span class="reading">こぜに</span><span class="meaning">Tiền lẻ</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">売・小売</span><span class="group-name">MUA BÁN / PHÂN PHỐI</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">小売</span><span class="reading">こうり</span><span class="meaning">Bán lẻ</span></div>
+      <div class="word-row"><span class="kanji">分配</span><span class="reading">ぶんぱい</span><span class="meaning">Phân phối</span></div>
+      <div class="word-row"><span class="kanji">分業</span><span class="reading">ぶんぎょう</span><span class="meaning">Phân công lao động</span></div>
+      <div class="word-row"><span class="kanji">損得</span><span class="reading">そんとく</span><span class="meaning">Lợi-hại</span></div>
+      <div class="word-row"><span class="kanji">倉敷料</span><span class="reading">くらしきりょう</span><span class="meaning">Phí lưu kho</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">持・所</span><span class="group-name">SỞ HỮU / DUY TRÌ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">所持</span><span class="reading">しょじ</span><span class="meaning">Sở hữu, mang theo</span></div>
+      <div class="word-row"><span class="kanji">所在</span><span class="reading">しょざい</span><span class="meaning">Nơi, vị trí</span></div>
+      <div class="word-row"><span class="kanji">持続</span><span class="reading">じぞく</span><span class="meaning">Duy trì, kéo dài</span></div>
+      <div class="word-row"><span class="kanji">自足</span><span class="reading">じそく</span><span class="meaning">Tự cung tự cấp</span></div>
+      <div class="word-row"><span class="kanji">享受</span><span class="reading">きょうじゅ</span><span class="meaning">Hưởng thụ</span></div>
+      <div class="word-row"><span class="kanji">窮乏</span><span class="reading">きゅうぼう</span><span class="meaning">Cùng cực, nghèo khổ</span></div>
+      <div class="word-row"><span class="kanji">貧乏</span><span class="reading">びんぼう</span><span class="meaning">Nghèo khổ</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 6: KHOA HỌC / Y TẾ ════════ -->
+<div class="page" id="page-6">
+  <div class="page-header">
+    <h2>🔬 Khoa Học & Y Tế</h2>
+    <div class="subtitle">Y học · Hóa học · Vật lý · Sinh học</div>
+    <span class="count">25 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">病・疾</span><span class="group-name">BỆNH TẬT — chữ 発 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">発作</span><span class="reading">ほっさ</span><span class="meaning">Cơn phát bệnh</span></div>
+      <div class="word-row"><span class="kanji">疾患</span><span class="reading">しっかん</span><span class="meaning">Bệnh tật</span></div>
+      <div class="word-row"><span class="kanji">解熱</span><span class="reading">げねつ</span><span class="meaning">Hạ sốt</span></div>
+      <div class="word-row"><span class="kanji">麻痺</span><span class="reading">まひ</span><span class="meaning">Tê liệt</span></div>
+      <div class="word-row"><span class="kanji">神経</span><span class="reading">しんけい</span><span class="meaning">Thần kinh</span></div>
+      <div class="word-row"><span class="kanji">脂肪</span><span class="reading">しぼう</span><span class="meaning">Mỡ, chất béo</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">往診・切開</span><span class="group-name">Y TẾ / PHẪU THUẬT</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">往診</span><span class="reading">おうしん</span><span class="meaning">Khám bệnh tại nhà</span></div>
+      <div class="word-row"><span class="kanji">切開</span><span class="reading">せっかい</span><span class="meaning">Mổ cắt, rạch</span></div>
+      <div class="word-row"><span class="kanji">応急</span><span class="reading">おうきゅう</span><span class="meaning">Khẩn cấp, sơ cứu</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">蒸・屈・沈</span><span class="group-name">HÓA LÝ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">蒸留</span><span class="reading">じょうりゅう</span><span class="meaning">Chưng cất</span></div>
+      <div class="word-row"><span class="kanji">屈折</span><span class="reading">くっせつ</span><span class="meaning">Khúc xạ, bẻ cong</span></div>
+      <div class="word-row"><span class="kanji">飽和</span><span class="reading">ほうわ</span><span class="meaning">Bão hòa</span></div>
+      <div class="word-row"><span class="kanji">粉末</span><span class="reading">ふんまつ</span><span class="meaning">Bột</span></div>
+      <div class="word-row"><span class="kanji">磁石</span><span class="reading">じしゃく</span><span class="meaning">Nam châm</span></div>
+      <div class="word-row"><span class="kanji">弾力</span><span class="reading">だんりょく</span><span class="meaning">Đàn hồi</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">聴・覚</span><span class="group-name">GIÁC QUAN</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">聴覚</span><span class="reading">ちょうかく</span><span class="meaning">Thính giác</span></div>
+      <div class="word-row"><span class="kanji">音色</span><span class="reading">ねいろ</span><span class="meaning">Âm sắc, tiếng đàn</span></div>
+      <div class="word-row"><span class="kanji">色彩</span><span class="reading">しきさい</span><span class="meaning">Màu sắc</span></div>
+      <div class="word-row"><span class="kanji">共鳴</span><span class="reading">きょうめい</span><span class="meaning">Cộng hưởng, đồng cảm</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 7: HỌC THUẬT ════════ -->
+<div class="page" id="page-7">
+  <div class="page-header">
+    <h2>📚 Học Thuật & Văn Hóa</h2>
+    <div class="subtitle">Học vấn · Nghệ thuật · Tư tưởng · Ngôn ngữ</div>
+    <span class="count">30 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">学・典</span><span class="group-name">HỌC VẤN / TIÊU CHUẨN</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">学芸</span><span class="reading">がくげい</span><span class="meaning">Học thuật và nghệ thuật</span></div>
+      <div class="word-row"><span class="kanji">典型的</span><span class="reading">てんけいてき</span><span class="meaning">Điển hình</span></div>
+      <div class="word-row"><span class="kanji">類似</span><span class="reading">るいじ</span><span class="meaning">Tương tự</span></div>
+      <div class="word-row"><span class="kanji">秘訣</span><span class="reading">ひけつ</span><span class="meaning">Bí quyết</span></div>
+      <div class="word-row"><span class="kanji">教習</span><span class="reading">きょうしゅう</span><span class="meaning">Huấn luyện, đào tạo</span></div>
+      <div class="word-row"><span class="kanji">質疑</span><span class="reading">しつぎ</span><span class="meaning">Chất vấn, hỏi đáp</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">架・画</span><span class="group-name">SÁNG TẠO / ĐỘT PHÁ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">架空</span><span class="reading">かくう</span><span class="meaning">Hư cấu, tưởng tượng</span></div>
+      <div class="word-row"><span class="kanji">画期</span><span class="reading">かっき</span><span class="meaning">Bước ngoặt, đột phá</span></div>
+      <div class="word-row"><span class="kanji">楽譜</span><span class="reading">がくふ</span><span class="meaning">Bản nhạc</span></div>
+      <div class="word-row"><span class="kanji">音色</span><span class="reading">ねいろ</span><span class="meaning">Âm sắc, tiếng đàn</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">同音異義</span><span class="group-name">⚠️ ĐỒNG ÂM DỊ NGHĨA — cần phân biệt!</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">施行</span><span class="reading">しこう</span><span class="meaning">Thi hành (luật pháp)</span></div>
+      <div class="word-row"><span class="kanji">試行</span><span class="reading">しこう ⚠️</span><span class="meaning">Thử nghiệm</span></div>
+      <div class="word-row"><span class="kanji">磁気</span><span class="reading">じき</span><span class="meaning">Từ trường</span></div>
+      <div class="word-row"><span class="kanji">磁器</span><span class="reading">じき ⚠️</span><span class="meaning">Đồ gốm sứ</span></div>
+      <div class="word-row"><span class="kanji">固執</span><span class="reading">こしつ/こしゅう</span><span class="meaning">Cố chấp (2 cách đọc!)</span></div>
+      <div class="word-row"><span class="kanji">差し引き</span><span class="reading">さしひき</span><span class="meaning">Khấu trừ</span></div>
+      <div class="word-row"><span class="kanji">差引</span><span class="reading">さしひき ⚠️</span><span class="meaning">Khấu trừ (viết tắt)</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">言・片</span><span class="group-name">NGÔN NGỮ / THÔNG TIN</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">片言</span><span class="reading">かたこと</span><span class="meaning">Nói bập bẹ</span></div>
+      <div class="word-row"><span class="kanji">無言</span><span class="reading">むごん</span><span class="meaning">Im lặng</span></div>
+      <div class="word-row"><span class="kanji">交信</span><span class="reading">こうしん</span><span class="meaning">Liên lạc thông tin</span></div>
+      <div class="word-row"><span class="kanji">周知</span><span class="reading">しゅうち</span><span class="meaning">Phổ biến, ai cũng biết</span></div>
+      <div class="word-row"><span class="kanji">経緯</span><span class="reading">けいい</span><span class="meaning">Diễn biến, quá trình</span></div>
+      <div class="word-row"><span class="kanji">取り扱い</span><span class="reading">とりあつかい</span><span class="meaning">Xử lý, thao tác</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">殊・秀</span><span class="group-name">NỔI TRỘI / ĐẶC BIỆT</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">殊に</span><span class="reading">ことに</span><span class="meaning">Đặc biệt</span></div>
+      <div class="word-row"><span class="kanji">殊勝</span><span class="reading">しゅしょう</span><span class="meaning">Đáng khâm phục</span></div>
+      <div class="word-row"><span class="kanji">秀英</span><span class="reading">しゅうえい</span><span class="meaning">Xuất sắc, tài giỏi</span></div>
+      <div class="word-row"><span class="kanji">幾多</span><span class="reading">いくた</span><span class="meaning">Vô số, nhiều</span></div>
+      <div class="word-row"><span class="kanji">頻繁</span><span class="reading">ひんぱん</span><span class="meaning">Thường xuyên</span></div>
+      <div class="word-row"><span class="kanji">時折</span><span class="reading">ときおり</span><span class="meaning">Thỉnh thoảng</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 8: ĐỊA ĐIỂM ════════ -->
+<div class="page" id="page-8">
+  <div class="page-header">
+    <h2>🗾 Địa Điểm & Không Gian</h2>
+    <div class="subtitle">Đường sá · Nhà cửa · Vị trí · Phương hướng</div>
+    <span class="count">27 từ</span>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge">道・街・路</span><span class="group-name">ĐƯỜNG ĐI — chữ 道 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">街<span class="hl">道</span></span><span class="reading">かいどう</span><span class="meaning">Đường lớn</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl">道</span>場</span><span class="reading">どうじょう</span><span class="meaning">Võ đường</span></div>
+      <div class="word-row"><span class="kanji">十字路</span><span class="reading">じゅうじろ</span><span class="meaning">Ngã tư</span></div>
+      <div class="word-row"><span class="kanji">路上</span><span class="reading">ろじょう</span><span class="meaning">Trên đường</span></div>
+      <div class="word-row"><span class="kanji">途上</span><span class="reading">とじょう</span><span class="meaning">Trên đường (tiến trình)</span></div>
+      <div class="word-row"><span class="kanji">舗装</span><span class="reading">ほそう</span><span class="meaning">Trải nhựa, lát đường</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge blue">土・郷</span><span class="group-name">ĐẤT ĐAI / QUÊ HƯƠNG — chữ 土 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl blue">土</span>木</span><span class="reading">どぼく</span><span class="meaning">Công trình xây dựng</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl blue">土</span>手</span><span class="reading">どて</span><span class="meaning">Bờ đê</span></div>
+      <div class="word-row"><span class="kanji">郷<span class="hl blue">土</span></span><span class="reading">きょうど</span><span class="meaning">Quê hương</span></div>
+      <div class="word-row"><span class="kanji">地元</span><span class="reading">じもと</span><span class="meaning">Địa phương</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge green">座・所</span><span class="group-name">VỊ TRÍ / TỌA ĐỘ — chữ 座 chung</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji"><span class="hl green">座</span>標</span><span class="reading">ざひょう</span><span class="meaning">Tọa độ</span></div>
+      <div class="word-row"><span class="kanji"><span class="hl green">座</span>右</span><span class="reading">ざゆう</span><span class="meaning">Luôn bên mình</span></div>
+      <div class="word-row"><span class="kanji">即座</span><span class="reading">そくざ</span><span class="meaning">Ngay lập tức</span></div>
+      <div class="word-row"><span class="kanji">所在</span><span class="reading">しょざい</span><span class="meaning">Nơi, vị trí</span></div>
+      <div class="word-row"><span class="kanji">中程</span><span class="reading">なかほど</span><span class="meaning">Ở giữa, khoảng giữa</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge gold">縁・控</span><span class="group-name">KHÔNG GIAN NHÀ</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">縁側</span><span class="reading">えんがわ</span><span class="meaning">Hiên nhà kiểu Nhật</span></div>
+      <div class="word-row"><span class="kanji">控室</span><span class="reading">ひかえしつ</span><span class="meaning">Phòng chờ</span></div>
+      <div class="word-row"><span class="kanji">宮殿</span><span class="reading">きゅうでん</span><span class="meaning">Cung điện</span></div>
+      <div class="word-row"><span class="kanji">極楽</span><span class="reading">ごくらく</span><span class="meaning">Cực lạc</span></div>
+      <div class="word-row"><span class="kanji">天辺</span><span class="reading">てっぺん</span><span class="meaning">Đỉnh, ngọn</span></div>
+      <div class="word-row"><span class="kanji">碁盤</span><span class="reading">ごばん</span><span class="meaning">Bàn cờ vây</span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label"><span class="kanji-badge dark">MISC</span><span class="group-name">VẬT DỤNG / KHÁC</span></div>
+    <div class="word-list">
+      <div class="word-row"><span class="kanji">団扇</span><span class="reading">うちわ</span><span class="meaning">Quạt giấy</span></div>
+      <div class="word-row"><span class="kanji">釣鐘</span><span class="reading">つりがね</span><span class="meaning">Chuông treo</span></div>
+      <div class="word-row"><span class="kanji">布巾</span><span class="reading">ふきん</span><span class="meaning">Khăn lau</span></div>
+      <div class="word-row"><span class="kanji">貝殻</span><span class="reading">かいがら</span><span class="meaning">Vỏ sò</span></div>
+      <div class="word-row"><span class="kanji">重宝</span><span class="reading">ちょうほう</span><span class="meaning">Tiện lợi, quý báu</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGE 9: QUIZ ════════ -->
+<div class="page" id="page-9">
+  <div class="page-header">
+    <h2>⚡ Quiz Mode</h2>
+    <div class="subtitle">Luyện tập — nhớ nghĩa từ</div>
+  </div>
+  <div class="quiz-counter" id="quizCounter">Từ 1 / 309</div>
+  <div class="quiz-card">
+    <div class="quiz-word" id="quizWord">怪獣</div>
+    <div class="quiz-hint" id="quizHint">Đọc âm on/kun?</div>
+    <button class="reveal-btn" onclick="revealQuiz()">👁 Xem đáp án</button>
+    <div class="quiz-reveal" id="quizReveal">
+      <div class="quiz-reading" id="quizReading"></div>
+      <div class="quiz-meaning" id="quizMeaning"></div>
+    </div>
+  </div>
+  <div class="quiz-nav">
+    <button class="btn btn-outline" onclick="quizPrev()">← Trước</button>
+    <button class="btn btn-primary" onclick="quizNext()">Tiếp →</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+const WORDS = [
+  ["怪獣","かいじゅう","Quái vật"],["音色","ねいろ","Âm sắc, tiếng đàn"],["色彩","しきさい","Màu sắc"],["寒気","さむけ","Cảm giác lạnh run"],["把握","はあく","Nắm bắt, hiểu rõ"],["樹立","じゅりつ","Thiết lập, xây dựng"],["謙虚","けんきょ","Khiêm tốn"],["発揮","はっき","Phát huy, thể hiện"],["陰湿","いんしつ","Thâm hiểm, nham hiểm"],["既婚者","きこんしゃ","Người đã kết hôn"],["無言","むごん","Im lặng"],["高尚","こうしょう","Cao thượng, cao quý"],["架空","かくう","Hư cấu, tưởng tượng"],["監督","かんとく","Giám sát, đạo diễn"],["怠惰","たいだ","Lười biếng"],["享受","きょうじゅ","Hưởng thụ"],["挽回","ばんかい","Lấy lại, khôi phục"],["画期","かっき","Bước ngoặt, đột phá"],["宗教","しゅうきょう","Tôn giáo"],["巨匠","きょしょう","Bậc thầy"],["恐慌","きょうこう","Khủng hoảng"],["郷愁","きょうしゅう","Nỗi nhớ quê hương"],["越境","えっきょう","Vượt biên giới"],["周知","しゅうち","Phổ biến, ai cũng biết"],["経緯","けいい","Diễn biến, quá trình"],["取り扱い","とりあつかい","Xử lý, thao tác"],["均衡","きんこう","Cân bằng"],["衝撃","しょうげき","Cú sốc, va chạm"],["目撃","もくげき","Chứng kiến"],["勤勉","きんべん","Siêng năng"],["脂肪","しぼう","Mỡ, chất béo"],["欠陥","けっかん","Khuyết điểm, lỗi"],["碁盤","ごばん","Bàn cờ vây"],["施行","しこう","Thi hành"],["試行","しこう","Thử nghiệm"],["走行","そうこう","Chạy xe, di chuyển"],["差し引き","さしひき","Khấu trừ, trừ đi"],["駄作","ださく","Sản phẩm tệ"],["束縛","そくばく","Ràng buộc, kiềm chế"],["辞退","じたい","Từ chối, xin rút"],["所持","しょじ","Sở hữu, mang theo"],["十字路","じゅうじろ","Ngã tư"],["庶務","しょむ","Công việc tổng hợp"],["早急","そうきゅう","Khẩn cấp"],["脅迫","きょうはく","Đe dọa, cưỡng ép"],["突破","とっぱ","Đột phá, vượt qua"],["絶版","ぜっぱん","Ngừng xuất bản"],["仏像","ぶつぞう","Tượng Phật"],["点線","てんせん","Đường nét đứt"],["従事","じゅうじ","Tham gia công việc"],["布告","ふこく","Sắc lệnh, bố cáo"],["侮辱","ぶじょく","Sỉ nhục"],["満腹","まんぷく","No nê"],["申し分","もうしぶん","Chỗ để phàn nàn"],["処分","しょぶん","Xử lý, vứt bỏ"],["控除","こうじょ","Khấu trừ"],["禁物","きんもつ","Điều cấm kỵ"],["物好き","ものずき","Tò mò, thích chuyện lạ"],["矛盾","むじゅん","Mâu thuẫn"],["茶湯","ちゃとう","Nước nóng pha trà"],["軍服","ぐんぷく","Quân phục"],["克服","こくふく","Khắc phục, vượt qua"],["貴族","きぞく","Quý tộc"],["紡績","ぼうせき","Kéo sợi, dệt may"],["真珠","しんじゅ","Ngọc trai"],["耕作","こうさく","Canh tác"],["豊作","ほうさく","Được mùa"],["再建","さいけん","Tái thiết"],["細心","さいしん","Cẩn thận, thận trọng"],["逆転","ぎゃくてん","Đảo ngược"],["持続","じぞく","Duy trì, kéo dài"],["自足","じそく","Tự cung tự cấp"],["俊足","しゅんそく","Nhanh chân"],["失格","しっかく","Bị loại, mất tư cách"],["噴出","ふんしゅつ","Phun trào"],["脱出","だっしゅつ","Thoát ra, trốn ra"],["模索","もさく","Mò mẫm, tìm kiếm"],["愛嬌","あいきょう","Duyên dáng, dễ mến"],["後回し","あとまわし","Để sau, trì hoãn"],["気後れ","きおくれ","Ngại ngùng, chùn bước"],["交信","こうしん","Liên lạc thông tin"],["腕前","うでまえ","Tay nghề, trình độ"],["縁側","えんがわ","Hiên nhà kiểu Nhật"],["応急","おうきゅう","Khẩn cấp, sơ cứu"],["退化","たいか","Thoái hóa, suy thoái"],["厄介","やっかい","Phiền phức, gánh nặng"],["切開","せっかい","Mổ cắt, rạch"],["往診","おうしん","Khám bệnh tại nhà"],["起工","きこう","Khởi công"],["質疑","しつぎ","Chất vấn, hỏi đáp"],["類似","るいじ","Tương tự"],["発作","ほっさ","Cơn phát bệnh"],["典型的","てんけいてき","Điển hình"],["墓地","ぼち","Nghĩa trang"],["区切り","くぎり","Điểm kết thúc, phân đoạn"],["値引き","ねびき","Giảm giá"],["格差","かくさ","Khoảng cách, chênh lệch"],["目途","めど","Mục tiêu, triển vọng"],["丘陵","きゅうりょう","Đồi núi"],["山腹","さんぷく","Sườn núi"],["山岳","さんがく","Núi cao, vùng núi"],["北極","ほっきょく","Bắc Cực"],["極限","きょくげん","Cực hạn, giới hạn tối đa"],["削減","さくげん","Cắt giảm"],["群衆","ぐんしゅう","Đám đông, quần chúng"],["大衆","たいしゅう","Đại chúng"],["境遇","きょうぐう","Hoàn cảnh, thân phận"],["待遇","たいぐう","Đối đãi"],["現品","げんぴん","Hàng thực tế"],["現像","げんぞう","Rửa ảnh"],["即座","そくざ","Ngay lập tức"],["座標","ざひょう","Tọa độ"],["座右","ざゆう","Luôn bên mình"],["固執","こしつ","Cố chấp, bảo thủ"],["執着","しゅうちゃく","Chấp niệm, lưu luyến"],["子息","しそく","Con trai"],["子守","こもり","Trông trẻ"],["途上","とじょう","Trên đường"],["上陸","じょうりく","Đổ bộ, lên bờ"],["土俵","どひょう","Sàn đấu sumo"],["土木","どぼく","Công trình xây dựng"],["郷土","きょうど","Quê hương"],["土手","どて","Bờ đê"],["手分け","てわけ","Phân chia công việc"],["勝手","かって","Tùy tiện"],["手当","てあて","Trợ cấp, phụ cấp"],["手際","てぎわ","Kỹ năng, thao tác khéo léo"],["手配","てはい","Sắp xếp, bố trí"],["気品","きひん","Khí chất, phẩm giá"],["勧告","かんこく","Khuyến cáo, kiến nghị"],["仲人","なこうど","Người mai mối"],["岩石","がんせき","Đá tảng, nham thạch"],["追跡","ついせき","Truy đuổi, truy vết"],["折衷","せっちゅう","Pha trộn, dung hòa"],["斡旋","あっせん","Làm trung gian, môi giới"],["舗装","ほそう","Trải nhựa, lát đường"],["中程","なかほど","Ở giữa, khoảng giữa"],["重宝","ちょうほう","Tiện lợi, quý báu"],["釣鐘","つりがね","Chuông treo"],["天辺","てっぺん","Đỉnh, ngọn"],["嫉妬","しっと","Ghen tỵ"],["侵犯","しんぱん","Xâm phạm"],["潔白","けっぱく","Trong sạch, vô tội"],["逆立","さかだち","Trồng cây chuối"],["凶作","きょうさく","Mất mùa"],["実費","じっぴ","Chi phí thực tế"],["月賦","げっぷ","Trả góp hàng tháng"],["満月","まんげつ","Trăng tròn"],["屈折","くっせつ","Khúc xạ, bẻ cong"],["詐欺","さぎ","Lừa đảo"],["軽減","けいげん","Giảm nhẹ"],["幾多","いくた","Vô số, nhiều"],["控訴","こうそ","Kháng cáo"],["訴訟","そしょう","Kiện tụng"],["頑丈","がんじょう","Chắc chắn, bền"],["目の当たり","まのあたり","Tận mắt, trước mắt"],["一目","ひとめ","Một cái nhìn, thoáng qua"],["一見","いっけん","Nhìn qua, có vẻ"],["一身上","いっしんじょう","Sự nghiệp cá nhân"],["小銭","こぜに","Tiền lẻ"],["花弁","はなびら","Cánh hoa"],["片言","かたこと","Nói bập bẹ"],["雪崩","なだれ","Lở tuyết"],["雨雲","あまぐも","Mây mưa"],["雨天","うてん","Trời mưa"],["梅雨","つゆ","Mùa mưa"],["稲光","いなびかり","Ánh chớp"],["津波","つなみ","Sóng thần"],["日夜","にちや","Ngày đêm"],["日和","ひより","Thời tiết tốt"],["日向","ひなた","Chỗ có nắng"],["西日","にしび","Nắng chiều"],["夕暮れ","ゆうぐれ","Hoàng hôn"],["漁獲","ぎょかく","Sản lượng đánh bắt"],["捕鯨","ほげい","Đánh bắt cá voi"],["捕虜","ほりょ","Tù binh"],["乳母","うば","Vú nuôi"],["母屋","おもや","Nhà chính"],["分母","ぶんぼ","Mẫu số"],["親父","おやじ","Bố, ông già"],["奔放","ほんぽう","Phóng khoáng"],["正規","せいき","Chính thức"],["名誉","めいよ","Vinh danh"],["襲名","しゅうめい","Kế thừa tên"],["署名","しょめい","Chữ ký"],["著名","ちょめい","Nổi tiếng"],["著書","ちょしょ","Tác phẩm"],["夜更かし","よふかし","Thức khuya"],["余所見","よそみ","Lơ đãng"],["横綱","よこづな","Nhà vô địch sumo"],["介抱","かいほう","Chăm sóc, hỗ trợ"],["辛抱","しんぼう","Chịu đựng, nhẫn nại"],["飽和","ほうわ","Bão hòa"],["緩和","かんわ","Giảm nhẹ"],["緩慢","かんまん","Chậm chạp"],["破棄","はき","Vứt bỏ, hủy bỏ"],["阻害","そがい","Cản trở"],["妨害","ぼうがい","Ngăn cản, quấy rối"],["迫害","はくがい","Áp bức, bức hại"],["危害","きがい","Gây hại, phá hủy"],["紛失","ふんしつ","Làm mất"],["磁石","じしゃく","Nam châm"],["磁気","じき","Từ trường"],["磁器","じき","Đồ gốm sứ"],["間柄","あいだがら","Quan hệ"],["合間","あいま","Khoảng thời gian trống"],["合流","ごうりゅう","Hợp lại"],["合致","がっち","Phù hợp"],["合併","がっぺい","Sáp nhập"],["損得","そんとく","Lợi-hại"],["真心","まごころ","Chân thành"],["本心","ほんしん","Tâm ý thật, lòng thật"],["解熱","げねつ","Hạ sốt"],["飢餓","きが","Nạn đói"],["団扇","うちわ","Quạt giấy"],["遠方","えんぽう","Phương xa"],["河川","かせん","Sông ngòi"],["海抜","かいばつ","Độ cao so với mực nước biển"],["破壊","はかい","Phá hủy"],["窮乏","きゅうぼう","Cùng cực, nghèo khổ"],["貧乏","びんぼう","Nghèo khổ"],["小売","こうり","Bán lẻ"],["殊に","ことに","Đặc biệt"],["殊勝","しゅしょう","Đáng khâm phục"],["秀英","しゅうえい","Xuất sắc, tài giỏi"],["処罰","しょばつ","Xử phạt"],["措置","そち","Biện pháp"],["惑星","わくせい","Hành tinh"],["正体","しょうたい","Thân phận, bản chất"],["路上","ろじょう","Trên đường"],["道場","どうじょう","Võ đường"],["街道","かいどう","Đường lớn"],["分業","ぶんぎょう","Phân công lao động"],["楽譜","がくふ","Bản nhạc"],["極楽","ごくらく","Cực lạc"],["墜落","ついらく","Rơi (tai nạn)"],["没落","ぼつらく","Suy thoái, sụp đổ"],["没収","ぼっしゅう","Tịch thu"],["沈没","ちんぼつ","Chìm"],["沈殿","ちんでん","Lắng đọng, kết tủa"],["宮殿","きゅうでん","Cung điện"],["洪水","こうずい","Lũ lụt"],["降水","こうすい","Lượng mưa"],["潜水","せんすい","Lặn"],["砂漠","さばく","Sa mạc"],["砂利","じゃり","Sỏi"],["強行","きょうこう","Cưỡng ép, bắt buộc"],["修行","しゅぎょう","Tu hành, rèn luyện"],["気障","きざ","Kiêu, làm màu"],["倉敷料","くらしきりょう","Phí lưu kho"],["融通","ゆうずう","Linh hoạt"],["転寝","うたたね","Ngủ gật"],["分配","ぶんぱい","Phân phối"],["焚き火","たきび","Lửa trại"],["目論見","もくろみ","Kế hoạch, toan tính"],["麻痺","まひ","Tê liệt"],["微塵","みじん","Hạt bụi"],["憂鬱","ゆううつ","U sầu"],["人質","ひとじち","Con tin"],["獲物","えもの","Con mồi"],["内訳","うちわけ","Chi tiết, phân mục"],["貝殻","かいがら","Vỏ sò"],["控室","ひかえしつ","Phòng chờ"],["心地","ここち","Cảm giác, tâm địa"],["悪者","わるもの","Kẻ xấu"],["滞納","たいのう","Chậm thanh toán"],["便宜","べんぎ","Thuận lợi"],["変革","へんかく","Cải cách, biến đổi"],["復旧","ふっきゅう","Khôi phục"],["責務","せきむ","Trách nhiệm"],["予断","よだん","Phán đoán sớm"],["聴覚","ちょうかく","Thính giác"],["学芸","がくげい","Học thuật và nghệ thuật"],["共鳴","きょうめい","Cộng hưởng, đồng cảm"],["教習","きょうしゅう","Huấn luyện, đào tạo"],["出現","しゅつげん","Xuất hiện"],["局限","きょくげん","Giới hạn, hạn chế"],["黴菌","ばいきん","Vi khuẩn, nấm mốc"],["秘訣","ひけつ","Bí quyết"],["減少","げんしょう","Giảm bớt"],["誇大","こだい","Phóng đại"],["封鎖","ふうさ","Phong tỏa"],["所在","しょざい","Nơi, vị trí"],["使用人","しようにん","Người giúp việc"],["疾患","しっかん","Bệnh tật"],["取捨","しゅしゃ","Lựa chọn, chọn lọc"],["干渉","かんしょう","Can thiệp"],["昇進","しょうしん","Thăng chức"],["荷造り","にづくり","Đóng gói"],["任務","にんむ","Nhiệm vụ"],["発芽","はつが","Nảy mầm"],["頻繁","ひんぱん","Thường xuyên"],["布巾","ふきん","Khăn lau"],["暴露","ばくろ","Phơi bày"],["粉末","ふんまつ","Bột"],["扶養","ふよう","Nuôi dưỡng"],["寄与","きよ","Đóng góp"],["賛美","さんび","Tán dương"],["蒸留","じょうりゅう","Chưng cất"],["弾力","だんりょく","Đàn hồi"],["証拠","しょうこ","Chứng cứ"],["腐敗","ふはい","Thối nát, tham nhũng"],["神経","しんけい","Thần kinh"],["一切","いっさい","Hoàn toàn, tất cả"],["地元","じもと","Địa phương"],["時折","ときおり","Thỉnh thoảng"],["残高","ざんだか","Số dư"]
+];
+
+let quizIdx = 0;
+let seen = new Set();
+
+function updateProgress() {
+  const pct = Math.round(seen.size / WORDS.length * 100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('progText').innerText = seen.size + '/' + WORDS.length;
+}
+
+// TAB
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('page-' + t.dataset.page).classList.add('active');
+    document.getElementById('mainContent').scrollTop = 0;
+    if (t.dataset.page === '9') loadQuiz();
+  });
+});
+
+// QUIZ
+function loadQuiz() {
+  const w = WORDS[quizIdx];
+  document.getElementById('quizWord').innerText = w[0];
+  document.getElementById('quizHint').innerText = 'Âm đọc và nghĩa là gì?';
+  document.getElementById('quizReveal').classList.remove('open');
+  document.getElementById('quizReading').innerText = w[1];
+  document.getElementById('quizMeaning').innerText = w[2];
+  document.getElementById('quizCounter').innerText = 'Từ ' + (quizIdx+1) + ' / ' + WORDS.length;
+  seen.add(quizIdx);
+  updateProgress();
+}
+function revealQuiz() {
+  document.getElementById('quizReveal').classList.add('open');
+}
+function quizNext() {
+  quizIdx = (quizIdx + 1) % WORDS.length;
+  loadQuiz();
+}
+function quizPrev() {
+  quizIdx = (quizIdx - 1 + WORDS.length) % WORDS.length;
+  loadQuiz();
+}
+
+loadQuiz();
+</script>
+<script src="/js/site-header.js"></script>
+</body>
+</html>
