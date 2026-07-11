@@ -4,6 +4,14 @@
    here that a theme would want to change — always var(--...).
    ============================================================ */
 
+/* Japanese pages: add Noto Sans JP for CJK glyphs, keep Latin faces first */
+html[lang="ja"] {
+  --font-sans: 'Inter', 'Noto Sans JP', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Noto Sans JP', var(--font-sans);
+}
+html[lang="ja"] body { line-height: 1.85; }
+html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3 { line-height: 1.25; }
+
 html {
   font-family: var(--font-sans);
   font-size: 16px;
@@ -131,6 +139,17 @@ section { padding-block: var(--space-2xl); }
   transition: color .2s var(--ease);
 }
 .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+.lang-switch {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.lang-switch:hover { border-color: var(--accent); color: var(--accent); }
 
 .theme-toggle {
   display: grid;
