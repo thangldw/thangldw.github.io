@@ -7,7 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
 :root{
-  --ink:#1a1a2e;--paper:#f0f4ff;--card:#ffffff;
+  --ink:#1a1a2e;--paper:#f7f8fa;--card:#ffffff;
   --red:#e53935;--green:#2e7d32;--blue:#1565c0;--purple:#6a1b9a;
   --orange:#e65100;--teal:#00695c;--indigo:#283593;--pink:#c2185b;
   --muted:#546e7a;--border:#cfd8dc;--gold:#f57f17;
@@ -20,20 +20,21 @@ body{background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro","Noto
 
 /* HEADER */
 #appHeader{
-  background:linear-gradient(135deg,#1a237e 0%,#283593 60%,#1565c0 100%);
-  color:#fff;padding:16px 22px;
+  background:#ffffff;
+  color:var(--ink);padding:16px 22px;
   display:flex;align-items:center;justify-content:space-between;
   position:sticky;top:0;z-index:100;gap:14px;
-  box-shadow:0 2px 12px rgba(0,0,0,.3);
+  border-bottom:1px solid #e4e7ee;
+  box-shadow:0 1px 6px rgba(20,23,29,.05);
 }
 #appHeader h1{font-family:"Noto Serif JP",serif;font-size:1.05rem;letter-spacing:.06em;white-space:nowrap;}
 #search-input{
-  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);
-  border-radius:20px;padding:8px 16px;color:#fff;font-size:.84rem;width:220px;outline:none;
+  background:#f1f3f7;border:1.5px solid #e4e7ee;
+  border-radius:20px;padding:8px 16px;color:var(--ink);font-size:.84rem;width:220px;outline:none;
   transition:all .2s;
 }
-#search-input::placeholder{color:rgba(255,255,255,.65);}
-#search-input:focus{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.8);}
+#search-input::placeholder{color:#838b99;}
+#search-input:focus{background:#fff;border-color:#3a5bd9;}
 
 /* FILTER BAR */
 .filter-bar{
