@@ -35,6 +35,13 @@
     .apps-intro .lead { color: var(--text-muted); font-size: var(--step-1); margin-top: var(--space-sm); }
     .apps-intro .lead strong { color: var(--text); font-weight: 600; }
 
+    .apps-cat { margin-top: var(--space-xl); }
+    .apps-cat:first-of-type { margin-top: 0; }
+    .apps-cat-head { display: flex; align-items: baseline; gap: var(--space-sm); margin-bottom: var(--space-md); border-bottom: 1px solid var(--border); padding-bottom: var(--space-xs); }
+    .apps-cat-head h2 { font-family: var(--font-display); font-size: var(--step-2); letter-spacing: -.01em; }
+    .apps-cat-head .cat-jp { font-family: var(--font-mono); color: var(--text-dim); font-size: var(--step--1); }
+    .apps-cat-head .cat-count { margin-left: auto; font-family: var(--font-mono); color: var(--text-dim); font-size: var(--step--1); }
+
     .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: var(--space-md); }
 
     .app-card {
@@ -50,7 +57,7 @@
     .app-card .ac-status { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; color: #5ecb9e; border: 1px solid color-mix(in srgb, #5ecb9e 35%, transparent); border-radius: 999px; padding: .15em .6em; }
     .app-card .ac-status.wip { color: var(--text-dim); border-color: var(--border); }
 
-    .app-card h2 { font-family: var(--font-display); font-size: var(--step-1); letter-spacing: -.01em; }
+    .app-card h3 { font-family: var(--font-display); font-size: var(--step-1); letter-spacing: -.01em; }
     .app-card .ac-jp { font-family: var(--font-mono); color: var(--text-dim); font-size: var(--step--1); margin-left: .5em; }
     .app-card p { color: var(--text-muted); font-size: var(--step--1); margin-top: var(--space-2xs); flex: 1; }
 
@@ -73,103 +80,338 @@
       <span class="eyebrow">Apps &amp; experiments</span>
       <h1>Things I've built</h1>
       <p class="lead">Small, self-contained builds — each one a way to <strong>show rather than tell</strong>.
-        From a browser-native data workbench to JLPT study tools. No backends; everything runs in your tab.</p>
+        From a browser-native data workbench to a full JLPT N1 study suite. No backends; everything runs in your tab.</p>
     </section>
 
-    <section class="apps-grid">
+    <!-- ══════════ Data & Engineering ══════════ -->
+    <section class="apps-cat">
+      <div class="apps-cat-head">
+        <h2>Data &amp; Engineering</h2>
+        <span class="cat-count">2 apps</span>
+      </div>
+      <div class="apps-grid">
 
-      <article class="app-card">
-        <div class="ac-top">
-          <div class="ac-icon">🦆</div>
-          <span class="ac-status">Live</span>
-        </div>
-        <h2>Data Copilot</h2>
-        <p>Ask a question in plain English — no API key — and the browser turns it into real SQL,
-          runs it (DuckDB-WASM), and charts the result. Or drop in your own CSV. Live market data
-          refreshed daily by a GitHub Actions pipeline.</p>
-        <div class="ac-tags">
-          <span class="ac-tag">NL→SQL</span><span class="ac-tag">DuckDB-WASM</span>
-          <span class="ac-tag">Parquet</span><span class="ac-tag">GitHub Actions</span>
-        </div>
-        <span class="ac-open">Open Data Copilot</span>
-        <a class="ac-cover" href="/apps/data-copilot/" aria-label="Open Data Copilot"></a>
-      </article>
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🦆</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Data Copilot</h3>
+          <p>Ask a question in plain English — no API key — and the browser turns it into real SQL,
+            runs it (DuckDB-WASM), and charts the result. Or drop in your own CSV. Live market data
+            refreshed daily by a GitHub Actions pipeline.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">NL→SQL</span><span class="ac-tag">DuckDB-WASM</span>
+            <span class="ac-tag">Parquet</span><span class="ac-tag">GitHub Actions</span>
+          </div>
+          <span class="ac-open">Open Data Copilot</span>
+          <a class="ac-cover" href="/apps/data-copilot/" aria-label="Open Data Copilot"></a>
+        </article>
 
-      <article class="app-card">
-        <div class="ac-top">
-          <div class="ac-icon">📡</div>
-          <span class="ac-status">Live</span>
-        </div>
-        <h2>Pipeline Observability</h2>
-        <p>The ELT job behind Data Copilot, instrumented — freshness, per-ticker coverage, and run history.
-          A cron that commits its own telemetry, so you can watch it.</p>
-        <div class="ac-tags">
-          <span class="ac-tag">GitHub Actions</span><span class="ac-tag">Observability</span><span class="ac-tag">Data quality</span>
-        </div>
-        <span class="ac-open">Open Pipeline</span>
-        <a class="ac-cover" href="/apps/pipeline/" aria-label="Open Pipeline Observability"></a>
-      </article>
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">📡</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Pipeline Observability</h3>
+          <p>The ELT job behind Data Copilot, instrumented — freshness, per-ticker coverage, and run history.
+            A cron that commits its own telemetry, so you can watch it.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">GitHub Actions</span><span class="ac-tag">Observability</span><span class="ac-tag">Data quality</span>
+          </div>
+          <span class="ac-open">Open Pipeline</span>
+          <a class="ac-cover" href="/apps/pipeline/" aria-label="Open Pipeline Observability"></a>
+        </article>
 
-      <article class="app-card">
-        <div class="ac-top">
-          <div class="ac-icon">🀄</div>
-          <span class="ac-status">Live</span>
-        </div>
-        <h2>N1 Kanji<span class="ac-jp">漢字読み</span></h2>
-        <p>A drill for JLPT N1 kanji readings — rounds, scoring, and a review mode for the ones you miss.
-          Built for my own N1 prep.</p>
-        <div class="ac-tags">
-          <span class="ac-tag">JLPT N1</span><span class="ac-tag">漢字</span><span class="ac-tag">Spaced review</span>
-        </div>
-        <span class="ac-open">Open N1 Kanji</span>
-        <a class="ac-cover" href="/apps/kanji-n1/" aria-label="Open N1 Kanji"></a>
-      </article>
+      </div>
+    </section>
 
-      <article class="app-card">
-        <div class="ac-top">
-          <div class="ac-icon">🎴</div>
-          <span class="ac-status">Live</span>
-        </div>
-        <h2>N1 Flashcards<span class="ac-jp">文法</span></h2>
-        <p>Flip-card drills for JLPT N1 grammar — progress bar, right/wrong tracking, and a clean flow
-          for fast repetition.</p>
-        <div class="ac-tags">
-          <span class="ac-tag">JLPT N1</span><span class="ac-tag">文法</span><span class="ac-tag">Flashcards</span>
-        </div>
-        <span class="ac-open">Open N1 Flashcards</span>
-        <a class="ac-cover" href="/apps/flashcard-n1/" aria-label="Open N1 Flashcards"></a>
-      </article>
+    <!-- ══════════ JLPT N1 · Vocabulary & Kanji ══════════ -->
+    <section class="apps-cat">
+      <div class="apps-cat-head">
+        <h2>JLPT N1 · Vocabulary &amp; Kanji</h2>
+        <span class="cat-jp">語彙・漢字</span>
+        <span class="cat-count">6 apps</span>
+      </div>
+      <div class="apps-grid">
 
-      <article class="app-card">
-        <div class="ac-top">
-          <div class="ac-icon">🔥</div>
-          <span class="ac-status">Live</span>
-        </div>
-        <h2>N1 Vocab<span class="ac-jp">語彙・読み方</span></h2>
-        <p>Kanji-reading quiz with collocations and the set phrases that keep showing up on N1 —
-          phonetically-similar distractors, streaks, wrong-answer review, and Japanese TTS.</p>
-        <div class="ac-tags">
-          <span class="ac-tag">JLPT N1</span><span class="ac-tag">語彙</span><span class="ac-tag">Set phrases</span><span class="ac-tag">TTS</span>
-        </div>
-        <span class="ac-open">Open N1 Vocab</span>
-        <a class="ac-cover" href="/apps/n1-vocab/" aria-label="Open N1 Vocab"></a>
-      </article>
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🀄</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>N1 Kanji<span class="ac-jp">漢字読み</span></h3>
+          <p>A drill for JLPT N1 kanji readings — rounds, scoring, and a review mode for the ones you miss.
+            Built for my own N1 prep.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">漢字</span><span class="ac-tag">Spaced review</span>
+          </div>
+          <span class="ac-open">Open N1 Kanji</span>
+          <a class="ac-cover" href="/apps/kanji-n1/" aria-label="Open N1 Kanji"></a>
+        </article>
 
-      <article class="app-card">
-        <div class="ac-top">
-          <div class="ac-icon">🈴</div>
-          <span class="ac-status">Live</span>
-        </div>
-        <h2>N1 文法②<span class="ac-jp">Mondai 6</span></h2>
-        <p>Sentence-ordering drills for JLPT N1 (文の文法② · pick the piece for ★) — 420 questions merged from two sets,
-          each with the correct order, grammar point, and a Vietnamese walkthrough.</p>
-        <div class="ac-tags">
-          <span class="ac-tag">JLPT N1</span><span class="ac-tag">文法</span><span class="ac-tag">420 questions</span>
-        </div>
-        <span class="ac-open">Open N1 文法②</span>
-        <a class="ac-cover" href="/apps/n1-mondai6/" aria-label="Open N1 Mondai 6"></a>
-      </article>
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🔥</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>N1 Vocab<span class="ac-jp">語彙・読み方</span></h3>
+          <p>Kanji-reading quiz with collocations and the set phrases that keep showing up on N1 —
+            phonetically-similar distractors, streaks, wrong-answer review, and Japanese TTS.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">語彙</span><span class="ac-tag">Set phrases</span><span class="ac-tag">TTS</span>
+          </div>
+          <span class="ac-open">Open N1 Vocab</span>
+          <a class="ac-cover" href="/apps/n1-vocab/" aria-label="Open N1 Vocab"></a>
+        </article>
 
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🧩</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Kanji + Collocations<span class="ac-jp">連語</span></h3>
+          <p>Mixed drill across kanji readings, collocations, and set phrases — three question banks
+            in one quiz flow.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">漢字</span><span class="ac-tag">Collocations</span>
+          </div>
+          <span class="ac-open">Open Kanji + Collocations</span>
+          <a class="ac-cover" href="/apps/n1-kanji-collocations/" aria-label="Open Kanji + Collocations"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">📖</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>N1 単語帳<span class="ac-jp">Word book</span></h3>
+          <p>A 309-word thematic word book — nature, legal, psychology, economy and more — with
+            expandable per-word detail and a built-in quiz mode.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">単語帳</span><span class="ac-tag">Thematic</span>
+          </div>
+          <span class="ac-open">Open 単語帳</span>
+          <a class="ac-cover" href="/apps/n1-tango/" aria-label="Open N1 単語帳"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🈷</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Kanji Analysis<span class="ac-jp">漢字分析</span></h3>
+          <p>Per-character breakdowns of N1 kanji vocabulary — readings, meanings, and the logic
+            behind each compound, word by word.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">漢字</span><span class="ac-tag">Deep dive</span>
+          </div>
+          <span class="ac-open">Open Kanji Analysis</span>
+          <a class="ac-cover" href="/apps/n1-kanji-analysis/" aria-label="Open Kanji Analysis"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🗂️</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Vocab Tabs<span class="ac-jp">語彙</span></h3>
+          <p>A tabbed N1 vocabulary reference with verified answers — organized for fast lookup
+            and review across topics.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">語彙</span><span class="ac-tag">Reference</span>
+          </div>
+          <span class="ac-open">Open Vocab Tabs</span>
+          <a class="ac-cover" href="/apps/n1-goi-tabs/" aria-label="Open Vocab Tabs"></a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══════════ JLPT N1 · Exam Drills 問題1–4 ══════════ -->
+    <section class="apps-cat">
+      <div class="apps-cat-head">
+        <h2>JLPT N1 · Exam Drills</h2>
+        <span class="cat-jp">問題1〜4</span>
+        <span class="cat-count">4 apps</span>
+      </div>
+      <div class="apps-grid">
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🎌</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Exam Vocab 2010–2025<span class="ac-jp">問題1〜4</span></h3>
+          <p>Every vocabulary question from the real N1 exams, 2010–2025 — 問題1 through 問題4,
+            compiled into one drillable archive.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">過去問</span><span class="ac-tag">2010–2025</span>
+          </div>
+          <span class="ac-open">Open Exam Vocab</span>
+          <a class="ac-cover" href="/apps/n1-exam-vocab/" aria-label="Open Exam Vocab 2010–2025"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">📚</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>問題2 文脈規定<span class="ac-jp">504問</span></h3>
+          <p>Contextually-defined-word drills from tests 25–66 — all 504 questions of 問題2,
+            with answers.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">文脈規定</span><span class="ac-tag">504 questions</span>
+          </div>
+          <span class="ac-open">Open 問題2</span>
+          <a class="ac-cover" href="/apps/n1-mondai2/" aria-label="Open 問題2 文脈規定"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🔁</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>問題3 言い換え<span class="ac-jp">類義</span></h3>
+          <p>Paraphrase / synonym drills (言い換え類義) from tests 67–81, plus review sets —
+            pick the closest meaning.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">言い換え</span><span class="ac-tag">類義語</span>
+          </div>
+          <span class="ac-open">Open 問題3</span>
+          <a class="ac-cover" href="/apps/n1-mondai3/" aria-label="Open 問題3 言い換え"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🎯</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>問題4 用法<span class="ac-jp">Usage</span></h3>
+          <p>Word-usage quizzes (用法) from tests 83–92 plus review sets — pick the sentence where
+            the word is used correctly.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">用法</span><span class="ac-tag">10 sets</span>
+          </div>
+          <span class="ac-open">Open 問題4</span>
+          <a class="ac-cover" href="/apps/n1-mondai4/" aria-label="Open 問題4 用法"></a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══════════ JLPT N1 · Grammar ══════════ -->
+    <section class="apps-cat">
+      <div class="apps-cat-head">
+        <h2>JLPT N1 · Grammar</h2>
+        <span class="cat-jp">文法</span>
+        <span class="cat-count">4 apps</span>
+      </div>
+      <div class="apps-grid">
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🎴</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>N1 Flashcards<span class="ac-jp">文法</span></h3>
+          <p>Flip-card drills for JLPT N1 grammar — progress bar, right/wrong tracking, and a clean flow
+            for fast repetition.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">文法</span><span class="ac-tag">Flashcards</span>
+          </div>
+          <span class="ac-open">Open N1 Flashcards</span>
+          <a class="ac-cover" href="/apps/flashcard-n1/" aria-label="Open N1 Flashcards"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">📜</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Grammar 2010–2024<span class="ac-jp">文法</span></h3>
+          <p>Every grammar question from the real exams, 2010–2024 — organized by year and pattern,
+            with explanations.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">過去問</span><span class="ac-tag">2010–2024</span>
+          </div>
+          <span class="ac-open">Open Grammar</span>
+          <a class="ac-cover" href="/apps/n1-grammar/" aria-label="Open Grammar 2010–2024"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🈴</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>N1 文法②<span class="ac-jp">Mondai 6</span></h3>
+          <p>Sentence-ordering drills for JLPT N1 (文の文法② · pick the piece for ★) — 420 questions merged from two sets,
+            each with the correct order, grammar point, and a Vietnamese walkthrough.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">文法</span><span class="ac-tag">420 questions</span>
+          </div>
+          <span class="ac-open">Open N1 文法②</span>
+          <a class="ac-cover" href="/apps/n1-mondai6/" aria-label="Open N1 Mondai 6"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">⭐</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>Mondai 6 Drill<span class="ac-jp">並べ替え</span></h3>
+          <p>A second sentence-scramble bank for 問題6 — 140 questions with exam and grammar-pattern
+            filters, and a different question pool from 文法②.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">並べ替え</span><span class="ac-tag">140 questions</span>
+          </div>
+          <span class="ac-open">Open Mondai 6 Drill</span>
+          <a class="ac-cover" href="/apps/n1-mondai6-drill/" aria-label="Open Mondai 6 Drill"></a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══════════ JLPT N1 · Reading ══════════ -->
+    <section class="apps-cat">
+      <div class="apps-cat-head">
+        <h2>JLPT N1 · Reading</h2>
+        <span class="cat-jp">読解</span>
+        <span class="cat-count">2 apps</span>
+      </div>
+      <div class="apps-grid">
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">🧭</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>読解 75 bài<span class="ac-jp">Anchor words</span></h3>
+          <p>The full 75-passage reading course built around the "anchor word" method —
+            passage, questions, and guided walkthroughs.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">読解</span><span class="ac-tag">75 passages</span>
+          </div>
+          <span class="ac-open">Open 読解 75 bài</span>
+          <a class="ac-cover" href="/apps/n1-dokkai/" aria-label="Open 読解 75 bài"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon">📰</div>
+            <span class="ac-status">Live</span>
+          </div>
+          <h3>問題9 Luyện tập<span class="ac-jp">中文</span></h3>
+          <p>Mid-length passage practice for 問題9 — reading drills with the B1→B4 method and
+            reverse / anchor-word techniques.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">読解</span><span class="ac-tag">問題9</span>
+          </div>
+          <span class="ac-open">Open 問題9</span>
+          <a class="ac-cover" href="/apps/n1-mondai9/" aria-label="Open 問題9 Luyện tập"></a>
+        </article>
+
+      </div>
     </section>
 
     <footer class="apps-foot">
