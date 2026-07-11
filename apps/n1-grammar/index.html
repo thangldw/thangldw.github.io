@@ -6,16 +6,16 @@
 <title>N1 Grammar 2010–2024 — thang.</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f4f6f9;color:#1a1a2e;min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f8fa;color:#1a1a2e;min-height:100vh}
 .jp{font-family:'Noto Sans JP','Hiragino Sans',sans-serif}
-.hdr{background:#1a1a2e;color:white;padding:12px 16px 0}
+.hdr{background:#fff;color:#1a1a2e;padding:12px 16px 0;border-bottom:1px solid #e4e7ee}
 .hdr-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .badge{background:#e63946;color:white;font-size:12px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
 .hdr-top h1{font-size:15px;font-weight:600}
 .hdr-top p{font-size:11px;opacity:.55;margin-top:1px}
-.tabs{display:flex;border-top:1px solid rgba(255,255,255,.1)}
-.tab{flex:1;padding:10px 0;border:none;background:none;color:rgba(255,255,255,.45);font-size:12.5px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;font-family:inherit;font-weight:500;position:relative}
-.tab.on{color:white;border-bottom-color:#ffd93d}
+.tabs{display:flex;border-top:1px solid #e4e7ee}
+.tab{flex:1;padding:10px 0;border:none;background:none;color:#838b99;font-size:12.5px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;font-family:inherit;font-weight:500;position:relative}
+.tab.on{color:#1a1a2e;border-bottom-color:#3a5bd9}
 .tab .badge-cnt{position:absolute;top:6px;right:12px;background:#ef4444;color:white;font-size:10px;font-weight:700;padding:1px 5px;border-radius:10px;min-width:18px;text-align:center}
 .period-bar{background:white;border-bottom:1px solid #e8eaed;padding:8px 14px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;position:sticky;top:0;z-index:20;box-shadow:0 1px 3px rgba(0,0,0,.06)}
 .pbtn{padding:4px 12px;border-radius:16px;border:1.5px solid #e8eaed;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;background:white;color:#6b7280}
@@ -348,8 +348,7 @@ function renderCard(q,sel,cl,isWrongMode){
     let cls='opt',ico=l.toUpperCase();
     if(sel){if(l===cl){cls='opt correct';ico='✓';}else if(l===sel){cls='opt wrong';ico='✗';}}
     const fn=isWrongMode?`wrpick('${l}')`:`pick('${l}')`;
-    const speakFn=`speakOpt('${txt.replace(/'/g,"\\'")}',this)`;
-    return`<button class="${cls}" onclick="${fn}"><span class="opt-num">${ico}</span><span class="jp">${txt}</span><button class="speak-opt-btn" onclick="event.stopPropagation();${speakFn}" title="Đọc lựa chọn này">🔊</button></button>`;
+    return`<button class="${cls}" onclick="${fn}"><span class="opt-num">${ico}</span><span class="jp">${txt}</span></button>`;
   }).join('');
   const wrongTag=isWrongMode?'<span class="tag-wrong">✗ Câu sai</span>':'';
   return`<div class="card ${isWrongMode?'wrong-mode':''}">

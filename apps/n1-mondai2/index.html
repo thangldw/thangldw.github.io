@@ -283,7 +283,6 @@ function buildQuestionHtml(qidx) {
     var spkId = 'optspk_' + qidx + '_' + i;
     opts += '<div class="' + wcls + '">';
     opts += '<button class="opt" onclick="pick(' + qidx + ',' + i + ')"' + dis + '>' + (i+1) + '　' + esc(w.k) + '</button>';
-    opts += '<button id="' + spkId + '" class="spk-sm" onclick="event.stopPropagation();speakJapanese(\'' + escAttr(w.k) + '\',\'' + spkId + '\')" title="発音">&#x1F50A;</button>';
     opts += '</div>';
   }
 
