@@ -73,7 +73,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
 }
 
-section { padding-block: var(--space-2xl); }
+section { padding-block: var(--space-xl) var(--space-2xl); }
 
 .section-head {
   display: flex;
@@ -168,7 +168,7 @@ section { padding-block: var(--space-2xl); }
 .nav-toggle { display: none; }
 
 /* ---------- Hero ---------- */
-.hero { padding-block: clamp(var(--space-2xl), 14vh, var(--space-3xl)) var(--space-2xl); }
+.hero { padding-block: clamp(var(--space-lg), 8vh, var(--space-2xl)) var(--space-2xl); }
 .hero .eyebrow { margin-bottom: var(--space-md); }
 .hero .pulse {
   width: 8px; height: 8px; border-radius: 50%;
@@ -367,7 +367,7 @@ section { padding-block: var(--space-2xl); }
 /* ---------- Contact ---------- */
 .contact { text-align: center; }
 .contact h2 { font-size: var(--step-3); margin-bottom: var(--space-md); }
-.contact p { color: var(--text-muted); font-size: var(--step-0); max-width: 54ch; margin: 0 auto var(--space-md); line-height: 1.7; }
+.contact p { color: var(--text-muted); font-size: var(--step-0); max-width: 75ch; margin: 0 auto var(--space-md); line-height: 1.7; }
 .contact p:last-of-type { margin-bottom: var(--space-lg); }
 .contact .email-link {
   font-family: var(--font-display);
