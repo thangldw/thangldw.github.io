@@ -22,6 +22,24 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/styles.css">
 
+  <!-- Structured data for search results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Thang Luu",
+    "url": "https://thangldw.github.io",
+    "email": "mailto:thangldw@gmail.com",
+    "jobTitle": "Technical Lead — Applied AI & Data Systems",
+    "address": { "@type": "PostalAddress", "addressLocality": "Tokyo", "addressCountry": "JP" },
+    "knowsLanguage": ["ja", "vi", "en"],
+    "sameAs": [
+      "https://www.linkedin.com/in/thangldw",
+      "https://github.com/thangldw"
+    ]
+  }
+  </script>
+
   <!-- Set theme before paint to avoid a flash of the wrong theme -->
   <script>
     (function () {
@@ -39,7 +57,7 @@
       <a href="#top" class="brand">thang<span class="dot">.</span></a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#about" class="nav-link">About</a>
-        <a href="#approach" class="nav-link">Approach</a>
+        <a href="#work" class="nav-link">Work</a>
         <a href="#skills" class="nav-link">Stack</a>
         <a href="apps/" class="nav-link">Apps</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -63,15 +81,9 @@
         retail, real estate, fintech, and research. I help teams turn messy,
         ambiguous data into practical systems they can understand, operate, and rely on.
       </p>
-      <p class="sub reveal">
-        I try to stay close to the problem, listen to what the data is really
-        saying, and adapt as the picture clears — strong technical work only
-        matters when it helps people decide and move forward. I'm still learning
-        on every project, alongside people doing the same.
-      </p>
       <div class="hero-cta reveal">
-        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get in touch</a>
-        <a href="apps/" class="btn btn-ghost"><i class="fa-solid fa-grip" aria-hidden="true"></i> Explore apps</a>
+        <a href="#work" class="btn btn-primary"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> See the work</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get in touch</a>
       </div>
 
     </section>
@@ -84,8 +96,8 @@
         </div>
         <div class="about-grid">
           <div>
-            <p>I'm a <strong>data-driven problem solver</strong> who works where engineering and business meet. Over the past decade I've moved from statistical analysis to data engineering, and now to leading technical delivery as a <strong>Front Technical Lead at FPT Japan</strong>. I still see myself as a student of this craft — I learn most from the people I build with.</p>
-            <p>My best work starts in ambiguity: a vague goal, a messy dataset, a customer who feels the pain but hasn't found the shape of the solution. I try to get close to the problem, understand what the data is really saying, and find the simpler path that creates real leverage.</p>
+            <p>I'm a <strong>data-driven problem solver</strong> who works where engineering and business meet. Over the past decade I've moved from statistical analysis to data engineering, and now to leading technical delivery as a <strong>Front Technical Lead at a global IT consultancy in Tokyo</strong>. I still see myself as a student of this craft — I learn most from the people I build with.</p>
+            <p>My best work starts in ambiguity: a vague goal, a messy dataset, a customer who feels the pain but hasn't found the shape of the solution. I get close to the problem, understand what the data is really saying, and find the simpler path that creates real leverage.</p>
             <p>From there I turn ideas into working systems — consulting on architecture, building pipelines and models, and leading delivery teams of <strong>30–50 engineers</strong> (including offshore), alongside the pre-sales, negotiation, and stakeholder work that keeps people aligned. I care about systems that are <strong>useful, reliable, and transferable</strong> — not something that works once, but something the next engineer and the customer team can understand, operate, and improve.</p>
             <p><em>Stay steadfast, stay free.</em></p>
           </div>
@@ -95,6 +107,84 @@
             <p style="margin-top:1rem"><strong>Focus</strong><br>Data platforms · Applied AI &amp; recommendation · Embedded delivery</p>
             <p style="margin-top:1rem"><strong>Languages</strong><br>🇯🇵 Japanese — N1 (Professional)<br>🇻🇳 Vietnamese — Native<br>🇬🇧 English — Working<br>🇨🇳 Chinese — Elementary</p>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <!-- Companies intentionally anonymized by industry. -->
+    <section id="work">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <span class="section-note font-mono">client names withheld — described by industry</span>
+        </div>
+        <div class="work-list">
+
+          <article class="work-item">
+            <div class="work-meta">
+              <span class="work-industry"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Major Japanese retail group</span>
+              <span class="work-role font-mono">Technical Lead · Data &amp; AI</span>
+            </div>
+            <h3>Customer data platform &amp; recommendation engine</h3>
+            <p class="work-problem">Purchase and behavioral data sat in silos across stores, e-commerce, and a loyalty app — marketing decisions ran on gut feel.</p>
+            <p>Embedded with the customer's team to design a unified customer data platform (Treasure Data / BigQuery), then built recommendation and ranking models on top of it, wired into Salesforce Marketing Cloud for personalized campaigns. Led the delivery team end-to-end, from architecture through handover.</p>
+            <ul class="work-outcomes">
+              <li>Single customer view across millions of members and all sales channels</li>
+              <li>Personalized recommendations serving daily campaigns in production</li>
+              <li>Customer team operates and extends the platform independently after handover</li>
+            </ul>
+          </article>
+
+          <article class="work-item">
+            <div class="work-meta">
+              <span class="work-industry"><i class="fa-solid fa-building" aria-hidden="true"></i> Leading real-estate platform</span>
+              <span class="work-role font-mono">Data Scientist → Lead</span>
+            </div>
+            <h3>User-assessment &amp; ranking models for property matching</h3>
+            <p class="work-problem">Listings and user behavior were rich but unmodeled — the product couldn't tell serious buyers from browsers, and search results ranked poorly.</p>
+            <p>Built user-assessment and ranking models from clickstream and inquiry data, using cluster and correspondence analysis to segment intent. Turned exploratory analysis into production scoring pipelines the product team could retrain and monitor themselves.</p>
+            <ul class="work-outcomes">
+              <li>Intent scoring live in the product's matching flow at scale</li>
+              <li>Measurably higher inquiry conversion on re-ranked results</li>
+              <li>Analysis-to-production path documented and owned by the in-house team</li>
+            </ul>
+          </article>
+
+          <article class="work-item">
+            <div class="work-meta">
+              <span class="work-industry"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Enterprise clients · multiple industries</span>
+              <span class="work-role font-mono">Front Technical Lead</span>
+            </div>
+            <h3>Solution consulting &amp; large-team delivery</h3>
+            <p class="work-problem">Enterprise data/AI projects often fail between the proposal and the production system — requirements drift, offshore teams lose context, and nobody owns the outcome.</p>
+            <p>As the front-side technical lead I own that gap: pre-sales and solution design with the customer in Japanese, then leading delivery teams of 30–50 engineers (onshore + offshore) through build, release, and handover — keeping requirements, design, and context intact across the whole chain.</p>
+            <ul class="work-outcomes">
+              <li>Multiple data platform and AI projects delivered to production</li>
+              <li>Bilingual bridge: customer-facing in Japanese (N1), delivery in Vietnamese/English</li>
+              <li>Repeat engagements from customers after first delivery</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <!-- Career trajectory, anonymized -->
+        <div class="timeline">
+          <h4 class="timeline-title font-mono">// Trajectory</h4>
+          <ol class="timeline-list">
+            <li>
+              <span class="tl-period font-mono">Now</span>
+              <div><strong>Front Technical Lead — global IT consultancy, Tokyo</strong><br>Solution consulting, applied AI &amp; data platforms, delivery leadership (30–50 engineers).</div>
+            </li>
+            <li>
+              <span class="tl-period font-mono">Mid-career</span>
+              <div><strong>Data Engineer / Data Scientist — retail &amp; real-estate platforms</strong><br>Customer data platforms, ELT pipelines, recommendation &amp; ranking models in production.</div>
+            </li>
+            <li>
+              <span class="tl-period font-mono">Early career</span>
+              <div><strong>Statistical Analyst — research &amp; fintech</strong><br>Statistical modeling, cluster &amp; correspondence analysis; where the data instinct comes from.</div>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -109,12 +199,12 @@
           <div class="card">
             <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
             <h3>Embed &amp; discover</h3>
-            <p>I try to start where the problem actually lives — with the users, the data, and the stakeholders. My work in solution consulting and pre-sales has taught me to slow down early, listen carefully, and reframe the ask until the real constraint becomes clear, before writing the first line of code.</p>
+            <p>I start where the problem actually lives — with the users, the data, and the stakeholders. Years of solution consulting and pre-sales taught me to slow down early, listen carefully, and reframe the ask until the real constraint becomes clear, before writing the first line of code.</p>
           </div>
           <div class="card">
             <div class="card-icon"><i class="fa-solid fa-cubes-stacked" aria-hidden="true"></i></div>
             <h3>Build &amp; ship</h3>
-            <p>I care about building systems that can survive production, not just demos: reliable ELT pipelines, recommendation and ranking models, and BI that leaders actually use. I've worked across cloud platforms and the full project lifecycle, trying to move fast without making the solution fragile.</p>
+            <p>I build systems that survive production, not just demos: reliable ELT pipelines, recommendation and ranking models, and BI that leaders actually use. I've shipped across cloud platforms and the full project lifecycle, moving fast without making the solution fragile.</p>
           </div>
           <div class="card">
             <div class="card-icon"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></div>
@@ -198,11 +288,43 @@
       </div>
     </section>
 
+    <!-- ============ BUILDS ============ -->
+    <section id="builds">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>Things I build for myself</h2>
+          <span class="section-note font-mono">all open, all running in your browser</span>
+        </div>
+        <p class="section-lead">Side projects are where I test ideas before I bring them to customers — and how I keep learning. Everything below is live on this site, built from scratch, no backend required.</p>
+        <div class="card-grid builds-grid">
+          <a class="card build-card" href="apps/data-copilot/">
+            <div class="card-icon">🦆</div>
+            <h3>Data Copilot</h3>
+            <p>Ask a question in plain English and the browser turns it into real SQL, runs it on DuckDB-WASM, and charts the result — no API key, no server. Live market data refreshed daily by a GitHub Actions pipeline.</p>
+            <span class="build-open">Open <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="card build-card" href="apps/pipeline/">
+            <div class="card-icon">📡</div>
+            <h3>Pipeline Observability</h3>
+            <p>The ELT job behind Data Copilot, fully instrumented — freshness, coverage, and run history. A cron that commits its own telemetry, so anyone can watch it work (or fail, honestly).</p>
+            <span class="build-open">Open <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="card build-card" href="apps/">
+            <div class="card-icon">🇯🇵</div>
+            <h3>JLPT N1 study suite</h3>
+            <p>15+ apps I built to take myself to JLPT N1 — kanji analysis, vocabulary drills, grammar, and reading practice. Proof that I'd rather build the tool than buy the textbook.</p>
+            <span class="build-open">Browse all apps <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CONTACT ============ -->
     <section id="contact">
       <div class="wrap contact reveal">
         <h2>I'd love to learn about your work.</h2>
         <p>I'm looking for <strong>Forward Deployed Engineer / Applied AI</strong> roles where I can embed with customers, turn ambiguous problems into production systems, and own delivery through to measurable impact. If you have a hard data or AI problem — or a role where an embedded engineer would help — let's talk. Based in Tokyo, working in English and Japanese.</p>
+        <p lang="ja" class="contact-ja">日本語でのご連絡も歓迎します。要件定義から設計・開発・運用まで、日本語で一貫して対応できます。</p>
         <a class="email-link" href="mailto:thangldw@gmail.com">thangldw@gmail.com</a>
         <div class="socials" style="justify-content:center; margin-top: var(--space-lg)">
           <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/thangldw" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a>
