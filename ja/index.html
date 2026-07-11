@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thang Luu（ルー・タン）— Forward Deployed Engineer · 応用AI＆データシステム</title>
+  <meta name="description" content="Thang Luu — 東京在住のデータ＆AIエンジニア／テクニカルリード。小売・不動産・フィンテック・リサーチ領域で10年以上、データを本番システムに変えてきました。JLPT N1。Forward Deployed Engineer / Applied AI ポジションを希望。">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thang Luu — Forward Deployed Engineer · 応用AI＆データシステム">
+  <meta property="og:description" content="東京を拠点に、本番稼働するデータ＆AIシステムを届けるテクニカルリード。経験10年以上、JLPT N1、顧客伴走型のデリバリー。">
+  <meta property="og:url" content="https://thangldw.github.io/ja/">
+  <meta property="og:locale" content="ja_JP">
+
+  <link rel="alternate" hreflang="en" href="https://thangldw.github.io/">
+  <link rel="alternate" hreflang="ja" href="https://thangldw.github.io/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://thangldw.github.io/">
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <!-- Structured data for search results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Thang Luu",
+    "alternateName": "ルー・タン",
+    "url": "https://thangldw.github.io/ja/",
+    "email": "mailto:thangldw@gmail.com",
+    "jobTitle": "テクニカルリード — 応用AI＆データシステム",
+    "address": { "@type": "PostalAddress", "addressLocality": "東京", "addressCountry": "JP" },
+    "knowsLanguage": ["ja", "vi", "en"],
+    "sameAs": [
+      "https://www.linkedin.com/in/thangldw",
+      "https://github.com/thangldw"
+    ]
+  }
+  </script>
+
+  <!-- Set theme before paint to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="wrap nav">
+      <a href="#top" class="brand">thang<span class="dot">.</span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about" class="nav-link">自己紹介</a>
+        <a href="#work" class="nav-link">実績</a>
+        <a href="#skills" class="nav-link">スキル</a>
+        <a href="../apps/" class="nav-link">Apps</a>
+        <a href="#contact" class="nav-link">連絡先</a>
+        <a href="../" class="lang-switch" lang="en" title="English version">EN</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="テーマ切り替え" title="テーマ切り替え">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero wrap">
+      <div class="reveal">
+        <span class="eyebrow"><span class="pulse"></span> 東京 · Forward Deployed Engineer · 応用AI＆データシステム</span>
+      </div>
+      <h1 class="reveal">Thang Luu</h1>
+      <p class="lead reveal">チームに入り込み、曖昧な課題を<span class="accent">信頼できる本番システム</span>へ。</p>
+      <p class="sub reveal">
+        東京を拠点とするデータ＆AIエンジニア／テクニカルリード。小売・不動産・
+        フィンテック・リサーチの各領域で10年以上、複雑で曖昧なデータを、
+        チームが理解・運用・信頼できる実用的なシステムに変えてきました。
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#work" class="btn btn-primary"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> 実績を見る</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 問い合わせる</a>
+      </div>
+
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>自己紹介</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p>エンジニアリングとビジネスの接点で価値を出す、<strong>データドリブンな課題解決者</strong>です。この10年で統計分析からデータエンジニアリングへ、そして現在は<strong>東京のグローバルITコンサルティング企業でフロント・テクニカルリード</strong>として技術デリバリーを率いています。今も自分をこの道の学び手だと思っています — 一緒に作る人たちから学ぶことが一番多いからです。</p>
+            <p>私が最も力を発揮するのは、曖昧さの中からです。ゴールがぼんやりしている、データが散らかっている、お客様は課題を感じているが解決の形がまだ見えていない — そんな状況で課題に深く入り込み、データが本当に語っていることを読み取り、実質的なレバレッジを生むシンプルな道筋を見つけます。</p>
+            <p>そこからアイデアを動くシステムに変えていきます。アーキテクチャのコンサルティング、パイプラインやモデルの構築、そして<strong>30〜50名規模</strong>（オフショア含む）のデリバリーチームのリード。プリセールス・交渉・ステークホルダー調整まで含めて、関係者の足並みを揃えるのも仕事の一部です。大切にしているのは、<strong>役に立ち、安定して動き、引き継げる</strong>システム — 一度動いて終わりではなく、次のエンジニアやお客様のチームが理解し、運用し、育てていけるものです。</p>
+            <p><em>Stay steadfast, stay free.</em></p>
+          </div>
+          <aside class="about-aside">
+            <h4>概要</h4>
+            <p><strong>拠点</strong><br>東京</p>
+            <p style="margin-top:1rem"><strong>専門領域</strong><br>データ基盤 · 応用AI＆レコメンデーション · 顧客伴走型デリバリー</p>
+            <p style="margin-top:1rem"><strong>言語</strong><br>🇯🇵 日本語 — N1（ビジネスレベル）<br>🇻🇳 ベトナム語 — 母語<br>🇬🇧 英語 — 実務レベル<br>🇨🇳 中国語 — 初級</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <!-- Companies intentionally anonymized by industry. -->
+    <section id="work">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>主な実績</h2>
+          <span class="section-note font-mono">守秘義務のため企業名は非公開 — 業界で記載</span>
+        </div>
+        <div class="work-list">
+
+          <article class="work-item">
+            <div class="work-meta">
+              <span class="work-industry"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> 大手小売グループ</span>
+              <span class="work-role font-mono">Technical Lead · Data &amp; AI</span>
+            </div>
+            <h3>顧客データ基盤とレコメンデーションエンジン</h3>
+            <p class="work-problem">購買・行動データが店舗、EC、会員アプリでサイロ化し、マーケティングの意思決定が勘に頼っていた。</p>
+            <p>お客様のチームに入り込み、統合顧客データ基盤（Treasure Data / BigQuery）を設計。その上にレコメンデーション・ランキングモデルを構築し、Salesforce Marketing Cloud と連携してパーソナライズ施策を実現しました。アーキテクチャ設計から引き継ぎまで、デリバリーチームを一貫してリードしました。</p>
+            <ul class="work-outcomes">
+              <li>数百万人規模の会員と全販売チャネルを横断する統合顧客ビューを実現</li>
+              <li>パーソナライズされたレコメンドが日次キャンペーンで本番稼働</li>
+              <li>引き継ぎ後はお客様のチームが自走して基盤を運用・拡張</li>
+            </ul>
+          </article>
+
+          <article class="work-item">
+            <div class="work-meta">
+              <span class="work-industry"><i class="fa-solid fa-building" aria-hidden="true"></i> 大手不動産プラットフォーム</span>
+              <span class="work-role font-mono">Data Scientist → Lead</span>
+            </div>
+            <h3>物件マッチングのためのユーザー評価・ランキングモデル</h3>
+            <p class="work-problem">物件情報とユーザー行動のデータは豊富にあるのにモデル化されておらず、本気の購入検討者と閲覧者を区別できず、検索結果のランキング精度も低かった。</p>
+            <p>クリックストリームと問い合わせデータからユーザー評価モデルとランキングモデルを構築。クラスター分析・コレスポンデンス分析でユーザー意図をセグメント化し、探索的な分析を、プロダクトチーム自身が再学習・監視できる本番スコアリングパイプラインへと仕上げました。</p>
+            <ul class="work-outcomes">
+              <li>意図スコアリングがマッチングフローで大規模に本番稼働</li>
+              <li>リランキングにより問い合わせコンバージョンが有意に向上</li>
+              <li>分析から本番化までの道筋をドキュメント化し、社内チームに移管</li>
+            </ul>
+          </article>
+
+          <article class="work-item">
+            <div class="work-meta">
+              <span class="work-industry"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> エンタープライズ各社 · 複数業界</span>
+              <span class="work-role font-mono">Front Technical Lead</span>
+            </div>
+            <h3>ソリューションコンサルティングと大規模チームデリバリー</h3>
+            <p class="work-problem">エンタープライズのデータ／AIプロジェクトは、提案と本番システムの間で頓挫しがち — 要件が漂流し、オフショアチームは文脈を見失い、成果に責任を持つ人が不在になる。</p>
+            <p>フロント側のテクニカルリードとして、まさにそのギャップを引き受けています。日本語でのプリセールス・ソリューション設計から始まり、30〜50名（オンショア＋オフショア）のデリバリーチームを率いて構築・リリース・引き継ぎまで — 要件・設計・文脈をチェーン全体で失わせないことが私の仕事です。</p>
+            <ul class="work-outcomes">
+              <li>複数のデータ基盤・AIプロジェクトを本番リリースまでデリバリー</li>
+              <li>バイリンガルの橋渡し：顧客対応は日本語（N1）、開発はベトナム語／英語</li>
+              <li>初回デリバリー後、お客様からの継続・追加案件を獲得</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <!-- Career trajectory, anonymized -->
+        <div class="timeline">
+          <h4 class="timeline-title font-mono">// キャリアの歩み</h4>
+          <ol class="timeline-list">
+            <li>
+              <span class="tl-period font-mono">現在</span>
+              <div><strong>フロント・テクニカルリード — グローバルITコンサルティング企業（東京）</strong><br>ソリューションコンサルティング、応用AI＆データ基盤、デリバリーリーダーシップ（30〜50名）。</div>
+            </li>
+            <li>
+              <span class="tl-period font-mono">キャリア中期</span>
+              <div><strong>データエンジニア／データサイエンティスト — 小売・不動産プラットフォーム</strong><br>顧客データ基盤、ELTパイプライン、レコメンデーション・ランキングモデルの本番運用。</div>
+            </li>
+            <li>
+              <span class="tl-period font-mono">キャリア初期</span>
+              <div><strong>統計アナリスト — リサーチ・フィンテック</strong><br>統計モデリング、クラスター分析・コレスポンデンス分析。データへの感覚の原点。</div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section id="approach">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>仕事の進め方</h2>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+            <h3>入り込む＆見極める</h3>
+            <p>課題が実際に存在する場所 — ユーザー、データ、ステークホルダーのそばから始めます。ソリューションコンサルティングとプリセールスの経験から学んだのは、序盤こそ急がず、丁寧に耳を傾け、本当の制約が見えるまで「依頼」を問い直すこと。コードを書くのはそれからです。</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-cubes-stacked" aria-hidden="true"></i></div>
+            <h3>作る＆届ける</h3>
+            <p>デモで終わらず、本番に耐えるシステムを作ります。安定したELTパイプライン、レコメンデーション・ランキングモデル、そして経営層が実際に使うBI。クラウド各基盤とプロジェクトの全工程を経験し、ソリューションを脆くせずにスピードを出すことを心がけています。</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></div>
+            <h3>導く＆任せる</h3>
+            <p>本当の成果物はコードだけではなく、引き継ぎ後も走り続けられるチームです。オフショアメンバーを含む30〜50名のチームを率い、要件・設計・文脈を明確に伝えることに注力しています。システムを理解し、自分ごととして持ち、自信を持って拡張できるように。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS / STACK ============ -->
+    <section id="skills">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>スキル</h2>
+        </div>
+        <div class="card-grid">
+          <div class="skill-group">
+            <h4>// AI＆データサイエンス</h4>
+            <div class="tags">
+              <span class="tag">レコメンデーションシステム</span><span class="tag">ランキングモデル</span>
+              <span class="tag">ユーザー評価モデル</span><span class="tag">クラスター分析</span>
+              <span class="tag">コレスポンデンス分析</span><span class="tag">共分散構造分析</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// 応用AI＆LLM</h4>
+            <div class="tags">
+              <span class="tag">RAG</span><span class="tag">LLMアプリ統合</span>
+              <span class="tag">プロンプト＆コンテキスト設計</span><span class="tag">AIエージェント</span>
+              <span class="tag">ベクトル検索</span><span class="tag">評価＆ガードレール</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// フルスタック＆デプロイ</h4>
+            <div class="tags">
+              <span class="tag">FastAPI</span><span class="tag">React / TypeScript</span>
+              <span class="tag">REST API</span><span class="tag">Docker / CI-CD</span>
+              <span class="tag">クラウドデプロイ</span><span class="tag">モニタリング</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// データエンジニアリング</h4>
+            <div class="tags">
+              <span class="tag">BigQuery</span><span class="tag">Treasure Data</span>
+              <span class="tag">データレイク／DWH</span><span class="tag">ELT / SQL</span>
+              <span class="tag">データアーキテクチャ</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// クラウド・BI・マーテック</h4>
+            <div class="tags">
+              <span class="tag">Google Cloud Platform</span><span class="tag">Tableau</span>
+              <span class="tag">Salesforce Marketing Cloud</span><span class="tag">Docker</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// プログラミング</h4>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">C</span>
+              <span class="tag">JavaScript</span><span class="tag">VBA</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// リーダーシップ＆デリバリー</h4>
+            <div class="tags">
+              <span class="tag">テクニカルリーダーシップ</span><span class="tag">ソリューションコンサルティング</span>
+              <span class="tag">プリセールス</span><span class="tag">ステークホルダー調整</span>
+              <span class="tag">プロジェクトマネジメント</span><span class="tag">オフショアデリバリー</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h4>// 資格</h4>
+            <div class="tags">
+              <span class="tag">AI Engineer for Data Scientists</span><span class="tag">Data Engineer</span>
+              <span class="tag">AI for Healthcare</span><span class="tag">JLPT N1</span>
+              <span class="tag">基本情報技術者（FE）</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BUILDS ============ -->
+    <section id="builds">
+      <div class="wrap reveal">
+        <div class="section-head">
+          <h2>自分のために作っているもの</h2>
+          <span class="section-note font-mono">すべて公開 — ブラウザだけで動きます</span>
+        </div>
+        <p class="section-lead">サイドプロジェクトは、お客様に持ち込む前にアイデアを試す場所であり、学び続けるための手段です。以下はすべてこのサイト上で稼働中。ゼロから作り、バックエンド不要です。</p>
+        <div class="card-grid builds-grid">
+          <a class="card build-card" href="../apps/data-copilot/">
+            <div class="card-icon">🦆</div>
+            <h3>Data Copilot</h3>
+            <p>自然言語で質問すると、ブラウザがそれを本物のSQLに変換し、DuckDB-WASMで実行してグラフ化 — APIキーもサーバーも不要。マーケットデータは GitHub Actions のパイプラインが毎日更新しています。</p>
+            <span class="build-open">開く <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="card build-card" href="../apps/pipeline/">
+            <div class="card-icon">📡</div>
+            <h3>Pipeline Observability</h3>
+            <p>Data Copilot を支えるELTジョブを丸ごと可視化 — データ鮮度、カバレッジ、実行履歴。自分のテレメトリを自分でコミットするcronなので、動く様子（正直、失敗する様子も）を誰でも見られます。</p>
+            <span class="build-open">開く <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <a class="card build-card" href="../apps/">
+            <div class="card-icon">🇯🇵</div>
+            <h3>JLPT N1 学習アプリ集</h3>
+            <p>自分をN1合格まで連れて行くために作った15本以上のアプリ — 漢字分析、語彙ドリル、文法、読解練習。教科書を買うより、ツールを作ってしまうタイプです。</p>
+            <span class="build-open">すべてのアプリを見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact">
+      <div class="wrap contact reveal">
+        <h2>あなたの課題について、ぜひ聞かせてください。</h2>
+        <p>お客様のチームに入り込み、曖昧な課題を本番システムに変え、測定可能な成果までデリバリーに責任を持つ — そんな<strong>Forward Deployed Engineer / Applied AI</strong>のポジションを探しています。難しいデータ／AIの課題をお持ちの方、あるいは伴走型エンジニアが力になれるポジションがあれば、ぜひお話ししましょう。東京在住、日本語・英語で対応可能です。</p>
+        <p class="contact-ja">要件定義から設計・開発・運用まで、日本語で一貫して対応できます。カジュアル面談も歓迎です。</p>
+        <a class="email-link" href="mailto:thangldw@gmail.com">thangldw@gmail.com</a>
+        <div class="socials" style="justify-content:center; margin-top: var(--space-lg)">
+          <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/thangldw" title="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a>
+          <a target="_blank" rel="noopener" href="https://github.com/thangldw" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="sr-only">GitHub</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Thang Luu · 東京</span>
+      <span class="font-mono">stay steadfast, stay free</span>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
