@@ -26,16 +26,17 @@
     .overview-hero .sub{color:var(--text-muted);max-width:67ch;margin-top:var(--space-md)}
     .release-pill{display:inline-flex;align-items:center;gap:.5rem;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));background:var(--accent-glow);color:var(--accent);border-radius:999px;padding:.35rem .75rem;font:var(--step--1) var(--font-mono)}
     .overview-actions{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-lg)}
-    .proof-strip{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--border)}
-    .proof{padding:var(--space-md);border-right:1px solid var(--border)}.proof:last-child{border:0}
-    .proof strong{display:block;font:700 var(--step-2) var(--font-display)}.proof span{color:var(--text-dim);font:var(--step--1) var(--font-mono)}
+    .proof-section{border-block:1px solid var(--border)}
+    .proof-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+    .proof{min-width:0;padding:clamp(1.15rem,2.2vw,1.75rem);border-right:1px solid var(--border)}.proof:first-child{padding-left:0}.proof:last-child{border-right:0;padding-right:0}
+    .proof strong{display:block;font:700 clamp(1.65rem,2.4vw,2.25rem)/1 var(--font-display)}.proof span{display:block;color:var(--text-dim);font:var(--step--1)/1.45 var(--font-mono);margin-top:.65rem;overflow-wrap:anywhere}
     .signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}
     .signal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-lg)}
     .signal b{font:var(--step--1) var(--font-mono);color:var(--accent)}.signal h3{font-size:var(--step-1);margin:.8rem 0 .35rem}.signal p{color:var(--text-muted);font-size:var(--step--1)}
     .signal.result{border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}.blocked{display:inline-block;color:#b42332;font:600 var(--step--1) var(--font-mono);margin-top:var(--space-sm)}[data-theme="dark"] .blocked{color:#ff8e99}
     .handoff{border-top:1px solid var(--border);padding-block:var(--space-xl);display:grid;grid-template-columns:1fr auto;gap:var(--space-xl);align-items:center}.handoff p{color:var(--text-muted);max-width:60ch;margin-top:.5rem}
-    @media(max-width:800px){.proof-strip{grid-template-columns:1fr 1fr}.signal-grid,.handoff{grid-template-columns:1fr}.overview-actions{align-items:stretch;flex-direction:column}.overview-actions .btn{justify-content:center}}
-    @media(max-width:520px){.proof-strip,.signal-grid{grid-template-columns:1fr}.proof{border-right:0;border-bottom:1px solid var(--border)}.proof:last-child{border-bottom:0}.nav-links>a[href^="#"]{display:none}}
+    @media(max-width:800px){.proof-strip{grid-template-columns:1fr 1fr}.proof{padding:1.25rem}.proof:first-child{padding-left:0}.proof:nth-child(2){border-right:0;padding-right:0}.proof:nth-child(-n+2){border-bottom:1px solid var(--border)}.proof:nth-child(3){padding-left:0}.proof:last-child{padding-right:0}.signal-grid,.handoff{grid-template-columns:1fr}.overview-actions{align-items:stretch;flex-direction:column}.overview-actions .btn{justify-content:center}}
+    @media(max-width:520px){.overview-hero{padding-block:var(--space-lg) var(--space-xl)}.overview-hero h1{font-size:clamp(3.35rem,18vw,4.6rem)}.proof{padding:1.1rem .85rem}.proof:first-child,.proof:nth-child(3){padding-left:0}.proof:nth-child(2),.proof:last-child{padding-right:0}.proof strong{font-size:1.65rem}.proof span{font-size:.72rem}.signal-grid{grid-template-columns:1fr}.nav-links>a[href^="#"]{display:none}}
   </style>
   <script>(function(){var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'))})()</script>
 </head>
@@ -63,11 +64,13 @@
       </div>
     </section>
 
-    <div class="proof-strip" aria-label="RAGOps proof points">
-      <div class="proof"><strong>1.4.0</strong><span>public release</span></div>
-      <div class="proof"><strong>50</strong><span>automated tests</span></div>
-      <div class="proof"><strong>30</strong><span>Japanese benchmark cases</span></div>
-      <div class="proof"><strong>0</strong><span>core runtime dependencies</span></div>
+    <div class="proof-section" role="region" aria-label="RAGOps proof points">
+      <div class="proof-strip wrap">
+        <div class="proof"><strong>1.4.0</strong><span>public release</span></div>
+        <div class="proof"><strong>50</strong><span>automated tests</span></div>
+        <div class="proof"><strong>30</strong><span>Japanese benchmark cases</span></div>
+        <div class="proof"><strong>0</strong><span>core runtime dependencies</span></div>
+      </div>
     </div>
 
     <section id="overview">
