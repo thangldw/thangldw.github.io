@@ -222,25 +222,6 @@ section { padding-block: var(--space-xl) var(--space-2xl); }
 .hero .lead + .sub { margin-top: var(--space-md); }
 .hero .sub + .sub { margin-top: var(--space-sm); }
 .hero-cta { display: flex; gap: var(--space-sm); flex-wrap: wrap; align-items: center; margin-top: var(--space-lg); }
-.hero-proof {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  max-width: 58rem;
-  margin-top: var(--space-xl);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--border);
-}
-.hero-proof > div { padding-right: var(--space-md); border-right: 1px solid var(--border); }
-.hero-proof > div + div { padding-left: var(--space-md); }
-.hero-proof > div:last-child { border-right: 0; }
-.hero-proof dt {
-  color: var(--text);
-  font-family: var(--font-display);
-  font-size: var(--step-1);
-  font-weight: 600;
-}
-.hero-proof dd { margin-top: .2rem; color: var(--text-muted); font-size: var(--step--1); }
-
 /* ---------- Social row ---------- */
 .socials { display: flex; gap: 0.35rem; margin-top: var(--space-lg); }
 .socials a {
@@ -471,9 +452,6 @@ section { padding-block: var(--space-xl) var(--space-2xl); }
   section { padding-block: var(--space-xl); }
   .work-item { padding: var(--space-md); }
   .timeline-list li { grid-template-columns: 1fr; gap: var(--space-2xs); }
-  .hero-proof { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-md); }
-  .hero-proof > div:nth-child(2) { border-right: 0; }
-  .hero-proof > div:nth-child(3) { padding-left: 0; }
   .release-grid { grid-template-columns: 1fr; }
   /* bigger touch targets */
   .btn { padding: 0.85rem 1.5rem; }
@@ -482,14 +460,6 @@ section { padding-block: var(--space-xl) var(--space-2xl); }
 
 @media (max-width: 460px) {
   .hero-cta .btn { width: 100%; justify-content: center; }
-  .hero-proof { grid-template-columns: 1fr; }
-  .hero-proof > div,
-  .hero-proof > div + div {
-    padding: 0 0 var(--space-sm);
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-proof > div:last-child { padding-bottom: 0; border-bottom: 0; }
 }
 
 /* Accessibility helper */
