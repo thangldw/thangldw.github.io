@@ -13,6 +13,18 @@ body {
   line-height: 1.65;
 }
 
+:where(img, video, canvas, svg) {
+  max-width: 100%;
+}
+
+:where(input, select, textarea, button) {
+  max-width: 100%;
+}
+
+:where(p, li, td, th) {
+  overflow-wrap: anywhere;
+}
+
 :where(h1, h2, h3, h4) {
   color: var(--text, var(--ink, #10151d));
   font-family: 'Space Grotesk', 'Noto Sans JP', system-ui, sans-serif;
@@ -51,4 +63,5 @@ body {
 
 @media (max-width: 680px) {
   .site-foot { padding-inline: 24px; }
+  :where(input, select, textarea) { min-width: 0; }
 }
