@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-07-11T22:23:58Z",
+  "last_updated": "2026-07-12T22:23:12Z",
   "source": "Yahoo Finance chart API (public, keyless)",
   "range": "2y",
   "interval": "1d",
   "row_count": 5446,
   "date_min": "2024-07-10",
   "date_max": "2026-07-10",
-  "duration_s": 6.7,
+  "duration_s": 8.6,
   "tickers": [
     {
       "ticker": "AAPL",
