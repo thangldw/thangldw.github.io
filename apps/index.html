@@ -9,7 +9,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css">
@@ -28,11 +28,11 @@
     .wrap { width: min(var(--content-width), 100% - 2 * var(--space-md)); margin-inline: auto; }
     a { color: inherit; text-decoration: none; }
 
-    .apps-main { padding-block: var(--space-xl) var(--space-2xl); }
-    .apps-intro { max-width: 46rem; margin-bottom: var(--space-xl); }
+    .apps-main { padding-block: 64px 40px; }
+    .apps-intro { max-width: none; margin-bottom: var(--space-xl); }
     .apps-intro .eyebrow { display: inline-flex; align-items: center; gap: .5em; color: var(--text-dim); font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: .04em; text-transform: uppercase; }
     .apps-intro h1 { font-family: var(--font-display); font-size: var(--step-4); line-height: 1.05; letter-spacing: -.02em; margin-top: var(--space-xs); }
-    .apps-intro .lead { color: var(--text-muted); font-size: var(--step-1); margin-top: var(--space-sm); }
+    .apps-intro .lead { color: var(--text-muted); font-size: 13.5px; letter-spacing: -.01em; margin-top: var(--space-sm); white-space: nowrap; }
     .apps-intro .lead strong { color: var(--text); font-weight: 600; }
 
     .apps-cat { margin-top: var(--space-xl); }
@@ -49,8 +49,8 @@
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
       padding: var(--space-md); overflow: hidden; transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
     }
-    .app-card:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: var(--shadow); }
-    .app-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); opacity: .8; }
+    .app-card:hover { border-color: var(--border-strong); }
+    .app-card::before { display:none }
 
     .app-card .ac-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-sm); }
     .app-card .ac-icon { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; font-size: 1.3rem; background: var(--accent-glow); color: var(--accent); }
@@ -69,19 +69,24 @@
     .app-card:hover .ac-open::after { transform: translateX(4px); }
     .app-card a.ac-cover { position: absolute; inset: 0; z-index: 1; } /* whole card clickable */
 
-    .apps-foot { margin-top: var(--space-2xl); padding-top: var(--space-md); border-top: 1px solid var(--border); color: var(--text-dim); font-size: var(--step--1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-sm); }
+    .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px 'IBM Plex Mono', var(--font-mono); text-align: center; }
+    .site-foot span { color: #aab1bc; }
 
-    @media (max-width: 640px) { .apps-intro h1 { font-size: var(--step-3); } }
+    .apps-nav{height:75px;padding:0 48px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);z-index:10}.apps-brand{font:600 15px var(--font-mono)}.apps-brand b{color:var(--accent)}.apps-brand span{color:var(--muted);font-weight:400}.apps-nav nav{display:flex;gap:26px;align-items:center;color:var(--body);font-size:13px}.theme-button{width:31px;height:31px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--ink)}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:42px}.filter{border:1px solid var(--border);border-radius:99px;padding:8px 15px;background:transparent;color:var(--body);font:500 12px var(--font-mono);cursor:pointer}.filter.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}.apps-intro .eyebrow{color:var(--accent)}.apps-intro h1{font-size:44px}.apps-grid{grid-template-columns:repeat(3,1fr);gap:20px}.app-card{padding:22px}.app-card .ac-icon{width:38px;height:38px;border-radius:8px}.apps-cat[hidden]{display:none}
+    @media(max-width:1200px){.apps-intro .lead{white-space:normal}}@media(max-width:900px){.apps-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width: 640px) {.apps-nav{padding:0 24px}.apps-nav nav a{display:none}.wrap{width:calc(100% - 48px)}.apps-intro h1{font-size:36px}.apps-grid{grid-template-columns:1fr}.apps-main{padding-top:48px}}
   </style>
 </head>
 <body>
+  <header class="apps-nav"><a class="apps-brand" href="/">thang<b>.</b> <span>/ apps</span></a><nav><a href="/#about">About</a><a href="/#work">Apps</a><a href="/#stack">Stack</a><button class="theme-button" id="themeToggle" aria-label="Toggle theme">◐</button></nav></header>
   <main class="wrap apps-main">
     <section class="apps-intro">
-      <span class="eyebrow">Apps &amp; experiments</span>
+      <span class="eyebrow">Apps</span>
       <h1>Things I've built</h1>
       <p class="lead">Small, self-contained builds — each one a way to <strong>show rather than tell</strong>.
         From a browser-native data workbench to a full JLPT N1 study suite. No backends; everything runs in your tab.</p>
     </section>
+
+    <div class="filters" aria-label="Filter apps"><button class="filter active" data-filter="All">All · 15</button><button class="filter" data-filter="Data & Engineering">Data &amp; Engineering · 3</button><button class="filter" data-filter="Vocabulary & Kanji">語彙・漢字 · 3</button><button class="filter" data-filter="Exam Drills">問題 drills · 3</button><button class="filter" data-filter="Grammar">文法 · 4</button><button class="filter" data-filter="Reading">読解 · 2</button></div>
 
     <!-- ══════════ Data & Engineering ══════════ -->
     <section class="apps-cat">
@@ -363,12 +368,10 @@
       </div>
     </section>
 
-    <footer class="apps-foot">
-      <span class="font-mono">Built by Thang Luu · Tokyo</span>
-      <a href="/">← Back to portfolio</a>
-    </footer>
   </main>
 
-  <script src="/js/site-header.js"></script>
+  <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
+
+  <script>(function(){var sections=[].slice.call(document.querySelectorAll('.apps-cat'));var buttons=[].slice.call(document.querySelectorAll('.filter'));buttons.forEach(function(b){b.onclick=function(){buttons.forEach(function(x){x.classList.toggle('active',x===b)});sections.forEach(function(s){s.hidden=b.dataset.filter!=='All'&&!s.querySelector('h2').textContent.includes(b.dataset.filter)})}});document.getElementById('themeToggle').onclick=function(){var n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.theme=n}})()</script>
 </body>
 </html>
