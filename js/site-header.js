@@ -17,10 +17,8 @@
 
   var LINKS = [
     { href: "/#about", label: "About", section: true },
-    { href: "/#approach", label: "Approach", section: true },
-    { href: "/#skills", label: "Stack", section: true },
     { href: "/apps/", label: "Apps" },
-    { href: "/#contact", label: "Contact", section: true },
+    { href: "/#stack", label: "Stack", section: true },
   ];
 
   var MOON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
@@ -28,17 +26,17 @@
 
   var CSS = [
     ".tw-header{position:sticky;top:0;z-index:1000;width:100%;align-self:stretch;flex:0 0 auto;",
-    "background:rgba(11,12,15,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);",
-    "border-bottom:1px solid #262c38;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;}",
-    "html[data-theme='light'] .tw-header{background:rgba(247,248,250,.9);border-bottom-color:#e4e7ee;}",
+    "background:rgba(13,17,23,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);",
+    "border-bottom:1px solid #1f2733;font-family:'Space Grotesk','Noto Sans JP',system-ui,sans-serif;}",
+    "html[data-theme='light'] .tw-header{background:rgba(250,251,252,.92);border-bottom-color:#e6e9ee;}",
     ".tw-header *{box-sizing:border-box;}",
-    ".tw-header .tw-wrap{width:min(1152px,100% - 48px);margin-inline:auto;height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
-    ".tw-header .tw-brand{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-weight:700;font-size:clamp(20px,18.1px + 0.6vw,25.9px);letter-spacing:-.03em;color:#eef1f6;text-decoration:none;display:inline-flex;align-items:center;}",
+    ".tw-header .tw-wrap{width:100%;padding:0 48px;height:75px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
+    ".tw-header .tw-brand{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;letter-spacing:0;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;}",
     "html[data-theme='light'] .tw-header .tw-brand{color:#14171d;}",
     ".tw-header .tw-brand .tw-dot{color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-brand .tw-dot{color:#3a5bd9;}",
     ".tw-header .tw-nav{display:flex;align-items:center;gap:24px;}",
-    ".tw-header .tw-nav a{color:#9aa3b2;text-decoration:none;font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;font-size:clamp(13.3px,12.6px + 0.2vw,15px);font-weight:400;line-height:1;transition:color .2s;}",
+    ".tw-header .tw-nav a{color:#9aa6b4;text-decoration:none;font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-size:13px;font-weight:500;line-height:1;transition:color .2s;}",
     ".tw-header .tw-nav a:hover,.tw-header .tw-nav a.tw-active{color:#eef1f6;}",
     "html[data-theme='light'] .tw-header .tw-nav a{color:#525a68;}",
     "html[data-theme='light'] .tw-header .tw-nav a:hover,html[data-theme='light'] .tw-header .tw-nav a.tw-active{color:#14171d;}",
@@ -46,15 +44,7 @@
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-toggle{border-color:#e4e7ee;color:#14171d;background:#ffffff;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
-    /* shared footer — injected only on sub-pages that don't ship their own */
-    ".tw-footer{width:100%;align-self:stretch;flex:0 0 auto;margin-top:auto;border-top:1px solid #262c38;font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;}",
-    "html[data-theme='light'] .tw-footer{border-top-color:#e4e7ee;}",
-    ".tw-footer .tw-fwrap{width:min(1152px,100% - 48px);margin-inline:auto;padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#6b7385;font-size:13px;}",
-    "html[data-theme='light'] .tw-footer .tw-fwrap{color:#838b99;}",
-    ".tw-footer .tw-fmono{font-family:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;}",
-    ".tw-footer a{color:inherit;text-decoration:none;}",
-    ".tw-footer a:hover{color:#7c9cff;}",
-    "@media(max-width:560px){.tw-header .tw-nav{gap:1rem;}.tw-header .tw-nav a.tw-section{display:none;}}",
+    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 24px}.tw-header .tw-nav{gap:1rem;}.tw-header .tw-nav a.tw-section{display:none;}}",
   ].join("");
 
   /* ---- resolve current theme (mirror the tokens.css pre-paint logic) ---- */
@@ -111,18 +101,6 @@
       "</nav></div>";
 
     document.body.insertAdjacentHTML("afterbegin", header.outerHTML);
-
-    // shared footer — only on pages that don't ship their own <footer>
-    if (!document.querySelector("footer")) {
-      var footer = document.createElement("footer");
-      footer.className = "tw-footer";
-      footer.innerHTML =
-        '<div class="tw-fwrap">' +
-        '<span class="tw-fmono">Built by Thang Luu · Tokyo</span>' +
-        '<a href="/apps/">← Back to apps</a>' +
-        "</div>";
-      document.body.appendChild(footer);
-    }
 
     document.getElementById("tw-toggle").addEventListener("click", function () {
       var root = document.documentElement;
