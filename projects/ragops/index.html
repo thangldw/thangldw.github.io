@@ -33,7 +33,7 @@
     .signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}
     .signal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-lg)}
     .signal b{font:var(--step--1) var(--font-mono);color:var(--accent)}.signal h3{font-size:var(--step-1);margin:.8rem 0 .35rem}.signal p{color:var(--text-muted);font-size:var(--step--1)}
-    .signal.result{border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}.blocked{display:inline-block;color:#b42332;font:600 var(--step--1) var(--font-mono);margin-top:var(--space-sm)}[data-theme="dark"] .blocked{color:#ff8e99}
+    .signal-result{border-color:color-mix(in srgb,var(--accent) 50%,var(--border))}.result-status{display:inline-flex;align-items:center;width:max-content;max-width:100%;color:#9f2230;background:color-mix(in srgb,#b42332 9%,transparent);border:1px solid color-mix(in srgb,#b42332 28%,transparent);border-radius:999px;padding:.35rem .65rem;font:600 .72rem/1.25 var(--font-mono);letter-spacing:.02em;margin-top:var(--space-sm)}[data-theme="dark"] .result-status{color:#ff9aa4;background:color-mix(in srgb,#ff8e99 10%,transparent);border-color:color-mix(in srgb,#ff8e99 30%,transparent)}
     .handoff{border-top:1px solid var(--border);padding-block:var(--space-xl);display:grid;grid-template-columns:1fr auto;gap:var(--space-xl);align-items:center}.handoff p{color:var(--text-muted);max-width:60ch;margin-top:.5rem}
     @media(max-width:800px){.proof-strip{grid-template-columns:1fr 1fr}.proof{padding:1.25rem}.proof:first-child{padding-left:0}.proof:nth-child(2){border-right:0;padding-right:0}.proof:nth-child(-n+2){border-bottom:1px solid var(--border)}.proof:nth-child(3){padding-left:0}.proof:last-child{padding-right:0}.signal-grid,.handoff{grid-template-columns:1fr}.overview-actions{align-items:stretch;flex-direction:column}.overview-actions .btn{justify-content:center}}
     @media(max-width:520px){.overview-hero{padding-block:var(--space-lg) var(--space-xl)}.overview-hero h1{font-size:clamp(3.35rem,18vw,4.6rem)}.proof{padding:1.1rem .85rem}.proof:first-child,.proof:nth-child(3){padding-left:0}.proof:nth-child(2),.proof:last-child{padding-right:0}.proof strong{font-size:1.65rem}.proof span{font-size:.72rem}.signal-grid{grid-template-columns:1fr}.nav-links>a[href^="#"]{display:none}}
@@ -79,7 +79,7 @@
         <div class="signal-grid">
           <article class="signal"><b>PROBLEM</b><h3>AI pilots lack a release decision</h3><p>Quality, cost, latency, citations, and safety live in separate checks.</p></article>
           <article class="signal"><b>BUILT</b><h3>Evidence as a product contract</h3><p>Portable traces, Japanese benchmarks, red-team rules, and CI gates.</p></article>
-          <article class="signal result"><b>RESULT</b><h3>A bad architecture was blocked</h3><p>Lexical-only retrieval lost 25 points of citation coverage and precision.</p><span class="blocked">RELEASE BLOCKED · EXIT 2</span></article>
+          <article class="signal signal-result"><b>RECORDED RESULT</b><h3>A retrieval regression was blocked</h3><p>In the 4-case reference experiment, the lexical-only candidate reduced citation coverage and precision from 100% to 75%.</p><span class="result-status">CANDIDATE BLOCKED · EXIT CODE 2</span></article>
         </div>
       </div>
     </section>
