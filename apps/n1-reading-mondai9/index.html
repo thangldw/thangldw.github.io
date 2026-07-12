@@ -1,0 +1,3785 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8">
+<title>JLPT N1 Reading Practice — 問題9 — thang.</title>
+<style>
+  :root{
+    --cream:#f7f8fa;
+    --cream2:#eef1f6;
+    --terracotta:#c1623d;
+    --terracotta-dark:#9c4a2c;
+    --ink:#3a2c20;
+    --line:#e4e7ee;
+    --green:#5b8c5a;
+    --green-bg:#e7f0e0;
+    --red:#c0504d;
+    --red-bg:#f7e3e1;
+    --anchor:#f6d76b;
+    --anchor2:#b8d8e8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    margin:0;
+    padding: 0;
+    line-height:1.8;
+  }
+  .container{max-width: 820px; margin: 0 auto;}
+  h1{
+    text-align:center;
+    color: var(--terracotta-dark);
+    font-size: 1.4em;
+    margin-bottom: 4px;
+  }
+  .subtitle{text-align:center; color:#8a7960; font-size:0.9em; margin-bottom:20px;}
+
+  .nav-bar{
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+    margin-bottom: 20px;
+  }
+  .nav-btn{
+    background: var(--cream2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor:pointer;
+    font-size:0.9em;
+    transition: all .15s;
+  }
+  .nav-btn:hover{ background: var(--anchor2); }
+  .nav-btn.active{
+    background: var(--terracotta);
+    color: white;
+    border-color: var(--terracotta-dark);
+  }
+
+  .toolbar{
+    display:flex; justify-content:center; gap:10px; margin-bottom: 18px;
+  }
+  .toggle-btn{
+    background: white;
+    border: 1.5px solid var(--terracotta);
+    color: var(--terracotta-dark);
+    padding: 7px 16px;
+    border-radius: 8px;
+    cursor:pointer;
+    font-size: 0.88em;
+    font-weight:600;
+  }
+  .toggle-btn.on{
+    background: var(--terracotta);
+    color:white;
+  }
+
+  .card{
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 6px rgba(150,110,60,0.08);
+  }
+
+  .bai-title{
+    color: var(--terracotta-dark);
+    font-weight:700;
+    font-size:1.05em;
+    margin-bottom:12px;
+    border-bottom: 2px solid var(--cream2);
+    padding-bottom:8px;
+  }
+
+  .passage{
+    font-size: 1.05em;
+    white-space: pre-wrap;
+    margin-bottom: 6px;
+  }
+  .passage .note{
+    font-size:0.82em;
+    color:#8a7960;
+    display:block;
+    margin-top:10px;
+  }
+
+  .anchor{
+    background: transparent;
+    border-radius:3px;
+    padding: 0 1px;
+  }
+  .anchor.show{ background: var(--anchor); }
+  .anchor.show-pick{ background: var(--anchor2); box-shadow: 0 0 0 1px var(--terracotta-dark) inset; }
+
+  .redflag{
+    color: inherit;
+  }
+  .redflag.show{
+    color: var(--red);
+    text-decoration: underline wavy var(--red);
+    font-weight:700;
+    background: var(--red-bg);
+    padding: 0 1px;
+    border-radius:3px;
+  }
+  .truebait.show{
+    color: #3a6f8f;
+    text-decoration: underline dotted #3a6f8f;
+    font-weight:700;
+    background: var(--anchor2);
+    padding: 0 1px;
+    border-radius:3px;
+  }
+
+  .hl-connective{
+    background: transparent;
+    border-radius: 3px;
+    padding: 0 1px;
+  }
+  .hl-connective.show{
+    background: #FFCC80;
+    border-bottom: 2px dashed #c97a1f;
+    font-weight: 600;
+  }
+  .hl-synonym{
+    background: transparent;
+    border-radius: 3px;
+    padding: 0 1px;
+    cursor: pointer;
+    position: relative;
+  }
+  .hl-synonym.show{
+    background: #A5D6A7;
+  }
+  .hl-synonym.show.glow{
+    background: #5fb463;
+    box-shadow: 0 0 0 2px #3d8c41;
+    color: white;
+  }
+  .syn-badge{
+    font-size: 0.65em;
+    vertical-align: super;
+    color: #2e7d32;
+    font-weight: 700;
+    margin: 0 1px;
+  }
+  .syn-tooltip{
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: #2e7d32;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    white-space: nowrap;
+    z-index: 10;
+    display: none;
+    margin-bottom: 4px;
+  }
+  .hl-synonym.glow .syn-tooltip{ display:block; }
+
+  .legend3{
+    display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+    font-size:0.78em; margin-bottom:14px; color:#7a6650;
+  }
+  .legend3 span.sw{ padding:1px 6px; border-radius:3px; margin-right:3px; }
+
+  .hl-synonym{ background: transparent; border-radius:3px; padding:0 1px; cursor:help; position:relative; }
+  .hl-synonym.show{ background: #A5D6A7; }
+  .hl-synonym.glow{ box-shadow: 0 0 0 2px #2e7d32; background:#81c784; }
+  .hl-synonym .pair-badge{ font-size:0.65em; vertical-align:super; color:#2e7d32; font-weight:700; }
+  .syn-tooltip{
+    position:absolute; bottom:125%; left:0; background:#2e7d32; color:white;
+    padding:4px 8px; border-radius:6px; font-size:0.75em; white-space:nowrap;
+    z-index:50; display:none; box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  }
+  .hl-synonym:hover .syn-tooltip, .hl-synonym.glow .syn-tooltip{ display:block; }
+
+  .hl-connective{ background: transparent; border-radius:2px; padding:0 1px; }
+  .hl-connective.show{ background:#FFCC80; border-bottom:1px dashed #cc7a00; }
+  .hl-connective.show.type-contrast{ border-bottom-color:#e65100; }
+  .hl-connective.show.type-conclude{ border-bottom-color:#1565c0; }
+  .hl-connective.show.type-causal{ border-bottom-color:#6a1b9a; }
+  .hl-connective.show.type-claim{ font-style: italic; }
+
+  .underline-q{
+    border-bottom: 3px solid var(--terracotta);
+    font-weight:700;
+    background: #fdf0e4;
+    padding: 0 2px;
+    border-radius:2px;
+  }
+
+  .question-block{
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line);
+  }
+  .q-text{
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .q-num{
+    display:inline-block;
+    background: var(--terracotta);
+    color:white;
+    border-radius:50%;
+    width: 24px;height:24px;
+    text-align:center;
+    line-height:24px;
+    font-size:0.85em;
+    margin-right:8px;
+  }
+
+  .choice{
+    display:block;
+    width:100%;
+    text-align:left;
+    background: var(--cream2);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    cursor:pointer;
+    font-size: 0.97em;
+    color: var(--ink);
+    transition: all .15s;
+  }
+  .choice:hover{ background: var(--anchor2); }
+  .choice.correct{
+    background: var(--green-bg);
+    border-color: var(--green);
+    font-weight:600;
+  }
+  .choice.wrong{
+    background: var(--red-bg);
+    border-color: var(--red);
+  }
+  .choice.disabled{ cursor: default; pointer-events:none; opacity:0.55; }
+  .choice.correct, .choice.wrong{ opacity:1; pointer-events:none; }
+
+  .feedback{
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size:0.92em;
+    font-weight:600;
+    display:none;
+  }
+  .feedback.show{ display:block; }
+  .feedback.ok{ background: var(--green-bg); color: var(--green); }
+  .feedback.bad{ background: var(--red-bg); color: var(--red); }
+
+  .explain-toggle{
+    margin-top:8px;
+    background:none;
+    border: 1px solid var(--terracotta);
+    color: var(--terracotta-dark);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.85em;
+    cursor:pointer;
+    display:none;
+  }
+  .explain-toggle.show{ display:inline-block; }
+
+  .explain-box{
+    display:none;
+    margin-top: 10px;
+    background: var(--cream);
+    border-left: 4px solid var(--terracotta);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.92em;
+  }
+  .explain-box.show{ display:block; }
+  .explain-box .jp{
+    font-style: normal;
+    color: var(--terracotta-dark);
+    background:#fff7ec;
+    padding: 6px 10px;
+    border-radius:6px;
+    margin: 6px 0;
+    display:block;
+  }
+  .explain-box b.kw{ color: var(--terracotta-dark); }
+  .explain-box .wrong-opt{
+    display:block;
+    margin: 4px 0 4px 0;
+    color:#7a6650;
+  }
+  .explain-box .label{
+    font-weight:700;
+    color: var(--ink);
+    margin-top:10px;
+    display:block;
+  }
+
+  .vocab-box{
+    margin-top: 20px;
+    background: var(--cream2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.9em;
+  }
+  .vocab-box .v-title{
+    font-weight:700;
+    color: var(--terracotta-dark);
+    margin-bottom:6px;
+  }
+  .vocab-item{ margin-bottom:4px; }
+
+  .app-note{
+    text-align:center;
+    color:#aa9576;
+    font-size:0.8em;
+    margin-top: 30px;
+  }
+</style>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<style>/* site-shell */ .container{padding:20px;}</style>
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+</head>
+<body>
+<div class="container">
+  <h1>JLPT N1 Reading Practice <span>問題9 · 中文</span></h1>
+  <div class="subtitle">Mon9 - Trung văn N1 / Chấm điểm + giải thích theo kỹ thuật Kanji mỏ neo</div>
+
+  <div class="nav-bar" id="navBar"></div>
+
+  <div class="toolbar">
+    <button class="toggle-btn" id="btnAnchor" onclick="toggleLayer('anchor')">🔍 Mỏ neo (Kanji)</button>
+    <button class="toggle-btn" id="btnSynonym" onclick="toggleLayer('synonym')">🟢 Cặp đồng nghĩa</button>
+    <button class="toggle-btn on" id="btnConnective" onclick="toggleLayer('connective')">📐 Liên từ / 主張</button>
+  </div>
+  <div style="text-align:center;color:#9a8567;font-size:0.82em;margin-bottom:10px;">
+    💡 Mỏ neo & từ ngược ý tự hiện khi bấm chọn đáp án — Liên từ/主張 hiện sẵn để bạn tự suy luận trước
+  </div>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.76em;margin-bottom:18px;color:#7a6650;">
+    <span><span style="background:#f6d76b;padding:1px 5px;border-radius:3px;">🟨 vàng</span> = mỏ neo (bằng chứng đúng)</span>
+    <span><span style="background:#A5D6A7;padding:1px 5px;border-radius:3px;">🟩 xanh</span> = cặp đồng nghĩa (bài ↔ đáp án)</span>
+    <span><span style="background:#FFCC80;padding:1px 5px;border-radius:3px;">🟧 cam</span> = liên từ / 主張表現</span>
+    <span><span style="background:#f7e3e1;color:#c0504d;text-decoration:underline wavy #c0504d;padding:1px 5px;border-radius:3px;">đỏ</span> = không có/ngược ý</span>
+    <span><span style="background:#b8d8e8;color:#3a6f8f;text-decoration:underline dotted #3a6f8f;padding:1px 5px;border-radius:3px;">xanh dương</span> = đúng nhưng không phải lý do</span>
+  </div>
+
+  <div id="quizArea"></div>
+
+  <div class="app-note">Tự luyện theo phương pháp B1→B4 + kỹ thuật NN-KQ / đảo ngược / từ mỏ neo</div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const baiList = [
+  {
+    id: 1,
+    title: "BÀI 1 - 7/2010",
+    passageHTML:
+`「あの人は、私が話し始めて一分とたたないうちに、話題を自分の話にすりかえてしまう」と言われる人のなかには、決して聞き上手ではないけれど、不思議と嫌われない人がいる。
+
+話を奪われた人も、「<span class="anchor" data-rel="q0c0">私の話よりずっとおもしろそう</span>。<span class="anchor" data-rel="q0c0">私の話が宙に消えて（注１）もしょうがないか</span>」という<span class="underline-q">①寛容な気持ち</span>になるのだろう。
+
+もちろん、私は「だから、話上手になればいいんですよ」とは言わない。ただ、「聞き上手でないことが帳消しになるほど話上手な人のしゃべりは、ちょっと研究してみる価値がありますよ」とご提案したい。
+
+聞き上手になるための"修業"（注２）をしていると、そのうち話の上手な人の特徴がわかってくると思う。
+
+聞き上手から、話上手でもあるというプラスアルファの魅力を持つ人間へとステップアップ（注３）するには、いつの間にか<span class="anchor" data-rel="q1c3">相手を自分の話に引きこむのが上手な人の話ぶり</span>を、「それはなぜなのか」と<span class="anchor" data-rel="q1c3">自分なりに分析する</span>と、とても勉強になるのだ。
+
+一人で分析するのが難しければ、だれかに「あの人は話が上手だよね。どんな話しぶりに惹かれる？」と<span class="anchor" data-rel="q1c0">疑問をぶつけてみる</span>のもいい。
+
+その勉強の成果は必ずや、自分の言動に<span class="anchor" data-rel="q2c0">投影される</span>はずだ。だれだって、<span class="anchor" data-rel="q2c0">他人のいいところは真似したいと思う</span>から。
+
+（斉藤茂太『どんなグズもなおる本－17タイプ別グズ解消法』による）`,
+    notes: "（注１）話が宙に消える：話が途中でどこかへ行ってしまう<br>（注２）修業：学んで身につけること<br>（注３）ステップアップする：進歩する",
+    questions: [
+      {
+        q: "①寛容な気持ちになるとあるが、なぜそうなるのか。",
+        choices: [
+          "相手の話が自分の話より<span class=\"anchor\">おもしろくて</span><span class=\"anchor\">引きこまれて</span>しまうから",
+          "話を奪ってしまった人の<span class=\"redflag\">態度</span>が<span class=\"redflag\">堂々としていて</span><span class=\"redflag\">魅力的</span>だから",
+          "自分の<span class=\"redflag\">代わりに</span>話上手な人が話をしてくれれば<span class=\"redflag\">助かる</span>から",
+          "相手は確かに<span class=\"truebait\">話上手</span>だけれど、<span class=\"truebait\">聞き上手</span>とは言えないから"
+        ],
+        correct: 0,
+        explain: {
+          main: `Câu hỏi có gạch chân <b class="kw">①寛容な気持ち</b> → áp dụng quy tắc: tìm câu <b class="kw">ngay trước</b> phần gạch chân để xác định nguyên nhân.`,
+          jp: `「私の話よりずっとおもしろそう。私の話が宙に消えてもしょうがないか」という①寛容な気持ちになるのだろう。`,
+          chain: `Mỏ neo: <b class="kw">おもしろそう</b> (thấy hay hơn) → Suy ra: vì thấy chuyện của đối phương <b class="kw">hay hơn</b> chuyện của mình → nảy sinh tâm lý khoan dung/đành chịu (①寛容な気持ち). Đây là cấu trúc <b class="kw">NN→KQ</b>: "thấy hay hơn" (NN) ⇒ "khoan dung, không trách" (KQ).`,
+          wrongs: [
+            {opt:"B", jp:`Bài <b>không có</b> chi tiết nào nói về "thái độ đường hoàng/hấp dẫn" của người đoạt lời.`, vn:"Bẫy thêm thông tin không có trong bài — tự suy diễn."},
+            {opt:"C", jp:`Bài không nói "nhờ người ta nói thay là đỡ/may".`, vn:"Bẫy suy diễn, không có cơ sở trong câu gốc."},
+            {opt:"D", jp:`聞き上手ではないけれど…（注: đúng là người đó không phải 聞き上手, nhưng đây không phải lý do của ①）`, vn:`Bẫy "râu ông nọ cắm cằm bà kia": chi tiết D có thật trong bài (ở câu đầu) nhưng nó <b>không phải nguyên nhân</b> của ①寛容な気持ち — chỉ là thông tin nền.`}
+          ]
+        }
+      },
+      {
+        q: "話上手になるにはどうすればいいと筆者は述べているか。",
+        choices: [
+          "話上手な人になぜ上手なのかと<span class=\"redflag\">尋ねて</span><span class=\"anchor\">分析する</span>。",
+          "どんな<span class=\"redflag\">話題でも自分の話にかえられる</span>ようにする。",
+          "<span class=\"redflag\">人の真似をしないで</span>、聞き上手になるための<span class=\"truebait\">研究</span>をする。",
+          "<span class=\"anchor\" data-rel=\"q1c3\">話上手</span>な人を<span class=\"anchor\" data-rel=\"q1c3\">よく観察</span>して、その<span class=\"anchor\" data-rel=\"q1c3\">特徴</span>を自分のものにする。"
+        ],
+        correct: 3,
+        explain: {
+          main: `Đây là câu hỏi dạng "lời khuyên" → tìm biểu hiện NN-KQ hoặc 主張表現 (đề xuất) quanh đoạn giữa bài.`,
+          jp: `相手を自分の話に引きこむのが上手な人の話ぶりを、「それはなぜなのか」と自分なりに分析すると、とても勉強になるのだ。`,
+          chain: `Mỏ neo: <b class="kw">話ぶり</b> (cách nói) + <b class="kw">分析する</b> (phân tích) → Chủ thể được phân tích là <b class="kw">cách nói của NGƯỜI KHÁC</b> (người nói giỏi), sau đó áp dụng cho bản thân (その勉強の成果は…自分の言動に投影される) → Suy ra: phải <b class="kw">quan sát kỹ</b> đặc điểm của người nói giỏi rồi biến thành của mình → khớp D.`,
+          wrongs: [
+            {opt:"A", jp:`「だれかに…疑問をぶつけてみるのもいい」`, vn:`Bẫy gần đúng: đây chỉ là <b>phương án phụ</b> khi tự phân tích khó (一人で分析するのが難しければ), không phải cách làm CHÍNH mà tác giả đề xuất.`},
+            {opt:"B", jp:`Không có cơ sở — đây là hành vi của người "cướp lời" ở đầu bài, tác giả không khuyên làm vậy.`, vn:"Đảo ngược ý: lấy đặc điểm của người không phải 聞き上手 gán thành lời khuyên."},
+            {opt:"C", jp:`筆者は「だから、話上手になればいいんですよ、とは言わない」と前置きしつつ、聞き上手だけでなく話上手にも学ぶ価値を勧めている。`, vn:`Ngược ý: tác giả không bảo "không bắt chước", mà chính là khuyên nên học hỏi (真似したいと思うから ở câu cuối).`}
+          ]
+        }
+      },
+      {
+        q: "筆者の考えと合っているのはどれか。",
+        choices: [
+          "<span class=\"anchor\" data-rel=\"q2c0\">聞き上手</span>になるだけでなく、<span class=\"anchor\" data-rel=\"q2c0\">話上手</span>な人にも学んでみるとよい。",
+          "聞き上手は<span class=\"redflag\">損をする</span>ことがあるので、話上手になったほうがよい。",
+          "他人に<span class=\"redflag\">嫌われないように</span>、話上手より聞き上手になったほうがよい。",
+          "聞き上手から話上手になるには、<span class=\"redflag\">自分の話し方</span>を分析してみるとよい。"
+        ],
+        correct: 0,
+        explain: {
+          main: `Câu hỏi "ý tổng toàn bài" — không nhất thiết ở câu cuối, mà thường gom toàn mạch tư duy của bài.`,
+          jp: `聞き上手になるための"修業"をしていると…話上手でもあるというプラスアルファの魅力を持つ人間へとステップアップするには…分析すると、とても勉強になるのだ。`,
+          chain: `Mỏ neo xuyên suốt: <b class="kw">聞き上手</b> + <b class="kw">話上手</b> xuất hiện song song trong toàn bài, tác giả luôn nói "không chỉ A mà nên học cả B" → khớp thẳng với A (đáp án): không chỉ rèn 聞き上手, mà còn nên học hỏi cả 話上手.`,
+          wrongs: [
+            {opt:"B", jp:`Bài không nói 聞き上手 "bị thiệt/lỗ".`, vn:"Ngược ý: tác giả không phủ định giá trị của 聞き上手, ngược lại vẫn coi đó là nền tảng (聞き上手になるための修業)."},
+            {opt:"C", jp:`Bài không so sánh "話上手 hay 聞き上手 cái nào hơn để tránh bị ghét".`, vn:"Bẫy thêm lý do (tránh bị ghét) không có trong bài, đồng thời ngược ý: tác giả khuyên học cả hai, không chọn 1."},
+            {opt:"D", jp:`相手を自分の話に引きこむのが上手な人の話ぶりを…分析する`, vn:`Bẫy đảo chủ thể rất tinh vi: bài nói phân tích <b>cách nói của NGƯỜI KHÁC</b> (話上手な人), còn D lại nói phân tích <b>cách nói của BẢN THÂN</b> (自分の話し方) → sai chủ thể.`}
+          ]
+        }
+      }
+    ],
+    vocab: [
+      {term:"帳消しになる（ちょうしになる）", mean:"xí xóa, bù trừ — cái dở được bù lại nhờ cái khéo"},
+      {term:"～にすりかえる", mean:"đánh tráo, chuyển sang — 話題をすりかえる: lái sang chủ đề khác"},
+      {term:"投影される（とうえいされる）", mean:"được phản ánh/in dấu vào"}
+    ],
+    synonymPairs: [
+      { passage: "おもしろそう", option: "おもしろくて", optionKey: "0-0", note: "cùng nghĩa 'thấy hay hơn'" },
+      { passage: "話ぶり", option: "よく観察", optionKey: "1-3", note: "quan sát cách nói = theo dõi kỹ 話ぶり" },
+      { passage: "自分なりに分析する", option: "特徴を自分のものにする", optionKey: "1-3", note: "phân tích rồi áp dụng = biến thành đặc điểm của mình" },
+      { passage: "聞き上手", option: "聞き上手", optionKey: "2-0", note: "giữ nguyên — đối chiếu trực tiếp" },
+      { passage: "話上手でもある", option: "話上手な人にも学んでみる", optionKey: "2-0", note: "không chỉ một mặt, mà cả 話上手 cũng nên học" }
+    ]
+  },
+  {
+    id: 2,
+    title: "BÀI 2 - 7/2010",
+    passageHTML:
+`ツバメは季節の変化にあわせて、暮らす場所をかえる渡り鳥です。日本が冬の時期は、暖かくてえさの豊富なオーストラリアや東南アジアで暮らしています。たまごを産んでひなを育てる繁殖期が近づくと、春になってえさとなる昆虫が一気にふえる日本へ向けて、いのちがけで海を渡ってきます。\n\nツバメの渡りは地球の南半球から北半球へと、何千キロメートルにもなります。ツバメがいつ渡ってきたかで、ツバメが暮らしていた地域や、渡りのルートの気象の変化や環境の変化をおしはかる(注)ことができます。そして、その変化を長期間にわたって観察をつづけることで、地球全体の気象の変化を予測する手がかりにもなるので、気象庁では、その年にはじめてツバメを見た日「<span class=\"underline-q\"><span class=\"underline-q\">ツバメの初見日</span></span>」を、各地の観察者や研究者からの報告をもとに、記録をとっているのです。\n\nツバメが渡りの行動をおこすのは、日照時間にかかわりがあるといわれています。\n\n(中略)日照時間は年ごとの変化が比較的少ないので、日時がそれほどずれることがありませんでした。ところが長年蓄積された記録を調べてみると、近年、各地のツバメの初見日が早まってきていることがわかってきました。\n\nその原因は…。\n\nまだはっきりとつきとめられてはいませんが、地球温暖化によっておこる気象の変化で、オーストラリアや東南アジア地方の晴、雨天のバランスがくずれ、日照時間にまでくるいがでてきているのかもしれません。\n\n(七尾純『テクテク観察ツバメ日記』による)`,
+    notes: "(注)おしはかる:推測する",
+    questions: [
+      {
+        q: "ツバメが日本へ渡ってくるのはなぜか。",
+        choices: [
+          "南半球でひなが育ち、えさとなる昆虫が不足するから。",
+          "日本が春になる頃、ひなが海を渡れるようになるから。",
+          "日本が暖かくなるとえさがふえ、子育てがしやすいから。",
+          "日本は冬になっても、他の地域より暖かくえさが豊富だから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "「<span class=\"underline-q\">ツバメの初見日</span>」を記録しているのは何のためか。",
+        choices: [
+          "ツバメの渡りのルートを解明するため。",
+          "日照時間の短縮の原因を究明するため。",
+          "世界の気象や環境の変化を研究するため。",
+          "観察者や研究者に気象情報を提供するため。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "最近の「<span class=\"underline-q\">ツバメの初見日</span>」と日照時間の関係について正しいものはどれか。",
+        choices: [
+          "南半球などで日照時間に変化がおきてツバメの渡りが早まっているのだろう。",
+          "温暖化で日本の日照時間が長くなり、ツバメの渡りが遅れてきているようだ。",
+          "ツバメは毎年日照時間と関係なく渡りを始めるようになったのかもしれない。",
+          "日本の日照時間にくるいがでたために、ツバメが早く渡ってくるようになった。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 3,
+    title: "BÀI 3 - 7/2010",
+    passageHTML:
+`消して費やしてしまう、使って無くしてしまう一どうも消費という言葉のイメージは前向きではないですね。消費者という言葉も、そう。生産者と対比して、消極的イメージがつきまとう。消費者という言葉は、経済用語のなかでもっとも不適切な一つだと私は思います。<span class=\"underline-q\">行為の中身からひどくズレています</span>。\n\n消費と呼ばれている行為は、その中身から言えば、生きていくのに必要なものを使うことですね。私たちは衣食住その他に、さまざまなものを使います。しかし、そのことを「消費」と呼ぶのは正しいか。正しくないと、言うべきです。なぜなら、人は食べ物を食べることによって、自分の身体を生産しているのです。なるほど、食べ物の形は消えてしまいます。しかし、それは私たちの生命としてよみがえっているのです。衣服を身につけることはどうか。それは体温を維持させることによって命をつくり出すだけでなく、他人にあたえる私たちの印象を生産しています。このように、消費と呼ばれている行為は、私たちの命と生活を、そして次の世代の人間を生産する行為です。それなのにそれを消費者と呼ぶのは、物の生産者の側から見た言い方にすぎません。`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">行為の中身からひどくズレています</span>とあるが、筆者は行為の中身をどのように説明しているか。",
+        choices: [
+          "生産者の立場に立って経済を支えること。",
+          "ものを使うことで、何かをつくり出すこと。",
+          "生産的な活動に従事して一日を終えること。",
+          "ものを使って、その形を消してしまうこと。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は衣服にどのような役割があると述べているか。",
+        choices: [
+          "体温を一定に保つだけでなく、着る人に満足感をあたえる。",
+          "次々に新たな流行を生み出し、人々の消費行動を促進する。",
+          "着る人の人柄や個性を引き出すことで、生活をより充実させる。",
+          "命を維持するだけでなく、他者に対する自分のイメージをあたえる。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が消費という言葉を不適切と考えているのはなぜか。",
+        choices: [
+          "言葉のイメージが一般的な用い方と合わないから。",
+          "生産との対立が十分に示されていない言い方だから。",
+          "物を使って無くす行為を消極的に示した言い方だから。",
+          "言葉のイメージがその行為の実態を示していないから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 4,
+    title: "BÀI 4 - 12/2010",
+    passageHTML:
+`すでに地図の空白がなくなった現在、地理的な冒険や探検といった行為は、時間が経つにつれてどんどん不可能になってきている。ジャーナリストの本多勝一氏は、冒険の条件として「命の危険性」と「行為の主体性」の二つをあげているが、<span class=\"underline-q\">①近代の冒険は、その後者が重要なのだ</span>。それはつまり自己表現の問題とも密接に関わってくる。ここでいう表現とは、地図上に誰もたどったことがない軌跡を描くという意味である。これまでの人類の歩みを俯瞰(注1)して、その隙間を見つけ、自分なりの方法で空白を埋めていく行為と言い換えることもできる。わかりやすいところでは、登山におけるバリエーション・ルート(注2)や、8000メートル峰(注3)を無酸素で登ることや、厳冬期にどこそこを横断するとか、はじめて大陸の最高峰に全部登るとか、そういうことだ。\n\n未踏(注4)の地がなければ、点と点を結んで誰もおこなっていないことをすればいい。\n\nそうした点と点を結ぶのが厳しい土地、アクセスの難しい場所、思いもよらないルールを形成するなら、なおさらその注目度は増していく。冒険の世界には、海でも山でも空でも、そういう志向が必ずどこかに存在している。白紙の(注5)キャンバスに絵を描くためには表現が必要なように、<span class=\"underline-q\">②地理的な空白がなくなった</span>時代を生きる現代の冒険者たちは、そこに特別な自分なりの題材を見つけなくてはいけない。だからこそ<span class=\"underline-q\">③冒険者は(注6)アーティストでもあると</span>いえる。`,
+    notes: "(注1)俯瞰(する):全体を眺める<br>(注2)バリエーション・ルート:登山で一般ルートとは別の、より困難な登路。<br>(注3)8000メートル峰:8000メートル級の山<br>(注4)未踏:まだ誰も足を踏み入れたことがないこと<br>(注5)キャンバス:絵を描くための布地<br>(注6)アーティスト:芸術家",
+    questions: [
+      {
+        q: "筆者は<span class=\"underline-q\">①近代の冒険はその後者が重要なのだ</span>と述べているが、それはどのような意味か。",
+        choices: [
+          "誰もが難関と感じる対象を探し、命をかけて挑戦することが重要だ。",
+          "先駆者が偉業を成し遂げた場所に、新たな決意で挑戦することが重要だ。",
+          "新たな冒険の対象を見いだし、独自の方法でそれに挑戦することが重要だ。",
+          "誰も踏み入ったことのない場所に、独創的な方法で挑戦することが重要だ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②地理的な空白がなくなった</span>とはどういうことか。",
+        choices: [
+          "誰も考えつかないような冒険のルートがなくなった。",
+          "自分なりの方法で冒険できる場所がなくなった。",
+          "冒険に値するルートがすべて行き尽くされた。",
+          "誰も冒険したことがない場所がなくなった。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が、<span class=\"underline-q\">③冒険者はアーティストでもあると</span>述べているのはなぜか。",
+        choices: [
+          "冒険者もアーティストのように創造性のある自己表現が求められるから。",
+          "冒険者もアーティストのように表現力をつけることで注目度が増すから。",
+          "冒険者もアーティストのように自然と向き合って自己表現するから。",
+          "冒険者もアーティストのように主体的な表現が許されているから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 5,
+    title: "BÀI 5 - 12/2010",
+    passageHTML:
+`世界の食糧供給の(注1)頭打ち、かつての日本と同じように、経済成長のために農業を衰退させ、一方では食生活の向上を図るアジアの動きなど、私たちが暮らしている輸入大国の基盤は意外に脆い。\n\n私たちは、<span class=\"underline-q\">①このへんで食糧の危機管理体制を考えておく必要がある</span>のではないか。\n\n危機管理とは、いったんことが起きた時に、生産から流通までをどうするか、前もって体制作りを考えておくことである。<span class=\"underline-q\">②体制を制度にして</span>おかないと、食料確保のためのある程度強制力を持った政策を実施することなど不可能である。畑にはイモ類を優先的に植えなければならない。個人的に嫌だという人がいても、国民が最小限の栄養をとるために協力してもらう必要がある。この点を制度化しておく方が良いのではないか、ということである。\n\n平和な時には、この制度は眠らせておけばいい。いざという時(注2)に政府が発動するれの立場の人たちが、自由に活動できるような環境を整えておく役割だけでいい。しかし何かの時には、食糧管理に責任を持つ仕組みに移行するのである。多くの場合は、異常事態が過ぎ去るまでの一時的な措置になるだろう。(中略)食糧の危機管理体制とは、非常事態に備えた生産から流通までの仕組み作りである。\n\n発動することがないように祈りながら、制度を検討しておく必要があるのではないか。\n\n(中村靖彦「コンビニファミレス回転寿司」による)`,
+    notes: "(注3)のである。普段は政府はなるべく食料の生産や流通には介入すべきではない。それぞ<br>(注1)頭打ち:限界に達して、それ以上伸びなくなること<br>(注2)いざという時に:非常事態の起こった時に<br>(注3)発動する:ここでは、制度を実際に使う",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①このへんで食糧の危機管理体制を考えておく必要がある</span>とあるが、なぜか。",
+        choices: [
+          "今すぐ食料を確保し国民一人一人の生活を守らなければならないから。",
+          "アジアを中心として食料の生産や流通に非常事態が起きているから。",
+          "食糧の確保が今後ますます難しくなることが予想されるから。",
+          "食糧輸出国の危機管理体制が確固としたものではないから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②体制を制度にして</span>とあるが、どうすることか。",
+        choices: [
+          "生産から流通までの体制を考える。",
+          "政府主導で実施できるような仕組みを作る。",
+          "国民が活動できるような体制を整える。",
+          "生産や流通に国民が責任を持つ仕組みを作る。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "政府が検討すべき食糧の危機管理体制について、筆者の考えに合うものはどれか。",
+        choices: [
+          "必要が生じたときには、国民の同意を得て実施するべきだ。",
+          "今すぐ実施した方が良いので、速やかに制度化するべきだ。",
+          "平常時は実施する必要はないが、制度自体は早く整えるべきだ。",
+          "平和な時に限らず、国民が自由に活動できる環境を整えるべきだ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 6,
+    title: "BÀI 6 - 12/2010",
+    passageHTML:
+`<span class=\"underline-q\">①日本の建築は寿命が短い</span>が、これは木造自体の耐久性から決まるのではない。木造建築でも百年や二百年は持つ。千年以上持たせることも可能である。しかし、構造部材(注1)のメンテナンスが必要なので耐久性を考えると大材(注2)を用いたほうが良い。しかし、城郭難しいし加工にも手間暇(注5)がかかる。また、一般的に木造建築は火事や地震で失われることも少なくない。\n\n日本人は白木の新しい建物を愛したが、時が経つと木の表面が黒ずんでくる。そこで、余裕がある者は、地震や火災に遭った時は勿論、ある程度老朽化してくると建て直し、周囲はその建て主のことを「甲斐性(注6)がある」といって褒め称えた。しかし、建て直すと言っても、大まかにいえばもとと同じものが建つ。勿論少し大きくなったり小さくなったり間取りが変わったりするが見た目に大差がない。そこで、街並みや風景は長期にわたって維持される。しかも木材はリユース(注7)、リサイクルされた。\n\n<span class=\"underline-q\">②これは</span>、日本独特の更新の文化と呼んでも良い。この典型が伊勢神宮である。二十年ごとに隣合う敷地に交互に建て直されるが、建てられるものは全く同じである。建物を更新するためには、木材が必要であり、樹木も植林によって更新される。若木のほうが二酸化炭素の吸収能力が優れているから、若木への更新は環境上も評価できる。同時に職人技術も更新される。更新は環境に優しく、人々に仕事を与え、ゆっくりとした変化をもたらす木の国の優れた文化である。`,
+    notes: "(注3)や宮殿、館、寺院仏閣(注4)の類でないとなかなか大材を用いることができない。入手も<br>(注1)構造部材:建物に加わる力を支える材料(例えば、柱)<br>(注2)大材:ここでは、長期の使用に耐える大きな木材<br>(注3)城郭:城とその外側の囲い<br>(注4)仏閣:寺の建物<br>(注5)手間暇:労力と時間<br>(注6)甲斐性がある:ここでは、何かを行う経済力があって立派だ<br>(注7)リユース:再使用",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①日本の建築は寿命が短い</span>とあるが、なぜか。",
+        choices: [
+          "木材自体に耐久性がないため、メンテナンスが難しいから。",
+          "建築に適した木材の入手が難しく、修理もあまりしないから。",
+          "木造建築は老朽化が早いだけでなく、火事や地震にも弱いから。",
+          "丈夫な木材があまり使えないうえ、災害で失われることも多いから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②これは</span>何を指すか。",
+        choices: [
+          "建物が老朽化してくると、同じように建て直すことで、外観が保持されること。",
+          "建物が老朽化してくると、外観を全く変えずに建て直すことで、景観が維持されること。",
+          "建物が老朽化してくると、材料を再利用して同じ間取りに建て直すこと。",
+          "建物が老朽化してくると、景観の維持を優先して見た目を変えずに建て直すこと。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は、木造建築が更新されることにはどのような利点があると考えているか。",
+        choices: [
+          "質の良い木材の入手が容易になるだけでなく、職人の技術が向上する。",
+          "樹木の生育に合った条件が整う上、美しい街並みも守られる。",
+          "植林が進むので環境によい上、職人の技術も受け継がれる。",
+          "木材の供給が安定するだけでなく、美しい風景が守られる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 7,
+    title: "BÀI 7 - 07/2011",
+    passageHTML:
+`以前、花見をしている時に「桜の花は本当にきれいな正五角形(注1)だね」と言ったら、風情のない人だと笑われたことがあった。確かに、桜の花びらには微妙な色合いや形、そして香りに加えて、散りゆく美しさがある。花を愛でる和歌や俳句は数限りないが、そのなかに「正五角形」という言葉が使われたことはおそらく一度もないであろう。科学者特有の美意識は、風流とはかなり異質なものなのだと悟った。\n\n科学において本質以外を切り捨てるためには、大胆な抽象化と理想化が必要である。\n\n桜の花びらのたくさんの特徴の中から、「正五角形」という形だけを取り出すこと。これが抽象化である。実際に数学的な意味で完全な正五角形を示す花びらは少ないだろうが、そこにはあまりこだわらない。これが理想化である。\n\n自然界で正五角形のような対称性を示すためには、必ず規則的な法則があるはずである。花の場合、品種によって花弁(注2)の回転対称性が遺伝子で決定されていることは間違いないから、うまくこの遺伝子を突きとめられれば、花の形を決める普遍的な法則が見つかるに違いない。このように、抽象化と理想化によって自然現象は単純に整理でき、普遍的な法則を見つける助けになる。\n\n(酒井邦嘉『科学者という仕事』による)`,
+    notes: "(注1)正五角形:五つの辺の長さが等しい五角形<br>(注2)花弁:花びら",
+    questions: [
+      {
+        q: "筆者は、自分が笑われた原因はどこにあると考えているか。",
+        choices: [
+          "科学者らしくない趣のある表現で桜の花を褒めた点。",
+          "自分が桜の美しさを理解できていなかった点。",
+          "桜の花は自分が述べた形をしていなかった点。",
+          "桜の美しさを科学者的な視点から表現した点。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "ここでの理想化とは何か。",
+        choices: [
+          "桜の花はどれも正五角形であるとみなすこと。",
+          "桜の花には共通する特徴があるとみなすこと。",
+          "桜の花には数学的な美しさがあると考えること。",
+          "桜の花は他のどの花よりも正五角形に近いと考えること。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えによると、花の場合、抽象化と理想化によって何が期待されるか。",
+        choices: [
+          "花には品種を越えた共通点があることが明らかになること。",
+          "自然界に咲いている花の美しさに普遍性が見いだされること。",
+          "花の形がどのように決まるのかその仕組みが解明されること。",
+          "花の形の対称性が遺伝子によるものであることが証明されること。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 8,
+    title: "BÀI 8 - 07/2011",
+    passageHTML:
+`住居を買おうとするときは、その資産的な価値に重点を置いて考える人が多い。普通の人にとっては、一生に一度の買い物とでもいうべきもので、多額の金を費やさなくてはならないので、当然のことだ。買った後で、何らかの事情で売らなくてはならない羽目になったときに、価値が減少していたのでは、大損害を被る。\n\nだが、住居にとってより重要なのは、その有用性(注1)である。住みやすさが必要なのはもちろんだが、自分のライフスタイルに合った構造になっているとか、生活のしやすい環境にあって利便性(注2)に富んでいるとかの点も、重要な要素である。それらは必ずしも<span class=\"underline-q\">世間一般の価値基準</span>とは一致しない。したがって、自分たちの考え方や行動様式に従い、それに照らし合わせて判断する必要がある。\n\n特に、終の住処(注3)として考えるときには、自分たちの生き方をはっきりと見極め、その視点に立ったうえで、選択し決めていかなくてはならない。年を取ってくれば、当然のことながら、行動する能力は衰えてきて、動き回る範囲は狭まってくる。\n\n自分たちの余生がどのようなものになるかについて、計画を立てたうえに想像力を働かせて、確実性の高い予測を組み立ててみる。その未来図に従って、住むべき場所の見当をつけ、住居の大きさや構造などを決めていく。もちろん、将来の経済状勢の大きな変化に備えて、予算を大きく下回る出費に抑えておくことも必要であることは、いうまでもない。\n\n(山崎武也『シニアこそ都会に住もう一田舎暮らしは不安がいっぱい』による)`,
+    notes: "(注1)有用性:役に立つこと<br>(注2)利便性:便利さ<br>(注3)終の住処:人生を終えるまで住む家",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">世間一般の価値基準</span>として筆者が本文であげているのは何か。",
+        choices: [
+          "長期にわたって居住できる物件であること。",
+          "将来売却するときにも有利な物件であること。",
+          "購入者の生活様式に合った物件であること。",
+          "購入時の費用負担が抑えられる物件であること。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えでは、年を取ってから住む家として住居を選ぶときに最も大切なことは何か。",
+        choices: [
+          "老後の生き方や行動範囲に沿っているかを判断する。",
+          "老後は行動する能力が衰えるため家の構造を優先する。",
+          "未来の予測に沿って決めた予算と同じくらいのものを選ぶ。",
+          "いつか売るときのことも考えて資産的な価値を重視する。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "住居選びについて、筆者が最も言いたいことは何か。",
+        choices: [
+          "人が生活する上でどんな住居に住むかはとても大切であり、一般的な価値基準も参考にしたほうがよい。",
+          "他人と考え方が異なったとしても、自分の生活スタイルを重視して将来の住居を決定したほうがよい。",
+          "将来の経済状勢の変化に備えて、できるだけ資産価値の下がりにくそうな住居を選んだほうがよい。",
+          "年を取るにつれて住居の好みも変わってくるため、その時々の考えに合わせて住居を選択したほうがよい。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 9,
+    title: "BÀI 9 - 07/2011",
+    passageHTML:
+`人間は、所詮、時代の子であり、環境の子である。わたしたちの認識は、自分の生きてきた時代や環境に大きく左右される。ある意味、閉じ込められているといってもいい。認識できる「世界」はきわめて限定的なのであり、時代や環境の制約によって、認識の鋳型(注1)ができてしまうから、場合によっては、大きく歪められた「世界」像しか見えなくなることもある。\n\nわたしたちは、<span class=\"underline-q\">①そういう宿命</span>を背負っているのである。\n\nだから、「世界を知る」といいつつ、実は、偏狭な認識の鋳型で「世界」をくり貫いて(注2)いるだけということが生じたりする。鋳型が同じであるかぎり、断片的な情報をいくら集めたところで、「世界」の認識は何も変わらない。固まった世界認識をもつことは、「世界」が大きく変化する状況では非常に危険なことである。\n\nこれほど情報環境が発達したにもかかわらず、<span class=\"underline-q\">②「世界を知る」ことがますます困難になった</span>と感じている人も増加している。果てしなく茫漠(注3)と広がり、しかも絶えず激動する「世界」が、手持ちの世界認識ではさっぱり見えなくなってきているからだ。たしかに、ただ漫然とメディアの情報を眺めているだけでは激流に呑み込まれてしまう。\n\nいまこそ、時代や環境の制約を乗り越えて、「<span class=\"underline-q\">世界を知る力</span>」を高めることが痛切に求められているのではないか。\n\nもちろん、時代や環境の制約から完全に自由になることはない。しかし、凝り固まった認識の鋳型をほぐし、世界認識をできるだけ柔らかく広げ、自分たちが背負っているものの見方や考え方の限界がどこにあるのか、しっかりとらえ直すことはできるはずだ。\n\n(寺島実郎『世界を知るカ』による)`,
+    notes: "(注1)鋳型:ここでは、画一化した型<br>(注2)くり貫いて:ここでは、切り取って<br>(注3)茫漠:広がりがあり過ぎて、はっきりしない様子",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①そういう宿命</span>とはどういう意味か。",
+        choices: [
+          "現代の人々は考えが時代や環境に歪められ、「世界」の見方が定まらない。",
+          "現代の人々は時代や環境の制約を受けており、「世界」が正しく見えないこともある。",
+          "人間はものの見方が時代や環境に縛られ、「世界」が正しく見えないこともある。",
+          "人間は生き方が時代や環境に大きく影響を受け、「世界」の見方が定まらない。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②「世界を知る」ことがますます困難になった</span>のはなぜか。",
+        choices: [
+          "個人の世界認識が狭まり、実世界の時代の変化をつかみにくいから。",
+          "個人の世界認識が固まらず、実世界の情報に惑わされてしまうから。",
+          "個人の世界認識が、実世界のめまぐるしい変化や情報量に対応できないから。",
+          "個人の世界認識が、高度に発達している実世界の情報環境に追いつけないから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は、「<span class=\"underline-q\">世界を知る力</span>」を高めるためにできることは何だと考えているか。",
+        choices: [
+          "今までの世界認識を改め、できるだけ多くの情報を得ること。",
+          "時代や環境の制約を克服して、自分の世界認識の限界を越えること。",
+          "情報の激流に呑み込まれず、自分の世界認識の枠から自由になること。",
+          "自分の世界認識にできるだけ柔軟性を持たせ、その範囲を自覚すること。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 10,
+    title: "BÀI 10 - 12/2011",
+    passageHTML:
+`以下は、市民向け講座の講師を務めた大学教員の話である。\n\n正直なことをいうと、成人した人々の集まりであるNHK文化センターで、美術史の話をするのは、最初はかなり疑わしい気分だった。というのは、多かれ少なかれ社会に出たり、家庭を持ったりした経験があって、それなりの見識なり専門なりを持っている人々が、いまさら“役にも立たぬ”過去の芸術に、それほど深い興味を持つだろうなどとは思えなかったからである。また、仮に持ったとしても、それは、自分の好みに合った美術品を、楽しんで眺める、といった種類のものかと思っていた。ところが、それが<span class=\"underline-q\">①大変な間違いだ</span>ということがわかった。\n\nひたひたと押し寄せてくる、にせものでない、深い興味は近頃の大学生にこそ見つけることのできないものであった。はたちになるやならずの若者たちは、多くの場合、単位をとるためにそこにいるのであって、どこまで心から興味を抱いてそこにいるのか全く疑わしい。\n\n(中略)<span class=\"underline-q\">②市民講座の熱心さ</span>は、かつて、喜びもなく学生時代を過ごしてしまった人々の、いわばノスタルジー（注）の場合なのであろうか。失われて初めて、その喜びを知ったというわけなのか。私はそう思うようになった。\n\nところが、それもまた、間違いだということがわかった。１年と数ヶ月講座を続けた今は、あることがわかったのである。つまり,“芸術は、子供にはわからない”ということである。芸術とは、人生の経験でもあり、憧れであり、また失望と悲哀である。一片の絵にも、人生が詰まっている。人生を生きていないものに、絵がわかるわけはない。もちろん、若者でも、ある程度はわかる。しかし、本当に深くわかるのは、すでに生きた人々である。\n\n(若桑みどり『レット・イット・ビー』による)`,
+    notes: "(注)ノスタルジー:過ぎた日々を懐かしがること",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①大変な間違いだ</span>とあるが、何が間違いだったのか。",
+        choices: [
+          "家庭を持った人が市民講座を聞きに来るとは思えなかったこと",
+          "専門知識のある人は自分の話を理解できるだろうと思っていたこと",
+          "社会経験のある人が美術史に大きな関心を示すとは思えなかったこと",
+          "美術の見識を持った人なら過去の芸術の話に興味を持つと思っていたこと"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②市民講座の熱心さ</span>とあるが、筆者は講座を受ける人たちが熱心なのはどうしてだと思っていたか。",
+        choices: [
+          "学生時代に感じた学ぶ喜びを懐かしんでいるから。",
+          "学生時代に知らなかった学ぶ喜びを初めて知ったから。",
+          "学生時代にあった美術への興味が再びわいてきたから。",
+          "学生時代に学んだ知識をより深めたいと思っているから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が市民講座での経験を通して最も強く感じたことは何か。",
+        choices: [
+          "芸術に対する憧れは年をとるにつれて強くなる。",
+          "芸術は人生の経験があってこそ理解できる。",
+          "絵が理解できるようになれば人生に深みがでる。",
+          "絵は人の生き方を表したものである。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 11,
+    title: "BÀI 11 - 12/2011",
+    passageHTML:
+`以下は、国立国会図書館についての新聞記事である。\n\n8月上旬、地下1階に用意された大型保温テントに66箱の段ボールが運びこまれた。ここに置いた6本のボンべから、濃度60%の二酸化炭素ガスが流し込まれた。\n\n段ボールの中身は、個人や団体が所蔵していた1930-40年代の和紙製の書籍や小冊子だ。同図書館資料保存課の中島尚子さんは「室温25度、濃度60%で2週間燻蒸(注1)と、成虫はもちろん、目に見えない卵まで駆除できます」と話す。\n\n同図書館の書庫の大半は閉架(注2)で、見学者以外の一般人は立ち入る機会がない。これまで虫食い被害は数件しかなく、外部からの害虫の侵入はあまり警戒されてこなかったという。\n\nところが、2006年に館内一斉調査をすると、過去に古書店から購入した和紙の巻物が見つかった。2007年には書庫内でカビが発生し、数千冊の本に被害が出た。カビは本そのものを傷めるだけでなく、虫の餌にもなる。\n\n調査の結果、外部から持ち込まれる本や、ホコリに付着した虫やカビが、図書館内で増殖する可能性があることがわかった。これまでは、虫が見つかった本を取り出し、化学薬品で駆除してきた。二酸化炭素は人や環境への影響も少なく、低費用で済む。書庫に入れる前に、段ボールごと一斉駆除できるのが最大のメリットという。\n\n同図書館は、こうしたノウハウをホームページや論文で国内外に紹介している。\n\nシステム`,
+    notes: "(注3)２本が、保管ケース内で繁殖した甲虫の一種「シバンムシ」の幼虫に食べられているの<br>(注1)燻蒸(くんじょう):ここでは、ガスや煙で殺菌殺虫を行う<br>(注2)閉架(へいか):利用者に書棚を開放せず、請求に応じて本を取り出して見せる<br>(注3)巻物(まきもの):長い紙に書かれて、巻いて保管された昔の書物",
+    questions: [
+      {
+        q: "この記事によると、国立国会図書館で2010年8月上旬に何が行われたか。",
+        choices: [
+          "2006年に虫食い被害が見つかった本に対する一斉調査が行われた。",
+          "同図書館が保管してきた書籍に対して虫食い被害の一斉調査が行われた。",
+          "個人や団体が所有していた和紙製の本などの害虫駆除作業が行われた。",
+          "1930-40年代から同図書館が所蔵していた書籍の害虫駆除作業が行われた。2.この記事によると、国立国会図書館では本が傷んだ原因をどのように考えているか。",
+          "外から持ち込まれる本などについた虫やカビが増殖したから",
+          "本や冊子を入れていた保管ケースの機能が十分ではなかったから",
+          "外部から侵入した害虫の駆除のために、化学薬品を使用したから",
+          "書庫は人の出入りが少なく、虫やカビの増殖に適した環境だったから"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "国立国会図書館で行われた作業の方法は以前のものとどのように違うか。",
+        choices: [
+          "以前は二酸化炭素ガスを使用していたが、最近では低費用で人や環境への影響が少ない薬品を使用するようになった。",
+          "以前は問題が見つかった本だけを処理していたが、最近では新しく受け入れた本について処理するようになった。",
+          "以前は書庫に入れる前に１冊ずつ処理していたが、最近では、書庫内で一斉に処理するようになった。",
+          "以前は人や環境に有害なガスを使用していたが、最近では化学薬品を使用するようになった。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 12,
+    title: "BÀI 12 - 12/2011",
+    passageHTML:
+`文章を書こうとすると、私たちの心の闇に一つの言葉が光る。その言葉がおぼろげな内容を象徴していて、そこから次の言葉が生まれる気配が感じられる。紙の上にその言葉を書きとめてみる。その言葉によってはじめて自分が何を書こうとしているかが、わかりはじめるのだ。“<span class=\"underline-q\">①混沌</span>からことばへ”とはこの場面を指している。人間の言葉が本当に生きているのはここである。\n\n私たちは、ペンが書いてゆくにつれて考える。“考える”とは、音声にならない言葉をひとりごとのように口の中で言うことだ。その言葉をペンが書き留める。書きとめた言葉がさらに次の思考を呼ぶ。これが文章表現の“現場”だ。\n\n文章を書いた経験をふりかえれば、だれでも思いあたることだが、書き上げた文章は必ず、自分がはじめに漠然と<span class=\"underline-q\">②予感していた内容</span>とは違ったものになっている。心の闇に一つ二つで危うく連なって光っていた言葉が漠然と象徴していた内容と、複雑な思考を経て言葉の秩序によって組織され他人にも理解されるようになった文章との違いが、そう感じさせるのだ。\n\n私たちは自分の考えたことを文章に表現しようとすることによって、実際には、考えていた以上のことをその表現された文章の内に発見する。これが文章表現における発見である。書かれた内容（世界）についての発見と、それが自分の中から出てきたという驚き。文章を書くということは、言葉によって、世界を知り自分を知るという二つの驚きを同時に経験することでもある。`,
+    notes: "（注）おぼろげな：はっきりしない",
+    questions: [
+      {
+        q: "ここでの<span class=\"underline-q\">①混沌</span>とはどのような状態か。",
+        choices: [
+          "書きたいことがあってもそれがぼんやりしている状態。",
+          "書こうとしても書くことがなかなか見つからない状態。",
+          "書こうと思う内容が複雑でうまく言葉で表せない状態。",
+          "書きたいことがたくさんあってうまくまとまらない状態。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "書き上げた文章が<span class=\"underline-q\">②予感していた内容</span>とは違ったものになっているのはなぜか。",
+        choices: [
+          "他人に理解されるように文章を整理して書き直したから。",
+          "心に浮かんだ言葉で表現したら複雑な内容になったから。",
+          "書き進むにつれて言葉が自然にわき出てペンを動かしたから。",
+          "書き進むにつれて他人にわかるような文章にまとまったから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "文章を書くことについて筆者はどのように述べているか。",
+        choices: [
+          "自分の複雑な思考を他人に示すためのものである。",
+          "自分の考えを言葉にするという喜びを伴うものである。",
+          "考えた内容以上のことを表現でき、自分を発見するものである。",
+          "書きたい内容がまとまり、自分の思考も再確認できるものである。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 13,
+    title: "BÀI 13 - 07/2012",
+    passageHTML:
+`定年に備えた企業の研修資料に<<「<span class=\"underline-q\">自分</span>」一「仕事」=?>>とあるのを見て、会社一筋に働いてきた人には厳しい設問だなあ、と思ったことがある。事実会社人間だった大阪の友人はこの設問に「ゼロや」と苦笑して、定年後の近況を話す。「女房が出掛けようとすると、ワシ(注)も行くと言うもんやから、すっかり嫌がられてるよ」こういう定年亭主を「恐怖のワシも族」と言うのだそうだが、今やさぞかし①<span class=\"underline-q\">「ワシも族」</span>がはびこっていることだろうと思いきや、ニッセイ基礎研究所の「定年前・定年後」という本にこんな調査結果が収められていた。\n\n数字は省くが、仕事に生きがいを持っていた人のほうが、そうでない人より定年後の社会活動にずっと生きがいを感じているという内容で、要するに、会社人間ほど定年後も意欲的という分析だ。\n\n彼らの社会活動の生きがいは、交友関係の広がりによって生まれているようで、植木職人になったり、NPOやボランティア、地域活動に携わっている元銀行員をはじめ、多種多様なケースがいろいろ紹介されている。\n\n以前、あれは有力銀行の支店長であったか、定年退職した途端、年賀状も激減するなど一変した状況に喪失感を覚え、自ら命を絶ったという話を聞いたことがある。\n\nこれなどは極端なケースだとしても、<<「会社」のために頑張る価値観は、「社会」のために頑張る価値観と合致するかもしれない>>と分析される先の調査結果などは、会社人間の「その後」に<span class=\"underline-q\">②新しい視点をもたらす</span>ものだろう。`,
+    notes: "(注)ワシ:わたし",
+    questions: [
+      {
+        q: "筆者の友人が、<<「<span class=\"underline-q\">自分</span>」一「仕事」=>>という設問に「ゼロや」と答えたそうだが、それはどのような意味か。",
+        choices: [
+          "その友人はこれまで一つの仕事しかしてこなかったので、ほかの仕事は全然できないという意味。",
+          "その友人は仕事一筋に生きてきたので、これからも家族と一緒に何かしようとは考えていないという意味。",
+          "その友人は生活のすべてを仕事中心に送ってきたので、定年後は何もすることがないという意味。",
+          "その友人は定年後に生きがいを見つけ、会社生活で得たものはゼロだったと感じているという意味。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "①<span class=\"underline-q\">「ワシも族」</span>とは、どのような人たちのことか。",
+        choices: [
+          "奥さんが何かしようとすると、なんでも一緒にしたがる定年後の夫。",
+          "奥さんばかりでなく、家族の皆からも嫌がられている定年後の父親。",
+          "会社に出かけて行くよりも、家で奥さんと一緒にいるのが好きな夫。",
+          "定年退職後、自ら進んで家事や社会活動に積極的に参加したがる夫。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②新しい視点をもたらす</span>とは、どのようなことか。",
+        choices: [
+          "退職後には多種多様な仕事の選択肢があるから明るいと感じること。",
+          "会社中心に過ごしてきた人ほど、家での仕事に積極的になれること。",
+          "会社人間ほど定年後の社会活動に意欲的であるととらえられること。",
+          "定年後に生きがいがない人でも、社会的な活動には期待できること。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 14,
+    title: "BÀI 14 - 07/2012",
+    passageHTML:
+`技術者にとってレース車を開発するというのは、非常に魅力があるようなのだ。それはそうだろう。市販車の開発であれば、コストのこと、工場のことを考えなければいけないので、自分の考え出した創意工夫を必ずしも反映できるわけではない。いいモデルを出したからといって、営業の力が弱ければ売れるとは限らない(少なくとも、多くの開発技術者はそう思って歯軋り(注1)をしているに違いない。\n\nしかし、レース車であれば、ある程度、採算無視で色んなことにトライできる。何よりも、営業力とか他の要素に邪魔されることなく、<span class=\"underline-q\">①どんな大メーカーを相手にも対等に優劣を争うことができる</span>わけだ。\n\n逆にいうと、言い訳のない世界でもある。敵よりコンマ1秒でも遅れをとれば負けるのだ。そして、それは、はっきりとその場で目に見える。(中略)目標設定も単純だ。市販車開発なら、時にはアメリカと欧州の両市場で売れる車を作ってくれと営業から要求されたりする。そこでは技術的に妥協せざるを得ないが、レースは絶対的な速さだけを目指せばいいのだ。その代わり、自分の実力が今どうであれ、敵の車が75秒でサーキット(注2)を1周していれば、それより速いタイムで走る車をつくらないと意味がないのだ。<span class=\"underline-q\">②出来る、出来ない</span>を論じる余地は全くない。また、お分かりのように、他チームの車の真似だけをしていれば、決して「最速」にはならないのも真実なのだ。\n\n(田中詔一『ホンダの価値観一一原点から守り続けるDNA』による)`,
+    notes: "(注1)歯軋りをする:ここでは、悔しく思う<br>(注2)サーキット:レース用のコース",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①どんな大メーカーを相手にも対等に優劣を争うことができる</span>とあるが、なぜか。",
+        choices: [
+          "創意工夫する力さえあれば売れる車がつくれるから。",
+          "性能さえよければ採算のとれるレース車がつくれるから。",
+          "営業力に邪魔されずに価格で勝負できる車がつくれるから。",
+          "コストなどの要素に影響されずにレースで競える車がつくれるから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②出来る、出来ない</span>とあるが、何が出来る、出来ないのか。",
+        choices: [
+          "自社の最高タイムを次のレースで上回ること。",
+          "技術的に妥協するしかない場合には妥協すること。",
+          "ライバル社より少しでも速く走れる車をつくること。",
+          "アメリカや欧州のレースでいい成績をおさめること。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "この文章によると、レース車の開発は、技術者にとってなぜ魅力的なのか。",
+        choices: [
+          "高い技術力が示せれば世界で認められるから。",
+          "自社が持っている技術力の高さを証明できるから。",
+          "明確な目標に向かって開発だけに集中できるから。",
+          "開発者としての実力が大メーカーからも評価されるから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 15,
+    title: "BÀI 15 - 07/2012",
+    passageHTML:
+`わが国の文章の書き手として、<span class=\"underline-q\">想像・想像する</span>という言葉をもっともよく使ったのは、おそらく柳田国男であろう。\n\n民衆に伝えられる生活の慣習、用具などに残る手がかりをつうじて、なつかしい古層つなものであった。\n\n柳田は、それと<span class=\"underline-q\"><span class=\"underline-q\">空想・空想する</span></span>という言葉と区別しようとした。その文章の執筆の時期や、あつかう対象、また語りかける相手のちがいにつれて、柳田の行なう空想・空想すると、想像・想像するの区別には、いかにもはっきりしている際と、そうでない場合がある。しかし後の場合も、空想・空想することをしだいに正確にしてゆけば、想像・想像するにいたるという、段階的なつながりにおいてーーあい接し（注２）、境界がぼやけていることはあるにしても、その上辺と下辺では、ちがいがはっきりしている、という仕方でーー使われている。\n\n具体的な根拠のない、あるいはあってもあいまいなものにたって行なう古層への心の動きを、空想・空想するとし、よりはっきりした根拠にたつ、しっかりした心の働きを、想像・想像するとして、柳田は使いわけているのである。そこで時には、ややとか、あきらかにとかいう限定辞をあらわさねばならぬのではあるが、空想・空想するには、人間の心の働きとして、マイナス・消極的評価のしるしがついており、想像・想像するは、プラス・積極的評価のしるしがついている。`,
+    notes: "（注１）へとたどる民俗学の、わが国での開拓者として、柳田にはこの言葉がきわめてたいせ<br>(注1)古層:ここでは、古い時代<br>(注2)あい接し:互いに接し",
+    questions: [
+      {
+        q: "柳田が使う「<span class=\"underline-q\">空想・空想する</span>」と「想像・想像する」にはどのような関係があると筆者は考えているか。",
+        choices: [
+          "互いに似ている部分があるが、「空想・空想する」から「想像・想像する」に変わることはない。",
+          "全く異なるものであり、「空想・空想する」と「想像・想像する」との境界ははっきりしている。",
+          "両極も境もぼやけていて、「空想・空想する」と「想像・想像する」との境界ははっきりしない。",
+          "両極は明確だが境はぼやけていて、「空想・空想する」から「想像・想像する」に変わることがある。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "柳田が「<span class=\"underline-q\">空想・空想する</span>」という言葉を使うのはどのようなときだと筆者は考えているか。",
+        choices: [
+          "はっきりしないものをもとに古い時代を考えるとき。",
+          "はっきりしたものを根拠に古い時代をたどるとき。",
+          "現代に残されている手がかりから過去をたどるとき。",
+          "過去の出来事を手がかりに現代を考えるとき。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "柳田が「<span class=\"underline-q\">想像・想像する</span>」という言葉を使うのはどのようなときだと筆者は考えているか。",
+        choices: [
+          "古い時代の民衆の心を伝えるとき。",
+          "人間の心の働きを積極的に評価するとき。",
+          "あいまいなイメージをはっきりさせるとき。",
+          "明確な根拠にもとづく心の働きを表すとき。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 16,
+    title: "BÀI 16 - 12/2012",
+    passageHTML:
+`私は、「どうしたらわかりやすく伝えられるか」ということを常に考えています。その一方で、「話を単純化しすぎてはいけない」ということも胆に銘じ(注1)ています。この兼ね合いが、結構難しいのです。扱うテーマに関して勉強を積み重ね、知識が増えるほど、難しくなります。生半可(注2)にしか知らないときのほうが、簡単にざっくり(注3)単純化できたりします。でも、そのために結果として、全体像が見えずに歪んだ像を示したり、事実とニュアンスが違ってきてしまったりすることにもつながります。\n\nこれはとても<span class=\"underline-q\">①怖いこと</span>です。それを防ぐには、どうしたらいいか。(中略)まず、調べたいことを勉強して、誰かに話してみます。簡単に話ができたら、要注意。学部生レベルである可能性が高いからです。そこで満足せずに、さらに深い勉強をしてみましょう。すると、あら不思議。急に話が難しくなります。\n\nこれが大学院生レベルです。いわば<span class=\"underline-q\">②「わかりやすい説明」に至るスランプ</span>のようなものです。\n\nそこで挫折せず、さらに勉強を深め、「この話のキモ(注4)は何なのか」を考え抜きましょう。すると、ある日突然、自分でも驚くほど、わかりやすい説明ができていることに気づくはずです。あなたは、その分野で、晴れて「指導教授」の立場まで成長したのです。\n\n学部生レベルの人の説明の間違いを訂正してあげることもできるようになったことでしょう。\n\n最初の単純化で満足せず、さらに高みを目指すとスランプに陥る。そこを突破すると、「わかりやすい説明」が可能になる。このプロセスが、キモなのです。\n\n(池上彰『<わかりやすさ>の勉強法』による`,
+    notes: "(注1)胆(きも）に銘(めい）じる:決して忘れないようにする<br>(注2)生半可:中途半端<br>(注3)ざっくり:大まかに、粗く<br>(注4).キモ:最も大事なところ",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①怖いこと</span>とは何か。",
+        choices: [
+          "不十分な知識で話を単純化したため、内容が正確でなくなること。",
+          "話があいまいになり、情報を断片的にしか伝えられなくなること。",
+          "事実に関する知識が不十分なせいで、話が単純化しづらいこと。",
+          "扱うテーマに関して知識が増えるほど、説明が難しくなること。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②「わかりやすい説明」に至るスランプ</span>とあるが、どのような状態か。",
+        choices: [
+          "知識が増えたにもかかわらず、深みのある説明ができない状態。",
+          "知識が増えたために、かえってわかりやすい説明ができない状態。",
+          "簡単なことにもかかわらず、どう説明すればいいかわからない状態。",
+          "話を簡単にしすぎるために、かえって説明を理解してもらえない状態。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は、スランプを突破するにはどうすればいいと述べているか。",
+        choices: [
+          "簡単にあきらめずに、なぜスランプになったかをよく考える。",
+          "あきらめずに知識をさらに深め、本質は何かを徹底的に考える。",
+          "単純化できた話を振り返り、わかりやすい説明とは何かを考え抜く。",
+          "十分に知識を深めたうえで、単純化するにはどうすればいいか考える。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 17,
+    title: "BÀI 17 - 12/2012",
+    passageHTML:
+`児童文学の多くは、子どもの視点で書かれています。もちろん作者は大人なのですが、子どもの考え方や、子どもの目の高さから見える風景を描いています。当然のことながら大人が読む場合、そこにどうしても<span class=\"underline-q\">①視点のズレが生じます</span>。\n\nけれど大人はみな、昔、子どもでした。子どもを卒業して大人になったと思っているのが、子どもだった自分を抱えたまま大人になったと思っているのかは人それぞれでしょうが、少なくとも、だれもが子ども時代を過ごしてきています。大人の視点で読みながら、子どもの頃の視点を思い出すことは可能です。自分の中の子どもに寄り添って、一緒に読むとでも言えばいいでしょうか。\n\n子ども時代に読んだ本を再読すると、同じ場面なのに、子どもの頃の自分と今の自分とでは、感じ方や受け取り方がちがうのに気づくことがあります。それは今の自分が、自分の心の中にいる子どもと向かいあう一瞬です。そうした機会に、今の子どもたちへのまなざしを新たにすることもあるでしょう。たとえば、「近頃の子どもにはこまったものだ」と文句を言っていたけれど、子どもの頃の自分はどうだったのか?と問い直す。大人であることにあぐらをかいていた(注)自分を省みる。そんなことが起こるかもしれません。\n\n<span class=\"underline-q\">②どうぞ、「子どもの本」を開いてみてください</span>。\n\n(ひこ・田中『大人のための児童文学講座』による)`,
+    notes: "(注)あぐらをかいていた:ここでは、何の疑問も感じずにいた",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①視点のズレが生じます</span>とあるが、なぜそうなるのか。",
+        choices: [
+          "大人は子どもの世界がよく理解できないから",
+          "大人は子どもの視点に合わせて読もうとするから",
+          "大人の見てきた風景と子どもの見ている風景はちがうから",
+          "大人の視点から子どもの視点で書かれたものを読むから"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、視点のズレを解消するためにできることは何か。",
+        choices: [
+          "大人の視点で今の子どもたちの気持ちを考えて読む。",
+          "大人の自分と子ども時代の自分を比べながら読む。",
+          "子ども時代の自分の視点を思い出しながら読む。",
+          "子どもに読んでやるような気持ちで読む。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②どうぞ、「子どもの本」を開いてみてください</span>とあるが、筆者はなぜそのように述べていると考えられるか。",
+        choices: [
+          "今の子どもの考え方を知ることで、大人である自分を省みることもあるから。",
+          "心の中にいる子どもの頃の自分に気づくことで、これまでの見方が変わることもあるから。",
+          "児童文学をよく理解することで、近頃の子どもの問題点を発見できるかもしれないから。",
+          "子ども時代の本を再読することで、これまでの自分のことがよく分かるかもしれないから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 18,
+    title: "BÀI 18 - 12/2012",
+    passageHTML:
+`ファースト・フードが世界中にひろがったのは、文化や人間の集合状態に変化が起こっていたからである。家族はこれまでほど安定したものではなくなったし、私的な生活、労働や遊びのパターンも個人的かつ多様になっていたのである。人間の接触が煩わしいものに感じる傾向も増大した。食事がもつ楽しみは感覚と社交の至上の快楽ではなくなった。それは他の行為のあいまに挿入されるものとなることが多かったし、それと平行して人間は食事を簡便に済ませることを望んだことも考慮すべきであろう。\n\nもちろん都市の食文化にとってファースト・フードが占める位置は、コンビニが買い物行動にたいして占める位置と同様、全面的ではない。しかし多種多様なレストランがいたるところに叢生(注1)してくるなかに、ひとつの均質化する力として割り込み、かつローカルな都市を世界的な規模にまでひろがった同一の網目に組み込むことは、無視できない力の<span class=\"underline-q\">兆候的現象</span>なのである。\n\nおそらくこうしたファースト・フードの経験は、意識されていることがら以上に、ほとんど意識されない感覚的な影響の方が大きいだろう。かつての食の内容からみると、貧困としかいいようのないメニューに慣れること、あえて社会的関係を破壊しようとしないでも、人びとはファースト・フードの利用によって、いつのまにか都市の遊民(注2)になっていくこと、そしてこの食形式の共有によってわれわれは奇妙なかたちで、われわれ自身をいつのまにか世界化していること、などである。`,
+    notes: "(注1)叢生(そうせい)する:ここでは、多くできる<br>(注2)遊民:ここでは、社会的関係をもたない人",
+    questions: [
+      {
+        q: "筆者によると、ファースト・フードがひろまった理由は何か。",
+        choices: [
+          "人びとが人間関係や食べることに無関心になったこと。",
+          "新しい食のスタイルが人びとの好みに合ったこと。",
+          "人とのつながりや生活スタイルが変化したこと。",
+          "食にたいする人びとの嗜好が似てきたこと。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">兆候的現象</span>とあるが、それはどのような現象か。",
+        choices: [
+          "個々の都市の食文化のなかに、ファースト・フードが入り込んでいる。",
+          "ファースト・フードの店舗数が、レストランのように増えている。",
+          "ファースト・フードが、都市ごとの多様な食形式を壊そうとしている。",
+          "ローカルな都市のレストランにファースト・フードの簡便さを取り入れている。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "ファースト・フードのひろがりが人びとに与える影響を、筆者はどのように考えているか。A.食事や人間関係への興味を失い、人びとは簡便な生活スタイルを求めるようになる。",
+        choices: [
+          "人間同士の関係を弱めることになり、仕事や遊びに熱中する人間が増える傾向が強まる。",
+          "知らないうちに人との絆や食への関心を薄め、世界同一の食形式に慣れ切った人間を増やす。",
+          "同じメニューに慣れることで、人びとはいつのまにか多種多様な食文化に興味を持たなくなる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 19,
+    title: "BÀI 19 - 07/2013",
+    passageHTML:
+`よく知らない人についてどのようにして印象を受けるのであろうか。アッシュの有名な実験を例にして紹介する。誰彼についての印象というものは、与えられる手がかり（情報）の順序によって影響されることを示している。たとえば、「知的な➞勤勉な➞衝動的な➞批判力のある➞頑固な➞嫉妬深い」の順番である人物の特徴が伝えられると、多少の欠点はあるが、適応的で有能な人物という印象ができる。一方、これとは逆の順番「嫉妬深い➞頑固な…➞知的な」では、深刻な問題を抱えた人とみなされる。\n\n(中略)最初の手がかりが方向づけをし、後に与えられる手がかりはそれに結びつけて解釈されると考えられる。これを初頭効果という。初めに与えられる手がかりが否定的だと、後の肯定的な手がかりも胡散臭くみなされてしまう。世に言われるように、「第一印象が肝心」なのである。なお、<span class=\"underline-q\">①この効果</span>はすべての人に見られるわけではなく、むしろ、後の手がかりによけい影響を受ける人もあることも指摘されている。あまり創造的でない人、認知の物差しが少ない(見方の次元が少ない)人の場合には、与えられた手がかりを順番に維持しがたく、初めに与えられた手がかりが後に与えられた手がかりによって上書きされてしまい、結果的に初めの手がかりによる印象は薄くなり、<span class=\"underline-q\">②後の手がかりによって印象がつくられやすい</span>(新近効果)。相手が複雑さに強い人かどうかで、伝える情報の順序を操作することによって印象を変えることも可能である。\n\n(海保博之編著『瞬間情報処理の心理学』による)`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①この効果</span>とはどのようなことか。",
+        choices: [
+          "最初に与えられた情報が、その後の印象を方向づける。",
+          "最初に与えられた情報で印象が決まり、変化しない。",
+          "最初に受ける印象は、後からの情報によって変化する。",
+          "最初に受ける印象が強ければ、否定的な印象につながらない。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②後の手がかりによって印象がつくられやすい</span>とあるが、なぜか。",
+        choices: [
+          "前に与えられた手がかりが不十分だから",
+          "前に与えられた手がかりより後のものが新しく思えるから",
+          "後で与えられた手がかりがより重要に思えるから",
+          "後で与えられた手がかりが前のものと置き換わるから"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "初頭効果と新近効果の二つの説明からわかることは何か。",
+        choices: [
+          "よく知らない人の印象は、与えられる情報の順序と受け手によって変化する。",
+          "よく知らない人の印象は、後に与えられた情報によって決定される。",
+          "よく知らない人に好印象を与えるには、初対面の印象が肝心である。",
+          "よく知らない人に対して肯定的な印象を持つことは困難である。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 20,
+    title: "BÀI 20 - 07/2013",
+    passageHTML:
+`書を読むという行為が、人間の成長や知的能力の向上に必須のものであることを、かつての社会は経験法則的に理解していたのではないだろうか。素読(注1)などは強制的、修養(注2)的なものではあるが、読書習慣の形成を何よりも重視する教育メソッド(注3)であったことは確かである。しかし、<span class=\"underline-q\">①私たちの世代</span>はどうであろうか。書物というものが映像や音響メディアなどと単純に比較することを許さない必需品であり、読書は基本的な能力であるという確信をいだいてきたものの、近年の社会経済のあり方によって自信を喪いかけていたことは否めないのではなかろうか。\n\n活字以外の表現手段が大きな影響力をもつようになったことを<span class=\"underline-q\">②「時代の流れ</span>」と呼ぶのはいいが、文化の変容があまりにも急激なこと、あるいは一つの有力な文化が別のものに置き換えられることには予測しがたい弊害を伴う。活字にもいろいろあるが、書物に特有の楽しみを与えてくれる本、思索の喜びをもたらしてくれる本、人生の支えになるような本が相対的に少なくなったのは、1980年代の半ばごろからで、書店の棚には情報的な本や、映像文化の書籍化をねらった寿命の短いものばかりが目立つようになった。家庭からはスペースの狭さをいいわけに、本棚が姿を消してしまった。\n\nちょうどそのころから映像文化や活字文化の本質を考えるメディア論が盛んになったが、いまから思えば従来の活字文化が衰弱した場合にどうなるかという洞察力において、いささか欠けるところがなかっただろうか。\n\n(紀田順一郎『読書三到一一新時代の「読む・引く・考える」』による`,
+    notes: "(注1)素読:ここでは、意味を考えずに、声を出して読むこと<br>(注2)修養:学問を修め人格を高めること<br>(注3)メソッド:方法",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①私たちの世代</span>とあるが、筆者の世代にとっての読書はどのようなものであったか。",
+        choices: [
+          "社会生活を営む上で必須であると信じられていた。",
+          "近年の社会経済のあり方には合わないものとされていた。",
+          "映像や音響メディアと同列に扱われるようになってきていた。",
+          "人間の成長に不可欠だと自信をもって言えなくなってきていた。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②「時代の流れ</span>」は、書物にどのような変化をもたらしたか。",
+        choices: [
+          "映像化することを目的として書かれた本が増えた。",
+          "情報を提供する本やすぐに読まれなくなる本が増えた。",
+          "楽しみや喜びが与えられ心の支えになるような本が増えた。",
+          "教育的に望ましくない本や悪影響を与えるような本が増えた。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "1980年代半ば以降のメディア論について、筆者はどのように述べているか。",
+        choices: [
+          "活字文化を急激に変容させた要因を把握していなかった。",
+          "活字文化が衰弱していく時期を予測していなかった。",
+          "活字文化の衰退後の状況を見通していなかった。",
+          "活字文化と映像文化の本質を明らかにしていなかった。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 21,
+    title: "BÀI 21 - 07/2013",
+    passageHTML:
+`現在、不安定化する社会におけるさまざまなリスクが個人を直撃しています。かつてであれば個人の属する集団や組織が、リスクを受け止めるのを支えてくれました。ところが、いまではそのような支えを期待することは難しくなっています。現代における不平等は個人単位で現れるのです。しかもその場合、不安や不満を抱いた人々は、同じような立場に置かれ、似たような思いをもった人々と連帯することが<span class=\"underline-q\">①けっして容易ではありません</span>。\n\n外から見れば、どれほど共通の傾向が見られる問題でも、一人ひとりの個人にはどうしても<私>の問題に見えてしまうからです。\n\n(中略)平等化社会を生きる個人は、それぞれが自分の「私」の意識をもっています。その意味でいえば、誰一人、他者の意のままにその存在を否定されるほど弱くありません。もし、社会が自分の存在を認めないのなら、逆に、自分もそのような社会を認めないというのが、現代における個人の典型的な自意識といえるでしょう。反面、<span class=\"underline-q\">②そのような個人</span>は自分一人で自己完結できるほどには強くありません。自分が[同類]のうちの一人に過ぎないことを痛いほど自覚している平等化社会の個人は、それゆえに他者をつねに意識せざるをえないのです。\n\nそうだとすれば、一人ひとりに固有な<私>にこだわりつつ、それでも自らの不完全性を日々感じている個人にとって、自分の自分らしさを確認するためにも他者が必要なはずです。その場合の他者とは、自分の身の回りにいて、相互に承認を与え合うような他者ばかりでなく、自らに位置と役割を与えてくれる社会もまた、重要な他者にほかなりません。\n\n（宇野重規『＜私＞時代のデモクラシー』＜による）`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①けっして容易ではありません</span>とあるが、なぜか。",
+        choices: [
+          "人は社会に存在するリスクに直撃されるから。",
+          "個人の不安や不満には共通点がないから。",
+          "個人はそれぞれの集団に縛られるから。",
+          "本人だけの問題だと思えるから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②そのような個人</span>とはどのような個人か。",
+        choices: [
+          "自分の存在を認めない社会は認めようとしない人。",
+          "自分を圧迫する社会に立ち向かおうとする人。",
+          "自分の意識を社会に向けようとしない人。",
+          "自分を認めない社会に生きている人。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "平等化社会を生きる<私>にとって他者とは何か。",
+        choices: [
+          "自分の不完全さを感じさせられる社会や周囲の人々。",
+          "相互に助け合わなければならないことを教えてくれる人々。",
+          "お互いを認め合える人々や自分に役割を与えてくれる社会。",
+          "一人ひとりが平等であることを意識させてくれる社会。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 22,
+    title: "BÀI 22 - 12/2013",
+    passageHTML:
+`十年絵を描いてきて、最近になってようやく筆の止めどころが、わかってきたかな、と思います。描きすぎずに筆を置くコツが少しずつわかってきた。\n\n最初のうちは、筆が多くなるものなんです。描きたいという気持ちが強いだけに、まだ、足りない。まだ、足りないという気になって、どんどん、描き出してしまう。だけど、それを無理して、セーブすることはないと思います。\n\nやっぱり、<span class=\"underline-q\">①とことん行ききっちゃったほうがいいんですよ</span>。何事も。\n\nたとえば、空腹のときに腹いっぱい食べて満腹感というものを味わっておかないと、加減というものが、わかりません。人間、満腹のことを知っているから、これはまだ五分(注1)腹八分といったら、この程度だという加減がわかる。一回とことんやってみることで、抑えることや、行き過ぎないことの良さが初めてわかるものですからね。\n\n(中略)自分が描きたいモチーフそのものと対峙(注2)して、自分の感じたところで、筆を進めている分には、いいんですが、客観的にそれを見て、ここが足りない。あそこが、足りないと思って描き出してしまうと、やめどころが、わからなくなってしまいます。それは、自分が、どう見て、どう感じたかという気持ちを素直に絵にするということとは、違ってくる。<span class=\"underline-q\">②絵を説明してしまうこと</span>になる。そうすると、絵が、うるさくなります。\n\n客観的な目を持つことも、確かに大事なことではあるんですが、見たまま感じたままのストレートな気持ちを解説してはいけないと思うんです。`,
+    notes: "(注1)五分:全体の50パーセント<br>(注2)対峙する:向き合う",
+    questions: [
+      {
+        q: "筆者は、絵を描き始めた時、どのように描いていたか。",
+        choices: [
+          "筆の進め方を身につけようと思って描いていた。",
+          "筆を進めすぎないように心がけて描いていた。",
+          "描きたい気持ちを抑えながらも、描き出していた。",
+          "描きたいという感情に任せて描き出していた。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">①とことん行ききっちゃったほうがいいんですよ</span>とあるが、なぜか。",
+        choices: [
+          "描きたい気持ちがどのくらいかがわかるから。",
+          "描きたいものが何なのかがわかるから。",
+          "描きすぎないことの大切さがわかるから。",
+          "描きくわえることの楽しさが、わかるから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②絵を説明してしまうこと</span>について、筆者は、どのように考えているか。",
+        choices: [
+          "絵を思いのままに描き出しすぎるので、絵に面白みがなくなる。",
+          "絵を描きたいという気持ちを抑えるので、表現が素直でなくなる。",
+          "絵を客観的な視点で描くので、見る人にあまり感動を与えられなくなる。",
+          "絵を客観的に見て描き出しすぎるので、感じたままの気持ちが表現されなくなる。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 23,
+    title: "BÀI 23 - 12/2013",
+    passageHTML:
+`大方の予想に反して、科学が飛躍的な成果をもたらす現場では、誰もが実生活の中で、体験する新鮮な驚きや、たわいのない(注1)、思いつきの類が<span class=\"underline-q\">その起点</span>となっている。\n\nむしろ、科学の画期的な発明発見など、限りなく日常的で具体的なものごとが元になっているのである。\n\n(中略)しかし、日ごろの思いつきや驚きと違って、思いついて終わり、驚いただけ、ということにならないところが、要するに科学の特徴である。思いつきや驚きは、新しい確かな「ものの見方」へのきっかけでしかなく、科学とは、それらをとことん洗練する創意工夫の営みにほかならない。実は、創意工夫こそが、歴史上も、有数の科学者たちにみられる、かなり一貫した姿勢なのである。\n\n何かに驚いて、それまでは、当然だと思っていたことに、少し違った角度から眼差しをむけてみる。それだけでなく、違った角度から見えてきたことを首尾一貫(注2)させ、確かなものにすると、求めても無駄な望みだと決めつけていたことが、あっさりと実現できることに気づく。新鮮な驚き、些細な思いつき、そして、ちょっとした理解の修正をきっかけに、常識とは、少し違った「ものの見方」をしたとき、どこか一面化していた常識そのものがより豊かなものにならないか考えてみる。これが、科学を本当に発展させた人々に共通した姿勢である。\n\n（瀬戸一夫『科学的思考とは、何だろうかーものつくりの視点から』による）`,
+    notes: "(注1)たわいのなし、:ここでは、小さな<br>(注2)首尾一貫させる:始めから終わりまで、一貫しているようにする。",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">その起点</span>とあるが、何の起点か。",
+        choices: [
+          "科学における大きな発明や発見。",
+          "日常のなかでの新鮮な発想。",
+          "生活の中の科学的体験。",
+          "実生活に役立つ科学。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は科学における思いつきや驚きを、どのようなものと考えているか。",
+        choices: [
+          "科学的な「ものの見方」の本質を形づくるもの。",
+          "科学の理論を日常的な出来事に関連づけるもの。",
+          "いつもとは違う視点を得る契機となるもの。",
+          "創意工夫をする過程で生まれてくるもの。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "科学を発展させた人々に共通している姿勢は、何か。",
+        choices: [
+          "思いつきや驚きをそのままにせず、常識とは違う見方をしようとする。",
+          "思い付きや驚きをこれまでの科学的知識で、説明しようとする。",
+          "発想の転換を通して、独創的な考え方を身につけようとする。",
+          "発想の転換をすることで、常識的な「ものの見方」を否定しようとする。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 24,
+    title: "BÀI 24 - 12/2013",
+    passageHTML:
+`多くの人は、個性の持ち主にあこがれて、できれば見習いたいものだと思いながら、実は、一方で「人並み」であることをひそかに求めてもいる。「ひと」からはずれていたり遅れていたりすることは、彼らを極度に不安にする。「同じ」思いを抱いていたことを発見することは、大きな安心を与えるはずであるから。「同じ」思いの通ずる仲間が見つかると、すぐにでも群れようとする。<span class=\"underline-q\">①そういう人間の傾向</span>は、別に、日本人にだけ備わったものというわけでもなく、ほとんど、本能的なものとして、多かれ少なかれ誰もが、抱えている要素であるといってよい。\n\nにもかわらず凡庸さ(注1)は、表向き、なぜこれほど忌み嫌われる(注2)のか、それは、おそらく、人間というものの大多数が凡庸な生を生きるほかなく、自分の未来もまたその限界のなかにあることをうすうす知っているのだが、そのことをそう決め付けられることは、自分の生を希望のない確定的なイメージに塗り込めてしまうことであり、それは<span class=\"underline-q\">②個としての価値を否定されてしまうことにつながる</span>と感じられるからである。\n\n生きる意欲が現にあるのに、お前の未来はこのとおり当たり前のものでしかないと規定されることは、未来に向かうものとしてある「生の意欲」の本質的条件を根こそぎにしてしまう。自らが、有限な存在であることを大筋ではわきまえつつ、しかもその範囲内に未知の部分を必ずいくらかは残しておく。そこに自らが、個であることの確証をかろうじて求めようとするのだ。\n\n（小浜逸郎『この国はなぜさびしいのか「物の指し」を失った日本人』による）`,
+    notes: "(注1)凡庸さ:ここでは、人並み、平凡であること。<br>(注2)忌み嫌う:ひどく嫌う。",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①そういう人間の傾向</span>とあるが、どのような傾向か。",
+        choices: [
+          "個性の持ち主に表面的には感心しつつも、内心ではそれほど認めない。",
+          "個性を重視し、意識的に自身と似た個性を持つ人としか群れようとしない。",
+          "個性的でありたいと願いながらも、自身と思いが同じ人と群れて安心する。",
+          "個性的であることを切望し、個性が強い人と集まって安心感を得る。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "何が<span class=\"underline-q\">②個としての価値を否定されてしまうことにつながる</span>のか。",
+        choices: [
+          "自身の限界を示され、将来に不安を感じること。",
+          "自身の平凡さを思い知らされ、限界を自覚すること。",
+          "自身の平凡さを指摘され、生きる意欲をなくすこと。",
+          "自身の無能さに気づかされ、自己の存在に不安を感じること。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えに合っているのはどれか。",
+        choices: [
+          "人間は自らの可能性を広げ、自身の価値を高める。",
+          "人間は個であることの確証を得て、自身の価値を高める。",
+          "人間は自らに希望の余地を残し、生きる意欲を保つ。",
+          "人間は常に新たな希望を探しながら、生きる意欲を保つ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 25,
+    title: "BÀI 25 - 07/2014",
+    passageHTML:
+`市場の製品のほとんどに何らかのマークが付いています。それに気づく人は少数であり、その意味を知ろうとする人は更に少数でしょう。見方によればこれは<span class=\"underline-q\">①市場の健全さの表れ</span>です。製品が満足なもので取引がスムーズなら問題は起こらないでしょう。しかし、中には使用者に損害を与えたり危険にさらしたりする製品もあるのが現実です。\n\n成熟した社会では、公共の利益に反する製品を市場から排除するために様々な仕組みと手段が使われていますが、製品に付けられている「<span class=\"underline-q\">適合マーク</span>」もその一つです。\n\nこれは製品が何らかの基準に適合していることの証明であり、製品の供給者から購入者及び使用者に情報を伝える手段です。適合マークは、業者間の取引における要件として、また、消費者の購入判断を助ける手段として古くから使われてきましたが、それらは主に地域社会のツールであり、意味や使い方は地域社会のルールでした。\n\nこの事情は1980年代に一変します。市場のグローバル化により、見知らぬマークを付けた外国製品が各国の市場に溢れたからです。(中略)適合マークが<span class=\"underline-q\">②本来の機能</span>を果たすには、そのマークが多数の人々に認知され、意味が正しく理解されていることが必要です。また、マークが伝える情報の信頼性を支える適合性評価が適切に行われたことの証拠が必要です。そこで、ISO（国際標準化機構）は1996年に適合マークに関する検討グループを設置し、問題の分析と解決策の検討を開始しました。\n\n（田中正躬監修・編著『氾濫するマークー多様化する認証』による）`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①市場の健全さの表れ</span>あるが、何が健全さの表れか。",
+        choices: [
+          "製品のマークに無関心な人が多いこと。",
+          "製品のマークの意味を知らない人がいないこと。",
+          "製品のほとんどにマークが付いていること。",
+          "製品の質がマークによって保証されていること。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②本来の機能</span>とあるが、どのような機能か。",
+        choices: [
+          "製品の不具合や問題点が解決されていることを証明する。",
+          "外国製品と自国の製品とを区別するための情報を与える。",
+          "消費者の購入意欲を高めるとともに、地域社会の経済を支える。",
+          "消費者に安心できる製品であることを伝え、公共の利益を守る。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">適合マーク</span>について、検討が必要になったきっかけは何だと筆者は述べているか。",
+        choices: [
+          "外国製品に対する消費者の関心が高まったこと。",
+          "各国の適合性評価への信頼性が失われていったこと。",
+          "各国の適合マークが混在して理解しにくくなったこと。",
+          "適合マークが付いていない外国製品が流通し始めたこと。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 26,
+    title: "BÀI 26 - 07/2014",
+    passageHTML:
+`以下は、ある日本企業の経営者が書いた文章である。\n\n現状維持でいい。そう思った途端、進歩は止まる。外の世界では、絶え間ない進化と発展が続いている。何もせずに同じところにとどまっているのは、じつは最大のリスクなのである。\n\nこの国にもう、安全、安心、安定はない。自分は人生をどうしたいのか、会社をどう変えたいのか、この国をどうすべきか…一人ひとりが日本の置かれた現実を直視しながら、志高く毎日を真剣に生きないかぎり、未来も変わらない。\n\nそう言うと多くの日本人は反射的に、次のように思うかもしれない。\n\n(中略)「どうすればいいか、もっと具体的に教えてほしい」とりあえず「見本」のようなものがないと、何をやったらよいのか、見当がつかないのだろう。\n\nしかし、それぞれが置かれた状況によって、すべきことが異なるのは当然。ある人にとってはプラスのことが、別の人にとってはマイナスにつながることもあるかもしれない。そもそも私は、ノウハウ本なるものをまったく信用していない。そこに書いてあるのは、過去の成功法則でしかない。それをもとに時代に合致した新しい法則を考えるというのであればまだよいが、過去の成功例をそっくり踏襲して、うまくいくはずがない。\n\nいずれにせよ、情報が瞬時に世界を駆け巡るグローバル時代では、そうした成功法則は、あっという間に陳腐化(注1)してしまう。\n\nただし、時代が変化しても普通的に通用する「考え方」というものなら、あるかもしれない。もちろんそれにしても、世の趨勢(注2)に影響されないことはない。しかし自らの視点があるかないかで、目の前の風景はまったく変わってくる。\n\n(柳井正『現実を視よ』による)`,
+    notes: "(注1)陳腐化する:ここでは、古くなる<br>(注2)趨勢:動向",
+    questions: [
+      {
+        q: "何もせずに同じところにとどまっているのがリスクなのは、なぜか。",
+        choices: [
+          "安定や安心を失うから。",
+          "未来を考えられなくなるから。",
+          "社会の進歩を止めてしまうから。",
+          "周囲の進歩から取り残されるから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "ノウハウ本あるものをまったく信用していないとあるが、なぜか。",
+        choices: [
+          "過去の成功例から、新しい法則は導き出せないから。",
+          "過去の成功例から、成功した本人にしか再現できないから。",
+          "変化の速い現代においては、過去の成功例は役に立たないから。",
+          "グローバル時代においては、個人の成功例はささいなものだから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、変化する時代を生きていくうえで必要なことは何か。",
+        choices: [
+          "社会の動きを敏感に察知できること。",
+          "自身で主体的に世の中をとらえること。",
+          "世の中の変化を広い視野でとらえること。",
+          "他者と自身の視点の違いを見つけること。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 27,
+    title: "BÀI 27 - 07/2014",
+    passageHTML:
+`ぼくらは、自由という言葉にある重さを感じる。自由と勝手とは似て非なるもので、自由を与えられると、その尊さ故にどう扱っていいかと緊張するのである。そのように教えられたわけではないのだが、その解釈する感性が少なくとも備わっていたということだろう。\n\n日常の仕事のことでもいい、ちょっと思い返すと、<span class=\"underline-q\">①それが実感できる</span>。\n\n<span class=\"underline-q\">②自由におやり下さいと言われると</span>、無邪気に、あるいは無責任に、これは楽だと思えるだろうか。自由におやり下さいの自由は、あなたの思うままお好きな世界を構築して結構ですという、全幅(注1)の信頼や神の如き好意ではないのである。\n\nもっとつき放している。お手並(注2)拝見という底意地の悪さもある。だから、言われた側の本心としては、自由にやらせていただけるのですかと、感動のリアクション(注3)を示しながら、実は大して期待していないな、要するにあてにされていないなと思ったりするのである。\n\nそれもこれも、自由という言葉の持つ重さと、それを使いこなす困難さを知っているからである。だから、ぼくらは若い時、自由に書いて下さい、自由に解釈して下さい、自由に生きて下さいと言われると、捨てられたような戦慄を覚えた(注4)ものである。\n\n自由に善玉、制約は悪玉だと伝えられているが、制約を示されたほうが人は安心して生きられるところもあるのである。\n\n(中略)ぼくは、自由を理解し、自由を享受し、自由を主張するためには、無免許であってはならないと思っている。少なくとも許されることと、許されざることの判別が可能な人だけに交付されるべきなのである。\n\n(阿久悠『清らかな厭世-言葉を失くした日本人へ』による)`,
+    notes: "(注1)全幅:最大限<br>(注2)手並:技量<br>(注3)リアクション:反応<br>(注4)戦慄を覚える:ここでは、ひどく恐ろしいと感じる",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①それが実感できる</span>とあるが、何が実感できるのか。",
+        choices: [
+          "自由という言葉の重さ。",
+          "自由という言葉のあいまいさ。",
+          "自由という言葉の解釈の違い。",
+          "自由という言葉の使い方の難しさ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②自由におやり下さいと言われると</span>、どのように感じると筆者は述べているか。",
+        choices: [
+          "失敗すると思われている。",
+          "責任を押しつけられている。",
+          "思いどおりにやらせてもらえる。",
+          "あまり頼りにならないと思われている。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "この文章で筆者が最も言いたいことは何か。",
+        choices: [
+          "自由を定義できなければ、自由を主張するべきではない。",
+          "自由の本当の意味がわからなければ、自由を与えられるべきではない。",
+          "自由に伴う責任を感じられなければ、自由という言葉を使うべきではない。",
+          "自由と不自由の違いがわからなければ、自由に生きることを許されるべきではない。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 28,
+    title: "BÀI 28 - 12/2014",
+    passageHTML:
+`不安は、正体がつかみきれないときほど膨らんでいく。長く引きずる。\n\n人間だれでも、自分に都合の悪いこと、恐ろしいことは考えたくない。そういう心理が働くから、無意識のうちに問題をあいまいにして解決を保留にする。\n\nそうして結局、<span class=\"underline-q\">いつまでも不安をダラダラと抱え続けてしまう</span>。\n\n逆に自分の何がどのように不安なのか、不安に思う必要があるのかどうかを把握すれば、それだけで不安は減る。\n\n不安の正体が明確になって、これは何かしなくてはまずいと認識されれば、それは「危機感」になる。危機感は不安と違う。危機感をもてば、行動を起こそうという意欲が湧く。さらに情報を集めて、行動計画をたてようとする。やるべきことが明確になる。だからスタートが切れるのだ。\n\n問題は鍵となる不安は何なのかということだ。様々な不安の中から、それを特定して意識する。その不安は、思いきり光を当てて自分で正体を見極められれば、次にどうすればいいかの対策も講じられる。\n\n(中略)不安には、しばらく保留にしておいても大丈夫な不安もある。それがわかった瞬間、不安は、また少し減る。\n\nこうして、自分が何をやらなければいけないかが見えてくる。やる気が出てくる。動く気になる。不安の解決策を考えながら、夢が膨らんでくることもある。\n\n(佐々木直彦『「仕事も人生もうまくいく人」の考え方』による)`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">いつまでも不安をダラダラと抱え続けてしまう</span>とあるが、なぜか。",
+        choices: [
+          "不安の原因がいくつもあって対処できないから。",
+          "不安について考えることを避けてしまうから。",
+          "不安が一人では解決できないほど大きいから。",
+          "不安に向き合うと不安はさらに膨らんでいくから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、危機感をもつとどうなるか。",
+        choices: [
+          "次の行動に移れる。",
+          "行動に自信がもてる。",
+          "不安の原因が把握できる。",
+          "不安の正体を突き止めたくなる。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "不安について、筆者はどのように考えているか。",
+        choices: [
+          "解決しやすい不安から順々に対応するといい。",
+          "保留にするべきではない不安をまず特定するといい。",
+          "不安を感じたときはすぐに解決策を考えて実行するといい。",
+          "不安の原因が何かわかるまでしばらく保留にしておくといい。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 29,
+    title: "BÀI 29 - 12/2014",
+    passageHTML:
+`自分の泣いているときの表情や、笑ったときの表情をまともに見たことのある人は、まずない。\n\n写真やビデオになれば、自然な笑いがおさめられることもあるかもしれないが、そこに映っているのは過去のそれであって、いま内側から生きている感情と重なり合うものではない。その点、鏡ならばそれを同時に捉えられそうにもみえる。しかし、じっさいには自分が笑っているとき、その笑っている自分の顔を見たとたん、もはや笑いつづけられなくて、さっと笑いがさめてしまうものである。泣いているときも同じである。(中略)自分の表情を視覚的に捉えることには、そもそも無理がある。他方、他者の表情を内的に捉えることも、私たちが他者の身体を内側から生きることができない以上、不可能である。ならば他者の表情の理解はほんらい不可能なことだということになるはずだが、私たちは日頃から、表情の理解が不可能だとか、困難だとか、ほとんど思いもしない。現に私たちは他者のわずかな表情の変化にも敏感であるし、その表情の理解を土台にすることで人間関係の基本部分を成り立たせている。\n\n表情は、ほぼ人類に共通であって、微妙な表情は別として、人種がちがっても、それを読み間違うことはまずない。含み笑いとか、苦笑い、あるいは愛想笑いとかいったものだと、同じく笑いでも文化差があって、読み間違うことがあるかもしれないが、典型的な表情に関してはまず間違わない。そうだとすれば類としての人間のなかに、表情を通して人どうしわかり合うメカニズムが、個の単位を越えて存在するものと考えねばならない。\n\n（浜田寿美男『「私」とは何か』による）`,
+    notes: "",
+    questions: [
+      {
+        q: "いま内側から生きている感情と重なり合う表情について、筆者はどのように考えているか。",
+        choices: [
+          "写真やビデオだけでなく、鏡でも見ることができる。",
+          "写真やビデオはもちろん、鏡ですら見ることはできない。",
+          "写真やビデオでは見られるが、鏡では見ることができない。",
+          "写真やビデオでは見られないが、鏡では見ることができる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "他者の表情を理解することについて、筆者はどのように考えているか。",
+        choices: [
+          "人間関係が成立すれば容易に理解できるが、それ以前には困難である。",
+          "人間関係を成立させる上で理解が欠かせないが、現実には容易ではない。",
+          "理解できないはずだが、現実には人間関係を構築する基盤になっている。",
+          "理解しようと努力することが、人間関係を構築する上で役立っている。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えに合うものはどれか。",
+        choices: [
+          "表情から理解し合うことは、人間に備わったメカニズムだと考えられる。",
+          "感情を表情で表現することは、人間に共通するメカニズムだと考えられる。",
+          "他者の表情を理解するメカニズムは、経験を通して精巧になると考えられる。",
+          "典型的な表情の違いを理解するメカニズムには、文化差があると考えられる。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 30,
+    title: "BÀI 30 - 12/2014",
+    passageHTML:
+`<span class=\"underline-q\">多くの大人</span>は、子供よりも先に生きているから、自分の方が人生を知っていると思っている。しかしこれはウソである。彼らが知っているのは「生活」であって、決して「人生」ではない。生活の仕方、いかに生活するかを知っているのを、人生を知っていることだと思っている。そして生活を教えることが、人生を教えることだと間違えているのである。\n\nしかし、「生活」と「人生」とはどちらも「ライフ」だが、この両者は大違いである。「何のために」生活するのと問われたら、どう答えるだろう。\n\nこういう基本的なところで大間違いをしているから、小中学校で仕事体験をさせようといった愚にもつかない(注1)教育になる。(中略)生活の必要のない年齢には、生活に必要のないことを学ぶ必要があるのだ。それはこの年齢、このわずかな期間にのみ許された、きわめて貴重な時間なのだ。生活に必要のないことは、人生に必要なことだ。すなわち、人生とは何かを考えるための時間があるのは、この年代の特権なのである。\n\n「人生とは何か」とは、そこにおいて生活が可能となるところの生存そのもの、これを問う問いである。「生きている」、すなわち「存在する」とは、どういうことなのか。\n\nこの問いの不思議に気がつけば、どの教科も、それを純粋に知ることの面白さがわかるはずだ。国語においては言葉、算数においては数と図形、理科においては物質と生命、社会においては人倫(注2)、どれもこの存在と宇宙の不思議を知ろうとするものだと知るはずだ。人間精神の普遍的な営みとして、自分と無縁なものはひとつもない。どれも自分の人生の役に立つ学びだと知るはずなのだ。\n\n(池田晶子『人間自身一考えることに終わりなく』による)`,
+    notes: "(注1)愚にもつかない:ここでは、ばかばかしい<br>(注2)人倫:人として守るべき道",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">多くの大人</span>について、筆者はどのように考えているか。",
+        choices: [
+          "生活も人生もわかっていない。",
+          "生活と人生の違いがわかっていない。",
+          "生活と人生の両方を教えている。",
+          "生活と人生の違いを教えている。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、子供にとって必要なのはどのような時間か。",
+        choices: [
+          "働くことの意義を考える。",
+          "人生と生活の違いを学ぶ。",
+          "生活に必要なことを学ぶ。",
+          "人が生きている意味を考える。3.「人生とは何か」と問うことによって、筆者は何がわかると考えているか。",
+          "自分がなぜ存在しているかということ。",
+          "すべての学びが自分にとって有益だということ。",
+          "教科で扱われている事柄は生活に必要だということ。",
+          "人間が存在すること自体が不思議であるということ。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 31,
+    title: "BÀI 31 - 07/2015",
+    passageHTML:
+`私たちは、日々、大量の情報を処理しなければならない現代において、本もまた、「できるだけ速く、たくさん読まなければいけない」という一種の強迫観念にとらわれている(注1)。「速読コンプレックス」と言い換えてもいいかもしれない。しかも、楽をしてそれができるのであれば、言うことはない。巷（ちまた）に溢れかえっている速読法を説く本は、<span class=\"underline-q\">①そうした心理</span>に巧みにつけこむ(注2)ように書かれている。\n\nもちろん、時と場合によっては、速く読むことも必要だろう。「明日までに大量の資料を読んで書類を作らなければいけない」といった状況下では、速読や斜め読み(注3)は避けられないだろう。しかしそれは、単に一時的な情報の処理であり、書かれた内容を十分に理解し、その知識を、自分の財産として身につけるための読書ではない。単に、情報の渦の中に否応なく巻き込まれてしまっているだけで、自分の人生を、今日のこの瞬間までよりも、さらに豊かで、個性的なものにするための読書ではないのである。\n\n読書を楽しむ秘訣は、何よりも、[速読コンプレックス]から解放されることである!本を速く読まなければならない理由は何もない。速く読もうと思えば、速く読めるような内容の薄い本へと自然と手が伸びがちである。その反対に、ゆっくり読むことを心がけていれば、時間をかけるにふさわしい、手応えのある本を好むようになるだろう。\n\n(平野啓一郎『本の読み方スローリーディングの実践』による)`,
+    notes: "(注1)強迫観念にとらわれている:ここでは、強い思い、から逃げられない<br>(注2)～に巧みにつけこむ:ここでは、~をうまく利用する<br>(注3)斜め読み:ざっと読むこと",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①そうした心理</span>とあるが、どのような心理か。",
+        choices: [
+          "本をたくさん読めるようになりたい。",
+          "大した努力なしに速読法を身につけたい。C.「速読コンプレックス」に縛られずに読みたい。",
+          "内容を理解しなければという思いから解放されたい。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、速読をしなければならないのはどのようなときか。",
+        choices: [
+          "情報の渦の中に巻き込まれないようにするとき。",
+          "多くの情報を急いで処理しなければならないとき。",
+          "多くの知識を自分のものとして蓄えようとするとき。",
+          "社会の変化の速さに取り残されないようにするとき。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、読書を楽しむにはどうすればよいか。",
+        choices: [
+          "手応えのある本を繰り返し読む。",
+          "本の内容に応じて速さを変えて読む。",
+          "速さにこだわらずできるだけ多くの本を読む。",
+          "速さや量にこだわらず時間をかけて本を読む。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 32,
+    title: "BÀI 32 - 07/2015",
+    passageHTML:
+`中学生や高校生の頃、歴史の時間が退屈だった。\n\n(中略)そんな私が四十歳の頃から歴史に興味を持ち始めた。何かを調べるとその辺りに知識の島ができ、別のことを調べるとまた別の島ができる。そのうちに孤立していたはずの二つの島が橋でつながる。「こういうことだったのか」という<span class=\"underline-q\">①驚きがある</span>。一見関係のなさそうな二つのものが結びつくという意外性は、自然科学における醍醐味の最たるものでもある。歴史を調べれば調べるほど島々がネットワークのように結ばれて行く。人間や情報は地球上を移動するから当然なのだが、ネットワークの構築はなぜか脳にすこぶる心地よい。その上あらゆる現象に人間が絡んでいて余計に面白い。\n\n<span class=\"underline-q\">②歴史</span>とは地球を舞台とした途方もなく(注1)壮大な演劇なのだ。自分や先祖も舞台の隅で参加している。それに人間の本質は変わらないから、人は似た状況で似たヘマ(注2)を何度も繰返す。だから現在を考えるのに実に役立つ。\n\n若い頃にこの面白さに気付いていれば、今と違い記憶力もよかったから強大かつ緻密なネットワークを完成することができ演劇をもっと深く味わえたのにとも思う。無理だったかもしれない。中年にさしかかって初めてこれまで生きてきた、そしてそう遠くない将来に消える自分の立位置を確かめたくなるからだ。家系を調べたくなったり先祖や自らがどのような時代の流れの中で生を受け生を営んできたかをしりたくなる。無邪気なままこの世から退場したくなるのだ。十代で歴史に興味を持つ者の気持ちは私には不思議だが、中年になって歴史に興味を持たない者の気持ちはそれ以上に不思議だ。\n\n（藤原正彦『週刊新潮』2010年10月28日号による）`,
+    notes: "(注1)途方もない:とんでもない。比べるものもない。<br>(注2)ヘマ:失敗",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①驚きがある</span>とあるが、なぜ驚いたのか。",
+        choices: [
+          "調べれば調べるほど、歴史の新しい事実がわかってくるから。",
+          "自分は歴史が嫌いだと思っていたが、実は好きであることを発見したから。",
+          "全く別だと思っていたものの間に、思いがけない関連性が見えてくるから。",
+          "関連性があると思っていたものが、全く関係がないことがわかったから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が考える<span class=\"underline-q\">②歴史</span>とはどのようなものか。",
+        choices: [
+          "先祖や自分たちもかかわって作ってきたドラマ。",
+          "自分たちの先祖が残した完成されたドラマ。",
+          "自分が生きてきた時代を映したドラマ。",
+          "過去の人間が複雑に絡んでいるドラマ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の気持ちに合っているものはどれか。",
+        choices: [
+          "若いうちは歴史に興味がないのに中年になって自然に興味がわいてくるのは驚きだ。",
+          "少しでも歴史を学べば時代の流れの中での自分の位置を知りたくなるのは当然だ。",
+          "中年になって歴史における自分の位置を知ろうとしない人もいることは意外だ。",
+          "十代のうちに歴史に関する知識のネットワークを構築しておくことが大切だ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 33,
+    title: "BÀI 33 - 07/2015",
+    passageHTML:
+`人類は、「都市」という空間をつくったときに、それまでの部族的（注1）、あるいは村落的な社会空間とは本質的に異なる社会空間を経験した。村落においては人々は、共に生き、共に死んでいくものとして、互いのこと、そのまた親の世代のこと、祖先のことまで熟知していることを前提とした社会的な関係を形成する。都市の街頭においては、人々は、互いの匿名性を前提として、見ず知らずの他人同士の視線によるコミュニケーションを交わす。都市のなかの市場では相手の人柄や家族のことなどなにも知らないことを前提とした商品の売買や機能的な結びつきを形成する。さらにそれを恒常化した組織も、村落の人と人の関係とは違って人々の分業を最適な状態で実現するための機能的なつながりである。\n\n都市の社会空間の経験は、人類にとっての社会のイメージを決定的に変えたし、したがって自己のイメージも変えた。\n\n人々は、自分を個人という単位として意識する機会が多くなり、財は一族（注2）や集団のものではなく、個人のものと意識され、才能は個々の人間の属性（注3）として考えられるようになった。都市の人間の間にも、うわさが飛び交うような口頭のコミュニケーションは発達したが、都市社会が大型化し、複雑化するにしたがって、それだけでは情報の共有に不安定性が拡大してくる。マスメディアは、誰でもアクセス可能であることを原理とする一方向の公開型メディアである。そのため、都市型のコミュニケーションを補完(注4)し、あるいはそれを強化する機能をになっている。\n\n（成田康昭『メディア空間文化論一いくつもの私との遭遇』による）`,
+    notes: "(注1)部族:共通の文化を持つ地域的集団<br>(注2)一族:血縁関係の集団<br>(注3)属性:人やものに備わる固有の性質<br>(注4).補完する:補う",
+    questions: [
+      {
+        q: "都市の社会空間の特徴について、筆者はどのように述べているか。",
+        choices: [
+          "人々が他人に関心を持たず、社会的なつながりが希薄になっている。",
+          "人々が互いを知らないことを前提として、機能で結びついている。",
+          "人々が相手との親密さより、機能的なつながりを優先している。",
+          "人々が匿名性を前提としたコミュニケーションを好んでいる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "都市の社会空間の経験によって、人々の自己に対する意識はどう変わったか。",
+        choices: [
+          "集団のなかの一員という立場を意識するようになった。",
+          "個人であるということをより強く自覚するようになった。",
+          "自分が果たすべき義務をより明確に意識するようになった。",
+          "自分の才能は社会のなかで生かすべきものだと考えるようになった。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "都市社会におけるマスメディアについて、筆者はどのようにとらえているか。",
+        choices: [
+          "人々の間の情報共有を安定させている。",
+          "人々の社会的な関係を強化している。",
+          "情報の複雑化を抑制している。",
+          "口頭のコミュニケーションの発達を促している。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 34,
+    title: "BÀI 34 - 12/2015",
+    passageHTML:
+`以下は、ある映画監督が書いた文章である。\n\n勝負を続けている限りは、負けは確定しない。勝ったり負けたりしながら、人生は続いていく。ただ、勝負を続けていくうちにだんだん勝負勘がついてくるし、くだらない失敗はしなくなってくる。スキル(注1)が上がってくるからだ。\n\n映画の話で言えば、僕は映画制作のシステムそのものに、大負けをしない仕掛けを組み込んだ。それは、<span class=\"underline-q\">①「他人と仕事をする</span>」ということだ。他人という客観性を映画制作の現場に持ち込めば、独りよがり(注2)な作品に突っ走ることを彼らが防いでくれる。それに僕は優秀な人としか組まないから、僕ひとりで何もかも考えるよりずっと映画の質は高くなるのだ。\n\n勝負を続けていると、思わぬ成果が飛び込んでくることがある。かつて負けたと思い込んでいた勝負に、後になって勝ってしまうことがあるのだ。僕の例で言えば、愚直(注3)に映画を撮り続けて、ある程度の評価を得るうちに、かつてボロクソに言われ(注4)た作品に光が当たり、再評価されるようなこともある。(中略)だから<span class=\"underline-q\">②絶対に勝負を諦めてはいけない</span>。ただし、常勝を狙うのは禁物だ。勝負をしなければ勝つことはできないが、必ず勝とう、絶対に失敗しないようにしようと意気込んだら、緊張感や気負いや、そんな余計なものを背負い込んで結果的に負けてしまう。\n\n(押井守『凡人として生きるということ』による)`,
+    notes: "(注1)スキル:技術<br>(注2)独りよがりな:ここでは、自己満足の<br>(注3)愚直に:ここでは、まじめに、こつこつと<br>(注4)ボロクソに言われる:ここでは、ひどい評価を受ける",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①「他人と仕事をする</span>」ことの利点について、筆者はどのように述べているか。",
+        choices: [
+          "負けた責任をひとりで背負わなくて済むため、楽な気持ちで作品が作れる。",
+          "思い込みによる失敗がなくなり、誰にでも受け入れられる作品が作れる。",
+          "仕事の負担が減り、作品の質を高めることに集中できる。",
+          "作品の客観性が保たれる上に、質も上げられる。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②絶対に勝負を諦めてはいけない</span>とあるが、なぜか。",
+        choices: [
+          "後で作品の価値が認められることがあるから。",
+          "よい作品は必ず評価されるものだから。",
+          "どんな勝負にも得るものがあるから。",
+          "勝負に慣れて緊張しなくなるから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、勝負を続ける上で気をつけるべき点は何か。",
+        choices: [
+          "勝負以外のことは考えてはいけない。",
+          "勝ち負けにこだわってはいけない。",
+          "いつも勝とうと思ってはいけない。",
+          "負ける自分を想像してはいけない。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 35,
+    title: "BÀI 35 - 12/2015",
+    passageHTML:
+`環境が高速化しても、私たちの神経的な伝達速度や知覚認知の処理時間は変化しないことから、人間が一時にできる認知的課題の数もそれほど変わらないことが推察される。\n\nこのことは、様々な情報が手に入り、やりたいこと、したいこと、そして実際にできる可能性が高まったとしても、<span class=\"underline-q\">①実際にできる事柄の数がそれほど増えるわけではない</span>ことを示唆している。\n\nもちろん、技術革新によって、一つの事柄をやり遂げるまでに要する時間は大いに短縮された。筆者自身、パーソナルコンピュータを使って論文などを書くようになって、論文一本あたりにかける時間と労力はずいぶん減少したと思う。特に、原稿を清書したり作図したり、という手作業の段階に要する時間はかなり減った。\n\nしかし、そうはいっても、論文を書く際に論理展開をまとめるのに要する時間はそれほど短縮されるわけではない。考えるためには、どうしてもそれなりの時間が必要だ。\n\n(中略)人間が一つのことをやり遂げるにはどうしても一定の時間がかかる。その時間が技術革新や経験、学習によって、増えた欲望を満たすのに必要な時間以上に短縮されないとしたらどうなるだろうか。当然、潜在的な可能性に基づいて肥大する欲望のうち、実際に満たされるものは一部のみということになる。この場合、やりたいこと、やれるはずのことは数多くあるのに、なかなかそれが実現できない<span class=\"underline-q\">②ジレンマが生じる</span>。\n\nそうなると、むしろ、できる事柄が少なかったころよりも時間が足りず、忙しく、やりたいことができないという感覚が強くなっているかもしれない。\n\n（一川誠『大人の時間はなぜ短いのか』による）`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①実際にできる事柄の数がそれほど増えるわけではない</span>のはなぜか。",
+        choices: [
+          "人間は高速化した環境では考える時間があまりないから。",
+          "人間が物事を認知できる速度はあまり変化しないから。",
+          "人間の認知的な能力を超えた課題が増えているから。",
+          "人間に与えられた時間は限られているから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "技術革新によって、一つの事柄の完成に要する時間はどうなったか。",
+        choices: [
+          "質の高さが求められるようになったため、完成までの時間は変わらない。",
+          "考える時間は短縮されないため、完成までの時間は変わらない。",
+          "様々な情報が入手しやすくなり、完成までの時間も短縮された。",
+          "手作業の時間が短縮された分、完成までの時間も短縮された。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②ジレンマが生じる</span>とあるが、なぜか。",
+        choices: [
+          "人間の欲望が増えすぎて、できることとできないことが見極められないから。",
+          "人間の欲望は増えたが、欲望を満たすのに必要な時間は短くならないから。",
+          "技術革新で作業効率が上がったが、しなければならないことも増えているから。",
+          "技術革新の速度が速すぎて、追いつくのが難しくなっているから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 36,
+    title: "BÀI 36 - 12/2015",
+    passageHTML:
+`類人猿（注1）の四足歩行と人間の二足歩行を比べると、時速4kmくらいの速度で歩くと、二足歩行のほうがエネルギー効率がいい。しかも長く歩けば歩くほどエネルギーの節約率が高くなる。すなわち、初期の人類は長い距離をゆっくりした速度で歩く必要性に迫られて、直立二足歩行を採用したと考えられるのだ。これは初期の人類が徐々に熱帯雨林を出ようとしていたこととぴったり符合する（注2）。熱帯雨林の外では果実が散在していて、広い範囲を探し回る必要がある。これを可能にする歩行様式として、二足で歩くことが有利になった可能性がある。\n\nしかし、長距離を歩くことになると群れの全員がまとまって移動するのは困難になる。子どもや身重（注3）の女性、老人など速い速度で長距離を歩くことがむずかしい仲間がいる。そのため、体力のある男たちが少数のグループを組み、広く歩き回って食物を集め、それを女や子どもたちのもとへ持ち帰っていっしょに食べたのではないかと思われるのだ。これが食物共有仮説である。だが、サバンナへ出たサルたちは二足にならなかった。なぜ人間だけがなったのか。それは、サバンナ（注4）へ出たパタスザルやアヌビスヒヒ、マントヒヒたちはオスがメスより格段に大きくなり、長い犬歯を発達させて群れの防御をするようになったからである。しかも胃腸の強い彼らは人類ほど広い範囲を歩き回って食物を探す必要はなかった。一方、<span class=\"underline-q\">人類の祖先</span>は男が大きくなるどころか、性差が小さく、犬歯(注5)も縮小して武器としては使えなくなっている。これは人類の男たちが捕食動物と戦うよりも、その目を避けながら食物を探し歩いていたことを物語っている。\n\n(朝倉敏夫編『火と食』による)`,
+    notes: "(注1)類人猿:生物学上、最もヒトに近いサル類<br>(注2)符号する:合う<br>(注3)身重:妊娠中<br>(注4)サバンナ:熱帯地方に見られる草原<br>(注5)犬歯:ここでは、特に鋭い歯",
+    questions: [
+      {
+        q: "筆者によると、人類が二足歩行を採用したのはなぜか。",
+        choices: [
+          "広い範囲を長く歩き続けられるから。",
+          "広い範囲を時間をかけずに移動できるから。",
+          "遠くまで見渡しながら歩けるから。",
+          "必要に応じて速度を変えながら歩けるから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "群れの行動は、二足歩行によってどのように変化したと考えられるか。",
+        choices: [
+          "移動が困難な者がグループを組み、ゆっくり食物を探し歩くようになった。",
+          "移動が困難な者を体力のある者が助けながら、共に食物を探すようになった",
+          "体力のある者のグループができ、その中で食物を共有するようになった。",
+          "体力のある者のグループができ、移動が困難な者に食物を分け与えるようになった。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">人類の祖先</span>について、筆者の考えに合うのはどれか。",
+        choices: [
+          "男たちが身体をより大きく見せて群れを防御していた。",
+          "男たちが捕食動物との遭遇を避けながら食物を探し回っていた。",
+          "男たちが捕食動物からできるだけ遠くへ逃げて身を守っていた。",
+          "男たちが武器を持って群れを防御しながら食物を探し回っていた。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 37,
+    title: "BÀI 37 - 07/2016",
+    passageHTML:
+`いつでも帰ってこられる場所があると思っていられるのは、ずいぶんと心強いことだと思うんです。別に帰ってこなくてもいい。<span class=\"underline-q\">「帰れるところがある」と思っている人</span>と、そんな場所がない人では、人生の選択肢の数が違う。当たり前ですけれど、「退路のある」人の方が発想がずっと自由になれる。ずっと冒険的になれる。\n\n親子関係も同じじゃないかと思います。10年ほど前に高校を卒業した娘が東京へ行くときに、ぼくが娘に言ったのは二つだけです。「金なら貸すぞ」と「困ったらいつでも帰っておいで」。親が子どもに向かって言ってあげられる言葉はこれに尽きるん（注1）じゃないでしょうか。泊まるところがなかったら、いつだって君のためのご飯とベッドは用意してあるよ。この言葉だけは親はどんなことがあっても意地でも言い続けないといけないと思うんです。「そんなに甘やかすと自立の妨げになる」と苦言を言う人もいますけれど、ぼくはそれは違うと思う。\n\n「人間は弱い」というのがぼくの人生観の根本なんです。だから、最優先の仕事はどうやってその弱い人間を慰め、癒し、支援する場を安定的に確保するか、です。\n\n（中略）家は、メンバーのポテンシャル(注2)を高めたり、競争に勝つために鍛えたりするための場じゃない。そういう機会なら家の外にいくらでもある。家というのは、外に出て、傷つき、力尽き、壊れてしまったメンバーがその傷を癒して、また外へ出て行く元気を回復するための備えの場であるべきだとぼくは思っています。\n\n（内田樹「ぼくの住まい論」による）`,
+    notes: "(注1)これに尽きる:これしかない<br>(注2)ポテンシャル:ここでは、可能性",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">「帰れるところがある」と思っている人</span>について、筆者はどのように述べているか。",
+        choices: [
+          "人生の選択肢に迷わない。",
+          "人生の可能性が広がる。",
+          "自分に自信が持てる。",
+          "将来に不安を感じない。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は親が子どものためにどうすればよいと考えているか。",
+        choices: [
+          "いつでも助けてあげられることを伝える。B.「人間は弱い」ということを教える。",
+          "自立の妨げになることをしない。",
+          "将来お金に困らないようにする。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は、家はどのような場であるべきだと考えているか。",
+        choices: [
+          "競争に勝つためにさらに自信をつける場",
+          "社会で自立するための能力を身につける場",
+          "どんなときでも、穏やかな気持ちになれる場",
+          "つらくなったときでも、活力を取り戻せる場"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 38,
+    title: "BÀI 38 - 07/2016",
+    passageHTML:
+`何であれ、一個の製品を完璧に仕上げるのに要求される技能は、たいへんなものです。そんな芸当(注1)が可能な職人の数は限られていることでしょう。作り出せる製品の数も、自然と限られています。ところが、作業工程を細分化してみますと、個々の工程は意外に単純だったりします。より単純な、一つの工程であれば、きちんとこなせる職人の数は、製品をまるごと作れる職人の数に比べて、ずっと多くなるでしょう。また、未熟練だった職人が腕を上げる(注2)のも、より単純な一工程に限定しての話であれば、ずっと容易です。作業の細分化と役割分担、つまり分業化は、確かに<span class=\"underline-q\">①生産性を向上させる</span>ものなのです。\n\n一個の経済に属するということは、その経済に属する他の人たちと分業関係を取り結ぶことを意味します。あなたの仕事も、同じ日本に住んでいる面識もない誰かの仕事も、<span class=\"underline-q\">②同じ分業の網の目に属している</span>のです。今では分業関係は世界全体に広がっていますから、あなたがした仕事が、地球の裏側にいる誰かのした仕事と組み合わせているということも、さらにあります。そして、分業の網の目が全世界に広がり、たとえば一個の工業製品を生産するために、構想からデザイン、原型の製作、部品の製造、組み立てといったさまざまな作業が全世界に広がっている現代は、確かに人類史上最も豊かな時代なのです。\n\n(徳川家広「自分を守る経済学」による)`,
+    notes: "(注1)芸当:普通の人にはまねのできない技<br>(注2)腕を上げる:技術を上達させる",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①生産性を向上させる</span>とあるが、なぜか。",
+        choices: [
+          "作業工程が細分化されると、一つの作業が速くなるから。",
+          "作業工程が細分化されると、職人でなくてもできるから。",
+          "一工程であれば、仕上げられる職人の数が増えるから。",
+          "一工程であれば、どんな職人でもできるから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②同じ分業の網の目に属している</span>とは、どのようなことを意味しているか。",
+        choices: [
+          "一連の作業工程の中の一つの役割を担っているということ。",
+          "作業工程が細分化されて分業関係が多様であるということ。",
+          "誰もがどの工程でもこなせる状態にあるということ。",
+          "同じ工程を分担している人が数多くいるということ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は現代をどのような時代だと考えているか。",
+        choices: [
+          "世界全体に熟練した職人の技術が広められている。",
+          "世界全体の分業関係で経済が成り立っている。",
+          "世界中で工業製品の品質が高くなっている。",
+          "世界のすべての国で分業が重視されている。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 39,
+    title: "BÀI 39 - 07/2016",
+    passageHTML:
+`以下は、長年インタビューを仕事にしている人が書いた文章である。\n\n何かと取材しつくされたような今の時代にも、乗った電車で横に座った、ぐらいの近くにいる普通の人たちの辿った過去、精神的な道のりを取材することには<span class=\"underline-q\">①可能性</span>が残されている。これは幸福な感触だった。普通の人に対して、話題の人物と同じような方法でなるべく丁寧に話をうかがってみたけれど（そのうちの一部分は、これはある職業における普通の人たちへのインタビューとして、昨年発表した拙著「善き書店員」という本にまとめた。特殊な人物の発言よりむしろそんな普通の人たちの実感こそ、数十年後に振り返れば時代の証言にも聞こえるのではと思うようになっていった。<span class=\"underline-q\">②有意義な取材</span>が開拓されきったような空白の時代に、特別で極端な物語はもういいやという状況で隙間を見つけようとして、そこら辺にごろんと転がっている声の実りにたまたま気づかされたわけだ。\n\n過去は、文句の言えない形で<span class=\"underline-q\">③「これだ」と見せられるようなものではない</span>。映像などで記録されていてさえ、人物の内面で起きた心の大事件みたいなものは捉えられなかったりもする。解釈は変化するから、同じ出来事への同じ人物の談話も十年前と今でかなり異なることもよくあり、つまり過去は人物の内面で揺れ動き続けていて、形を持たない怪物のようでもある。過去の解釈は、本人が切実に感じているからこそ人生に陰影を与えるため、主観の記憶の何が真実かさえも重要ではない場面がある。有名無名を問わず、さまざまな方に取材で話をうかがううちに、この過去という確固たる形を持たず動き続ける怪物にこそ人間は振り回されたり、あるいは歩き続けていくための滋養(注)をもらったりするようだな、と思うようになっていった。\n\n(木村俊介「暮しの手帖」2014年6-7月号による)`,
+    notes: "(注)滋養:ここでは、栄養",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①可能性</span>とはどのようなことか。",
+        choices: [
+          "普通の人のほうが、丁寧に取材に応じてくれること。",
+          "普通の人の実感に、取材すべきものを見いだせること。",
+          "普通の人への取材では、共感できる話を聞けること。",
+          "普通の人への取材のほうが、幸福な時間に感じられること。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②有意義な取材</span>とはどのようなものだったか。",
+        choices: [
+          "普通の人から時代の証言になるような話を聞く。",
+          "普通の人から数多くの普通の話を聞く。",
+          "話題の人物から日常の何げない話を聞く。",
+          "特別な人から特別な話を聞く。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "過去は<span class=\"underline-q\">③「これだ」と見せられるようなものではない</span>とあるが、なぜか。",
+        choices: [
+          "過去は心の中で形を変えていくものだから。",
+          "過去はあまりに多くの出来事を含んでいるから。",
+          "過去の記録は過去の一部でしかないから。",
+          "過去の記憶は徐々に薄れていくものだから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 40,
+    title: "BÀI 40 - 12/2016",
+    passageHTML:
+`人に従順な飼い犬は、もともとオオカミの仲間を飼い馴らしたものである。\n\n（中略）ところが、「人間がオオカミを飼い馴らした」という話には<span class=\"underline-q\">謎が多い</span>。犬が人間と暮らすようになったのは、15000年ほど前の旧石器時代のことであると推測されている。当時の人類にとって、肉食獣は恐るべき敵であった。そんな恐ろしい肉食獣を飼い馴らすという発想を当時の人類が持ち得たのだろうか。しかも犬を飼うということは、犬にエサをやらなければならない。わずかな食糧で暮らしていた人類に、犬を飼うほどの余裕があったのだろうか。また当時の人類は犬がいなくても、狩りをすることができた。犬を必要とする理由はなかったのである。\n\n最近の研究では、人間が犬を必要としたのではなく、犬の方から人間を求めて寄り添ってきたと考えられている。犬の祖先となったとされる弱いオオカミたちは、群れの中での順位が低く、食べ物も十分ではない。そこで、人間に近づき、食べ残しをあさるようになったのではないかと考えられているのである。\n\n弱いオオカミだけでは、狩りをすることができないが、人間の手助けをすることはできる。そして、やがて人間と犬とが共に狩りをするようになったと推察されている。こう考えると、当時、自然界の中で強い存在となりつつあった人間に寄り添うことは、犬にとって得なことが多かった。つまり、人間が犬を利用したのではなく、犬が人間を利用したかもしれないのである。\n\n（稲垣栄洋『弱者の戦略』による）`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">謎が多い</span>とあるが、謎に合うのはどれか。",
+        choices: [
+          "犬ではなくオオカミを飼おうとしたこと",
+          "オオカミを肉食獣だと思わなかったこと",
+          "恐ろしいオオカミを飼って利用しようと考えたこと",
+          "狩りの邪魔になるのに恐ろしいオオカミを飼おうとしたこと"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、どのようなオオカミが犬の祖先だと考えられるか。",
+        choices: [
+          "人間から頼りにされたオオカミ",
+          "狩りの上手なオオカミ",
+          "群れから追い出されたオオカミ",
+          "群れの中で下位のオオカミ"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "犬の祖先が人間と暮らすようになったきっかけについて、筆者はどのように考えているか。",
+        choices: [
+          "人間を利用して仲間からの危険を避けようとした。",
+          "人間に近づいて食糧を得ようとした。",
+          "人間が狩りの手助けをさせた。",
+          "人間がエサを与えた。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 41,
+    title: "BÀI 41 - 12/2016",
+    passageHTML:
+`子どもはこれから自分は大人になっていくのだから、自分はどうなるのだろうとそれは一生懸命に大人を観察している。その大人に魅力を感じれば、あんなふうになりたいと思うかもしれない。ほんのちょっとチャーミングなところを認めて、ああ失敗しても、どじ(注1)ばかりでもいいんだと思えることもあるかもしれない。あるいは、僕はあんな大人にはならないだろうけれど、あんなふうにするのもすてきだなと感じることもあるに違いない。とにかく子どもは、<span class=\"underline-q\">①そんなふうに</span>常に大人を見ているのである。\n\n（中略）子どもはやがて大人になる。その大人に魅力がなかったら、それは自分に明日がないと言われているのと同じことだ。大人になってもつまらなそうだ。楽しいことがなさそうだと感じたら、君の未来はこの程度のものだとつきつけられているのと変わらない。<span class=\"underline-q\">②これほど子どもにとって不幸なこ</span>とはない。\n\n大人はいつも子どもに見つめられている、子どもが自分を観察しているということを自覚していなければいけないと思う。わが身をつくろって、いいかっこするのではない。正直に失敗するのなら、子どもより上手に失敗してみせよう、傷つくなら子どもより上手に傷ついてみせよう。人生の先輩としてというより、現役の子どもに対してベテランの子どもとして、ベテランらしいところを見せてやろうじゃないか。そういう気概の(注2)大人がたくさんいれば、子どもたちはきっと大人の世界に魅力を見いだすに違いない。それが幸福な子どもの将来につながるのだと思う。\n\n（大林宣彦『父の失恋娘の結婚一べそっかきの幸福そうな顔』による）`,
+    notes: "(注1)どじ:うっかりした失敗<br>(注2)気概の:ここでは、強い気持ちを持った",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①そんなふうに</span>とあるが、子どもはどんなふうに大人を見ているのか。",
+        choices: [
+          "早く大人になりたいと思っている。",
+          "大人の姿から魅力的な部分を探している。",
+          "自分が失敗したときどうするか考えている。",
+          "あんな大人にはなりたくないと思っている。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②これほど子どもにとって不幸なこ</span>とはないとあるが、何が不幸なのか。",
+        choices: [
+          "大人を見ても未来の自分に希望が持てないこと。",
+          "大人を見てもすてきな大人になる自信が持てないこと。",
+          "大人を見ても今何をしておけばいいか分からないこと。",
+          "大人を見ても将来自分のしたいことが見つからないこと。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が大人に対して伝えたいことは何か。",
+        choices: [
+          "人生の先輩らしく、いつもかっこいい大人でいよう。",
+          "ベテランの子どもとして、子どもを幸福な将来へ導いてあげよう。",
+          "子どもたちに、大人の魅力的な世界を教えよう。",
+          "子どもたちに、ベテランの子どもとしての行いを示そう。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 42,
+    title: "BÀI 42 - 12/2016",
+    passageHTML:
+`科学記者を始めた20年ほど前、記者の訪問を歓迎しない科学者は、けっして珍しくなかった。「新聞記者との付き合いには何のメリットもなく、時間の無駄。記者と親しい科学者は、同僚からうさんくさい目で見られる。真理の探究に没頭する科学者が、記者なんていう世俗を相手にしては沽券(注1)にかかわる」というわけだ。それが今は、まったく違う。科学者も、研究に税金を使うからには自分の仕事を積極的に世間に説明するのが当然だとみなされ、大学や研究所はメディア戦略を練るまでになった。<span class=\"underline-q\">変われば変わるものだ</span>。\n\n(中略).科学者側の広報が巧みになればなるほど、科学ジャーナリズム科学者集団のたんなる宣伝係で仕事をした気になってしまう恐れがある。\n\n「サイエンス」や英国の「ネイチャー」に載る科学者の論文を、どの新聞も毎週のように記事にして紹介している。その多くが、これらの論文誌の巧みな広報資料や研究者の記者発表をもとにしているのだが、これなどまさに、何を社会に伝えるかは自分で決めるというジャーナリズムの要(注2)を、科学者集団側になかば預けてしまっているのではないか。\n\n自分でネタ探しをするよりも、このほうがたしかに効率的なのだ。\n\n米国の科学ジャーナリズムの教科書には、科学者たちはマスメディアを自分たちの広報機関のようにとらえるものだと書いてある。科学ジャーナリズムは、広報戦略に長けてきた(注3)科学者たちとどう付き合っていくべきか。その哲学と戦略を、こちら側も改めて肝に銘じて(注4)おかなければならない時代になった。`,
+    notes: "(注1)沽券にかかわる:体面を損ねる<br>(注2)要:最も大切な部分<br>(注3)長けてきた:上手になってきた<br>(注4)肝に銘じて:忘れないように心にしっかりととどめて",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">変われば変わるものだ</span>とあるが、科学者はどのように変わったのか。",
+        choices: [
+          "以前は記者を世俗的だと見ていたが、現在はメディアを信頼するようになった。",
+          "以前は記者と距離を置いていたが、現在は積極的にメディアとかかわるようになった。",
+          "以前は同僚の目を気にしていたが、現在は記者の目をより気にするようになった。",
+          "以前は自らメディア戦略を練っていたが、現在は記者の力を借りるようになった。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "科学者との関係で、今のジャーナリズムにはどのような問題があるか。",
+        choices: [
+          "科学者が望む論文を記事にしていない。",
+          "科学者が十分満足できる広報をしていない。",
+          "科学者から提供された情報をそのまま伝えている。",
+          "科学者から提供された情報を十分理解せずに報じている。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "この文章で筆者が最も言いたいことは何か。",
+        choices: [
+          "科学者は、科学ジャーナリズムの立場をもっと理解すべきである。",
+          "科学者は、科学ジャーナリズムとの関係のあり方を改めて見直すべきである。",
+          "科学ジャーナリズムは、報道内容の決定にあたって主体的であるべきだ。",
+          "科学ジャーナリズムは、科学の価値を正しく認めてもらえるよう努めるべきだ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 43,
+    title: "BÀI 43 - 07/2017",
+    passageHTML:
+`よく知っている人を相手に自己を語るのは簡単だが、お互いによく知らない相手に自己を語るというのは非常に難しい。よく知っている相手との間に共通の文脈ができあがっているので、その文脈にふさわしい自分を提示していけばよいから、ほぼ自動化した形で自己を語ることができる。たとえば、相手がこちらのことを勇ましい豪傑（注1）とみなしているなら、自分の中の武勇伝（注2）的なエピソードを中心に語ることになるだろうし、相手がこちらのことを温厚な紳士とみなしているなら、自分の中のおだやかな部分を中心に語ることになるだろう。相手との文脈によって語り分けるからといって、けっしてだましているわけではない。どちらも<span class=\"underline-q\">嘘ではない</span>のだ。\n\n困るのは、よく知らない人が相手である場合だ。共通の文脈ができあがっていないため、どのような自分を語り出していけばよいのかがわからない。逆に言えば、共通の文脈による制約がないぶん、どんな自分でも自由に演出し、語り出していくことができる。だからこそ、迷い、悩んでしまうのだ。\n\nこうした事情からわかるのは、僕たちは自分のことをいろんなふうに語ることができるということだ。\n\n(中略)自分の姿がおぼろげに(注3)しか見えないうちから、まずは語ることを始めなければならない。語ることによって、自分の姿が語りの方向につくられていく。\n\n（榎木博明『(ほんとうの自分.のつくり方一一自己物語の心理学』による）`,
+    notes: "(注1)豪傑:勇気のある、強い人<br>(注2)武勇伝的な:ここでは、勇ましい<br>(注3)おぼろげに:ぼんやりと",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">嘘ではない</span>とあるが、何が嘘ではないのか。",
+        choices: [
+          "自分が語る自分と相手が語る自分",
+          "異なる相手によって語られた自分",
+          "相手に合わせて語り分けた自分",
+          "相手にとって良い自分と悪い自分"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "よく知らない相手に自分を語るのは、なぜ難しいのか。",
+        choices: [
+          "自分のどの側面を語ればよいか決められないから。",
+          "自分のすべての側面を語らなければならないから。",
+          "自分のイメージが相手によってつくられることになるから。",
+          "自分が演出したとおりに相手に思ってもらえないから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えを最もよく表しているものはどれか。",
+        choices: [
+          "よく知らない相手には、本当の自分を語ることが必要だ。",
+          "相手より先に、自分から語り始めることが重要だ。",
+          "相手とよく語り合うことによって、自分の形がつくられていく。",
+          "相手に自分を語ることによって、自分の形ができあがっていく。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 44,
+    title: "BÀI 44 - 07/2017",
+    passageHTML:
+`ウェブ時代に突入して、私たちの生活には、世界中のありとあらゆる情報が溢れかえることとなった。その量は膨大で、しかも、時間とともに流れ去ることもなく、データとして刻々と蓄えられ続けている。一方で、私たちの毎日はといえば、相も変わらず24時間しかなく、寿命は80年程度だ。どうやったって、そのすべてを網羅することなどできない。\n\n私たちは、仕方なく、どんな情報とも、どんな言葉とも、忙しなく(注1)、広く浅いつきあいをするようになって、ふと我に返ると、自分は果たして、本当に、以前よりも、世間や人間に対する理解が深くなっているのだろうかと、不安を感じるようになっている。\n\nそういう時代に、小説は、まさしく<span class=\"underline-q\">「小さく説く」</span>のである。\n\nこの広大無辺(注2)で、複雑極まりない世の中を、そして、そこに生きる人間の心の奥底を、誰の手のひらにでも収まるほどのコンパクトなサイズに圧縮して、濃密な時間とともに体験させてくれる。それが、小説だ。\n\n確かに小説は、絵や彫刻のように、一目で見ることのできる物体ではない。ある一定量の記号の連なりである以上、時間をかけて、前から順番に最後まで辿っていかなければならない。しかし、その間、小説は絶えず、読者に語りかけ、読者に耳を貸し、読者の手を引き、読者と一緒に感じ、一緒に考える。それは、途方(注3)に暮れるような情報の海を泳ぎ回るのとは、まったく別の興奮を与えてくれるはずだ。`,
+    notes: "(注1)忙しなく:ここでは、時間に追い立てられるように<br>(注2)広大無辺で:限りなく広くて<br>(注3)途方に暮れる:どうしたらよいかわからなくなる",
+    questions: [
+      {
+        q: "筆者によると、ウェブ時代に生きる人々が感じている不安とはどのようなものか。",
+        choices: [
+          "膨大な情報を理解する時間が足りないのではないか。",
+          "人や世間に対する認識が深まっていないのではないか。",
+          "蓄積され続ける情報の中から必要な情報が探せないのではないか。",
+          "人の心までが時間や情報に流されそうになっているのではないか。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "小説は<span class=\"underline-q\">「小さく説く」</span>とあるが、どういう意味か。",
+        choices: [
+          "人間の複雑な心理を簡潔に示す。",
+          "広く複雑な人間社会を少しだけ見せる。",
+          "人の心や複雑な世の中を凝縮して示す。",
+          "広い世の中の重要なところを圧縮して見せる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "ウェブ時代に小説を読むことについて、筆者はどのように考えているか。",
+        choices: [
+          "小説には膨大な情報が詰め込まれているので、濃密な時間を体験することができる。",
+          "小説は複雑な世の中を説明しているので、情報が溢(あふ)れる世界を深く理解できるようになる。",
+          "小説が読者に寄り添ってくれることで、現代の情報とのかかわり方とは異なる刺激が得られる。",
+          "小説が読者の手を引いてくれることで、情報社会で不安を感じず生きていけるようになる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 45,
+    title: "BÀI 45 - 07/2017",
+    passageHTML:
+`一日に八時間眠るのが人間社会の決まりごとであるかのように言う人がいる。それには何か特別な根拠があるのか。もともと睡眠は、適応のための技術である。さまざまな身体内部および外部の環境条件に合わせて、脳をうまく休息させ、よりよく活動させるための柔軟な生存戦略である。多少の無理や融通が利かないはずはない。\n\nしかも、眠ることは筋肉を緩ませる、意識レベルを下げる、栄養補給を断つなどの危険を伴う”命懸け”の行為だ。それだけに、睡眠中の安全が確保できる条件を整えてからでないと、眠るわけにいかないというのが生き物の鉄則だ。また、優先してなすべきことがほかにあるから、睡眠は、すなおに順位をそちらに譲るのが通例だ。\n\nそうなると、安心して睡眠に割り当てられる時間は、かなりかぎられたものになってしまう。一日のうちのかぎられた条件と時間のもとでうまく眠り、うまく目覚めるために、高等動物は進化の過程でさまざまな方式を開発してきた。\n\nだから、睡眠は本来多様性に富むものだ。\n\n人間の睡眠も、生物学的にはまったく同様の適応力を備えている。しかし、人間は文明の発達とともに、<span class=\"underline-q\">睡眠を人為的な規則で拘束した</span>。社会活動や季節変化などをもとにして、睡眠の持つ多様性を一定の枠の中に押し込めてしまったのだ。\n\nこうして、世の中では、大人は一日に八時間まとめて寝るのが基準であるかのように考える傾向が定着した。ここから、睡眠時間の負債を気にするという不幸が発生したのだ。一日に八時間くらい寝床の中で過ごす人が大半を占めるにせよ、この数値に生物学的な根拠はない。\n\n(井上昌次郎『睡眠の技術一一今日からぐっすり眠れる本』による)`,
+    notes: "",
+    questions: [
+      {
+        q: "生き物にとっての睡眠について、筆者はどのように述べているか。",
+        choices: [
+          "生き抜くために、さまざまな条件に合わせて調整できるものである。",
+          "脳を休息させるために、一定の時間確保されるべきものである。",
+          "自身の生命を脅かすもので、できるだけ避けるべきものである。",
+          "環境に適応するために、他の活動より優先されるものである。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">睡眠を人為的な規則で拘束した</span>とあるが、どういうことか。",
+        choices: [
+          "日々の睡眠時間をできるだけ短くすることにした。",
+          "一日のうちの、一定の時間を睡眠に充てることにした。",
+          "活動時間に合わせて、睡眠時間を減らすことにした。",
+          "各自の条件に合わせて、睡眠時間を決めることにした。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "この文章で筆者が最も言いたいことは何か。",
+        choices: [
+          "人間の睡眠時間は一様に決めるようなものではない。",
+          "人間の睡眠の方式は他の生き物と比べられるものではない。",
+          "人間も他の生き物と同様に、睡眠をとることが生存戦略となっている。",
+          "人間は社会活動をする上で、他の生き物と異なる睡眠時間が必要になった。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 46,
+    title: "BÀI 46 - 12/2017",
+    passageHTML:
+`日本には昔から「物見遊山」（注1）という言葉がありますが、非日常への憧れは観光の一つの本質です。しかしその一方で、物見遊山だけに頼った<span class=\"underline-q\">観光地</span>はいずれ必ず飽きられてしまうというのも事実です。例えば富士山を見た外国人が、もう一度富士山だけを見るために訪日してくれるでしょうか？よほど個人的な思い入れでもない限り、そういうケースは稀でしょう。海外からわざわざやって来た旅行者に日本という場所へのリピーター（注2）となってもらうためには、彼らがまた戻って来たくなる別の工夫が必要です。\n\nどの様なビジネスであったとしても、顧客の存在は決定的な意味を持ちます。そのブランドの価値を認めて、長期にわたって買い支えてくれる人の存在無しには安定的な収益は望めません。<span class=\"underline-q\">このことは観光地においても事情は同じ</span>です。\n\n(中略)ここで再び、本質的な問いかけが浮かんできます。顧客とリピーターを生みだし、観光・リゾート地として何度も選ばれ続けるためには、一体何が必要なのでしょうか?本当の意味で旅行者を惹(ひ)きつけ、その土地のファンとなるのは、名所旧跡のような観光資源だけではありません。重要なのは自分たちとは異なる豊かな「日常性(ライフスタイル)」です。その土地の人たちが生き生きと暮らしていれば、訪れた人はきっとその理由を見つけたくなる。風土に根差した生活様式、独自の食文化、季節ごとの行事、その地の環境が育んだ産業――。二回、三回と足を運べば、その度にまた人違った表情が見えてくる。その深さを知れば、決して飽きることはありません。`,
+    notes: "(注1)物見遊山:見物して遊びまわること<br>(注2)リピーター:ここでは、繰り返し訪れる人",
+    questions: [
+      {
+        q: "富士山の例を挙げて、筆者が述べようとしていることは何か。",
+        choices: [
+          "旅行者の観光の目的が変化してきた。",
+          "旅行者が個人的な思い入れのある観光地にしか行かなくなった。",
+          "ただ見物するだけの観光地は飽きられやすい。",
+          "観光地は非日常への憧(あこが)れを満たす場ではなくなった。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">このことは観光地においても事情は同じ</span>とあるが、どういうことか。",
+        choices: [
+          "繰り返し訪れる旅行者の存在が観光地の経営を支える。",
+          "観光地の価値を認めて広めてくれる人が必要だ。",
+          "観光地が新しい旅行者を獲得し続けなければならない。",
+          "安定的な収益を得て観光地の価値を高めることが必要だ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">観光地</span>として何度も足を運んでもらうには、何が重要か。",
+        choices: [
+          "次々と新しい観光資源を生み出し続けること。",
+          "観光資源としての名所旧跡を大切に保存すること。",
+          "風土特有の文化や産業の中で人々が暮らしていること。",
+          "その土地の人たちが生き生きと暮らせる理由を説明すること。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 47,
+    title: "BÀI 47 - 12/2017",
+    passageHTML:
+`芸術作品が私たちにもたらすものは、感動ばかりではない。驚きとか困惑、ときに不快感やイライラ感だったりする。それまでだれも思いつかなかったような形状や色彩や音は、私たちをさまざまに揺さぶる。私たちは慣れ親しんだ世界に浸っているとき心地よさに包まれているが、そこから新しいものは生まれない。そういう意味で穏やかで心地よい文化は、保守的で現状肯定的であり、創造性やエネルギーにとぼしい。だからこそ、あえて不安とか狂気、驚きといった刺激をもたらしてくれる<span class=\"underline-q\">①天邪鬼(あまのじゃく</span>）なものを否定するところで生まれる。そうした芸術が誕生すると、社会は大きな包摂性な刺激因子としての芸術が必要になってくる。<span class=\"underline-q\">②その繰り返し</span>によって、社会と文化のエネルギーが維持されるのではないか。\n\n(中略)そうした芸術の天邪性は、活力よりも穏やかさが優勢になりがちな成熟社会においてはより重要である。しかも、いまは昔とちがって世の中の変化のサイクルがどんどん短くなっており、これは芸術を生み出す側に大きな変化が求められていることを意味している。なぜなら時代の変化に合わそうとすると、必然的に次々と作品を世に出さなければならず、個々の作品の質を高めることがむずかしくなる。質を高めて完成域に近づいたときには、もう時代は次のサイクルに入っていて、次の作品に取りかからなくてはならない。`,
+    notes: "（注1）としての芸術が社会には必要なのである。そういう意味で芸術は安定した穏やか<br>（注2）をもっているから、トゲトゲしたものもくるんで呑み込んでしまう。すると、また異質<br>(注1)天邪鬼(あまのじゃく):ここでは、逆らったり否定したりするようなもの<br>(注2)包摂(ほうせつ)性:中に包み込む性質",
+    questions: [
+      {
+        q: "筆者によると、<span class=\"underline-q\">①天邪鬼(あまのじゃく</span>)としての芸術が社会に必要なのはなぜか。",
+        choices: [
+          "社会が不安や刺激を当然のものとして受け入れられるようになるから。",
+          "社会にこれまでにないような創造性やエネルギーをもたらすから。",
+          "社会の穏やかさや心地よさを人々に再認識させるから。",
+          "社会の不安や狂気や驚きから人々を解放するから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②その繰り返し</span>とあるが、何を繰り返すのか。",
+        choices: [
+          "ある芸術が社会に取り込まれ、また異質性を持った別の芸術が求められること",
+          "ひとつの芸術が社会に完全に排除されると、次の新たな芸術が誕生すること",
+          "新しい芸術が、社会に刺激を与えたり与えなかったりすること",
+          "芸術に、同質性が求められたり異質性が求められたりすること"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、いまの芸術家はどのような状況に置かれているのか。",
+        choices: [
+          "時代の変化を感じさせる作品を世に出さなければならない。",
+          "穏やかさをもたらす作品を世に出さなければならない。",
+          "常に作品の質を追求していかなければならない。",
+          "作品を世に出し続けていかなければならない。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 48,
+    title: "BÀI 48 - 12/2017",
+    passageHTML:
+`いま私たちの多くは、社会など動かしようがないと考えているのではないでしょうか。そして、それを所与(注1)の条件として、どのように行動すればいいかの判断基準を決めているのです。言い換えれば私たちは、「この社会は動かしようがないのだから、それを現実として受け入れるしかない」と思い込み、その範囲内で実行可能な行為しか考慮しなくなってしまうのです。ここに<span class=\"underline-q\">①大きな誤り</span>があります。たしかにこの社会は動かし難い。それは事実です。\n\nしかし、そのことと、この社会がいかにあるべきかは、まったく別のことです。にもかかわらず、目の前の現実に依拠（いきょ）（注2）して、私たちの行為の正しさやよさが決められてしまう。これでは、現実に不正義が行われていても、それを問うことはできません。なぜなら、そのような現実を前提にして、正しい行為とは何かのルール設定がなされているからです。目の前の現実が正義にかなっていない場合、そこでの行為の正しさやよさを問うことはできないと私は考えていますが、ともすると（注3）私たちは、その現実の範囲内での「適切な」行為を「正しい」行為であると考えてしまいがちです。\n\nたしかに、<span class=\"underline-q\">②その現実</span>が動かしがたく、そのなかで生きていかねばならないとすれば、そこにおいて最も適切な行為とは何かを探究することには意味がありますし、その探究によって最も適切とされる行為を選択すべきでしょう。しかしながら、その現実のほうに問題があるとすれば、そこで最も適切とされた行為は「適切」であるにしても、「正しい」行為ではないはずです。`,
+    notes: "(注1)所与の:与えられた<br>(注2)～に依拠:に基づく<br>(注3)ともすると:ここでは、つい",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①大きな誤り</span>とは何か。",
+        choices: [
+          "あるべき社会の姿と現実とを区別できず、的確な判断ができないこと",
+          "現実社会における行動の判断基準があるにもかかわらず、従わないこと",
+          "現実は動かしようがないとあきらめて、自ら動こうとしないこと",
+          "現実を変えられないものとして受け入れ、そのなかでしか行動を考えないこと"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②その現実</span>とあるが、どのようなものか。",
+        choices: [
+          "不正義が行われている現実",
+          "何が不正義か決められない現実",
+          "社会が正義を求めている現実",
+          "あるべき社会を求めている現実"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "行為の適切さと正しさについて、筆者はどのように考えているか。",
+        choices: [
+          "現実においては、正しい行為より最も適切とされる行為を選択すべきだ。",
+          "現実で適切とされる行為が、いつも正しい行為であるとは言えない。",
+          "行為の正しさを追求しすぎて、現実における適切さを忘れてはいけない。",
+          "最も適切な行為を探究しても、正しい行為は見つけ出せない。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 49,
+    title: "BÀI 49 - 07/2018",
+    passageHTML:
+`以下は、文芸作品の賞の選考について書かれた文章である。\n\n書いたものが売れれば、それでいちおう報われる。多くの読者の支持があったということだからである。贅沢を言うようだが、それだけでは、何だか心もとない(注)売れるということには、様々な意味合いがある。いい本だから売れるとは限らないし、売れたからいい本だとも言えない。\n\nそこに賞の意味がある。売れようが売れまいが、これはいい本ですよ。それがある程度保証される。お金とは違った価値観がそこに示される。私はいくつかの賞の選考に関係している。賞をいただくより、賞を選考する方が好きかもしれない。書く場合には、自分の力量が問われる。しかし、選考する場合には、自分の目が問われる。目が悪いと、何もかも同じに見える。違いがわからないのである。その意味では美術品、骨董品の評価と同じであろう。\n\n書く時には、ある専門分野について、力があればいい。でも選考する時には、それだけでは不足であろう。どのような分野であれ、よいものとは何か、それを見極める目が要求される。その代わりに、専門分野について、必ずしも詳しい必要はない。\n\n(中略)選考する時の喜びは、複数の選考委員が同じ著作を本音で選んだ時である。自分もそれを支持している時には、自分が賞をもらったのと、似たような嬉しさがある。賞を受けた人の喜びが、まさに他人事ではなくなるのである。このあたりの心理が、なかなかおもしろい。\n\n選考する側も、常に自分の価値観を問われている。推薦した作品が受賞するのは、その価値観がいわば受賞することだともいえよう。`,
+    notes: "(注)心もとない:頼りない",
+    questions: [
+      {
+        q: "本が売れることについて、筆者はどのように考えているか。",
+        choices: [
+          "読むに値する本だと保証されたことになる。",
+          "賞を受賞するより価値がある場合もある。",
+          "読者の支持を得たことにはならない。",
+          "いい本だと保証されるわけではない。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、賞を選考する時に必要なカとはどのようなものか。",
+        choices: [
+          "よいものを見極めて書くことができる能力。",
+          "どのような作品にもよさを見いだせる能力。",
+          "専門分野の作品を正しく評価できる能力。",
+          "専門分野以外でもよいものが見極められる能カ。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "自分が賞をもらったのと似たような嬉しさがあるとあるが、なぜか。",
+        choices: [
+          "受賞者と自分の価値観が同じだとわかったから。",
+          "受賞者の苦労に共感して選んだから。",
+          "自分の価値観が認められたと感じられるから。",
+          "自分が賞を受けた時の喜びを思い出すから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 50,
+    title: "BÀI 50 - 07/2018",
+    passageHTML:
+`以下は、ある企業家が書いた文章である。\n\n企業が利益を確保するために社員を捨てる、整理するというのは市場の意思です。リストラに遭った人は、自分の会社を恨んだり、文句を言ったりしますが、<span class=\"underline-q\">それは違う</span>。厳しい言い方をすれば、消費者があなたの会社の商品を買わない、つまりあなたの給料は払えないと言っているわけです。\n\n会社という堅牢（注1）な箱で守られていると考えてはいけない。社員一人ひとりは、消費者や市場とつながっている。社員個人の集合体が企業なのです。\n\n私は社員の年金制度を廃止し、ボーナスも退職金も一切取りやめました。新入社員も含めてすべて年俸制にし、それぞれが稼ぎ出した利益に応じて査定する（注2）システムに変えたのです。年俸は、前年比プラスかマイナスかどちらかで、横ばいはありえません。\n\n会社の利益が増えれば全体の年俸の原資（注3）は増えますが、それはプラス評価をした人だけに配分します。\n\n会社で働くというのは、会社の利益を増やすのが目的です。その利益は株主と社員に分配されます。利益の多寡（注4）は顧客、すなわち消費者が決めます。彼らにいかに喜ばれる仕事ができるかが重要です。働くとはそういうことです。私は日頃から社員に「給料をもらって働く人は要らない、働いて給料をもらう人しか必要ない」と言っています。社員という言葉はこれから死語になり、「商人」という言葉がそれに代わると思います。会社が何かしてくれるという考えを捨て、個である自分が商人として顧客・消費者に何を与えられるかと発想する時代なのです。`,
+    notes: "(注1)堅牢な:頑丈な<br>(注2)査定する:評価する<br>(注3)原資:ここでは、資金<br>(注4)多寡:多少",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">それは違う</span>とあるが、なぜか。",
+        choices: [
+          "リストラは、会社に属している社員全員のせいだから。",
+          "リストラは、会社の意思で決めたものだから。",
+          "リストラは、良い商品でも売れない市場のせいだから。",
+          "リストラは、市場の動向を反映したものだから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の会社の給料の決め方はどのようなものか。",
+        choices: [
+          "経営者ではなく社員同士の評価で決まる。",
+          "社員が個別に会社と相談して決まる。",
+          "社員が会社に利益をもたらしたかどうかで決まる。",
+          "会社の利益が増えれば全員の給料が上がる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が会社で働く人に求めているのはどのようなことか。",
+        choices: [
+          "どうすれば給料に見合う働きができるかを考え、主体的に行動すること。",
+          "会社の利益より、いかに消費者に利益をもたらすかを考えること。",
+          "会社優先の考えを捨て、どうすれば社会に貢献できるか考えること。",
+          "会社に守られているという考えをやめ、個人として消費者と向き合うこと。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 51,
+    title: "BÀI 51 - 07/2018",
+    passageHTML:
+`以下は、議論について書かれた文章である。\n\n意見とはある問題に対する解決である。しかし、それは単なる「感じ」や「心情」の表明ではない。根拠を伴って、その内容が客観的に正しいのだ、ということを相手に強制する構造をしている。たとえば「私はこう思う。なぜなら～からだ。」と言うとき、「なぜなら～からだ」の部分を聞いて、「なるほど」と思ったら、その前の「こう思う」の部分も承認しなければならない。それが、<span class=\"underline-q\">①議論というゲームのルール</span>なのである。\n\n相手が自分の根拠を認めれば、相手に自分の意見を押しつけることができる。逆に自分が相手の根拠を認めれば、自分の意見を捨てて相手に従わねばならなくなる。\n\nつまり議論とは、支配と屈従(注1)という権力関係を暗黙のうちに含むシビアなゲームなのである。<span class=\"underline-q\">②議論に負けると、何だか悔しい感じになる</span>のは、そういうことなのだ。\n\nしかし、これが「勝ち負け」に終わらないのは、双方が「真理の探求」という共通の目標を持っているからだ。議論してどちらが正しいかを決定するのは、勝ち負けを決めることが主なる目的ではない。よりよい解決を求めるためである。だから、議論に負けても、それは相手に負けたことにはならない。真理に負けた、いや従っているのである。悔しがるより、自分がより真理に近づいたと満足すべきなのだ。\n\n議論に参加する者は、まずこの「真理への献身」を共有しなければならない。根拠の承認を迫る形式に則って(注2)発言することは、いわば、この暗黙の献身を表しているのである。`,
+    notes: "(注1)屈従:自分の意志に反して従うこと<br>(注2）則る:従う",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①議論というゲームのルール</span>とはどのようなルールか。",
+        choices: [
+          "相手の意見が根拠を伴っていたら、反論してはならない。",
+          "相手の根拠に納得できたら、その意見も認めなければならない。",
+          "意見を述べるときは「感じ」や「心情」を表明してはならない。",
+          "自分の意見を認めさせたければ、相手の意見も認めなければならない。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②議論に負けると、何だか悔しい感じになる</span>とあるが、なぜか。",
+        choices: [
+          "相手に従わなければならないから。",
+          "相手が自分を見下していると感じるから。",
+          "自分の意見がうまく伝えられないから。",
+          "自分の意見に価値がないように感じるから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えに合うのはどれか。",
+        choices: [
+          "議論は形式に従って真理を追求するものだ。",
+          "議論は勝ち負けではなく参加することに意義がある。C.「真理の探求」には、相手の意見に従うことが必要だ。D.「真理への献身」を実践すれば、議論に勝てるものだ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 52,
+    title: "BÀI 52 - 12/2021(1)",
+    passageHTML:
+`技術者にとってレース車を開発すると言うのは、非常に魅力があるようなのだ。\n\nそれはそうだろう。市販車の開発であれば、コストのことや工場のことを考えなければいけないので、自分の考え出した創意工夫を必ずしも反映できるわけではない。\n\nいいモデルを出したからといって、営業の力が弱ければ売れるとは限らない(少なくとも、多くの開発技術はそう思って歯軋り(注1)をしているに違いない)。しかし、レース車であれば、ある程度、採算無視で色んなことにトライできる。何よりも、営業力とか他の要素に邪魔されることなく、<span class=\"underline-q\">①どんな大メーカーを相手にも対等に優劣を争うことができる</span>わけだ。逆にいうと、言い訳のない世界でもある。敵よりコンマ1秒でも遅れをとれば負けるのだ。そして、それは、はっきりとその場で目に見える。\n\n(中略)目標設定も単純だ。市販車開発なら、時にはアメリカと欧州の両市場で売れる車を作ってくれと営業から要求されたりする。そこでは技術的に妥協せざるを得ないが、レースは絶対的な速さだけを目指せばいいのだ。その代わり、自分の実力がいまどうであれ、敵の車が75秒でサーキット(注2)を1周していれば、それより速いタイムで走る車を作らないと意味がないのだ。<span class=\"underline-q\">②出来る、出来ない</span>を論じる余地は全くない。また、お分かりのように、他チームの車の真似だけをしていれば、決して「最速」にはならないのも真実なのだ。`,
+    notes: "(注1)歯軋りをするここでは、悔しく思う<br>(注2)サーキット:レース用コース",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">①どんな大メーカーを相手にも対等に優劣を争うことができる</span>とあるが、なぜか。",
+        choices: [
+          "創意工夫する力さえあれば売れる車がつくれるから。",
+          "性能さえよければ採算のとれるレース車がつくれるから。",
+          "営業力に邪魔されずに価格で勝負できる車がつくれるから。",
+          "コストなどの要素に影響されずにレースで競える車が造られるから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">②出来る、出来ない</span>とあるが、何が出来る、出来ないのか。",
+        choices: [
+          "自社の最高タイムを次のレースで上回ること。",
+          "技術的に妥協するしかない場合には妥協すること。",
+          "ライバル社より少しでも速く走れる車をつくること。",
+          "アメリカや欧州のレースでいい成績をおさめること。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "この文章によると、レース車の開発は、技術者にとってなぜ魅力的なのか。",
+        choices: [
+          "高い技術力を示せれば世界で認められるから。",
+          "自社が持っている技術力の高さを証明できるから。",
+          "明確な目標に向かって開発だけに集中できるから。",
+          "開発者としての実力が大メーカーからも評価されるから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 53,
+    title: "BÀI 53 - 12/2021(2)",
+    passageHTML:
+`下の文章はプールで水泳をするときの<span class=\"underline-q\">準備運動</span>について書かれたものである。\n\nよく、プールなどで、水着に着替えると、ろくに準備運動もしないで、水に飛び込んで“水泳のベテラン”のような顔をしている人をみかけますが、これは絶対にまねてはいけない見本です。水泳は全身運動、しかも体にいろいろな負荷や刺激を与える。いわばかなり激しい運動ですから、水に入る前の準備運動をするのは鉄則だといえます。\n\nまず、筋肉をほぐしましょう。\n\nプールの<span class=\"underline-q\">水温</span>はたいだい30度前後です。なれている人にとっては温かく感じられますが、初めての人はとても冷たいと思うでしょう。人間の体温は36度前後ですが、水の熱伝導率はとても大きく、空気の20倍だそうですから、水は体から熱をどんどん奪っていってしまいます。そのため、しだいに体が冷えてきて、血行が悪くなり、筋肉のけいれんを起こすことがあるのです。\n\nこのように、水温によって筋肉に血行不良が起こり、柔軟性を失い、けいれん(注1)を引き起こすことがわかります。そこで、練習を始める前に、あらかじめ筋肉の血行をよくし、筋温度を高めておかなければなりません。準備運動のとき、下半身に重点をおいて柔軟体操をすることです。ふくらはぎ(注2)、太ももの裏の筋肉などをとくに念入りに伸縮させ、ウォーミングアップ(注3)しておきます。\n\nまた、あわせて関節を柔軟にし、どのような運動も無理なくできるようにしておくことが大切になります。首、肩、ひざ、足首そしてふくらはぎなどのストレッチング(注4)を、あらかじめ十分にしておきましょう。`,
+    notes: "(注1)けいれん:筋肉が自分の意志とはかかわりなく、勝手に震えたように動くこと<br>(注2)ふくらはぎ:足のこの部分<br>(注3)ウォーミングアップする:本格的な運動に入る前に体をよく準備する<br>(注4)ストレッチング:伸ばすこと",
+    questions: [
+      {
+        q: "絶対にまねてはいけないのはなぜか。",
+        choices: [
+          "水着に着替えてすぐに泳がないと体に負荷がかかるから",
+          "水泳のようなはげしい運動に準備運動は欠かせないから",
+          "ベテランのように泳ぐとすぐ体力を消耗してしまうから",
+          "準備運動の省略はベテラン以外にはゆすされていないから"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "この文章のキーワードを「<span class=\"underline-q\">水温</span>」の他に3つあげるとしたら、以下どの3つあげるか。",
+        choices: [
+          "筋肉、血行、柔軟",
+          "空気、血行、刺激",
+          "筋肉、空気、鉄則",
+          "負荷、伸縮、鉄則"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">準備運動</span>について筆者がすすめていることはどんなことか。",
+        choices: [
+          "水泳は全身運動であるので、全身の筋肉をほぐす運動を水中で行うと",
+          "下半身の柔軟体操を行うことともに全身のストレッチングをしておくと",
+          "下半身の柔軟体操をする際に太ももの裏の筋肉の状態をしらべておくと",
+          "関節を柔軟に動かせるようにいろいろな全身運動を合わせて行うと"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 54,
+    title: "BÀI 54 - 12/2021(3)",
+    passageHTML:
+`日本ではあまり朗読CDで本を読むということをしないが、欧米では人気があり、新刊本から往年の名作まで朗読CD化され、普通の書店でずらりと販売されている。これは視力の低下している人のためだけではなく、車中の眼を休めたいときでも、そうした朗読CDを利用して多くの人が読書を楽しんでいるのだ。\n\nそれなのに、これが日本であまり利用されないのは、日常的に活字に親しむ文化があるので、わざわざ音声化する必要性を感じていない人が多いだけのことだろう。しかし、「音声は音声なりの楽しみがある」ということを知ったなら、朗読CDは趣味や実用にもっと活用されるに違いない。\n\n(中略)同じ内容の文章を活字で読むのと、他人が朗読した音声を聞くのでは、ほぼ同じ時間がかかる。「黙読(1)なら、音声を聞くより速い」という意見があるかもしれないが、黙読にかかる時間は、自分で活字を音読(注2)した場合とそれほど変わらないはずだ。\n\nそして、一定のペースで読み進める限り、自分で活字を読んだ場合と音声で聞いた場合とで、理解できた内容もほぼ同じになるに違いない。\n\n実はそれでも、脳に入力される情報量は、音声より活字の方が少ないのである。なぜなら、音声で聞いた場合は、文字だけでは区別がつかないニュアンスの違いなどが朗読した人によって適切に判断され、イントネーション(抑揚)や「間」などを含めた音声表現として発話されるからだ。`,
+    notes: "(注1)黙読:声に出さないで読むこと<br>(注2)音読:声に出して読むこと",
+    questions: [
+      {
+        q: "筆者によると、日本ではあまり朗読CDで本を読むということをしないのはなぜか。",
+        choices: [
+          "音声化された本の種類が少なく、欲しいものが手に入りにくいから",
+          "音声化されたものを誰もが楽しめるという意識がないから",
+          "音声化されたもの聞くより活字で読むほうが、習慣になっているから",
+          "音声化されたもの聞いても、活字で読むほど理解は深まらないと考えているから"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "文章を読んだり聞いたりするのにかかる時間と理解できる内容について、筆者はどのように述べているか。",
+        choices: [
+          "自身で黙読するのと音読するのとでは、時間は同じだが、理解できる内容は差があるだろう。",
+          "自身で黙読するのと他人の音読を聞くのとでは、時間と理解できる内容に大きな差はないだろう。",
+          "自身で音読するのと他人の音読を聞くのとでは、時間と理解できる内容に差があるだろう。",
+          "自身で音読するより他人の音読を聞くほうが、時間はかかるが、理解できる内容に差はないだろう。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えに合うのはどれか。",
+        choices: [
+          "活字で読むより音声で聞くほうが、得られる情報量は多い。",
+          "活字で読むのと音声で聞くのとでは、情報量に大きな差は生じない。",
+          "活字で読むほうが文字から想像できることが多く、得られる情報量が多い。",
+          "音声での表現は、伝える人による情報量の差がほとんどない。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 55,
+    title: "BÀI 55 - 07/2022(1)",
+    passageHTML:
+`巻によくある<span class=\"underline-q\">料理本</span>について、私がかねがね不満に思っていたことがある。\n\nそれは、たとえば炒飯ならば、一、フライパンを熱する。二、大さじ二杯のサラダ油を入れる。三、溶き卵を入れる。････といった感じに書かれていることが多くて、なぜそうするのかが書かれていないのだ。なぜフライパンを熱してから油を入れるのか。なぜ溶き卵をこのタイミングで入れるのか。私は、そういうことが知りたい。型というかマニュアルが欲しいのではなく、その型が生み出された基本原理が知りたいのである。\n\n基本原理さえつかめれば、これは他にも広く応用が利くので、後々役立つ度合いが大きい。個別の型だけを学んでも、それは他のことに応用できるのかできないのか判断がつかないし、応用したとしても、その範囲はかなり限定されてしまう。そして何より、ただ誰かの作った型に理由もわからず無自覚なまま従っていること自体が、私にはとても気持ちが悪いのだ。\n\n(中略)型というものは、それを考案した人自身に最も必要だったものであって、必ずしもすべての人に有益とは限らない。真に学ぶとは、誰かの型をコピーすることではなく、そこからエッセンスを抽出して、自分に合ったやり方を生み出すことではないだろうか。\n\nマニュアルを使うことに慣らされた現代だからこそ、白紙の状態から必要なやり方をその都度見つけ出せるような人間を育てていく必要があるのではないかと、私はいろんな場面で思うのである。`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">料理本</span>について筆者が不満に思っていたことは何か、",
+        choices: [
+          "なぜ自分とは違う手順なのかがわからないこと。",
+          "作り方が丁寧に書かれていないこと。",
+          "手順が決められた理由が書かれていないこと。",
+          "手順が一つしか書かれていないこと。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "型について、筆者はどのように述べているか",
+        choices: [
+          "個人が自由に作ったもので、基本原理をもとに作られたものではない。",
+          "学ぶことはできないので、自分で見つけるしかない。",
+          "作った人には必要なものだが、誰にでも役に立つとは言えない。",
+          "作った人から学べば、誰にでも応用できるものだ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "学ぶことについて、筆者の考に合うのはどれか。",
+        choices: [
+          "基本原理を理解したうえで、自分なりのやり方を発見することが大切だ。",
+          "より多くの型を学び、その中から自分に合ったやり方を探し出すべきだ。",
+          "まず型を身につけ、それを自分に合うように修正していくことが大切だ。",
+          "マニュアルを使うことをやめて、基本原理を自分で考えるべきだ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 56,
+    title: "BÀI 56 - 07/2022(2)",
+    passageHTML:
+`これまでずいぶんたくさんアニメーションを作ってきましたが、しかしなかなか未だに巧くアニメーションを作るのは難しく、大変です。いつもどう作ったらよいのか、作り始めてからもとまどってしまうのです。しかし少しずつ形になってくると、ふつふつと(注1)楽しくなってくるのです。そしてできあがってきたイメージと自分の頭の中のイメージとの、一致とズレを近づけたり、遠ざけたりするために、たくさんの作業を積み重ねて、最後には、どこかであきらめを付けて、終わりにします。\n\nただその時には終わったと思っても、少し時間を置いてみると、もう少しこうすればよかった、ああすればよかったと、後悔ばかりが浮かんできて、自分のアニメーションの上映会に立ち会う時は、いたたまれない思いがします。アニメーションに限らず、クリエーター(注2)は多かれ少なかれ、ただ楽しいばかりではなく、こんな思いをしながら、次こそは自分のベストを形にしようと、日々まるで「修行」のように物作りに追われていくのではないでしょうか。いつかは、<span class=\"underline-q\">この魔物</span>から逃れて、心安らかな日が訪れるのを夢想しながら。\n\n(中略)現実世界には、辛いことや思いどおりにならないこともたくさんありますが、創作活動の中、精神の世界で自由に羽を伸ばせる時、そこには他のいろいろな楽しい娯楽では味わえない深い喜びがあり、それがこの魔物から逃れられない理由のひとつです。\n\nそして、言葉にはできない価値観をうまく作品として整えられた時、それは人の反応や評価を超えた、絶対的な充実感を与えてくれるものと信じています。`,
+    notes: "(注1)ふつふつと:心の中からわいてくるように<br>(注2)クリエーター:創造的な仕事に携わっている人",
+    questions: [
+      {
+        q: "筆者にとって、アニメーションを作る作業とはどのようなものか",
+        choices: [
+          "自分のイメージどおりになることを求めずに、楽しみながら形にする。",
+          "自分のイメージに近づけて修正を重ねるうちに、できあがっていく。",
+          "思い描いたことと現実の形を調整し続け、あるところで妥協する。",
+          "十分納得できるまで、完成に向けて作業を積み重ねる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">この魔物</span>とは何か",
+        choices: [
+          "我慢できないくらい大変で、作品作りをやめてしまいたくなる物作り。",
+          "後悔に悩まされながら、納得できる作品を目指し続ける物作り。",
+          "自分のベストの形が分からなくなってしまうような物作り。",
+          "作品を作り終えるたびに、気力を奪われるような物作り。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "創作することについて、筆者の考えに合うのはどれか。",
+        choices: [
+          "自分の思いどおりにならなくても、人に評価された時に充実感が得られる。",
+          "自分の世界観を思う存分広げ、作品の中で表現できた時に満足できる。",
+          "満足できる作品になりそうになくても、完成させると充実感が得られる。",
+          "いつか満足する作品が作れると信じていれば、評価される作品が作れる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 57,
+    title: "BÀI 57 - 07/2022(3)",
+    passageHTML:
+`人間の脳の一部に、前頭葉というものがある。\n\nこの前頭葉は、意欲や感情のコントロール、思考や想像のスイッチ機能を果たしていると考えられている。そして、長期記憶を保持する役割も担っている。しかしここが、脳の中で一番早く老化が始まるのだという。(中略)前頭葉の老化に拍車をかけると懸念されているものがある。デジタルだ。(注1)人間がパソコンやスマートフォン(注2)、インターネットなどに頼り過ぎるようになったことで、自分の頭の中に情報や知識を蓄積したり、繰り返し引き出す機会が減った。それが前頭葉の老化をいっそう促しているという指摘がある。\n\nデジタルの中に蓄えられる莫大な情報を、人間に新たに与えられた「外部脳」だと解釈し、これが人間の脳の効率化につながるのだという見解が増えた。外部脳を持てば、自分の脳を記憶装置にせず、思考の場として徹底できる、そう考える専門家も少なくない。\n\nしかし、外部脳に頼ることの代償が前頭葉の老化促進だとすれば、<span class=\"underline-q\">この考え</span>に対しては慎重に対峙(注3)しなければならない。\n\n自分の脳の中に情報や知識を記憶し、それを駆使してこそ生まれる連想や判断というものがある。これを頻繁に繰り返すことで、人間の脳の潜在力が引き出され、老化も防ぐことができる。外部脳ができたことを謳歌する前に、自分の脳を鍛え、活用することの重要性を再認識する必要がありそうだ。闇雲に(注4)デジタルへ脳の役目を託すことは、危険を伴うと言わざるを得ない。外部脳に人間の脳が持つ元来の力を奪われかねないのだから。`,
+    notes: "(注1)デジタル:ここでは、デジタル機器<br>(注2)スマートフォン:パソコンの機能もある携帯電話<br>(注3)対峙する:向き合う<br>(注4)闇雲に:深く考えずに",
+    questions: [
+      {
+        q: "筆者によると、デジタルを使うことで前頭葉の老化が進むのはなぜか",
+        choices: [
+          "記憶にかかわる脳の機能を使うことが少なくなるから。",
+          "デジタルがもたらす膨大な情報が、脳を疲労させるから",
+          "脳が情報や知識を扱うことがなくなるから。",
+          "脳が感情のコントロールや思考をしないようになるから。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">この考え</span>とはどのような考えか",
+        choices: [
+          "脳よりデジタルのほうが、情報や知識を多く蓄積できる。",
+          "デジタルに頼り過ぎると、次第に脳の機能が低下する。",
+          "デジタルは、脳と同じように思考に使えるものではない。",
+          "デジタルと脳を使い分けることで、脳は思考に特化できる。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が言いたいことは何か",
+        choices: [
+          "情報や知識の記憶装置である脳を、さらに鍛えるべきだ。",
+          "連想や判断の機能を持てば、デジタルも脳の役目を果たせる。",
+          "デジタルをうまく活用しなければ、脳の潜在力が引き出せない。",
+          "脳の機能を衰えさせないよう、デジタルの利用は慎重であるべきだ。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 58,
+    title: "BÀI 58 - 12/2022(1)",
+    passageHTML:
+`ともすると私たち大人は、自分たちの子ども時代の遊びはよくて、今の子どもの遊びは好ましくないと考えがちです。(中略)今はダメで昔はよかったというような感覚をもって、今の子どもの遊びについて考えると、<span class=\"underline-q\">とんでもないことになります</span>。子どもたちが嬉々として(注)遊んでいるものを取り上げて、今の時代ではおもしろくないような遊びを、無理に押しつけることになってしまいます。そうなると遊びが遊びでなくなってしまいかねません。\n\nまた、私たちが考える好ましい遊び環境となると、なぜかとても整理された空間になりがちです。たとえば画一化された公園を見ると、ムダなく機能を重視したオフィスを連想させさえします。限られたスペースで、しかも安全性や管理の問題を考えればそうならざるをえないのかもしれませんが、それでは子どもが遊びたいと思わなくなるのです。\n\n子どもたちの遊び空間には、もしかしたら不自由さや不便さ、大人がムダだと思えるようなものも必要かもしれません。配慮の行き届きすぎた場所は、遊園地という商業施設は別として、子どもたちが自由に遊べる環境としては好ましくないのではないでしょうか。\n\n子どもたちの遊び環境について考えるときに大切なのは、私たち大人の側にあるそのような先入観です。自分は子どものころにこんな遊びをした。今の子どもはそれをしていない。だから今の子どもは遊んでいない。こんな単純な考え方では、決して子どものためになる遊び環境など考えることはできません。`,
+    notes: "(注)嬉々として:喜んで",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">とんでもないことになります</span>とあるが、どうなるのか",
+        choices: [
+          "子どもが子ども同士で遊べなくなる。",
+          "子どもが自由に遊びを楽しめなくなる。",
+          "子どもが今の時代の遊びに興味をもたなくなる。",
+          "子どもが安全に管理された場所でしか遊べなくなる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者が言いたいことは何か",
+        choices: [
+          "大人は子どもの遊びに干渉するべきではない。",
+          "大人は安全性を考えて、遊び環境を整えなければならない。・",
+          "大人は先入観をもたずに、子どもの遊び環境を考えるべきだ。",
+          "大人の先入観が遊び環境を考えるうえで役に立つこともある。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 59,
+    title: "BÀI 59 - 12/2022(2)",
+    passageHTML:
+`私たち人間は、いろいろなものを食べる雑食性動物です。それに対し、基本的にパンダはササだけを食べ、コアラ(注1)はユーカリの葉だけを食べます。動物の生き残り戦略を考えると、雑食性動物の方が、慣れ親しんだ食べものが入手困難な状況になったとしても、それ以外の食べられるものへと嗜好をシフトすることによって飢餓を脱し、生存する確率を高めることができます。雑食性動物は環境適応性に優れた生きものといえます。\n\nしかしその一方で、新たに見つけ出した食べものが毒性をもっていたり、栄養バランスが悪いものであれば、健康を損ね、最悪死に至る可能性があります。そのため、雑食性動物は、新しい食べものを食べるときには、必ずそのリスクと対峙(注2)しなければなりません。\n\nすなわち雑食性動物は、食べたことのないものを食べるのを躊躇する「食物新奇性恐怖」と、積極的に食べようとする「食物新奇性嗜好」という相矛盾(注3)する行動傾向を、生まれながらに合わせもっているといえます。(中略)雑食性動物がもつ食べものの新奇性恐怖と新奇性嗜好のジレンマを解消してきたもののひとつが、人の「調理」という行為です。食べたことのない食材、たとえば昆虫をそのままの“原型”で出されると、拒否感を抱く人が多いですが、粉にしてチップスなど、見慣れたお菓子のかたちで提供されれば、食べる人は確実に増えます。さらに慣れ親しんだ調味料で味付けしたものなどてあれば、「あっ、意外とおいしい」と好評価を得るかもしれません。この調理という操作が、新奇なものを食べるという恐怖を緩和させるのに一役(注4)買っています。`,
+    notes: "(注1)コアラ:動物の一種<br>(注2)対峙する:ここでは、向き合う<br>(注3)相~:互いに~<br>(注4)一役買う:ここでは、役立つ",
+    questions: [
+      {
+        q: "筆者によると、雑食性動物の特徴は何か。",
+        choices: [
+          "慣れ親しんだものを食べたいという気持ちよりも、新しい食べものへの好奇心の方が強い。",
+          "新しい食べものに対して、恐怖心をもちながらも、挑戦する性質をもっている。",
+          "いろいろなものを食べるので、栄養バランスが偏らず、生存する確率が高い。",
+          "目の前に食べものがあれば、躊躇せずに積極的に食べようとする。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、調理することでどうなるか。",
+        choices: [
+          "食材が限られていても、人間の欲求を満たすことができる。",
+          "新しい食材への好奇心は薄れるが、恐怖は解消できる。",
+          "慣れ親しんでいないものへの好奇心を高めることができる。",
+          "食べたことのないものへの抵抗感を減らすことができる。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 60,
+    title: "BÀI 60 - 12/2022(3)",
+    passageHTML:
+`私は、自分の研究をおもしろいと思えるのと同じ程度に、他人の研究をおもしろいと思えるかどうかが、研究者に向いているか否かの判断の基準であると思っている。いくらいいデータを出す人であっても、他人のデータを自分の仕事と同じだけの熱量を持っておもしろがれなければ、研究者としてははっきり不向きであると思わざるを得ない。学者としては失格であろう。\n\nこれがもっとも端的にあらわれるのが、研究発表の際に見られる質問の量である。\n\n(中略)発表された内容を、当事者として自分ならこういうアイデアで実験をし、結果をこう解釈することもできる、明確な結論を得るためにはこの部分に不備があり、次にはこんな実験を計画すれば、もっとはっきりした結論に到達することができるのではないか、などなど、考え始めれば、おのずから尋ねたいことは次から次へ出てくるはずなのである。\n\n私はこれを「能動的に聞く」と言っている。人の話は、能動的に聞いてこそ、自らの身につくものである。話された内容をただひたすら覚えようとしたり、吸収しようとしているだけでは、却ってその知識は自分のものとならない。\n\n「能動的に聞く」とは、話された内容を、自らのこれまでの知の体系のなかに位置づけることであり、位置づけるためには、聞きつつ常に自分の知の体系を確認し、照合する作業を伴うはずである。外部からインプットされてくる内容と、既存の自らの知識の箱とのあいだに軋轢が生じるのは当然であり、その軋轢こそが質間を促す力になる筈なのだ。`,
+    notes: "",
+    questions: [
+      {
+        q: "筆者によると、研究者として不向きな人とはどのような人か。",
+        choices: [
+          "他人の研究に、自分の研究ほどの関心を持てない人。",
+          "他人よりいいデータを出すことができない人。",
+          "自分の研究も他人の研究もおもしろがれない人。",
+          "自分の研究に、他人の研究成果を生かせない人。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、どのようにすれば質間の量が増えるか",
+        choices: [
+          "既存の知識に聞いた内容を加えて、知の体系を豊かにする。",
+          "聞いた内容と自分の知の体系を照合し、違いを意識する。",
+          "新しい知の体系のなかに、既存の自分の知識を組み込む。",
+          "自分の既存の知識に、常に疑問を持つ。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 61,
+    title: "BÀI 61 - 12/2022(4)",
+    passageHTML:
+`企業Aと企業Bがあり、ある契約をそのどちらと取り交わすべきか考えるときに、A社は資本金1000万円、B社は資本金1億円であるという情報は、おそらく重要な情報の一つであると想定されるが、すべてではない。従業員数、年商(注)、営業継続年数、支社数・支店数、などなどのうちから、意思決定者が、意思決定の方針に基づいて重要な情報を取捨選択しなければならないだろう。そのとき、ことさらにいくつかの情報に力点を置く報告書があげられたときに、意思決定者(経営者)はそこに存在する<span class=\"underline-q\">「意図」を充分に嗅ぎ取らなくてはならない</span>。つまり、汚染されている可能性があるということである。ここで、報告された情報がすべて確実な事実であったとしても汚染は生じている可能性があるという点に注意が必要である。\n\nしたがって、情報汚染とは、ある情報に、本来想定しているもの以外の何かが付随していて、それによってその情報の理解が歪むことをいう。その何かとは、その情報をもたらした側の意図である。この世界に「データのみで構成されていて、そこに意図の混入が認められない」という意味での無色透明な情報など存在しない。どのような情報であっても、意図という色で染められている。そして、重要なのはそれが必ずしも汚染ではないという点である。意図が混入するのは当然のことであり、すべての情報には意図が混入しているのであるから、それだけでもってそれを汚染とまでは呼べない。\n\nそれが汚染となるのは、その情報に含まれる「意図」によって、その情報の本質部分である「データ」の理解が深められるからである。`,
+    notes: "(注)年商:一年間の売り上げ額",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">「意図」を充分に嗅ぎ取らなくてはならない</span>とあるが、なぜか。",
+        choices: [
+          "事実ではない情報が意図的に混入されているかもしれないから。",
+          "意思決定者に有利な情報が取り除かれているかもしれないから。",
+          "情報には意図が含まれていて、理解が歪められるかもしれないから。",
+          "情報をもたらす側の意図が、歪められて理解されるかもしれないから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "情報の汚染について、筆者はどのように述べているか。",
+        choices: [
+          "情報が汚染されているかどうかを見抜くことは難しい。",
+          "情報が汚染されていても、受け取る側の理解に影響はない。",
+          "情報に意図含まれていても、汚染されているとは限らない。",
+          "すべての情報には意図が含まれているので、汚染されているといえる。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 62,
+    title: "BÀI 62 - 07/2023(1)",
+    passageHTML:
+`「常識を疑ってみる」ということ、実はそれが学問の始まりでもあります。勉強が「強いて勉める」という受動的な側面を持つものであるならば、学問は「問うで学ぶ」ことであり、極めて能動的な行為です。自ら主体的な行為として問うことを通して、常識とされてきたものの見方を疑い、それを少しずらすなどして、別の見方を見出そうとしていきます。学問の「正解」はひとつとは限りません。学ぶこととは、単純に知識を増やすということではなく、ましてやテストで覚えたことを吐き出すことでもなく、それを自分のものとして再編成していくことであり、さらに言えば自分の物差しが変わり、自分自身が変わっていくことなのです。そして、思いがけない大発見や、独創的なアイデアが生まれるかもしれません。\n\n「<span class=\"underline-q\">疑う</span>」という言葉は、通常は否定的な意味で使われます。「人を疑う」と言えば、普通はその人を信用しないというのと同義なわけです。私も、人を疑って生きるよりも、できるだけ人を信じて生きていたいと思っています。しかし、世の中で当たり前とされている事柄を「疑う」ことが必要な時もあります。「常識だから」という一言で目を閉ざし、それに安易に取り込まれてしまうことなく、そこを少しずらしたところに面白いことを見出していくために。それは、何事も信用しないというような厭世的な生き方に繋がるのでなく、むしろ創造的で豊かな世界を紡ぎだしていくための、積極的な営みなのです。`,
+    notes: "",
+    questions: [
+      {
+        q: "筆者によると、学問とはどのような行為か。",
+        choices: [
+          "「正解」を求めて、自ら主体的に問い続けていく行為である。",
+          "独創的なアイデアを生み出すために、自らのものの見方を変える行為だ。",
+          "自ら問いながら、ものの見方を模索しながら自分自身が変わっていく行為だ。",
+          "新しい知識を積極的に取り入れることで、自分自身を変えていく行為だ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "学問で「<span class=\"underline-q\">疑う</span>」ことについて、筆者の考えに合うのはどれか。",
+        choices: [
+          "何を信じればいいのかを理解するのに欠かせない行為だ。",
+          "豊かに生きるために、新しい常識を作りだす積極的な行為だ。",
+          "常識に安易に取り込まれないために必要だが、否定的な行為だ。",
+          "常識に縛られずに、これまでと異なる考え方を生み出す行為だ。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 63,
+    title: "BÀI 63 - 07/2023(2)",
+    passageHTML:
+`春に美しい花をさかせるカタクリは、アリに種まきをさせるという驚くべき戦略を持っている。\n\nカタクリの種は熟すのは花が咲いてから、およそ2ヶ月後だ。はじけて地面に落ちた種は、すぐにアリがやってきて巣に運んでいってしまう。薄茶色の種の先に白い部分がある。これが脂肪分に富んだエライオゾームと呼ばれるものだ。アリはこの部分に惹かれる(注1)ことが分かっている。エライオゾームはアリにとってそれほど魅力的な物質であるらしい。\n\n運ばれた種はアリの巣に貯蔵されることになるが、アリは二日もすると、せっかく運び込んだ種を巣から運び出してしまう。種は巣の中深いところに持ち込まれても発芽できないから、これはカタクリにとって好都合だ。どうしてアリはせっかく集めた種を棄ててしまうのだろうか。\n\n実は熟して地上に落ちたばかりのカタクリの種についているエライオゾームは、アリの幼虫が共通して持つにおいに近い物質を持っているのだという。アリは種を食べ物として集めるわけではなく、自分の幼虫と思って巣に持ち帰るらしいというわけだ。ところが種がはじけてから24時間もすると、アリの死んだ幼虫のにおいに変わるのだそうだ。それで今度はアリは種を巣の外に捨てに行くのだというから恐れ入ってしまう。`,
+    notes: "(注1)惹かれる:心が引きつけられる",
+    questions: [
+      {
+        q: "筆者によると、アリはなぜカタクリの種を巣に運ぶのか。",
+        choices: [
+          "種についている脂肪分がアリの好物だから。",
+          "種はアリの成長に欠かせない栄養分だから。。",
+          "種がアリの餌になる幼虫に似ているから。",
+          "種をアリの生きた幼虫だと思うから。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、アリはなぜ集めた種を捨てるのか。",
+        choices: [
+          "種のにおいで、アリの幼虫が死んでしまうから。",
+          "種からアリの死んだ幼虫のにおいがするから。",
+          "種がアリの死んだ幼虫と同じ色に変わるから。",
+          "種がはじけて、アリの嫌うにおいを出すから。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 64,
+    title: "BÀI 64 - 07/2023(3)",
+    passageHTML:
+`子は親の鏡と言われる。こどもを見れば親が分かるということだが、こどもは親のしぐさ、もの言いを実によく見ている。三つにもなれば如何にも(注1)生意気で反論などをするものだが、<span class=\"underline-q\">「そんな言い方をするもんじゃない」と言ったら負けだ</span>。「あら、あなたの言い方とそっくりよ」と横からチクリと揶揄される(注2)のがオチだから。全くこどもは物真似の名人なのである。\n\nアイドル歌手からくまのプーさんの喋り方まで、見境なく(注3)貪欲にコピーしてしまう。コピーすることによってこどもたちはすべてを獲得してゆく。こどもたちは個性的であろうなどと少しも考えない。みんなと同じじょうにできることが嬉しくてたまらないのだ。\n\nだが、こどもの再現のありさまを少し注意深く観察していると、この性能の良い複写機の、本当の性能の良さが見えてくる。大人たちの考えるコピーとはいささか違うのである。こどもたちの身体的能力、言語的能力は未熟なのでオリジナルなものの完璧なコピーはできない。\n\n従ってこどもはオリジナルなものを自由に改変する。切り捨て、誇張する。それはオリジナルなものからの絶妙な逸脱なのである。この模倣行為は、むしろ、一人のこどもの生きる生活全体のなかで、今全く新しく意味付けられた別のオリジナルなものが生成していると言ってもいいものなのだ。\n\nこどもが模倣をしながらも、とりわけ個性的であるのは、このような模倣モデルからの自由な逸脱があるからだ。私たちがこどもを見て楽しむのも、その逸脱のほほえましさなのではないか。`,
+    notes: "(注1)如何(いか)にも:見るからに<br>(注2)揶揄(やゆ)される:からかわれる<br>(注3)見境(みさかい)なく:区別なく、何でも",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">「そんな言い方をするもんじゃない」と言ったら負けだ</span>とあるが、なぜか。",
+        choices: [
+          "こどもの成長を否定しているようなものだから。",
+          "こどもの反論が正しいと認めるようなものだから。",
+          "自分で自分を注意しているようなものだから。",
+          "自分がこどもと同じレベルで答えるようなものだから。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "こどもの模倣について、筆者はどのように考えているか。",
+        choices: [
+          "完璧にはコピーできないことが、個性につながっている。",
+          "完璧にコピーしようとしているが、本質は捉えられていない。",
+          "オリジナルなものを自由に変えて、おとなを楽しませようとしている。",
+          "オリジナルからの逸脱を気にせず、自分の個性を表現しようとしている。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 65,
+    title: "BÀI 65 - 07/2023(4)",
+    passageHTML:
+`人々の肉体には、実は大きな幅がある。生まれ持った個性があり、成長の段階で著しく改変するこうした人間が使用するものを作る際の方向性には、二つの選択肢がある。一つは、異なる体格や身体能力を持つ多数の人々が同じものや環境を平等に使えるようにする方法。もう一つは、それぞれの体格や能力に合わせて、いくつかのサイズや機能を用意する方法である。前者は経済的に有利な試みだが、その効果に限界があるケースが多い。後者は多様なユーザーに対応できるが、開発に時間がかかり、しかも作られたもののコストが上昇してしまうという問題性を孕んでいる(注1)。\n\nユニバーサルデザイン(UD)では、使い手の様々な問題負担を抑えつつ、個人に不平等感を抱かせないデザインやものづくりを求められている。デザインに平等という意識を上手に反映させていくために、多様な使い手とできるだけ接触し対話を行い、使い手に対する知識と体験を広げることが効果的だ。私たちは平等という感覚をどのようなときに感じ、考えるのかという点を、見つめ直したい。\n\n私たちが平等かどうかを意識するのは、確かな不平等の予感や印象を持つときであることは間違いない。平等がきちんと保証されている場合、その状況は私たちにとって自然なことであり、問題意識が芽生える(注2)ことはない。しかしデザインやものづくりに当たっては、問題が発生してから平等について考えるのではなく、ものやサービスに常に必要な普通の意識であるととらえたい。`,
+    notes: "(注1)孕む:含む<br>(注2)芽生える:生まれる",
+    questions: [
+      {
+        q: "人間が使用するものを作る際の問題点について、筆者が述べていることはどれか。",
+        choices: [
+          "同じもので多様な使い手に対応すると、そのものの効果に限界が生じる。",
+          "同じものを多様な使い手に対応させるには、開発に時間がかかりすぎる。",
+          "個別の使い手に対応すると、そのものの効果が見えにくくなる。",
+          "個別の使い手に対応すると、平等にものが使えなくなる。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "ユニバーサルデザインにおけるデザインやものづくりについて、筆者が最も言いたいことはなにか。",
+        choices: [
+          "多様な使い手が、平等だという感覚が持てるものを作り出すべきだ。",
+          "使い手が不平等だと感じたら、原因を究明しなければならない。",
+          "すべての使い手にとって平等であるものにすることは難しい。",
+          "常に使い手にとっての平等について考えなければならない。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 66,
+    title: "BÀI 66 - 12/2023(1)",
+    passageHTML:
+`中等教育で、生徒たちはいろいろな科目でさまざまな分野の知識に触れていきます。\n\nどのような知識でも必ず前提となる世界観や物事の枠組みがあり、そうした背景なくしては該当する理論や見識が成り立ちません。\n\n生徒たちは、それぞれの科目で分野ごとの専門知識に触れていくことによって、前提とされる世界観や物事の枠組みを、自分の世界観や考え方の一部として固定化させていきます。\n\nつまり、学習を進めて、専門知識を身につければつけるほど、前提とされる価値観や枠組みに縛られていくことになるのです。\n\n一方で、技術革新やグローバル化により、社会の仕組みや共通認識が、目まぐるしく変化する中、現在の自分の世界観から飛び出して、他の価値観を理解する力が必要とされています。\n\n哲学の営みの中核は、物事の根本や前提を問い直して、考察することにあります。\n\n哲学の営みに親しむことで、現在のものの見方や考える枠組みから自分を解き放ち、急速に変化する社会の中で、揺るぎない自分の価値観を模索していく力を身につけることができるのです。\n\nより深いレベルでの学習が始まる中等教育においてこそ、より柔軟な「<span class=\"underline-q\">哲学する力</span>」を養い始めることが必要とされているのです。`,
+    notes: "(注1)中等教育:中学、高校での教育<br>(注2)揺るぎない:強固な",
+    questions: [
+      {
+        q: "筆者によると、中学や高校でさまざまな知識に触れていくと、どうなるか。",
+        choices: [
+          "分野ごとに前提とされる世界観や物事の枠組みが違うことに気づく。",
+          "身についた世界観や物事の枠組みの中で思考するようになる。",
+          "新しい世界観や考え方にしか興味が持てなくなる。",
+          "自分の世界観や考え方がより明確になる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、何のために「<span class=\"underline-q\">哲学する力</span>」が必要か。",
+        choices: [
+          "激しく変化する社会の中で、自分の価値観を探求できるようにするため",
+          "自分のものの見方や考える枠組みの間違いを修正できるようにするため",
+          "自分の価値観を問い直し、社会の仕組みを正しく理解するため",
+          "社会の共通認識を学び、より深いレベルでの学習を進めるため"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 67,
+    title: "BÀI 67 - 12/2023(2)",
+    passageHTML:
+`以下は、羽毛を持つ恐竜について述べられた文章である。\n\n恐竜には、鳥のように卵を温める習性があったことがわかっています。\n\n(中略)気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。\n\n羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。\n\n爬虫類は卵を温めません。爬虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、爬虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。\n\n羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35~40度ほどの温度で卵を温めることが可能です。\n\n厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。\n\n人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。\n\n卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。\n\n恐竜が卵を温めていたとすれば、おそらく同じように、<span class=\"underline-q\">お腹のあたりの羽毛が抜けていたと思われます</span>。`,
+    notes: "(注)生息地域:生活している地域",
+    questions: [
+      {
+        q: "筆者によると、羽毛を持つことにはどのような利点があるか。",
+        choices: [
+          "低温の環境でも、卵を一定の温かさで保つことができる。",
+          "低温の環境でも、卵の成長を促し早く孵すことができる。",
+          "環境にかかわらず体温が維持でき、卵が多く産める。",
+          "環境に合わせて卵の温度を調整でき、早くすことができる。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">お腹のあたりの羽毛が抜けていたと思われます</span>とあるが、筆者はなぜそう考えるのか。",
+        choices: [
+          "体の熱を逃がすことで、卵を温めすぎるのを防げるから",
+          "皮膚から卵に直接体温が伝わることで、効率的に卵を温められるから",
+          "卵に皮膚を直接当てることで、卵の温度を知ることができるから",
+          "卵と接する部分の皮膚がむき出しになることで、卵が抱きやすくなるから"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 68,
+    title: "BÀI 68 - 12/2023(3)",
+    passageHTML:
+`以下は、仕事でリーダーの立場にある人に向けて書かれた文章である。\n\n「君は何がやりたいの?」「どんな仕事が好きですか?」と聞いたとき、本人の口から出てくる答えが本当に「向いていること」とは限りません。なぜなら、どんな仕事をやりたいかについては、驚くほど多くの人がイメージに左右されています。特に若い人や新人であれば、その傾向は強くなります。本人の発言を鵜呑みに(注1)してはいけないのです仕事の実情を知らずに単純に「あの仕事が好きだ!」と思い込んでいたり、「商品開発のAさんは楽しそう。私も商品開発をやりたい」と憧れていたり。上司に何をやりたいか聞かれたから、<span class=\"underline-q\">それ</span>ほど強い興味があるわけではなくても「特にありません」と答えるのは気まずいので、「なんとなくやりたいもの」をとりあえず答えただけというケースもあります。\n\nそれを踏まえずに、「君、広報が好きなの?じゃあ、やってみなさい!自分で言うならモチベーションも高いからうまくいくだろう」というリーダーは、マネジメントという大切な仕事を放棄しているようなものです。(注3)本人も気づかない埋もれたスキルを引き出し、チームの勝利に貢献してもらうには、リーダーがメンバー自身よりも、その人の適性を把握していなければなりません。\n\n(中略)本当に適性があれば、新しいポジションで成果を出します。成果が出ると面白くなり、ますますスキルが上がります。やがて「自分が貢献できている、チームの役に立っている」と実感できるようになれば、それがそのメンバーのやりたい仕事になっていきます。`,
+    notes: "(注1)鵜呑みにする:そのまま受け入れる<br>(注2)モチベーション:意欲<br>(注3)マネジメント:ここでは、チームのメンバーの管理",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">それ</span>とあるが、どのようなことか。",
+        choices: [
+          "仕事を具体的な内容よりイメージで捉えて答えていること",
+          "よいイメージが持たれやすい仕事を選んで答えていること",
+          "できない仕事をできると思い込んで答えていること",
+          "本当にやりたい仕事を選ばずに答えていること"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "部下への接し方について、筆者はどのように考えているか。",
+        choices: [
+          "希望と違う仕事に挑戦させて、本人の新しいスキルを引き出すことが大切だ。",
+          "適性を見極めて仕事を任せれば、本人は充実感を持って取り組むようになる。",
+          "本人のやりたい仕事に挑戦させれば、望ましい成果が出せるようになる。",
+          "個人の成果を望むより、チームに貢献する経験をさせることが大切だ。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 69,
+    title: "BÀI 69 - 12/2023(4)",
+    passageHTML:
+`実験科学の世界では、仮説にぴたりと合致するような結果が得られることはまずないといってよい。その際、ほとんどの研究者はこう考える。自分の仮説は間違っていない。\n\nただ、実験の方法がよくないから、よいデータが出ないのだと。そこで条件を少しずつ変えて、繰り返し実験を行うことになる。しかし、ほとんどの場合、実験がうまくいかないのは、実は、仮説そのものが間違っているからなのだ。\n\nだが、研究者は頑迷なので自説に固執してしまう。かくして膨大な時間と試行錯誤が浪費される。なので、科学研究にほんとうに必要な才能は、天才性やひらめきというよりは、むしろ、自己懐疑、失望に対する耐性、潔い諦め、といったものとなる。\n\n逆に、実験科学の世界では、時として、思い描いたとおりの、いや、想像以上にすばらしい、見事な実験データが得られることがある。こんな時、研究者に求められることは何か。ぬか喜びしてはならぬ、ということである。実験の方法に穴があるから、見せかけだけの結果が出ているのかもしれない。つまりここでも自己懐疑、(希望に対する)耐性、諦め、が必要となる。\n\n英語にはこんな言い方がある。toogoodtobetrue(できすぎは、真実ではない)。もう少しだけ研究者に冷静さがあればあの「発見」はなかった。そんな誤謬はいくつでもある。`,
+    notes: "(注1)頑迷:頑固<br>(注2)~に対する耐性:ここでは、~に影響されない強さ<br>(注3)ぬか喜び:あとでがっかりする結果になる一時的な喜び<br>(注4)誤謬:誤り",
+    questions: [
+      {
+        q: "筆者によると、自分の仮説に合う実験結果が得られない場合、多くの研究者はどうするか。",
+        choices: [
+          "仮説と条件を少しずつ変えて、実験を繰り返す。",
+          "仮説の問題点を明らかにするために、実験の条件を変える。",
+          "仮説に合う結果を得るために、条件を変えて実験を繰り返す。",
+          "仮説に合う結果を求めて、条件を変えずに時間をかけて実験する。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "実験科学の分野の研究者について、筆者の考えに合うのはどれか。",
+        choices: [
+          "実験結果に振り回されず、常に仮説と結果を冷静に検証する必要がある。",
+          "実験に冷静に臨んでも、思いどおりのよい結果が得られるとは限らない。",
+          "「発見」のためには、膨大な時間と試行錯誤を覚悟しなければならない。",
+          "思い描いたとおりの結果を得るには、実験による検証を諦めてはならない。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 70,
+    title: "BÀI 70 - 07/2024(1)",
+    passageHTML:
+`私は、何を表現したくて漫画を描いているのか?マンガ家を目指したころから考えていた。\n\n(中略)古代から、似た物語はたくさんある。ドラマ(注1)作りで大事なのは、新しい筋立て(注2)やエピソードを無理やりひねり出すことより、作者独自の考え方を、ドラマにのせて表現することなのだろう。十代の私は、そう気づいた。しかし「自分の考え」をどうやって確立するのか?自分の考えのつもりでも、人の意見に引きずられているかもしれない。\n\nそこで新聞を使った「<span class=\"underline-q\"><span class=\"underline-q\">修業</span></span>」を思いついた。毎朝、新聞を適当に開き、目をつぶって紙面を指す。そして指先にふれたところに載っていた記事の中の人物になりきって「この後どうすればこの問題が解決するか?どう振舞うのがベストなのか?」を毎日、真剣に想像した。\n\nこれをくり返すうち、自分なりの考え方をきちんと言葉で表現する大切さが分かってきた。そして自分が何を表現したいのかも、おぼろげ(注3)ながら見えてきた。\n\n突き詰めると、私は「ヒロインが何を考えているか」を描きたかったのだ。\n\nそれまでの少女漫画には、主人公である少女が能動的に動く物語が少ないように感じていた。それよりヒロインの喜怒哀楽、感情が描かれることが多かった。でも私は、自ら考え決心して生き方を選ぶ少女を描きたかった。\n\nそのため私の作品では、何かを決意するまでのヒロインの試行錯誤が長い。第一読者である担当編集者には「理屈っぽい」と言われ続けている。「ヒロインが泣く時に読者が共感してくれるんだ」とアドバイスされても、泣く前に考える女性を描き続けた。`,
+    notes: "(注1)ドラマ:ここでは、ストーリー<br>(注2)筋立て:話の組み立て<br>(注3)おぼろげながら:ぼんやりではあるが",
+    questions: [
+      {
+        q: "筆者は何のために新聞を使って「<span class=\"underline-q\">修業</span>」をしていたか。",
+        choices: [
+          "記事の人物について自分の考えを持つため。",
+          "記事を参考に、自分なりのストーリーを作り出すため。",
+          "自分自身の考えを持てるようにするため。",
+          "自分の考えを言葉で表現できるようになるため。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者は、「<span class=\"underline-q\">修業</span>」を繰り返した後、漫画で何を表現したいと思ったか。",
+        choices: [
+          "ヒロインが自ら決断し人生を生きる姿。",
+          "ヒロインが自らの人生について悩む姿。",
+          "ヒロインが自ら選んだ人生で成功する過程。",
+          "ヒロインの感情や心が変化する過程。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 71,
+    title: "BÀI 71 - 07/2024(2)",
+    passageHTML:
+`以下は、<span class=\"underline-q\">生物の進化</span>について書かれた文章である。\n\n世界中にさまざまな形の角を持つカブトムシ(注1)がいますが、その中のどれかが生き残りやすいということはありません。カブトムシとしての条件さえ整っていれば、角の形はどれでもいい。たまたま突然変異(注2)でいろいろな角のカブトムシが生まれ、そこには環境圧力がからなかったので、どれも生き残っただけの話です(もちろん、たとえば移動が困難なほど巨大な角など、生きるのに邪魔になる形質の個体は淘汰(注3)されたでしょう)。\n\nこうした形質は、進化のプロセスにおける「遊び」の部分だといえます。たとえば自動車なら、四角い車体にタイヤが四つあり、中にはエンジンやハンドルがあるといった基本形は、どのメーカーでも変わりません。しかしそれ以外の細かい部分――ヘッドライトの形やシートの色や材質など――は、自動車としての本質にあまり関係がないので、車種やメーカーによってかなり多様性がある。デザイン的に遊べるのです。\n\n生物の場合も、デザイン的な遊びを入れる余地がなく、多くの種に共通する基本形はあります。生きている環境が同じなら、体型が似てくるのは当然の成り行きで、これは「収斂進化」と呼ばれています。たとえば哺乳類であるイルカの体型が魚類と似ているのは収斂進化の結果のひとつです。(中略)突然変異は生物の多様性を拡大しますが、環境圧力にはその多様性を絞り込む役割があるといえるでしょう。生物の進化には、その両面があるのです。`,
+    notes: "(注1)カブトムシ:昆虫の一種で、雄は角を持つ<br>(注2)突然変異:親にはない生物的特徴が子に現れること<br>(注3)淘汰される:ここでは、滅びる",
+    questions: [
+      {
+        q: "カブトムシの例を挙げて筆者が言おうとしていることは、何か。",
+        choices: [
+          "環境によって、個体が生き残るために必要な基本形も変化していく。",
+          "さまざまな形の個体が生まれても、時間がたてばひとつの形になっていく。",
+          "生存の条件に合う変化の生じた個体だけが生き残ることができる。",
+          "生存にかかわる本質的な部分の変化でなければ、どんな形の個体も生き残る。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "<span class=\"underline-q\">生物の進化</span>について、筆者はどのように述べているか。",
+        choices: [
+          "突然変異で生じた多様性は、環境次第で維持されたり縮小したりする。",
+          "突然変異が頻繁に起こることで、環境の影響を受けない個体が生まれる。",
+          "突然変異も環境からの圧力も、多様性を拡大したり縮小したりする役割がある。",
+          "多様性は、環境からの圧力で絞り込まれても、突然変異によって拡大し続けていく。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 72,
+    title: "BÀI 72 - 07/2024(3)",
+    passageHTML:
+`不正に対して、腹の底からふつふつと怒りが湧き上がってくるのは、人間にとってとても大切なことです。そして、それが大きな共感となって社会全体に広がるとき、社会変革のうねり(注)が訪れます。\n\nしかし同時に私たちは、<span class=\"underline-q\">「正しい怒り」の罠</span>についても、きちんと知っておかなくてはなりません。「正しい怒り」で胸がいっぱいになると、「怒っている私こそが正しいのだ」というふうに、私を正義の側に置いてしまいがちになります。すると、私の正義を邪魔するものは「悪」である、という思考回路ができあがります。\n\nそれがさらにもう一歩進むと、「悪」である彼らに正義の裁きを加えて社会を良くするためならば、こっちだって少々の「小さな悪」を行なってもかまわないはずだ、となってしまうことすらあるのです。\n\n歴史を振り返ってみれば、このような行き過ぎが何度も繰り返されてきました。そして「正しい怒り」で胸がいっぱいだと、なかなかそのような罠の存在に気づけません。\n\nすなわち、ほんとうの意味で「<span class=\"underline-q\">正しく怒る</span>」とは、「不正は許せない!」という怒りによって動機づけられた自分の行為のひとつひとつが、客観的に見ても「正しい」と言えるのかどうかを、たえず冷静に自己点検しながら、その怒りのエネルギーを上手に正義へと結びつけていくことではないかと私は思うのです。それができてはじめて、私たちはより良い社会を作っていけるのです。`,
+    notes: "(注)うねり:ここでは、大きな動き",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">「正しい怒り」の罠</span>とはどういうことか。",
+        choices: [
+          "不正に対する怒りの感情が自分で制御できなくなってしまうこと。",
+          "不正に怒りを感じる自分の側に正義があると思い込んでしまうこと。",
+          "不正だけではなく正しいことに対しても怒りを抱いてしまうこと。",
+          "怒りによってしか不正を正すことができないと思い込んでしまうこと。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "「<span class=\"underline-q\">正しく怒る</span>」ことについて、筆者の考えに合うのはどれか。",
+        choices: [
+          "怒りに基づいた行為が正当かどうかを社会全体で考えるべきだ。",
+          "怒りから生じた行為が正当かどうかを常に客観視する必要がある。",
+          "怒りをどのようにして正義に結びつけたらいいか冷静に考えるべきだ。",
+          "一人一人が自分の怒りの行動に責任を持ち、冷静でいる必要がある"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 73,
+    title: "BÀI 73 - 07/2024(4)",
+    passageHTML:
+`経済学者のケインズは、「本を読むときは好意的に読まなければならない」と発言したことがあるが、それは、ケインズの論敵(注1)だったある経済学者(スージーだったと記憶している)が、最初から悪意に基づく批判的な態度でケインズの著書を読むために、肝心の論点を一向に理解しないこと(できないこと)を嘆いての発言であった。\n\nつまり、読む前から批判的な姿勢を持っていると、批判という意図的フィルターの介在によって、他者のつくった知的生産物との関わり方が、出発点から歪んでしまうのである。高名な著者になんとかして批判の一矢を浴びせてやろうと意気込んでいる人が書いた書評などを読むと、浅薄な(2)揚げ足取り(3)に終始している場合が実に多いのは、そのせいである。そんな読み方をしていては、「知」が血肉化する(24)ことなど到底ありえない。やはり最初は、好意的な読みからスタートした方が得だろう。\n\n好意的な読み方の先には、没入(195)して読むという世界があると私は考えている。好意も批判もなく、ただ夢中になって読む。徹底的に読む。そうやって読んだものこそ、無意識のうちに内在化(6)する。(中略)ただし、私は批判的な読み方が不要だと言っているのではない。没入しないと深く読めないと言う一方で、しかし、批判的に読まなければ、読みが鋭くならないとも実感している。\n\nでは、どうすれば良いのだろうか。バランスを取るにかぎる、と物知り顔(7)で言う人もいるかもしれない。しかし、ここで必要なのは、両者のバランスを取ろうとすることではない。そうではなくて、このふたつの読み方を意識的に往来することなのだ。`,
+    notes: "(注1)論敵:論争の相手<br>(注2)浅薄な:思慮が足りない<br>(注3)揚げ足取り:重要でない部分を取り上げて批判すること<br>(注4)血肉化する:ここでは、自分のものになる<br>(注5)没入する:熱中する<br>(注6)内在化する:ここでは、身につく<br>(注7)物知り顔:よく知っているかのような顔",
+    questions: [
+      {
+        q: "筆者によると、最初から批判的に読むことの問題点は何か。",
+        choices: [
+          "論点だけでなく、重要でない点まで取り上げて批判するようになること。",
+          "著者の主張が正しいと分かっているのに、受け入れられなくなること。",
+          "批判することが目的になり、著者の主張を正確に理解できなくなること。",
+          "批判することしか頭になくなり、自分の考えが持てなくなること。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えに合うのはどれか。",
+        choices: [
+          "批判的に読みながら徹底的な読みも加えることを意識するべきだ。",
+          "徹底的に読むことが必要だが、批判的な読みも忘れてはいけない。",
+          "徹底的に読むか批判的に読むかは内容によって決める必要がある。",
+          "徹底的に深く読めば、意識しなくても鋭く批判的に読むことができる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 74,
+    title: "BÀI 74 - 12/2024(1)",
+    passageHTML:
+`育児と言えば、たいていは母親によってなされると思われています。(中略)ところがライオンはちょっと違います。同じ群れのライオンは、そろって出産する傾向があり、育児も群れの雌全員が協力して行うのです。赤ちゃんは生まれて一か月あまりは物陰に隠され、母親だけで育てられます。しかし、歩けるようになると、群れに連れてこられて共同生活が始まります。\n\nライオンの群れには複数の大人の雌がいますから、それらの子どもたちが集まって、大所帯となります。集められた子どもたちは、自分の母親以外のライオンの乳も飲むことができ、群れの全員の保護を受けることができます。捕食獣(注1)であるライオンは、子育て中も獲物狩りに出かけなければなりません。母親一頭で子育てをしている場合には、外出中に、ハイエナ(注2)などに子どもが捕食される危険があります。しかし、共同育児をして誰かが子どものそばに残っていれば安心です。\n\n若い雌ライオンは敏捷(注3)ですが、子育ての経験に乏しく、失敗することもよくあります。それに比べ、壮年期になったライオンは経験豊富で態度もどっしりとして子育ても上手です。長の雌がまとめて面倒を見た方が育児はうまくいくかもしれません。反面、若いライオンの敏捷性は狩りでは有利に働くでしょう。ライオンは狩りも共同で行い、獲物はみんなで食べますから年老いて狩りに参加できなくても、食事をとることができるのです。\n\nライオンたちは、明確な分業とまではいえなくても、うまく育児と狩りを全員が協力することで、問題を解決しています。`,
+    notes: "(注1)捕食獣:ほかの動物を捕らえて食べる獣<br>(注2)ハイエナ:動物の一種<br>(注3)敏捷だ:動きが素早い",
+    questions: [
+      {
+        q: "ライオンの子育てについて、筆者はどのように述べているか。",
+        choices: [
+          "生後すぐに、群れの中で雌が交代で育てる。",
+          "生後一カ月あまり過ぎると、経験豊富な年長の雌が育てる。",
+          "歩けるようになるまで、群れの中で母親が育てる。",
+          "歩けるようになると、群れの雌が協力して育てる。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "共同生活の利点について、筆者はどのように述べているか。",
+        choices: [
+          "壮年期のライオンの経験を育児と狩りに生かすことができる。",
+          "年齢に応じて役割を分担することで、育児と狩りが両立できる。",
+          "群れの中での役割分担が明確になり、個々のライオンの負担が減る。",
+          "若いライオンが育児も狩りも経験することで、どんな役割もできるようになる。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 75,
+    title: "BÀI 75 - 12/2024(2)",
+    passageHTML:
+`仕事柄(注1)、私は取材を受けることが多いが、あるとき取材をしている人から、話すのが苦手だと打ち明けられたことがある。取材中は自然な感じで会話が進んでいたこともあって少し驚いたが、そう言われてみるとたしかに少し緊張しているように見えなくもない。ただ、取材を受けている私の立場からすると、必ずしも悪い印象は受けなかった。\n\nむしろ緊張感が相手に対する配慮のように感じられて、良い感じで話をすることができた。\n\n私たちは、あることが苦手だと思うと、うまくできていないように思える面に目を向けてしまう。\n\nスムーズに言葉が出てこなかったことや、話が行きつ戻りつしてしまったことなどが気になって、自分を責める気持ちになる。\n\nしかし、スムーズに言葉が出なかったことで、会話にため(注2)が出てきていることもある。相手は、その時間的すきまの時に、考えをまとめたり、振り返りをしたりできたりする。トントン拍子に(注3)会話が進まないことで、話している内容を多面的に考えることができたりもする。\n\n思うように会話できないときは、失敗ではなく、話を深めるように無意識に心が手助けしているようにも思える。(中略)失敗のように思えることには、それなりに意味があるのだろう。\n\n欠点のように思えることも、見方を変えるとじつは長所だということが少なくない。自分に対して多面的な見方ができると、気持ちが楽になるし、本来の力を発揮できるようになる。`,
+    notes: "(注1)仕事柄:仕事の性質上<br>(注2)ため:ここでは、余裕の時間<br>(注3)トントン拍子に:順調",
+    questions: [
+      {
+        q: "取材をしている人からうまく言葉が出てこないことについて、筆者はどのように考えているか。",
+        choices: [
+          "取材を受けている人は、間を取りながら話さなければならないという気持ちにさせられる。",
+          "取材を受けている人は、考えをまとめたり振り返ったりしながら内容が深められる。",
+          "取材を受けている人は、内容をまとめて分かりやすく伝えるための準備ができる。",
+          "取材を受けている人は、自分のせいだと考えて自ら会話を進めようとする。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者の考えに合うのはどれか。",
+        choices: [
+          "自分に対して多面的な見方ができれば、ほかの人の失敗や欠点にも寛容になる。",
+          "欠点だと思えることを改善できれば、自分の能力が発揮できるようになる。",
+          "本来の力を発揮するためには、自分の欠点ではなく長所を探すのがいい。",
+          "失敗や欠点だと思っていても、捉え方次第で長所になり得る。"
+        ],
+        correct: 3,
+        explain: { simple: true, note: "Đáp án đúng: D. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 76,
+    title: "BÀI 76 - 12/2024(3)",
+    passageHTML:
+`以下は、商品パッケージのデザイナーが書いた文章である。\n\n大量生産品のように全国に流通し、多くの方々にご利用いただく商品の場合には、必ずマーケティング調査(注1)が行われます。とくにパッケージのリニューアル時には、従来よりも売り上げが落ちてしまっては大変なので、より慎重に行われます。\n\nただそういう場合、必ず「今までの方が良かった」という意見が過半を占めます。ですがメーカーにとっては、定番となっている商品をどうしてもリニューアル(注2)しなければならないタイミングが必ずやってきます。それは、競合他社が売り上げを伸ばしたり、技術開発に伴い商品そのものが改善された「り、いろいろな理由でそれは必ずやってくる。ところがマーケティング調査してみると「変えない方がいい」という結果が出てしまう。今までのファンはその商品に愛着をもっているわけですから、リニューアルに大賛成してくれるわけがないのです。ですが、どうしても新しくしなければならない。\n\n私は<span class=\"underline-q\">こういった時</span>、これまでの財産をうまく生かして、今までのファンがある程度を許容してくれれば、それは大成功だと考えています。最初は少し許せない部分があったとしても、これが一年、二年経つと、新しいデザインも見慣れてくる。したがってマーケティング調査の数字は、そういう時間軸も考えたうえで見る必要があります。`,
+    notes: "(注1)マーケティング調査:市場調査<br>(注2)リニューアル:ここでは、更新",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">こういった時</span>とは、どのような時か。",
+        choices: [
+          "パッケージの変更に伴って、ファンが商品への愛着を失った時。",
+          "パッケージの変更を望まないファンが多いのに、変更せざるを得ない時。",
+          "新しいファンを獲得するには、パッケージの変更が不可欠だと分かった時。",
+          "ファンの賛否が分からない状況で、パッケージを変更しなければならない時。"
+        ],
+        correct: 1,
+        explain: { simple: true, note: "Đáp án đúng: B. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "マーケティング調査の結果について、筆者はどのように考えているか。",
+        choices: [
+          "一部の消費者の意見として、うまく生かすべきだ。",
+          "肯定的な意見を積極的に取り入れて商品開発に生かすべきだ。",
+          "消費者の反応が変わっていくことを考慮して分析するべきだ。",
+          "過去の結果と合わせて、消費者の好みの変化を読み取るべきだ。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  },
+  {
+    id: 77,
+    title: "BÀI 77 - 12/2024(4)",
+    passageHTML:
+`群馬県の上野村で暮らすようになって覚えたもののひとつに「待つ」という感覚がある。\n\nたとえばこの村の農業は春を待たなければはじまらない。山菜も、茸も、それが出てくる時期を待たなければけっして手には入らない。木材として利用するのなら、木を切るのは、森の木々が活動を低下させる秋から冬がくるのを待つ必要がある。実に多くのことが、村では<span class=\"underline-q\">「待つ」ことからはじまっていく</span>。\n\nそれが、自然とともに働き、暮らすということなのであろう。自然の力を借りようとすれば、自然がつくる、それに適したときがくるのを待たなければならない。といってもそれは、のんびりした暮らし方とばかりもいえないのである。なぜなら、ときを待つ以上、逆にそのときを逃してしまったらうまくいかなくなる。田植えのとき、草取りのとき、稲刈りのとき･･･。村の暮らしには、逃がしてはいけないときがたえずやってくる。\n\nときを待つ暮らしにとっては、人間の意志は万能ではない。それよりも自然という他者の動きの方が重要で、人間の意志は、自然の動きをうまく活用する範囲内でしか有効ではない。だから、自然と結ばれ、ときを待ちながら働き暮らしてきた村の人たちは、人間関係のなかでも同じような感覚を育んだ。人間関係においても自分の一方的な意志は万能ではない。人々の動きを理解しながら、ちょうどよいタイミングがくるのを待って、そのときを逃さずに働きかけていく。それが村の人たちの人間関係のつくり方だった。自然との関係のなかで学んだことが人間同士の関係のなかでもいかされていたのである。\n\n(内山節『戦争という仕事』による)`,
+    notes: "",
+    questions: [
+      {
+        q: "<span class=\"underline-q\">「待つ」ことからはじまっていく</span>とあるが、何を待つのか。",
+        choices: [
+          "自然が豊かさを回復して利用できるようになるとき。",
+          "自然を人間の都合に合わせるのに適したとき。",
+          "自然の恵みを受けるのに適した状態になるとき。",
+          "自然の変化が感じられるようになるとき。"
+        ],
+        correct: 2,
+        explain: { simple: true, note: "Đáp án đúng: C. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      },
+      {
+        q: "筆者によると、村の人たちの人間関係はどのようにつくられたか。",
+        choices: [
+          "自然との関係と同様に、相手の行動を見ながら時機を捉えて働きかける。",
+          "自然の変化を捉えるように、相手の変化を待って働きかける。",
+          "自然の影響を受けやすい人々の動きを理解し、タイミングよく働きかける。",
+          "自然の変化を待つのと同様に、相手からの働きかけを焦らずに待つ。"
+        ],
+        correct: 0,
+        explain: { simple: true, note: "Đáp án đúng: A. (Phân tích mỏ neo chi tiết sẽ bổ sung khi luyện đến bài này.)" }
+      }
+    ],
+    vocab: []
+  }
+];
+
+/* ============ LIÊN TỪ / 主張表現 (built-in, longest-match first) ============ */
+const CONNECTIVES = [
+  // 主張表現 (đặt trước vì nhiều chuỗi dài)
+  {w:"のではないだろうか", type:"claim"}, {w:"のではないか", type:"claim"},
+  {w:"なければならない", type:"claim"}, {w:"べきではない", type:"claim"},
+  {w:"が必要だ", type:"claim"}, {w:"が大切だ", type:"claim"}, {w:"が重要だ", type:"claim"},
+  {w:"かもしれない", type:"claim"}, {w:"のである", type:"claim"}, {w:"はずだ", type:"claim"},
+  {w:"べきだ", type:"claim"}, {w:"と考える", type:"claim"}, {w:"と言える", type:"claim"},
+  {w:"と思う", type:"claim"}, {w:"でしょう", type:"claim"}, {w:"だろう", type:"claim"},
+  {w:"のだ", type:"claim"}, {w:"ではないか", type:"claim"},
+  // tương phản
+  {w:"それなのに", type:"contrast"}, {w:"にもかかわらず", type:"contrast"},
+  {w:"ところが", type:"contrast"}, {w:"けれども", type:"contrast"}, {w:"けれど", type:"contrast"},
+  {w:"しかし", type:"contrast"}, {w:"だが", type:"contrast"}, {w:"一方", type:"contrast"}, {w:"逆に", type:"contrast"},
+  // chốt/tóm lược
+  {w:"要するに", type:"conclude"}, {w:"このように", type:"conclude"},
+  {w:"すなわち", type:"conclude"}, {w:"つまり", type:"conclude"}, {w:"結局", type:"conclude"},
+  // nhân quả
+  {w:"したがって", type:"causal"}, {w:"そのため", type:"causal"}, {w:"それで", type:"causal"},
+  {w:"ゆえに", type:"causal"}, {w:"そこで", type:"causal"}, {w:"だから", type:"causal"}
+].sort((a,b)=> b.w.length - a.w.length);
+
+let layerState = { anchor:false, synonym:false, connective:true };
+
+function toggleLayer(name){
+  layerState[name] = !layerState[name];
+  document.getElementById('btn'+name.charAt(0).toUpperCase()+name.slice(1)).classList.toggle('on', layerState[name]);
+  applyLayerVisibility();
+}
+
+function applyLayerVisibility(){
+  document.querySelectorAll('.hl-connective').forEach(el=>el.classList.toggle('show', layerState.connective));
+  document.querySelectorAll('.hl-synonym').forEach(el=>el.classList.toggle('show', layerState.synonym));
+  // lớp anchor (mỏ neo tự học) dùng chung biến layerState.anchor
+  document.querySelectorAll('.anchor').forEach(el=>el.classList.toggle('show', layerState.anchor));
+}
+
+// Wrap các liên từ/主張表現 trong 1 node text thuần (không đụng vào tag có sẵn)
+function wrapConnectivesInTextNode(node){
+  const text = node.nodeValue;
+  let matches = [];
+  let i = 0;
+  while(i < text.length){
+    let found = null;
+    for(const c of CONNECTIVES){
+      if(text.startsWith(c.w, i)){ found = c; break; }
+    }
+    if(found){
+      matches.push({start:i, end:i+found.w.length, type:found.type, text:found.w});
+      i += found.w.length;
+    } else {
+      i++;
+    }
+  }
+  if(matches.length === 0) return;
+  const frag = document.createDocumentFragment();
+  let cursor = 0;
+  matches.forEach(m=>{
+    if(m.start > cursor) frag.appendChild(document.createTextNode(text.slice(cursor, m.start)));
+    const span = document.createElement('span');
+    span.className = 'hl-connective show type-' + m.type;
+    span.textContent = m.text;
+    frag.appendChild(span);
+    cursor = m.end;
+  });
+  if(cursor < text.length) frag.appendChild(document.createTextNode(text.slice(cursor)));
+  node.parentNode.replaceChild(frag, node);
+}
+
+function highlightConnectives(rootEl){
+  const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(wrapConnectivesInTextNode);
+}
+
+// Tô cặp đồng nghĩa cho 1 bài (chỉ áp dụng nếu bai.synonymPairs tồn tại)
+function highlightSynonymPairs(passageEl, choicesWraps, pairs){
+  pairs.forEach((p, idx)=>{
+    const pid = 'p'+idx;
+    // vế trong bài
+    if(passageEl.innerHTML.includes(p.passage) && !passageEl.innerHTML.includes(`data-pair="${pid}"`)){
+      passageEl.innerHTML = passageEl.innerHTML.replace(
+        p.passage,
+        `<span class="hl-synonym" data-pair="${pid}">${p.passage}<span class="syn-tooltip">${p.note}</span></span>`
+      );
+    }
+    // vế trong đáp án (optionKey dạng "qIndex-choiceIndex")
+    const [qi, ci] = p.optionKey.split('-').map(Number);
+    const wrap = choicesWraps[qi];
+    if(!wrap) return;
+    const btn = wrap.querySelectorAll('.choice')[ci];
+    if(btn && btn.innerHTML.includes(p.option) && !btn.innerHTML.includes(`data-pair="${pid}"`)){
+      btn.innerHTML = btn.innerHTML.replace(
+        p.option,
+        `<span class="hl-synonym" data-pair="${pid}">${p.option}<span class="syn-tooltip">${p.note}</span></span>`
+      );
+    }
+  });
+
+  // hover glow: bấm/hover 1 vế thì vế cùng pair sáng lên
+  passageEl.querySelectorAll('.hl-synonym').forEach(el=>{
+    el.addEventListener('mouseenter', ()=>{
+      const pid = el.getAttribute('data-pair');
+      document.querySelectorAll(`.hl-synonym[data-pair="${pid}"]`).forEach(e=>e.classList.add('glow'));
+    });
+    el.addEventListener('mouseleave', ()=>{
+      const pid = el.getAttribute('data-pair');
+      document.querySelectorAll(`.hl-synonym[data-pair="${pid}"]`).forEach(e=>e.classList.remove('glow'));
+    });
+  });
+  choicesWraps.forEach(wrap=>{
+    wrap.querySelectorAll('.hl-synonym').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>{
+        const pid = el.getAttribute('data-pair');
+        document.querySelectorAll(`.hl-synonym[data-pair="${pid}"]`).forEach(e=>e.classList.add('glow'));
+      });
+      el.addEventListener('mouseleave', ()=>{
+        const pid = el.getAttribute('data-pair');
+        document.querySelectorAll(`.hl-synonym[data-pair="${pid}"]`).forEach(e=>e.classList.remove('glow'));
+      });
+    });
+  });
+}
+
+function renderNav(){
+  const nav = document.getElementById('navBar');
+  nav.innerHTML = '';
+  baiList.forEach((b, idx)=>{
+    const btn = document.createElement('button');
+    btn.className = 'nav-btn' + (idx===0 ? ' active' : '');
+    btn.textContent = 'Bài ' + b.id;
+    btn.onclick = ()=> selectBai(idx);
+    nav.appendChild(btn);
+  });
+}
+
+function selectBai(idx){
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('active', i===idx));
+  renderBai(baiList[idx]);
+}
+
+function renderBai(bai){
+  const area = document.getElementById('quizArea');
+  area.innerHTML = '';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  card.innerHTML = `
+    <div class="bai-title">${bai.title}</div>
+    <div class="passage">${bai.passageHTML}<span class="note">${bai.notes}</span></div>
+  `;
+
+  const allChoicesWraps = [];
+
+  bai.questions.forEach((q, qi)=>{
+    const qBlock = document.createElement('div');
+    qBlock.className = 'question-block';
+    qBlock.innerHTML = `<div class="q-text"><span class="q-num">${qi+1}</span>${q.q}</div>`;
+
+    const choicesWrap = document.createElement('div');
+    q.choices.forEach((c, ci)=>{
+      const btn = document.createElement('button');
+      btn.className = 'choice';
+      btn.innerHTML = String.fromCharCode(65+ci) + '. ' + c;
+      btn.onclick = ()=> answer(qBlock, q, ci, choicesWrap, qi, card);
+      choicesWrap.appendChild(btn);
+    });
+    qBlock.appendChild(choicesWrap);
+    allChoicesWraps.push(choicesWrap);
+
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+    qBlock.appendChild(fb);
+
+    const expBtn = document.createElement('button');
+    expBtn.className = 'explain-toggle';
+    expBtn.textContent = '📖 Xem giải thích chi tiết';
+    qBlock.appendChild(expBtn);
+
+    const expBox = document.createElement('div');
+    expBox.className = 'explain-box';
+    const ex = q.explain;
+    let expHTML;
+    if(ex.simple){
+      expHTML = `<div>${ex.note}</div>`;
+    } else {
+      let wrongsHTML = ex.wrongs.map(w=>
+        `<span class="wrong-opt"><b>${w.opt}.</b> <span class="jp" style="display:inline;background:none;padding:0;">${w.jp}</span><br>→ ${w.vn}</span>`
+      ).join('');
+      expHTML = `
+        <div>${ex.main}</div>
+        <span class="jp">${ex.jp}</span>
+        <div>${ex.chain}</div>
+        <span class="label">Vì sao các đáp án khác sai:</span>
+        ${wrongsHTML}
+      `;
+    }
+    expBox.innerHTML = expHTML;
+    qBlock.appendChild(expBox);
+
+    expBtn.onclick = ()=>{
+      expBox.classList.toggle('show');
+      expBtn.textContent = expBox.classList.contains('show') ? '📕 Ẩn giải thích' : '📖 Xem giải thích chi tiết';
+    };
+
+    card.appendChild(qBlock);
+  });
+
+  // vocab
+  if(bai.vocab && bai.vocab.length){
+    const vbox = document.createElement('div');
+    vbox.className = 'vocab-box';
+    vbox.innerHTML = `<div class="v-title">📚 Từ vựng / cấu trúc khó</div>` +
+      bai.vocab.map(v=>`<div class="vocab-item">• <b>${v.term}</b>: ${v.mean}</div>`).join('');
+    card.appendChild(vbox);
+  }
+
+  area.appendChild(card);
+
+  // ---- Lớp 3: liên từ / 主張表現 (tự động, toàn bộ bài) ----
+  const passageEl = card.querySelector('.passage');
+  highlightConnectives(passageEl);
+
+  // ---- Lớp 2: cặp đồng nghĩa (chỉ bài đã có dữ liệu synonymPairs) ----
+  if(bai.synonymPairs && bai.synonymPairs.length){
+    highlightSynonymPairs(passageEl, allChoicesWraps, bai.synonymPairs);
+  }
+
+  applyLayerVisibility();
+}
+
+function answer(qBlock, q, chosenIdx, choicesWrap, qIndex, cardEl){
+  const buttons = choicesWrap.querySelectorAll('.choice');
+  buttons.forEach((b,i)=>{
+    b.classList.add('disabled');
+    if(i === q.correct) b.classList.add('correct');
+    if(i === chosenIdx && chosenIdx !== q.correct) b.classList.add('wrong');
+  });
+
+  const fb = qBlock.querySelector('.feedback');
+  fb.classList.add('show');
+  if(chosenIdx === q.correct){
+    fb.classList.add('ok');
+    fb.textContent = '✅ Chính xác!';
+  } else {
+    fb.classList.add('bad');
+    fb.textContent = '❌ Chưa đúng — đáp án đúng là ' + String.fromCharCode(65+q.correct) + '.';
+  }
+
+  qBlock.querySelector('.explain-toggle').classList.add('show');
+
+  // 1) Xóa mỏ neo của các câu khác trong bài (tránh nhìn nhầm), rồi hiện mỏ neo của câu đang làm
+  cardEl.querySelectorAll('.passage .anchor').forEach(el=>el.classList.remove('show-pick'));
+  const relTag = 'q' + qIndex + 'c' + q.correct;
+  cardEl.querySelectorAll('.passage .anchor').forEach(el=>{
+    const rel = el.getAttribute('data-rel');
+    if(rel === relTag) el.classList.add('show-pick');
+  });
+
+  // 2) Hiện redflag / truebait trong TẤT CẢ đáp án của câu này để so sánh ngay
+  choicesWrap.querySelectorAll('.redflag, .truebait').forEach(el=>el.classList.add('show'));
+  choicesWrap.querySelectorAll('.choice .anchor').forEach(el=>el.classList.add('show'));
+}
+
+renderNav();
+renderBai(baiList[0]);
+</script>
+<script src="/js/site-header-v2.js"></script>
+  <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
+</body>
+</html>

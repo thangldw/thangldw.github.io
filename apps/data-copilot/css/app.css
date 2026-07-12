@@ -197,6 +197,6 @@ body.dragging::after {
   .intro h1 { font-size: var(--step-3); }
   .dataset-bar { flex-direction: column; align-items: flex-start; }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .intro .lead { white-space: normal; }
 }

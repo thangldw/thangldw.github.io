@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>N1 漢字 Phân tích — thang.</title>
+<title>JLPT N1 Kanji Analysis — 漢字分析 — thang.</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
 :root{
@@ -52,8 +52,8 @@ body{background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro","Noto
 .result-count{font-size:.78rem;color:var(--muted);margin-left:auto;font-weight:500;}
 
 /* GRID */
-.container{max-width:1140px;margin:0 auto;padding:6px 18px 60px;}
-.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;}
+.container{width:min(1500px,100%);margin:0 auto;padding:12px 32px 60px;}
+.vocab-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
 
 /* CARD */
 .vocab-card{
@@ -188,7 +188,10 @@ body{background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro","Noto
 }
 
 mark{background:#fff59d;border-radius:3px;padding:0 2px;}
+@media(max-width:1180px){.vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(max-width:840px){.container{padding-inline:24px}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:600px){
+  .container{padding-inline:16px;}
   .vocab-grid{grid-template-columns:1fr;}
   .card-kanji{font-size:1.8rem;}
   #appHeader h1{font-size:.9rem;}
@@ -203,11 +206,11 @@ mark{background:#fff59d;border-radius:3px;padding:0 2px;}
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/app-footer.css">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
 </head>
 <body>
 <header id="appHeader">
-  <h1>🈷 JLPT N1 漢字 — Phân tích từng từ</h1>
+      <h1>JLPT N1 Kanji Analysis <span>漢字分析</span></h1>
   <input id="search-input" type="text" placeholder="🔍 Tìm từ, cách đọc, nghĩa..." oninput="filterCards()">
 </header>
 

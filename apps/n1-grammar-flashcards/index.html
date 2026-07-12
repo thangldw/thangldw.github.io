@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JLPT N1 Grammar Flashcards — thang.</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/tokens.css">
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<style>
+  body{ background:var(--bg); color:var(--text); font-family:var(--font-sans); font-size:var(--step-0);
+    line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap{ width:min(34rem, 100% - 2*var(--space-md)); margin-inline:auto; }
+  .app-main{ padding-block:var(--space-lg) var(--space-2xl); }
+
+  .intro{ text-align:center; margin-bottom:var(--space-lg); }
+  .intro h1{ font-family:var(--font-display); font-size:var(--step-2); letter-spacing:-.01em; }
+  .intro h1 .jp-title{ font-family:'Noto Sans JP',var(--font-sans); color:var(--text-dim); font-weight:500; margin-left:.35em; }
+  .intro .sub{ color:var(--text-muted); font-size:var(--step--1); margin-top:var(--space-2xs); }
+
+  .topbar{ display:flex; gap:.5rem; margin-bottom:var(--space-sm); flex-wrap:wrap; }
+  select{ background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:var(--radius-sm);
+    padding:.55em .7em; font-size:var(--step--1); flex:1; font-family:var(--font-sans); }
+  select:focus{ outline:none; border-color:var(--accent); }
+
+  button{ border:1px solid transparent; border-radius:var(--radius-sm); padding:.6em 1em; font-size:var(--step--1);
+    font-weight:600; cursor:pointer; font-family:var(--font-sans);
+    transition:transform .15s var(--ease), background .2s, border-color .2s, color .2s, filter .2s; }
+  button:active{ transform:scale(.96); }
+  .shuffle-btn{ background:var(--surface); border-color:var(--border); color:var(--text-muted); flex:0 0 auto; font-weight:500; }
+  .shuffle-btn:hover{ border-color:var(--border-strong); color:var(--text); }
+
+  .progress-wrap{ margin-bottom:var(--space-md); }
+  .progress-bar{ height:6px; background:var(--surface-2); border-radius:4px; overflow:hidden; }
+  .progress-fill{ height:100%; background:var(--accent); width:0%; transition:width .3s var(--ease); }
+  .stats{ display:flex; justify-content:space-between; font-size:var(--step--1); color:var(--text-dim);
+    margin-top:var(--space-2xs); font-family:var(--font-mono); }
+  .stats span.good{ color:#5ecb9e; font-weight:600; }
+  .stats span.bad{ color:#e46a8b; font-weight:600; }
+
+  .card-area{ perspective:1400px; margin-bottom:var(--space-md); }
+  .card{ position:relative; width:100%; min-height:340px; cursor:pointer;
+    transform-style:preserve-3d; transition:transform .5s var(--ease); }
+  .card.flipped{ transform:rotateY(180deg); }
+  .face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--radius);
+    padding:var(--space-md); display:flex; flex-direction:column;
+    background:var(--surface); border:1px solid var(--border); box-shadow:var(--shadow); }
+  .front{ justify-content:center; align-items:center; text-align:center; }
+  .front .idx{ position:absolute; top:14px; left:16px; font-size:var(--step--1); color:var(--text-dim); font-family:var(--font-mono); }
+  .front .pattern{ font-family:'Noto Sans JP',var(--font-sans); font-size:var(--step-2); font-weight:700; line-height:1.35; color:var(--text); }
+  .front .hint{ margin-top:var(--space-sm); font-size:var(--step--1); color:var(--text-dim); }
+  .back{ transform:rotateY(180deg); overflow-y:auto; }
+  .back .pattern-sm{ font-family:'Noto Sans JP',var(--font-sans); font-size:var(--step-0); font-weight:700; color:var(--accent); margin-bottom:var(--space-xs); }
+  .back .meaning{ font-size:var(--step-0); font-weight:500; margin-bottom:var(--space-sm); color:var(--text); line-height:1.55; }
+  .back .ex{ font-family:'Noto Sans JP',var(--font-sans); font-size:var(--step--1); color:var(--text); background:var(--surface-2);
+    border-radius:var(--radius-sm); padding:.7em .8em; margin-bottom:var(--space-2xs); line-height:1.6; }
+  .back .ex .jp{ color:var(--accent-soft); }
+  .back .ex .vn{ color:var(--text-muted); display:block; margin-top:3px; }
+  .back .note{ font-size:var(--step--1); color:var(--text-muted); margin-top:var(--space-xs); font-style:italic;
+    background:var(--surface-2); border-left:3px solid var(--accent); border-radius:6px; padding:.6em .8em; line-height:1.55; }
+
+  .controls{ display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; }
+  .btn-nav{ background:var(--surface); border-color:var(--border); color:var(--text-muted); }
+  .btn-nav:hover{ border-color:var(--border-strong); color:var(--text); }
+  .btn-flip{ background:var(--accent); color:var(--accent-ink); }
+  .btn-flip:hover{ filter:brightness(1.08); }
+  .btn-know{ background:color-mix(in srgb,#5ecb9e 12%,transparent); color:#5ecb9e; border-color:color-mix(in srgb,#5ecb9e 40%,transparent); }
+  .btn-unknow{ background:color-mix(in srgb,#e46a8b 12%,transparent); color:#e46a8b; border-color:color-mix(in srgb,#e46a8b 40%,transparent); }
+  .row2{ display:flex; gap:.5rem; margin-top:var(--space-sm); }
+  .row2 button{ flex:1; }
+  .done-screen{ text-align:center; }
+  .done-screen .big{ font-size:40px; margin-bottom:6px; }
+  .restart-btn{ background:var(--accent); color:var(--accent-ink); margin-top:var(--space-sm); }
+  .hidden{ display:none; }
+  @media (max-width:420px){ .front .pattern{ font-size:var(--step-1); } }
+</style>
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+</head>
+<body>
+<main class="app-main wrap">
+
+<section class="intro">
+  <h1>JLPT N1 Grammar Flashcards <span class="jp-title">文法</span></h1>
+  <div class="sub" id="subtitle">99 mẫu ngữ pháp N1 + 8 mẫu 限り (107 thẻ) — bấm vào thẻ để xem nghĩa</div>
+</section>
+
+<div class="topbar">
+  <select id="rangeSelect">
+    <option value="1-107">Tất cả (1–107)</option>
+    <option value="1-25">Bài 1–11 (1–25)</option>
+    <option value="26-50">Bài 12–25 (26–50)</option>
+    <option value="51-75">Bài 26–37 (51–75)</option>
+    <option value="76-99">Bài 38–50 (76–99)</option>
+    <option value="100-107">Tất cả các mẫu 限り (100–107)</option>
+    <option value="unknown">Chỉ ôn thẻ chưa thuộc</option>
+  </select>
+  <button class="shuffle-btn" id="shuffleBtn">🔀 Trộn</button>
+  <button class="shuffle-btn" id="resetBtn" title="Xóa toàn bộ tiến độ đã lưu">🗑️ Xóa tiến độ</button>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="stats">
+    <span id="counter">1 / 99</span>
+    <span><span class="good" id="knowCount">0</span> thuộc &nbsp; <span class="bad" id="unknowCount">0</span> chưa thuộc</span>
+  </div>
+</div>
+
+<div class="card-area" id="cardArea">
+  <div class="card" id="card">
+    <div class="face front">
+      <div class="idx" id="idxLabel">1</div>
+      <div class="pattern" id="frontPattern">AあってのB</div>
+      <div class="hint">👆 Bấm để xem nghĩa & ví dụ</div>
+    </div>
+    <div class="face back" id="backFace"></div>
+  </div>
+</div>
+
+<div id="reviewControls" class="hidden">
+  <div class="row2">
+    <button class="btn-unknow" id="btnUnknow">❌ Chưa thuộc</button>
+    <button class="btn-know" id="btnKnow">✅ Đã thuộc</button>
+  </div>
+</div>
+
+<div class="controls" style="margin-top:10px;">
+  <button class="btn-nav" id="prevBtn">← Trước</button>
+  <button class="btn-nav" id="nextBtn">Sau →</button>
+</div>
+
+<div class="done-screen hidden" id="doneScreen">
+  <div class="big">🎉</div>
+  <div>Bạn đã ôn hết bộ thẻ này!</div>
+  <div class="sub" id="doneStats"></div>
+  <button class="restart-btn" id="restartBtn">Ôn lại từ đầu</button>
+</div>
+</main>
+
+<script>
+const data = [
+{p:"1. AあってのB", m:"Chính vì có A nên mới có B. Nếu không có A thì cũng chẳng có B.", ex:[["どんなに有名でも、お客様あってのお店です。", "Dù nổi tiếng đến mấy, có khách hàng mới có nhà hàng."], ["あなたあっての私です。", "Có em mới có anh — anh không thể sống thiếu em."]]},
+{p:"2. Aいかんで/では/によってはB ・ Aいかんによらず/かかわらずB", m:"① Tuỳ theo A như thế nào mà B.\\n② Không liên quan A ra sao, vẫn B (đi với によらず/かかわらず).", ex:[["成績が伸びるかどうかは本人の今後の努力いかんだ。", "Thành tích có tiến bộ hay không là tuỳ vào nỗ lực của người đó."], ["結果のいかんにかかわらず、必ず報告してください。", "Dù kết quả thế nào cũng hãy báo cáo."]]},
+{p:"3. Aう(ý hướng)が/と B ・ Aまいが／Aまいと B", m:"① Cho dù A, thì B.\\n② Cho dù A hay không A, vẫn B.", note:"Thể ý hướng: グループI 書く→書こう; II 食べる→食べよう; III する→しよう、来る→来よう. Phủ định まい: 書く→書くまい, 食べる→食べるまい/食べまい, する→するまい/すまい, 来る→来るまい/こまい。", ex:[["彼が困ろうが、私には関係がない。", "Dù anh ta có khốn đốn thế nào cũng chẳng liên quan đến tôi."], ["彼が来ようが来まいが、時間になったら出発します。", "Anh ta đến hay không cũng vậy, đến giờ là xuất phát."]]},
+{p:"4. Aう(ý hướng)にも A(khả năng phủ định)ない", m:"Có lý do nào đó nên dù muốn A cũng không thể làm được.", note:"Chỉ dùng với động từ. Phân biệt với mẫu cổ hơn [V(辞書形)に V(khả năng phủ định)]: 泣くに泣けない (khóc cũng không khóc được).", ex:[["仕事が終わらないから、帰ろうにも帰れない。", "Việc chưa xong nên muốn về cũng không về được."], ["びんのふたは固くて開けようにも開けられなかった。", "Nắp lọ cứng quá, muốn mở cũng không mở được."]]},
+{p:"5. A限りだ", m:"Cảm xúc A ở mức tối đa, cao nhất có thể.", note:"A là tính từ chỉ cảm xúc (うれしい、さびしい、心細い…), chủ ngữ ngầm là người nói.", ex:[["こんなに盛大な結婚式を挙げることができて、うれしい限りです。", "Tổ chức được lễ cưới hoành tráng thế này, còn gì vui sướng bằng."], ["たったひとりの肉親だった姉を亡くして、さびしい限りです。", "Mất đi người chị ruột duy nhất, thật không gì buồn hơn."]]},
+{p:"6. A(た)が最後 B", m:"Nếu (lỡ) A xảy ra thì chắc chắn dẫn đến kết quả xấu B, không thể ngăn lại được.", note:"B luôn là kết quả xấu/tiêu cực, không thể đảo ngược.", ex:[["彼がスピーチを始めたが最後、長々と話が続いて終わらない。", "Ông ta mà bắt đầu phát biểu thì thôi rồi, nói dài lê thê không dứt."], ["獲物をくわえたが最後、猛獣はそれを放そうとしなかった。", "Đã ngoạm được con mồi thì mãnh thú không thả ra nữa."]]},
+{p:"7. AかたがたB", m:"Tiện làm việc A, làm luôn việc B (B thường là đi thăm hỏi/cảm ơn).", ex:[["散歩かたがた、買い物をする。", "Tiện đi dạo, mua sắm luôn."], ["先日のお礼かたがた、お見舞いに行く。", "Nhân tiện đi cảm ơn việc hôm trước, ghé thăm người ốm luôn."]]},
+{p:"8. AかたわらB", m:"Trong khi làm A (công việc/nghề chính), đồng thời làm B (việc phụ).", note:"A là việc chính, B là việc phụ. Thường dùng cho nghề nghiệp/học hành kéo dài, không dùng cho hành động tức thời.", ex:[["彼は勉学のかたわら、アルバイトをしている。", "Anh ấy vừa đi học vừa làm thêm."], ["彼は小説を書くかたわら、作詞もしている。", "Anh ấy vừa viết tiểu thuyết vừa sáng tác ca khúc."]]},
+{p:"9. AがてらB", m:"Vừa làm A, tiện thể làm B (gần nghĩa với かたがた nhưng B nhẹ nhàng, ngẫu hứng hơn).", ex:[["遊びがてら、建設中の別荘を見に行こう。", "Tiện đường đi chơi, ghé xem biệt thự đang xây."], ["家が近いですから散歩がてら遊びに来てください。", "Nhà gần nên tiện đi dạo, anh ghé chơi nhé."]]},
+{p:"10. Aが早いかB", m:"Ngay sau khi A vừa xảy ra, B xảy ra liền (rất nhanh, gần như đồng thời).", note:"Dùng với 動詞(辞書形)＋が早いか. Diễn tả phản xạ rất nhanh, thường mang sắc thái sinh động, kể chuyện.", ex:[["ベルが鳴るが早いか、彼女は受話器を取った。", "Chuông vừa reo là cô ấy nhấc máy ngay."], ["冷蔵庫を開けるが早いか、猫はとんできた。", "Vừa mở tủ lạnh ra là con mèo đã lao đến ngay."]]},
+{p:"11. Aからある", m:"Trên/hơn mức A (A là số lượng, độ dài, khoảng cách, số tiền).", note:"Cũng có dạng 「Aからの」(=A以上の) và 「A円からする」(giá từ A trở lên).", ex:[["10キロからある巨大なかぼちゃが実った。", "Quả bí ngô to hơn 10 cân chín rồi."], ["ここから東京までは、100キロからある。", "Từ đây đến Tokyo hơn 100 cây số."]]},
+{p:"12. Aきらいがある", m:"Có khuynh hướng/thói quen (thường là xấu) A.", note:"Chỉ dùng cho ngôi thứ 3, thường diễn tả khuynh hướng không tốt. Danh từ + の + きらいがある.", ex:[["彼は人の話を聞かないきらいがある。", "Anh ta có vẻ không thích nghe người khác nói."], ["うちの子は偏食のきらいがある。", "Con tôi có hiện tượng ăn uống không cân đối."]]},
+{p:"13. A極まる ・ A極まりない", m:"Cực kỳ A (nhấn mạnh mức độ cao, thường là điều không tốt).", note:"極まりない tuy có hình thức phủ định nhưng nghĩa giống hệt 極まる. Cũng dùng khi cảm xúc đạt đến cực hạn (感極まる).", ex:[["彼の態度は、失礼極まりない。", "Thái độ của anh ta cực kỳ vô lễ."], ["感極まって泣き出した。", "Cảm kích tột độ, tôi đã khóc oà."]]},
+{p:"14. Aごとき／ごとくB", m:"Như A, B (lối nói cổ, văn vẻ).", note:"Cách nói khá cổ. Người+ごとき: nếu chỉ người khác → khinh miệt; nếu chỉ bản thân → khiêm tốn.", ex:[["山のごとき大波に村はのみこまれてしまった。", "Ngôi làng bị sóng lớn như núi nuốt chửng."], ["君ごとき、若造に何ができる。", "Như cậu, một đứa trẻ ranh thì làm được gì."]]},
+{p:"15. AこととてB", m:"Vì có sự tình/lý do A nên B (lối nói cổ, hay dùng để xin lỗi, giải thích).", note:"Cách nói khá cổ, trang trọng, hay dùng trong thư từ xin lỗi/giải thích.", ex:[["休み中のこととてご連絡が遅れ、たいへん失礼いたしました。", "Do đang nghỉ nên liên lạc chậm, thành thật xin lỗi."], ["10年ぶりのこととて、すぐにはわからなかった。", "Vì đã 10 năm rồi nên không nhận ra ngay được."]]},
+{p:"16. AことなしにB", m:"Không làm/không có A mà vẫn B.", note:"動詞(辞書形)＋ことなしに.", ex:[["日曜日も休むことなしに働いた。", "Làm việc không nghỉ cả Chủ Nhật."], ["相手のプライドを傷つけることなしに忠告することは難しい。", "Khuyên bảo mà không làm tổn thương lòng tự trọng đối phương quả là khó."]]},
+{p:"17. A始末だ", m:"Cuối cùng dẫn đến kết quả xấu A (thường sau một chuỗi sự việc tệ dần).", note:"動詞(辞書形)＋始末だ. Luôn mang sắc thái chê trách, thất vọng về kết quả cuối cùng.", ex:[["「ひとりでできる」と言っていたのに、結局は助けを求める始末だ。", "Đã nói tự làm được, cuối cùng lại phải nhờ người giúp."], ["事業を始めたが失敗して借金だけが残る始末だった。", "Khởi nghiệp thất bại, kết cục chỉ còn lại nợ."]]},
+{p:"18. Aずくめ", m:"Hoàn toàn, toàn bộ, tuyệt đối là A (thường đi với màu sắc, いいこと, 規則...).", note:"名詞＋ずくめ【尽くめ】. Hay gặp: 黒ずくめ(toàn đen), いいことずくめ(toàn chuyện tốt), 規則ずくめ(toàn quy tắc).", ex:[["黒ずくめのファッションが流行した。", "Thời trang toàn màu đen đã thịnh hành."], ["楽しいことずくめの学生生活だった。", "Cuộc sống sinh viên tràn đầy niềm vui."], ["この学校は規則ずくめで本当にいやになる。", "Trường này toàn quy tắc với quy tắc, thực sự phát chán."]]},
+{p:"19. Aずにはおかない", m:"Nhất định/thế nào cũng sẽ A (không thể không xảy ra).", ex:[["神は罪を犯したものには罰を与えずにはおかない。", "Thần linh nhất định sẽ trừng phạt kẻ có tội."], ["命がけで主人を守った盲導犬の話は人々を感動させずにはおかなかった。", "Câu chuyện chú chó dẫn đường liều mình bảo vệ chủ ắt hẳn đã làm xúc động nhiều người."]]},
+{p:"20. Aずにはすまない", m:"Không làm A thì không xong / Phải A mới được (theo lẽ thường, đạo lý xã hội).", ex:[["私が悪かったのだから、あやまらずにはすまないと思う。", "Vì tôi sai nên nghĩ là không xin lỗi không được."], ["会社に莫大な損害を与えたのだから、辞表を出さずにはすまない。", "Vì gây tổn hại lớn cho công ty nên buộc phải nộp đơn từ chức."]]},
+{p:"21. Aすら／ですらB", m:"Đến cả A cũng B (nhấn mạnh trường hợp cực đoan nhất).", note:"Gần nghĩa với さえ nhưng trang trọng, văn viết hơn.", ex:[["あの子は、自分の名前すら書けない。", "Đứa bé đó đến tên mình cũng không viết được."], ["先生ですらわからない難しい問題だ。", "Bài khó đến mức cả thầy giáo cũng không hiểu."]]},
+{p:"22. AそばからB", m:"Vừa xong A là B liền (hiệu quả của A mất ngay lập tức bởi B).", note:"Thường diễn tả vòng lặp lặp đi lặp lại gây bực bội (làm A xong, B lại phá ngay).", ex:[["うちの塀は、消すそばから落書きされる。", "Tường nhà tôi vừa xóa xong lại bị vẽ bậy ngay."], ["この木の実は赤くなるそばから、鳥に食べられてしまう。", "Quả cây này vừa đỏ là bị chim ăn hết ngay."]]},
+{p:"23. ただAのみ ・ ただAのみならず", m:"① ただAのみ：chỉ là A thôi.\\n② ただAのみならず：không chỉ là A (mà còn...).", ex:[["あの会社は、ただ学歴のみを評価する。", "Công ty đó chỉ đánh giá qua bằng cấp."], ["彼はただ外見のみならず、性格もいい。", "Anh ấy không chỉ ngoại hình đẹp mà tính cách cũng tốt."]]},
+{p:"24. AたところでB", m:"Dù (có) A đi nữa thì cũng B (B thường là vô ích/không có tác dụng) — quan hệ đối lập.", note:"Dùng để nhận định trước một việc làm gì đó là vô ích, không có tác dụng.", ex:[["急いで行ったところで、もう間に合わない。", "Có đi gấp cũng chẳng kịp."], ["何回やったところで、勝てないよ。相手が強すぎるんだから。", "Chơi bao lần cũng chẳng thắng đâu, vì đối thủ quá mạnh."]]},
+{p:"25. AだにB", m:"Chỉ riêng A (thường là 'nghĩ', 'tưởng tượng', 'nhớ lại') thôi đã B rồi — nhấn mạnh.", note:"A thường đi với 考える/想像する/思い出す; B thường mang cảm xúc tiêu cực như おそろしい、つらい.", ex:[["子どものころお化けは想像するだにおそろしかった。", "Lúc nhỏ chỉ tưởng tượng đến ma thôi đã sợ rồi."], ["あの火事の夜のことは思い出すだにおそろしい。", "Đêm hoả hoạn đó, chỉ nghĩ đến thôi đã thấy ghê."]]},
+{p:"26. Aたりとも", m:"Dù chỉ một lượng nhỏ nhất A cũng không được phép/không thể — phủ định tuyệt đối.", note:"A là lượng từ nhỏ nhất (1分、1円、1秒...), theo sau thường là phủ định. Hơi mang tính văn viết.", ex:[["目上の方との待ち合わせには、1分たりとも遅れてはならない。", "Hẹn với cấp trên thì chậm 1 phút cũng không được."], ["父から送金してもらったお金は、1円たりとも無駄にはできない。", "Tiền bố gửi cho thì đến một Yên cũng không được tiêu phí."]]},
+{p:"27. Aたるもの(者)B", m:"Đã là A (một tư cách, vai trò người) thì đương nhiên phải B.", note:"A là từ chỉ người/vai trò, cách nói cổ trang trọng, nhấn mạnh trách nhiệm/tư cách.", ex:[["教育者たる者が、飲酒運転をするなど許せない。", "Đã là nhà giáo thì việc uống rượu lái xe là không thể chấp nhận."], ["医者たる者は、患者の秘密を守るべきだ。", "Đã là thầy thuốc thì phải giữ bí mật của bệnh nhân."]]},
+{p:"28. AつBつ", m:"① Hai bên qua lại làm cho nhau (cạnh tranh, giành giật).\\n② AたりBたり với A,B là từ trái nghĩa (đi tới đi lui...).", ex:[["抜きつ抜かれつの激しいレースになった。", "Trở thành cuộc đua giành giật ngôi đầu kịch liệt."], ["道に迷って行きつ戻りつするうちに、何とか目的地に着いた。", "Lạc đường, cứ đi tới đi lui mãi rồi cũng đến được đích."]]},
+{p:"29. Aっぱなし", m:"Cứ để nguyên trạng thái A (thường mang ý chê trách vì để bừa bãi, không dọn dẹp).", ex:[["玄関のドアを開けっぱなしにしないでください。", "Đừng để mở cửa ra vào như vậy, côn trùng sẽ bay vào."], ["一晩中電気がつけっぱなしだった。", "Cả đêm cứ để điện sáng (quên tắt)."]]},
+{p:"30. AであれBであれ", m:"① Aであれ: dù là A.\\n② AであれBであれ: dù là A hay là B (cũng vậy).", ex:[["お金持ちであれ悩みはある。", "Người giàu cũng có nỗi niềm riêng (giàu cũng khóc)."], ["男であれ女であれ、不況の今は就職することは難しい。", "Dù nam hay nữ, lúc kinh tế suy thoái tìm việc đều khó."]]},
+{p:"31. AてからというものB", m:"Kể từ khi A trở đi, đã thành ra B (một trạng thái khác hẳn so với trước đây).", ex:[["祖母が死んでからというもの、祖父はお酒ばかり飲んでいる。", "Từ khi bà mất, ông suốt ngày chỉ uống rượu."], ["漢方薬を飲みはじめてからというもの、体調がいい。", "Từ lúc bắt đầu uống thuốc bắc, sức khoẻ tốt hẳn lên."]]},
+{p:"32. Aでなくてなん(何)だろう", m:"Không phải là A thì còn là gì nữa — khẳng định mạnh mẽ, mang tính văn vẻ.", note:"Cách nói tránh khẳng định trực tiếp bằng 「Aだ」 mà diễn đạt văn vẻ, giàu cảm xúc hơn.", ex:[["彼女に対する気持ちが、愛でなくて何だろう。", "Tình cảm với cô ấy, không phải tình yêu thì là gì."], ["これが不当な解雇でなくて何だろう。", "Đây hẳn là một việc sa thải không thỏa đáng."]]},
+{p:"33. AではあるまいしB", m:"Vì (rõ ràng) không phải là A nên đương nhiên B (thường trách móc, mỉa mai nhẹ).", ex:[["忍者ではあるまいし、人が突然消えてしまうことなんてないだろう。", "Không phải Ninja, làm gì có chuyện người tự dưng biến mất."], ["赤ちゃんではあるまいし、自分のことは自分でしなさい。", "Không phải em bé, tự làm việc của mình đi."]]},
+{p:"34. Aてやまない", m:"Thành tâm, không ngừng cầu chúc/mong ước A — nhấn mạnh cảm xúc tha thiết.", note:"Thể lịch sự: ～てやみません (ví dụ: 一日も早い回復を願ってやみません).", ex:[["事業の成功を祈ってやまない。", "Luôn cầu chúc sự nghiệp thành công."], ["卒業生の活躍を期待してやまない。", "Luôn hy vọng vào sự thành đạt của các sinh viên ra trường."]]},
+{p:"35. (A、)BとあいまってC", m:"A kết hợp cùng B tạo nên kết quả C (thường là kết quả tốt hơn).", note:"A nhiều khi bị lược bỏ. 名詞＋と相まって.", ex:[["CMソングのヒットと相まって、その商品は飛ぶように売れた。", "Cùng với bài hát quảng cáo hit, mặt hàng đó bán chạy như tôm tươi."], ["昨日は日曜だったので、好天と相まって人出が多かった。", "Hôm qua là Chủ Nhật, lại thêm trời đẹp nên rất đông người."]]},
+{p:"36. AとあってB ・ AとあればB", m:"① AとあってB: Vì lý do A nên B (B là kết quả tự nhiên).\\n② AとあればB: Nếu là A thì B (giả định, sẵn sàng làm gì đó).", ex:[["オリックスが優勝したとあって、地元神戸の人たちは大喜びだった。", "Vì đội Oryx vô địch nên người dân Kobe rất vui sướng."], ["社長の命令とあっては、聞かないわけにはいかない。", "Nếu là lệnh của giám đốc thì không nghe không được."]]},
+{p:"37. AといいBといい", m:"A cũng vậy, B cũng vậy — nhìn từ góc độ nào (trong số nhiều ví dụ) cũng nhận định như thế.", ex:[["そのレストランは料理といいサービスといい申し分なかった。", "Nhà hàng đó món ăn ngon, dịch vụ cũng tốt, thật hoàn hảo."], ["新居は床といい壁といい、とても上質な材料が使ってある。", "Nhà mới cả sàn lẫn tường đều dùng vật liệu chất lượng cao."]]},
+{p:"38. Aというところだ ・ といったところだ", m:"Đại khái/cao nhất cũng chỉ cỡ mức A (ước lượng, không nhiều hơn).", ex:[["最近はどんなアルバイトでも時給750円というところだ。", "Gần đây việc làm thêm nào lương cũng chỉ tầm 750 Yên/giờ."], ["私の成績ではその大学には、合格ラインぎりぎりといったところだろう。", "Với thành tích của tôi thì chỉ tầm sát điểm đỗ trường đó thôi."]]},
+{p:"39. AといえどもB", m:"Tuy/dù là A (một trường hợp đặc biệt, được kính trọng) nhưng vẫn B.", ex:[["親といえども、子どもの将来を勝手に決めることはできない。", "Là bố mẹ cũng không được tự ý quyết định tương lai con."], ["犯罪者といえども、私たちと同じ人間だ。", "Dù là tội phạm thì cũng là con người như chúng ta."]]},
+{p:"40. Aといったらない ・ といったらありはしない(ありゃしない)", m:"Cực kỳ A, không thể nói hết bằng lời (nhấn mạnh cảm xúc, thường việc xấu, dùng trong văn nói).", note:"Thường dùng cho điều tiêu cực và trong hội thoại thân mật.", ex:[["このアパートは不便だといったらありゃしない。", "Căn hộ này bất tiện hết chỗ nói."], ["最近のテレビ番組はつまらないといったらありゃしない。", "Chương trình TV gần đây chán không có gì để nói."]]},
+{p:"41. Aと思いきやB", m:"Đã tưởng/nghĩ là A, nhưng hoá ra lại là B — khác hẳn dự đoán.", ex:[["不採用と思いきや、採用の通知が来た。", "Tưởng là trượt rồi, ai ngờ lại có thông báo trúng tuyển."], ["田中先生が作るテストだから難しいと思いきや、案外やさしかった。", "Tưởng thầy Tanaka ra đề sẽ khó, ai ngờ lại khá dễ."]]},
+{p:"42. AときたらB", m:"Nói về A thì (đúng là) B — mang tâm trạng than phiền, trách móc.", note:"Thường dùng cho chủ đề không mấy tích cực, mang giọng điệu phàn nàn thân mật.", ex:[["うちの子ときたら、朝から晩までテレビゲームをしている。", "Con tôi thì suốt từ sáng đến tối toàn chơi điện tử."], ["最近の若者ときたら、礼儀も知らない。", "Giới trẻ gần đây thì lễ nghi cũng chẳng biết."]]},
+{p:"43. AところをB", m:"① Trong trạng thái/cảnh huống A thì B (bị bắt gặp, xảy ra chuyện gì đó).\\n② Dù đang/đáng lẽ A nhưng B (quán ngữ thể hiện cảm tạ, xin lỗi với đối phương).", ex:[["つまみ食いしているところを母に見つかってしまった。", "Đang nhón đồ ăn vụng thì bị mẹ bắt gặp."], ["本日はお忙しいところを私たちの結婚式にご出席いただき、ありがとうございました。", "Hôm nay dù đang bận rộn nhưng quý vị đã đến dự lễ cưới, xin chân thành cảm ơn."]]},
+{p:"44. AとしたところでB ・ としたって ・ にしたところで ・ にしたって", m:"Cho dù đứng ở vị trí/lập trường của A thì cũng B.", note:"A thường là người hoặc vật được nhân cách hóa như người.", ex:[["彼としたって、彼女が仕事をするのは、反対ではなかった。", "Dù là anh ấy thì cũng không phản đối việc cô ấy đi làm."], ["ゴリラにしたって狭い檻の中に閉じこめられているのはストレスがたまるに違いない。", "Dù là khỉ đột thì bị nhốt trong chuồng chật chắc chắn cũng stress."]]},
+{p:"45. Aとは", m:"Ngạc nhiên, ngoài dự đoán, không ngờ tới về việc A — nhấn mạnh cảm xúc bất ngờ.", note:"Là cách nói nhấn mạnh chức năng của 「と」, hàm ý 'dự đoán khác với kết quả thực tế'.", ex:[["彼が犯人だとは、夢にも思わなかった。", "Việc anh ta là thủ phạm thì nằm mơ cũng không nghĩ tới."], ["日本の冬がこんなに寒いとは、思わなかった。", "Không nghĩ là mùa đông Nhật lại lạnh đến thế."]]},
+{p:"46. AとはいえB", m:"Tuy A nhưng (thực tế) B (vẫn còn khác/chưa đủ như A gợi ý).", ex:[["4月になったとはいえ、まだ寒い日もある。", "Tuy đã sang tháng 4 nhưng vẫn còn ngày lạnh."], ["娘は20歳とはいえ、まだまだ子どもです。", "Con gái dù 20 tuổi rồi nhưng vẫn còn trẻ con lắm."]]},
+{p:"47. AとばかりにB", m:"Cứ như là A (không nói thành lời, nhưng thái độ/hành động thể hiện rõ điều đó), rồi B.", note:"Theo sau dạng mệnh lệnh/cấm đoán + とばかりに【許りに】.", ex:[["日曜日なのに妻は早く起きようとばかりに、掃除機をかけはじめた。", "Dù là Chủ Nhật nhưng vợ tôi cứ như giục dậy sớm, bật máy hút bụi luôn."], ["写真をとるなとばかりに、カメラのレンズをふさがれた。", "Cứ như cấm chụp ảnh, ống kính camera bị che lại."]]},
+{p:"48. Aともなく ・ Aともなしに", m:"Vô tình, không chủ ý mà lại A (không có ý định rõ ràng).", ex:[["ラジオを聴くともなく聴いていたら、懐かしい曲が流れてきた。", "Không định nghe radio nhưng lại nghe được, thì bài hát xưa vang lên."], ["寝るともなしにベッドに横になっていたら、いつの間にか眠ってしまった。", "Không định ngủ nhưng nằm ra giường, ngủ thiếp đi lúc nào không biết."]]},
+{p:"49. Aともなると ・ Aともなれば", m:"Một khi đã đạt đến mức/vị trí A thì đương nhiên B (nhấn mạnh).", ex:[["人気歌手ともなると、ファンが騒ぐので、自由に外出もできない。", "Khi đã thành ca sĩ nổi tiếng thì fan ồn ào, không thể tự do ra ngoài."], ["子どもも4歳ともなれば、自分のことは自分でするようになる。", "Trẻ con mà lên 4 tuổi là đã biết tự làm việc của mình."]]},
+{p:"50. Aないではおかない", m:"Nhất định phải A, không thể không xảy ra/không làm.", ex:[["彼は率直な性格だから、思ったことは口に出さないではおかないよ。", "Anh ta trực tính nên nghĩ gì là kiểu gì cũng nói ra."], ["こんな美しい景色を見せたら、彼女はきっとスケッチしないではおかないだろう。", "Cảnh đẹp thế này mà cho cô ấy xem thì chắc chắn cô ấy sẽ vẽ phác thảo ngay."]]},
+{p:"51. Aないではすまない", m:"Không làm A thì không xong, phải làm A mới được (theo lẽ thường/quy tắc xã hội).", ex:[["多くの人に迷惑をかけたのだから、あやまらないではすまないだろう。", "Đã làm phiền nhiều người nên không xin lỗi không xong."], ["借りたお金は返さないではすまない。", "Tiền đã vay thì phải trả."]]},
+{p:"52. AないまでもB", m:"Dù chưa đạt đến mức A, thì ít nhất cũng đạt mức B (thấp hơn A một chút).", ex:[["次のテストでは満点はとれないまでも、90点以上はとりたい。", "Kỳ thi tới dù không đạt điểm tối đa cũng muốn được từ 90 điểm trở lên."], ["富士山の頂上までは登れないまでも、せめて途中までは登ってみたい。", "Dù không lên được đỉnh núi Phú Sĩ thì cũng muốn thử leo đến lưng chừng."]]},
+{p:"53. Aないものでもない", m:"Không hẳn là không thể A — với điều kiện nào đó, vẫn có khả năng A xảy ra.", ex:[["一生懸命働けばマイホームが手に入らないものでもない。", "Nếu chăm chỉ làm việc thì vẫn có thể mua được nhà riêng."], ["もう少し条件をよくしてくれれば、この会社で働かないものでもない。", "Nếu được tạo điều kiện tốt hơn một chút thì tôi cũng không đến mức không làm ở công ty này."]]},
+{p:"54. Aながらに", m:"Ở (giữ) nguyên trạng thái A; cùng với, đi kèm trạng thái A.", note:"生まれながらに = 生まれつき (bẩm sinh). Diễn tả hai trạng thái diễn ra song song.", ex:[["ヘレン・ケラーは生まれながらに目も見えず耳も聞こえなかった。", "Helen Keller từ khi sinh ra mắt đã không nhìn thấy, tai không nghe được."], ["容疑者は涙ながらに、自分の無実を訴えた。", "Kẻ tình nghi vừa khóc vừa kêu oan mình vô tội."]]},
+{p:"55. AながらもB", m:"Tuy/dù A nhưng (vẫn) B — quan hệ đối lập, nhượng bộ.", ex:[["彼はまだ小さいながらも、きちんと挨拶する。", "Cậu bé tuy nhỏ tuổi nhưng chào hỏi rất lễ phép."], ["狭いながらも楽しいわが家。", "Tuy chật hẹp nhưng nhà ta thật vui vẻ."]]},
+{p:"56. Aなくして ・ Aなくしては B", m:"Không làm/không có A thì không thể B.", ex:[["みなさんの協力なくしては、完成させることはできませんでした。", "Không có sự hiệp lực của mọi người thì đã không thể hoàn thành."], ["失敗をおそれない勇気なくしては、新しいものを生み出すことはできない。", "Không có dũng khí không sợ thất bại thì không thể sáng tạo ra cái mới."]]},
+{p:"57. Aなしに ・ Aなしには B", m:"Không làm A mà vẫn B / Không có A thì không thể B.", note:"Gần nghĩa với なくして(は) nhưng なしに có thể dùng cho cả việc 'không báo trước'.", ex:[["国の両親からの仕送りなしには、留学生活は続けられない。", "Không có tiền bố mẹ ở quê gửi cho thì không thể tiếp tục cuộc sống du học."], ["地震は何の予告もなしに、突然襲ってくる。", "Động đất chẳng có dự báo gì cả, đột ngột ập đến."]]},
+{p:"58. Aならでは ・ Aならではの", m:"Chỉ riêng A mới có, ngoài A ra không có (đặc trưng riêng có).", ex:[["当レストランならではの料理をお楽しみください。", "Mời quý vị thưởng thức món ăn đặc trưng chỉ có ở nhà hàng chúng tôi."], ["大型画面ならではの迫力に圧倒される。", "Bị choáng ngợp bởi sự cuốn hút chỉ có ở màn hình lớn."]]},
+{p:"59. AなりB", m:"Ngay sau khi A vừa xong, B xảy ra liền.", ex:[["疲れていたのか、夕飯を食べるなり、寝てしまった。", "Mệt quá chăng, vừa ăn tối xong là ngủ luôn."], ["帰宅するなり、また出かけてしまった。", "Vừa về nhà cái đã đi mất ngay."]]},
+{p:"60. AなりBなり", m:"Đưa ra ví dụ minh hoạ: A cũng được, B cũng được (chọn một trong số đó).", note:"動詞(辞書形)＋なり. Phía sau thường là lời khuyên/mệnh lệnh.", ex:[["熱があるなら、薬を飲むなり、氷で冷やすなりしたほうがいいですよ。", "Nếu sốt thì uống thuốc hoặc chườm đá đều tốt cả."], ["いらないものは、人にあげるなり、捨てるなりしたらどうですか。", "Đồ không cần thì cho người khác hoặc vứt đi, sao không thử xem?"]]},
+{p:"61. AなりにB", m:"Đứng ở lập trường/mức độ riêng của A, B tương ứng với điều đó (theo cách riêng).", note:"私なりに rất hay dùng; với người trên (bề trên) thì ít dùng cách nói này.", ex:[["私は私なりに将来のことをまじめに考えているつもりだ。", "Tôi định bụng sẽ suy nghĩ nghiêm túc về tương lai theo cách của riêng mình."], ["若者は若者なりに、大人とは違った価値観で人生を真剣に考えているのだ。", "Người trẻ cũng suy nghĩ nghiêm túc về cuộc sống theo cách riêng, khác với người lớn."]]},
+{p:"62. Aにあたらない ・ にはあたらない", m:"Không cần thiết/không đáng phải A (thường đi sau động từ chỉ cảm xúc như ngạc nhiên, khen, chê).", ex:[["失敗したからといって落胆するにはあたりません。", "Chỉ vì thất bại mà nản lòng thì không đáng."], ["年齢差が10歳違いの夫婦なんて驚くにあたらない。", "Vợ chồng chênh nhau 10 tuổi thì chẳng có gì đáng ngạc nhiên."]]},
+{p:"63. AにあってB", m:"Vì ở trong tình huống/thời điểm/hoàn cảnh A nên B.", ex:[["どんなに厳しい状況にあっても、彼は笑顔を絶やさない。", "Dù trong hoàn cảnh khắc nghiệt đến mấy, anh ấy vẫn không thôi mỉm cười."], ["忙しい生活にあって、ゆとりを持つことを忘れないでいるのは難しい。", "Trong cuộc sống bận rộn, thật khó để không quên dành chút thời gian thư thái."]]},
+{p:"64. Aに至る ・ 至るまで ・ 至って ・ 至っては ・ 至っても", m:"① Đến tận A (giới hạn không gian/thời gian).\\n② Đạt đến trạng thái cực hạn A (sau một quá trình diễn biến).", ex:[["登山口から頂上に至る道は、よく整備されていて、歩きやすかった。", "Đường từ chân núi lên đến đỉnh được chuẩn bị tốt nên dễ đi."], ["死亡事故が発生するに至って、やっと信号機が設置された。", "Đến khi xảy ra tai nạn chết người, đèn tín hiệu mới được lắp."]]},
+{p:"65. Aにかかわる", m:"Có liên quan, chi phối, ảnh hưởng lớn đến A.", ex:[["命にかかわる病気ではありませんから安心してください。", "Đây không phải bệnh liên quan đến tính mạng nên cứ yên tâm."], ["あなたの将来にかかわることだから、進路についてはよく考えるべきだ。", "Vì là việc liên quan đến tương lai của anh nên hãy suy nghĩ kỹ về hướng đi."]]},
+{p:"66. Aにかたくない", m:"Dễ dàng có thể A (thường đi với 想像する、理解する — suy đoán/lý giải dễ dàng).", note:"Hay đi cùng 想像/理解, mang tính văn viết.", ex:[["彼女が母親に死なれて、気を落としているだろうことは、想像するにかたくない。", "Dễ tưởng tượng cô ấy đang suy sụp vì mẹ mất."], ["田舎に住んでいる人が都会に憧れる心情は理解にかたくない。", "Dễ lý giải tâm trạng người ở quê mơ ước đến thành phố."]]},
+{p:"67. Aにして", m:"① Nhấn mạnh thời gian/địa điểm/tình trạng A.\\n② Đến cả A (trình độ cao) còn không làm được, thì mức thấp hơn càng không thể.", ex:[["彼は3歳にして、ひらがなが全部読めるようになった。", "Cậu bé mới 3 tuổi đã đọc được hết Hiragana."], ["先生にして解けない問題なのだから、私ができるわけがない。", "Vì là câu hỏi mà đến thầy còn không giải được nên tôi không có lý nào làm được."]]},
+{p:"68. Aに即して ・ 即しては ・ 即しても ・ 即した", m:"Theo, phù hợp, hợp với A (thực tế, sự thật, tình hình).", note:"Khi theo một quy định/tiêu chuẩn cố định thì dùng chữ 則 thay vì 即 (規定に則して).", ex:[["現実に即して考える。", "Suy nghĩ phù hợp với thực tế."], ["政府には、実情に即した対応をしてもらいたい。", "Mong chính phủ có biện pháp ứng phó phù hợp với thực tế."]]},
+{p:"69. Aにたえる ・ にたえない", m:"① Có/không có giá trị để làm A.\\n② Rất A, không thể chịu đựng nổi (cảm xúc bức bách, chán ghét).", note:"Nghĩa ② dùng dạng 名詞＋にたえない, diễn tả cảm xúc mạnh không kiềm chế được.", ex:[["彼の論文は読むにたえないものだ。ひどすぎる。", "Luận văn của anh ta không thể đọc nổi, quá tệ."], ["大臣が誤解を招くような発言をしたことは、まことに遺憾にたえません。", "Việc bộ trưởng phát ngôn gây hiểu lầm thực sự là điều đáng tiếc khôn xiết."]]},
+{p:"70. Aに足る ・ 足らない", m:"Có/không có đủ giá trị để (đáng) làm A.", note:"動詞: 信頼するに足る; 名詞: 信頼に足る.", ex:[["田中さんには話しても大丈夫だ。彼女は信用するに足る人だ。", "Nói chuyện với chị Tanaka được, chị ấy là người đáng tin cậy."], ["そんなに小さなことは、論ずるに足らない。", "Việc nhỏ nhặt thế, không đáng phải bàn luận."]]},
+{p:"71. AにひきかえB", m:"Trái ngược hẳn với A, B (nhận định mang tính chủ quan, nhấn mạnh sự thay đổi/khác biệt).", ex:[["昨年にひきかえ、今年は暖冬だ。", "Trái với năm ngoái, năm nay mùa đông ấm áp."], ["無口な兄にひきかえ、弟は社交家だ。", "Trái với ông anh ít nói, thằng em lại rất dễ gần."]]},
+{p:"72. AにもましてB", m:"Hơn cả mức A, B (còn... hơn nữa).", ex:[["猛暑と言われた去年にもまして、今年の夏は暑い。", "Còn nóng hơn cả năm ngoái vốn đã được gọi là nóng khốc liệt."], ["前回にもまして、今回のテストは難しかった。", "Kỳ thi lần này còn khó hơn cả lần trước."]]},
+{p:"73. Aの至り", m:"Cảm xúc/tâm trạng A đạt đến mức tối cao (thường dùng diễn tả sự cảm kích, vinh dự, xấu hổ).", ex:[["ノーベル賞をいただき光栄の至りです。", "Thật vinh dự tột cùng khi nhận được giải Nobel."], ["先生におほめいただき、光栄の至りと感激しております。", "Em thực sự cảm kích khi được thầy khen, thật là vinh dự."]]},
+{p:"74. Aの極み", m:"A đạt đến mức cực hạn, tột cùng (thể hiện sự cảm khái của người nói).", ex:[["金メダルこそスポーツ選手にとって栄光の極みだ。", "Chính huy chương vàng là tột đỉnh vinh quang với vận động viên thể thao."], ["自殺して親より先にあの世に行くなんて、親不孝の極みだ。", "Tự sát, đi trước cả bố mẹ, thực sự là bất hiếu tột cùng."]]},
+{p:"75. AはおろかB", m:"A đã đành (đương nhiên rồi), B (mức độ cao hơn) cũng vậy.", ex:[["事故でけがをして、走ることはおろか歩くこともできない。", "Bị thương trong tai nạn, chạy đã đành rồi, đi bộ cũng không nổi."], ["詐欺にあい、家はおろか土地までとられてしまった。", "Bị lừa, nhà đã đành, đến cả đất cũng bị lấy mất."]]},
+{p:"76. AばこそB", m:"Chính vì (có) A nên mới B — nhấn mạnh lý do tích cực.", note:"Dùng dạng giả định (ば) của động từ. Nhấn mạnh lý do chính đáng, tích cực cho hành động/thái độ phía sau.", ex:[["あなたのことを思えばこそ、忠告しているのです。", "Chính vì nghĩ đến anh nên tôi mới khuyên như vậy."], ["厳しくしつけるのは子どもを愛すればこそだ。", "Nghiêm khắc dạy dỗ chính là vì yêu thương con cái."]]},
+{p:"77. Aばそれまでだ", m:"Nếu (lỡ) A xảy ra thì coi như hết, không còn gì để làm nữa (sự việc trở nên vô nghĩa).", ex:[["一生懸命にしても試験に落ちてしまえばそれまでだ。", "Dù học hành chăm chỉ đến mấy, thi rớt là coi như hết."], ["お金をたくさん持っていても、死んでしまえばそれまでだ。", "Dù có nhiều tiền đến mấy, chết là hết."]]},
+{p:"78. ひとりAだけでなく ・ ひとりAのみならず", m:"Không chỉ riêng A (mà còn cả những thứ khác) — cách nói trang trọng trong văn viết.", ex:[["ごみ問題はひとり日本だけでなく世界的な問題だ。", "Vấn đề rác thải không chỉ của riêng Nhật mà là vấn đề toàn cầu."], ["日米貿易摩擦はひとり両国のみならずほかの国にも大きな影響を与えている。", "Xung đột thương mại Nhật-Mỹ không chỉ ảnh hưởng hai nước mà còn các nước khác."]]},
+{p:"79. Aべからず ・ べからざる", m:"① べからず: Cấm A, không được làm A (dùng trên biển báo).\\n② べからざる: Không nên/không được phép A (bổ nghĩa cho danh từ phía sau).", note:"Cách nói cổ thể hiện sự cấm đoán, ngày nay ít dùng ngoài biển báo/văn trang trọng.", ex:[["関係者以外入るべからず。", "Không phận sự miễn vào."], ["彼は会社にとって必要欠くべからざる人材だ。", "Anh ta là nhân tài không thể thiếu đối với công ty."]]},
+{p:"80. Aべく", m:"Để/với mục đích làm A (vế sau không phải là nhờ vả/mệnh lệnh).", note:"Chia động từ: 読む→読むべく; 食べる→食べるべく; 来る→来るべく; する→するべく/すべく。", ex:[["定年退職後、海外に移住すべく今から準備を進めている。", "Từ bây giờ tôi bắt đầu chuẩn bị để định cư nước ngoài sau khi nghỉ hưu."], ["歌手になるべく歌のレッスンに通っている。", "Để trở thành ca sĩ, tôi đang đi học lớp hát."]]},
+{p:"81. Aにあるまじき", m:"Hành vi/lời nói không thể chấp nhận được với cương vị/tư cách A.", note:"A là người (chức vụ/vai trò), theo sau là danh từ chỉ hành vi. Lối nói trang trọng, dùng trong văn viết để phê phán.", ex:[["飲酒運転をするとは、教育者にあるまじき行為だ。", "Uống rượu lái xe là hành vi không thể chấp nhận với một nhà giáo."], ["盗みをするなんて警官にあるまじき行為だ。", "Trộm cắp là hành vi không thể chấp nhận với một cảnh sát."]]},
+{p:"82. Aまでだ ・ までのことだ", m:"Chỉ còn cách làm A thôi, ngoài ra không còn cách nào khác (cách nói biện bạch, chấp nhận thực tế).", ex:[["給料が上がらないなら、会社をやめるまでだ。", "Nếu lương không tăng thì chỉ có cách nghỉ việc thôi."], ["雨が降りはじめたが、傘がないのだから、しかたがない。濡れていくまでだ。", "Trời bắt đầu mưa nhưng không có ô, đành chịu ướt mà đi thôi."]]},
+{p:"83. Aまでもない ・ までもなく", m:"Không cần thiết phải làm A (việc đó hiển nhiên/không quan trọng đến mức phải làm).", ex:[["日本の首都はいうまでもなく、東京です。", "Thủ đô của Nhật thì không cần nói cũng biết là Tokyo."], ["試験は全然できなかったから発表を待つまでもなく不合格にきまっている。", "Thi chẳng làm được gì nên không cần chờ kết quả cũng biết là trượt."]]},
+{p:"84. Aまみれ", m:"Mình đầy A (dơ bẩn bám đầy bề mặt, thường đi với 汗、泥、血、ほこり...).", note:"名詞＋まみれ【塗れ】, giới hạn ở một số danh từ chỉ chất bẩn (汗、ほこり、血、泥…).", ex:[["クーラーのない部屋で、汗まみれになって作業をしている。", "Mướt mải mồ hôi làm việc trong phòng không có điều hoà."], ["先日父は家の蔵から、ほこりまみれの家系図を見つけ出した。", "Hôm trước bố tìm thấy cuốn gia phả phủ đầy bụi trong nhà kho."]]},
+{p:"85. Aめく", m:"Có vẻ như/mang dáng dấp của A.", note:"Dạng 「Aめいてくる」còn mang nghĩa 'dần trở nên giống A'.", ex:[["日一日と春めいてきて、梅の花も咲き出した。", "Ngày càng có vẻ như mùa xuân, hoa mai bắt đầu nở."], ["まじめに話しているとき、冗談めいたことは言うな。", "Khi nói chuyện nghiêm túc thì đừng nói những câu nghe có vẻ đùa cợt."]]},
+{p:"86. AもさることながらB", m:"A đã đành (hiển nhiên là tốt), nhưng không chỉ thế, B cũng vậy — thường khen ngợi.", ex:[["味もさることながら、盛りつけが美しく目も楽しませてくれる。", "Vị ngon đã đành, cách bày biện cũng đẹp mắt."], ["アイドル歌手のYは、歌もさることながら、気さくな性格でも人気をとっている。", "Ca sĩ thần tượng Y thì giọng hát đã đành, tính cách cởi mở cũng rất được yêu mến."]]},
+{p:"87. AものをB", m:"Đáng lẽ đã A (kết quả tốt) rồi, vậy mà... B — mang tâm trạng tiếc nuối, trách móc.", note:"Khi lược bỏ B (chỉ nói đến ものを) thì hàm ý tiếc nuối vì A đã không xảy ra. Mang sắc thái than vãn/bất mãn nhiều hơn のに thông thường.", ex:[["もう少し勉強すれば合格できたものを。", "Cố thêm chút nữa là đỗ rồi, vậy mà..."], ["言ってくれれば貸してあげたものを。", "Nói thì em cho mượn ngay rồi, vậy mà (không nói)..."]]},
+{p:"88. Aや ・ Aや否やB", m:"Vừa A xong là B ngay, gần như chưa kịp biết A đã xong hay chưa thì B đã xảy ra (văn viết).", ex:[["泥棒は、私の顔を見るや否や逃げ出した。", "Kẻ trộm vừa nhìn thấy mặt tôi là đã chạy mất."], ["帰宅するや、愛犬が飛びついてきた。", "Vừa về đến nhà, chú chó đã chồm ra ngay."]]},
+{p:"89. Aゆえ ・ ゆえに ・ ゆえのB", m:"Vì (lý do) A nên B.", note:"ゆえに còn dùng trong toán học: A=B, B=C, ゆえに A=C.", ex:[["日本は天然資源に乏しいがゆえに、工業原材料を海外からの輸入に依存している。", "Vì nghèo tài nguyên thiên nhiên, Nhật phải phụ thuộc nhập khẩu nguyên liệu công nghiệp."], ["小さな子どもゆえ、失礼はお許しください。", "Vì cháu còn nhỏ, mong được lượng thứ nếu có gì thất lễ."]]},
+{p:"90. AをおいてBない", m:"Ngoài A ra thì không có B nào khác (A là duy nhất, không thể thay thế).", ex:[["彼女を説得できるのは、Aさんをおいてほかに適任者はいない。", "Để thuyết phục được cô ấy, ngoài anh A ra không ai thích hợp hơn."], ["この役にぴったりの女優は彼女をおいてほかにいるだろうか。", "Nữ diễn viên hợp với vai này, ngoài cô ấy ra liệu còn ai khác không."]]},
+{p:"91. Aを限りにB", m:"Lấy A làm điểm cuối cùng/tối đa rồi B (kết thúc, dừng lại từ mốc A).", ex:[["今日を限りに、会社をやめます。", "Hết hôm nay là tôi sẽ nghỉ việc."], ["声を限りに叫んでみたが誰も答えなかった。", "Tôi đã hét lên hết sức nhưng không ai trả lời."]]},
+{p:"92. Aを皮切りにB", m:"Bắt đầu từ A, sau đó tiếp diễn hàng loạt B (sự kiện liên tiếp).", ex:[["花火大会を皮切りに3日間にわたっていろいろな行事が行われる。", "Bắt đầu với hội pháo hoa, nhiều sự kiện khác được tổ chức suốt 3 ngày."], ["今度のイタリア出店を皮切りに彼は、ヨーロッパに進出しようとしている。", "Bắt đầu với việc mở cửa hàng ở Ý, anh ta đang muốn tiến sang thị trường châu Âu."]]},
+{p:"93. Aを禁じ得ない", m:"Không thể không/không kìm được cảm xúc A (thường là cảm xúc tiêu cực mạnh).", note:"名詞(cảm xúc)＋を禁じ得ない.", ex:[["殺人犯に対する憎しみを禁じ得ない。", "Không thể không căm ghét trước kẻ sát nhân."], ["多くの国民に愛された喜劇俳優の死に哀惜の念を禁じ得ない。", "Không thể kìm được sự thương tiếc trước sự ra đi của diễn viên hài được nhiều người yêu mến."]]},
+{p:"94. AをもってB", m:"① Nhờ có/bằng A mà B.\\n② Lấy A làm mốc kết thúc, B (thường dùng trong nghi thức, văn bản).", note:"Mẫu「～をもってすれば、～」còn có nghĩa 'nếu có ~ thì có thể thực hiện việc khó'.", ex:[["あの小説家は名文をもって知られる。", "Tiểu thuyết gia đó được biết đến nhờ những áng văn nổi tiếng."], ["以上をもって会議を終わらせていただきます。", "Xin được phép kết thúc buổi họp tại đây."]]},
+{p:"95. AをものともせずにB", m:"Mặc cho, bất chấp khó khăn/trở ngại A, vẫn B (thể hiện sự dũng cảm, kiên cường).", ex:[["勇気ある青年は、燃えさかる火をものともせずに、子どもを助けた。", "Thanh niên dũng cảm bất chấp ngọn lửa dữ dội, đã cứu được đứa trẻ."], ["彼は周囲の反対をものともせず、自分が正しいと思う道を歩み続けた。", "Anh ta bất chấp mọi người phản đối, vẫn tiếp tục con đường mình cho là đúng."]]},
+{p:"96. Aを余儀なくされる ・ を余儀なくさせる", m:"① を余儀なくされる: Bị/buộc phải A (trái với ý chí bản thân).\\n② を余儀なくさせる: Khiến/bắt ai đó phải A (trái với ý muốn của đối phương).", ex:[["震災で家を失った人々は避難所暮らしを余儀なくされた。", "Những người mất nhà do động đất buộc phải sống ở khu lánh nạn."], ["雨のため体育祭は中止を余儀なくされた。", "Vì trời mưa nên hội thể dục buộc phải huỷ."]]},
+{p:"97. AをよそにB", m:"Không quan tâm/bất chấp A (sự lo lắng, phản đối của người khác), vẫn cứ B — mang tính phủ định, tiêu cực.", ex:[["大学は学生の反対運動をよそに、学費の値上げを強行した。", "Trường đại học bất chấp phong trào phản đối của sinh viên, vẫn kiên quyết tăng học phí."], ["祖父は心臓が悪いのに家族の心配をよそに、よく旅行に出かける。", "Ông tôi dù tim không tốt nhưng bất chấp gia đình lo lắng, vẫn hay đi du lịch."]]},
+{p:"98. Aんがため ・ んがために ・ んがためのB", m:"Với mục đích/để làm A, B (mục đích tích cực, cần thực hiện).", note:"「ん」đặt trước dạng phủ định (ない形): 泣く→泣かんがため; 食べる→食べんがため; 来る→こんがため; する→せんがため。", ex:[["試合に勝たんがため、日夜練習に励んでいる。", "Để thắng trận, chúng tôi ngày đêm chăm chỉ luyện tập."], ["祖父は健康を維持せんがため、毎日散歩を欠かさない。", "Ông tôi để duy trì sức khoẻ, ngày nào cũng đi bộ không sót."]]},
+{p:"99. Aんばかりだ ・ んばかりに ・ んばかりの", m:"Gần như/trông như sắp A đến nơi (không dùng để nói về bản thân người nói).", note:"「ん」đặt trước dạng phủ định: 泣く→泣かんばかり; 食べる→食べんばかり; 来る→こんばかり。", ex:[["いたずらをした生徒は先生に叱られ、泣き出さんばかりだった。", "Học sinh nghịch ngợm bị thầy mắng, nhìn như chỉ trực khóc."], ["今にも雨が降り出さんばかりの空模様になってきた。", "Nhìn bầu trời như sắp đổ mưa đến nơi."]]},
+
+{p:"100. Aに限る", m:"Không gì bằng A, A là tốt nhất.", note:"Thường dùng để đưa ra lời khuyên hay phán đoán từ kinh nghiệm bản thân. 動詞(辞書形)／名詞＋に限る。", ex:[["疲れたときは、ゆっくり風呂に入るに限る。", "Khi mệt thì không gì bằng ngâm mình trong bồn tắm thật thong thả."], ["夏の飲み物はビールに限る。", "Đồ uống mùa hè thì không gì bằng bia."], ["風邪には早く寝るに限る。", "Cảm cúm thì ngủ sớm là nhất."]]},
+
+{p:"101. Aに限り ・ Aに限って", m:"① に限り：chỉ riêng A, duy nhất A mới được (giới hạn đặc biệt).\n② に限って：chính A lại... (nghịch lý, thường trách móc/ngạc nhiên).", note:"に限り thường dùng trong thông báo/quy định. に限って mang sắc thái ngạc nhiên hoặc mỉa mai vì A là trường hợp đặc biệt, bất ngờ.", ex:[["本日に限り、全品半額です。", "Chỉ hôm nay, tất cả hàng giảm nửa giá."], ["学生に限り、入場料が無料です。", "Chỉ dành cho học sinh sinh viên, vào cửa miễn phí."], ["うちの子に限って、そんなことをするはずがない。", "Chẳng lẽ chính con mình lại làm chuyện như thế (không thể nào)."]]},
+
+{p:"102. Aかぎりでは ・ Aかぎりだと", m:"Trong phạm vi A (điều tôi biết, thấy, nghe...) thì B.", note:"Thường đi với 私の知る限り(では)、見る限り(では)、聞く限り(では)... Nghĩa là 'dựa trên phạm vi thông tin hiện có, tôi phán đoán...'.", ex:[["私の知る限りでは、彼は正直な人です。", "Trong phạm vi tôi biết, anh ấy là người thật thà."], ["見る限り、特に問題はなさそうだ。", "Nhìn qua thì có vẻ không có vấn đề gì đặc biệt."], ["報告書を読む限りでは、プロジェクトは順調に進んでいる。", "Đọc báo cáo thì có vẻ dự án đang tiến triển thuận lợi."]]},
+
+{p:"103. AないかぎりB ・ Aかぎり(は)B", m:"① AないかぎりB：Trừ khi A xảy ra, nếu không thì B (điều kiện phủ định).\n② AかぎりはB：Trong chừng mực A còn tồn tại/kéo dài thì B.", note:"AないかぎりB = 'nếu không có A thì chắc chắn B'. AかぎりはB = 'bao lâu A còn đúng thì B vẫn còn'. Phân biệt rõ hai nghĩa.", ex:[["奇跡が起きないかぎり、試合に勝つことはできないだろう。", "Trừ khi có điều kỳ diệu xảy ra, chắc không thể thắng trận đấu."], ["私が生きているかぎりは、あなたを守ります。", "Bao lâu tôi còn sống, tôi sẽ bảo vệ anh."], ["彼が謝らないかぎり、絶対に許さない。", "Trừ khi anh ta xin lỗi, tôi tuyệt đối sẽ không tha thứ."]]},
+
+{p:"104. Aに限らず", m:"Không chỉ riêng A, không giới hạn ở A (mà còn nhiều thứ/người khác nữa).", note:"Gần nghĩa với だけでなく nhưng trang trọng hơn. 名詞＋に限らず。", ex:[["子どもに限らず、大人もこのゲームを楽しんでいる。", "Không chỉ trẻ em, người lớn cũng đang thích thú với trò chơi này."], ["日本に限らず、世界中でプラスチック問題が深刻化している。", "Không chỉ ở Nhật, vấn đề rác thải nhựa đang trở nên nghiêm trọng trên toàn thế giới."], ["スポーツに限らず、何事も練習が大切だ。", "Không chỉ thể thao, việc gì cũng cần luyện tập mới thành thạo."]]},
+
+{p:"105. AとはかぎらないB", m:"Không nhất thiết là A, chưa chắc đã A (bác bỏ suy nghĩ đương nhiên/cố định).", note:"Thường dùng để phản bác quan niệm chung. 「必ずしも～とは限らない」là cách dùng rất phổ biến.", ex:[["お金持ちだからといって、幸せとは限らない。", "Không phải cứ giàu là hạnh phúc."], ["有名な大学を卒業したからといって、仕事ができるとは限らない。", "Không phải cứ tốt nghiệp trường nổi tiếng là làm việc giỏi."], ["高いものが必ずしもいいとは限らない。", "Không nhất thiết đồ đắt tiền là tốt."]]},
+
+{p:"106. 限りなくA", m:"Gần như vô hạn, không ngừng, tiếp cận mức cao nhất của A.", note:"Diễn tả mức độ rất cao, gần như không có giới hạn. Hay đi với ～に近い (gần như).", ex:[["この砂漠は限りなく広がっている。", "Sa mạc này trải dài gần như vô tận."], ["彼女の努力は限りなく続いた。", "Nỗ lực của cô ấy cứ tiếp diễn không ngừng."], ["その色は限りなく白に近い。", "Màu đó gần như là trắng tinh."]]},
+
+{p:"107. Aに限ったことではない", m:"Không phải chỉ riêng A mới như thế, A không phải là trường hợp đặc biệt duy nhất.", note:"Thường dùng để nói rằng vấn đề/hiện tượng nào đó không phải chỉ xảy ra với A, mà rộng hơn nhiều.", ex:[["ミスをするのは君に限ったことではない。誰だって失敗する。", "Mắc lỗi không phải chỉ riêng cậu. Ai cũng thất bại cả."], ["電車が遅れるのは日本に限ったことではない。", "Tàu điện trễ không phải chuyện chỉ riêng ở Nhật."], ["若者の読書離れは日本に限ったことではなく、世界的な現象だ。", "Giới trẻ xa rời sách không phải chỉ ở Nhật, đây là hiện tượng toàn cầu."]]},
+];
+
+let order = data.map((_,i)=>i);
+let pos = 0;
+let known = new Set();
+let unknown = new Set();
+let flipped = false;
+let activeList = order.slice();
+
+// ---- Lưu tiến độ vào localStorage ----
+// Chỉ lưu tiến độ học thật (thẻ đã thuộc / chưa thuộc); pos & activeList là state
+// phiên xem nên không lưu. Set không JSON hoá trực tiếp → chuyển qua mảng.
+const STORAGE_KEY = 'flashcard-n1-progress';
+const STORAGE_VERSION = 1;
+
+function saveProgress(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      v: STORAGE_VERSION,
+      n: data.length,
+      known: Array.from(known),
+      unknown: Array.from(unknown)
+    }));
+  }catch(e){ /* storage đầy / bị chặn — bỏ qua, không làm vỡ app */ }
+}
+
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const saved = JSON.parse(raw);
+    // Bỏ qua nếu schema hoặc số thẻ đổi → tránh khôi phục sai index.
+    if(saved.v !== STORAGE_VERSION || saved.n !== data.length) return;
+    const inRange = i => Number.isInteger(i) && i >= 0 && i < data.length;
+    known = new Set((saved.known || []).filter(inRange));
+    unknown = new Set((saved.unknown || []).filter(inRange));
+  }catch(e){ /* dữ liệu hỏng — bỏ qua */ }
+}
+
+loadProgress();
+
+const cardEl = document.getElementById('card');
+const idxLabel = document.getElementById('idxLabel');
+const frontPattern = document.getElementById('frontPattern');
+const backFace = document.getElementById('backFace');
+const counter = document.getElementById('counter');
+const progressFill = document.getElementById('progressFill');
+const knowCountEl = document.getElementById('knowCount');
+const unknowCountEl = document.getElementById('unknowCount');
+const doneScreen = document.getElementById('doneScreen');
+const cardArea = document.getElementById('cardArea');
+const controlsRow = document.querySelector('.controls');
+const reviewControls = document.getElementById('reviewControls');
+const doneStats = document.getElementById('doneStats');
+
+function renderCard(){
+  doneScreen.classList.add('hidden');
+  cardArea.classList.remove('hidden');
+  controlsRow.classList.remove('hidden');
+  reviewControls.classList.remove('hidden');
+
+  if(pos >= activeList.length){
+    cardArea.classList.add('hidden');
+    controlsRow.classList.add('hidden');
+    reviewControls.classList.add('hidden');
+    doneScreen.classList.remove('hidden');
+    doneStats.textContent = `Thuộc: ${known.size} | Chưa thuộc: ${unknown.size} / ${activeList.length}`;
+    return;
+  }
+  const i = activeList[pos];
+  const item = data[i];
+  flipped = false;
+  cardEl.classList.remove('flipped');
+  idxLabel.textContent = (pos+1) + " / " + activeList.length;
+  frontPattern.textContent = item.p;
+
+  let exHtml = item.ex.map(e => `<div class="ex"><span class="jp">${e[0]}</span><span class="vn">${e[1]}</span></div>`).join('');
+  let meaningHtml = item.m.split("\n").map(line => `<div>${line}</div>`).join('');
+  let noteHtml = item.note ? `<div class="note">📌 注意: ${item.note}</div>` : '';
+  backFace.innerHTML = `
+    <div class="pattern-sm">${item.p}</div>
+    <div class="meaning">${meaningHtml}</div>
+    ${exHtml}
+    ${noteHtml}
+  `;
+
+  counter.textContent = (pos+1) + " / " + activeList.length;
+  progressFill.style.width = ((pos)/activeList.length*100) + "%";
+  knowCountEl.textContent = known.size;
+  unknowCountEl.textContent = unknown.size;
+}
+
+function flip(){
+  flipped = !flipped;
+  cardEl.classList.toggle('flipped', flipped);
+}
+
+function next(){
+  pos++;
+  renderCard();
+}
+function prev(){
+  if(pos>0){ pos--; renderCard(); }
+}
+
+document.getElementById('flipBtn').onclick = flip;
+cardEl.onclick = flip;
+document.getElementById('nextBtn').onclick = next;
+document.getElementById('prevBtn').onclick = prev;
+
+document.getElementById('btnKnow').onclick = ()=>{
+  const i = activeList[pos];
+  known.add(i); unknown.delete(i);
+  saveProgress();
+  next();
+};
+document.getElementById('btnUnknow').onclick = ()=>{
+  const i = activeList[pos];
+  unknown.add(i); known.delete(i);
+  saveProgress();
+  next();
+};
+
+document.getElementById('resetBtn').onclick = ()=>{
+  if(!confirm('Xóa toàn bộ tiến độ đã lưu (đã thuộc / chưa thuộc)?')) return;
+  known.clear(); unknown.clear();
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  pos = 0;
+  renderCard();
+};
+
+document.getElementById('shuffleBtn').onclick = ()=>{
+  for(let i=activeList.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [activeList[i],activeList[j]] = [activeList[j],activeList[i]];
+  }
+  pos = 0;
+  renderCard();
+};
+
+document.getElementById('rangeSelect').onchange = (e)=>{
+  const val = e.target.value;
+  if(val === 'unknown'){
+    activeList = Array.from(unknown);
+    if(activeList.length===0){ activeList = order.slice(); alert('Chưa có thẻ nào đánh dấu "chưa thuộc", hiển thị tất cả.'); }
+  } else {
+    const [a,b] = val.split('-').map(Number);
+    activeList = order.slice(a-1,b);
+  }
+  pos = 0;
+  renderCard();
+};
+
+document.getElementById('restartBtn').onclick = ()=>{
+  pos = 0;
+  renderCard();
+};
+
+renderCard();
+</script>
+<script src="/js/site-header-v2.js"></script>
+  <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
+</body>
+</html>
