@@ -1,33 +1,111 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>RAGOps — From AI demo to defensible release decision · Thang Luu</title>
-  <meta name="description" content="RAGOps is a local-first evaluation, red-team, and release-gate platform for production RAG and agent systems. A Forward Deployed Engineering case study by Thang Luu.">
-  <meta property="og:type" content="article"><meta property="og:title" content="RAGOps — From AI demo to defensible release decision"><meta property="og:description" content="A production-minded AI evaluation platform: scenario contracts, regression gates, red teaming, portable traces, reports, API, and CI."><meta property="og:url" content="https://thangldw.github.io/projects/ragops/">
-  <link rel="canonical" href="https://thangldw.github.io/projects/ragops/"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/tokens.css"><link rel="stylesheet" href="/css/styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RAGOps — Forward Deployed AI case study · Thang Luu</title>
+  <meta name="description" content="An overview of RAGOps, an open-source evaluation and release platform for production RAG and agent systems by Thang Luu.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="RAGOps — Forward Deployed AI case study">
+  <meta property="og:description" content="From an ambiguous Japanese enterprise AI request to a defensible release decision.">
+  <meta property="og:url" content="https://thangldw.github.io/projects/ragops/">
+  <link rel="canonical" href="https://thangldw.github.io/projects/ragops/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <style>
-    .case-hero{padding-block:var(--space-xl) var(--space-2xl)}.case-hero h1{font-size:clamp(3.25rem,9vw,7.5rem);letter-spacing:-.065em;margin:.2em 0}.case-hero .lead{font-family:var(--font-display);font-size:clamp(1.35rem,3vw,2.2rem);line-height:1.2;max-width:24ch}.case-hero .sub{color:var(--text-muted);max-width:68ch;margin-top:var(--space-md)}.case-actions{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-lg)}.release-pill{display:inline-flex;align-items:center;gap:.5rem;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));background:var(--accent-glow);color:var(--accent);border-radius:999px;padding:.35rem .75rem;font:var(--step--1) var(--font-mono)}
-    .proof-strip{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--border)}.proof{padding:var(--space-md);border-right:1px solid var(--border)}.proof:last-child{border:0}.proof strong{display:block;font:700 var(--step-2) var(--font-display)}.proof span{color:var(--text-dim);font:var(--step--1) var(--font-mono)}.case-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:var(--space-xl);align-items:start}.case-copy p{color:var(--text-muted);margin-bottom:var(--space-sm)}.case-copy strong{color:var(--text)}.case-aside{position:sticky;top:6rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-lg)}.case-aside h3{font-size:var(--step-1);margin-bottom:var(--space-sm)}.case-aside li{color:var(--text-muted);padding:.45rem 0;border-bottom:1px solid var(--border)}
-    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:var(--space-lg)}.flow-step{background:var(--surface);padding:var(--space-md);min-height:150px}.flow-step b{display:block;color:var(--accent);font:var(--step--1) var(--font-mono);margin-bottom:var(--space-xs)}.flow-step strong{font-family:var(--font-display)}.flow-step p{color:var(--text-dim);font-size:var(--step--1);margin-top:var(--space-xs)}.decision{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);margin-top:var(--space-lg)}.decision-card{border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-lg);background:var(--surface)}.decision-card p{color:var(--text-muted);margin-top:var(--space-xs)}.decision-card.rejected{opacity:.76}.decision-card.chosen{border-color:color-mix(in srgb,var(--accent) 55%,var(--border));box-shadow:0 0 0 1px var(--accent-glow)}
-    .report{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}.report-head{display:flex;justify-content:space-between;align-items:center;padding:var(--space-md);border-bottom:1px solid var(--border)}.status-blocked{color:#ff7b86;font:600 var(--step--1) var(--font-mono)}.report table{width:100%;border-collapse:collapse}.report th,.report td{text-align:right;padding:.8rem var(--space-md);border-bottom:1px solid var(--border);font:var(--step--1) var(--font-mono)}.report th:first-child,.report td:first-child{text-align:left}.delta-bad{color:#ff7b86}.metric-good{color:#5ecb9e}.timeline{border-left:1px solid var(--border);margin-left:.5rem;padding-left:var(--space-lg)}.milestone{position:relative;margin-bottom:var(--space-lg)}.milestone:before{content:"";position:absolute;width:11px;height:11px;border-radius:50%;background:var(--accent);left:calc(-1 * var(--space-lg) - 6px);top:.45rem}.milestone b{font:var(--step--1) var(--font-mono);color:var(--accent)}.milestone p{color:var(--text-muted);margin-top:.3rem}.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md)}.lesson{border-top:2px solid var(--accent);padding-top:var(--space-md)}.lesson p{color:var(--text-muted);margin-top:var(--space-xs)}.case-footer{padding-block:var(--space-xl);border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:var(--space-md);align-items:center}.case-footer p{color:var(--text-muted);max-width:55ch}
-    @media(max-width:850px){.proof-strip{grid-template-columns:1fr 1fr}.proof:nth-child(2){border-right:0}.proof:nth-child(-n+2){border-bottom:1px solid var(--border)}.case-grid{grid-template-columns:1fr}.case-aside{position:static}.flow{grid-template-columns:1fr}.flow-step{min-height:0}.decision,.lesson-grid{grid-template-columns:1fr}.report{overflow-x:auto}.case-footer{align-items:flex-start;flex-direction:column}}
-    @media(max-width:560px){.nav-links>a[href^="#"]{display:none}.nav-links{gap:var(--space-sm)}.case-hero{padding-top:var(--space-lg)}.case-actions{align-items:stretch;flex-direction:column}.case-actions .btn{justify-content:center}.report th,.report td{padding:.7rem .8rem}}
+    .overview-hero{padding-block:var(--space-xl) var(--space-2xl)}
+    .overview-hero h1{font-size:clamp(3.5rem,10vw,8rem);letter-spacing:-.07em;margin:.18em 0}
+    .overview-hero .lead{font:600 clamp(1.45rem,3vw,2.45rem)/1.15 var(--font-display);max-width:25ch}
+    .overview-hero .sub{color:var(--text-muted);max-width:67ch;margin-top:var(--space-md)}
+    .release-pill{display:inline-flex;align-items:center;gap:.5rem;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--border));background:var(--accent-glow);color:var(--accent);border-radius:999px;padding:.35rem .75rem;font:var(--step--1) var(--font-mono)}
+    .overview-actions{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-top:var(--space-lg)}
+    .proof-strip{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--border)}
+    .proof{padding:var(--space-md);border-right:1px solid var(--border)}.proof:last-child{border:0}
+    .proof strong{display:block;font:700 var(--step-2) var(--font-display)}.proof span{color:var(--text-dim);font:var(--step--1) var(--font-mono)}
+    .overview-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:var(--space-xl);align-items:start}
+    .overview-copy p{color:var(--text-muted);margin-bottom:var(--space-sm)}.overview-copy strong{color:var(--text)}
+    .signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md)}
+    .signal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:var(--space-lg)}
+    .signal b{font:var(--step--1) var(--font-mono);color:var(--accent)}.signal h3{font-size:var(--step-1);margin:.8rem 0 .35rem}.signal p{color:var(--text-muted);font-size:var(--step--1)}
+    .result{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);padding:var(--space-lg);display:grid;grid-template-columns:1fr auto;gap:var(--space-md);align-items:center}
+    .result p{color:var(--text-muted);margin-top:.4rem}.blocked{color:#ff7b86;font:600 var(--step--1) var(--font-mono);white-space:nowrap}
+    .handoff{border-top:1px solid var(--border);padding-block:var(--space-xl);display:grid;grid-template-columns:1fr auto;gap:var(--space-xl);align-items:center}.handoff p{color:var(--text-muted);max-width:60ch;margin-top:.5rem}
+    @media(max-width:800px){.proof-strip,.signal-grid{grid-template-columns:1fr 1fr}.overview-grid,.handoff{grid-template-columns:1fr}.result{grid-template-columns:1fr}.overview-actions{align-items:stretch;flex-direction:column}.overview-actions .btn{justify-content:center}}
+    @media(max-width:520px){.proof-strip,.signal-grid{grid-template-columns:1fr}.proof{border-right:0;border-bottom:1px solid var(--border)}.proof:last-child{border-bottom:0}.nav-links>a[href^="#"]{display:none}}
   </style>
   <script>(function(){var s=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',s||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'))})()</script>
 </head>
 <body>
-  <header class="site-header" id="top"><div class="wrap nav"><a href="/" class="brand">thang<span class="dot">.</span></a><nav class="nav-links" aria-label="Case study navigation"><a href="#problem">Problem</a><a href="#architecture">Architecture</a><a href="#evidence">Evidence</a><a href="/apps/">Apps</a><button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button></nav></div></header>
+  <header class="site-header" id="top">
+    <div class="wrap nav">
+      <a href="/" class="brand">thang<span class="dot">.</span></a>
+      <nav class="nav-links" aria-label="RAGOps overview navigation">
+        <a href="#overview">Overview</a>
+        <a href="#signals">Signals</a>
+        <a href="/apps/">Apps</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+      </nav>
+    </div>
+  </header>
   <main>
-    <section class="case-hero wrap reveal"><span class="release-pill"><span class="pulse"></span> Public release · v1.4.0</span><h1>RAGOps</h1><p class="lead">From an AI demo to a defensible release decision.</p><p class="sub">A local-first evaluation, red-team, and regression platform for production RAG and agent systems. Built as a reusable product—not a one-off chatbot—to demonstrate how I approach Forward Deployed Engineering from ambiguous requirement to an auditable release gate.</p><div class="case-actions"><a class="btn btn-primary" href="#evidence">See the evidence</a><a class="btn btn-ghost" href="https://github.com/thangldw/ragops" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Public repository</a></div></section>
-    <div class="proof-strip"><div class="proof"><strong>1.4.0</strong><span>public release</span></div><div class="proof"><strong>47</strong><span>automated tests</span></div><div class="proof"><strong>30</strong><span>Japanese benchmark cases</span></div><div class="proof"><strong>0</strong><span>core runtime dependencies</span></div></div>
-    <section id="problem"><div class="wrap case-grid reveal"><div class="case-copy"><div class="section-head"><h2>The deployment gap</h2></div><p>Teams can build an impressive RAG or agent prototype in days. The harder question arrives before production: <strong>is this version safe and useful enough to release?</strong></p><p>Evidence is usually split across notebooks, vendor traces, prompt logs, and manual reviews. A quality score may improve while latency doubles. An average may hide a critical permission leak. A demo can work while nobody can explain what changed from the accepted baseline.</p><p>I reframed the problem as a release contract: the same scenario, the same policies, a recorded baseline, a candidate build, and an explainable go/no-go result that can run locally or in CI.</p></div><aside class="case-aside"><h3>Product contract</h3><ul><li>Offline by default</li><li>Deterministic before model-judged</li><li>Portable scenarios and traces</li><li>Critical findings override averages</li><li>Open core; hosted layer optional</li></ul></aside></div></section>
-    <section id="architecture"><div class="wrap reveal"><div class="section-head"><h2>Architecture</h2><span class="section-note">one core, multiple adapters</span></div><div class="flow"><div class="flow-step"><b>01 / DEFINE</b><strong>Scenario</strong><p>Cases, evidence, thresholds, budgets, and red-team policies.</p></div><div class="flow-step"><b>02 / CAPTURE</b><strong>Trace</strong><p>Answers, citations, retrieval IDs, latency, cost, and approvals.</p></div><div class="flow-step"><b>03 / EVALUATE</b><strong>Core engine</strong><p>Quality, operations, plugins, and critical policy checks.</p></div><div class="flow-step"><b>04 / COMPARE</b><strong>Release gate</strong><p>Baseline versus candidate with explicit regression tolerances.</p></div><div class="flow-step"><b>05 / EXPLAIN</b><strong>Evidence</strong><p>JSON, Markdown, HTML, SQLite history, API, and workbench.</p></div></div><div class="decision"><article class="decision-card rejected"><h3>Rejected: another RAG app</h3><p>A reference chatbot would show retrieval and generation, but it would not solve the reusable production problem shared by different AI workflows.</p></article><article class="decision-card chosen"><h3>Chosen: evaluation infrastructure</h3><p>The product evaluates systems rather than owning their model or vector database. That keeps the core horizontal, portable, and commercially extensible.</p></article></div></div></section>
-    <section id="evidence"><div class="wrap reveal"><div class="section-head"><h2>Release evidence</h2><span class="section-note">Graph-assisted reference deployment</span></div><p class="section-lead">The Japanese troubleshooting agent filters by role, expands context through a domain graph, and exports portable traces. A lexical-only candidate runs against the same contract and is blocked on citation and groundedness regressions.</p><div class="report"><div class="report-head"><strong>Graph + ACL → lexical-only candidate</strong><span class="status-blocked">BLOCKED · exit 2</span></div><table><thead><tr><th>Metric</th><th>Baseline</th><th>Candidate</th><th>Delta</th></tr></thead><tbody><tr><td>Citation coverage</td><td class="metric-good">1.00</td><td>0.75</td><td class="delta-bad">−0.25</td></tr><tr><td>Citation precision</td><td class="metric-good">1.00</td><td>0.75</td><td class="delta-bad">−0.25</td></tr><tr><td>Lexical groundedness</td><td class="metric-good">1.00</td><td>0.7812</td><td class="delta-bad">−0.2188</td></tr><tr><td>Critical findings</td><td class="metric-good">0</td><td>0</td><td>0</td></tr></tbody></table></div><p class="section-lead" style="margin-top:1rem">Synthetic evidence validates the release harness and architecture comparison; it does not claim production adoption or measured ROI.</p></div></section>
-    <section id="delivery"><div class="wrap case-grid reveal"><div><div class="section-head"><h2>Delivery path</h2></div><div class="timeline"><article class="milestone"><b>M1 · BENCHMARK</b><h3>Credible release contracts</h3><p>Thirty Japanese cases, citation and claim checks, attack packs, baseline/regressed/adversarial fixtures, and CI gates.</p></article><article class="milestone"><b>M2 · DEPLOYMENT</b><h3>Reference GraphRAG workflow</h3><p>ACL-first retrieval, graph expansion, approval-aware decisions, trace 0.4 metadata, and a recorded architecture regression.</p></article><article class="milestone"><b>M3 · SHOWCASE</b><h3>Evidence for technical and executive review</h3><p>Architecture, threat model, rollout plan, executive go/no-go report, public case study, and presentation scripts.</p></article><article class="milestone"><b>M4–M5 · PRODUCT</b><h3>Team workflow and commercial alpha</h3><p>Run review, trends, nightly gates, workspace-isolated stores, digested keys, rotation, audit events, and explicit production limits.</p></article></div></div><aside class="case-aside"><h3>My ownership</h3><ul><li>Product thesis and scope</li><li>Domain and API contracts</li><li>Architecture and ADRs</li><li>Implementation and tests</li><li>Security and release workflow</li><li>Case study and presentation narrative</li></ul></aside></div></section>
-    <section id="lessons"><div class="wrap reveal"><div class="section-head"><h2>What this demonstrates</h2></div><div class="lesson-grid"><article class="lesson"><h3>Start from the decision</h3><p>The product is organized around a go/no-go decision, not around fashionable model components.</p></article><article class="lesson"><h3>Make quality operational</h3><p>A metric becomes useful when it is versioned, explainable, and able to block a bad release in CI.</p></article><article class="lesson"><h3>Design for handover</h3><p>Portable contracts, zero-dependency core, ADRs, tests, and explicit limitations make the system easier for another team to own.</p></article></div></div></section>
-    <section><div class="wrap case-footer"><div><h2>Current status</h2><p>v1.4.0 is public and ready for OSS feedback, FDE interviews, and customer-reviewed offline pilots. The hosted control-plane layer remains an explicitly non-production alpha.</p></div><a class="btn btn-primary" href="https://github.com/thangldw/ragops" target="_blank" rel="noopener">Explore the source</a></div></section>
-  </main><script src="/js/main.js"></script>
-</body></html>
+    <section class="overview-hero wrap reveal">
+      <span class="release-pill"><span class="pulse"></span> Open source · v1.4.0</span>
+      <h1>RAGOps</h1>
+      <p class="lead">From an ambiguous AI request to a defensible release decision.</p>
+      <p class="sub">A Forward Deployed Engineering case study and open-source platform for evaluating production RAG and agent systems. RAGOps turns quality, citation, latency, cost, and safety expectations into versioned evidence and an explainable go/no-go result.</p>
+      <div class="overview-actions">
+        <a class="btn btn-primary" href="https://thangldw.github.io/ragops/">Open the full product showcase <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        <a class="btn btn-ghost" href="https://github.com/thangldw/ragops" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> Explore the source</a>
+      </div>
+    </section>
+
+    <div class="proof-strip" aria-label="RAGOps proof points">
+      <div class="proof"><strong>1.4.0</strong><span>public release</span></div>
+      <div class="proof"><strong>50</strong><span>automated tests</span></div>
+      <div class="proof"><strong>30</strong><span>Japanese benchmark cases</span></div>
+      <div class="proof"><strong>0</strong><span>core runtime dependencies</span></div>
+    </div>
+
+    <section id="overview">
+      <div class="wrap overview-grid reveal">
+        <div class="overview-copy">
+          <div class="section-head"><h2>The product idea</h2></div>
+          <p>Teams can create impressive AI pilots quickly. The harder production question is: <strong>is this candidate safe and useful enough to release?</strong></p>
+          <p>I designed RAGOps as the evidence layer between an AI change and that decision. The core evaluates portable scenarios and traces; the reference Japanese troubleshooting agent demonstrates ACL-first graph-assisted retrieval, approval-aware workflow decisions, and controlled rollout thinking.</p>
+          <p>The portfolio page stays intentionally concise. The standalone showcase contains the full discovery story, architecture, experiment, limitations, and rollout recommendation.</p>
+        </div>
+        <div class="result">
+          <div><h3>Recorded architecture regression</h3><p>A lexical-only candidate lost 25 points of citation coverage and precision against the accepted graph-assisted baseline.</p></div>
+          <span class="blocked">RELEASE BLOCKED · EXIT 2</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="signals">
+      <div class="wrap reveal">
+        <div class="section-head"><h2>What this demonstrates</h2></div>
+        <div class="signal-grid">
+          <article class="signal"><b>DISCOVER</b><h3>Frame the real decision</h3><p>Translate an ambiguous enterprise request into users, constraints, success metrics, risks, and stop conditions.</p></article>
+          <article class="signal"><b>BUILD</b><h3>Own the vertical slice</h3><p>Implement ACL-aware retrieval, graph context, workflow decisions, portable traces, API, CLI, and CI.</p></article>
+          <article class="signal"><b>EVALUATE</b><h3>Make claims testable</h3><p>Use Japanese benchmark cases, regressions, adversarial fixtures, red-team rules, and release gates.</p></article>
+          <article class="signal"><b>DEPLOY</b><h3>Recommend an honest rollout</h3><p>Separate synthetic evidence from production proof and define offline, shadow, pilot, and scale phases.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap handoff reveal">
+        <div><h2>Continue to the product story</h2><p>See the architecture pipeline, exact benchmark deltas, rollout decision, and links to the reproducible implementation.</p></div>
+        <a class="btn btn-primary" href="https://thangldw.github.io/ragops/">View the full RAGOps showcase <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </section>
+  </main>
+  <script src="/js/main.js"></script>
+</body>
+</html>
