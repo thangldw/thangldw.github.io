@@ -54,6 +54,7 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
@@ -62,7 +63,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#about" class="nav-link">About</a>
         <a href="#skills" class="nav-link">Stack</a>
-        <a href="projects/ragops/" class="nav-link">RAGOps</a>
+        <a href="projects/ragops/" class="nav-link mobile-priority">RAGOps</a>
         <a href="apps/" class="nav-link">Apps</a>
         <a href="#contact" class="nav-link">Contact</a>
         <a href="ja/" class="lang-switch" lang="ja" title="日本語版">日本語</a>
@@ -73,7 +74,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero wrap">
       <div class="reveal">
@@ -87,9 +88,15 @@
         ambiguous data into practical systems they can understand, operate, and rely on.
       </p>
       <div class="hero-cta reveal">
-        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get in touch</a>
-        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/thangldw" class="btn btn-ghost"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+        <a href="projects/ragops/" class="btn btn-primary"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> View RAGOps case study</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Get in touch</a>
       </div>
+      <dl class="hero-proof reveal" aria-label="Career proof points">
+        <div><dt>10+</dt><dd>years across data &amp; AI</dd></div>
+        <div><dt>30–50</dt><dd>engineer delivery teams</dd></div>
+        <div><dt>JLPT N1</dt><dd>professional Japanese</dd></div>
+        <div><dt>Tokyo</dt><dd>customer-embedded delivery</dd></div>
+      </dl>
 
     </section>
 
@@ -220,35 +227,70 @@
     <section id="builds">
       <div class="wrap reveal">
         <div class="section-head">
-          <h2>Things I build for myself</h2>
-          <span class="section-note font-mono">all open, all running in your browser</span>
+          <h2>Selected systems &amp; case studies</h2>
+          <span class="section-note font-mono">public proof · live demos · release-track products</span>
         </div>
-        <p class="section-lead">Side projects are where I test ideas before I bring them to customers — and how I keep learning. Everything below is live on this site, built from scratch, no backend required.</p>
+        <p class="section-lead">I use product work to make engineering judgment inspectable: the problem, the trade-offs, the evidence, and what remains unproven. The first four systems are public and runnable; the release-track products below remain private while their release gates are completed.</p>
         <div class="card-grid builds-grid">
           <a class="card build-card" href="projects/ragops/">
-            <div class="card-icon">🛡️</div>
+            <span class="project-status">Open source · v1.4.0</span>
+            <div class="card-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
             <h3>RAGOps</h3>
             <p>A production-minded evaluation and release-gate platform for RAG and agent systems — portable scenarios, regression checks, red-team policies, trace ingestion, reports, API, and a local workbench.</p>
             <span class="build-open">Read the case study <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
           <a class="card build-card" href="apps/data-copilot/">
-            <div class="card-icon">🦆</div>
+            <span class="project-status">Live demo · browser-native</span>
+            <div class="card-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
             <h3>Data Copilot</h3>
             <p>Ask a question in plain English and the browser turns it into real SQL, runs it on DuckDB-WASM, and charts the result — no API key, no server. Live market data refreshed daily by a GitHub Actions pipeline.</p>
             <span class="build-open">Open <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
           <a class="card build-card" href="apps/pipeline/">
-            <div class="card-icon">📡</div>
+            <span class="project-status">Live telemetry · daily pipeline</span>
+            <div class="card-icon"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i></div>
             <h3>Pipeline Observability</h3>
             <p>The ELT job behind Data Copilot, fully instrumented — freshness, coverage, and run history. A cron that commits its own telemetry, so anyone can watch it work (or fail, honestly).</p>
             <span class="build-open">Open <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
           <a class="card build-card" href="apps/">
-            <div class="card-icon">🇯🇵</div>
+            <span class="project-status">12 browser apps · public</span>
+            <div class="card-icon"><i class="fa-solid fa-language" aria-hidden="true"></i></div>
             <h3>JLPT N1 study suite</h3>
             <p>A dozen apps I built to take myself to JLPT N1 — kanji analysis, vocabulary drills, grammar, and reading practice. Proof that I'd rather build the tool than buy the textbook.</p>
             <span class="build-open">Browse all apps <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
+        </div>
+
+        <div class="release-track" id="release-track">
+          <div class="section-head release-head">
+            <h3>Products approaching release</h3>
+            <span class="section-note font-mono">private validation · public evidence coming next</span>
+          </div>
+          <p class="section-lead">These systems are in active release preparation. Their source and private data stay closed for now; public case studies will appear only when the evidence is ready to stand on its own.</p>
+          <div class="card-grid release-grid">
+            <article class="card build-card private-product">
+              <span class="project-status status-private">Private · Release track</span>
+              <div class="card-icon"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></div>
+              <h3>Swing Quant</h3>
+              <p>A fail-safe quantitative swing-trading research and portfolio workflow for the US, Japan, and Vietnam — rule-based scoring, walk-forward ML gates, allocation, backtesting, and explainable dashboards.</p>
+              <span class="release-proof">Decision rules remain primary; experimental layers must fail safely.</span>
+            </article>
+            <article class="card build-card private-product">
+              <span class="project-status status-private">Private · Pre-alpha</span>
+              <div class="card-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></div>
+              <h3>Proofline</h3>
+              <p>An evidence-first engineering decision memory: immutable source versions, exact-span citations, governed AI-derived memories, local-first retrieval, and inspectable failure paths.</p>
+              <span class="release-proof">Built for traceable answers, not unsupported fluency.</span>
+            </article>
+            <article class="card build-card private-product">
+              <span class="project-status status-private">Private · Release preparation</span>
+              <div class="card-icon"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div>
+              <h3>KakeFlow</h3>
+              <p>A local-first household finance desktop workspace with multi-source ingestion, review-before-posting, double-entry accounting, reconciliation, and encrypted local storage.</p>
+              <span class="release-proof">Release gates include desktop packaging, signing, and recovery verification.</span>
+            </article>
+          </div>
         </div>
       </div>
     </section>
