@@ -410,14 +410,7 @@ section { padding-block: var(--space-xl) var(--space-2xl); }
 .contact h2 { font-size: var(--step-3); margin-bottom: var(--space-md); }
 .contact p { color: var(--text-muted); font-size: var(--step-0); max-width: 75ch; margin: 0 auto var(--space-md); line-height: 1.7; }
 .contact p:last-of-type { margin-bottom: var(--space-lg); }
-.contact .email-link {
-  font-family: var(--font-display);
-  font-size: var(--step-2);
-  color: var(--accent);
-  border-bottom: 2px solid transparent;
-  transition: border-color .2s var(--ease);
-}
-.contact .email-link:hover { border-color: var(--accent); }
+.contact-email { margin-inline: auto; }
 .contact .contact-ja { font-size: var(--step--1); color: var(--text-dim); }
 
 /* ---------- Footer ---------- */
