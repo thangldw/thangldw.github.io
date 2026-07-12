@@ -56,6 +56,7 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">本文へ移動</a>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
@@ -64,6 +65,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#about" class="nav-link">自己紹介</a>
         <a href="#skills" class="nav-link">スキル</a>
+        <a href="../projects/ragops/" class="nav-link mobile-priority">RAGOps</a>
         <a href="../apps/" class="nav-link">Apps</a>
         <a href="#contact" class="nav-link">連絡先</a>
         <a href="../" class="lang-switch" lang="en" title="English version">EN</a>
@@ -74,7 +76,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero wrap">
       <div class="reveal">
@@ -88,9 +90,15 @@
         チームが理解・運用・信頼できる実用的なシステムに変えてきました。
       </p>
       <div class="hero-cta reveal">
-        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 問い合わせる</a>
-        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/thangldw" class="btn btn-ghost"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+        <a href="../projects/ragops/" class="btn btn-primary"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> RAGOps事例を見る</a>
+        <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 問い合わせる</a>
       </div>
+      <dl class="hero-proof reveal" aria-label="キャリア実績">
+        <div><dt>10年以上</dt><dd>データ＆AIの実務経験</dd></div>
+        <div><dt>30〜50名</dt><dd>開発チームのデリバリー</dd></div>
+        <div><dt>JLPT N1</dt><dd>日本語での一貫対応</dd></div>
+        <div><dt>東京</dt><dd>顧客伴走型デリバリー</dd></div>
+      </dl>
 
     </section>
 
@@ -221,29 +229,70 @@
     <section id="builds">
       <div class="wrap reveal">
         <div class="section-head">
-          <h2>自分のために作っているもの</h2>
-          <span class="section-note font-mono">すべて公開 — ブラウザだけで動きます</span>
+          <h2>システム＆ケーススタディ</h2>
+          <span class="section-note font-mono">公開実績 · ライブデモ · リリース準備中</span>
         </div>
-        <p class="section-lead">サイドプロジェクトは、お客様に持ち込む前にアイデアを試す場所であり、学び続けるための手段です。以下はすべてこのサイト上で稼働中。ゼロから作り、バックエンド不要です。</p>
+        <p class="section-lead">課題、トレードオフ、検証結果、そして未検証の範囲まで、技術判断を確認できる形でプロダクトを作っています。最初の4件は公開済み、続く3件はリリースゲートを進めている非公開プロダクトです。</p>
         <div class="card-grid builds-grid">
+          <a class="card build-card" href="../projects/ragops/">
+            <span class="project-status">オープンソース · v1.4.0</span>
+            <div class="card-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+            <h3>RAGOps</h3>
+            <p>RAG／エージェントシステム向けの本番志向リリースゲート。ポータブルなシナリオ、回帰チェック、レッドチームポリシー、トレース取込、レポート、API、ローカルワークベンチを備えています。</p>
+            <span class="build-open">ケーススタディを見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
           <a class="card build-card" href="../apps/data-copilot/">
-            <div class="card-icon">🦆</div>
+            <span class="project-status">ライブデモ · ブラウザ完結</span>
+            <div class="card-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
             <h3>Data Copilot</h3>
             <p>自然言語で質問すると、ブラウザがそれを本物のSQLに変換し、DuckDB-WASMで実行してグラフ化 — APIキーもサーバーも不要。マーケットデータは GitHub Actions のパイプラインが毎日更新しています。</p>
             <span class="build-open">開く <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
           <a class="card build-card" href="../apps/pipeline/">
-            <div class="card-icon">📡</div>
+            <span class="project-status">ライブテレメトリ · 日次更新</span>
+            <div class="card-icon"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i></div>
             <h3>Pipeline Observability</h3>
             <p>Data Copilot を支えるELTジョブを丸ごと可視化 — データ鮮度、カバレッジ、実行履歴。自分のテレメトリを自分でコミットするcronなので、動く様子（正直、失敗する様子も）を誰でも見られます。</p>
             <span class="build-open">開く <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
           <a class="card build-card" href="../apps/">
-            <div class="card-icon">🇯🇵</div>
+            <span class="project-status">ブラウザアプリ12本 · 公開</span>
+            <div class="card-icon"><i class="fa-solid fa-language" aria-hidden="true"></i></div>
             <h3>JLPT N1 学習アプリ集</h3>
             <p>自分をN1合格まで連れて行くために作った12本のアプリ — 漢字分析、語彙ドリル、文法、読解練習。教科書を買うより、ツールを作ってしまうタイプです。</p>
             <span class="build-open">すべてのアプリを見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
           </a>
+        </div>
+
+        <div class="release-track" id="release-track">
+          <div class="section-head release-head">
+            <h3>リリース準備中のプロダクト</h3>
+            <span class="section-note font-mono">非公開検証中 · 公開できる証拠を準備中</span>
+          </div>
+          <p class="section-lead">現在はソースと非公開データを公開せず、リリースゲートを進めています。単独で検証できる証拠が整った段階で、公開ケーススタディを追加します。</p>
+          <div class="card-grid release-grid">
+            <article class="card build-card private-product">
+              <span class="project-status status-private">非公開 · リリース準備中</span>
+              <div class="card-icon"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></div>
+              <h3>Swing Quant</h3>
+              <p>米国・日本・ベトナム市場向けの、フェイルセーフな定量スイングトレード研究／ポートフォリオ基盤。ルールベース評価、ウォークフォワードMLゲート、配分、バックテスト、説明可能なダッシュボードを統合しています。</p>
+              <span class="release-proof">判断ルールを主軸にし、実験的な層は安全に失敗する設計です。</span>
+            </article>
+            <article class="card build-card private-product">
+              <span class="project-status status-private">非公開 · プレアルファ</span>
+              <div class="card-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></div>
+              <h3>Proofline</h3>
+              <p>エビデンスを起点にしたエンジニアリング意思決定メモリ。ソースの不変バージョン、正確な引用範囲、レビュー可能なAIメモリ、ローカル優先検索、検査可能な失敗経路を備えます。</p>
+              <span class="release-proof">流暢さよりも、根拠を追跡できる回答を優先します。</span>
+            </article>
+            <article class="card build-card private-product">
+              <span class="project-status status-private">非公開 · リリース準備中</span>
+              <div class="card-icon"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div>
+              <h3>KakeFlow</h3>
+              <p>複数ソース取込、計上前レビュー、複式簿記、照合、ローカル暗号化を備えた、ローカルファーストの家計管理デスクトップワークスペースです。</p>
+              <span class="release-proof">デスクトップ配布、署名、リカバリ検証をリリースゲートとして進めています。</span>
+            </article>
+          </div>
         </div>
       </div>
     </section>
