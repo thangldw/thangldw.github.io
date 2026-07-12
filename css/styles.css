@@ -4,6 +4,6 @@
 :root[data-theme="dark"] .project img.visual{filter:brightness(.58) contrast(1.12) saturate(.8)}
 .project img.visual{transition:filter .25s ease}
 .hero-intro{max-width:none;flex:1;min-width:0}.hero-intro>p{font-size:16px;line-height:1.6;color:var(--body);margin:0}.hero-intro>p:first-child{white-space:nowrap}.hero-intro .hero-contact{margin-top:22px;color:var(--ink)}.hero-contact span{font:400 12px 'IBM Plex Mono';color:var(--muted)}.contact{justify-content:flex-end}
-@media(max-width:1180px){.hero-intro>p:first-child{white-space:normal}}
+@media(max-width:1400px){.hero-intro>p:first-child{white-space:normal}}
 .work .intro{max-width:none;white-space:nowrap}
 @media(max-width:900px){.work .intro{white-space:normal}}
