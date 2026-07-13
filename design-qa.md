@@ -48,6 +48,7 @@
 4. Final iteration: added `04_Measure & improve`, shortened method labels to hold a single line, rewrote Apps around practical work and collaboration, removed search and its query-state code, and corrected the RAGOps destination.
 5. Post-fix evidence: desktop, laptop, and mobile browser captures show no overflow; filter counts, URL state, and console checks pass.
 6. Width refinement: centered header/footer bands were reduced to 75% on Home and Apps. Computed dimensions, mobile overrides, visual comparisons, and console checks pass.
+7. Production cache check: Apps loaded the new width immediately; Home initially retained the prior cached stylesheet. The Home stylesheet query was advanced to `20260714c` so GitHub Pages clients fetch the verified 75% rule.
 
 ## Follow-up polish
 
