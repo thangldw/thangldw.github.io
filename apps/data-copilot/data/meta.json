@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-07-12T22:23:12Z",
+  "last_updated": "2026-07-13T05:10:04Z",
   "source": "Yahoo Finance chart API (public, keyless)",
   "range": "2y",
   "interval": "1d",
-  "row_count": 5446,
-  "date_min": "2024-07-10",
-  "date_max": "2026-07-10",
-  "duration_s": 8.6,
+  "row_count": 5436,
+  "date_min": "2024-07-11",
+  "date_max": "2026-07-13",
+  "duration_s": 8.5,
   "tickers": [
     {
       "ticker": "AAPL",
@@ -68,30 +68,30 @@
     {
       "ticker": "6758.T",
       "name": "Sony",
-      "rows": 488,
-      "date_min": "2024-07-10",
-      "date_max": "2026-07-10"
+      "rows": 486,
+      "date_min": "2024-07-16",
+      "date_max": "2026-07-13"
     },
     {
       "ticker": "7203.T",
       "name": "Toyota",
-      "rows": 488,
-      "date_min": "2024-07-10",
-      "date_max": "2026-07-10"
+      "rows": 486,
+      "date_min": "2024-07-16",
+      "date_max": "2026-07-13"
     },
     {
       "ticker": "8306.T",
       "name": "MUFG",
-      "rows": 488,
-      "date_min": "2024-07-10",
-      "date_max": "2026-07-10"
+      "rows": 486,
+      "date_min": "2024-07-16",
+      "date_max": "2026-07-13"
     },
     {
       "ticker": "9984.T",
       "name": "SoftBank Group",
-      "rows": 488,
-      "date_min": "2024-07-10",
-      "date_max": "2026-07-10"
+      "rows": 486,
+      "date_min": "2024-07-16",
+      "date_max": "2026-07-13"
     },
     {
       "ticker": "AAPL",
@@ -138,9 +138,9 @@
     {
       "ticker": "^N225",
       "name": "Nikkei 225",
-      "rows": 488,
-      "date_min": "2024-07-10",
-      "date_max": "2026-07-10"
+      "rows": 486,
+      "date_min": "2024-07-16",
+      "date_max": "2026-07-13"
     }
   ],
   "failed": []
