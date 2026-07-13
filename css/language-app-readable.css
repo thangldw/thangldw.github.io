@@ -1,0 +1,184 @@
+/* Shared readability layer for the twelve Japanese-learning apps.
+   This stylesheet intentionally loads after each app's original styles. */
+
+html.language-app-root {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body.language-app {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body.language-app :where(input, select, textarea) {
+  min-height: 40px;
+  font-size: 14px !important;
+}
+
+/* Dense reference collections: three readable columns instead of four. */
+body[data-language-app="n1-kanji-analysis"] .vocab-grid,
+body[data-language-app="n1-vocabulary-tabs"] :is(.grid, .ptu-grid, .pre-grid),
+body[data-language-app="n1-vocabulary-exams"] .grid,
+body[data-language-app="n1-vocabulary-paraphrase"] .grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.filter-label, .filter-btn, .result-count, .section-label, .colloc-label, .syn-label, .parts-label, .wrong-label, .confuse-title),
+body[data-language-app="n1-vocabulary-tabs"] :is(.cnt-lbl, .ebdg, .refbdg, .ptag, .synb-l, .co-l, .n1b, .keyb, .sbdg, .sec-t, .dtg-h, .pre-h, .ptu-cat-title),
+body[data-language-app="n1-vocabulary-exams"] :is(.cnt-lbl, .hbadge, .etag, .ptag, .synb-lbl, .co-lbl, .wr-lbl, .ra-badge, .vi-badge, .ex-yr),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.cnt, .rtag, .ptag, .synl, .clls, .ct, .qbadge) {
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-round,
+body[data-language-app="n1-vocabulary-tabs"] :is(.hdr-sub, .hbdg),
+body[data-language-app="n1-vocabulary-exams"] :is(.n1b, .sh, .sm, .header-sub, .pos-lbl),
+body[data-language-app="n1-grammar-exams"] :is(.cnt-info, .ybtn, .cnt > p) {
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .hdr p,
+body[data-language-app="n1-reading-mondai9"] :is(.legend3 span, .answer-legend, .answer-legend span) {
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .spk,
+body[data-language-app="n1-vocabulary-exams"] .spk-btn {
+  min-width: 34px;
+  min-height: 34px;
+  font-size: 13px !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.card-meaning, .card-reading, .card-example, .colloc-item, .syn-chip, .parts-table, .wrong-meaning, .wrong-reading, .confuse-text),
+body[data-language-app="n1-vocabulary-tabs"] :is(.wh, .vi-b, .syi .sw, .syi .sh, .syi .sm, .co-item, .co-item .cvi, .ex-block, .ex-vi, .dtg-t, .pre-table, .ptu-vi, .ptu-pat),
+body[data-language-app="n1-vocabulary-exams"] :is(.wh, .vi-badge, .syi, .co-item, .cvi, .ex-block, .esyi, .exp, .qsen, .qvi-box, .ra-sentence, .ra-vi),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.mng, .vi, .syi, .exp, .esyi, .ew, .qs) {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.filter-btn, .load-more),
+body[data-language-app="n1-vocabulary-tabs"] :is(.mtab, .stab, .ptab, .load-more),
+body[data-language-app="n1-vocabulary-exams"] :is(.tab, .pbtn, .bstart, .bnext, .load-more),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.tab, .bstart, .bnext, .load-more) {
+  min-height: 40px;
+  font-size: 14px !important;
+}
+
+/* Quiz and reading apps: larger supporting copy and a calmer reading width. */
+body[data-language-app="n1-kanji-collocations"] .main {
+  max-width: 840px;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.badge, .stat-label, .set-tag, .set-examples-title, .progress-label, .legend, .mode-label, .q-num),
+body[data-language-app="n1-vocabulary-context"] :is(.qlbl, .wbadge, .wlbl, .wnum, .lang, .scorebox),
+body[data-language-app="n1-grammar-exams"] :is(.badge, .badge-cnt, .prog-info, .tag-num, .tag-yr, .tag-prog, .tag-ngp, .tag-wrong, .res-lbl, .exp-lbl-r, .exp-lbl-s, .tts-label, .period-bar, .year-bar),
+body[data-language-app="n1-grammar-sentence-order-drill"] :is(.sub, .period, .order, .grammarTag, .step),
+body[data-language-app="n1-reading-75"] :is(.bai-tag, .bai-date, .meta-row, .source, .progress-label, .jump-label, .trap-tag),
+body[data-language-app="n1-reading-mondai9"] :is(.subtitle, .label, .q-num, .pair-badge, .syn-badge, .legend3, .app-note) {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.hbtn, .mbtn, .q-context, .colloc-chip, .set-ex, .set-ex .vn, .back-btn, .modal-sub, .modal-btn, .done-sub, .done-btn),
+body[data-language-app="n1-vocabulary-context"] :is(.btn, .opt, .sentvn, .setvn, .bnav, .extitle),
+body[data-language-app="n1-grammar-exams"] :is(.tab, .toggle-btn, .pbtn, .opt, .result, .res-vn, .exp-r, .exp-s, .next-btn, .prev-btn, .review-btn, .restart-btn, .clear-btn, .back-top-btn),
+body[data-language-app="n1-grammar-sentence-order-drill"] :is(.topbar, .opt, .feedback, .explain, .nav, .jumpBtn, .speakBtn),
+body[data-language-app="n1-reading-75"] :is(.sheet-select, .jump-input, .jump-btn, .choice, .feedback, .note, .nav-btn, .btn, .restart-btn),
+body[data-language-app="n1-reading-mondai9"] :is(.nav-btn, .toggle-btn, .choice, .feedback, .explain-toggle, .explain-box, .note, .vocab-item) {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .container {
+  max-width: 860px;
+}
+
+body[data-language-app="n1-grammar-exams"] .cnt {
+  max-width: 820px;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.hdr, .jp, .study-jp) {
+  font-size: 18px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order-drill"] .wrap {
+  max-width: 760px;
+}
+
+body[data-language-app="n1-reading-75"] .wrap {
+  max-width: 840px;
+}
+
+body[data-language-app="n1-reading-mondai9"] .container {
+  max-width: 900px;
+}
+
+body[data-language-app="n1-reading-mondai9"] :is(.passage, .q-text, .explain-box) {
+  line-height: 1.9 !important;
+}
+
+/* The two token-based grammar apps previously inherited a 12px rem root. */
+html.route-n1-grammar-flashcards {
+  font-size: 16px;
+}
+
+html.route-n1-grammar-sentence-order {
+  font-size: 18px;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .wrap {
+  width: min(100% - 32px, 620px);
+  max-width: 620px;
+}
+
+body[data-language-app="n1-grammar-flashcards"] :is(.topbar, .sub, .hint, .idx, .stats, .note, .ex),
+body[data-language-app="n1-grammar-sentence-order"] :is(.sub, .range, .section-label, .qnum, .instr, .idx, .grammar, .step, .menu-foot) {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] :is(.btn-flip, .btn-know, .btn-nav, .btn-unknow, .shuffle-btn, .restart-btn),
+body[data-language-app="n1-grammar-sentence-order"] :is(.set-btn, .choice-btn, .navbtn, .primary, .secondary, .back-link) {
+  min-height: 42px;
+  font-size: 14px !important;
+}
+
+@media (max-width: 1000px) {
+  body[data-language-app="n1-kanji-analysis"] .vocab-grid,
+  body[data-language-app="n1-vocabulary-tabs"] :is(.grid, .ptu-grid, .pre-grid),
+  body[data-language-app="n1-vocabulary-exams"] .grid,
+  body[data-language-app="n1-vocabulary-paraphrase"] .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  body.language-app {
+    font-size: 15px;
+  }
+
+  body[data-language-app="n1-kanji-analysis"] .vocab-grid,
+  body[data-language-app="n1-vocabulary-tabs"] :is(.grid, .ptu-grid, .pre-grid),
+  body[data-language-app="n1-vocabulary-exams"] .grid,
+  body[data-language-app="n1-vocabulary-paraphrase"] .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body[data-language-app="n1-kanji-analysis"] :is(.container, .filter-bar),
+  body[data-language-app="n1-vocabulary-tabs"] :is(.container, .ctrl),
+  body[data-language-app="n1-vocabulary-exams"] :is(.container, .ctrl),
+  body[data-language-app="n1-vocabulary-paraphrase"] :is(.container, .ctrl) {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  body[data-language-app="n1-grammar-flashcards"] .wrap {
+    width: min(100% - 24px, 620px);
+  }
+}
