@@ -50,6 +50,7 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Center Home and Apps header/footer bands at exactly 75% of the desktop viewport while preserving near-full-width mobile controls and navigation.
 - [x] Rewrite Home and Apps copy from prior portfolio evidence with a professional, collaborative tone; expand How I Work to four stages, remove Apps search, and route RAGOps directly to its showcase.
 - [x] Refine the Home resume from annotated feedback: remove duplicated profile labels/tags, rename the sidebar and project headings, expand working languages, and reorganize About around non-duplicative delivery context.
 - [x] Rebuild Home as a split-profile online resume with About, Roles, How I Work, and a concise Past Projects index based on the selected option 3 concept.
