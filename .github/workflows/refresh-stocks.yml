@@ -37,7 +37,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add apps/data-copilot/data/stocks.parquet apps/data-copilot/data/meta.json
+          git add \
+            apps/data-copilot/data/stocks.parquet \
+            apps/data-copilot/data/meta.json \
+            apps/data-copilot/data/runs.json
           if git diff --cached --quiet; then
             echo "No data changes — nothing to commit."
           else
