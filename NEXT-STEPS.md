@@ -50,6 +50,7 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Tighten the Apps opening rhythm by reducing the header-to-intro spacing at desktop and mobile breakpoints without changing the catalog layout.
 - [x] Fix the scrolled-header overlap by keeping the sticky backdrop full-width and constraining only Home/Apps header and footer content to the requested 75% desktop measure.
 - [x] Center Home and Apps header/footer bands at exactly 75% of the desktop viewport while preserving near-full-width mobile controls and navigation.
 - [x] Rewrite Home and Apps copy from prior portfolio evidence with a professional, collaborative tone; expand How I Work to four stages, remove Apps search, and route RAGOps directly to its showcase.

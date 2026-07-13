@@ -26,6 +26,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 16. Home copy now draws on the earlier Japanese portfolio narrative: 10+ years across data analysis, engineering, and technical delivery; a learner-first collaboration stance; and openness to roles and partnerships. `How I Work` now adds `04_Measure & improve`, with all four titles kept to one line. Apps now presents a growing body of practical work, removes the search control, retains its three shareable filters, and routes RAGOps directly to `https://thangldw.github.io/ragops/`. Desktop, laptop, and mobile checks passed without overflow or console errors.
 17. Home and Apps header/footer bands now occupy exactly 75% of the desktop viewport and remain centered. At 390px they expand to 358px (`100% - 32px`) so navigation and controls remain usable. Computed-width checks passed on both routes with zero overflow and console errors.
 18. The user-reported sticky-header overlap is fixed on Home and Apps. The backdrop now remains full-width while only the inner navigation/footer content uses the centered 75% measure. At 1440px the outer header is 1440px and its inner row is 1080px; at 390px the inner row is 358px. The reproduced scrolled state, desktop/mobile overflow checks, and console checks pass.
+19. The Apps introduction now sits closer to the global header: top padding changes from 54px to 32px on desktop and from 40px to 28px on mobile. Same-viewport captures confirm a tighter opening hierarchy with no changes to the catalog grid or filter behavior.
 
 ## Screenshots
 
@@ -56,6 +57,8 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Apps 75% header width](../resume-v3/apps-header-75-comparison.jpg)
 
 ![Sticky header overlap fix](../resume-v3/header-overlap-fix-comparison.jpg)
+
+![Apps intro spacing refinement](../resume-v3/apps-hero-spacing-comparison.jpg)
 
 ## Evidence limits
 
