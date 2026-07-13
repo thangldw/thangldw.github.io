@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apps — thang.</title>
-  <meta name="description" content="Interactive demos and tools by Thang Luu — a browser-native data workbench, JLPT N1 study apps, and more. Each is a small, self-contained build.">
+  <meta name="description" content="A growing body of practical engineering systems and language-learning tools by Thang Luu, shared for feedback, collaboration, and continued learning.">
   <link rel="canonical" href="https://thangldw.github.io/apps/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Apps — Thang Luu">
-  <meta property="og:description" content="Browser-native data tools and a complete JLPT N1 study suite — 15 self-contained applications.">
+  <meta property="og:description" content="Practical engineering systems and language-learning tools, shared for feedback, collaboration, and continued learning.">
   <meta property="og:url" content="https://thangldw.github.io/apps/">
   <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -39,7 +39,7 @@
     .apps-main { padding-block: 64px 40px; }
     .apps-intro { max-width: none; margin-bottom: var(--space-xl); }
     .apps-intro .eyebrow { display: inline-flex; align-items: center; gap: .5em; color: var(--text-dim); font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: .04em; text-transform: uppercase; }
-    .apps-intro h1 { font-family: var(--font-display); font-size: var(--step-4); line-height: 1.05; letter-spacing: -.02em; margin-top: var(--space-xs); }
+    .apps-intro h1 { font-family: var(--font-display); font-size: var(--step-4); line-height: 1.05; letter-spacing: -.02em; margin-top: var(--space-xs); }.apps-intro h1 em{color:var(--accent);font-style:normal}
     .apps-intro .lead { color: var(--text-muted); font-size: 13.5px; letter-spacing: -.01em; margin-top: var(--space-sm); white-space: nowrap; }
     .apps-intro .lead strong { color: var(--text); font-weight: 600; }
 
@@ -85,24 +85,23 @@
     .theme-button{display:grid;place-items:center;cursor:pointer}.ac-icon i{font-size:1rem}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .skip-link{position:fixed;left:12px;top:-60px;z-index:99;background:var(--ink);color:var(--bg);padding:10px}.skip-link:focus{top:12px}
     .wrap{width:min(1328px,calc(100% - 96px))}.apps-main{padding-top:54px}.apps-intro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(360px,1.2fr);gap:72px;align-items:end;margin-bottom:40px}.apps-intro .eyebrow{grid-column:1/-1;margin-bottom:-52px}.apps-intro h1{font-size:clamp(42px,4vw,58px);line-height:1.02;letter-spacing:-.045em;margin:0}.apps-intro .lead{margin:0;white-space:normal;font-size:16px;line-height:1.55;max-width:720px}.apps-nav{height:68px;padding:0 56px}.apps-brand{font:700 24px var(--font-sans);letter-spacing:-.05em}.apps-brand span{display:none}.apps-nav nav{gap:38px;color:var(--ink);font-size:15px}.apps-nav nav a:first-child{color:var(--accent)}.theme-button{width:34px;height:34px;border-radius:8px;background:var(--surface)}
-    .catalog-controls{display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:22px;align-items:center;margin-bottom:36px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.search-box{position:relative}.search-box i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}.search-box input{width:100%;height:42px;padding:0 14px 0 40px;border:1px solid var(--border-strong);border-radius:5px;background:var(--surface);color:var(--ink);font:400 14px var(--font-sans)}.filters{margin:0;gap:8px;justify-content:flex-end}.filter{border-radius:5px;padding:9px 13px}.filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .catalog-controls{display:flex;align-items:center;margin-bottom:36px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.filters{margin:0;gap:8px;justify-content:flex-start}.filter{border-radius:5px;padding:9px 13px}.filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
     .apps-cat{margin-top:48px}.apps-cat-head{margin-bottom:0;padding:0 0 13px}.apps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-bottom:1px solid var(--border)}.app-card{min-height:280px;padding:24px;border-radius:0;border-width:1px 1px 0 0}.app-card[hidden]{display:none}.app-card:nth-child(3n){border-right:0}.app-card .ac-icon{border-radius:6px}.app-card .ac-tags{margin-top:18px}.app-card .ac-tag{background:transparent}.app-card .ac-open{margin-top:20px}
-    @media(max-width:960px){.apps-intro{grid-template-columns:1fr;gap:20px}.apps-intro .eyebrow{grid-column:auto;margin-bottom:0}.catalog-controls{grid-template-columns:1fr}.filters{justify-content:flex-start}.apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-card:nth-child(3n){border-right:1px solid var(--border)}.app-card:nth-child(2n){border-right:0}}
+    @media(max-width:960px){.apps-intro{grid-template-columns:1fr;gap:20px}.apps-intro .eyebrow{grid-column:auto;margin-bottom:0}.apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-card:nth-child(3n){border-right:1px solid var(--border)}.app-card:nth-child(2n){border-right:0}}
     @media(max-width:640px){.apps-nav{height:65px;padding:0 16px}.apps-brand{font-size:22px}.apps-nav nav{gap:10px;font-size:13px}.apps-nav nav a{display:block}.theme-button{width:32px;height:32px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:40px}.apps-intro h1{font-size:40px}.catalog-controls{padding-top:16px}.filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter{flex:0 0 auto}.apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n){border-right:0;min-height:0}}
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to demos</a>
+  <a class="skip-link" href="#main">Skip to apps</a>
   <header class="apps-nav"><a class="apps-brand" href="/">thang<b>.</b> <span>/ demos</span></a><nav><a href="/apps/" aria-current="page">Apps &amp; Demo</a><a href="/ja/">EN / 日本語</a><button class="theme-button" id="themeToggle" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button></nav></header>
   <main class="wrap apps-main" id="main">
     <section class="apps-intro">
-      <span class="eyebrow">Demos &amp; systems</span>
-      <h1>Two collections,<br>one catalog.</h1>
-      <p class="lead">A growing collection organized into two clear areas: production-oriented technical work and practical language-learning tools.</p>
+      <span class="eyebrow">Applied work &amp; experiments</span>
+      <h1>A growing body of<br><em>practical work.</em></h1>
+      <p class="lead">These projects bring together production-oriented engineering and practical language-learning tools. They reflect how I approach real problems, document what I’m learning, and make work available for feedback. I’m always glad to hear from teams, collaborators, and people exploring similar challenges.</p>
     </section>
 
     <div class="catalog-controls">
-      <label class="search-box"><span class="sr-only">Search demos</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="appSearch" type="search" placeholder="Search demos" autocomplete="off"></label>
       <div class="filters" role="toolbar" aria-label="Filter apps"><button class="filter active" data-filter="all" aria-pressed="true">All · 15</button><button class="filter" data-filter="technical" aria-pressed="false">Technical · 3</button><button class="filter" data-filter="language" aria-pressed="false">Language · 12</button></div>
     </div>
     <p id="filterStatus" class="sr-only" aria-live="polite">Showing all 15 apps.</p>
@@ -121,8 +120,8 @@
           <h3>RAGOps</h3>
           <p>An evaluation and release-gate platform for production RAG and agent systems. Compare a candidate against an accepted baseline, detect quality and safety regressions, and produce auditable reports.</p>
           <div class="ac-tags"><span class="ac-tag">AI evaluation</span><span class="ac-tag">Red team</span><span class="ac-tag">FastAPI</span><span class="ac-tag">CI/CD</span></div>
-          <span class="ac-open">Read the case study</span>
-          <a class="ac-cover" href="/projects/ragops/" aria-label="Open the RAGOps case study"></a>
+          <span class="ac-open">Open RAGOps</span>
+          <a class="ac-cover" href="https://thangldw.github.io/ragops/" aria-label="Open the RAGOps showcase"></a>
         </article>
 
         <article class="app-card">
@@ -366,7 +365,6 @@
     (function () {
       var sections = [].slice.call(document.querySelectorAll('.apps-cat'));
       var buttons = [].slice.call(document.querySelectorAll('.filter'));
-      var search = document.getElementById('appSearch');
       var status = document.getElementById('filterStatus');
       var valid = buttons.map(function (button) { return button.dataset.filter; });
       var aliases = { data: 'technical', vocabulary: 'language', exam: 'language', grammar: 'language', reading: 'language' };
@@ -376,17 +374,14 @@
         var url = new URL(location.href);
         if (activeFilter === 'all') url.searchParams.delete('category');
         else url.searchParams.set('category', activeFilter);
-        var query = search.value.trim();
-        if (query) url.searchParams.set('q', query);
-        else url.searchParams.delete('q');
-        history[mode === 'push' ? 'pushState' : 'replaceState']({ category: activeFilter, q: query }, '', url);
+        url.searchParams.delete('q');
+        history[mode === 'push' ? 'pushState' : 'replaceState']({ category: activeFilter }, '', url);
       }
 
       function applyCatalog(filter, urlMode) {
         filter = aliases[filter] || filter;
         if (valid.indexOf(filter) < 0) filter = 'all';
         activeFilter = filter;
-        var query = search.value.trim().toLocaleLowerCase();
         var count = 0;
 
         buttons.forEach(function (button) {
@@ -399,31 +394,26 @@
           var categoryVisible = filter === 'all' || section.dataset.category === filter;
           var visibleInSection = 0;
           section.querySelectorAll('.app-card').forEach(function (card) {
-            var matches = !query || card.textContent.toLocaleLowerCase().indexOf(query) >= 0;
-            card.hidden = !categoryVisible || !matches;
+            card.hidden = !categoryVisible;
             if (!card.hidden) visibleInSection += 1;
           });
           section.hidden = !categoryVisible || visibleInSection === 0;
           count += visibleInSection;
         });
 
-        status.textContent = query ? 'Showing ' + count + ' demos matching “' + search.value.trim() + '”.' :
-          (filter === 'all' ? 'Showing all ' + count + ' demos.' : 'Showing ' + count + ' demos in ' + filter + '.');
+        status.textContent = filter === 'all' ? 'Showing all ' + count + ' apps.' : 'Showing ' + count + ' apps in ' + filter + '.';
         if (urlMode) syncUrl(urlMode);
       }
 
       buttons.forEach(function (button) {
         button.addEventListener('click', function () { applyCatalog(button.dataset.filter, 'push'); });
       });
-      search.addEventListener('input', function () { applyCatalog(activeFilter, 'replace'); });
       window.addEventListener('popstate', function () {
         var params = new URLSearchParams(location.search);
-        search.value = params.get('q') || '';
         applyCatalog(params.get('category') || 'all', null);
       });
 
       var params = new URLSearchParams(location.search);
-      search.value = params.get('q') || '';
       applyCatalog(params.get('category') || 'all', null);
 
       var themeButton = document.getElementById('themeToggle');
