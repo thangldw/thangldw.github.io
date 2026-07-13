@@ -19,19 +19,21 @@
   <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=20260713e">
-  <link rel="stylesheet" href="css/styles.css?v=20260714c">
+  <link rel="stylesheet" href="css/styles.css?v=20260714d">
   <script>document.documentElement.dataset.theme=localStorage.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
 </head>
 <body class="home-v2 resume-home">
   <a class="skip" href="#main">Skip to content</a>
   <header class="home-header" id="top">
-    <a class="logo" href="#top" aria-label="Thang Luu home">thang<span>.</span></a>
-    <button class="menu" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">Menu</button>
-    <nav id="primaryNav" aria-label="Primary navigation">
-      <a href="apps/">Apps &amp; Demo</a>
-      <a href="ja/" class="lang-link">EN / 日本語</a>
-      <button id="themeToggle" class="theme" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button>
-    </nav>
+    <div class="header-inner">
+      <a class="logo" href="#top" aria-label="Thang Luu home">thang<span>.</span></a>
+      <button class="menu" aria-label="Open menu" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+      <nav id="primaryNav" aria-label="Primary navigation">
+        <a href="apps/">Apps &amp; Demo</a>
+        <a href="ja/" class="lang-link">EN / 日本語</a>
+        <button id="themeToggle" class="theme" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button>
+      </nav>
+    </div>
   </header>
 
   <main id="main" class="resume-layout">
@@ -107,7 +109,7 @@
     </div>
   </main>
 
-  <footer>Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
+  <footer><div class="footer-inner">Crafted with love © 2026 — <span>stay steadfast, stay free</span></div></footer>
   <script src="js/main.js?v=20260713f"></script>
 </body>
 </html>
