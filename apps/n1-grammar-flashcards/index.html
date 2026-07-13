@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi" data-theme="dark" class="language-app-root route-n1-grammar-flashcards">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,8 +86,9 @@
   @media (max-width:420px){ .front .pattern{ font-size:var(--step-1); } }
 </style>
   <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+<link rel="stylesheet" href="../../css/language-app-readable.css">
 </head>
-<body>
+<body class="language-app" data-language-app="n1-grammar-flashcards">
 <main class="app-main wrap">
 
 <section class="intro">
@@ -370,7 +371,6 @@ function prev(){
   if(pos>0){ pos--; renderCard(); }
 }
 
-document.getElementById('flipBtn').onclick = flip;
 cardEl.onclick = flip;
 document.getElementById('nextBtn').onclick = next;
 document.getElementById('prevBtn').onclick = prev;

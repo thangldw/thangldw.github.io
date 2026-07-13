@@ -1,6 +1,6 @@
 # Release completion checklist
 
-Updated: 2026-07-13
+Updated: 2026-07-14
 
 ## High priority
 
@@ -12,7 +12,7 @@ Updated: 2026-07-13
 
 - [x] Add incremental rendering to Vocabulary Tabs: 96 cards initially, with an explicit load-more action.
 - [x] Apply incremental rendering to Vocabulary Exams (96), Kanji Analysis (96), and Paraphrase Vocabulary (72).
-- [x] Preserve the responsive grid rules: 4 columns desktop, 3 below 1180px, 2 below 840px, and 1 on mobile.
+- [x] Improve the dense Language reference grids to 3 columns desktop, 2 below 1000px, and 1 on mobile so supporting text remains readable.
 
 ## Visual and interaction QA
 
@@ -50,6 +50,7 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Audit and improve typography inside all 12 canonical Language apps; remove visible sub-12px app text, preserve zero mobile overflow, and restore the broken Grammar Flashcard flip interaction.
 - [x] Audit all 15 Apps cards against Home and increase the shared title, description, tag, status, filter, and CTA type scale; align compact navigation with Home without modifying the Home page.
 - [x] Tighten the Apps opening rhythm to a compact 16px desktop / 20px mobile offset without changing the catalog layout.
 - [x] Fix the scrolled-header overlap by keeping the sticky backdrop full-width and constraining only Home/Apps header and footer content to the requested 75% desktop measure.
