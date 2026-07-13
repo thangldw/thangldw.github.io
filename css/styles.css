@@ -7,3 +7,4 @@
 @media(max-width:1400px){.hero-intro>p:first-child{white-space:normal}}
 .work .intro{max-width:none;white-space:nowrap}
 @media(max-width:900px){.work .intro{white-space:normal}}
+.theme{display:grid;place-items:center;cursor:pointer}

@@ -18,6 +18,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 8. The post-deploy public pass confirmed Home, Apps, Data Copilot, Pipeline, and Vocabulary Tabs with zero horizontal overflow; Pipeline rendered two run-history rows, all 10 legacy redirects reached their canonical route, and the Prefix/Suffix view rendered 44 expandable groups.
 9. The post-release metadata pass added canonical social previews to all 18 sitemap URLs. Home and Apps use real 1200×630 browser captures, and the local validator now checks description length, Open Graph completeness, canonical/`og:url` agreement, image existence, and Twitter card type.
 10. Apps catalog filters now expose shareable `?category=` URLs, preserve state through browser back/forward, announce the visible result count, and report selection through `aria-pressed`. Direct-link, click, and back-navigation states passed in-browser.
+11. The Apps catalog now uses 15 consistent Font Awesome icons with zero emoji fallbacks. Home mobile navigation synchronizes `aria-expanded`, closes with Escape, and both Home and Apps theme controls announce the action available after every theme change.
 
 ## Screenshots
 
@@ -26,6 +27,8 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Pipeline run history](02-pipeline-history.png)
 
 ![Vocabulary Tabs mobile](03-vocabulary-tabs-mobile.png)
+
+![Apps icon system](04-apps-icon-system.jpg)
 
 ## Evidence limits
 
