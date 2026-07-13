@@ -15,6 +15,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 5. Vocabulary Tabs and Vocabulary Exams passed computed-style contrast checks in light and dark themes: 4,202 visible text/control samples, zero failures after remediation.
 6. Vocabulary quiz QA covered initial, answered, explanation, next, result, and reset states. Reading practice answers are native buttons and disable after selection.
 7. The offline validator passed 32 HTML pages, 10 redirects, 18 sitemap URLs, duplicate-ID checks, canonical targets, and all local references.
+8. The post-deploy public pass confirmed Home, Apps, Data Copilot, Pipeline, and Vocabulary Tabs with zero horizontal overflow; Pipeline rendered two run-history rows, all 10 legacy redirects reached their canonical route, and the Prefix/Suffix view rendered 44 expandable groups.
 
 ## Screenshots
 
@@ -26,4 +27,4 @@ The documented release backlog is complete. Pipeline history persists, long voca
 
 ## Evidence limits
 
-The in-app browser does not expose a native browser-zoom command, so the 200% layout check used the standards-equivalent 720 CSS-pixel viewport. Keyboard behavior was exercised directly for custom expandable cards and through native button semantics for tabs, filters, quiz answers, theme and audio controls. Public-route verification must be repeated once the final commit is visible on GitHub Pages.
+The in-app browser does not expose a native browser-zoom command, so the 200% layout check used the standards-equivalent 720 CSS-pixel viewport. Keyboard behavior was exercised directly for custom expandable cards and through native button semantics for tabs, filters, quiz answers, theme and audio controls. The final public-route verification completed after v1.3.0 became visible on GitHub Pages.
