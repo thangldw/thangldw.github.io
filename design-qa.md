@@ -1,47 +1,52 @@
-# Design QA — About hierarchy and resume-label refinement
+# Design QA — Professional resume copy and catalog refinement
 
 - Original visual direction: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/source-option-3.png`
 - User annotation truth: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/user-about-annotation.png`
-- Same-viewport baseline: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-before.png`
-- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-desktop.png`
-- Full-view comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-comparison-full.jpg`
-- Focused comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-comparison-focused.jpg`
-- Mobile evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-mobile-390.png`
-- Viewport: 1440 × 1024 desktop; 390 × 844 mobile
-- State: home page, light theme
+- Home baseline: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-before.png`
+- Home implementation: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-four-step-final-desktop.png`
+- Home comparison: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-v302-comparison.jpg`
+- Apps baseline: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-two-groups-desktop.png`
+- Apps implementation: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-copy-no-search-desktop.png`
+- Apps comparison: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-copy-comparison.jpg`
+- Responsive evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-four-step-laptop-1024.png`, `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-four-step-final-mobile-390.png`, and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-copy-no-search-mobile-390.png`
+- Viewports: 1440 × 1024 desktop, 1024 × 900 laptop, and 390 × 844 mobile
+- State: light theme; Home default; Apps All, Technical, and Language filters
 
 ## Findings
 
 - No remaining P0, P1, or P2 issues.
-- The duplicated `Split profile resume` kicker and six-tag profile row were removed as annotated.
-- The sidebar labels now read `What I Do` and `Working Languages`; the project heading now reads `Selected Work`, which is clearer and more portfolio-appropriate than `Roles`, `Languages`, and `Past Projects`.
-- The language list contains English, 日本語, Tiếng Việt, and 中文 without inventing proficiency levels.
-- The About section now uses one narrative flow plus three non-duplicative dimensions: industries, delivery scope, and maintainability.
+- Home no longer exposes location information or duplicated profile tags. `Languages`, `Open to Opportunities`, and the relocated learner-first availability statement form a clearer sidebar hierarchy.
+- About uses evidence from the earlier portfolio: 10+ years across statistical analysis, data engineering, and technical delivery; cross-sector experience; current front-line delivery leadership; and a clear learner/collaborator stance.
+- `How I Work` now covers Embed, Build, Enable, and Measure/Improve. All four numbered titles render as single-line phrases at 1440px, 1024px, and 390px.
+- Apps removes the unused search path and replaces catalog-first copy with a professional description of applied work, feedback, and collaboration. Technical and Language remain durable top-level filters.
+- The RAGOps card now says `Open RAGOps` and points directly to `https://thangldw.github.io/ragops/`.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: existing Space Grotesk and IBM Plex Mono hierarchy is preserved. The mobile headline was reduced to 36px and its hidden line-break whitespace was corrected so words never merge.
-- Spacing and layout rhythm: removing the repeated tags reduces the About height while keeping `How I Work` and both selected-work rows visible in the desktop viewport. Sidebar dividers and section rhythm remain aligned.
-- Colors and visual tokens: existing neutral surfaces, indigo accent, orange secondary accent, and light/dark tokens are unchanged.
-- Image quality and asset fidelity: this screen uses no photographic assets; Font Awesome icons remain sharp and consistent with the selected direction.
-- Copy and content: all repeated role/location/language tags were removed. Added copy describes delivery scope and working principles already supported by the resume content.
+- Fonts and typography: Space Grotesk and IBM Plex Mono remain consistent. The revised headline retains the selected concept's two-line scale and accent treatment. All method titles avoid wrapping at tested breakpoints.
+- Spacing and layout rhythm: Home uses four equal method columns on desktop, a 2×2 laptop grid, and a single mobile column. Apps gains a cleaner filter-only control row after search removal.
+- Colors and visual tokens: the established neutral, indigo, and orange system is unchanged. Language bullets use one subtle indigo because they do not represent different semantic categories.
+- Image quality and asset fidelity: no photographic assets are required; Font Awesome provides all interface icons. Social previews are real 1200 × 630 browser captures.
+- Copy and content: new claims are grounded in prior portfolio copy. The tone emphasizes contribution, learning, team ownership, feedback, and collaboration without inventing outcomes or proficiency levels.
 
 ## Interaction and implementation checks
 
-- Desktop and 390px mobile render without horizontal overflow.
-- Theme and navigation implementation were not changed.
+- Home: four method items; all titles one line; no location text; no horizontal overflow at 1440px, 1024px, or 390px.
+- Apps: no search control; All shows 15, Technical shows 3, and Language shows 12; filter URL state and legacy category aliases remain supported.
+- RAGOps accessible link target: `https://thangldw.github.io/ragops/`.
 - Browser console errors: none.
-- Static validation: all 32 HTML pages, 10 redirects, 18 sitemap URLs, social metadata, and local references pass.
+- Static validation covers 32 HTML pages, 10 redirects, 18 sitemap URLs, social metadata, and all local references.
 
 ## Comparison history
 
-1. Baseline annotation: the top profile kicker and horizontal tag row duplicated sidebar content; generic section labels did not communicate portfolio intent.
-2. Draft pass: replaced the tag row with a profile snapshot, then rejected it because it still repeated sidebar information.
-3. Final fix: removed the duplicate snapshot entirely, kept only non-duplicative About context, renamed the three annotated headings, and expanded the working-language list.
-4. Post-fix evidence: the same 1440 × 1024 comparison shows clearer hierarchy, lower density, and no layout regression. Mobile verification confirms no overflow or merged headline text.
+1. Baseline: repeated location/role/language tags, generic headings, three-stage working method, catalog-first Apps copy, and an unnecessary search field.
+2. Draft: introduced a profile snapshot, then removed it after recognizing that it repeated sidebar information.
+3. Refinement: removed location, unified language markers, relocated the opportunity status, rewrote About from prior portfolio evidence, and combined each numbered method title into one line.
+4. Final iteration: added `04_Measure & improve`, shortened method labels to hold a single line, rewrote Apps around practical work and collaboration, removed search and its query-state code, and corrected the RAGOps destination.
+5. Post-fix evidence: desktop, laptop, and mobile browser captures show no overflow; filter counts, URL state, and console checks pass.
 
 ## Follow-up polish
 
-- No P3 follow-up is required for the annotated scope.
+- No P3 follow-up is required for the current scope.
 
 final result: passed

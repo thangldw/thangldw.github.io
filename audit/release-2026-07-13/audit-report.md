@@ -23,6 +23,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 13. Global navigation now follows one compact standard on Home, Apps, Japanese, RAGOps, and every demo route: `Apps & Demo`, `EN / 日本語`, and the theme control. The former Demos, Collections, Notes, About, and Contact header links were removed. Desktop and 320px checks passed without overflow or console errors.
 14. Home now operates as a split-profile online resume with a professional summary, role profile, Embed/Build/Enable working method, and compact Past Projects index. Apps now has exactly two top-level collections: Technical (3) and Language (12). Search, accessible filters, new category URLs, and legacy category aliases passed desktop/mobile checks with zero console errors.
 15. Annotated Home feedback is implemented: the duplicated profile kicker and horizontal tags were removed; `Roles`, `Languages`, and `Past Projects` became `What I Do`, `Working Languages`, and `Selected Work`; Tiếng Việt and 中文 were added. About now carries only non-duplicative industry, delivery, and maintainability context. Desktop/mobile checks passed without overflow or console errors.
+16. Home copy now draws on the earlier Japanese portfolio narrative: 10+ years across data analysis, engineering, and technical delivery; a learner-first collaboration stance; and openness to roles and partnerships. `How I Work` now adds `04_Measure & improve`, with all four titles kept to one line. Apps now presents a growing body of practical work, removes the search control, retains its three shareable filters, and routes RAGOps directly to `https://thangldw.github.io/ragops/`. Desktop, laptop, and mobile checks passed without overflow or console errors.
 
 ## Screenshots
 
@@ -43,6 +44,10 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Technical and Language collections](../resume-v3/apps-two-groups-desktop.png)
 
 ![Annotated About refinement](../resume-v3/about-annotation-comparison-full.jpg)
+
+![Final Home refinements](../resume-v3/home-v302-comparison.jpg)
+
+![Apps copy and catalog refinement](../resume-v3/apps-copy-comparison.jpg)
 
 ## Evidence limits
 
