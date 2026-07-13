@@ -24,6 +24,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 14. Home now operates as a split-profile online resume with a professional summary, role profile, Embed/Build/Enable working method, and compact Past Projects index. Apps now has exactly two top-level collections: Technical (3) and Language (12). Search, accessible filters, new category URLs, and legacy category aliases passed desktop/mobile checks with zero console errors.
 15. Annotated Home feedback is implemented: the duplicated profile kicker and horizontal tags were removed; `Roles`, `Languages`, and `Past Projects` became `What I Do`, `Working Languages`, and `Selected Work`; Tiếng Việt and 中文 were added. About now carries only non-duplicative industry, delivery, and maintainability context. Desktop/mobile checks passed without overflow or console errors.
 16. Home copy now draws on the earlier Japanese portfolio narrative: 10+ years across data analysis, engineering, and technical delivery; a learner-first collaboration stance; and openness to roles and partnerships. `How I Work` now adds `04_Measure & improve`, with all four titles kept to one line. Apps now presents a growing body of practical work, removes the search control, retains its three shareable filters, and routes RAGOps directly to `https://thangldw.github.io/ragops/`. Desktop, laptop, and mobile checks passed without overflow or console errors.
+17. Home and Apps header/footer bands now occupy exactly 75% of the desktop viewport and remain centered. At 390px they expand to 358px (`100% - 32px`) so navigation and controls remain usable. Computed-width checks passed on both routes with zero overflow and console errors.
 
 ## Screenshots
 
@@ -48,6 +49,10 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Final Home refinements](../resume-v3/home-v302-comparison.jpg)
 
 ![Apps copy and catalog refinement](../resume-v3/apps-copy-comparison.jpg)
+
+![Home 75% header width](../resume-v3/home-header-75-comparison.jpg)
+
+![Apps 75% header width](../resume-v3/apps-header-75-comparison.jpg)
 
 ## Evidence limits
 
