@@ -1,4 +1,4 @@
-# Design QA — Professional resume copy and catalog refinement
+# Design QA — Apps readability aligned to the Home design system
 
 - Original visual direction: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/source-option-3.png`
 - User annotation truth: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/user-about-annotation.png`
@@ -13,13 +13,19 @@
 - Sticky-header fix evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-header-inner-75-scrolled.png` and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/header-overlap-fix-comparison.jpg`
 - Apps intro spacing evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-32-desktop.png`, `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-28-mobile.png`, and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-comparison.jpg`
 - Compact Apps intro evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-16-desktop.png`, `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-20-mobile.png`, and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-compact-comparison.jpg`
+- Apps readability source truth: `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/00-user-small-type-report.png` and `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/01-home-reference.png`
+- Apps readability implementation: `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/03-apps-after-all.png`, `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/04-apps-after-language.png`, `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/05-apps-after-compact-640.png`, `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/05-apps-menu-open-640.png`, and `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/05-apps-after-mobile-390.png`
+- Full and focused comparisons: `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/06-readability-before-after.jpg`, `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/07-home-apps-system-comparison.jpg`, and `/Users/thang/Documents/thangldw.github.io/audit/apps-readability-v308/08-card-type-focused-comparison.jpg`
 - Responsive evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-four-step-laptop-1024.png`, `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-header-75-mobile-390.png`, and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-header-75-mobile-390.png`
-- Viewports: 1440 × 1024 desktop, 1024 × 900 laptop, and 390 × 844 mobile
+- Viewports: 1440 × 1024 desktop, 1024 × 900 laptop, 640 × 900 compact navigation, and 390 × 844 mobile
 - State: light theme; Home default; Apps All, Technical, and Language filters
 
 ## Findings
 
 - No remaining P0, P1, or P2 issues.
+- Home remains the unchanged visual reference. The Apps page now carries the same type families, 16px base rhythm, neutral/indigo tokens, navigation behavior, and restrained borders.
+- All 15 Apps cards use 19px titles, 15px descriptions, 14px CTAs, and 12px tags/status labels. Increased line-height and padding improve scanning without changing project copy or category structure.
+- Apps mobile navigation now follows Home's Menu/Close pattern and supports `aria-expanded`, close-on-link, and Escape-to-close behavior.
 - Home no longer exposes location information or duplicated profile tags. `Languages`, `Open to Opportunities`, and the relocated learner-first availability statement form a clearer sidebar hierarchy.
 - About uses evidence from the earlier portfolio: 10+ years across statistical analysis, data engineering, and technical delivery; cross-sector experience; current front-line delivery leadership; and a clear learner/collaborator stance.
 - `How I Work` now covers Embed, Build, Enable, and Measure/Improve. All four numbered titles render as single-line phrases at 1440px, 1024px, and 390px.
@@ -40,9 +46,12 @@
 
 - Home: four method items; all titles one line; no location text; no horizontal overflow at 1440px, 1024px, or 390px.
 - Apps: no search control; All shows 15, Technical shows 3, and Language shows 12; filter URL state and legacy category aliases remain supported.
+- Apps card structure audit: all 15 cards include one title, description, tag group, CTA, accessible whole-card link, and status; the shared CSS applies the readability change across every row.
 - RAGOps accessible link target: `https://thangldw.github.io/ragops/`.
 - Computed Home and Apps desktop outer header widths: `1440px`; inner header/footer ratios: `0.75`; mobile inner widths: `358px` at a `390px` viewport.
 - Browser console errors: none.
+- Compact Apps interaction: Menu opens as a 608px panel in a 640px viewport, Escape closes it, document width remains 640px, Language exposes 12 cards and synchronized URL/ARIA state, and theme labels update in both directions.
+- At 390px, document width remains 390px, cards measure 342px, and filters reflow to 167px / 167px / 342px so no label is clipped.
 - Static validation covers 32 HTML pages, 10 redirects, 18 sitemap URLs, social metadata, and all local references.
 
 ## Comparison history
@@ -57,6 +66,7 @@
 8. Sticky-header correction: the user-reported scroll state revealed that narrowing the sticky element also narrowed its opaque backdrop. Home and Apps now keep a full-width sticky surface with a centered 75% inner container; the same scrolled state, 1440px desktop, and 390px mobile checks pass with zero overflow or console errors.
 9. Apps rhythm refinement: the intro moves 22px closer to the header on desktop and 12px closer on mobile. Same-viewport comparison confirms the tighter hierarchy while preserving the existing grid, copy, filter row, and card layout.
 10. Compact spacing iteration: following additional user feedback, desktop padding moves from 32px to 16px and mobile from 28px to 20px. The eyebrow retains visible separation from the header while the opening content now reads as part of the same page frame.
+11. Readability audit: the user-provided card screenshot and the current 1440px implementation confirmed undersized descriptions, supporting labels, and CTAs. All 15 cards now use a larger shared type scale; focused before/after evidence shows the improvement, Language state preserves long bilingual titles, and the compact capture confirms the Home-style mobile menu and one-column card rhythm.
 
 ## Follow-up polish
 

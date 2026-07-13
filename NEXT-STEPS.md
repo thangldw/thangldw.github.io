@@ -50,6 +50,7 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Audit all 15 Apps cards against Home and increase the shared title, description, tag, status, filter, and CTA type scale; align compact navigation with Home without modifying the Home page.
 - [x] Tighten the Apps opening rhythm to a compact 16px desktop / 20px mobile offset without changing the catalog layout.
 - [x] Fix the scrolled-header overlap by keeping the sticky backdrop full-width and constraining only Home/Apps header and footer content to the requested 75% desktop measure.
 - [x] Center Home and Apps header/footer bands at exactly 75% of the desktop viewport while preserving near-full-width mobile controls and navigation.
