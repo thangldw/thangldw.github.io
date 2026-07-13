@@ -47,3 +47,9 @@ Updated: 2026-07-13
 - Japanese-app audit: `audit/japanese-apps/audit-report.md`
 - Responsive audit: `audit/responsive/audit-report.md`
 - Design QA: `design-qa.md`
+
+## Post-release improvements
+
+- [x] Add validated social-sharing metadata to all 18 sitemap URLs: canonical, 60–170 character description, Open Graph title/description/URL/image, and Twitter large-image card.
+- [x] Capture real 1200×630 website screenshots for Home and Apps social previews instead of using generated or placeholder artwork.
+- [x] Extend the offline validator so missing, mismatched, or broken social metadata blocks future releases locally.
