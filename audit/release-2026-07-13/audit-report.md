@@ -17,6 +17,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 7. The offline validator passed 32 HTML pages, 10 redirects, 18 sitemap URLs, duplicate-ID checks, canonical targets, and all local references.
 8. The post-deploy public pass confirmed Home, Apps, Data Copilot, Pipeline, and Vocabulary Tabs with zero horizontal overflow; Pipeline rendered two run-history rows, all 10 legacy redirects reached their canonical route, and the Prefix/Suffix view rendered 44 expandable groups.
 9. The post-release metadata pass added canonical social previews to all 18 sitemap URLs. Home and Apps use real 1200×630 browser captures, and the local validator now checks description length, Open Graph completeness, canonical/`og:url` agreement, image existence, and Twitter card type.
+10. Apps catalog filters now expose shareable `?category=` URLs, preserve state through browser back/forward, announce the visible result count, and report selection through `aria-pressed`. Direct-link, click, and back-navigation states passed in-browser.
 
 ## Screenshots
 

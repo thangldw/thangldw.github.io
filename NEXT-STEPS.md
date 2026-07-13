@@ -53,3 +53,4 @@ Updated: 2026-07-13
 - [x] Add validated social-sharing metadata to all 18 sitemap URLs: canonical, 60–170 character description, Open Graph title/description/URL/image, and Twitter large-image card.
 - [x] Capture real 1200×630 website screenshots for Home and Apps social previews instead of using generated or placeholder artwork.
 - [x] Extend the offline validator so missing, mismatched, or broken social metadata blocks future releases locally.
+- [x] Make Apps category filters shareable and accessible with `?category=` deep links, browser back/forward support, `aria-pressed`, and a live result count.
