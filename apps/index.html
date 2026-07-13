@@ -97,20 +97,21 @@
   <main class="wrap apps-main" id="main">
     <section class="apps-intro">
       <span class="eyebrow">Demos &amp; systems</span>
-      <h1>Every demo,<br>one place.</h1>
-      <p class="lead">A growing collection of working tools — from browser-native data systems to a complete JLPT N1 study suite. Filter by collection or search by what you want to explore.</p>
+      <h1>Two collections,<br>one catalog.</h1>
+      <p class="lead">A growing collection organized into two clear areas: production-oriented technical work and practical language-learning tools.</p>
     </section>
 
     <div class="catalog-controls">
       <label class="search-box"><span class="sr-only">Search demos</span><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="appSearch" type="search" placeholder="Search demos" autocomplete="off"></label>
-      <div class="filters" role="toolbar" aria-label="Filter apps"><button class="filter active" data-filter="all" aria-pressed="true">All · 15</button><button class="filter" data-filter="data" aria-pressed="false">Data &amp; Engineering · 3</button><button class="filter" data-filter="vocabulary" aria-pressed="false">語彙・漢字 · 3</button><button class="filter" data-filter="exam" aria-pressed="false">問題 drills · 3</button><button class="filter" data-filter="grammar" aria-pressed="false">文法 · 4</button><button class="filter" data-filter="reading" aria-pressed="false">読解 · 2</button></div>
+      <div class="filters" role="toolbar" aria-label="Filter apps"><button class="filter active" data-filter="all" aria-pressed="true">All · 15</button><button class="filter" data-filter="technical" aria-pressed="false">Technical · 3</button><button class="filter" data-filter="language" aria-pressed="false">Language · 12</button></div>
     </div>
     <p id="filterStatus" class="sr-only" aria-live="polite">Showing all 15 apps.</p>
 
-    <!-- ══════════ Data & Engineering ══════════ -->
-    <section class="apps-cat" data-category="data">
+    <!-- ══════════ Technical ══════════ -->
+    <section class="apps-cat" data-category="technical">
       <div class="apps-cat-head">
-        <h2>Data &amp; Engineering</h2>
+        <h2>Technical</h2>
+        <span class="cat-jp">AI · Data · Engineering</span>
         <span class="cat-count">3 projects</span>
       </div>
       <div class="apps-grid">
@@ -159,12 +160,12 @@
       </div>
     </section>
 
-    <!-- ══════════ JLPT N1 · Vocabulary & Kanji ══════════ -->
-    <section class="apps-cat" data-category="vocabulary">
+    <!-- ══════════ Language ══════════ -->
+    <section class="apps-cat" data-category="language">
       <div class="apps-cat-head">
-        <h2>JLPT N1 · Vocabulary &amp; Kanji</h2>
-        <span class="cat-jp">語彙・漢字</span>
-        <span class="cat-count">3 apps</span>
+        <h2>Language</h2>
+        <span class="cat-jp">Japanese · JLPT N1</span>
+        <span class="cat-count">12 apps</span>
       </div>
       <div class="apps-grid">
 
@@ -213,17 +214,7 @@
           <a class="ac-cover" href="/apps/n1-vocabulary-tabs/" aria-label="Open Vocab Tabs"></a>
         </article>
 
-      </div>
-    </section>
-
-    <!-- ══════════ JLPT N1 · Exam Drills 問題1–4 ══════════ -->
-    <section class="apps-cat" data-category="exam">
-      <div class="apps-cat-head">
-        <h2>JLPT N1 · Exam Drills</h2>
-        <span class="cat-jp">問題1〜4</span>
-        <span class="cat-count">3 apps</span>
-      </div>
-      <div class="apps-grid">
+      <!-- Vocabulary exam drills -->
 
         <article class="app-card">
           <div class="ac-top">
@@ -270,17 +261,7 @@
           <a class="ac-cover" href="/apps/n1-vocabulary-paraphrase/" aria-label="Open 問題3 言い換え"></a>
         </article>
 
-              </div>
-    </section>
-
-    <!-- ══════════ JLPT N1 · Grammar ══════════ -->
-    <section class="apps-cat" data-category="grammar">
-      <div class="apps-cat-head">
-        <h2>JLPT N1 · Grammar</h2>
-        <span class="cat-jp">文法</span>
-        <span class="cat-count">4 apps</span>
-      </div>
-      <div class="apps-grid">
+      <!-- Grammar tools -->
 
         <article class="app-card">
           <div class="ac-top">
@@ -342,17 +323,7 @@
           <a class="ac-cover" href="/apps/n1-grammar-sentence-order-drill/" aria-label="Open Mondai 6 Drill"></a>
         </article>
 
-      </div>
-    </section>
-
-    <!-- ══════════ JLPT N1 · Reading ══════════ -->
-    <section class="apps-cat" data-category="reading">
-      <div class="apps-cat-head">
-        <h2>JLPT N1 · Reading</h2>
-        <span class="cat-jp">読解</span>
-        <span class="cat-count">2 apps</span>
-      </div>
-      <div class="apps-grid">
+      <!-- Reading tools -->
 
         <article class="app-card">
           <div class="ac-top">
@@ -398,6 +369,7 @@
       var search = document.getElementById('appSearch');
       var status = document.getElementById('filterStatus');
       var valid = buttons.map(function (button) { return button.dataset.filter; });
+      var aliases = { data: 'technical', vocabulary: 'language', exam: 'language', grammar: 'language', reading: 'language' };
       var activeFilter = 'all';
 
       function syncUrl(mode) {
@@ -411,6 +383,7 @@
       }
 
       function applyCatalog(filter, urlMode) {
+        filter = aliases[filter] || filter;
         if (valid.indexOf(filter) < 0) filter = 'all';
         activeFilter = filter;
         var query = search.value.trim().toLocaleLowerCase();
