@@ -1,45 +1,47 @@
-# Design QA — Split-profile online resume and two-collection catalog
+# Design QA — About hierarchy and resume-label refinement
 
-- Source visual truth: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/source-option-3.png`
-- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-desktop-pass2.png`
-- Full-view comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/comparison-pass2.jpg`
-- Apps catalog evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-two-groups-desktop.png`
-- Mobile evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-mobile-390.png` and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-language-mobile-390.png`
+- Original visual direction: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/source-option-3.png`
+- User annotation truth: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/user-about-annotation.png`
+- Same-viewport baseline: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-before.png`
+- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-desktop.png`
+- Full-view comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-comparison-full.jpg`
+- Focused comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-comparison-focused.jpg`
+- Mobile evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/about-annotation-mobile-390.png`
 - Viewport: 1440 × 1024 desktop; 390 × 844 mobile
-- State: light theme for visual comparison; dark theme and mobile navigation tested separately
+- State: home page, light theme
 
 ## Findings
 
 - No remaining P0, P1, or P2 issues.
-- Home matches the selected split-profile direction: fixed visual rail on desktop, senior-role summary, About statement, three-part work method, and two compact past-project rows.
-- The requested Apps information architecture is explicit and scalable: `Technical` contains the three engineering projects and `Language` contains all twelve Japanese-learning tools.
-- Fonts and typography: Space Grotesk, IBM Plex Mono, weights, compact mono labels, two-line statement, and hierarchy closely match the source.
-- Spacing and layout rhythm: 350px profile rail, thin dividers, three-column method, and four-column project rows align with the source; mobile collapses without horizontal overflow.
-- Colors and visual tokens: existing light/dark neutral surfaces, indigo primary accent, and orange secondary accent are preserved.
-- Image quality and asset fidelity: the selected concept contains no photographic or raster content; Font Awesome supplies the closest matching interface icons.
-- Copy and content: About, roles, working method, and project summaries use real portfolio content. The unsupported mock-only PDF action was intentionally omitted rather than linking a fake document.
+- The duplicated `Split profile resume` kicker and six-tag profile row were removed as annotated.
+- The sidebar labels now read `What I Do` and `Working Languages`; the project heading now reads `Selected Work`, which is clearer and more portfolio-appropriate than `Roles`, `Languages`, and `Past Projects`.
+- The language list contains English, 日本語, Tiếng Việt, and 中文 without inventing proficiency levels.
+- The About section now uses one narrative flow plus three non-duplicative dimensions: industries, delivery scope, and maintainability.
+
+## Required fidelity surfaces
+
+- Fonts and typography: existing Space Grotesk and IBM Plex Mono hierarchy is preserved. The mobile headline was reduced to 36px and its hidden line-break whitespace was corrected so words never merge.
+- Spacing and layout rhythm: removing the repeated tags reduces the About height while keeping `How I Work` and both selected-work rows visible in the desktop viewport. Sidebar dividers and section rhythm remain aligned.
+- Colors and visual tokens: existing neutral surfaces, indigo accent, orange secondary accent, and light/dark tokens are unchanged.
+- Image quality and asset fidelity: this screen uses no photographic assets; Font Awesome icons remain sharp and consistent with the selected direction.
+- Copy and content: all repeated role/location/language tags were removed. Added copy describes delivery scope and working principles already supported by the resume content.
 
 ## Interaction and implementation checks
 
-- Home theme toggle changes light/dark state and updates its accessible label.
-- Home mobile menu opens, closes with Escape, and retains the standardized navigation.
-- Apps filters expose All, Technical, and Language; `Language` shows 12 apps and `Technical` shows 3 projects.
-- Search inside Language with `kanji` returns 2 results and updates the URL/live result text.
-- Legacy category URLs (`data`, `vocabulary`, `exam`, `grammar`, `reading`) map to the new Technical/Language model.
+- Desktop and 390px mobile render without horizontal overflow.
+- Theme and navigation implementation were not changed.
 - Browser console errors: none.
+- Static validation: all 32 HTML pages, 10 redirects, 18 sitemap URLs, social metadata, and local references pass.
 
 ## Comparison history
 
-1. Pass 1: P2 density mismatch — the Language project row started below the 1024px viewport, while the selected source showed both project rows. Evidence: `audit/resume-v3/comparison-pass1.jpg`.
-2. Fix: reduced About and method vertical spacing, tightened body type, and compacted project-row padding without changing content or hierarchy.
-3. Pass 2: both Technical and Language project rows are visible in the target viewport; no actionable P0/P1/P2 differences remain. Evidence: `audit/resume-v3/comparison-pass2.jpg`.
-
-## Focused comparison evidence
-
-The 2880 × 1024 combined comparison keeps the profile rail, About typography, method columns, and both project rows readable at original resolution. Apps grouping and mobile behavior are separately captured, so no additional crop was required.
+1. Baseline annotation: the top profile kicker and horizontal tag row duplicated sidebar content; generic section labels did not communicate portfolio intent.
+2. Draft pass: replaced the tag row with a profile snapshot, then rejected it because it still repeated sidebar information.
+3. Final fix: removed the duplicate snapshot entirely, kept only non-duplicative About context, renamed the three annotated headings, and expanded the working-language list.
+4. Post-fix evidence: the same 1440 × 1024 comparison shows clearer hierarchy, lower density, and no layout regression. Mobile verification confirms no overflow or merged headline text.
 
 ## Follow-up polish
 
-- P3: a downloadable resume action can be added later when a real, maintained PDF exists.
+- No P3 follow-up is required for the annotated scope.
 
 final result: passed
