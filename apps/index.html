@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260713c">
@@ -81,11 +82,11 @@
 
     .apps-nav{height:75px;padding:0 48px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);z-index:10}.apps-brand{font:600 15px var(--font-mono)}.apps-brand b{color:var(--accent)}.apps-brand span{color:var(--muted);font-weight:400}.apps-nav nav{display:flex;gap:26px;align-items:center;color:var(--body);font-size:13px}.theme-button{width:31px;height:31px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--ink)}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:42px}.filter{border:1px solid var(--border);border-radius:99px;padding:8px 15px;background:transparent;color:var(--body);font:500 12px var(--font-mono);cursor:pointer}.filter.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}.apps-intro .eyebrow{color:var(--accent)}.apps-intro h1{font-size:44px}.apps-grid{grid-template-columns:repeat(3,1fr);gap:20px}.app-card{padding:22px}.app-card .ac-icon{width:38px;height:38px;border-radius:8px}.apps-cat[hidden]{display:none}
     @media(max-width:1400px){.apps-intro .lead{white-space:normal}}@media(max-width:900px){.apps-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width: 640px) {.apps-nav{padding:0 24px}.apps-nav nav a{display:none}.wrap{width:calc(100% - 48px)}.apps-intro h1{font-size:36px}.apps-grid{grid-template-columns:1fr}.apps-main{padding-top:48px}}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .theme-button{display:grid;place-items:center;cursor:pointer}.ac-icon i{font-size:1rem}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
 <body>
-  <header class="apps-nav"><a class="apps-brand" href="/">thang<b>.</b> <span>/ apps</span></a><nav><a href="/#about">About</a><a href="/#work">Apps</a><a href="/#stack">Stack</a><button class="theme-button" id="themeToggle" aria-label="Toggle theme">◐</button></nav></header>
+  <header class="apps-nav"><a class="apps-brand" href="/">thang<b>.</b> <span>/ apps</span></a><nav><a href="/#about">About</a><a href="/#work">Apps</a><a href="/#stack">Stack</a><button class="theme-button" id="themeToggle" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button></nav></header>
   <main class="wrap apps-main">
     <section class="apps-intro">
       <span class="eyebrow">Apps</span>
@@ -106,7 +107,7 @@
       <div class="apps-grid">
 
         <article class="app-card">
-          <div class="ac-top"><div class="ac-icon">🛡️</div><span class="ac-status">v1.0</span></div>
+          <div class="ac-top"><div class="ac-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div><span class="ac-status">v1.0</span></div>
           <h3>RAGOps</h3>
           <p>An evaluation and release-gate platform for production RAG and agent systems. Compare a candidate against an accepted baseline, detect quality and safety regressions, and produce auditable reports.</p>
           <div class="ac-tags"><span class="ac-tag">AI evaluation</span><span class="ac-tag">Red team</span><span class="ac-tag">FastAPI</span><span class="ac-tag">CI/CD</span></div>
@@ -116,7 +117,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🦆</div>
+            <div class="ac-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Data Copilot</h3>
@@ -133,7 +134,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">📡</div>
+            <div class="ac-icon"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Pipeline Observability</h3>
@@ -160,7 +161,7 @@
 
                         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🧩</div>
+            <div class="ac-icon"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Kanji &amp; Collocations<span class="ac-jp">漢字・連語</span></h3>
@@ -175,7 +176,7 @@
 
                 <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🈷</div>
+            <div class="ac-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>JLPT N1 Kanji Analysis<span class="ac-jp">漢字分析</span></h3>
@@ -190,7 +191,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🗂️</div>
+            <div class="ac-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>JLPT N1 Vocabulary Tabs<span class="ac-jp">語彙</span></h3>
@@ -217,7 +218,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🎌</div>
+            <div class="ac-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Vocabulary Exams 2010–2025<span class="ac-jp">問題1〜4</span></h3>
@@ -232,7 +233,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">📚</div>
+            <div class="ac-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Context Vocabulary<span class="ac-jp">問題2 · 504問</span></h3>
@@ -247,7 +248,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🔁</div>
+            <div class="ac-icon"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Paraphrase Vocabulary<span class="ac-jp">問題3 · 言い換え</span></h3>
@@ -274,7 +275,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🎴</div>
+            <div class="ac-icon"><i class="fa-solid fa-clone" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Grammar Flashcards<span class="ac-jp">文法</span></h3>
@@ -289,7 +290,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">📜</div>
+            <div class="ac-icon"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Grammar Exams 2010–2024<span class="ac-jp">文法</span></h3>
@@ -304,7 +305,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🈴</div>
+            <div class="ac-icon"><i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Sentence Ordering<span class="ac-jp">文の文法②</span></h3>
@@ -319,7 +320,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">⭐</div>
+            <div class="ac-icon"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Sentence Ordering Drill<span class="ac-jp">問題6 · 並べ替え</span></h3>
@@ -346,7 +347,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">🧭</div>
+            <div class="ac-icon"><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Reading — 75 Passages<span class="ac-jp">読解</span></h3>
@@ -361,7 +362,7 @@
 
         <article class="app-card">
           <div class="ac-top">
-            <div class="ac-icon">📰</div>
+            <div class="ac-icon"><i class="fa-solid fa-newspaper" aria-hidden="true"></i></div>
             <span class="ac-status">Live</span>
           </div>
           <h3>Reading Practice<span class="ac-jp">問題9 · 中文</span></h3>
@@ -381,6 +382,6 @@
 
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 
-  <script>(function(){var sections=[].slice.call(document.querySelectorAll('.apps-cat'));var buttons=[].slice.call(document.querySelectorAll('.filter'));var status=document.getElementById('filterStatus');var valid=buttons.map(function(b){return b.dataset.filter});function setFilter(filter,updateUrl){if(valid.indexOf(filter)<0)filter='all';buttons.forEach(function(b){var on=b.dataset.filter===filter;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});sections.forEach(function(s){s.hidden=filter!=='all'&&s.dataset.category!==filter});var count=sections.reduce(function(total,s){return total+(s.hidden?0:s.querySelectorAll('.app-card').length)},0);status.textContent=filter==='all'?'Showing all '+count+' apps.':'Showing '+count+' apps in '+filter+'.';if(updateUrl){var url=new URL(location.href);if(filter==='all')url.searchParams.delete('category');else url.searchParams.set('category',filter);history.pushState({category:filter},'',url)}}buttons.forEach(function(b){b.onclick=function(){setFilter(b.dataset.filter,true)}});window.addEventListener('popstate',function(){setFilter(new URLSearchParams(location.search).get('category')||'all',false)});setFilter(new URLSearchParams(location.search).get('category')||'all',false);document.getElementById('themeToggle').onclick=function(){var n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.theme=n}})()</script>
+  <script>(function(){var sections=[].slice.call(document.querySelectorAll('.apps-cat'));var buttons=[].slice.call(document.querySelectorAll('.filter'));var status=document.getElementById('filterStatus');var valid=buttons.map(function(b){return b.dataset.filter});function setFilter(filter,updateUrl){if(valid.indexOf(filter)<0)filter='all';buttons.forEach(function(b){var on=b.dataset.filter===filter;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});sections.forEach(function(s){s.hidden=filter!=='all'&&s.dataset.category!==filter});var count=sections.reduce(function(total,s){return total+(s.hidden?0:s.querySelectorAll('.app-card').length)},0);status.textContent=filter==='all'?'Showing all '+count+' apps.':'Showing '+count+' apps in '+filter+'.';if(updateUrl){var url=new URL(location.href);if(filter==='all')url.searchParams.delete('category');else url.searchParams.set('category',filter);history.pushState({category:filter},'',url)}}buttons.forEach(function(b){b.onclick=function(){setFilter(b.dataset.filter,true)}});window.addEventListener('popstate',function(){setFilter(new URLSearchParams(location.search).get('category')||'all',false)});setFilter(new URLSearchParams(location.search).get('category')||'all',false);var themeButton=document.getElementById('themeToggle');function syncThemeButton(){var dark=document.documentElement.dataset.theme==='dark';themeButton.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');themeButton.querySelector('i').className=dark?'fa-solid fa-sun':'fa-solid fa-moon'}themeButton.onclick=function(){var n=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=n;localStorage.theme=n;syncThemeButton()};syncThemeButton()})()</script>
 </body>
 </html>
