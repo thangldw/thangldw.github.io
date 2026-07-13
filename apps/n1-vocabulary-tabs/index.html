@@ -16,7 +16,7 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .hbdg{font-size:11px;padding:2px 8px;border-radius:10px;white-space:nowrap;background:#f1f3f7;border:1px solid #e4e7ee}
 .hbdg.gr{background:#e8f5e9;border-color:#c8e6c9;color:#2e7d32}.hbdg.rd{background:#fdecea;border-color:#f5c6c0;color:#b71c1c}
 .mtabs{display:flex;background:#fff;border-bottom:2px solid #e5e2d8;overflow-x:auto;padding:0 12px}
-.mtab{padding:9px 14px;font-size:13px;cursor:pointer;border-bottom:3px solid transparent;color:#888;white-space:nowrap;margin-bottom:-2px;transition:all .15s;font-family:inherit}
+.mtab{padding:9px 14px;font-size:13px;cursor:pointer;border:0;border-bottom:3px solid transparent;background:transparent;color:#888;white-space:nowrap;margin-bottom:-2px;transition:all .15s;font-family:inherit}
 .mtab.on{color:#1e2240;border-bottom-color:#4a5aad;font-weight:600}
 .stabs{display:flex;gap:5px;padding:7px 12px 5px;flex-wrap:wrap;background:#fff;border-bottom:1px solid #e5e2d8}
 .stab{padding:4px 11px;border:1.5px solid #d5d2ca;border-radius:20px;font-size:12px;cursor:pointer;background:#fff;color:#555;font-weight:500;transition:all .15s;font-family:inherit;white-space:nowrap}
@@ -197,8 +197,10 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
-  <link rel="stylesheet" href="/css/goi-tabs.css?v=20260713d">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260713c">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260713e">
+  <link rel="stylesheet" href="/css/goi-tabs.css?v=20260713e">
+  <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 </head>
 <body>
 <div class="hdr">
@@ -209,13 +211,13 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
 </div>
 <div class="mtabs">
-  <div class="mtab on" onclick="sw('c',this)">Từ vựng</div>
-  <div class="mtab" onclick="sw('s1696',this)">Bộ 1696</div>
-  <div class="mtab" onclick="sw('adj',this)">Tính từ</div>
-  <div class="mtab" onclick="sw('ptu',this)">Phó từ</div>
-  <div class="mtab" onclick="sw('dtg',this)">Động từ ghép</div>
-  <div class="mtab" onclick="sw('ct',this)">Cơ thể</div>
-  <div class="mtab" onclick="sw('pre',this)">Tiền tố・接頭辞</div>
+  <button type="button" class="mtab on" aria-selected="true" onclick="sw('c',this)">Từ vựng</button>
+  <button type="button" class="mtab" aria-selected="false" onclick="sw('s1696',this)">Bộ 1696</button>
+  <button type="button" class="mtab" aria-selected="false" onclick="sw('adj',this)">Tính từ</button>
+  <button type="button" class="mtab" aria-selected="false" onclick="sw('ptu',this)">Phó từ</button>
+  <button type="button" class="mtab" aria-selected="false" onclick="sw('dtg',this)">Động từ ghép</button>
+  <button type="button" class="mtab" aria-selected="false" onclick="sw('ct',this)">Cơ thể</button>
+  <button type="button" class="mtab" aria-selected="false" onclick="sw('pre',this)">Tiền tố・接頭辞</button>
 </div>
 <div class="stabs" id="stc">
   <button class="stab on" onclick="spos('',this,'c')">すべて</button>
@@ -257,8 +259,10 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 </div>
 <script>
 
-function togP(el){el.parentElement.classList.toggle('open');}
-function tog(id){var el=document.getElementById(id);if(el)el.classList.toggle('open');}
+function togP(el){var open=el.parentElement.classList.toggle('open');el.setAttribute('aria-expanded',String(open));}
+function tog(id){var el=document.getElementById(id);if(el){var open=el.classList.toggle('open');el.setAttribute('aria-expanded',String(open));}}
+function cardKey(event,el){if(event.key==='Enter'||event.key===' '){event.preventDefault();tog(el.id);}}
+function panelKey(event,el){if(event.key==='Enter'||event.key===' '){event.preventDefault();togP(el);}}
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function hl(t,q){if(!q||!t)return esc(t);try{return esc(String(t)).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),function(m){return'<mark>'+m+'</mark>';});}catch(e){return esc(t);}}
 function ptag(p){var m={'動詞':'v','名詞':'n','形容詞':'adj','副詞':'adv'};return'<span class="ptag '+(m[p]||'oth')+'">'+esc(p||'名詞')+'</span>';}
@@ -269,8 +273,9 @@ var PAGE_SIZE=96,_visible={c:PAGE_SIZE,w:PAGE_SIZE},_visible1696=PAGE_SIZE;
 var _pc='',_pw='',_ren={},_syCache={},_abt=[];
 
 function sw(t,btn){
-  document.querySelectorAll('.mtab').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.mtab').forEach(function(b){b.classList.remove('on');b.setAttribute('aria-selected','false');});
   btn.classList.add('on');
+  btn.setAttribute('aria-selected','true');
   ['c','s1696','adj','ptu','dtg','ct','pre'].forEach(function(id){
     var p=document.getElementById('pn-'+id);
     if(p)p.style.display=(id===t)?'':'none';
@@ -401,7 +406,7 @@ function bCard(v,q,isC,idx){
       }
     }
   }
-  return '<div class="card'+(isC?'':' wcard')+'" data-p="'+esc(pos)+'" id="'+uid+'" onclick="tog(\''+uid+'\')">'+(v.e?'<span class="ebdg">出題済</span>':'')+
+  return '<div class="card'+(isC?'':' wcard')+'" data-p="'+esc(pos)+'" id="'+uid+'" role="button" tabindex="0" aria-expanded="false" onclick="tog(\''+uid+'\')" onkeydown="cardKey(event,this)">'+(v.e?'<span class="ebdg">出題済</span>':'')+
     '<div class="wrow"><span class="wk">'+hl(k,q)+'</span>'+(h?'<span class="wh">'+esc(h)+'</span>':'')+ptag(pos)+(h?'<button class="spk" onclick="event.stopPropagation();spk(\''+k.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"','"+uid+'\')">Nghe</button>':'')+
     '</div>'+(vi||v.jm?'<div class="vi-row"><span class="vi-b">Nghĩa · '+hl(vi,q)+'</span>'+(v.jm?'<span class="jm-b">'+esc(v.jm)+'</span>':'')+'</div>':'')+
     (syH?'<div class="synb"><div class="synb-l">類義語 · Đồng nghĩa</div><div class="syn-chips">'+syH+'</div></div>':'')+
@@ -438,7 +443,7 @@ function rADJ(el){
   DTP.forEach(function(v,i){
     var uid='adj'+i,at=v.p||'adj-i';
     var coH='';(v.co||[]).forEach(function(c){coH+='<div class="co-item n1"><span class="cjp">'+esc(c.j||c.jp||'')+'<span class="n1b">N1</span></span></div>';});
-    h+='<div class="card" data-p="形容詞" data-at="'+at+'" id="'+uid+'" onclick="tog(\''+uid+'\')"><div class="wrow"><span class="wk">'+esc(v.k)+'</span>'+(v.h?'<span class="wh">'+esc(v.h)+'</span>':'')+'<span class="ptag adj">'+(at==='adj-na'?'ナ形':'イ形')+'</span>'+(v.h?'<button class="spk" onclick="event.stopPropagation();spk(\''+v.k.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"','"+uid+'\')">Nghe</button>':'')+
+    h+='<div class="card" data-p="形容詞" data-at="'+at+'" id="'+uid+'" role="button" tabindex="0" aria-expanded="false" onclick="tog(\''+uid+'\')" onkeydown="cardKey(event,this)"><div class="wrow"><span class="wk">'+esc(v.k)+'</span>'+(v.h?'<span class="wh">'+esc(v.h)+'</span>':'')+'<span class="ptag adj">'+(at==='adj-na'?'ナ形':'イ形')+'</span>'+(v.h?'<button class="spk" onclick="event.stopPropagation();spk(\''+v.k.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"','"+uid+'\')">Nghe</button>':'')+
     '</div>'+(v.vi?'<div class="vi-row"><span class="vi-b">Nghĩa · '+esc(v.vi)+'</span></div>':'')+(coH?'<div class="co-wrap"><div class="co-l">Cụm từ</div><div class="co-list">'+coH+'</div></div>':'')+'<div class="detail"></div></div>';
   });
   el.innerHTML=h+'</div></div>';
@@ -487,7 +492,7 @@ function switchPTU(btn,mode){
     PAT.forEach(function(g){
       var col=g.color||'#4a148c';
       h+='<div style="margin-bottom:13px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden">';
-      h+='<div style="background:'+col+';color:#fff;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="togP(this)">';
+      h+='<div role="button" tabindex="0" aria-expanded="false" style="background:'+col+';color:#fff;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="togP(this)" onkeydown="panelKey(event,this)">';
       h+='<span style="font-size:14px;font-weight:700">【'+esc(g.group)+'】</span><span style="font-size:12px;color:rgba(255,255,255,.8)">'+esc(g.group_vi)+'</span><span style="font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;margin-left:auto">'+g.items.length+'語</span></div>';
       h+='<div class="pre-b">';
       g.items.forEach(function(item){
@@ -514,7 +519,7 @@ function rDTG(el){
   Object.keys(DTG).forEach(function(gk){
     var g=DTG[gk];total+=g.words.length;
     h+='<div style="margin-bottom:11px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden">';
-    h+='<div style="background:#1e2240;color:#fff;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="togP(this)">';
+    h+='<div role="button" tabindex="0" aria-expanded="false" style="background:#1e2240;color:#fff;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="togP(this)" onkeydown="panelKey(event,this)">';
     h+='<span style="font-size:16px;font-weight:700;font-family:Noto Sans JP,sans-serif">'+esc(g.prefix||gk)+'</span>';
     h+='<span style="font-size:11px;color:rgba(255,255,255,.7)">'+esc(g.vi_prefix||'')+'</span>';
     h+='<span style="font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;margin-left:auto">'+g.words.length+'語</span></div>';
@@ -597,7 +602,7 @@ function r1696(el,q){
         v.opts.forEach(function(o){optsH+='<div style="font-size:13px;font-family:Noto Sans JP,sans-serif;background:#f8f9ff;border:1px solid #e0e4f5;border-radius:7px;padding:6px 10px;color:#333;line-height:1.7"><span style="color:#888;font-size:11px;font-weight:700;margin-right:4px">'+o.n+'.</span>'+esc(o.t||'')+'</div>';});
         optsH+='</div>';
       }
-      h+='<div class="card" style="border-top:3px solid #1565c0" id="'+uid+'" onclick="tog(\''+uid+'\')"><div class="wrow"><span class="wk">'+esc(v.k)+'</span>'+(v.h?'<span class="wh">'+esc(v.h)+'</span>':'')+ptag(v.p||'名詞')+(v.h?'<button class="spk" onclick="event.stopPropagation();spk(\''+v.k.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"','"+uid+'\')">Nghe</button>':'')+
+      h+='<div class="card" style="border-top:3px solid #1565c0" id="'+uid+'" role="button" tabindex="0" aria-expanded="false" onclick="tog(\''+uid+'\')" onkeydown="cardKey(event,this)"><div class="wrow"><span class="wk">'+esc(v.k)+'</span>'+(v.h?'<span class="wh">'+esc(v.h)+'</span>':'')+ptag(v.p||'名詞')+(v.h?'<button class="spk" onclick="event.stopPropagation();spk(\''+v.k.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"','"+uid+'\')">Nghe</button>':'')+
       '</div>'+(v.vi?'<div class="vi-row"><span class="vi-b">Nghĩa · '+esc(v.vi)+'</span></div>':'')+(coH?'<div class="co-wrap"><div class="co-l">🔥 Set</div><div class="co-list">'+coH+'</div></div>':'')+'<div class="detail">'+optsH+'</div></div>';
     });
   });

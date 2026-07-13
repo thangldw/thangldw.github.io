@@ -57,9 +57,11 @@ body {
 }
 
 .site-foot span {
-  color: #aab1bc;
+  color: #667085;
   font-style: normal;
 }
+
+html[data-theme="dark"] .site-foot span { color: #b0bac7; }
 
 @media (max-width: 680px) {
   .site-foot { padding-inline: 24px; }

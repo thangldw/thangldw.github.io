@@ -18,7 +18,7 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .hbadge.cnt{background:rgba(74,90,173,.5)}
 /* ── TABS ── */
 .tabs{display:flex;background:#fff;border-bottom:2px solid #e5e2d8;padding:0 16px;overflow-x:auto}
-.tab{padding:10px 16px;font-size:13px;cursor:pointer;border-bottom:3px solid transparent;color:#888;transition:all .15s;margin-bottom:-2px;white-space:nowrap;font-family:inherit}
+.tab{padding:10px 16px;font-size:13px;cursor:pointer;border:0;border-bottom:3px solid transparent;background:transparent;color:#888;transition:all .15s;margin-bottom:-2px;white-space:nowrap;font-family:inherit}
 .tab.active{color:#1e2240;border-bottom-color:#4a5aad;font-weight:600}
 .tab:hover:not(.active){color:#4a5aad}
 /* ── CONTAINER ── */
@@ -173,7 +173,9 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260713c">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260713e">
+  <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 </head>
 <body>
 
@@ -187,9 +189,9 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="sw('v',this)">📚 単語リスト</div>
-  <div class="tab" onclick="sw('q',this)">✏️ 問題練習</div>
-  <div class="tab" onclick="sw('ra',this)">⚡ Sai→Đúng</div>
+  <button type="button" class="tab active" aria-selected="true" onclick="sw('v',this)">単語リスト</button>
+  <button type="button" class="tab" aria-selected="false" onclick="sw('q',this)">問題練習</button>
+  <button type="button" class="tab" aria-selected="false" onclick="sw('ra',this)">Sai → Đúng</button>
 </div>
 
 <div class="container">
@@ -1993,19 +1995,19 @@ function buildCard(v){
   const mondaiList=v.mondai_list||[v.mondai];
   const etags=mEtag(mondaiList);
   const yearEtag=((v.years||[]).slice(0,2).map(y=>`<span class="etag m${v.mondai}" style="font-size:9.5px">${esc(y)}</span>`)).join('');
-  return`<div class="card" id="c${idx}" data-m="${v.mondai||''}" onclick="tog(${idx})">
+  return`<div class="card" id="c${idx}" data-m="${v.mondai||''}" role="button" tabindex="0" aria-expanded="false" onclick="tog(${idx})" onkeydown="cardKey(event,${idx})">
     <div class="wrow">
       <span class="wk">${hlQ(v.k||'',q)}</span>
       ${v.h?`<span class="wh">${esc(v.h)}</span>`:''}
       ${ptag(v.p)}
       <div class="etags">${etags}${yearEtag}</div>
-      ${v.h?`<button class="spk-btn" id="sp${idx}" onclick="event.stopPropagation();spk('${(v.k||'').replace(/'/g,"\\'")}',${idx})">🔊</button>`:''}
+      ${v.h?`<button class="spk-btn" id="sp${idx}" aria-label="Phát âm ${esc(v.k||'')}" onclick="event.stopPropagation();spk('${(v.k||'').replace(/'/g,"\\'")}',${idx})">Nghe</button>`:''}
     </div>
     ${v.vi?`<div class="vi-row"><span class="vi-badge">🇻🇳 ${hlQ(v.vi,q)}</span></div>`:''}
     ${(v.sy||[]).length?`<div class="synb"><div class="synb-lbl">≒ 類義語・同義語</div><div class="syn-chips">${syH}</div></div>`:''}
     ${(v.co||[]).length?`<div class="co-wrap"><div class="co-lbl">🔥 Cụm Set N1</div><div class="co-list">${coH}</div></div>`:''}
     <div class="detail">
-      ${v.s?`<div class="ex-block">${exS}<button class="spk-btn" id="exspk${idx}" onclick="event.stopPropagation();spkS('${(v.s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}', ${idx})" style="margin-left:6px">🔊</button><span class="ex-yr">📝 ${etags} ${yearEtag}</span></div>`:''}
+      ${v.s?`<div class="ex-block">${exS}<button class="spk-btn" id="exspk${idx}" aria-label="Đọc câu ví dụ" onclick="event.stopPropagation();spkS('${(v.s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}', ${idx})" style="margin-left:6px">Nghe</button><span class="ex-yr">${etags} ${yearEtag}</span></div>`:''}
       ${m4optsH}
       ${wrH?`<div class="wrongs-sec"><div class="wr-lbl">❌ Đáp án sai hay gặp</div><div class="wr-list">${wrH}</div></div>`:''}
       ${v.hint?`<div class="hint-box"><div class="hint-lbl">💡 Mẹo ghi nhớ</div>${esc(v.hint)}</div>`:''}
@@ -2013,7 +2015,8 @@ function buildCard(v){
   </div>`;
 }
 
-function tog(idx){document.getElementById('c'+idx).classList.toggle('open');}
+function tog(idx){var el=document.getElementById('c'+idx);var open=el.classList.toggle('open');el.setAttribute('aria-expanded',String(open));}
+function cardKey(event,idx){if(event.key==='Enter'||event.key===' '){event.preventDefault();tog(idx);}}
 
 // ── Speech ──
 function spk(text,idx){
@@ -2045,7 +2048,7 @@ if(window.speechSynthesis){window.speechSynthesis.getVoices();window.speechSynth
 
 // ── Tabs ──
 function sw(t,btn){
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  document.querySelectorAll('.tab').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});btn.classList.add('active');btn.setAttribute('aria-selected','true');
   document.getElementById('tv').style.display=t==='v'?'':'none';
   document.getElementById('tq').style.display=t==='q'?'':'none';
   document.getElementById('tra').style.display=t==='ra'?'':'none';

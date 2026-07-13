@@ -360,7 +360,7 @@ function buildCard(item,q){
   const mHl=q?hl(item.m,q):esc(item.m);
   const speakText=`${item.k}。${item.ex.replace(/<k>(.*?)<\/k>/g,'$1')}`;
 
-  return `<div class="vocab-card" onclick="toggle(this)">
+  return `<div class="vocab-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this)" onkeydown="cardKey(event,this)">
     <div class="card-header">
       <div class="card-kanji">${kHl}</div>
       <div class="card-meta">
@@ -385,7 +385,8 @@ function buildCard(item,q){
   </div>`;
 }
 
-function toggle(el){el.classList.toggle('expanded');}
+function toggle(el){const expanded=el.classList.toggle('expanded');el.setAttribute('aria-expanded',String(expanded));}
+function cardKey(event,el){if(event.key==='Enter'||event.key===' '){event.preventDefault();toggle(el);}}
 
 function getFiltered(){
   let items=DATA;

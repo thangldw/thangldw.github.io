@@ -13,10 +13,10 @@ html[data-theme="dark"] {
   --goi-bg: #0d1117;
   --goi-surface: #11161f;
   --goi-ink: #f2f5f9;
-  --goi-body: #9aa6b4;
-  --goi-muted: #7d8896;
-  --goi-border: #273140;
-  --goi-accent: #7c8cf8;
+  --goi-body: #b0bac7;
+  --goi-muted: #a6b0bd;
+  --goi-border: #3a4656;
+  --goi-accent: #8e9cff;
   --goi-chip: #1a2230;
 }
 
@@ -51,9 +51,12 @@ body { background: var(--goi-bg); color: var(--goi-ink); }
 .vi-b { color: var(--goi-body); background: var(--goi-chip); }
 .synb,.co-item { border-color: var(--goi-border); background: color-mix(in srgb,var(--goi-accent) 5%,var(--goi-surface)); }
 .synb-l,.co-l { color: var(--goi-accent); }
-.syi,.syi.pri { background: var(--goi-chip); }
-.syi .sw,.syi.pri .sw { color: var(--goi-ink); }
-.syi .sh,.syi.pri .sh,.syi .sm,.syi.pri .sm { color: var(--goi-muted); }
+.syi { background: var(--goi-chip); }
+.syi.pri { background: var(--goi-accent); }
+.syi .sw { color: var(--goi-ink); }
+.syi.pri .sw { color: #fff; }
+.syi .sh,.syi .sm { color: var(--goi-muted); }
+.syi.pri .sh,.syi.pri .sm { color: #fff; }
 
 html[data-theme="dark"] :where(.dtg-s,.ptu-card,.pat-g,.pre-s,.ct-chip,.detail,.ex-block,.dtg-t td,.pre-t td) { background: var(--goi-surface); color: var(--goi-ink); border-color: var(--goi-border); }
 html[data-theme="dark"] :where(.dtg-t tr:hover td,.pre-t tr:hover td) { background: var(--goi-chip); }

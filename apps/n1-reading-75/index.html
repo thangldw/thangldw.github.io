@@ -216,9 +216,9 @@ function renderQuestion(i){
       if(idx === q.correct) cls += " correct";
       else cls += " fade";
     }
-    choicesHtml += `<div class="${cls}" onclick="selectChoice(${idx})">
+    choicesHtml += `<button type="button" class="${cls}" ${answered?'disabled':''} onclick="selectChoice(${idx})">
         <span class="letter">${String.fromCharCode(65+idx)}.</span><span>${c}</span>
-      </div>`;
+      </button>`;
   });
 
   let passageHtml = q.passage;
