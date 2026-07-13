@@ -50,6 +50,7 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Rewrite Home and Apps copy from prior portfolio evidence with a professional, collaborative tone; expand How I Work to four stages, remove Apps search, and route RAGOps directly to its showcase.
 - [x] Refine the Home resume from annotated feedback: remove duplicated profile labels/tags, rename the sidebar and project headings, expand working languages, and reorganize About around non-duplicative delivery context.
 - [x] Rebuild Home as a split-profile online resume with About, Roles, How I Work, and a concise Past Projects index based on the selected option 3 concept.
 - [x] Consolidate the Apps catalog into two primary collections: Technical (3 projects) and Language (12 Japanese-learning apps), while preserving search, URL state, and legacy category links.
