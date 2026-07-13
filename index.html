@@ -19,7 +19,7 @@
   <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=20260713e">
-  <link rel="stylesheet" href="css/styles.css?v=20260713f">
+  <link rel="stylesheet" href="css/styles.css?v=20260714a">
   <script>document.documentElement.dataset.theme=localStorage.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
 </head>
 <body class="home-v2 resume-home">
@@ -36,21 +36,22 @@
 
   <main id="main" class="resume-layout">
     <aside class="resume-profile" aria-labelledby="profileName">
-      <p class="resume-kicker">Split profile resume</p>
       <h1 id="profileName">Thang Luu</h1>
       <p class="resume-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Tokyo, Japan</p>
 
       <section class="profile-section" aria-labelledby="rolesTitle">
-        <h2 id="rolesTitle">Roles</h2>
+        <h2 id="rolesTitle">What I do</h2>
         <article><h3>Forward Deployed Engineer</h3><p>Ship tools that solve real problems in real environments.</p></article>
         <article><h3>Data &amp; AI Engineer</h3><p>Turn data into insights and systems teams can act on.</p></article>
         <article><h3>Technical Lead</h3><p>Lead by example. Build with clarity. Unlock team impact.</p></article>
       </section>
 
       <section class="profile-section profile-languages" aria-labelledby="languagesTitle">
-        <h2 id="languagesTitle">Languages</h2>
+        <h2 id="languagesTitle">Working languages</h2>
         <p><i class="fa-solid fa-circle" aria-hidden="true"></i> English</p>
         <p><i class="fa-solid fa-circle" aria-hidden="true"></i> 日本語</p>
+        <p><i class="fa-solid fa-circle" aria-hidden="true"></i> Tiếng Việt</p>
+        <p><i class="fa-solid fa-circle" aria-hidden="true"></i> 中文</p>
       </section>
 
       <section class="profile-section profile-connect" aria-labelledby="connectTitle">
@@ -65,14 +66,17 @@
     <div class="resume-content">
       <section class="resume-about" aria-labelledby="aboutTitle">
         <p class="resume-kicker">About</p>
-        <h2 id="aboutTitle">I build <em>systems and tools</em><br>that teams rely on.</h2>
-        <div class="about-copy">
-          <p>I’m Thang Luu — a Tokyo-based Forward Deployed Engineer, Data &amp; AI Engineer, and Technical Lead. I embed with teams to turn ambiguous problems into production systems they trust.</p>
-          <div><p>I work across retail, real estate, fintech, healthcare, and research—delivering in English and Japanese.</p><p>I care about shipping tools that are useful, understandable, and built to last.</p></div>
+        <div class="about-overview">
+          <div class="about-intro">
+            <h2 id="aboutTitle">I build <em>systems and tools</em> <br>that teams rely on.</h2>
+            <p class="about-lead">I’m Thang Luu — a Tokyo-based Forward Deployed Engineer, Data &amp; AI Engineer, and Technical Lead. I embed with teams to turn ambiguous problems into production systems they trust.</p>
+            <div class="about-principles">
+              <p><span>Across industries</span>Retail, real estate, fintech, healthcare, and research.</p>
+              <p><span>End-to-end delivery</span>From problem framing and prototypes to production rollout and team enablement.</p>
+              <p><span>Built to last</span>Useful, understandable tools that teams can own and extend.</p>
+            </div>
+          </div>
         </div>
-        <ul class="role-tags" aria-label="Professional profile">
-          <li>Tokyo, Japan</li><li>Forward Deployed Engineer</li><li>Data &amp; AI Engineer</li><li>Technical Lead</li><li>Applied AI &amp; Data Systems</li><li>EN / 日本語</li>
-        </ul>
       </section>
 
       <section class="resume-method" aria-labelledby="methodTitle">
@@ -85,7 +89,7 @@
       </section>
 
       <section class="resume-projects" aria-labelledby="projectsTitle">
-        <div class="projects-heading"><p class="resume-kicker" id="projectsTitle">Past projects</p><a href="apps/">View all projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+        <div class="projects-heading"><p class="resume-kicker" id="projectsTitle">Selected work</p><a href="apps/">View all projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
         <div class="project-row">
           <div class="project-group"><i class="fa-solid fa-database" aria-hidden="true"></i><div><h3>Technical Work</h3><p>Data &amp; Engineering</p></div></div>
           <a class="resume-project" href="apps/data-copilot/"><h3>Data Copilot</h3><p>Ask questions across CSVs, SQL, and charts. Get answers and next steps.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>

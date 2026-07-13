@@ -50,6 +50,7 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Refine the Home resume from annotated feedback: remove duplicated profile labels/tags, rename the sidebar and project headings, expand working languages, and reorganize About around non-duplicative delivery context.
 - [x] Rebuild Home as a split-profile online resume with About, Roles, How I Work, and a concise Past Projects index based on the selected option 3 concept.
 - [x] Consolidate the Apps catalog into two primary collections: Technical (3 projects) and Language (12 Japanese-learning apps), while preserving search, URL state, and legacy category links.
 - [x] Standardize navigation across Home, Apps, Japanese, RAGOps, and every demo page: `Apps & Demo`, `EN / 日本語`, then the light/dark control; remove Demos, Collections, Notes, About, and Contact from all global headers.
