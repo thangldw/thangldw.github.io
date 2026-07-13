@@ -21,6 +21,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 11. The Apps catalog now uses 15 consistent Font Awesome icons with zero emoji fallbacks. Home mobile navigation synchronizes `aria-expanded`, closes with Escape, and both Home and Apps theme controls announce the action available after every theme change.
 12. Portfolio v2 replaces the timeline and Recent Updates model with a rotating spotlight, three scalable collections, and a searchable catalog. Data Copilot, Pipeline Observability, RAGOps, Japanese-learning tools, and future demos now share one expandable information architecture. The selected design passed side-by-side visual QA at 1440 × 1024 with no remaining P0/P1/P2 issues.
 13. Global navigation now follows one compact standard on Home, Apps, Japanese, RAGOps, and every demo route: `Apps & Demo`, `EN / 日本語`, and the theme control. The former Demos, Collections, Notes, About, and Contact header links were removed. Desktop and 320px checks passed without overflow or console errors.
+14. Home now operates as a split-profile online resume with a professional summary, role profile, Embed/Build/Enable working method, and compact Past Projects index. Apps now has exactly two top-level collections: Technical (3) and Language (12). Search, accessible filters, new category URLs, and legacy category aliases passed desktop/mobile checks with zero console errors.
 
 ## Screenshots
 
@@ -35,6 +36,10 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Portfolio v2](../redesign-v2/home-desktop-final.png)
 
 ![Unified navigation](../nav-standard-v2/comparison-final.jpg)
+
+![Split-profile resume](../resume-v3/home-desktop-pass2.png)
+
+![Technical and Language collections](../resume-v3/apps-two-groups-desktop.png)
 
 ## Evidence limits
 

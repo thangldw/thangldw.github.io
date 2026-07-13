@@ -1,43 +1,45 @@
-# Design QA — Unified navigation standard
+# Design QA — Split-profile online resume and two-collection catalog
 
-- Source visual truth: `/Users/thang/Documents/thangldw.github.io/audit/nav-standard-v2/source-production.png`
-- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/audit/nav-standard-v2/implementation-home.png`
-- Full-view comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/nav-standard-v2/comparison-final.jpg`
-- Mobile evidence: `/Users/thang/Documents/thangldw.github.io/audit/nav-standard-v2/implementation-home-mobile-menu-320.png`
-- Viewport: 1440 × 1024 desktop; 320 × 780 mobile
-- State: light theme; desktop header visible; mobile menu tested open and closed
+- Source visual truth: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/source-option-3.png`
+- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-desktop-pass2.png`
+- Full-view comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/comparison-pass2.jpg`
+- Apps catalog evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-two-groups-desktop.png`
+- Mobile evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-mobile-390.png` and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-language-mobile-390.png`
+- Viewport: 1440 × 1024 desktop; 390 × 844 mobile
+- State: light theme for visual comparison; dark theme and mobile navigation tested separately
 
 ## Findings
 
-- No remaining P0, P1, or P2 visual issues.
-- The page body, typography, spacing, palette, icons, imagery, and content remain unchanged from the v2.0.0 visual source.
-- The only desktop visual difference is the requested navigation simplification: Demos, Collections, Notes, About, and Contact were removed; `Apps & Demo` replaces Contact; `EN / 日本語` sits immediately before the theme control.
-- Home, Apps, Japanese, RAGOps, Data Copilot, and every sub-app using the shared header now expose the same navigation order.
-- At 320px, Home retains its menu interaction and the shared sub-page header remains free of horizontal overflow.
-
-## Required fidelity surfaces
-
-- Fonts and typography: unchanged from the v2.0.0 source; header labels retain Space Grotesk/Noto Sans JP sizing and weight.
-- Spacing and layout rhythm: the 68px desktop header, 65px mobile header, page gutters, hero, spotlight, collections, and method band remain aligned with the source.
-- Colors and visual tokens: unchanged light/dark tokens and indigo accent.
-- Image quality and asset fidelity: no image assets were added, removed, rescaled, or recompressed.
-- Copy and content: page content is unchanged; only the user-requested navigation labels were altered.
+- No remaining P0, P1, or P2 issues.
+- Home matches the selected split-profile direction: fixed visual rail on desktop, senior-role summary, About statement, three-part work method, and two compact past-project rows.
+- The requested Apps information architecture is explicit and scalable: `Technical` contains the three engineering projects and `Language` contains all twelve Japanese-learning tools.
+- Fonts and typography: Space Grotesk, IBM Plex Mono, weights, compact mono labels, two-line statement, and hierarchy closely match the source.
+- Spacing and layout rhythm: 350px profile rail, thin dividers, three-column method, and four-column project rows align with the source; mobile collapses without horizontal overflow.
+- Colors and visual tokens: existing light/dark neutral surfaces, indigo primary accent, and orange secondary accent are preserved.
+- Image quality and asset fidelity: the selected concept contains no photographic or raster content; Font Awesome supplies the closest matching interface icons.
+- Copy and content: About, roles, working method, and project summaries use real portfolio content. The unsupported mock-only PDF action was intentionally omitted rather than linking a fake document.
 
 ## Interaction and implementation checks
 
-- Home mobile menu opens, reports `aria-expanded=true`, closes with Escape, and contains only `Apps & Demo` and `EN / 日本語`.
-- Theme controls remain present after the language link on all tested headers.
-- `Apps & Demo` is marked current on Apps routes; the Japanese page's language link returns to English Home.
-- Tested routes: Home, Apps, Japanese Home, RAGOps, and Data Copilot at desktop and 320px.
-- Console errors: none.
+- Home theme toggle changes light/dark state and updates its accessible label.
+- Home mobile menu opens, closes with Escape, and retains the standardized navigation.
+- Apps filters expose All, Technical, and Language; `Language` shows 12 apps and `Technical` shows 3 projects.
+- Search inside Language with `kanji` returns 2 results and updates the URL/live result text.
+- Legacy category URLs (`data`, `vocabulary`, `exam`, `grammar`, `reading`) map to the new Technical/Language model.
+- Browser console errors: none.
 
 ## Comparison history
 
-1. The first and final comparison confirmed that the implementation differs from the source only where explicitly requested in the header.
-2. No P0/P1/P2 correction loop was required.
+1. Pass 1: P2 density mismatch — the Language project row started below the 1024px viewport, while the selected source showed both project rows. Evidence: `audit/resume-v3/comparison-pass1.jpg`.
+2. Fix: reduced About and method vertical spacing, tightened body type, and compacted project-row padding without changing content or hierarchy.
+3. Pass 2: both Technical and Language project rows are visible in the target viewport; no actionable P0/P1/P2 differences remain. Evidence: `audit/resume-v3/comparison-pass2.jpg`.
 
 ## Focused comparison evidence
 
-The header text, order, spacing, and theme control are readable at full resolution in the 2880 × 1024 combined comparison. Mobile menu visibility and fit are separately captured at 320 × 780, so no additional crop was required.
+The 2880 × 1024 combined comparison keeps the profile rail, About typography, method columns, and both project rows readable at original resolution. Apps grouping and mobile behavior are separately captured, so no additional crop was required.
+
+## Follow-up polish
+
+- P3: a downloadable resume action can be added later when a real, maintained PDF exists.
 
 final result: passed
