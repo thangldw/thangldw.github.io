@@ -28,6 +28,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 18. The user-reported sticky-header overlap is fixed on Home and Apps. The backdrop now remains full-width while only the inner navigation/footer content uses the centered 75% measure. At 1440px the outer header is 1440px and its inner row is 1080px; at 390px the inner row is 358px. The reproduced scrolled state, desktop/mobile overflow checks, and console checks pass.
 19. The Apps introduction now sits closer to the global header: top padding changes from 54px to 32px on desktop and from 40px to 28px on mobile. Same-viewport captures confirm a tighter opening hierarchy with no changes to the catalog grid or filter behavior.
 20. A second spacing refinement reduces the Apps introduction to 16px desktop and 20px mobile top padding. The eyebrow remains visually separated from the header, while desktop and mobile captures confirm the catalog layout is unchanged.
+21. The full 15-card Apps catalog was audited against the unchanged Home design reference and the user-reported screenshot. Shared card typography now uses 19px titles, 15px descriptions, 14px CTAs, and 12px tags/status labels, with larger card padding and visible focus treatment. Apps compact navigation now follows Home's Menu/Close and Escape behavior. At 390px the three filters reflow without clipping. All, Language, focused before/after, compact closed/open-menu, filter URL/ARIA, theme-label, zero-overflow, and zero-browser-error checks pass.
 
 ## Screenshots
 
@@ -62,6 +63,8 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Apps intro spacing refinement](../resume-v3/apps-hero-spacing-comparison.jpg)
 
 ![Compact Apps intro spacing](../resume-v3/apps-hero-spacing-compact-comparison.jpg)
+
+![Apps card readability](../apps-readability-v308/08-card-type-focused-comparison.jpg)
 
 ## Evidence limits
 
