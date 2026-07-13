@@ -11,6 +11,7 @@
 - Header-width comparisons: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-header-75-comparison.jpg` and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-header-75-comparison.jpg`
 - Reported sticky-header defect: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/user-header-overlap-bug.png`
 - Sticky-header fix evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-header-inner-75-scrolled.png` and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/header-overlap-fix-comparison.jpg`
+- Apps intro spacing evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-32-desktop.png`, `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-28-mobile.png`, and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-hero-spacing-comparison.jpg`
 - Responsive evidence: `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-four-step-laptop-1024.png`, `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/home-header-75-mobile-390.png`, and `/Users/thang/Documents/thangldw.github.io/audit/resume-v3/apps-header-75-mobile-390.png`
 - Viewports: 1440 × 1024 desktop, 1024 × 900 laptop, and 390 × 844 mobile
 - State: light theme; Home default; Apps All, Technical, and Language filters
@@ -22,6 +23,7 @@
 - About uses evidence from the earlier portfolio: 10+ years across statistical analysis, data engineering, and technical delivery; cross-sector experience; current front-line delivery leadership; and a clear learner/collaborator stance.
 - `How I Work` now covers Embed, Build, Enable, and Measure/Improve. All four numbered titles render as single-line phrases at 1440px, 1024px, and 390px.
 - Apps removes the unused search path and replaces catalog-first copy with a professional description of applied work, feedback, and collaboration. Technical and Language remain durable top-level filters.
+- Apps intro padding is reduced from 54px to 32px on desktop and from 40px to 28px on mobile, giving the opening statement a clearer visual relationship to the header without compressing the headline or filters.
 - The RAGOps card now says `Open RAGOps` and points directly to `https://thangldw.github.io/ragops/`.
 - Home and Apps sticky header backdrops now span the full 1440px viewport, while their inner content and footer content measure exactly 1080px (75%) and are centered at x=180px. Mobile inner content uses 358px in a 390px viewport to preserve usable navigation space.
 
@@ -52,6 +54,7 @@
 6. Width refinement: centered header/footer bands were reduced to 75% on Home and Apps. Computed dimensions, mobile overrides, visual comparisons, and console checks pass.
 7. Production cache check: Apps loaded the new width immediately; Home initially retained the prior cached stylesheet. The Home stylesheet query was advanced to `20260714c` so GitHub Pages clients fetch the verified 75% rule.
 8. Sticky-header correction: the user-reported scroll state revealed that narrowing the sticky element also narrowed its opaque backdrop. Home and Apps now keep a full-width sticky surface with a centered 75% inner container; the same scrolled state, 1440px desktop, and 390px mobile checks pass with zero overflow or console errors.
+9. Apps rhythm refinement: the intro moves 22px closer to the header on desktop and 12px closer on mobile. Same-viewport comparison confirms the tighter hierarchy while preserving the existing grid, copy, filter row, and card layout.
 
 ## Follow-up polish
 
