@@ -19,6 +19,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 9. The post-release metadata pass added canonical social previews to all 18 sitemap URLs. Home and Apps use real 1200×630 browser captures, and the local validator now checks description length, Open Graph completeness, canonical/`og:url` agreement, image existence, and Twitter card type.
 10. Apps catalog filters now expose shareable `?category=` URLs, preserve state through browser back/forward, announce the visible result count, and report selection through `aria-pressed`. Direct-link, click, and back-navigation states passed in-browser.
 11. The Apps catalog now uses 15 consistent Font Awesome icons with zero emoji fallbacks. Home mobile navigation synchronizes `aria-expanded`, closes with Escape, and both Home and Apps theme controls announce the action available after every theme change.
+12. Portfolio v2 replaces the timeline and Recent Updates model with a rotating spotlight, three scalable collections, and a searchable catalog. Data Copilot, Pipeline Observability, RAGOps, Japanese-learning tools, and future demos now share one expandable information architecture. The selected design passed side-by-side visual QA at 1440 × 1024 with no remaining P0/P1/P2 issues.
 
 ## Screenshots
 
@@ -29,6 +30,8 @@ The documented release backlog is complete. Pipeline history persists, long voca
 ![Vocabulary Tabs mobile](03-vocabulary-tabs-mobile.png)
 
 ![Apps icon system](04-apps-icon-system.jpg)
+
+![Portfolio v2](../redesign-v2/home-desktop-final.png)
 
 ## Evidence limits
 
