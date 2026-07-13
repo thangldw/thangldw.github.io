@@ -16,9 +16,7 @@
   "use strict";
 
   var LINKS = [
-    { href: "/#about", label: "About", section: true },
-    { href: "/apps/", label: "Apps" },
-    { href: "/#stack", label: "Stack", section: true },
+    { href: "/apps/", label: "Apps & Demo" },
   ];
 
   var MOON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
@@ -44,7 +42,7 @@
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-toggle{border-color:#e4e7ee;color:#14171d;background:#ffffff;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
-    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 24px}.tw-header .tw-nav{gap:1rem;}.tw-header .tw-nav a.tw-section{display:none;}}",
+    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:22px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:32px;height:32px;}}",
   ].join("");
 
   /* ---- resolve current theme (mirror the tokens.css pre-paint logic) ---- */
@@ -82,13 +80,14 @@
     var theme = currentTheme();
     var onApps = location.pathname.replace(/\/index\.html$/, "/").indexOf("/apps/") === 0
       || /^\/apps\//.test(location.pathname);
+    var onJapanese = document.documentElement.lang === "ja" || location.pathname.indexOf("/ja/") === 0;
 
     var nav = LINKS.map(function (l) {
       var cls = [];
-      if (l.section) cls.push("tw-section");
-      if (l.label === "Apps" && onApps) cls.push("tw-active");
-      return '<a href="' + l.href + '"' + (cls.length ? ' class="' + cls.join(" ") + '"' : "") + ">" + l.label + "</a>";
+      if (l.label === "Apps & Demo" && onApps) cls.push("tw-active");
+      return '<a href="' + l.href + '"' + (cls.length ? ' class="' + cls.join(" ") + '" aria-current="page"' : "") + ">" + l.label + "</a>";
     }).join("");
+    var languageLink = '<a class="tw-lang" href="' + (onJapanese ? "/" : "/ja/") + '">EN / 日本語</a>';
 
     var header = document.createElement("header");
     header.className = "tw-header";
@@ -97,10 +96,13 @@
       '<div class="tw-wrap">' +
       '<a href="/" class="tw-brand">thang<span class="tw-dot">.</span></a>' +
       '<nav class="tw-nav" aria-label="Primary">' + nav +
+      languageLink +
       '<button class="tw-toggle" id="tw-toggle" aria-label="Toggle color theme" title="Toggle theme">' + iconFor(theme) + "</button>" +
       "</nav></div>";
 
-    document.body.insertAdjacentHTML("afterbegin", header.outerHTML);
+    var skipLink = document.body.firstElementChild;
+    if (skipLink && skipLink.matches(".skip-link, .skip")) skipLink.insertAdjacentHTML("afterend", header.outerHTML);
+    else document.body.insertAdjacentHTML("afterbegin", header.outerHTML);
 
     document.getElementById("tw-toggle").addEventListener("click", function () {
       var root = document.documentElement;
