@@ -23,6 +23,8 @@ class PageParser(HTMLParser):
         self.references: list[str] = []
         self.canonicals: list[str] = []
         self.refreshes: list[str] = []
+        self.meta_names: dict[str, str] = {}
+        self.meta_properties: dict[str, str] = {}
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = {key.lower(): value or "" for key, value in attrs}
@@ -35,6 +37,10 @@ class PageParser(HTMLParser):
             self.canonicals.append(values.get("href", ""))
         if tag == "meta" and values.get("http-equiv", "").lower() == "refresh":
             self.refreshes.append(values.get("content", ""))
+        if tag == "meta" and values.get("name"):
+            self.meta_names[values["name"].lower()] = values.get("content", "").strip()
+        if tag == "meta" and values.get("property"):
+            self.meta_properties[values["property"].lower()] = values.get("content", "").strip()
 
 
 def local_target(page: Path, reference: str) -> Path | None:
@@ -88,6 +94,39 @@ def main() -> int:
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", namespace)}
 
+    required_og = {"og:type", "og:title", "og:description", "og:url", "og:image"}
+    for absolute in sorted(sitemap_urls):
+        if not absolute or not absolute.startswith(SITE_URL + "/"):
+            errors.append(f"sitemap.xml: invalid site URL {absolute}")
+            continue
+        path = urlsplit(absolute).path
+        page_file = ROOT / path.lstrip("/") / "index.html" if path != "/" else ROOT / "index.html"
+        if page_file not in parsed_pages:
+            errors.append(f"sitemap.xml: missing page for {absolute}")
+            continue
+        page = parsed_pages[page_file]
+        if page.canonicals != [absolute]:
+            errors.append(f"{page_file.relative_to(ROOT)}: expected canonical {absolute}")
+        description = page.meta_names.get("description", "")
+        if not description:
+            errors.append(f"{page_file.relative_to(ROOT)}: missing meta description")
+        elif not 60 <= len(description) <= 170:
+            errors.append(
+                f"{page_file.relative_to(ROOT)}: meta description must be 60–170 characters"
+            )
+        missing_og = sorted(required_og - page.meta_properties.keys())
+        if missing_og:
+            errors.append(f"{page_file.relative_to(ROOT)}: missing {', '.join(missing_og)}")
+        elif page.meta_properties["og:url"] != absolute:
+            errors.append(f"{page_file.relative_to(ROOT)}: og:url must match canonical")
+        else:
+            image_url = page.meta_properties["og:image"]
+            image_path = ROOT / urlsplit(image_url).path.lstrip("/")
+            if not image_url.startswith(SITE_URL + "/") or not image_path.is_file():
+                errors.append(f"{page_file.relative_to(ROOT)}: invalid og:image {image_url}")
+        if page.meta_names.get("twitter:card") != "summary_large_image":
+            errors.append(f"{page_file.relative_to(ROOT)}: expected twitter summary_large_image")
+
     for previous, canonical in mappings:
         previous_file = ROOT / previous.lstrip("/") / "index.html"
         canonical_file = ROOT / canonical.lstrip("/") / "index.html"
@@ -99,8 +138,6 @@ def main() -> int:
         if not any(canonical in value for value in previous_page.refreshes):
             errors.append(f"{previous}: redirect does not target {canonical}")
         absolute = SITE_URL + canonical
-        if canonical_page.canonicals != [absolute]:
-            errors.append(f"{canonical}: expected canonical {absolute}")
         if absolute not in sitemap_urls:
             errors.append(f"sitemap.xml: missing {absolute}")
 
@@ -112,7 +149,7 @@ def main() -> int:
 
     print(
         f"Validated {len(pages)} HTML pages, {len(mappings)} redirects, "
-        f"{len(sitemap_urls)} sitemap URLs, and all local references."
+        f"{len(sitemap_urls)} sitemap URLs with social metadata, and all local references."
     )
     return 0
 

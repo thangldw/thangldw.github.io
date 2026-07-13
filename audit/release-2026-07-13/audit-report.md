@@ -16,6 +16,7 @@ The documented release backlog is complete. Pipeline history persists, long voca
 6. Vocabulary quiz QA covered initial, answered, explanation, next, result, and reset states. Reading practice answers are native buttons and disable after selection.
 7. The offline validator passed 32 HTML pages, 10 redirects, 18 sitemap URLs, duplicate-ID checks, canonical targets, and all local references.
 8. The post-deploy public pass confirmed Home, Apps, Data Copilot, Pipeline, and Vocabulary Tabs with zero horizontal overflow; Pipeline rendered two run-history rows, all 10 legacy redirects reached their canonical route, and the Prefix/Suffix view rendered 44 expandable groups.
+9. The post-release metadata pass added canonical social previews to all 18 sitemap URLs. Home and Apps use real 1200×630 browser captures, and the local validator now checks description length, Open Graph completeness, canonical/`og:url` agreement, image existence, and Twitter card type.
 
 ## Screenshots
 
