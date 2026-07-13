@@ -50,6 +50,8 @@ Updated: 2026-07-13
 
 ## Post-release improvements
 
+- [x] Redesign Home around a rotating spotlight and scalable collections, remove the timeline/Recent Updates treatment, and give AI, data, Japanese-learning, and future demos equal room to grow.
+- [x] Redesign Apps as a searchable, URL-addressable catalog that can scale beyond the current 15 demos without making RAGOps the center of the portfolio.
 - [x] Add validated social-sharing metadata to all 18 sitemap URLs: canonical, 60–170 character description, Open Graph title/description/URL/image, and Twitter large-image card.
 - [x] Capture real 1200×630 website screenshots for Home and Apps social previews instead of using generated or placeholder artwork.
 - [x] Extend the offline validator so missing, mismatched, or broken social metadata blocks future releases locally.
