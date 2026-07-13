@@ -54,6 +54,9 @@ body{background:var(--paper);color:var(--ink);font-family:"Be Vietnam Pro","Noto
 /* GRID */
 .container{width:min(1500px,100%);margin:0 auto;padding:12px 32px 60px;}
 .vocab-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
+.load-row{display:flex;justify-content:center;padding:18px 0 4px;}
+.load-more{min-height:44px;padding:9px 18px;border:1.5px solid var(--blue);border-radius:9px;background:#fff;color:var(--blue);font:600 13px "Be Vietnam Pro",sans-serif;cursor:pointer;}
+.load-more:hover,.load-more:focus-visible{background:var(--bg-blue);}
 
 /* CARD */
 .vocab-card{
@@ -191,11 +194,12 @@ mark{background:#fff59d;border-radius:3px;padding:0 2px;}
 @media(max-width:1180px){.vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
 @media(max-width:840px){.container{padding-inline:24px}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:600px){
+  #appHeader{padding-inline:16px;}
   .container{padding-inline:16px;}
   .vocab-grid{grid-template-columns:1fr;}
   .card-kanji{font-size:1.8rem;}
   #appHeader h1{font-size:.9rem;}
-  #search-input{width:155px;}
+  #search-input{width:min(155px,45vw);min-width:0;}
 }
 </style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -248,6 +252,7 @@ mark{background:#fff59d;border-radius:3px;padding:0 2px;}
 
 <div class="container">
   <div class="vocab-grid" id="vocab-grid"></div>
+  <div class="load-row" id="load-row"></div>
 </div>
 
 <script>
@@ -395,11 +400,17 @@ function getFiltered(){
   return items;
 }
 
-function render(){
+let visibleCount=96;
+function render(append){
   const items=getFiltered();
-  document.getElementById('vocab-grid').innerHTML=items.map(v=>buildCard(v,currentSearch)).join('');
-  document.getElementById('result-count').textContent=`${items.length} từ`;
+  if(!append)visibleCount=96;
+  const shown=Math.min(visibleCount,items.length);
+  document.getElementById('vocab-grid').innerHTML=items.slice(0,shown).map(v=>buildCard(v,currentSearch)).join('');
+  document.getElementById('result-count').textContent=shown<items.length?`${shown} / ${items.length} từ`:`${items.length} từ`;
+  document.getElementById('load-row').innerHTML=shown<items.length?`<button type="button" class="load-more" onclick="loadMore()">Hiển thị thêm ${Math.min(96,items.length-shown)} mục</button>`:'';
 }
+
+function loadMore(){visibleCount+=96;render(true);}
 
 function setRound(r,btn){
   currentRound=r;

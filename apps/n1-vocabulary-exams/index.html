@@ -40,6 +40,9 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .pbtn.adv.on{background:#6a1b9a;border-color:#6a1b9a}
 /* ── GRID ── */
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.load-row{display:flex;justify-content:center;padding:18px 0 4px}
+.load-more{min-height:44px;padding:9px 18px;border:1.5px solid #4a5aad;border-radius:9px;background:#fff;color:#3949ab;font:600 13px inherit;cursor:pointer}
+.load-more:hover,.load-more:focus-visible{background:#eef0fa}
 /* ── CARD ── */
 .card{background:#fff;border-radius:13px;border:1px solid #e5e2d8;padding:13px 14px 12px;cursor:pointer;transition:box-shadow .15s,border-color .15s;position:relative}
 .card:hover{box-shadow:0 3px 14px rgba(0,0,0,.1)}
@@ -245,6 +248,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <button class="pbtn adv" onclick="fp2('副詞',this)">副詞</button>
   </div>
   <div class="grid" id="vg"></div>
+  <div class="load-row" id="more-vocab"></div>
 </div>
 </div>
 <div id="tq" style="display:none">
@@ -1922,10 +1926,10 @@ function mEtag(mondai){
 }
 
 // ── Filter state ──
-var curP='', curY='', curM='', curQ='';
+var curP='', curY='', curM='', curQ='', visibleCount=96;
 function fp2(p,btn){curP=p;document.querySelectorAll('.pbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');rv();}
 
-function rv(){
+function rv(append){
   curQ=(document.getElementById('si').value||'').toLowerCase();
   curY=document.getElementById('fy').value;
   curM=document.getElementById('fm').value;
@@ -1940,10 +1944,15 @@ function rv(){
       (v.sy||[]).some(s=>(s.k||'').includes(curQ)||(s.m||'').toLowerCase().includes(curQ));
     return yOk&&mOk&&pOk&&qOk;
   });
-  document.getElementById('vc').textContent=list.length+' 語';
+  if(!append)visibleCount=96;
+  const shown=Math.min(visibleCount,list.length);
+  document.getElementById('vc').textContent=shown<list.length?shown+' / '+list.length+' 語':list.length+' 語';
   document.getElementById('hcnt').textContent=list.length+' từ';
-  document.getElementById('vg').innerHTML=list.map(v=>buildCard(v)).join('');
+  document.getElementById('vg').innerHTML=list.slice(0,shown).map(v=>buildCard(v)).join('');
+  document.getElementById('more-vocab').innerHTML=shown<list.length?`<button type="button" class="load-more" onclick="loadMoreVocab()">Hiển thị thêm ${Math.min(96,list.length-shown)} mục</button>`:'';
 }
+
+function loadMoreVocab(){visibleCount+=96;rv(true);}
 
 function buildCard(v){
   const idx=V.indexOf(v);

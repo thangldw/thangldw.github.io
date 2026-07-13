@@ -174,6 +174,9 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 .pre-b{display:none;padding:11px 13px}
 .open .pre-b{display:block}
 mark{background:#fff176;padding:0 2px;border-radius:3px}
+.load-row{grid-column:1/-1;display:flex;justify-content:center;padding:18px 0 6px}
+.load-more{min-height:44px;padding:9px 18px;border:1.5px solid #4a5aad;border-radius:9px;background:#fff;color:#3949ab;font:600 13px "Be Vietnam Pro",sans-serif;cursor:pointer}
+.load-more:hover,.load-more:focus-visible{background:#eef0fa}
 
 .ptu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:7px}
 .ptu-card{background:#fff;border-radius:10px;border:1px solid #e5e2d8;padding:9px 11px;border-left:3px solid #6a1b9a}
@@ -237,7 +240,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <span class="cnt-lbl" id="vcw">—</span>
 </div>
 <div class="container">
-  <div id="pn-c"><div class="grid" id="gc"></div></div>
+  <div id="pn-c"><div class="grid" id="gc"></div><div class="load-row" id="more-c"></div></div>
   <div id="pn-w" style="display:none"><div class="grid" id="gw"></div></div>
   <div id="pn-s1696" style="display:none"></div>
   <div id="pn-adj"   style="display:none"></div>
@@ -261,6 +264,7 @@ function ptag(p){var m={'動詞':'v','名詞':'n','形容詞':'adj','副詞':'ad
 function sbdg(src){var l={'tettei_m2':'Mon2','tettei_m3':'Mon3','mon1quiz':'Mon1','mon4master':'Mon4★','other':'他'};var c={'tettei_m2':'m2','tettei_m3':'m3','mon1quiz':'m1','mon4master':'m4'};return'<span class="sbdg '+(c[src]||'st')+'">'+esc(l[src]||src||'')+'</span>';}
 
 var C,W,DTP,PTU,PAT,DTG,PRE,CT,C1696,TRANS;
+var PAGE_SIZE=96,_visible={c:PAGE_SIZE,w:PAGE_SIZE},_visible1696=PAGE_SIZE;
 var _pc='',_pw='',_ren={},_syCache={},_abt=[];
 
 function sw(t,btn){
@@ -290,7 +294,7 @@ function spos(p,btn,tab){
   btn.classList.add('on');rv(tab);
 }
 
-function rv(tab){
+function rv(tab,append){
   var isC=(tab==='c'),data=isC?C:(W||[]);
   var q=(document.getElementById('si'+tab).value||'').toLowerCase();
   var pos=isC?_pc:_pw;
@@ -303,12 +307,15 @@ function rv(tab){
     var sOk=!src||((v.src||'').indexOf(src)>=0)||((v.s2||'').indexOf(src)>=0);
     return pOk&&qOk&&sOk&&(!exam||v.e);
   });
-  document.getElementById('vc'+tab).textContent=list.length+' 語';
+  if(!append)_visible[tab]=PAGE_SIZE;
+  var visible=Math.min(_visible[tab]||PAGE_SIZE,list.length);
+  var renderList=list.slice(0,visible);
+  document.getElementById('vc'+tab).textContent=visible<list.length?visible+' / '+list.length+' 語':list.length+' 語';
   var html='';
   // Mon4★: group by round in order
   if(isC && src==='mon4master'){
     var byRound={},roundOrder=[];
-    list.forEach(function(v){
+    renderList.forEach(function(v){
       var rnd=v.rnd||'その他';
       if(!byRound[rnd]){byRound[rnd]=[];roundOrder.push(rnd);}
       byRound[rnd].push(v);
@@ -327,10 +334,14 @@ function rv(tab){
       byRound[rnd].forEach(function(v){html+=bCard(v,q,true,gi++);});
     });
   } else {
-    for(var i=0;i<list.length;i++)html+=bCard(list[i],q,isC,i);
+    for(var i=0;i<renderList.length;i++)html+=bCard(renderList[i],q,isC,i);
   }
   document.getElementById('g'+tab).innerHTML=html;
+  var more=document.getElementById('more-'+tab);
+  if(more)more.innerHTML=visible<list.length?'<button type="button" class="load-more" onclick="loadMore(\''+tab+'\')">Hiển thị thêm '+Math.min(PAGE_SIZE,list.length-visible)+' mục</button>':'';
 }
+
+function loadMore(tab){_visible[tab]=(_visible[tab]||PAGE_SIZE)+PAGE_SIZE;rv(tab,true);}
 
 function bCard(v,q,isC,idx){
   var k=v.k||'',h=v.h||'',vi=v.vi||'',pos=v.p||'名詞';
@@ -562,16 +573,20 @@ function rPRE(el){
   el.innerHTML=h+'</div></section></div>';
 }
 
-function r1696(el){
+function r1696(el,q){
+  q=(q||'').toLowerCase();
+  var data=C1696.filter(function(v){return !q||(v.k||'').toLowerCase().includes(q)||(v.h||'').toLowerCase().includes(q)||(v.vi||'').toLowerCase().includes(q)||(v.co||[]).some(function(c){return(c.j||'').toLowerCase().includes(q);});});
   var secs={both:'🔥 Câu luyện + set',only1696:'📝 Câu luyện',onlyCDT:'📌 Set phrase'};
   var bg={both:'#e8f5e9',only1696:'#e3f2fd',onlyCDT:'#fff3e0'};
   var col={both:'#2e7d32',only1696:'#1565c0',onlyCDT:'#e65100'};
   var grp={both:[],only1696:[],onlyCDT:[]};
-  C1696.forEach(function(v){var s=v.sec||'only1696';if(grp[s])grp[s].push(v);});
-  var h='<div style="padding:8px 0"><div style="margin-bottom:9px"><input type="text" id="si1696" placeholder="検索..." oninput="f1696()" style="max-width:280px;padding:6px 10px;border:1.5px solid #d5d2ca;border-radius:8px;font-size:13px;outline:none;font-family:inherit"><span id="vc1696" style="font-size:12px;color:#888;font-weight:600;margin-left:6px">'+C1696.length+' 語</span></div>';
+  data.forEach(function(v){var s=v.sec||'only1696';if(grp[s])grp[s].push(v);});
+  var shown=Math.min(_visible1696,data.length),remaining=shown;
+  var h='<div style="padding:8px 0"><div style="margin-bottom:9px"><input type="text" id="si1696" placeholder="検索..." oninput="f1696(this.value)" style="max-width:280px;padding:6px 10px;border:1.5px solid #d5d2ca;border-radius:8px;font-size:13px;outline:none;font-family:inherit"><span id="vc1696" style="font-size:12px;color:#888;font-weight:600;margin-left:6px">'+(shown<data.length?shown+' / '+data.length:data.length)+' 語</span></div>';
   ['both','only1696','onlyCDT'].forEach(function(sec){
-    var cards=grp[sec];if(!cards||!cards.length)return;
-    h+='<div style="font-size:12px;font-weight:700;padding:5px 10px;border-radius:6px;margin:10px 0 6px;background:'+bg[sec]+';color:'+col[sec]+'">'+secs[sec]+' ('+cards.length+'語)</div>';
+    var allCards=grp[sec];if(!allCards||!allCards.length||remaining<=0)return;
+    var cards=allCards.slice(0,remaining);remaining-=cards.length;
+    h+='<div style="font-size:12px;font-weight:700;padding:5px 10px;border-radius:6px;margin:10px 0 6px;background:'+bg[sec]+';color:'+col[sec]+'">'+secs[sec]+' ('+allCards.length+'語)</div>';
     cards.forEach(function(v,i){
       var uid='p'+sec.replace('only','o').replace('CDT','C')+i;
       var coH='';(v.co||[]).forEach(function(c){coH+='<div class="co-item n1"><span class="cjp">'+esc(c.j||'')+'<span class="n1b">N1</span></span></div>';});
@@ -585,9 +600,12 @@ function r1696(el){
       '</div>'+(v.vi?'<div class="vi-row"><span class="vi-b">Nghĩa · '+esc(v.vi)+'</span></div>':'')+(coH?'<div class="co-wrap"><div class="co-l">🔥 Set</div><div class="co-list">'+coH+'</div></div>':'')+'<div class="detail">'+optsH+'</div></div>';
     });
   });
+  if(shown<data.length)h+='<div class="load-row"><button type="button" class="load-more" onclick="more1696()">Hiển thị thêm '+Math.min(PAGE_SIZE,data.length-shown)+' mục</button></div>';
   el.innerHTML=h+'</div>';
+  var input=document.getElementById('si1696');if(input){input.value=q;}
 }
-function f1696(){var q=(document.getElementById('si1696')||{}).value||'';q=q.toLowerCase();var cnt=0;document.querySelectorAll('#pn-s1696 .card').forEach(function(c){var ok=!q||c.textContent.toLowerCase().includes(q);c.style.display=ok?'':'none';if(ok)cnt++;});var el=document.getElementById('vc1696');if(el)el.textContent=cnt+' 語';}
+function f1696(q){_visible1696=PAGE_SIZE;r1696(document.getElementById('pn-s1696'),q);var input=document.getElementById('si1696');if(input){input.focus();input.setSelectionRange(input.value.length,input.value.length);}}
+function more1696(){var q=(document.getElementById('si1696')||{}).value||'';_visible1696+=PAGE_SIZE;r1696(document.getElementById('pn-s1696'),q);}
 
 
 function initM4Syn(){
