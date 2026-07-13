@@ -54,3 +54,4 @@ Updated: 2026-07-13
 - [x] Capture real 1200×630 website screenshots for Home and Apps social previews instead of using generated or placeholder artwork.
 - [x] Extend the offline validator so missing, mismatched, or broken social metadata blocks future releases locally.
 - [x] Make Apps category filters shareable and accessible with `?category=` deep links, browser back/forward support, `aria-pressed`, and a live result count.
+- [x] Replace the Apps catalog emoji with a consistent Font Awesome icon system; expose mobile-menu state through ARIA, support Escape-to-close, and keep theme-toggle labels synchronized with the active theme.
