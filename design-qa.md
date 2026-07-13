@@ -1,33 +1,35 @@
-**Design QA**
+# Design QA — Scalable portfolio redesign
 
-- Source visual truth: `/Users/thang/Downloads/design_handoff_portfolio/Home.dc.html` and `/Users/thang/Downloads/design_handoff_portfolio/Apps.dc.html`
-- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/home-preview.png`
-- Comparison evidence: `/Users/thang/Documents/thangldw.github.io/design-comparison.jpg`
-- Viewport: desktop, 1440 × 1000; responsive CSS checked at 1024px and 680px breakpoints
-- State: Home light theme; Apps light theme with Grammar filter active
-- Primary interactions tested: Apps single-select filter, theme initialization, project links present, anchor navigation present
-- Console errors: none
+- Source visual truth: `/Users/thang/.codex/generated_images/019f59dd-e5d9-70d2-bc47-bfc56cca7f1d/exec-99a8b3ac-3525-4e34-a5d7-ab708eb44b76.png`
+- Implementation screenshot: `/Users/thang/Documents/thangldw.github.io/audit/redesign-v2/home-desktop-final.png`
+- Full-view comparison evidence: `/Users/thang/Documents/thangldw.github.io/audit/redesign-v2/comparison-final.jpg`
+- Viewport: 1440 × 1024
+- State: light theme, Data Copilot selected, spotlight running, mobile menu closed
 
-**Findings**
+## Final findings
 
-- No remaining P0/P1/P2 issues in the implemented scope.
-- Fonts and typography: Space Grotesk, IBM Plex Mono and Noto Sans JP match the handoff; heading scale and mono labels follow the supplied values.
-- Spacing and layout rhythm: 48px desktop gutters, bordered section rhythm, two-column featured grid and three-column app grid match the handoff; mobile collapses to one column.
-- Colors and visual tokens: light/dark variables use the supplied indigo palette and dark inversion.
-- Image quality and asset fidelity: the four featured cards use raster screenshots captured from the actual local project routes, cropped to the required 520:170 ratio.
-- Copy and content: Home content and all 15 app entries preserve the handoff/current project wording.
+- No remaining P0, P1, or P2 visual issues.
+- The final implementation matches the selected direction's compact editorial header, two-column introduction, rotating spotlight, three equal-weight collections, restrained indigo/orange palette, and method band.
+- The information architecture is demo-agnostic: Data Copilot, Pipeline Observability, and RAGOps have equal emphasis, while new demos can be added through collections and the searchable catalog.
+- The previous timeline and Recent Updates sections are absent.
+- P3 accepted: Font Awesome glyph silhouettes differ slightly from the generated concept's line icons. The closest installed icon-library symbols were used to preserve consistency and accessible semantics.
 
-**Focused comparison evidence**
+## Interaction and responsive QA
 
-Hero typography, process strip, featured card image ratio, Apps filters, app card typography, and footer/contact treatment were checked. No additional crop was needed because these surfaces are readable in the full-page evidence and the Apps interaction was separately inspected in-browser.
+- Spotlight tabs: click selection, Left/Right arrow navigation, automatic rotation, Pause/Resume state, and ARIA selection passed.
+- Home navigation: mobile menu state, Escape-to-close, theme toggle, and link targets passed.
+- Apps catalog: category deep links, text search, combined filters, browser back/forward restoration, live result count, and empty-state behavior passed.
+- Responsive checks: 1440px desktop and 390px mobile passed without horizontal overflow; the existing release suite also covers the 320px breakpoint.
+- Console errors: none on Home or Apps in tested light/dark and filtered states.
 
-**Comparison history**
+## Comparison history
 
-1. Initial implementation used stylized project panels. Replaced all four with real captured project screenshots and retained the handoff's 520:170 slot ratio.
-2. Apps filtering was tested with `文法 · 4`; only the Grammar group remained visible and no console errors were reported.
+1. Pass 1 identified P2 differences in hero title scale/wrapping, top alignment, collection density, and method-band position.
+2. Typography, section density, hero alignment, and collection icon targeting were corrected.
+3. Pass 2 and the final combined comparison found no remaining P0/P1/P2 mismatch.
 
-**Follow-up Polish**
+## Focused comparison evidence
 
-- P3: recapture featured screenshots after meaningful app visual updates to keep portfolio imagery fresh.
+The hero, spotlight, collections, and method band remain legible in the 2880 × 1024 side-by-side comparison. The source and implementation were also inspected separately at original resolution, so an additional crop was not required.
 
 final result: passed
