@@ -34,7 +34,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Mono', 'Noto Sans JP', monospace; min-height: 100vh; }
 
-  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(79,70,229,0.07); }
+  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; box-shadow: 0 1px 8px rgba(79,70,229,0.07); }
   .header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .header-title { font-size: 15px; font-weight: 500; }
   .badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid; }
@@ -889,7 +889,7 @@ function retryCard() { answered=false; renderQuestion(); }
 // On load: check if there's any saved progress
 
 </script>
-<script src="/js/site-header-v2.js?v=20260713f"></script>
+<script src="/js/site-header-v2.js?v=20260714g"></script>
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>
