@@ -32,5 +32,3 @@ GitHub Pages is configured in legacy branch mode from `master` at the repository
 ```bash
 git push origin master
 ```
-
-Release commits use `[skip ci]`. Stable source snapshots are also published as GitHub Releases, which does not require a workflow run.
