@@ -167,6 +167,7 @@ header{position:relative;top:auto;z-index:1}
 .resume-home .project-group,.resume-home .resume-project{min-width:0;padding:14px 20px;border-right:1px solid var(--border)}.resume-home .project-group{display:flex;align-items:flex-start;gap:14px;padding-left:0}.resume-home .project-group>i{margin-top:3px;color:var(--accent);font-size:20px}.resume-home .language-row .project-group>i{color:#f27a2b}
 .resume-home .project-group h3,.resume-home .resume-project h3{margin:0;font-size:13px;font-weight:500}.resume-home .project-group p,.resume-home .resume-project p{margin:4px 0 0;color:var(--body);font-size:10.5px;line-height:1.4}
 .resume-home .resume-project{position:relative;padding-right:38px;transition:background .2s}.resume-home .resume-project:hover{background:var(--surface);color:var(--ink)}.resume-home .resume-project>i{position:absolute;right:18px;top:22px;font-size:11px;transition:transform .2s}.resume-home .resume-project:hover>i{transform:translateX(3px)}
+.resume-home .resume-project.is-private{padding-right:20px;cursor:default}.resume-home .resume-project.is-private:hover{background:transparent;color:inherit}
 .resume-home footer{width:100%;max-width:none;margin:0;padding:20px 0}
 .resume-home .footer-inner{width:75%;margin-inline:auto}
 @media(max-width:1100px){
