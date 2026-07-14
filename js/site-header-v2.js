@@ -25,10 +25,14 @@
     "html[data-theme='light'] .tw-header{background:rgba(250,251,252,.92);border-bottom-color:#e6e9ee;}",
     ".tw-header *{box-sizing:border-box;}",
     ".tw-header .tw-wrap{width:100%;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
-    ".tw-header .tw-brand{font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.05em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;}",
+    ".tw-header .tw-brand{font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}",
     "html[data-theme='light'] .tw-header .tw-brand{color:#14171d;}",
-    ".tw-header .tw-brand .tw-dot{color:#7c9cff;}",
-    "html[data-theme='light'] .tw-header .tw-brand .tw-dot{color:#3a5bd9;}",
+    ".tw-header .tw-mark{width:36px;height:36px;border:1px solid rgba(124,156,255,.55);border-radius:9px;background:rgba(124,156,255,.1);color:#f2f5f9;display:inline-flex;align-items:center;justify-content:center;font:600 13px/1 'IBM Plex Mono',monospace;letter-spacing:-.08em;transition:border-color .2s,background .2s,transform .2s;}",
+    ".tw-header .tw-brand:hover .tw-mark{border-color:#7c9cff;background:rgba(124,156,255,.18);transform:translateY(-1px);}",
+    ".tw-header .tw-brand:focus-visible{outline:2px solid #7c9cff;outline-offset:4px;border-radius:7px;}",
+    ".tw-header .tw-dot{color:#7c9cff;}",
+    "html[data-theme='light'] .tw-header .tw-mark{background:#eef1ff;border-color:#b9c5ff;color:#263b8f;}",
+    "html[data-theme='light'] .tw-header .tw-dot{color:#3a5bd9;}",
     ".tw-header .tw-nav{display:flex;align-items:center;gap:38px;}",
     ".tw-header .tw-nav a{color:#9aa6b4;text-decoration:none;font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-size:15px;font-weight:500;line-height:1;transition:color .2s;}",
     ".tw-header .tw-nav a:hover,.tw-header .tw-nav a.tw-active{color:#eef1f6;}",
@@ -38,7 +42,7 @@
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-toggle{border-color:#e4e7ee;color:#14171d;background:#ffffff;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
-    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:22px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:32px;height:32px;}}",
+    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:20px;gap:8px}.tw-header .tw-mark{width:32px;height:32px;font-size:12px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:32px;height:32px;}}",
   ].join("");
 
   /* ---- resolve current theme (mirror the tokens.css pre-paint logic) ---- */
@@ -79,7 +83,7 @@
     header.id = "tw-header";
     header.innerHTML =
       '<div class="tw-wrap">' +
-      '<a href="/" class="tw-brand">thang<span class="tw-dot">.</span></a>' +
+      '<a href="/" class="tw-brand" aria-label="Thang Luu home"><span class="tw-mark" aria-hidden="true">[t_]</span><span class="tw-name">thang<span class="tw-dot">.</span></span></a>' +
       '<nav class="tw-nav" aria-label="Theme controls">' +
       '<button class="tw-toggle" id="tw-toggle" aria-label="Toggle color theme" title="Toggle theme">' + iconFor(theme) + "</button>" +
       "</nav></div>";
