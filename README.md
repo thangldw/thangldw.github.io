@@ -129,7 +129,6 @@ GitHub may show a `pages-build-deployment` run after a push; that is the platfor
 ├── css/                  # shared tokens, layouts, app system, and local icons
 ├── ja/                   # Japanese profile
 ├── js/                   # shared site behavior
-├── projects/             # case studies
 ├── scripts/              # validation and market-data refresh scripts
 ├── index.html            # English profile
 ├── sitemap.xml
