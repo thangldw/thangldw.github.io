@@ -19,6 +19,12 @@ python3 -m http.server 4173
 
 Open `http://127.0.0.1:4173/`.
 
+Validate routes, redirects, metadata, and local asset references before publishing:
+
+```bash
+python3 scripts/validate_site.py
+```
+
 ## Release without CI
 
 GitHub Pages is configured in legacy branch mode from `master` at the repository root. A direct push publishes the static files without requiring the project workflows:

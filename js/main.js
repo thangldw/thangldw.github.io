@@ -1,8 +1,6 @@
 (function () {
   var root = document.documentElement;
   var themeButton = document.getElementById('themeToggle');
-  var menuButton = document.querySelector('.menu');
-  var header = document.querySelector('.home-header');
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.spotlight-tab'));
   var panel = document.getElementById('spotlightPanel');
   var pauseButton = document.getElementById('spotlightPause');
@@ -39,14 +37,6 @@
     themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     var icon = themeButton.querySelector('i');
     if (icon) icon.className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-  }
-
-  function setMenu(open) {
-    if (!menuButton || !header) return;
-    header.classList.toggle('open', open);
-    menuButton.textContent = open ? 'Close' : 'Menu';
-    menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
 
   function renderSpotlight(key, focusTab) {
@@ -87,14 +77,6 @@
       syncTheme();
     });
   }
-
-  if (menuButton) menuButton.addEventListener('click', function () { setMenu(!header.classList.contains('open')); });
-  document.querySelectorAll('.home-header nav a').forEach(function (link) {
-    link.addEventListener('click', function () { setMenu(false); });
-  });
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') setMenu(false);
-  });
 
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
