@@ -1,5 +1,7 @@
 # General
 .DS_Store
+.claude/settings.local.json
+.claude/*.local.*
 .localized
 __MACOSX/
 .AppleDouble
