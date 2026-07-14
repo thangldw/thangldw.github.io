@@ -27,7 +27,7 @@
       title: 'RAGOps',
       description: 'Evaluate RAG and agent releases against an accepted baseline, detect regressions, and preserve the evidence behind a decision.',
       purpose: 'Turn an ambiguous AI request into a defensible release decision with explicit trade-offs and open questions.',
-      href: 'projects/ragops/'
+      href: 'https://thangldw.github.io/ragops/'
     }
   };
 

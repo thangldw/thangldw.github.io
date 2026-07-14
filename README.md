@@ -13,7 +13,7 @@ A static portfolio and a collection of browser-native engineering and Japanese-l
 | NamiQuant | Internal | Local swing-trading decision support with deterministic scoring and risk gates |
 | Data Copilot | [`/apps/data-copilot/`](https://thangldw.github.io/apps/data-copilot/) | Local CSV profiling, DuckDB-WASM SQL, and charts |
 | Pipeline Observability | [`/apps/pipeline/`](https://thangldw.github.io/apps/pipeline/) | Freshness, coverage, run history, and data-quality signals |
-| RAGOps | [`/projects/ragops/`](https://thangldw.github.io/projects/ragops/) | Case study for evaluation and release gates in RAG systems |
+| RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | Evaluation and release gates for RAG and agent systems |
 
 The catalog also contains the canonical JLPT N1 routes. Compatibility redirects are maintained in [`apps/URL-MIGRATION.md`](apps/URL-MIGRATION.md).
 
