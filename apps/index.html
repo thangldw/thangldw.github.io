@@ -64,6 +64,7 @@
     .app-card .ac-icon { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; font-size: 1.3rem; background: var(--accent-glow); color: var(--accent); }
     .app-card .ac-status { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--success); border: 1px solid color-mix(in srgb, var(--success) 50%, transparent); border-radius: 999px; padding: .2em .65em; }
     .app-card .ac-status.wip { color: var(--text-dim); border-color: var(--border); }
+    .app-card .ac-status.internal { color: var(--text-dim); border-color: var(--border-strong); background: var(--surface-2); }
 
     .app-card h3 { font-family: var(--font-display); font-size: 19px; line-height: 1.3; font-weight: 500; letter-spacing: -.015em; }
     .app-card .ac-jp { font-family: var(--font-mono); color: var(--text-dim); font-size: 13px; line-height: 1.45; margin-left: .5em; }
@@ -75,6 +76,8 @@
     .app-card .ac-open { display: inline-flex; align-items: center; gap: .4em; margin-top: var(--space-md); color: var(--accent); font-weight: 600; font-size: 14px; line-height: 1.4; }
     .app-card .ac-open::after { content: "\2192"; transition: transform .2s var(--ease); }
     .app-card:hover .ac-open::after { transform: translateX(4px); }
+    .app-card .ac-open.ac-private { color: var(--text-dim); font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+    .app-card .ac-open.ac-private::after { content: none; }
     .app-card a.ac-cover { position: absolute; inset: 0; z-index: 1; } /* whole card clickable */
 
     .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px var(--font-mono, var(--portfolio-font-mono)); text-align: center; }
@@ -87,9 +90,8 @@
     .wrap{width:min(1328px,calc(100% - 96px))}.apps-main{padding-top:16px}.apps-intro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(360px,1.2fr);column-gap:72px;row-gap:24px;align-items:center;margin-bottom:0}.apps-intro .eyebrow{grid-column:1/-1;margin-bottom:0}.apps-intro h1{font-size:clamp(42px,4vw,58px);line-height:1.02;letter-spacing:-.045em;margin:0}.apps-intro .lead{margin:0;white-space:normal;font-size:16px;line-height:1.55;max-width:720px}.apps-nav{height:68px;padding:0 56px}.apps-brand{font:700 24px var(--font-sans);letter-spacing:-.05em}.apps-brand span{display:none}.apps-nav nav{gap:38px;color:var(--ink);font-size:15px}.apps-nav nav a:first-child{color:var(--accent)}.theme-button{width:34px;height:34px;border-radius:8px;background:var(--surface)}
     .apps-nav{display:block;width:100%;margin:0;padding:0}.apps-nav-inner{position:relative;display:flex;align-items:center;justify-content:space-between;width:75%;height:100%;margin-inline:auto}.site-foot{width:100%;margin-inline:0;padding-inline:0}.site-foot-inner{width:75%;margin-inline:auto}
     .apps-cat{margin-top:0}.apps-cat-head{margin-bottom:0;padding:24px 0}.apps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-bottom:1px solid var(--border)}.app-card{min-height:300px;padding:28px;border-radius:0;border-width:1px 1px 0 0}.app-card[hidden]{display:none}.app-card:nth-child(3n){border-right:0}.app-card .ac-icon{border-radius:6px}.app-card .ac-tags{margin-top:20px}.app-card .ac-tag{background:transparent}.app-card .ac-open{margin-top:22px}.app-card:focus-within{outline:2px solid var(--accent);outline-offset:-3px}
-    .apps-cat[data-category="technical"] .apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.apps-cat[data-category="technical"] .app-card:nth-child(3n){border-right:1px solid var(--border)}.apps-cat[data-category="technical"] .app-card:nth-child(2n){border-right:0}
     @media(max-width:960px){.apps-intro{grid-template-columns:1fr;gap:20px}.apps-intro .eyebrow{grid-column:auto;margin-bottom:0}.apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-card:nth-child(3n){border-right:1px solid var(--border)}.app-card:nth-child(2n){border-right:0}}
-    @media(max-width:640px){.apps-nav-inner,.site-foot-inner{width:calc(100% - 32px)}.apps-nav{height:65px;padding:0}.apps-brand{font-size:22px}.apps-menu{display:block}.apps-nav nav{display:none;position:absolute;top:65px;left:0;right:0;padding:16px;background:var(--bg);border:1px solid var(--border);border-top:0;gap:16px;font-size:13px;flex-wrap:wrap}.apps-nav.open nav{display:flex}.apps-nav nav a{display:block}.theme-button{width:32px;height:32px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:20px}.apps-intro h1{font-size:40px}.apps-cat-head{padding:20px 0}.apps-cat-head .cat-count{padding-left:16px}.apps-grid,.apps-cat[data-category="technical"] .apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n),.apps-cat[data-category="technical"] .app-card:nth-child(3n){border-right:0;min-height:0}}
+    @media(max-width:640px){.apps-nav-inner,.site-foot-inner{width:calc(100% - 32px)}.apps-nav{height:65px;padding:0}.apps-brand{font-size:22px}.apps-menu{display:block}.apps-nav nav{display:none;position:absolute;top:65px;left:0;right:0;padding:16px;background:var(--bg);border:1px solid var(--border);border-top:0;gap:16px;font-size:13px;flex-wrap:wrap}.apps-nav.open nav{display:flex}.apps-nav nav a{display:block}.theme-button{width:32px;height:32px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:20px}.apps-intro h1{font-size:40px}.apps-cat-head{padding:20px 0}.apps-cat-head .cat-count{padding-left:16px}.apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n){border-right:0;min-height:0}}
     /* Header scrolls with the page. */
     .apps-nav { position: relative; top: auto; z-index: 1; }
     .apps-brand{display:inline-flex;align-items:center;gap:10px;font-size:22px;letter-spacing:-.04em}
@@ -119,7 +121,7 @@
           <h2>Technical</h2>
           <span class="cat-jp">AI · Data · Engineering</span>
         </div>
-        <span class="cat-count"><strong>4</strong><span>projects</span></span>
+        <span class="cat-count"><strong>5</strong><span>projects</span></span>
       </div>
       <div class="apps-grid">
 
@@ -145,6 +147,20 @@
           </div>
           <span class="ac-open">Open Proofline</span>
           <a class="ac-cover" href="https://thangldw.github.io/proofline/" aria-label="Open the Proofline showcase"></a>
+        </article>
+
+        <article class="app-card">
+          <div class="ac-top">
+            <div class="ac-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+            <span class="ac-status internal">Internal</span>
+          </div>
+          <h3>NamiQuant</h3>
+          <p>A local swing-trading decision-support system for the US, Japanese, and Vietnamese markets. It turns market data into deterministic scores, risk gates, position sizing, portfolio allocation, and an offline dashboard without placing orders.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">Quant scoring</span><span class="ac-tag">Risk gates</span>
+            <span class="ac-tag">Backtesting</span><span class="ac-tag">Python · React</span>
+          </div>
+          <span class="ac-open ac-private">Internal project · no public demo</span>
         </article>
 
         <article class="app-card">
