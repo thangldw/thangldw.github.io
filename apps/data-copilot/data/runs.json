@@ -22,5 +22,13 @@
     "failed_count": 0,
     "date_max": "2026-07-13",
     "duration_s": 6.9
+  },
+  {
+    "ts": "2026-07-14T22:29:55Z",
+    "row_count": 5440,
+    "ticker_count": 11,
+    "failed_count": 0,
+    "date_max": "2026-07-14",
+    "duration_s": 6.4
   }
 ]
