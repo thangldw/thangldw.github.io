@@ -6,7 +6,7 @@ A static portfolio and a collection of browser-native engineering and Japanese-l
 
 | Area | Route | Purpose |
 |---|---|---|
-| Profile | [`/`](https://thangldw.github.io/) | English profile, working style, and selected projects |
+| Profile | [`/`](https://thangldw.github.io/) | English profile, working style, and side projects |
 | Japanese profile | [`/ja/`](https://thangldw.github.io/ja/) | Japanese-language professional profile |
 | Project catalog | [`/apps/`](https://thangldw.github.io/apps/) | Technical demos and JLPT N1 learning tools |
 | Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | Local-first engineering decision memory with exact source citations |
