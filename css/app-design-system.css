@@ -1,0 +1,743 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+/* Portfolio app design system
+   Visual source: the Home resume — neutral canvas, indigo/orange accents,
+   restrained borders, square controls, and Space Grotesk + IBM Plex Mono. */
+
+:root {
+  --portfolio-bg: #fafbfc;
+  --portfolio-surface: #ffffff;
+  --portfolio-surface-2: #f2f4f8;
+  --portfolio-ink: #10151d;
+  --portfolio-body: #4f5968;
+  --portfolio-muted: #667085;
+  --portfolio-border: #e2e6ed;
+  --portfolio-border-strong: #c7ced9;
+  --portfolio-accent: #4657d8;
+  --portfolio-accent-soft: #eef0ff;
+  --portfolio-orange: #f27a2b;
+  --portfolio-orange-soft: #fff2e8;
+  --portfolio-success: #237447;
+  --portfolio-success-soft: #eaf6ef;
+  --portfolio-danger: #b44545;
+  --portfolio-danger-soft: #fff0f0;
+  --portfolio-radius: 6px;
+  --portfolio-content: 1328px;
+}
+
+:root[data-theme="dark"] {
+  --portfolio-bg: #0d1117;
+  --portfolio-surface: #11161f;
+  --portfolio-surface-2: #1a2230;
+  --portfolio-ink: #f2f5f9;
+  --portfolio-body: #b0bac7;
+  --portfolio-muted: #97a2b0;
+  --portfolio-border: #293343;
+  --portfolio-border-strong: #4b586a;
+  --portfolio-accent: #8e9cff;
+  --portfolio-accent-soft: #202844;
+  --portfolio-orange: #ff9a5d;
+  --portfolio-orange-soft: #35251d;
+  --portfolio-success: #6ee7a3;
+  --portfolio-success-soft: #173126;
+  --portfolio-danger: #ff8b8b;
+  --portfolio-danger-soft: #3a2023;
+}
+
+body.portfolio-app,
+body.portfolio-catalog {
+  margin: 0;
+  background: var(--portfolio-bg) !important;
+  color: var(--portfolio-ink) !important;
+  font-family: "Space Grotesk", "Noto Sans JP", sans-serif !important;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.portfolio-app *,
+body.portfolio-catalog * {
+  box-sizing: border-box;
+}
+
+body.portfolio-app :where(h1, h2, h3, h4, button, input, select, textarea),
+body.portfolio-catalog :where(h1, h2, h3, h4, button, input, select, textarea) {
+  font-family: "Space Grotesk", "Noto Sans JP", sans-serif;
+}
+
+body.portfolio-app :where(.font-mono, code, kbd, pre),
+body.portfolio-catalog :where(.font-mono, code, kbd, pre) {
+  font-family: "IBM Plex Mono", "Noto Sans JP", monospace !important;
+}
+
+body.portfolio-app :where(a, button, input, select, textarea):focus-visible,
+body.portfolio-catalog :where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--portfolio-accent) !important;
+  outline-offset: 3px;
+}
+
+body.portfolio-app .tw-header .tw-wrap {
+  width: 75%;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+body.portfolio-app > :where(main, .container, .main, .wrap, .cnt) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body.portfolio-app > :where(main, .container, .main, .wrap, .cnt):first-of-type {
+  padding-top: 40px;
+}
+
+body.portfolio-app :where(h1, h2, h3, h4) {
+  color: var(--portfolio-ink) !important;
+  letter-spacing: -0.025em;
+}
+
+body.portfolio-app :where(p, .lead, .sub, .muted, .header-sub, .hdr-sub) {
+  color: var(--portfolio-body);
+}
+
+body.portfolio-app :where(.eyebrow, .section-label, .filter-label, .mode-label, .cnt-lbl, .qlbl, .label) {
+  color: var(--portfolio-accent) !important;
+  font-family: "IBM Plex Mono", "Noto Sans JP", monospace !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.portfolio-app :where(input, select, textarea) {
+  border: 1px solid var(--portfolio-border-strong) !important;
+  border-radius: 4px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body.portfolio-app :where(button, .btn, label.btn) {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  letter-spacing: 0 !important;
+}
+
+body.portfolio-app :where(.site-foot, footer.site-foot) {
+  width: 100%;
+  margin-top: 56px;
+  padding: 20px 24px;
+  border-top: 1px solid var(--portfolio-border) !important;
+  background: var(--portfolio-bg) !important;
+  color: var(--portfolio-muted) !important;
+  font: 400 12px/1.5 "IBM Plex Mono", monospace !important;
+  text-align: center;
+}
+
+/* Shared button language. */
+body.portfolio-app :is(
+  .btn, .hbtn, .mbtn, .filter-btn, .load-more, .mtab, .stab, .ptab, .tab,
+  .bstart, .bnext, .pbtn, .back-btn, .modal-btn, .done-btn, .next-btn,
+  .prev-btn, .review-btn, .restart-btn, .clear-btn, .back-top-btn, .toggle-btn,
+  .set-btn, .choice-btn, .navbtn, .jumpBtn, .jump-btn, .nav-btn, .shuffle-btn,
+  .btn-nav, .btn-know, .btn-unknow, .speakBtn, .speak-btn, .spk, .spk-btn
+) {
+  min-height: 40px;
+  border: 1px solid var(--portfolio-border-strong) !important;
+  border-radius: 4px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-body) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+body.portfolio-app :is(
+  .btn-primary, .primary, .next-btn, .bstart, .bnext, .pbtn.on,
+  .filter-btn.active, .mtab.on, .stab.on, .ptab.on, .tab.active, .tab.is-active,
+  .ybtn.on, .done-btn, .restart-btn
+) {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent) !important;
+  color: #fff !important;
+}
+
+body.portfolio-app :is(
+  .btn, .hbtn, .mbtn, .filter-btn, .load-more, .mtab, .stab, .ptab, .tab,
+  .bstart, .bnext, .pbtn, .back-btn, .modal-btn, .done-btn, .next-btn,
+  .prev-btn, .review-btn, .restart-btn, .clear-btn, .back-top-btn, .toggle-btn,
+  .set-btn, .choice-btn, .navbtn, .jumpBtn, .jump-btn, .nav-btn, .shuffle-btn,
+  .btn-nav, .btn-know, .btn-unknow
+):hover {
+  border-color: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent) !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+body.portfolio-app :is(.btn-primary, .primary, .next-btn, .bstart, .bnext, .done-btn, .restart-btn):hover {
+  color: #fff !important;
+  filter: brightness(1.06) !important;
+}
+
+/* Technical apps. */
+body[data-app-route="data-copilot"] .app-main,
+body[data-app-route="pipeline"] .main {
+  max-width: 1180px;
+  padding-bottom: 48px;
+}
+
+body[data-app-route="data-copilot"] .intro,
+body[data-app-route="pipeline"] .intro {
+  margin: 0 0 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+body[data-app-route="data-copilot"] .intro::before {
+  content: "TECHNICAL · DATA SYSTEMS";
+}
+
+body[data-app-route="pipeline"] .intro::before {
+  content: "TECHNICAL · OBSERVABILITY";
+}
+
+body[data-app-route="data-copilot"] .intro::before,
+body[data-app-route="pipeline"] .intro::before {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--portfolio-accent);
+  font: 600 12px/1.4 "IBM Plex Mono", monospace;
+  letter-spacing: 0.04em;
+}
+
+body[data-app-route="data-copilot"] .intro h1,
+body[data-app-route="pipeline"] .intro h1 {
+  margin: 0;
+  font-size: clamp(38px, 4vw, 52px) !important;
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+}
+
+body[data-app-route="data-copilot"] .intro .lead,
+body[data-app-route="pipeline"] .intro .lead {
+  max-width: 900px;
+  margin-top: 14px;
+  color: var(--portfolio-body) !important;
+  font-size: 16px !important;
+  line-height: 1.6;
+  white-space: normal !important;
+}
+
+body[data-app-route="data-copilot"] :is(.dataset-bar, .ask-bar, .panel, .editor, .chart-host, .table-scroll),
+body[data-app-route="pipeline"] :is(.stat, .chart-host, .table-scroll, .pipe) {
+  border-color: var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-route="data-copilot"] .dataset-bar {
+  padding: 18px 20px;
+  border-left: 3px solid var(--portfolio-accent) !important;
+}
+
+body[data-app-route="data-copilot"] .ds-dot {
+  background: var(--portfolio-success) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-route="data-copilot"] .tabs {
+  gap: 0;
+  margin: 26px 0 0;
+  border: 1px solid var(--portfolio-border) !important;
+  border-bottom: 0 !important;
+  background: var(--portfolio-surface-2);
+}
+
+body[data-app-route="data-copilot"] .tab {
+  min-width: 128px;
+  border-width: 0 1px 2px 0 !important;
+  border-color: var(--portfolio-border) !important;
+  background: transparent !important;
+}
+
+body[data-app-route="data-copilot"] .tab.is-active {
+  border-bottom-color: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-app-route="data-copilot"] .panel.is-active {
+  display: block;
+  min-height: 260px;
+  padding: 22px;
+  border: 1px solid var(--portfolio-border);
+}
+
+body[data-app-route="pipeline"] section {
+  margin-bottom: 40px;
+}
+
+body[data-app-route="pipeline"] section > h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--portfolio-border);
+  font-size: 22px !important;
+}
+
+body[data-app-route="pipeline"] .stats {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 !important;
+  border: 1px solid var(--portfolio-border);
+}
+
+body[data-app-route="pipeline"] .stat {
+  min-height: 132px;
+  padding: 20px !important;
+  border: 0 !important;
+  border-right: 1px solid var(--portfolio-border) !important;
+  border-bottom: 1px solid var(--portfolio-border) !important;
+  border-radius: 0 !important;
+}
+
+body[data-app-route="pipeline"] .stat:nth-child(3n) {
+  border-right: 0 !important;
+}
+
+body[data-app-route="pipeline"] .stat .k,
+body[data-app-route="pipeline"] .pipe .k {
+  color: var(--portfolio-accent) !important;
+  font: 600 11px/1.4 "IBM Plex Mono", monospace !important;
+}
+
+body[data-app-route="pipeline"] .stat .v {
+  margin-top: 10px;
+  font-size: 28px !important;
+}
+
+body[data-app-route="pipeline"] .cov-row .bar {
+  height: 8px;
+  border-radius: 0 !important;
+  background: var(--portfolio-surface-2) !important;
+}
+
+body[data-app-route="pipeline"] .cov-row .bar > span {
+  border-radius: 0 !important;
+  background: var(--portfolio-accent) !important;
+}
+
+/* Shared Language app frame. */
+body[data-app-kind="language"] {
+  --c1: var(--portfolio-accent);
+  --c2: var(--portfolio-orange);
+  --accent: var(--portfolio-accent);
+  --bg: var(--portfolio-bg);
+  --surface: var(--portfolio-surface);
+  --text: var(--portfolio-ink);
+  --muted: var(--portfolio-muted);
+  --border: var(--portfolio-border);
+}
+
+body[data-app-kind="language"] > :where(main, .container, .main, .wrap, .cnt) {
+  padding-bottom: 48px;
+}
+
+body[data-app-kind="language"] :is(.header, .hdr, .intro) {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--portfolio-border) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.intro, .header, .hdr, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  text-align: left !important;
+}
+
+body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  margin-top: 0;
+  font-size: clamp(28px, 3vw, 40px) !important;
+  font-weight: 600 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body[data-app-kind="language"] :is(.container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  margin-bottom: 22px !important;
+  padding: 0 0 18px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--portfolio-border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.container > h1, .main > h1, .wrap > h1, .cnt > h1) span {
+  color: var(--portfolio-accent) !important;
+  font-weight: 500;
+}
+
+body[data-app-kind="language"] :is(.filter-bar, .ctrl, .tabs, .mtabs, .stabs, .ptab-bar, .modes, .topbar, .toolbar, .year-bar, .period-bar, .catalog-controls) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.badge, .ptag, .rtag, .etag, .hbadge, .n1b, .qbadge, .wbadge, .set-tag, .grammarTag, .pair-badge, .syn-badge, .trap-tag) {
+  border: 1px solid var(--portfolio-border-strong) !important;
+  border-radius: 3px !important;
+  background: transparent !important;
+  color: var(--portfolio-muted) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.active, .on, .pri, .primary) > :is(.badge, .ptag, .rtag),
+body[data-app-kind="language"] :is(.badge-blue, .active-orange) {
+  border-color: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-app-kind="language"] :is(.opt, .choice, .m4o, .sopt) {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: 4px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.opt, .choice, .m4o, .sopt):hover {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent-soft) !important;
+}
+
+body[data-app-kind="language"] :is(.correct, .ok, .good) {
+  border-color: var(--portfolio-success) !important;
+  background: var(--portfolio-success-soft) !important;
+  color: var(--portfolio-success) !important;
+}
+
+body[data-app-kind="language"] :is(.wrong, .ng, .bad) {
+  border-color: var(--portfolio-danger) !important;
+  background: var(--portfolio-danger-soft) !important;
+  color: var(--portfolio-danger) !important;
+}
+
+/* Dense language reference collections. */
+body[data-language-app="n1-kanji-analysis"] .container,
+body[data-language-app="n1-vocabulary-tabs"] .container,
+body[data-language-app="n1-vocabulary-exams"] .container,
+body[data-language-app="n1-vocabulary-paraphrase"] .container {
+  max-width: var(--portfolio-content) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.vocab-card, .card-detail),
+body[data-language-app="n1-vocabulary-tabs"] :is(.wcard, .ptu-card, .pre, .detail),
+body[data-language-app="n1-vocabulary-exams"] :is(.card, .qcard, .ra-card),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.card, .qcard) {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .vocab-card,
+body[data-language-app="n1-vocabulary-tabs"] .wcard,
+body[data-language-app="n1-vocabulary-exams"] .card,
+body[data-language-app="n1-vocabulary-paraphrase"] .card {
+  overflow: hidden;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.card-round, .section-label),
+body[data-language-app="n1-vocabulary-tabs"] :is(.sec-t, .cnt-lbl, .dtg-h, .pre-h),
+body[data-language-app="n1-vocabulary-exams"] :is(.cnt-lbl, .wr-lbl, .ra-header),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.cnt, .rtag) {
+  color: var(--portfolio-accent) !important;
+  font-family: "IBM Plex Mono", "Noto Sans JP", monospace !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-kanji,
+body[data-language-app="n1-vocabulary-tabs"] :is(.wk, .key, .n1-star),
+body[data-language-app="n1-vocabulary-exams"] :is(.wk, .qwd, .ra-word),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.wk, .qwd) {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.colloc-section, .syn-section, .wrong-section, .confuse-box),
+body[data-language-app="n1-vocabulary-tabs"] :is(.syi, .co-wrap, .ex-block, .dtg-b, .pre-b, .ptu-col),
+body[data-language-app="n1-vocabulary-exams"] :is(.syi, .co-wrap, .ex-block, .hint-box, .qvi-box),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.syi, .exp, .res) {
+  border-color: var(--portfolio-border) !important;
+  border-radius: 3px !important;
+  background: var(--portfolio-surface-2) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] :is(.vi-row, .syi, .co-item, .ex-block, .dtg-b, .pre-b, .pre-pb, .ptu-col),
+body[data-language-app="n1-vocabulary-exams"] :is(.vi-row, .syi, .co-item, .ex-block, .hint-box, .qvi-box, .wrongs-sec),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.vi, .syi, .exp, .res) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-body) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] :is(.m1, .m2, .m3, .m4, .rd, .gr, .adv, .adj),
+body[data-language-app="n1-vocabulary-exams"] :is(.m1, .m2, .m3, .m4, .rd, .gr, .adv, .adj),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.m1, .m2, .m3, .m4) {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-header,
+body[data-language-app="n1-vocabulary-tabs"] :is(.hdr-row, .wrow),
+body[data-language-app="n1-vocabulary-exams"] :is(.h-row, .wrow),
+body[data-language-app="n1-vocabulary-paraphrase"] .wrow {
+  border-bottom-color: var(--portfolio-border) !important;
+}
+
+/* Quiz, flashcard, ordering and reading surfaces. */
+body[data-language-app="n1-kanji-collocations"] .main,
+body[data-language-app="n1-vocabulary-context"] .container,
+body[data-language-app="n1-grammar-flashcards"] .wrap,
+body[data-language-app="n1-grammar-exams"] .cnt,
+body[data-language-app="n1-grammar-sentence-order"] .container,
+body[data-language-app="n1-grammar-sentence-order-drill"] .wrap,
+body[data-language-app="n1-reading-75"] .wrap,
+body[data-language-app="n1-reading-mondai9"] .container {
+  max-width: 960px !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-kanji-collocations"] > .header {
+  padding-top: 32px;
+}
+
+body[data-language-app="n1-kanji-collocations"] .header-title {
+  color: var(--portfolio-ink) !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.04em;
+}
+
+body[data-language-app="n1-kanji-collocations"] .legend {
+  justify-content: flex-start !important;
+  color: var(--portfolio-muted) !important;
+}
+
+body[data-language-app="n1-reading-75"] > .topbar,
+body[data-language-app="n1-reading-75"] > .progress-wrap {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.stats, .q-card, .set-examples, .modal-box),
+body[data-language-app="n1-vocabulary-context"] :is(.wcard, .qcard, .scorebox),
+body[data-language-app="n1-grammar-flashcards"] :is(.card, .done-screen),
+body[data-language-app="n1-grammar-exams"] :is(.card, .study-card, .wrong-card, .traps-box),
+body[data-language-app="n1-grammar-sentence-order"] :is(.card, .set-grid, .result),
+body[data-language-app="n1-grammar-sentence-order-drill"] :is(.card, .feedback, .explain),
+body[data-language-app="n1-reading-75"] :is(.card, .chain-box, .summary),
+body[data-language-app="n1-reading-mondai9"] :is(.card, .question-block, .explain-box, .vocab-box) {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stats {
+  gap: 0 !important;
+  overflow: hidden;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat {
+  border-right: 1px solid var(--portfolio-border);
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat:last-child {
+  border-right: 0;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card {
+  border-top: 3px solid var(--portfolio-orange) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card-area,
+body[data-language-app="n1-grammar-flashcards"] #reviewControls,
+body[data-language-app="n1-grammar-flashcards"] .controls {
+  width: min(100%, 720px);
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .btn-know {
+  border-color: var(--portfolio-success) !important;
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .btn-unknow {
+  border-color: var(--portfolio-danger) !important;
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .set-grid {
+  gap: 0 !important;
+  overflow: hidden;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .set-btn {
+  border-width: 0 1px 1px 0 !important;
+  border-radius: 0 !important;
+}
+
+body[data-language-app="n1-reading-75"] .topbar,
+body[data-language-app="n1-reading-mondai9"] .toolbar {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface-2) !important;
+}
+
+body[data-language-app="n1-reading-75"] .note,
+body[data-language-app="n1-reading-mondai9"] .app-note {
+  border-left: 3px solid var(--portfolio-orange) !important;
+  border-radius: 0 !important;
+  background: var(--portfolio-orange-soft) !important;
+  color: var(--portfolio-body) !important;
+}
+
+/* Apps catalog: retain its information architecture, align the visual rhythm. */
+body.portfolio-catalog .apps-intro .eyebrow,
+body.portfolio-catalog .apps-intro h1 em,
+body.portfolio-catalog .apps-cat-head .cat-jp,
+body.portfolio-catalog .app-card .ac-open {
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-catalog .apps-intro {
+  padding: 34px 0 36px;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+body.portfolio-catalog .catalog-controls {
+  border-top: 0 !important;
+}
+
+body.portfolio-catalog .filter {
+  border-color: var(--portfolio-border-strong) !important;
+  border-radius: 4px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-body) !important;
+}
+
+body.portfolio-catalog .filter.active {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent) !important;
+  color: #fff !important;
+}
+
+body.portfolio-catalog .app-card {
+  background: transparent !important;
+  border-color: var(--portfolio-border) !important;
+}
+
+body.portfolio-catalog .app-card:hover {
+  background: var(--portfolio-surface) !important;
+  border-color: var(--portfolio-border-strong) !important;
+}
+
+body.portfolio-catalog .app-card .ac-icon {
+  border: 1px solid var(--portfolio-border);
+  border-radius: 4px !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-catalog .apps-cat[data-category="language"] .app-card .ac-icon {
+  background: var(--portfolio-orange-soft) !important;
+  color: var(--portfolio-orange) !important;
+}
+
+body.portfolio-catalog .app-card .ac-status,
+body.portfolio-catalog .app-card .ac-tag {
+  border-radius: 3px !important;
+}
+
+@media (max-width: 960px) {
+  body.portfolio-app .tw-header .tw-wrap {
+    width: calc(100% - 64px);
+  }
+
+  body.portfolio-app > :where(main, .container, .main, .wrap, .cnt) {
+    width: calc(100% - 64px);
+  }
+
+  body[data-language-app="n1-kanji-collocations"] > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 64px);
+  }
+
+  body[data-app-route="pipeline"] .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-app-route="pipeline"] .stat:nth-child(3n) {
+    border-right: 1px solid var(--portfolio-border) !important;
+  }
+
+  body[data-app-route="pipeline"] .stat:nth-child(2n) {
+    border-right: 0 !important;
+  }
+}
+
+@media (max-width: 680px) {
+  body.portfolio-app .tw-header .tw-wrap {
+    width: calc(100% - 32px);
+  }
+
+  body.portfolio-app > :where(main, .container, .main, .wrap, .cnt) {
+    width: calc(100% - 32px);
+  }
+
+  body[data-language-app="n1-kanji-collocations"] > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 32px);
+  }
+
+  body.portfolio-app > :where(main, .container, .main, .wrap, .cnt):first-of-type {
+    padding-top: 28px;
+  }
+
+  body[data-app-route="data-copilot"] .intro h1,
+  body[data-app-route="pipeline"] .intro h1 {
+    font-size: 36px !important;
+  }
+
+  body[data-app-route="pipeline"] .stats {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-app-route="pipeline"] .stat,
+  body[data-app-route="pipeline"] .stat:nth-child(2n),
+  body[data-app-route="pipeline"] .stat:nth-child(3n) {
+    border-right: 0 !important;
+  }
+
+  body[data-app-route="data-copilot"] .tabs {
+    overflow-x: auto;
+  }
+
+  body[data-app-route="data-copilot"] .tab {
+    min-width: 112px;
+  }
+
+  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+    font-size: 30px !important;
+  }
+}
