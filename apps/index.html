@@ -93,12 +93,19 @@
     @media(max-width:480px){.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;overflow:visible;padding-bottom:0}.filter{width:100%}.filter:last-child{grid-column:1/-1}}
     /* Header scrolls with the page. */
     .apps-nav { position: relative; top: auto; z-index: 1; }
+    .apps-brand{display:inline-flex;align-items:center;gap:10px;font-size:22px;letter-spacing:-.04em}
+    .apps-brand .brand-mark{width:36px;height:36px;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:9px;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font:600 13px/1 var(--font-mono);letter-spacing:-.08em;transition:border-color .2s,background .2s,transform .2s}
+    .apps-brand .brand-name{display:inline;color:var(--ink);font-weight:700}
+    .apps-brand .brand-dot{display:inline;color:var(--accent)}
+    .apps-brand:hover .brand-mark{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 18%,transparent);transform:translateY(-1px)}
+    .apps-brand:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:7px}
+    @media(max-width:640px){.apps-brand{gap:8px;font-size:20px}.apps-brand .brand-mark{width:32px;height:32px;font-size:12px}.apps-nav nav{display:flex;position:static;padding:0;background:transparent;border:0}}
   </style>
   <link rel="stylesheet" href="/css/app-design-system.css?v=20260714b">
 </head>
 <body class="portfolio-catalog">
   <a class="skip-link" href="#main">Skip to apps</a>
-  <header class="apps-nav"><div class="apps-nav-inner"><a class="apps-brand" href="/">thang<b>.</b> <span>/ demos</span></a><nav id="appsPrimaryNav" aria-label="Theme controls"><button class="theme-button" id="themeToggle" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button></nav></div></header>
+  <header class="apps-nav"><div class="apps-nav-inner"><a class="apps-brand" href="/" aria-label="Thang Luu home"><span class="brand-mark" aria-hidden="true">[t_]</span><span class="brand-name">thang<span class="brand-dot">.</span></span></a><nav id="appsPrimaryNav" aria-label="Theme controls"><button class="theme-button" id="themeToggle" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button></nav></div></header>
   <main class="wrap apps-main" id="main">
     <section class="apps-intro">
       <span class="eyebrow">Applied work &amp; experiments</span>
