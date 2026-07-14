@@ -97,9 +97,10 @@ function fmt(v) {
 }
 
 function shortX(v) {
-  // ISO date → YYYY-MM; otherwise truncate long categories.
+  // Keep the day for ISO dates so distinct daily points do not collapse into
+  // repeated month labels on the x-axis.
   const s = String(v);
-  const m = s.match(/^(\d{4})-(\d{2})-\d{2}/);
-  if (m) return `${m[1]}-${m[2]}`;
+  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return `${m[1]}-${m[2]}-${m[3]}`;
   return s.length > 10 ? s.slice(0, 9) + "…" : s;
 }
