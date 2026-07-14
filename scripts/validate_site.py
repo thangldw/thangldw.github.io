@@ -14,6 +14,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
+ANALYTICS_SCRIPT = "/js/analytics.js"
 EXTERNAL_FONT_PATTERNS = {
     "Google Fonts stylesheet": "fonts.googleapis.com",
     "Google Fonts asset": "fonts.gstatic.com",
@@ -84,6 +85,19 @@ def main() -> int:
         duplicates = sorted(key for key, count in Counter(parser.ids).items() if count > 1)
         if duplicates:
             errors.append(f"{page.relative_to(ROOT)}: duplicate ids: {', '.join(duplicates)}")
+
+        analytics_references = [
+            reference for reference in parser.references if reference == ANALYTICS_SCRIPT
+        ]
+        if parser.refreshes:
+            if analytics_references:
+                errors.append(
+                    f"{page.relative_to(ROOT)}: redirect pages must not load analytics"
+                )
+        elif analytics_references != [ANALYTICS_SCRIPT]:
+            errors.append(
+                f"{page.relative_to(ROOT)}: expected one {ANALYTICS_SCRIPT} reference"
+            )
 
         for reference in parser.references:
             target = local_target(page, reference)
