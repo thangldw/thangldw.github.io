@@ -8,9 +8,8 @@
 <meta name="description" content="Bộ tra cứu JLPT N1 theo tab gồm từ vựng, tính từ, phó từ, động từ ghép, cơ thể và 44 nhóm tiền tố・hậu tố.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Vocabulary Tabs"><meta property="og:description" content="Kho từ vựng N1 theo chủ đề, từ loại và tiền tố・hậu tố."><meta property="og:url" content="https://thangldw.github.io/apps/n1-vocabulary-tabs/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;color:#1a1a1a;font-size:14px}
+body{font-family:var(--font-sans, var(--portfolio-font-sans));background:#f7f8fa;color:#1a1a1a;font-size:14px}
 .hdr{background:#fff;color:#1a1a2e;padding:11px 16px;position:relative;z-index:1;border-bottom:1px solid #e4e7ee;box-shadow:0 1px 6px rgba(20,23,29,.05)}
 .hdr-sub{font-size:10px;color:#838b99;margin-bottom:2px;letter-spacing:.05em;text-transform:uppercase}
 .hdr-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -41,8 +40,8 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .ebdg{position:absolute;top:5px;right:8px;font-size:9px;background:#fff3e0;color:#e65100;border-radius:4px;padding:1px 5px;font-weight:700}
 .refbdg{display:inline-flex;align-items:center;font-size:9px;background:#e8eaf6;color:#3949ab;border-radius:4px;padding:1px 6px;font-weight:600;margin-left:3px}
 .wrow{display:flex;align-items:baseline;gap:7px;margin-bottom:4px;flex-wrap:wrap}
-.wk{font-size:20px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif}
-.wh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:"Noto Sans JP",sans-serif}
+.wk{font-size:20px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
+.wh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:system-ui,sans-serif}
 .ptag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:700}
 .ptag.v{background:#fdecea;color:#b71c1c}.ptag.n{background:#e3f2fd;color:#1565c0}
 .ptag.adj{background:#e8f5e9;color:#2e7d32}.ptag.adv{background:#f3e5f5;color:#6a1b9a}
@@ -53,22 +52,22 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 @keyframes bk{0%,100%{opacity:1}50%{opacity:.3}}
 .vi-row{margin-bottom:5px}
 .vi-b{font-size:13px;color:#b45309;background:#fffbeb;border-radius:6px;padding:3px 9px;display:inline-block;font-weight:500}
-.jm-b{font-size:11px;color:#546e7a;background:#f5f5f5;border-radius:5px;padding:2px 7px;display:inline-block;margin-left:4px;font-family:"Noto Sans JP",sans-serif}
+.jm-b{font-size:11px;color:#546e7a;background:#f5f5f5;border-radius:5px;padding:2px 7px;display:inline-block;margin-left:4px;font-family:system-ui,sans-serif}
 .synb{background:#f8f7ff;border-radius:9px;padding:7px 10px;margin-bottom:6px;border:1px solid #e8e6f8}
 .synb-l{font-size:10px;color:#4a5aad;font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
 .syn-chips{display:flex;flex-wrap:wrap;gap:4px}
 .syi{display:flex;flex-direction:column;background:#eef0fa;border-radius:7px;padding:4px 9px}
 .syi.pri{background:#4a5aad}
-.syi .sw{font-size:13px;font-weight:600;color:#2c357a;font-family:"Noto Sans JP",sans-serif}
+.syi .sw{font-size:13px;font-weight:600;color:#2c357a;font-family:system-ui,sans-serif}
 .syi.pri .sw{color:#fff}
-.syi .sh{font-size:10px;color:#7f8fd0;font-family:"Noto Sans JP",sans-serif}
+.syi .sh{font-size:10px;color:#7f8fd0;font-family:system-ui,sans-serif}
 .syi.pri .sh{color:rgba(255,255,255,.7)}
 .syi .sm{font-size:10px;color:#546e7a}
 .syi.pri .sm{color:rgba(255,255,255,.8)}
 .co-wrap{margin-bottom:3px}
 .co-l{font-size:10px;color:#00695c;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 .co-list{display:flex;flex-direction:column;gap:3px}
-.co-item{font-size:14px;font-family:"Noto Sans JP",sans-serif;background:#e0f7f4;border:1px solid #b2dfdb;border-radius:7px;padding:5px 9px;line-height:1.6}
+.co-item{font-size:14px;font-family:system-ui,sans-serif;background:#e0f7f4;border:1px solid #b2dfdb;border-radius:7px;padding:5px 9px;line-height:1.6}
 .co-item.n1{border-left:3px solid #e65100;background:linear-gradient(90deg,#fff8e1 0,#e0f7f4 50px)}
 .co-item.key{border-left:4px solid #2e7d32;background:linear-gradient(90deg,#e8f5e9 0,#e0f7f4 55px)}
 .co-item .cjp{font-size:14px;font-weight:700;color:#1e2240}
@@ -78,9 +77,9 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .keyb{font-size:9px;background:#2e7d32;color:#fff;padding:1px 4px;border-radius:3px;margin-left:4px;font-weight:700;vertical-align:middle}
 .detail{display:none;margin-top:9px;padding-top:9px;border-top:1.5px dashed #e5e2d8}
 .card.open .detail{display:block}
-.ex-block{background:#fafafa;border-left:3px solid #4a5aad;border-radius:0 8px 8px 0;padding:7px 10px;margin-bottom:6px;font-size:13px;line-height:1.9;font-family:"Noto Sans JP",sans-serif;color:#333}
+.ex-block{background:#fafafa;border-left:3px solid #4a5aad;border-radius:0 8px 8px 0;padding:7px 10px;margin-bottom:6px;font-size:13px;line-height:1.9;font-family:system-ui,sans-serif;color:#333}
 .ex-block strong{color:#1b5e20;font-weight:800}
-.ex-vi{font-size:12px;color:#b45309;font-family:"Be Vietnam Pro",sans-serif;margin-top:3px;font-style:italic}
+.ex-vi{font-size:12px;color:#b45309;font-family:var(--font-sans, var(--portfolio-font-sans));margin-top:3px;font-style:italic}
 .src-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px;align-items:center}
 .sbdg{font-size:9.5px;padding:1px 6px;border-radius:4px;font-weight:700}
 .sbdg.m2{background:#e3f2fd;color:#1565c0}.sbdg.m3{background:#e8f5e9;color:#2e7d32}
@@ -95,19 +94,19 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 /* DTG */
 .dtg-s{margin-bottom:12px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden}
 .dtg-h{background:#1e2240;color:#fff;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px}
-.dtg-h .dp{font-size:17px;font-weight:700;font-family:"Noto Sans JP",sans-serif}
+.dtg-h .dp{font-size:17px;font-weight:700;font-family:system-ui,sans-serif}
 .dtg-h .dv{font-size:12px;color:rgba(255,255,255,.7)}
 .dtg-h .dc{font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;margin-left:auto}
 .dtg-b{display:none;padding:10px}
 .dtg-s.open .dtg-b{display:block}
 .dtg-t{width:100%;border-collapse:collapse;font-size:13px}
 .dtg-t th{background:#f5f7ff;color:#3949ab;font-weight:700;padding:7px 10px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:12px}
-.dtg-t td{padding:6px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-family:"Noto Sans JP",sans-serif}
+.dtg-t td{padding:6px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-family:system-ui,sans-serif}
 .dtg-t tr:hover td{background:#fafafa}
 .dtg-v{font-weight:700;color:#b71c1c;font-size:13px}
-.dtg-kn{font-size:11px;color:#4a5aad;font-family:"Noto Sans JP",sans-serif;margin-left:4px}
+.dtg-kn{font-size:11px;color:#4a5aad;font-family:system-ui,sans-serif;margin-left:4px}
 .dtg-n{font-size:12px;color:#555}
-.dtg-vi{font-size:12px;color:#b45309;font-family:"Be Vietnam Pro",sans-serif}
+.dtg-vi{font-size:12px;color:#b45309;font-family:var(--font-sans, var(--portfolio-font-sans))}
 .dtg-warn-box{font-size:11px;color:#e65100;background:#fff3e0;border:1px solid #ffe0b2;border-radius:5px;padding:3px 8px;margin-top:3px;display:inline-block}
 /* PTU */
 .ptab-bar{display:flex;gap:6px;padding:8px 0 10px;flex-wrap:wrap}
@@ -119,10 +118,10 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .ptu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:7px}
 .ptu-card{background:#fff;border-radius:10px;border:1px solid #e5e2d8;padding:10px 12px;border-left:3px solid #6a1b9a}
 .ptu-card.n1-exam{border-left:4px solid #e65100;background:linear-gradient(90deg,#fff8e1 0,#fff 50px)}
-.ptu-k{font-size:16px;font-weight:700;color:#4a148c;font-family:"Noto Sans JP",sans-serif}
+.ptu-k{font-size:16px;font-weight:700;color:#4a148c;font-family:system-ui,sans-serif}
 .ptu-vi{font-size:12px;color:#b45309;margin-top:2px}
-.ptu-col{font-size:12px;color:#333;font-family:"Noto Sans JP",sans-serif;margin-top:3px;line-height:1.6}
-.ptu-pat{font-size:11px;color:#6a1b9a;background:#f3e5f5;border-radius:4px;padding:2px 7px;margin-top:3px;display:inline-block;font-family:"Noto Sans JP",sans-serif;font-weight:600}
+.ptu-col{font-size:12px;color:#333;font-family:system-ui,sans-serif;margin-top:3px;line-height:1.6}
+.ptu-pat{font-size:11px;color:#6a1b9a;background:#f3e5f5;border-radius:4px;padding:2px 7px;margin-top:3px;display:inline-block;font-family:system-ui,sans-serif;font-weight:600}
 /* Pattern groups */
 .pat-g{margin-bottom:14px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden}
 .pat-h{color:#fff;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px}
@@ -133,37 +132,37 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .pat-g.open .pat-b{display:block}
 .pat-row{display:grid;grid-template-columns:200px 1fr;gap:10px;padding:7px 0;border-bottom:1px dashed #e8e0f0;align-items:start}
 .pat-row:last-child{border:none}
-.pw{font-size:16px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif}
+.pw{font-size:16px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
 .pvi{font-size:11.5px;color:#b45309;margin-top:2px}
-.ppat{font-size:11px;font-family:"Noto Sans JP",sans-serif;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:3px;display:inline-block}
-.pc{font-size:13px;font-family:"Noto Sans JP",sans-serif;color:#333;line-height:1.7}
+.ppat{font-size:11px;font-family:system-ui,sans-serif;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:3px;display:inline-block}
+.pc{font-size:13px;font-family:system-ui,sans-serif;color:#333;line-height:1.7}
 /* PREFIX */
 .pre-s{margin-bottom:12px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden}
 .pre-h{padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;background:#4e342e;color:#fff}
 .pre-h.sfx{background:#37474f}
-.pre-pb{font-size:17px;font-weight:700;font-family:"Noto Sans JP",sans-serif}
-.pre-kn{font-size:12px;color:rgba(255,255,255,.75);font-family:"Noto Sans JP",sans-serif}
+.pre-pb{font-size:17px;font-weight:700;font-family:system-ui,sans-serif}
+.pre-kn{font-size:12px;color:rgba(255,255,255,.75);font-family:system-ui,sans-serif}
 .pre-pv{font-size:12px;color:rgba(255,255,255,.75)}
 .pre-cnt{font-size:11px;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:10px;margin-left:auto}
 .pre-b{display:none;padding:12px 14px}
 .pre-s.open .pre-b{display:block}
 .pre-note{font-size:11px;color:#4e342e;background:#efebe9;border-radius:6px;padding:5px 10px;margin-bottom:10px}
-.pre-all{font-size:13px;font-family:"Noto Sans JP",sans-serif;color:#3e2723;background:#efebe9;border-radius:6px;padding:6px 10px;margin-bottom:10px;line-height:1.9;font-weight:600}
+.pre-all{font-size:13px;font-family:system-ui,sans-serif;color:#3e2723;background:#efebe9;border-radius:6px;padding:6px 10px;margin-bottom:10px;line-height:1.9;font-weight:600}
 .pre-t{width:100%;border-collapse:collapse;font-size:13px}
 .pre-t th{background:#f5f0ec;color:#4e342e;font-weight:700;padding:6px 10px;text-align:left;border-bottom:2px solid #d7ccc8;font-size:12px}
-.pre-t td{padding:6px 10px;border-bottom:1px solid #f0ebe6;vertical-align:top;font-family:"Noto Sans JP",sans-serif}
+.pre-t td{padding:6px 10px;border-bottom:1px solid #f0ebe6;vertical-align:top;font-family:system-ui,sans-serif}
 .pre-t .pk{font-weight:700;color:#4e342e}
 .pre-t .ph{font-size:11px;color:#795548;margin-left:3px}
-.pre-t .pv{font-size:12px;color:#546e7a;font-family:"Be Vietnam Pro",sans-serif}
+.pre-t .pv{font-size:12px;color:#546e7a;font-family:var(--font-sans, var(--portfolio-font-sans))}
 .sec-t{font-size:13px;font-weight:700;margin:14px 0 8px;padding:7px 12px;border-radius:8px}
 .sec-t.pre{color:#4e342e;background:#efebe9}
 .sec-t.sfx{color:#37474f;background:#eceff1}
 /* CT */
 .ct-s{margin-bottom:12px}
-.ct-h{font-size:14px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif;background:#e8eaf6;border-radius:8px;padding:7px 12px;margin-bottom:7px}
+.ct-h{font-size:14px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif;background:#e8eaf6;border-radius:8px;padding:7px 12px;margin-bottom:7px}
 .ct-chips{display:flex;flex-wrap:wrap;gap:5px}
 .ct-chip{background:#fff;border:1.5px solid #c5cae9;border-radius:8px;padding:5px 10px}
-.ct-col{font-size:13px;font-weight:600;color:#3949ab;font-family:"Noto Sans JP",sans-serif}
+.ct-col{font-size:13px;font-weight:600;color:#3949ab;font-family:system-ui,sans-serif}
 .ct-vi{font-size:11px;color:#546e7a;margin-top:1px}
 mark{background:#fff176;padding:0 2px;border-radius:3px}
 @media(max-width:520px){.grid,.ptu-grid{grid-template-columns:1fr}.pat-row{grid-template-columns:1fr}}
@@ -171,22 +170,22 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 .ptu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:7px}
 .ptu-card{background:#fff;border-radius:10px;border:1px solid #e5e2d8;padding:9px 11px;border-left:3px solid #6a1b9a}
 .ptu-card.n1-exam{border-left:4px solid #e65100;background:linear-gradient(90deg,#fff8e1 0,#fff 50px)}
-.ptu-k{font-size:15px;font-weight:700;color:#4a148c;font-family:"Noto Sans JP",sans-serif}
+.ptu-k{font-size:15px;font-weight:700;color:#4a148c;font-family:system-ui,sans-serif}
 .ptu-vi{font-size:12px;color:#b45309;margin-top:2px}
-.ptu-col{font-size:12px;color:#333;font-family:"Noto Sans JP",sans-serif;margin-top:3px;line-height:1.6}
+.ptu-col{font-size:12px;color:#333;font-family:system-ui,sans-serif;margin-top:3px;line-height:1.6}
 .pre-b{display:none;padding:11px 13px}
 .open .pre-b{display:block}
 mark{background:#fff176;padding:0 2px;border-radius:3px}
 .load-row{grid-column:1/-1;display:flex;justify-content:center;padding:18px 0 6px}
-.load-more{min-height:44px;padding:9px 18px;border:1.5px solid #4a5aad;border-radius:9px;background:#fff;color:#3949ab;font:600 13px "Be Vietnam Pro",sans-serif;cursor:pointer}
+.load-more{min-height:44px;padding:9px 18px;border:1.5px solid #4a5aad;border-radius:9px;background:#fff;color:#3949ab;font:600 13px var(--font-sans, var(--portfolio-font-sans));cursor:pointer}
 .load-more:hover,.load-more:focus-visible{background:#eef0fa}
 
 .ptu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:7px}
 .ptu-card{background:#fff;border-radius:10px;border:1px solid #e5e2d8;padding:9px 11px;border-left:3px solid #6a1b9a}
 .ptu-card.n1-exam{border-left:4px solid #e65100;background:linear-gradient(90deg,#fff8e1 0,#fff 50px)}
-.ptu-k{font-size:15px;font-weight:700;color:#4a148c;font-family:"Noto Sans JP",sans-serif}
+.ptu-k{font-size:15px;font-weight:700;color:#4a148c;font-family:system-ui,sans-serif}
 .ptu-vi{font-size:12px;color:#b45309;margin-top:2px}
-.ptu-col{font-size:12px;color:#333;font-family:"Noto Sans JP",sans-serif;margin-top:3px;line-height:1.6}
+.ptu-col{font-size:12px;color:#333;font-family:system-ui,sans-serif;margin-top:3px;line-height:1.6}
 .pre-b{display:none;padding:11px 13px}
 .open .pre-b{display:block}
 mark{background:#fff176;padding:0 2px;border-radius:3px}
@@ -199,12 +198,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/tokens.css?v=20260714b">
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713e">
-  <link rel="stylesheet" href="/css/goi-tabs.css?v=20260713e">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260714c">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
+  <link rel="stylesheet" href="/css/goi-tabs.css?v=20260714b">
   <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 <link rel="stylesheet" href="../../css/language-app-readable.css">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714b">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714c">
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-vocabulary-tabs">
 <div class="hdr">
@@ -384,13 +383,13 @@ function bCard(v,q,isC,idx){
       var numBadge=v.num?'✗'+v.num+' ':'✗ ';
       var ws=esc(v.ws);
       if(v.ow)ws=ws.replace(new RegExp(esc(v.ow).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'),'<span style="color:#b71c1c;font-weight:800;text-decoration:line-through">'+esc(v.ow)+'</span>');
-      wH='<div style="background:#fff3f3;border:1px solid #ffcdd2;border-radius:8px;padding:7px 11px;font-family:Noto Sans JP,sans-serif;font-size:13px;line-height:1.9;margin-bottom:7px"><span style="font-weight:700;color:#c62828">'+numBadge+'</span>'+ws+'</div>';
+      wH='<div style="background:#fff3f3;border:1px solid #ffcdd2;border-radius:8px;padding:7px 11px;font-family:var(--font-sans, var(--portfolio-font-sans));font-size:13px;line-height:1.9;margin-bottom:7px"><span style="font-weight:700;color:#c62828">'+numBadge+'</span>'+ws+'</div>';
       wH+='<div style="background:#fff8f0;border-left:3px solid #e65100;padding:6px 10px;border-radius:0 8px 8px 0;margin-bottom:6px">';
-      wH+='<div style="font-size:12px;font-weight:700;color:#e65100;font-family:Noto Sans JP,sans-serif;margin-bottom:4px">→「'+esc(k)+'（'+esc(h)+'）」= '+esc(vi)+'</div>';
+      wH+='<div style="font-size:12px;font-weight:700;color:#e65100;font-family:var(--font-sans, var(--portfolio-font-sans));margin-bottom:4px">→「'+esc(k)+'（'+esc(h)+'）」= '+esc(vi)+'</div>';
       if(v.cs){
         var cs=esc(v.cs);
         cs=cs.replace(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'),'<strong style="color:#1b5e20">'+k+'</strong>');
-        wH+='<div style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333;line-height:1.9">→ '+cs+'</div>';
+        wH+='<div style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333;line-height:1.9">→ '+cs+'</div>';
       }
       if(v.ct)wH+='<div style="font-size:11.5px;color:#388e3c;font-style:italic;margin-top:3px">= '+esc(v.ct)+'</div>';
       wH+='</div>';
@@ -398,7 +397,7 @@ function bCard(v,q,isC,idx){
       if(v.ws){
         var ws=esc(v.ws);
         if(v.ow)ws=ws.replace(new RegExp(esc(v.ow).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'),'<span style="color:#b71c1c;font-weight:800;text-decoration:line-through">'+esc(v.ow)+'</span>');
-        wH='<div style="background:#fff3f3;border:1px solid #ffcdd2;border-radius:8px;padding:6px 10px;font-family:Noto Sans JP,sans-serif;font-size:13px;line-height:1.9;margin-bottom:6px">✗ '+ws+'</div>';
+        wH='<div style="background:#fff3f3;border:1px solid #ffcdd2;border-radius:8px;padding:6px 10px;font-family:var(--font-sans, var(--portfolio-font-sans));font-size:13px;line-height:1.9;margin-bottom:6px">✗ '+ws+'</div>';
       }
       if(v.os){
         wH+='<div style="font-size:12px;color:#e65100;font-weight:700;margin:4px 0">→ Đúng: <b>'+esc(k)+'</b>'+(h?'（'+esc(h)+'）':'')+' = '+esc(vi)+'</div>';
@@ -478,7 +477,7 @@ function rPTU(el){
     h+='<div style="font-size:12px;font-weight:700;color:#4a148c;text-transform:uppercase;padding:6px 0 4px;border-bottom:2px solid #e8e0f0;margin-bottom:7px;margin-top:13px">'+esc(cats[c])+' ('+bycat[c].length+')</div>';
     h+='<div class="ptu-grid" style="margin-bottom:12px">';
     bycat[c].forEach(function(v){
-      h+='<div class="ptu-card'+(v.n?' n1-exam':'')+'"><div class="ptu-k">'+esc(v.k)+(v.n?'<span style="font-size:9px;background:#e65100;color:#fff;padding:1px 4px;border-radius:3px;margin-left:4px;font-weight:700">N1</span>':'')+'</div>'+(v.vi?'<div class="ptu-vi">Nghĩa · '+esc(v.vi)+'</div>':'')+(v.col?'<div class="ptu-col">→ '+esc(v.col)+'</div>':'')+(v.pat?'<div style="font-size:11px;color:#6a1b9a;background:#f3e5f5;border-radius:4px;padding:2px 6px;margin-top:3px;display:inline-block;font-family:Noto Sans JP,sans-serif;font-weight:600">'+esc(v.pat)+'</div>':'')+'</div>';
+      h+='<div class="ptu-card'+(v.n?' n1-exam':'')+'"><div class="ptu-k">'+esc(v.k)+(v.n?'<span style="font-size:9px;background:#e65100;color:#fff;padding:1px 4px;border-radius:3px;margin-left:4px;font-weight:700">N1</span>':'')+'</div>'+(v.vi?'<div class="ptu-vi">Nghĩa · '+esc(v.vi)+'</div>':'')+(v.col?'<div class="ptu-col">→ '+esc(v.col)+'</div>':'')+(v.pat?'<div style="font-size:11px;color:#6a1b9a;background:#f3e5f5;border-radius:4px;padding:2px 6px;margin-top:3px;display:inline-block;font-family:var(--font-sans, var(--portfolio-font-sans));font-weight:600">'+esc(v.pat)+'</div>':'')+'</div>';
     });
     h+='</div>';
   });
@@ -501,10 +500,10 @@ function switchPTU(btn,mode){
       h+='<div class="pre-b">';
       g.items.forEach(function(item){
         h+='<div style="display:grid;grid-template-columns:190px 1fr;gap:10px;padding:6px 0;border-bottom:1px dashed #e8e0f0">';
-        h+='<div><div style="font-size:15px;font-weight:700;color:#1e2240;font-family:Noto Sans JP,sans-serif">'+esc(item.k)+'</div>';
+        h+='<div><div style="font-size:15px;font-weight:700;color:#1e2240;font-family:var(--font-sans, var(--portfolio-font-sans))">'+esc(item.k)+'</div>';
         h+='<div style="font-size:11px;color:#b45309;margin-top:2px">Nghĩa · '+esc(item.vi)+'</div>';
-        h+='<div style="font-size:11px;font-family:Noto Sans JP,sans-serif;font-weight:700;padding:2px 6px;border-radius:4px;margin-top:3px;display:inline-block;background:'+col+'20;color:'+col+'">'+esc(item.pattern)+'</div></div>';
-        h+='<div style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333;line-height:1.7">→ '+esc(item.col)+'</div></div>';
+        h+='<div style="font-size:11px;font-family:var(--font-sans, var(--portfolio-font-sans));font-weight:700;padding:2px 6px;border-radius:4px;margin-top:3px;display:inline-block;background:'+col+'20;color:'+col+'">'+esc(item.pattern)+'</div></div>';
+        h+='<div style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333;line-height:1.7">→ '+esc(item.col)+'</div></div>';
       });
       h+='</div></div>';
     });
@@ -524,7 +523,7 @@ function rDTG(el){
     var g=DTG[gk];total+=g.words.length;
     h+='<div style="margin-bottom:11px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden">';
     h+='<div role="button" tabindex="0" aria-expanded="false" style="background:#1e2240;color:#fff;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="togP(this)" onkeydown="panelKey(event,this)">';
-    h+='<span style="font-size:16px;font-weight:700;font-family:Noto Sans JP,sans-serif">'+esc(g.prefix||gk)+'</span>';
+    h+='<span style="font-size:16px;font-weight:700;font-family:var(--font-sans, var(--portfolio-font-sans))">'+esc(g.prefix||gk)+'</span>';
     h+='<span style="font-size:11px;color:rgba(255,255,255,.7)">'+esc(g.vi_prefix||'')+'</span>';
     h+='<span style="font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;margin-left:auto">'+g.words.length+'語</span></div>';
     h+='<div class="pre-b"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr><th style="background:#f5f7ff;color:#3949ab;font-weight:700;padding:6px 9px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:11.5px">動詞</th><th style="background:#f5f7ff;color:#3949ab;font-weight:700;padding:6px 9px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:11.5px">名詞</th><th style="background:#f5f7ff;color:#3949ab;font-weight:700;padding:6px 9px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:11.5px">Nghĩa</th></tr>';
@@ -548,8 +547,8 @@ function rCT(el){
   var grps={};CT.forEach(function(e){var b=e.body||'';if(!grps[b])grps[b]=[];grps[b].push(e);});
   var h='<div style="padding:8px 0">';
   Object.keys(grps).forEach(function(b){
-    h+='<div style="margin-bottom:11px"><div style="font-size:13px;font-weight:700;color:#1e2240;font-family:Noto Sans JP,sans-serif;background:#e8eaf6;border-radius:8px;padding:6px 11px;margin-bottom:6px">'+esc(b)+'</div><div style="display:flex;flex-wrap:wrap;gap:5px">';
-    grps[b].forEach(function(e){h+='<div style="background:#fff;border:1.5px solid #c5cae9;border-radius:8px;padding:4px 9px"><div style="font-size:13px;font-weight:600;color:#3949ab;font-family:Noto Sans JP,sans-serif">'+esc(e.col)+'</div>'+(e.vi?'<div style="font-size:11px;color:#546e7a;margin-top:1px">'+esc(e.vi)+'</div>':'')+'</div>';});
+    h+='<div style="margin-bottom:11px"><div style="font-size:13px;font-weight:700;color:#1e2240;font-family:var(--font-sans, var(--portfolio-font-sans));background:#e8eaf6;border-radius:8px;padding:6px 11px;margin-bottom:6px">'+esc(b)+'</div><div style="display:flex;flex-wrap:wrap;gap:5px">';
+    grps[b].forEach(function(e){h+='<div style="background:#fff;border:1.5px solid #c5cae9;border-radius:8px;padding:4px 9px"><div style="font-size:13px;font-weight:600;color:#3949ab;font-family:var(--font-sans, var(--portfolio-font-sans))">'+esc(e.col)+'</div>'+(e.vi?'<div style="font-size:11px;color:#546e7a;margin-top:1px">'+esc(e.vi)+'</div>':'')+'</div>';});
     h+='</div></div>';
   });
   el.innerHTML=h+'</div>';
@@ -603,7 +602,7 @@ function r1696(el,q){
       var optsH='';
       if(v.opts&&v.opts.length){
         optsH='<div style="display:flex;flex-direction:column;gap:4px;margin-top:7px">';
-        v.opts.forEach(function(o){optsH+='<div style="font-size:13px;font-family:Noto Sans JP,sans-serif;background:#f8f9ff;border:1px solid #e0e4f5;border-radius:7px;padding:6px 10px;color:#333;line-height:1.7"><span style="color:#888;font-size:11px;font-weight:700;margin-right:4px">'+o.n+'.</span>'+esc(o.t||'')+'</div>';});
+        v.opts.forEach(function(o){optsH+='<div style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));background:#f8f9ff;border:1px solid #e0e4f5;border-radius:7px;padding:6px 10px;color:#333;line-height:1.7"><span style="color:#888;font-size:11px;font-weight:700;margin-right:4px">'+o.n+'.</span>'+esc(o.t||'')+'</div>';});
         optsH+='</div>';
       }
       h+='<div class="card" style="border-top:3px solid #1565c0" id="'+uid+'" role="button" tabindex="0" aria-expanded="false" onclick="tog(\''+uid+'\')" onkeydown="cardKey(event,this)"><div class="wrow"><span class="wk">'+esc(v.k)+'</span>'+(v.h?'<span class="wh">'+esc(v.h)+'</span>':'')+ptag(v.p||'名詞')+(v.h?'<button class="spk" onclick="event.stopPropagation();spk(\''+v.k.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"','"+uid+'\')">Nghe</button>':'')+
@@ -695,7 +694,7 @@ function init(){
 }
 init();
 </script>
-<script src="/js/site-header-v2.js?v=20260714k"></script>
+<script src="/js/site-header-v2.js?v=20260714l"></script>
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>

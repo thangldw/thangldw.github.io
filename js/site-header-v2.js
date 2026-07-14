@@ -21,20 +21,20 @@
   var CSS = [
     ".tw-header{position:relative;z-index:1;width:100%;align-self:stretch;flex:0 0 auto;",
     "background:rgba(13,17,23,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);",
-    "border-bottom:1px solid #1f2733;font-family:'Space Grotesk','Noto Sans JP',system-ui,sans-serif;}",
+    "border-bottom:1px solid #1f2733;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;}",
     "html[data-theme='light'] .tw-header{background:rgba(250,251,252,.92);border-bottom-color:#e6e9ee;}",
     ".tw-header *{box-sizing:border-box;}",
     ".tw-header .tw-wrap{width:100%;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
-    ".tw-header .tw-brand{font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}",
+    ".tw-header .tw-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}",
     "html[data-theme='light'] .tw-header .tw-brand{color:#14171d;}",
-    ".tw-header .tw-mark{color:#7c9cff;display:inline-block;font:600 17px/1 'IBM Plex Mono',monospace;letter-spacing:-.08em;transition:color .2s,transform .2s;}",
+    ".tw-header .tw-mark{color:#7c9cff;display:inline-block;font:600 17px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;letter-spacing:-.08em;transition:color .2s,transform .2s;}",
     ".tw-header .tw-brand:hover .tw-mark{color:#9bb2ff;transform:translateX(1px);}",
     ".tw-header .tw-brand:focus-visible{outline:2px solid #7c9cff;outline-offset:4px;border-radius:7px;}",
     ".tw-header .tw-dot{color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-mark{color:#3a5bd9;}",
     "html[data-theme='light'] .tw-header .tw-dot{color:#3a5bd9;}",
     ".tw-header .tw-nav{display:flex;align-items:center;gap:38px;}",
-    ".tw-header .tw-nav a{color:#9aa6b4;text-decoration:none;font-family:'Space Grotesk','Noto Sans JP',sans-serif;font-size:15px;font-weight:500;line-height:1;transition:color .2s;}",
+    ".tw-header .tw-nav a{color:#9aa6b4;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-size:15px;font-weight:500;line-height:1;transition:color .2s;}",
     ".tw-header .tw-nav a:hover,.tw-header .tw-nav a.tw-active{color:#eef1f6;}",
     "html[data-theme='light'] .tw-header .tw-nav a{color:#525a68;}",
     "html[data-theme='light'] .tw-header .tw-nav a:hover,html[data-theme='light'] .tw-header .tw-nav a.tw-active{color:#14171d;}",
@@ -68,14 +68,6 @@
     style.id = "tw-header-style";
     style.textContent = CSS;
     document.head.appendChild(style);
-
-    // Make sure the brand font is available even on pages that don't link it.
-    if (!document.querySelector("link[href*='fonts.googleapis.com']")) {
-      var f = document.createElement("link");
-      f.rel = "stylesheet";
-      f.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap";
-      document.head.appendChild(f);
-    }
 
     var theme = currentTheme();
     var header = document.createElement("header");

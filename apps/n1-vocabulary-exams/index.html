@@ -8,9 +8,8 @@
 <meta name="description" content="Tra cứu và luyện 648 từ vựng JLPT N1 từ đề thi 2010–2025, có câu ví dụ, từ đồng nghĩa và bài kiểm tra tương tác.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Vocabulary Exams 2010–2025"><meta property="og:description" content="648 từ vựng N1 từ đề thi 2010–2025 với bài luyện tương tác."><meta property="og:url" content="https://thangldw.github.io/apps/n1-vocabulary-exams/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;color:#1a1a1a;font-size:14px}
+body{font-family:var(--font-sans, var(--portfolio-font-sans));background:#f7f8fa;color:#1a1a1a;font-size:14px}
 /* ── HEADER ── */
 .header{background:#fff;color:#1a1a2e;padding:14px 20px;position:relative;z-index:1;border-bottom:1px solid #e4e7ee;box-shadow:0 1px 6px rgba(20,23,29,.05)}
 .header-sub{font-size:10px;color:#838b99;margin-bottom:3px;letter-spacing:.06em;text-transform:uppercase}
@@ -58,8 +57,8 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .card[data-m="4"]::before{background:#6a1b9a}
 /* ── CARD HEADER ── */
 .wrow{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap;padding-top:4px}
-.wk{font-size:20px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif}
-.wh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:"Noto Sans JP",sans-serif}
+.wk{font-size:20px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
+.wh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:system-ui,sans-serif}
 .ptag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:700}
 .ptag.v{background:#fdecea;color:#b71c1c}
 .ptag.n{background:#e3f2fd;color:#1565c0}
@@ -83,42 +82,42 @@ body{font-family:"Be Vietnam Pro","Noto Sans JP",sans-serif;background:#f7f8fa;c
 .synb{background:#f8f7ff;border-radius:9px;padding:8px 10px;margin-bottom:8px;border:1px solid #e8e6f8}
 .synb-lbl{font-size:10px;color:#4a5aad;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
 .syn-chips{display:flex;flex-wrap:wrap;gap:5px}
-.syi{display:flex;flex-direction:column;background:#eef0fa;border-radius:7px;padding:5px 10px;font-family:"Noto Sans JP",sans-serif;line-height:1.4;min-width:0}
+.syi{display:flex;flex-direction:column;background:#eef0fa;border-radius:7px;padding:5px 10px;font-family:system-ui,sans-serif;line-height:1.4;min-width:0}
 .syi.pri{background:#4a5aad}
 .syi .sw{font-size:13px;font-weight:600;color:#2c357a}
 .syi.pri .sw{color:#fff}
 .syi .sh{font-size:10px;color:#7f8fd0;margin-top:1px}
 .syi.pri .sh{color:rgba(255,255,255,.7)}
-.syi .sm{font-size:10.5px;color:#546e7a;font-family:"Be Vietnam Pro",sans-serif;margin-top:1px}
+.syi .sm{font-size:10.5px;color:#546e7a;font-family:var(--font-sans, var(--portfolio-font-sans));margin-top:1px}
 .syi.pri .sm{color:rgba(255,255,255,.8)}
 /* ── COLLOCATIONS ── */
 .co-wrap{margin-bottom:4px}
 .co-lbl{font-size:10px;color:#00695c;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;display:flex;align-items:center;gap:4px}
 .co-list{display:flex;flex-direction:column;gap:4px}
-.co-item{font-size:14px;font-family:"Noto Sans JP",sans-serif;background:#e0f7f4;border:1px solid #b2dfdb;border-radius:8px;padding:6px 10px;line-height:1.65}
+.co-item{font-size:14px;font-family:system-ui,sans-serif;background:#e0f7f4;border:1px solid #b2dfdb;border-radius:8px;padding:6px 10px;line-height:1.65}
 .co-item .cjp{font-size:14px;font-weight:600;color:#1e2240}
 .co-item .cjp b{font-weight:800;color:#00695c;font-size:14px}
-.co-item .cvi{font-size:11px;color:#546e7a;font-family:"Be Vietnam Pro",sans-serif;margin-top:2px}
+.co-item .cvi{font-size:11px;color:#546e7a;font-family:var(--font-sans, var(--portfolio-font-sans));margin-top:2px}
 .co-item.n1{border-left:3px solid #e65100;background:linear-gradient(90deg,#fff8e1 0,#e0f7f4 55px)}
 .n1b{font-size:9px;background:#e65100;color:#fff;padding:1px 5px;border-radius:4px;margin-left:5px;font-weight:700;vertical-align:middle;white-space:nowrap}
 /* ── DETAIL ── */
 .detail{display:none;margin-top:10px;padding-top:10px;border-top:1.5px dashed #e5e2d8}
 .card.open .detail{display:block}
-.ex-block{background:#fafafa;border-left:3px solid #4a5aad;border-radius:0 8px 8px 0;padding:8px 11px;margin-bottom:9px;font-size:13px;line-height:1.95;color:#333;font-family:"Noto Sans JP",sans-serif}
+.ex-block{background:#fafafa;border-left:3px solid #4a5aad;border-radius:0 8px 8px 0;padding:8px 11px;margin-bottom:9px;font-size:13px;line-height:1.95;color:#333;font-family:system-ui,sans-serif}
 .ex-block strong{color:#b71c1c;font-weight:700}
 .ex-yr{font-size:10px;color:#aaa;display:block;margin-top:2px}
 .wrongs-sec{margin-bottom:8px}
 .wr-lbl{font-size:10px;color:#b71c1c;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
 .wr-list{display:flex;flex-direction:column;gap:4px}
 .wi{display:flex;gap:8px;align-items:flex-start;background:#fff6f6;border:1px solid #ffd5d5;border-radius:7px;padding:6px 10px}
-.wr{font-size:12px;font-weight:700;color:#b71c1c;min-width:80px;flex-shrink:0;font-family:"Noto Sans JP",sans-serif}
+.wr{font-size:12px;font-weight:700;color:#b71c1c;min-width:80px;flex-shrink:0;font-family:system-ui,sans-serif}
 .wm{font-size:11.5px;color:#555;line-height:1.55}
 .hint-box{background:#f0f7f0;border:1px solid #c8e6c9;border-radius:8px;padding:8px 11px;font-size:12px;color:#2e7d32;line-height:1.7}
 .hint-lbl{font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
 mark{background:#fff176;padding:0 2px;border-radius:3px}
 /* ── MON4 OPTIONS ── */
 .m4-opts{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
-.m4o{background:#f8f7ff;border:1px solid #e0ddf8;border-radius:7px;padding:6px 10px;font-size:12px;color:#444;font-family:"Noto Sans JP",sans-serif;line-height:1.6}
+.m4o{background:#f8f7ff;border:1px solid #e0ddf8;border-radius:7px;padding:6px 10px;font-size:12px;color:#444;font-family:system-ui,sans-serif;line-height:1.6}
 .m4o.correct{background:#eaf3de;border-color:#a5d6a7;color:#1b5e20;font-weight:600}
 .m4o.wrong{background:#fff6f6;border-color:#ffcdd2;color:#7f0000}
 .m4o-num{font-size:10px;font-weight:700;margin-right:6px;color:#aaa}
@@ -137,13 +136,13 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 .pb{background:#4a5aad;height:4px;border-radius:99px;transition:width .3s}
 .qcard{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:16px;margin-bottom:10px}
 .qwd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.qk{font-size:25px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif}
-.qh{font-size:13px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:"Noto Sans JP",sans-serif}
+.qk{font-size:25px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
+.qh{font-size:13px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:system-ui,sans-serif}
 .qvi-box{font-size:11px;color:#b45309;background:#fffbeb;border-radius:6px;padding:2px 9px;margin-bottom:8px;display:none;font-weight:500}
-.qsen{font-size:15px;line-height:2;color:#1a1a1a;font-family:"Noto Sans JP",sans-serif}
+.qsen{font-size:15px;line-height:2;color:#1a1a1a;font-family:system-ui,sans-serif}
 .ul{text-decoration:underline;text-decoration-color:#4a5aad;color:#4a5aad;font-weight:600}
 .og{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.ob{background:#fff;border:1.5px solid #d5d2ca;border-radius:9px;padding:10px 12px;font-size:13px;cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:8px;transition:all .15s;font-family:"Noto Sans JP",sans-serif;line-height:1.5}
+.ob{background:#fff;border:1.5px solid #d5d2ca;border-radius:9px;padding:10px 12px;font-size:13px;cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:8px;transition:all .15s;font-family:system-ui,sans-serif;line-height:1.5}
 .ob .nm{font-size:11px;color:#aaa;min-width:14px;font-weight:600;flex-shrink:0;margin-top:2px}
 .ob:hover:not(:disabled){border-color:#4a5aad;background:#f0f2fc}
 .ob.ok{background:#eaf3de;border-color:#3b6d11;color:#173404}
@@ -152,9 +151,9 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 .ob:disabled{cursor:default}
 .exp{background:#fff;border:1.5px solid #c8d0f0;border-radius:10px;padding:14px;font-size:13px;line-height:1.8;margin-bottom:10px;display:none}
 .exp.show{display:block}
-.ew{font-size:18px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif}
-.eh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:1px 7px;border-radius:5px;margin-left:6px;font-family:"Noto Sans JP",sans-serif}
-.esyi{display:inline-block;font-size:12px;background:#eef0fa;color:#2c357a;border-radius:6px;padding:3px 9px;margin:2px 2px 0 0;font-weight:500;font-family:"Noto Sans JP",sans-serif}
+.ew{font-size:18px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
+.eh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:1px 7px;border-radius:5px;margin-left:6px;font-family:system-ui,sans-serif}
+.esyi{display:inline-block;font-size:12px;background:#eef0fa;color:#2c357a;border-radius:6px;padding:3px 9px;margin:2px 2px 0 0;font-weight:500;font-family:system-ui,sans-serif}
 .esyi.pri{background:#4a5aad;color:#fff}
 .bnext{background:#4a5aad;color:#fff;border:none;border-radius:9px;padding:11px;font-size:14px;cursor:pointer;display:none;width:100%;font-weight:600;font-family:inherit;transition:background .15s}
 .bnext.show{display:block}.bnext:hover{background:#3a4a9d}
@@ -175,11 +174,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/tokens.css?v=20260714b">
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713e">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260714c">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
   <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 <link rel="stylesheet" href="../../css/language-app-readable.css">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714b">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714c">
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-vocabulary-exams">
 
@@ -333,13 +332,13 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 <div id="tra" style="display:none">
 <style>.ra-card{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:14px 15px;margin-bottom:10px;border-left:4px solid #f57c00}
 .ra-word{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
-.ra-kanji{font-size:22px;font-weight:700;color:#1e2240;font-family:"Noto Sans JP",sans-serif}
+.ra-kanji{font-size:22px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
 .ra-vi{font-size:12px;color:#b45309;background:#fffbeb;padding:2px 8px;border-radius:6px}
 .ra-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px}
 .ra-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-top:2px}
 .ra-wrong{background:#fdecea;color:#b71c1c}
 .ra-correct{background:#e8f5e9;color:#2e7d32}
-.ra-sentence{font-size:13px;font-family:"Noto Sans JP",sans-serif;line-height:1.9;color:#333}
+.ra-sentence{font-size:13px;font-family:system-ui,sans-serif;line-height:1.9;color:#333}
 .ra-arrow{font-size:11px;color:#f57c00;font-weight:700;margin:5px 0;padding-left:5px}
 .ra-header{background:linear-gradient(135deg,#ff6d00,#ff8f00);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:14px}
 .ra-header h3{font-size:14px;font-weight:600;margin-bottom:5px}
@@ -1100,11 +1099,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2010 問3</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">この団体は先月発足したばかりです。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この団体は先月発足したばかりです。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2017 問3</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">この団体は留学生支援団体として昨年8月に発足した。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この団体は留学生支援団体として昨年8月に発足した。</span>
     </div>
   </div>
 </div>
@@ -1118,11 +1117,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2010 問6</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">メールが多すぎて、重要な連絡を見落としていた。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">メールが多すぎて、重要な連絡を見落としていた。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2017 問5</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">「300,000円」と書いてあったのにゼロを一つ見落として3万円だと勘違いしていた。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">「300,000円」と書いてあったのにゼロを一つ見落として3万円だと勘違いしていた。</span>
     </div>
   </div>
 </div>
@@ -1136,11 +1135,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2011 問4</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">あの店では今、化粧品の無料サンプルを配布している。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">あの店では今、化粧品の無料サンプルを配布している。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2017 問1</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">駅の案内所では、観光案内地図を無料で配布している。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">駅の案内所では、観光案内地図を無料で配布している。</span>
     </div>
   </div>
 </div>
@@ -1154,11 +1153,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2012 問3</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">成功を勝ち取るためには、日々の努力を怠ってはいけない。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">成功を勝ち取るためには、日々の努力を怠ってはいけない。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問3</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">この薬品を扱うときは、常に注意を怠ってはいけない。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この薬品を扱うときは、常に注意を怠ってはいけない。</span>
     </div>
   </div>
 </div>
@@ -1172,11 +1171,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2012 問2</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2021 問6</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
     </div>
   </div>
 </div>
@@ -1190,11 +1189,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2013 問1</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">手順を改善したら、業務が円滑に進むようになった。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">手順を改善したら、業務が円滑に進むようになった。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問2</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">会を円滑に運営するためには、会員の協力が不可欠だ。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">会を円滑に運営するためには、会員の協力が不可欠だ。</span>
     </div>
   </div>
 </div>
@@ -1208,11 +1207,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2015 問5</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問1</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
     </div>
   </div>
 </div>
@@ -1226,11 +1225,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2016 問6</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2021 問2</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
     </div>
   </div>
 </div>
@@ -1244,11 +1243,11 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <div style="display:flex;flex-direction:column;gap:5px">
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問5</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">この劇場は2千人の観客を収容することができます。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この劇場は2千人の観客を収容することができます。</span>
     </div>
     <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
       <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2023 問2</span>
-      <span style="font-size:13px;font-family:Noto Sans JP,sans-serif;color:#333">このコンサートホールは500人を収容できる。</span>
+      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">このコンサートホールは500人を収容できる。</span>
     </div>
   </div>
 </div>
@@ -2127,7 +2126,7 @@ function resetQ(){document.getElementById('res').classList.remove('show');docume
 
 rv();
 </script>
-<script src="/js/site-header-v2.js?v=20260714k"></script>
+<script src="/js/site-header-v2.js?v=20260714l"></script>
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>

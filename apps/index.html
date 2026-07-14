@@ -14,13 +14,10 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v6.4.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
 
   <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/tokens.css?v=20260714b">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260714c">
 
   <script>
     (function () {
@@ -80,7 +77,7 @@
     .app-card:hover .ac-open::after { transform: translateX(4px); }
     .app-card a.ac-cover { position: absolute; inset: 0; z-index: 1; } /* whole card clickable */
 
-    .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px 'IBM Plex Mono', var(--font-mono); text-align: center; }
+    .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px var(--font-mono, var(--portfolio-font-mono)); text-align: center; }
     .site-foot span { color: #aab1bc; }
 
     .apps-nav{height:75px;padding:0 48px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);z-index:10}.apps-brand{font:600 15px var(--font-mono)}.apps-brand b{color:var(--accent)}.apps-brand span{color:var(--muted);font-weight:400}.apps-nav nav{display:flex;gap:26px;align-items:center;color:var(--body);font-size:13px}.theme-button{width:31px;height:31px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--ink)}.apps-intro .eyebrow{color:var(--accent)}.apps-intro h1{font-size:44px}.apps-grid{grid-template-columns:repeat(3,1fr);gap:20px}.app-card{padding:22px}.app-card .ac-icon{width:44px;height:44px;border-radius:8px}
@@ -102,7 +99,7 @@
     .apps-brand:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:7px}
     @media(max-width:640px){.apps-brand{gap:8px;font-size:20px}.apps-brand .brand-mark{font-size:16px}.apps-nav nav{display:flex;position:static;padding:0;background:transparent;border:0}}
   </style>
-  <link rel="stylesheet" href="/css/app-design-system.css?v=20260714b">
+  <link rel="stylesheet" href="/css/app-design-system.css?v=20260714c">
 </head>
 <body class="portfolio-catalog">
   <a class="skip-link" href="#main">Skip to apps</a>

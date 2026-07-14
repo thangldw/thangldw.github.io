@@ -10,7 +10,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f7f8fa;color:#1a1a2e;min-height:100vh}
-.jp{font-family:'Noto Sans JP','Hiragino Sans',sans-serif}
+.jp{font-family:var(--font-sans, var(--portfolio-font-sans))}
 .hdr{background:#fff;color:#1a1a2e;padding:12px 16px 0;border-bottom:1px solid #e4e7ee}
 .hdr-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
 .badge{background:#e63946;color:white;font-size:12px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
@@ -59,7 +59,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .res-vn{font-size:13px;color:#4b5563;line-height:1.6}
 .kw-box{margin-top:10px;background:#fffbeb;border:1px solid #fbbf24;border-radius:10px;padding:10px 13px}
 .kw-title{font-size:11.5px;font-weight:700;color:#b45309;margin-bottom:5px}
-.kw-hint{font-size:13px;color:#92400e;font-weight:600;margin-bottom:3px;font-family:'Noto Sans JP',sans-serif}
+.kw-hint{font-size:13px;color:#92400e;font-weight:600;margin-bottom:3px;font-family:system-ui,sans-serif}
 .kw-loai{font-size:12.5px;color:#b45309;line-height:1.5}
 .exp{margin-top:10px;background:#faf5ff;border:1px solid #e9d5ff;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
 .exp-s{font-size:13.5px;line-height:1.7;color:#1e1b4b}
@@ -68,7 +68,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .exp-lbl-r{font-weight:700;color:#059669}
 .traps-box{background:#fffbeb;border-radius:8px;padding:9px 11px;border-left:3px solid #f59e0b}
 .traps-title{font-size:12px;font-weight:700;color:#92400e;margin-bottom:5px}
-.trap-row{margin:4px 0;font-size:13px;line-height:1.6;color:#78350f;font-family:'Noto Sans JP',sans-serif}
+.trap-row{margin:4px 0;font-size:13px;line-height:1.6;color:#78350f;font-family:system-ui,sans-serif}
 .trap-w{font-weight:700;color:#b45309}
 .btn-row{display:flex;gap:8px;margin-top:12px}
 .next-btn{flex:1;padding:12px;border-radius:12px;border:none;background:#1a1a2e;color:white;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit}
@@ -100,7 +100,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .study-jp{font-size:15px;line-height:1.85;margin-bottom:7px;color:#1a1a2e}
 .study-vn{font-size:12.5px;color:#6b7280;margin-bottom:10px;line-height:1.55}
 .study-opts{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
-.sopt{font-size:12.5px;padding:3px 10px;border-radius:9px;font-family:'Noto Sans JP',sans-serif}
+.sopt{font-size:12.5px;padding:3px 10px;border-radius:9px;font-family:system-ui,sans-serif}
 .sopt-ans{background:#dcfce7;color:#15803d;font-weight:700;border:1px solid #86efac}
 .sopt-no{background:#f9fafb;color:#9ca3af;border:1px solid #e8eaed}
 .toggle-btn{font-size:12.5px;color:#6366f1;background:none;border:1.5px solid #c7d2fe;border-radius:8px;padding:5px 12px;cursor:pointer;font-family:inherit;font-weight:600}
@@ -122,9 +122,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
 <link rel="stylesheet" href="../../css/language-app-readable.css">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714b">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714c">
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-grammar-exams">
 <div class="hdr">
@@ -513,7 +513,7 @@ updateWrongBadge();
 renderBars();
 render();
 </script>
-<script src="/js/site-header-v2.js?v=20260714k"></script>
+<script src="/js/site-header-v2.js?v=20260714l"></script>
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>

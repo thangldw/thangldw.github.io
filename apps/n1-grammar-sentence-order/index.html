@@ -8,9 +8,8 @@
 <meta name="description" content="JLPT N1 Mondai 6 (文の文法② · sắp xếp câu / điền ★) — 420 câu luyện tập hợp nhất, có giải thích tiếng Việt và điểm ngữ pháp. Tiến độ lưu trong trình duyệt.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Sentence Ordering — 文の文法②"><meta property="og:description" content="420 câu sắp xếp câu N1, có giải thích tiếng Việt và lưu tiến độ."><meta property="og:url" content="https://thangldw.github.io/apps/n1-grammar-sentence-order/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/reset.css">
-<link rel="stylesheet" href="/css/tokens.css?v=20260714b">
+<link rel="stylesheet" href="/css/tokens.css?v=20260714c">
 <script>
   (function () {
     var saved = localStorage.getItem('theme');
@@ -24,14 +23,14 @@
     line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; align-items:center; }
   .container{ width:100%; max-width:46rem; padding:var(--space-md) var(--space-md) var(--space-2xl);
     --ok:#5ecb9e; --no:#e46a8b; --amber:#f6a94a; }
-  .jp{ font-family:'Noto Sans JP',var(--font-sans); }
+  .jp{ font-family:var(--font-sans, var(--portfolio-font-sans)); }
 
   /* intro */
   .intro{ text-align:center; margin-bottom:var(--space-lg); }
-  .intro h1{ font-family:'Noto Serif JP',var(--font-display),serif; font-size:var(--step-3); letter-spacing:-.01em; }
+  .intro h1{ font-family:var(--font-serif, var(--portfolio-font-serif)); font-size:var(--step-3); letter-spacing:-.01em; }
   .intro h1 .en{ font-family:var(--font-display); color:var(--text-dim); font-weight:500; margin-left:.4em; font-size:.6em; }
   .intro .sub{ color:var(--text-muted); font-size:var(--step--1); margin-top:var(--space-2xs); }
-  .intro .instr{ font-family:'Noto Sans JP',var(--font-sans); color:var(--text-dim); font-size:var(--step--1); margin-top:var(--space-xs); }
+  .intro .instr{ font-family:var(--font-sans, var(--portfolio-font-sans)); color:var(--text-dim); font-size:var(--step--1); margin-top:var(--space-xs); }
 
   /* menu */
   .resume{ background:var(--surface); border:1px solid var(--amber); border-radius:var(--radius); padding:var(--space-sm) var(--space-md);
@@ -61,12 +60,12 @@
 
   .card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:var(--space-md); box-shadow:var(--shadow); }
   .qnum{ font-family:var(--font-mono); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); }
-  .sentence{ font-family:'Noto Sans JP',sans-serif; font-size:1.15rem; line-height:2; color:var(--text); margin:var(--space-xs) 0 var(--space-md); }
+  .sentence{ font-family:system-ui,sans-serif; font-size:1.15rem; line-height:2; color:var(--text); margin:var(--space-xs) 0 var(--space-md); }
   .blank{ display:inline-block; min-width:2.2em; text-align:center; border-bottom:2px solid var(--border-strong); margin:0 .15em; color:var(--text-dim); }
   .blank.star{ color:var(--accent); border-bottom-color:var(--accent); font-weight:700; }
 
   .choices{ display:grid; gap:.5rem; }
-  .choice-btn{ font-family:'Noto Sans JP',sans-serif; text-align:left; background:var(--surface-2); border:1px solid var(--border);
+  .choice-btn{ font-family:system-ui,sans-serif; text-align:left; background:var(--surface-2); border:1px solid var(--border);
     border-radius:var(--radius-sm); padding:.7em .9em; font-size:1rem; color:var(--text); cursor:pointer; transition:all .15s; }
   .choice-btn:hover:not(:disabled){ border-color:var(--border-strong); }
   .choice-btn:disabled{ cursor:default; }
@@ -78,8 +77,8 @@
   @keyframes fade{ from{opacity:0;transform:translateY(4px);} to{opacity:1;transform:none;} }
   .badge{ font-family:var(--font-mono); font-size:var(--step--1); display:inline-block; border-radius:999px; padding:.2em .7em; margin:0 .4em .4em 0; }
   .badge.order{ background:var(--accent-glow); color:var(--accent-soft); }
-  .badge.grammar{ background:color-mix(in srgb,var(--amber) 14%,transparent); color:var(--amber); font-family:'Noto Sans JP',var(--font-mono); }
-  .full{ font-family:'Noto Sans JP',sans-serif; font-size:1.02rem; line-height:1.9; color:var(--text); background:var(--surface-2);
+  .badge.grammar{ background:color-mix(in srgb,var(--amber) 14%,transparent); color:var(--amber); font-family:var(--font-sans, var(--portfolio-font-sans)); }
+  .full{ font-family:system-ui,sans-serif; font-size:1.02rem; line-height:1.9; color:var(--text); background:var(--surface-2);
     border-radius:var(--radius-sm); padding:.7em .9em; margin:.4em 0; }
   .vi{ color:var(--text-muted); font-size:var(--step--1); margin-bottom:.6em; }
   .steps{ border-top:1px solid var(--border); padding-top:.6em; }
@@ -104,9 +103,9 @@
 
   @media(max-width:480px){ .set-grid{ grid-template-columns:repeat(3,1fr); } .sentence{ font-size:1.05rem; } }
 </style>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
 <link rel="stylesheet" href="../../css/language-app-readable.css">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714b">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714c">
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-grammar-sentence-order">
 <main class="container app-main">
@@ -296,7 +295,7 @@
   renderMenu();
 })();
 </script>
-<script src="/js/site-header-v2.js?v=20260714k"></script>
+<script src="/js/site-header-v2.js?v=20260714l"></script>
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>
