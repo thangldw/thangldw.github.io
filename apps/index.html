@@ -45,10 +45,13 @@
 
     .apps-cat { margin-top: var(--space-xl); }
     .apps-cat:first-of-type { margin-top: 0; }
-    .apps-cat-head { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md); border-bottom: 1px solid var(--border); padding-bottom: var(--space-xs); }
-    .apps-cat-head h2 { font-family: var(--font-display); font-size: var(--step-2); letter-spacing: -.01em; }
-    .apps-cat-head .cat-jp { font-family: var(--font-mono); color: var(--text-dim); font-size: var(--step--1); }
-    .apps-cat-head .cat-count { margin-left: auto; font-family: var(--font-mono); color: var(--text-dim); font-size: var(--step--1); }
+    .apps-cat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-md); border-bottom: 1px solid var(--border); padding-bottom: var(--space-xs); }
+    .apps-cat-head .cat-copy { display: grid; gap: 5px; }
+    .apps-cat-head h2 { margin: 0; font-family: var(--font-display); font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -.02em; }
+    .apps-cat-head .cat-jp { font-family: var(--font-mono); color: var(--text-dim); font-size: 11px; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
+    .apps-cat-head .cat-count { display: grid; justify-items: end; gap: 2px; margin-left: auto; padding-left: 24px; border-left: 1px solid var(--border); font-family: var(--font-mono); color: var(--text-dim); }
+    .apps-cat-head .cat-count strong { color: var(--text); font-size: 20px; line-height: 1; font-weight: 500; }
+    .apps-cat-head .cat-count span { font-size: 10px; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; }
 
     .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: var(--space-md); }
 
@@ -89,7 +92,7 @@
     .catalog-controls{display:flex;align-items:center;margin-bottom:36px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.filters{margin:0;gap:8px;justify-content:flex-start}.filter{border-radius:5px;padding:9px 13px}.filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
     .apps-cat{margin-top:0}.apps-cat-head{margin-bottom:0;padding:24px 0}.apps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-bottom:1px solid var(--border)}.app-card{min-height:300px;padding:28px;border-radius:0;border-width:1px 1px 0 0}.app-card[hidden]{display:none}.app-card:nth-child(3n){border-right:0}.app-card .ac-icon{border-radius:6px}.app-card .ac-tags{margin-top:20px}.app-card .ac-tag{background:transparent}.app-card .ac-open{margin-top:22px}.app-card:focus-within{outline:2px solid var(--accent);outline-offset:-3px}
     @media(max-width:960px){.apps-intro{grid-template-columns:1fr;gap:20px}.apps-intro .eyebrow{grid-column:auto;margin-bottom:0}.apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-card:nth-child(3n){border-right:1px solid var(--border)}.app-card:nth-child(2n){border-right:0}}
-    @media(max-width:640px){.apps-nav-inner,.site-foot-inner{width:calc(100% - 32px)}.apps-nav{height:65px;padding:0}.apps-brand{font-size:22px}.apps-menu{display:block}.apps-nav nav{display:none;position:absolute;top:65px;left:0;right:0;padding:16px;background:var(--bg);border:1px solid var(--border);border-top:0;gap:16px;font-size:13px;flex-wrap:wrap}.apps-nav.open nav{display:flex}.apps-nav nav a{display:block}.theme-button{width:32px;height:32px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:20px}.apps-intro h1{font-size:40px}.catalog-controls{padding-top:16px}.filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter{flex:0 0 auto}.apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n){border-right:0;min-height:0}}
+    @media(max-width:640px){.apps-nav-inner,.site-foot-inner{width:calc(100% - 32px)}.apps-nav{height:65px;padding:0}.apps-brand{font-size:22px}.apps-menu{display:block}.apps-nav nav{display:none;position:absolute;top:65px;left:0;right:0;padding:16px;background:var(--bg);border:1px solid var(--border);border-top:0;gap:16px;font-size:13px;flex-wrap:wrap}.apps-nav.open nav{display:flex}.apps-nav nav a{display:block}.theme-button{width:32px;height:32px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:20px}.apps-intro h1{font-size:40px}.catalog-controls{padding-top:16px}.filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter{flex:0 0 auto}.apps-cat-head{padding:20px 0}.apps-cat-head .cat-count{padding-left:16px}.apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n){border-right:0;min-height:0}}
     @media(max-width:480px){.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;overflow:visible;padding-bottom:0}.filter{width:100%}.filter:last-child{grid-column:1/-1}}
     /* Header scrolls with the page. */
     .apps-nav { position: relative; top: auto; z-index: 1; }
@@ -121,9 +124,11 @@
     <!-- ══════════ Technical ══════════ -->
     <section class="apps-cat" data-category="technical">
       <div class="apps-cat-head">
-        <h2>Technical</h2>
-        <span class="cat-jp">AI · Data · Engineering</span>
-        <span class="cat-count">3 projects</span>
+        <div class="cat-copy">
+          <h2>Technical</h2>
+          <span class="cat-jp">AI · Data · Engineering</span>
+        </div>
+        <span class="cat-count"><strong>3</strong><span>projects</span></span>
       </div>
       <div class="apps-grid">
 
@@ -174,9 +179,11 @@
     <!-- ══════════ Language ══════════ -->
     <section class="apps-cat" data-category="language">
       <div class="apps-cat-head">
-        <h2>Language</h2>
-        <span class="cat-jp">Japanese · JLPT N1</span>
-        <span class="cat-count">12 apps</span>
+        <div class="cat-copy">
+          <h2>Language</h2>
+          <span class="cat-jp">Japanese · JLPT N1</span>
+        </div>
+        <span class="cat-count"><strong>12</strong><span>apps</span></span>
       </div>
       <div class="apps-grid">
 
