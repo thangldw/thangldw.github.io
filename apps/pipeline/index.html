@@ -14,12 +14,8 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="/css/reset.css">
-  <link rel="stylesheet" href="/css/tokens.css?v=20260714b">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260714c">
 
   <script>
     (function () {
@@ -89,13 +85,13 @@
     .pipe .field .k { font-family: var(--font-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); }
     .pipe .field .v { margin-top: .2em; }
 
-    .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px 'IBM Plex Mono', var(--font-mono); text-align: center; }
+    .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px var(--font-mono, var(--portfolio-font-mono)); text-align: center; }
     .site-foot span { color: #aab1bc; }
     @media (max-width: 1400px){ .intro .lead { white-space: normal; } }
     @media (max-width: 560px){ .cov-row { grid-template-columns: 6.5rem 1fr; } .cov-row .meta { grid-column: 2; text-align: right; } }
   </style>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
-  <link rel="stylesheet" href="/css/app-design-system.css?v=20260714b">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
+  <link rel="stylesheet" href="/css/app-design-system.css?v=20260714c">
 </head>
 <body class="portfolio-app" data-app-kind="technical" data-app-route="pipeline">
   <main class="wrap main">
@@ -261,6 +257,6 @@
       $("#stats").innerHTML = `<div class="stat bad"><div class="k">error</div><div class="v" style="font-size:var(--step-0)">${esc(String(err))}</div></div>`;
     });
   </script>
-  <script src="/js/site-header-v2.js?v=20260714k"></script>
+  <script src="/js/site-header-v2.js?v=20260714l"></script>
 </body>
 </html>

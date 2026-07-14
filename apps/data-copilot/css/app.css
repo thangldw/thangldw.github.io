@@ -180,7 +180,7 @@ kbd { font-family: var(--font-mono); font-size: .85em; background: var(--bg); bo
   padding: 20px 48px;
   border-top: 1px solid var(--border);
   color: var(--text-dim);
-  font: 400 12px 'IBM Plex Mono', var(--font-mono);
+  font: 400 12px var(--font-mono, var(--portfolio-font-mono));
   text-align: center;
 }
 .site-foot span { color: #aab1bc; }

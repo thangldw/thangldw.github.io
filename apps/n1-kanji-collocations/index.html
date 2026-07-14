@@ -7,7 +7,6 @@
 <link rel="canonical" href="https://thangldw.github.io/apps/n1-kanji-collocations/">
 <meta name="description" content="Luyện kanji, cách đọc, cụm từ và collocation JLPT N1 trong một luồng quiz chạy hoàn toàn trên trình duyệt.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Kanji &amp; Collocations — 漢字・連語"><meta property="og:description" content="Quiz kanji, cách đọc và collocation JLPT N1."><meta property="og:url" content="https://thangldw.github.io/apps/n1-kanji-collocations/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f7f8fa;
@@ -32,7 +31,7 @@
     --orange-border: rgba(234,88,12,0.25);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'IBM Plex Mono', 'Noto Sans JP', monospace; min-height: 100vh; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-mono), var(--font-sans, var(--portfolio-font-sans)); min-height: 100vh; }
 
   .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; box-shadow: 0 1px 8px rgba(79,70,229,0.07); }
   .header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -70,17 +69,17 @@
 
   .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px 30px; margin-bottom: 20px; text-align: center; box-shadow: 0 2px 16px rgba(79,70,229,0.07); }
   .q-num { font-size: 13px; color: var(--muted); margin-bottom: 14px; letter-spacing: .05em; font-weight: 500; }
-  .q-kanji { font-family: 'Noto Sans JP', sans-serif; font-size: 72px; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.1; letter-spacing: .02em; }
+  .q-kanji { font-family: system-ui, sans-serif; font-size: 72px; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.1; letter-spacing: .02em; }
 
   /* Set phrase context */
-  .q-context { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--orange); background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 8px 16px; margin: 8px 0 4px; display: inline-block; line-height: 1.6; font-weight: 500; }
+  .q-context { font-family: system-ui, sans-serif; font-size: 13px; color: var(--orange); background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 8px 16px; margin: 8px 0 4px; display: inline-block; line-height: 1.6; font-weight: 500; }
   .q-context b { color: var(--orange); }
 
   .q-meaning { font-size: 16px; color: #7c3aed; font-weight: 600; margin-bottom: 4px; background: #f5f3ff; display: inline-block; padding: 4px 16px; border-radius: 20px; }
   .q-ask { font-size: 14px; color: var(--muted); margin-top: 6px; }
 
   .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-  .opt { background: var(--surface); border: 2px solid var(--border); color: var(--text); padding: 18px 10px; border-radius: 12px; font-size: 20px; font-family: 'Noto Sans JP', monospace; cursor: pointer; transition: all .15s; text-align: center; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .opt { background: var(--surface); border: 2px solid var(--border); color: var(--text); padding: 18px 10px; border-radius: 12px; font-size: 20px; font-family: var(--font-sans, var(--portfolio-font-sans)); cursor: pointer; transition: all .15s; text-align: center; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
   .opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); transform: translateY(-1px); box-shadow: 0 3px 10px rgba(79,70,229,0.12); }
   .opt.correct { border-color: var(--green-border); background: var(--green-bg); color: var(--green); }
   .opt.wrong { border-color: var(--red-border); background: var(--red-bg); color: var(--red); }
@@ -91,13 +90,13 @@
   .set-examples.show { display: block; }
   .set-examples-title { font-size: 11px; color: var(--orange); margin-bottom: 8px; letter-spacing: .06em; text-transform: uppercase; }
   .colloc-bar { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 10px 0 2px; }
-  .colloc-chip { background: #eef1fb; border: 1px solid #c7d0f5; color: #4f46e5; font-family: 'Noto Sans JP', sans-serif; font-size: 13px; padding: 4px 13px; border-radius: 20px; line-height: 1.5; font-weight: 500; }
+  .colloc-chip { background: #eef1fb; border: 1px solid #c7d0f5; color: #4f46e5; font-family: system-ui, sans-serif; font-size: 13px; padding: 4px 13px; border-radius: 20px; line-height: 1.5; font-weight: 500; }
   .speak-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all .15s; margin-top: 6px; flex-shrink: 0; }
   .speak-btn:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); transform: scale(1.08); }
   .speak-btn.speaking { border-color: var(--accent); background: var(--accent); color: #fff; animation: pulse-speak 1s ease-in-out infinite; }
   @keyframes pulse-speak { 0%,100%{box-shadow:0 0 0 0 rgba(79,70,229,0.4)} 50%{box-shadow:0 0 0 7px rgba(79,70,229,0)} }
   .speak-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .set-ex { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; color: var(--muted); line-height: 1.8; padding: 4px 0; border-bottom: 1px solid #fed7aa; }
+  .set-ex { font-family: system-ui, sans-serif; font-size: 13px; color: var(--muted); line-height: 1.8; padding: 4px 0; border-bottom: 1px solid #fed7aa; }
   .set-ex:last-child { border-bottom: none; }
   .set-ex .jp { color: var(--text); font-size: 14px; }
   .set-ex .vn { color: var(--muted); font-size: 12px; }
@@ -154,9 +153,9 @@
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260713b">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
 <link rel="stylesheet" href="../../css/language-app-readable.css">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714b">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260714c">
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-kanji-collocations">
 
@@ -889,7 +888,7 @@ function retryCard() { answered=false; renderQuestion(); }
 // On load: check if there's any saved progress
 
 </script>
-<script src="/js/site-header-v2.js?v=20260714k"></script>
+<script src="/js/site-header-v2.js?v=20260714l"></script>
   <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>
