@@ -14,8 +14,9 @@
   --portfolio-border: #e2e6ed;
   --portfolio-border-strong: #c7ced9;
   --portfolio-accent: #4657d8;
+  --portfolio-accent-ink: #ffffff;
   --portfolio-accent-soft: #eef0ff;
-  --portfolio-orange: #f27a2b;
+  --portfolio-orange: #a83a00;
   --portfolio-orange-soft: #fff2e8;
   --portfolio-success: #237447;
   --portfolio-success-soft: #eaf6ef;
@@ -35,6 +36,7 @@
   --portfolio-border: #293343;
   --portfolio-border-strong: #4b586a;
   --portfolio-accent: #8e9cff;
+  --portfolio-accent-ink: #0d1117;
   --portfolio-accent-soft: #202844;
   --portfolio-orange: #ff9a5d;
   --portfolio-orange-soft: #35251d;
@@ -159,7 +161,7 @@ body.portfolio-app :is(
 ) {
   border-color: var(--portfolio-accent) !important;
   background: var(--portfolio-accent) !important;
-  color: #fff !important;
+  color: var(--portfolio-accent-ink) !important;
 }
 
 body.portfolio-app :is(
@@ -176,8 +178,21 @@ body.portfolio-app :is(
 }
 
 body.portfolio-app :is(.btn-primary, .primary, .next-btn, .bstart, .bnext, .done-btn, .restart-btn):hover {
-  color: #fff !important;
+  color: var(--portfolio-accent-ink) !important;
   filter: brightness(1.06) !important;
+}
+
+body.portfolio-app :is(
+  .pbtn.on, .filter-btn.active, .mtab.on, .stab.on, .ptab.on,
+  .tab.active, .tab.is-active, .ybtn.on
+):hover {
+  color: var(--portfolio-accent-ink) !important;
+}
+
+body.portfolio-app :is(.btn-primary, .primary) kbd {
+  border-color: color-mix(in srgb, var(--portfolio-accent-ink) 35%, transparent);
+  background: color-mix(in srgb, var(--portfolio-accent-ink) 12%, transparent);
+  color: inherit;
 }
 
 /* Technical apps. */
@@ -264,7 +279,7 @@ body[data-app-route="data-copilot"] .tab {
 
 body[data-app-route="data-copilot"] .tab.is-active {
   border-bottom-color: var(--portfolio-accent) !important;
-  color: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent-ink) !important;
 }
 
 body[data-app-route="data-copilot"] .panel.is-active {
@@ -289,7 +304,7 @@ body[data-app-route="pipeline"] section > h2 {
 }
 
 body[data-app-route="pipeline"] .stats {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0 !important;
   border: 1px solid var(--portfolio-border);
 }
@@ -303,7 +318,7 @@ body[data-app-route="pipeline"] .stat {
   border-radius: 0 !important;
 }
 
-body[data-app-route="pipeline"] .stat:nth-child(3n) {
+body[data-app-route="pipeline"] .stat:last-child {
   border-right: 0 !important;
 }
 
@@ -485,6 +500,38 @@ body[data-language-app="n1-vocabulary-paraphrase"] :is(.vi, .syi, .exp, .res) {
   box-shadow: none !important;
 }
 
+body[data-language-app="n1-vocabulary-tabs"] .syn-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 6px;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi {
+  min-width: 0;
+  gap: 2px;
+  padding: 8px 10px;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi.pri,
+body[data-language-app="n1-vocabulary-exams"] .syi.pri,
+body[data-language-app="n1-vocabulary-paraphrase"] .syi.pri {
+  border: 1px solid color-mix(in srgb, var(--portfolio-accent) 38%, var(--portfolio-border)) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi.pri .sw,
+body[data-language-app="n1-vocabulary-exams"] .syi.pri .sw,
+body[data-language-app="n1-vocabulary-paraphrase"] .syi.pri .sw {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi.pri :is(.sh, .sm),
+body[data-language-app="n1-vocabulary-exams"] .syi.pri :is(.sh, .sm),
+body[data-language-app="n1-vocabulary-paraphrase"] .syi.pri :is(.sh, .sm) {
+  color: var(--portfolio-body) !important;
+}
+
 body[data-language-app="n1-vocabulary-tabs"] :is(.m1, .m2, .m3, .m4, .rd, .gr, .adv, .adj),
 body[data-language-app="n1-vocabulary-exams"] :is(.m1, .m2, .m3, .m4, .rd, .gr, .adv, .adj),
 body[data-language-app="n1-vocabulary-paraphrase"] :is(.m1, .m2, .m3, .m4) {
@@ -612,6 +659,155 @@ body[data-language-app="n1-reading-mondai9"] .app-note {
   color: var(--portfolio-body) !important;
 }
 
+/* Theme-safe overrides for legacy app surfaces that used fixed light colors. */
+body[data-language-app="n1-vocabulary-context"] .sent,
+body[data-language-app="n1-vocabulary-context"] .optwrap,
+body[data-language-app="n1-vocabulary-context"] .pb,
+body[data-language-app="n1-vocabulary-paraphrase"] .synb,
+body[data-language-app="n1-reading-75"] .passage,
+body[data-language-app="n1-grammar-exams"] :is(.tts-bar, .prog-bar),
+body[data-language-app="n1-grammar-sentence-order-drill"] :is(.nav.secondary, .period),
+body[data-language-app="n1-reading-mondai9"] .underline-q,
+body[data-language-app="n1-kanji-collocations"] :is(.legend, .progress-bar) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .sent,
+body[data-language-app="n1-reading-75"] .passage {
+  border-left-color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] .synb,
+body[data-language-app="n1-reading-mondai9"] .underline-q,
+body[data-language-app="n1-kanji-collocations"] :is(.q-meaning, .colloc-chip) {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 35%, var(--portfolio-border)) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] #appHeader {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-bg) !important;
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-reading-75"] :is(.brand, .jump-label, .progress-label, .bai-date, .source),
+body[data-language-app="n1-grammar-exams"] .tts-label,
+body[data-language-app="n1-vocabulary-paraphrase"] .mng {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] .synb-lbl,
+body[data-language-app="n1-vocabulary-paraphrase"] .synl,
+body[data-language-app="n1-vocabulary-context"] :is(.blank, .scorebox),
+body[data-language-app="n1-kanji-analysis"] .card-reading,
+body[data-language-app="n1-reading-mondai9"] :is(.bai-title, .v-title) {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] .co-lbl {
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] .wh,
+body[data-language-app="n1-grammar-exams"] .tag-num,
+body[data-language-app="n1-kanji-analysis"] .card-round {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 35%, var(--portfolio-border)) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.tag-yr, .opt-num) {
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.jp, .jp-s),
+body[data-language-app="n1-reading-mondai9"] .q-text,
+body[data-language-app="n1-kanji-analysis"] .card-example {
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-example {
+  border-left-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-surface-2) !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .hl-connective.show {
+  color: #3a2c20 !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] :is(.layer-hint, .answer-legend, .passage .note, .subtitle) {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .answer-legend > span > span {
+  color: #3a2c20 !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .q-num {
+  background: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent-ink) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-example strong {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .q-context {
+  border-color: color-mix(in srgb, var(--portfolio-orange) 38%, var(--portfolio-border)) !important;
+  background: var(--portfolio-orange-soft) !important;
+  color: var(--portfolio-orange) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .q-context b {
+  color: inherit !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat-val.red {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat-val.green,
+body[data-app-route="pipeline"] .stat.ok .v {
+  color: var(--portfolio-success) !important;
+}
+
+body[data-app-route="pipeline"] :is(.cov-row.lag .meta, .stat.warn .v) {
+  color: var(--portfolio-orange) !important;
+}
+
+body[data-app-route="pipeline"] .stat.bad .v {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.cnt-info, .prog-info, .tag-prog) {
+  color: var(--portfolio-muted) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-info [style*="#16a34a"] {
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-info [style*="#ef4444"] {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] .clls {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.wrow, .qwd) button {
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-app :where(.site-foot, footer.site-foot) span,
+body.portfolio-catalog :where(.site-foot, footer.site-foot) span {
+  color: var(--portfolio-muted) !important;
+}
+
 /* Apps catalog: retain its information architecture, align the visual rhythm. */
 body.portfolio-catalog .apps-intro .eyebrow,
 body.portfolio-catalog .apps-intro h1 em,
@@ -639,7 +835,7 @@ body.portfolio-catalog .filter {
 body.portfolio-catalog .filter.active {
   border-color: var(--portfolio-accent) !important;
   background: var(--portfolio-accent) !important;
-  color: #fff !important;
+  color: var(--portfolio-accent-ink) !important;
 }
 
 body.portfolio-catalog .app-card {
