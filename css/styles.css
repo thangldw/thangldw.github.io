@@ -112,6 +112,11 @@
   .home-v2 .method-band .outline{width:100%;min-width:0}
 }
 
+/* Site headers belong to the document flow and scroll away with the page. */
+html{scroll-padding-top:0}
+header{position:relative;top:auto;z-index:1}
+
+
 /* Portfolio v3 — split-profile online resume */
 .resume-home{background:var(--bg)}
 .resume-home .home-header{display:block;width:100%;margin:0;padding:0}

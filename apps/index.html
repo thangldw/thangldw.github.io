@@ -91,6 +91,8 @@
     @media(max-width:960px){.apps-intro{grid-template-columns:1fr;gap:20px}.apps-intro .eyebrow{grid-column:auto;margin-bottom:0}.apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-card:nth-child(3n){border-right:1px solid var(--border)}.app-card:nth-child(2n){border-right:0}}
     @media(max-width:640px){.apps-nav-inner,.site-foot-inner{width:calc(100% - 32px)}.apps-nav{height:65px;padding:0}.apps-brand{font-size:22px}.apps-menu{display:block}.apps-nav nav{display:none;position:absolute;top:65px;left:0;right:0;padding:16px;background:var(--bg);border:1px solid var(--border);border-top:0;gap:16px;font-size:13px;flex-wrap:wrap}.apps-nav.open nav{display:flex}.apps-nav nav a{display:block}.theme-button{width:32px;height:32px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:20px}.apps-intro h1{font-size:40px}.catalog-controls{padding-top:16px}.filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.filter{flex:0 0 auto}.apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n){border-right:0;min-height:0}}
     @media(max-width:480px){.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;overflow:visible;padding-bottom:0}.filter{width:100%}.filter:last-child{grid-column:1/-1}}
+    /* Header scrolls with the page. */
+    .apps-nav { position: relative; top: auto; z-index: 1; }
   </style>
   <link rel="stylesheet" href="/css/app-design-system.css?v=20260714b">
 </head>
