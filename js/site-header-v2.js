@@ -23,7 +23,7 @@
   var SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>';
 
   var CSS = [
-    ".tw-header{position:sticky;top:0;z-index:1000;width:100%;align-self:stretch;flex:0 0 auto;",
+    ".tw-header{position:relative;z-index:1;width:100%;align-self:stretch;flex:0 0 auto;",
     "background:rgba(13,17,23,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);",
     "border-bottom:1px solid #1f2733;font-family:'Space Grotesk','Noto Sans JP',system-ui,sans-serif;}",
     "html[data-theme='light'] .tw-header{background:rgba(250,251,252,.92);border-bottom-color:#e6e9ee;}",
