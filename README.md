@@ -13,6 +13,7 @@ A build-free static portfolio for engineering side projects and browser-based JL
 | Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | External showcase |
 | RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | External showcase |
 | NamiQuant | Catalog entry only | Internal project; no public application |
+| KakeFlow | Catalog entry only | Private project; public page planned |
 
 The canonical JLPT routes live under `apps/`. Old bookmarks are preserved by the redirects documented in [`apps/URL-MIGRATION.md`](apps/URL-MIGRATION.md); legacy application copies are not kept.
 
