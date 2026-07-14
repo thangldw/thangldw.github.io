@@ -14,6 +14,11 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
+EXTERNAL_FONT_PATTERNS = {
+    "Google Fonts stylesheet": "fonts.googleapis.com",
+    "Google Fonts asset": "fonts.gstatic.com",
+    "Font Awesome CDN": "use.fontawesome.com",
+}
 
 
 class PageParser(HTMLParser):
@@ -84,6 +89,12 @@ def main() -> int:
             target = local_target(page, reference)
             if target is not None and not target.exists():
                 errors.append(f"{page.relative_to(ROOT)}: broken reference {reference}")
+
+    for path in sorted((*ROOT.rglob("*.html"), *ROOT.rglob("*.css"), *ROOT.rglob("*.js"))):
+        content = path.read_text(encoding="utf-8")
+        for label, pattern in EXTERNAL_FONT_PATTERNS.items():
+            if pattern in content:
+                errors.append(f"{path.relative_to(ROOT)}: external font dependency ({label})")
 
     migration = (ROOT / "apps/URL-MIGRATION.md").read_text(encoding="utf-8")
     mappings = re.findall(r"\| `(/apps/[^`]+/)` \| `(/apps/[^`]+/)` \|", migration)

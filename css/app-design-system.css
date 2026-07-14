@@ -1,8 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-
 /* Portfolio app design system
    Visual source: the Home resume — neutral canvas, indigo/orange accents,
-   restrained borders, square controls, and Space Grotesk + IBM Plex Mono. */
+   restrained borders, square controls, and local system fonts. */
 
 :root {
   --portfolio-bg: #fafbfc;
@@ -24,6 +22,9 @@
   --portfolio-danger-soft: #fff0f0;
   --portfolio-radius: 6px;
   --portfolio-content: 1328px;
+  --portfolio-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+  --portfolio-font-serif: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --portfolio-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
 :root[data-theme="dark"] {
@@ -51,7 +52,7 @@ body.portfolio-catalog {
   margin: 0;
   background: var(--portfolio-bg) !important;
   color: var(--portfolio-ink) !important;
-  font-family: "Space Grotesk", "Noto Sans JP", sans-serif !important;
+  font-family: var(--font-sans, var(--portfolio-font-sans)) !important;
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -64,12 +65,12 @@ body.portfolio-catalog * {
 
 body.portfolio-app :where(h1, h2, h3, h4, button, input, select, textarea),
 body.portfolio-catalog :where(h1, h2, h3, h4, button, input, select, textarea) {
-  font-family: "Space Grotesk", "Noto Sans JP", sans-serif;
+  font-family: var(--font-sans, var(--portfolio-font-sans));
 }
 
 body.portfolio-app :where(.font-mono, code, kbd, pre),
 body.portfolio-catalog :where(.font-mono, code, kbd, pre) {
-  font-family: "IBM Plex Mono", "Noto Sans JP", monospace !important;
+  font-family: var(--font-mono, var(--portfolio-font-mono)) !important;
 }
 
 body.portfolio-app :where(a, button, input, select, textarea):focus-visible,
@@ -104,7 +105,7 @@ body.portfolio-app :where(p, .lead, .sub, .muted, .header-sub, .hdr-sub) {
 
 body.portfolio-app :where(.eyebrow, .section-label, .filter-label, .mode-label, .cnt-lbl, .qlbl, .label) {
   color: var(--portfolio-accent) !important;
-  font-family: "IBM Plex Mono", "Noto Sans JP", monospace !important;
+  font-family: var(--font-mono, var(--portfolio-font-mono)) !important;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -131,7 +132,7 @@ body.portfolio-app :where(.site-foot, footer.site-foot) {
   border-top: 1px solid var(--portfolio-border) !important;
   background: var(--portfolio-bg) !important;
   color: var(--portfolio-muted) !important;
-  font: 400 12px/1.5 "IBM Plex Mono", monospace !important;
+  font: 400 12px/1.5 var(--font-mono, var(--portfolio-font-mono)) !important;
   text-align: center;
 }
 
@@ -222,7 +223,7 @@ body[data-app-route="pipeline"] .intro::before {
   display: block;
   margin-bottom: 10px;
   color: var(--portfolio-accent);
-  font: 600 12px/1.4 "IBM Plex Mono", monospace;
+  font: 600 12px/1.4 var(--font-mono, var(--portfolio-font-mono));
   letter-spacing: 0.04em;
 }
 
@@ -325,7 +326,7 @@ body[data-app-route="pipeline"] .stat:last-child {
 body[data-app-route="pipeline"] .stat .k,
 body[data-app-route="pipeline"] .pipe .k {
   color: var(--portfolio-accent) !important;
-  font: 600 11px/1.4 "IBM Plex Mono", monospace !important;
+  font: 600 11px/1.4 var(--font-mono, var(--portfolio-font-mono)) !important;
 }
 
 body[data-app-route="pipeline"] .stat .v {
@@ -471,7 +472,7 @@ body[data-language-app="n1-vocabulary-tabs"] :is(.sec-t, .cnt-lbl, .dtg-h, .pre-
 body[data-language-app="n1-vocabulary-exams"] :is(.cnt-lbl, .wr-lbl, .ra-header),
 body[data-language-app="n1-vocabulary-paraphrase"] :is(.cnt, .rtag) {
   color: var(--portfolio-accent) !important;
-  font-family: "IBM Plex Mono", "Noto Sans JP", monospace !important;
+  font-family: var(--font-mono, var(--portfolio-font-mono)) !important;
 }
 
 body[data-language-app="n1-kanji-analysis"] .card-kanji,
