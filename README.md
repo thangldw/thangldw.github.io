@@ -1,140 +1,120 @@
 # thangldw.github.io
 
-A static portfolio and a collection of browser-native engineering and Japanese-learning tools. The site is published at [thangldw.github.io](https://thangldw.github.io/) and runs without an application server or build step.
+A build-free static portfolio for engineering side projects and browser-based JLPT N1 study tools. The public site is [thangldw.github.io](https://thangldw.github.io/).
 
-## What is here
+## Published surfaces
 
-| Area | Route | Purpose |
+| Surface | Location | Ownership |
 |---|---|---|
-| Profile | [`/`](https://thangldw.github.io/) | English profile, working style, and side projects |
-| Japanese profile | [`/ja/`](https://thangldw.github.io/ja/) | Japanese-language professional profile |
-| Project catalog | [`/apps/`](https://thangldw.github.io/apps/) | Technical demos and JLPT N1 learning tools |
-| Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | Local-first engineering decision memory with exact source citations |
-| NamiQuant | Internal | Local swing-trading decision support with deterministic scoring and risk gates |
-| Data Copilot | [`/apps/data-copilot/`](https://thangldw.github.io/apps/data-copilot/) | Local CSV profiling, DuckDB-WASM SQL, and charts |
-| Pipeline Observability | [`/apps/pipeline/`](https://thangldw.github.io/apps/pipeline/) | Freshness, coverage, run history, and data-quality signals |
-| RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | Evaluation and release gates for RAG and agent systems |
+| English profile | [`/`](https://thangldw.github.io/) | This repository |
+| Japanese profile | [`/ja/`](https://thangldw.github.io/ja/) | This repository |
+| Project catalog | [`/apps/`](https://thangldw.github.io/apps/) | This repository |
+| Data Copilot | [`/apps/data-copilot/`](https://thangldw.github.io/apps/data-copilot/) | This repository |
+| Pipeline Observability | [`/apps/pipeline/`](https://thangldw.github.io/apps/pipeline/) | This repository |
+| Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | External showcase |
+| RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | External showcase |
+| NamiQuant | Catalog entry only | Internal project; no public application |
 
-The catalog also contains the canonical JLPT N1 routes. Compatibility redirects are maintained in [`apps/URL-MIGRATION.md`](apps/URL-MIGRATION.md).
+The canonical JLPT routes live under `apps/`. Old bookmarks are preserved by the redirects documented in [`apps/URL-MIGRATION.md`](apps/URL-MIGRATION.md); legacy application copies are not kept.
 
-## System map
-
-The diagram uses a Miro-style visual language: one reading direction, short labels, grouped responsibilities, labeled connectors, and a limited high-contrast palette.
+## Delivery map
 
 ```mermaid
 flowchart LR
-  subgraph Authoring[Authoring]
-    A[Static HTML, CSS, and JS]
-    B[Local datasets and assets]
+  subgraph Build[Content]
+    A[HTML · CSS · JavaScript]
+    B[Local data · fonts · images]
   end
 
-  subgraph Quality[Quality gate]
+  subgraph Check[Quality gate]
     C[Local preview]
-    D[Site validator]
+    D{Validator passes?}
   end
 
-  subgraph Delivery[Delivery]
-    E[Push to master]
+  subgraph Ship[Publishing]
+    E[Push master]
     F[GitHub Pages]
-    G[Public site]
+    G([Public site])
   end
 
   A --> C
   B --> C
-  C -->|inspect| D
-  D -->|pass| E
-  E --> F
-  F --> G
+  C --> D
+  D -->|Fix| A
+  D -->|Pass| E
+  E --> F --> G
 
-  classDef source fill:#FFF4CC,stroke:#D6A800,color:#1F2937,stroke-width:1.5px;
-  classDef check fill:#DDEBFF,stroke:#4262FF,color:#172B4D,stroke-width:1.5px;
-  classDef ship fill:#DFF7E5,stroke:#2D9D57,color:#17351F,stroke-width:1.5px;
-  class A,B source;
-  class C,D check;
-  class E,F,G ship;
+  classDef content fill:#FFF4CC,stroke:#B88A00,color:#292300,stroke-width:1.5px;
+  classDef quality fill:#E8E5FF,stroke:#5B5BD6,color:#24225A,stroke-width:1.5px;
+  classDef delivery fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1.5px;
+  class A,B content;
+  class C,D quality;
+  class E,F,G delivery;
 ```
 
-## Local development
+## Work locally
 
-Requirements: Python 3 and a modern browser.
+Requirements: Python 3 and a current browser.
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Open `http://127.0.0.1:4173/`. Root-relative links and browser APIs are not reliable when HTML files are opened directly from the filesystem, so use the local server.
+Open `http://127.0.0.1:4173/`. Use the server instead of opening files directly because the site relies on root-relative URLs and browser APIs.
 
-## Validation
-
-Run the repository validator before publishing:
+Before publishing, run:
 
 ```bash
 python3 scripts/validate_site.py
 ```
 
-It checks HTML parsing, duplicate IDs, local references, canonical URLs, redirect mappings, sitemap entries, and social metadata. It also rejects external font-service requests so typography remains local and predictable.
+The validator checks HTML parsing, duplicate IDs, local file references, canonical and Open Graph metadata, sitemap coverage, every compatibility redirect, and accidental external font requests.
 
-## Typography and icons
-
-The UI uses operating-system fonts only:
-
-- sans-serif: the native UI font with explicit Japanese fallbacks;
-- serif: the native Mincho/serif stack where Japanese editorial text benefits from it;
-- monospace: the native code font for SQL, metadata, and technical labels.
-
-No Google Fonts request is made. Interface icons use a small local WOFF2 subset containing only the glyphs referenced by the site.
-
-## Market-data refresh
-
-The portfolio itself deploys from a normal push. A separate scheduled workflow exists only to refresh Data Copilot's market dataset.
-
-```mermaid
-flowchart LR
-  A([Daily schedule]) --> B[Fetch market data]
-  B --> C[Transform to Parquet and JSON]
-  C --> D{Data changed?}
-  D -->|No| E([Stop])
-  D -->|Yes| F[Commit generated data]
-  F --> G[Push to master]
-  G --> H[Pages publishes the update]
-
-  classDef trigger fill:#F3E8FF,stroke:#8B5CF6,color:#3B1D63,stroke-width:1.5px;
-  classDef action fill:#DDEBFF,stroke:#4262FF,color:#172B4D,stroke-width:1.5px;
-  classDef decision fill:#FFF4CC,stroke:#D6A800,color:#4B3B00,stroke-width:1.5px;
-  classDef done fill:#DFF7E5,stroke:#2D9D57,color:#17351F,stroke-width:1.5px;
-  class A trigger;
-  class B,C,F,G action;
-  class D decision;
-  class E,H done;
-```
-
-The workflow is defined in [`.github/workflows/refresh-stocks.yml`](.github/workflows/refresh-stocks.yml). It can also be started manually from GitHub Actions.
-
-## Publishing
-
-GitHub Pages serves the repository root from `master`. Publishing requires only:
-
-```bash
-git push origin master
-```
-
-GitHub may show a `pages-build-deployment` run after a push; that is the platform's Pages publication job, not a custom application workflow.
-
-## Repository layout
+## Repository map
 
 ```text
 .
-├── apps/                 # product demos, JLPT tools, and compatibility redirects
-├── assets/               # social images and local icon-font subsets
-├── css/                  # shared tokens, layouts, app system, and local icons
+├── .github/workflows/    # scheduled market-data refresh
+├── apps/                 # applications and compatibility redirects
+├── assets/               # local data, images, and icon-font subsets
+├── css/                  # shared styles and design tokens
 ├── ja/                   # Japanese profile
-├── js/                   # shared site behavior
-├── scripts/              # validation and market-data refresh scripts
+├── js/                   # shared browser behavior
+├── scripts/              # validation and data-refresh utilities
 ├── index.html            # English profile
 ├── sitemap.xml
 └── robots.txt
 ```
 
-## Documentation visuals
+There is no package installation or production build. GitHub Pages serves the repository root from `master`; a normal `git push origin master` publishes through GitHub's Pages deployment job.
 
-Workflow, graph, and architecture documentation should stay editable as Mermaid rather than being committed as opaque screenshots. Use Miro's [flowchart guidance](https://miro.com/flowchart/) and [mapping and diagramming guidance](https://help.miro.com/hc/en-us/articles/4403634496402-Miro-for-mapping-diagramming) as the visual baseline: standardized shapes, visible connectors, consistent alignment, swimlanes for ownership, layers or subgraphs for complexity, concise labels, and color as a secondary cue rather than the only cue.
+## Data refresh
+
+The portfolio does not need a custom deployment workflow. The only repository workflow, [`.github/workflows/refresh-stocks.yml`](.github/workflows/refresh-stocks.yml), refreshes Data Copilot's market data on a schedule or by manual dispatch.
+
+```mermaid
+flowchart LR
+  A([Schedule or manual run]) --> B[Fetch quotes]
+  B --> C[Transform data]
+  C --> D{Output changed?}
+  D -->|No| E([Finish])
+  D -->|Yes| F[Commit generated files]
+  F --> G[Push master]
+  G --> H([Pages republishes])
+
+  classDef trigger fill:#E8E5FF,stroke:#5B5BD6,color:#24225A,stroke-width:1.5px;
+  classDef action fill:#DDEBFF,stroke:#4262FF,color:#172B4D,stroke-width:1.5px;
+  classDef decision fill:#FFF4CC,stroke:#B88A00,color:#292300,stroke-width:1.5px;
+  classDef finish fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1.5px;
+  class A trigger;
+  class B,C,F,G action;
+  class D decision;
+  class E,H finish;
+```
+
+## UI and documentation rules
+
+- Typography uses system sans-serif, serif/Mincho, and monospace stacks. No font service is called.
+- Icons come from small local WOFF2 subsets; add a glyph only when an interface actually uses it.
+- Diagrams remain editable Mermaid, not screenshot-only documentation.
+- For workflows and infographics, follow Miro's [flowchart guidance](https://miro.com/flowchart/) and [mapping and diagramming guidance](https://help.miro.com/hc/en-us/articles/4403634496402-Miro-for-mapping-diagramming): one clear reading direction, short labels, aligned groups, visible connectors, swimlanes or subgraphs for ownership, and a small high-contrast palette whose meaning is reinforced by text.

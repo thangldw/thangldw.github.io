@@ -100,6 +100,28 @@ def main() -> int:
     mappings = re.findall(r"\| `(/apps/[^`]+/)` \| `(/apps/[^`]+/)` \|", migration)
     if not mappings:
         errors.append("apps/URL-MIGRATION.md: no URL mappings found")
+    elif len(mappings) != len(set(mappings)):
+        errors.append("apps/URL-MIGRATION.md: duplicate URL mapping")
+
+    documented_redirects = set(mappings)
+    discovered_redirects: set[tuple[str, str]] = set()
+    for page, parser in parsed_pages.items():
+        if not parser.refreshes:
+            continue
+        route = "/" + page.parent.relative_to(ROOT).as_posix().strip("/") + "/"
+        for refresh in parser.refreshes:
+            target = re.search(r"url\s*=\s*([^;\s]+)", refresh, flags=re.IGNORECASE)
+            if target:
+                discovered_redirects.add((route, target.group(1)))
+
+    for previous, canonical in sorted(discovered_redirects - documented_redirects):
+        errors.append(
+            f"apps/URL-MIGRATION.md: undocumented redirect {previous} -> {canonical}"
+        )
+    for previous, canonical in sorted(documented_redirects - discovered_redirects):
+        errors.append(
+            f"apps/URL-MIGRATION.md: stale mapping {previous} -> {canonical}"
+        )
 
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
@@ -148,6 +170,12 @@ def main() -> int:
         canonical_page = parsed_pages[canonical_file]
         if not any(canonical in value for value in previous_page.refreshes):
             errors.append(f"{previous}: redirect does not target {canonical}")
+        if previous_page.canonicals != [canonical]:
+            errors.append(f"{previous}: canonical link must target {canonical}")
+        if canonical not in previous_page.references:
+            errors.append(f"{previous}: missing fallback link to {canonical}")
+        if canonical_page.refreshes:
+            errors.append(f"{previous}: redirect chain detected through {canonical}")
         absolute = SITE_URL + canonical
         if absolute not in sitemap_urls:
             errors.append(f"sitemap.xml: missing {absolute}")
