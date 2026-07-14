@@ -9,7 +9,7 @@
    site's design system or FontAwesome (e.g. the standalone N1 apps).
 
    The landing page keeps its own hand-written header — this mirrors
-   it. Root-relative links (/, /apps/, /ja/) resolve from any page
+   it. Root-relative links (/, /apps/) resolve from any page
    because the site is served at the domain root.
    ============================================================ */
 (function () {

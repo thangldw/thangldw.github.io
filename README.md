@@ -7,7 +7,6 @@ A build-free static portfolio for engineering side projects and browser-based JL
 | Surface | Location | Ownership |
 |---|---|---|
 | English profile | [`/`](https://thangldw.github.io/) | This repository |
-| Japanese profile | [`/ja/`](https://thangldw.github.io/ja/) | This repository |
 | Project catalog | [`/apps/`](https://thangldw.github.io/apps/) | This repository |
 | Data Copilot | [`/apps/data-copilot/`](https://thangldw.github.io/apps/data-copilot/) | This repository |
 | Pipeline Observability | [`/apps/pipeline/`](https://thangldw.github.io/apps/pipeline/) | This repository |
@@ -78,7 +77,6 @@ The validator checks HTML parsing, duplicate IDs, local file references, canonic
 ├── apps/                 # applications and compatibility redirects
 ├── assets/               # local data, images, and icon-font subsets
 ├── css/                  # shared styles and design tokens
-├── ja/                   # Japanese profile
 ├── js/                   # shared browser behavior
 ├── scripts/              # validation and data-refresh utilities
 ├── index.html            # English profile
