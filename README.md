@@ -9,6 +9,7 @@ A static portfolio and a collection of browser-native engineering and Japanese-l
 | Profile | [`/`](https://thangldw.github.io/) | English profile, working style, and selected projects |
 | Japanese profile | [`/ja/`](https://thangldw.github.io/ja/) | Japanese-language professional profile |
 | Project catalog | [`/apps/`](https://thangldw.github.io/apps/) | Technical demos and JLPT N1 learning tools |
+| Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | Local-first engineering decision memory with exact source citations |
 | Data Copilot | [`/apps/data-copilot/`](https://thangldw.github.io/apps/data-copilot/) | Local CSV profiling, DuckDB-WASM SQL, and charts |
 | Pipeline Observability | [`/apps/pipeline/`](https://thangldw.github.io/apps/pipeline/) | Freshness, coverage, run history, and data-quality signals |
 | RAGOps | [`/projects/ragops/`](https://thangldw.github.io/projects/ragops/) | Case study for evaluation and release gates in RAG systems |
