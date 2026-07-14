@@ -116,6 +116,15 @@
 html{scroll-padding-top:0}
 header{position:relative;top:auto;z-index:1}
 
+/* Personal brand lockup: reusable monogram plus readable wordmark. */
+.home-v2 .logo{display:inline-flex;align-items:center;gap:10px;font-size:22px;letter-spacing:-.04em}
+.home-v2 .logo .brand-mark{width:36px;height:36px;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:9px;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font:600 13px/1 var(--font-mono);letter-spacing:-.08em;transition:border-color .2s,background .2s,transform .2s}
+.home-v2 .logo .brand-name{display:inline;color:var(--ink)}
+.home-v2 .logo .brand-dot{display:inline;color:var(--accent)}
+.home-v2 .logo:hover .brand-mark{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 18%,transparent);transform:translateY(-1px)}
+.home-v2 .logo:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:7px}
+@media(max-width:680px){.home-v2 .logo{gap:8px;font-size:20px}.home-v2 .logo .brand-mark{width:32px;height:32px;font-size:12px}.home-v2 .home-header nav{display:flex;position:static;padding:0;background:transparent;border:0}}
+
 
 /* Portfolio v3 — split-profile online resume */
 .resume-home{background:var(--bg)}
