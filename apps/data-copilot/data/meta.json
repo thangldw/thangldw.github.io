@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-07-13T22:27:12Z",
+  "last_updated": "2026-07-14T22:29:55Z",
   "source": "Yahoo Finance chart API (public, keyless)",
   "range": "2y",
   "interval": "1d",
-  "row_count": 5429,
+  "row_count": 5440,
   "date_min": "2024-07-15",
-  "date_max": "2026-07-13",
-  "duration_s": 6.9,
+  "date_max": "2026-07-14",
+  "duration_s": 6.4,
   "tickers": [
     {
       "ticker": "AAPL",
@@ -68,79 +68,79 @@
     {
       "ticker": "6758.T",
       "name": "Sony",
-      "rows": 486,
+      "rows": 487,
       "date_min": "2024-07-16",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "7203.T",
       "name": "Toyota",
-      "rows": 486,
+      "rows": 487,
       "date_min": "2024-07-16",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "8306.T",
       "name": "MUFG",
-      "rows": 486,
+      "rows": 487,
       "date_min": "2024-07-16",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "9984.T",
       "name": "SoftBank Group",
-      "rows": 486,
+      "rows": 487,
       "date_min": "2024-07-16",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "AAPL",
       "name": "Apple",
-      "rows": 500,
+      "rows": 501,
       "date_min": "2024-07-15",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "AMZN",
       "name": "Amazon",
-      "rows": 500,
+      "rows": 501,
       "date_min": "2024-07-15",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "GOOGL",
       "name": "Alphabet",
-      "rows": 500,
+      "rows": 501,
       "date_min": "2024-07-15",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "MSFT",
       "name": "Microsoft",
-      "rows": 500,
+      "rows": 501,
       "date_min": "2024-07-15",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "NVDA",
       "name": "NVIDIA",
-      "rows": 500,
+      "rows": 501,
       "date_min": "2024-07-15",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "^GSPC",
       "name": "S&P 500",
-      "rows": 500,
+      "rows": 501,
       "date_min": "2024-07-15",
-      "date_max": "2026-07-13"
+      "date_max": "2026-07-14"
     },
     {
       "ticker": "^N225",
       "name": "Nikkei 225",
-      "rows": 485,
+      "rows": 486,
       "date_min": "2024-07-16",
-      "date_max": "2026-07-10"
+      "date_max": "2026-07-13"
     }
   ],
   "failed": []
