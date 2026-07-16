@@ -3,36 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KakeFlow — 記録から、次のアクションへ。</title>
+  <title>KakeFlow — 家計の全体像と、次のアクションをひとつに。</title>
   <meta name="description" content="KakeFlow は、家計データを端末内で取り込み、確認し、根拠の残る台帳から次に必要なアクションまで見渡せる、開発中のローカルファースト・デスクトップアプリです。">
   <link rel="canonical" href="https://thangldw.github.io/apps/kakeflow/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="KakeFlow — 記録から、次のアクションへ。">
+  <meta property="og:title" content="KakeFlow — 家計の全体像と、次のアクションをひとつに。">
   <meta property="og:description" content="取り込み、確認、照合、計画を、ひとつの家計ワークスペースで。">
   <meta property="og:url" content="https://thangldw.github.io/apps/kakeflow/">
   <meta property="og:image" content="https://thangldw.github.io/apps/kakeflow/assets/screenshots/kakeflow-overview.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="720">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#f7f6f1">
+  <meta name="theme-color" content="#f2f1ec">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="kakeflow-page.css?v=20260716">
+  <link rel="stylesheet" href="kakeflow-page.css?v=20260716-v2">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
 
+  <div class="desktop-bar" aria-hidden="true">
+    <span>KakeFlow · Product preview</span>
+  </div>
+
   <header class="site-header">
     <div class="nav-shell">
-      <a class="wordmark" href="#top" aria-label="KakeFlow ホーム">kake<span>flow</span></a>
+      <a class="wordmark" href="#top" aria-label="KakeFlow ホーム"><img class="brand-mark" src="assets/kakeflow-brand-mark.png" width="24" height="24" alt=""><b>kakeflow</b><small>PREVIEW</small></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">メニュー</button>
       <nav id="primary-nav" aria-label="ページ内ナビゲーション">
-        <a href="#workflow">使い方</a>
+        <a href="#flow">仕組み</a>
         <a href="#screens">画面</a>
-        <a href="#workspaces">できること</a>
-        <a href="#release">リリース</a>
+        <a href="#workspaces">機能</a>
+        <a href="#release">公開予定</a>
       </nav>
-      <a class="button button-small button-outline" href="/apps/">All projects</a>
+      <a class="project-link" href="/apps/">All projects</a>
     </div>
   </header>
 
@@ -40,143 +44,114 @@
     <section class="hero" id="top">
       <div class="hero-shell">
         <div class="hero-copy">
-          <p class="status-line"><span aria-hidden="true"></span>COMING SOON · PRIVATE DEVELOPMENT</p>
-          <p class="eyebrow">FROM HOUSEHOLD RECORDS TO THE NEXT ACTION</p>
-          <h1>家計を記録する。<br><em>次にやることまでわかる。</em></h1>
-          <p class="hero-lede">銀行、カード、レシート、電子マネー、証券口座。ばらばらの記録を端末内で取り込み、確認が必要な項目を先に整理。確定した台帳から、今月の状況と次のアクションをひとつの画面で見渡せます。</p>
+          <p class="section-label"><span>PRIVATE DEVELOPMENT</span> LOCAL-FIRST DESKTOP</p>
+          <h1>家計の全体像と、<br><em>次のアクション</em>をひとつに。</h1>
+          <p class="hero-lede">銀行、カード、レシート、電子マネー、証券口座。ばらばらの記録を端末内で取り込み、確認が必要な項目を先に整理。確定した台帳から、今月の状況と次にやることを見渡せます。</p>
           <div class="hero-actions">
             <span class="button button-primary button-disabled">Coming soon</span>
-            <a class="button button-paper" href="#workflow">新しい使い方を見る</a>
+            <a class="button button-secondary" href="#screens">開発中の画面を見る</a>
           </div>
-          <p class="release-note">掲載画面は開発中の UI プレビューです。ソースコード、ダウンロード、正式なリリース日はまだ公開していません。</p>
-          <ul class="trust-row" aria-label="KakeFlow の基本原則">
-            <li><strong>Local-first</strong><span>家計データは端末内で処理</span></li>
-            <li><strong>Review-gated</strong><span>確認してから台帳へ反映</span></li>
-            <li><strong>Evidence-linked</strong><span>数字から原本まで追跡</span></li>
-          </ul>
+          <p class="release-note">ソースコード、ダウンロード、正式なリリース日はまだ公開していません。</p>
         </div>
 
-        <figure class="hero-product">
-          <div class="product-bar" aria-hidden="true"><span></span><span></span><span></span><b>KakeFlow — 田中家</b></div>
+        <figure class="product-preview">
+          <div class="preview-toolbar"><b>ホーム</b><span>世帯の状況・重要アクション・データ品質</span><small>v1.1 UI</small></div>
           <img src="assets/screenshots/kakeflow-overview.png" width="1280" height="720" alt="KakeFlow のホーム画面。純資産、収入、支出、貯蓄見込み、アクションセンター、収支推移を表示" fetchpriority="high">
-          <figcaption>Home は集計結果だけでなく、カード引落、予算超過、重複候補、低信頼度 OCR など、対応が必要な項目を先に示します。</figcaption>
+          <figcaption>掲載画面は開発中の UI プレビューです。</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="principles" aria-label="新しい KakeFlow の三つの体験">
-      <article><span>01</span><div><b>迷わない Home</b><p>状況、重要アクション、データ品質を同じ入口に。</p></div></article>
-      <article><span>02</span><div><b>確認してから記帳</b><p>マッピング、重複、OCR をレビューして確定。</p></div></article>
-      <article><span>03</span><div><b>視点をすぐ切り替える</b><p>口座・家族・発生・資金移動の範囲を明示。</p></div></article>
+    <section class="status-strip" aria-label="KakeFlow の設計原則">
+      <article><span>LOCAL</span><b>端末内で処理</b><p>家計データをローカルに保持</p></article>
+      <article><span>REVIEW</span><b>確認してから転記</b><p>未確認候補は集計に含めない</p></article>
+      <article><span>EVIDENCE</span><b>原本まで追跡</b><p>CSV 行、PDF、レシートへ戻れる</p></article>
+      <article><span>SCOPE</span><b>範囲を明示</b><p>口座、家族、計上基準を切り替え</p></article>
     </section>
 
-    <section class="section workflow-section" id="workflow">
-      <div class="section-head split-head">
-        <div><p class="eyebrow">ONE REVIEWABLE HOUSEHOLD FLOW</p><h2>集める。確かめる。<br>判断する。</h2></div>
-        <p>KakeFlow は、ファイルを入れた瞬間に家計を上書きしません。原本を残し、候補をレビューし、確定した取引だけを台帳とレポートへつなぎます。</p>
+    <section class="section" id="flow">
+      <div class="section-heading">
+        <div><p class="section-kicker">ONE REVIEWABLE FLOW</p><h2>集める。確かめる。判断する。</h2></div>
+        <p>ファイルを入れた瞬間に家計を上書きしない。処理段階と確認理由を見せ、人が確定した取引だけを台帳とレポートへつなぎます。</p>
       </div>
 
-      <div class="workflow-board" id="workflow-board">
-        <canvas id="workflow-lines" aria-hidden="true"></canvas>
-        <div class="board-label">KakeFlow reviewable household flow</div>
-        <section class="board-cluster source-cluster" aria-labelledby="source-title">
-          <p id="source-title">01 · COLLECT</p>
-          <div class="source-list">
-            <article class="board-node source-node" data-node="bank"><b>銀行・電子マネー</b><span>CSV・XLSX・明細</span></article>
-            <article class="board-node source-node" data-node="card"><b>カード</b><span>利用明細・請求・引落</span></article>
-            <article class="board-node source-node" data-node="wallet"><b>フォルダ・メール</b><span>ローカル・Drive・Gmail</span></article>
-            <article class="board-node source-node" data-node="receipt"><b>撮影 Inbox</b><span>レシート画像・PDF・OCR</span></article>
-            <article class="board-node source-node" data-node="securities"><b>証券・資産</b><span>残高・取引・為替</span></article>
-          </div>
-        </section>
-        <section class="board-cluster process-cluster" aria-labelledby="process-title">
-          <p id="process-title">02 · DETECT</p>
-          <article class="board-node sticky lavender" data-node="inbox"><small>SOURCE KEPT</small><b>Import Inbox</b><span>形式と処理段階を見える化</span></article>
-          <article class="board-node sticky yellow" data-node="extract"><small>ON DEVICE</small><b>抽出・OCR</b><span>日付、金額、明細、証拠位置</span></article>
-        </section>
-        <section class="board-cluster integrity-cluster" aria-labelledby="integrity-title">
-          <p id="integrity-title">03 · REVIEW</p>
-          <article class="board-node sticky coral" data-node="dedupe"><b>マッピング・重複</b><span>口座、カテゴリ、振替候補を確認</span></article>
-          <article class="board-node sticky blue" data-node="receipt-match"><b>根拠をリンク</b><span>元行、PDF、レシートへ戻れる</span></article>
-          <article class="board-node sticky pink" data-node="card-match"><b>カード照合</b><span>請求と引落を負債返済へ</span></article>
-        </section>
-        <section class="ledger-hub" aria-labelledby="ledger-title">
-          <span>04 · POST</span><b id="ledger-title">確定済み台帳</b><small>未確認候補は集計しない</small>
-        </section>
-        <section class="board-cluster outcome-cluster" aria-labelledby="outcome-title">
-          <p id="outcome-title">05 · ACT</p>
-          <article class="board-node outcome-node" data-node="household"><b>Home</b><span>状況・アクション・品質</span></article>
-          <article class="board-node outcome-node" data-node="cashflow"><b>取引・照合</b><span>検索・修正・ドリルダウン</span></article>
-          <article class="board-node outcome-node" data-node="balance"><b>計画・分析</b><span>予算・予測・固定費</span></article>
-          <article class="board-node outcome-node" data-node="portfolio"><b>資産・家族</b><span>純資産・投資・共有範囲</span></article>
-        </section>
-      </div>
-
-      <aside class="card-rule" aria-labelledby="review-rule-title">
-        <div><p class="eyebrow">REVIEW GATE</p><h3 id="review-rule-title">未確認の候補を、確定した数字に混ぜない。</h3><p>処理段階と確認理由を見せることで、「どこまで集計済みか」と「次に何を直すか」を迷わず判断できます。</p></div>
-        <ol>
-          <li><span>検出</span><b>原本と形式を保存</b><strong>集計外</strong></li>
-          <li><span>レビュー</span><b>口座・重複・根拠を確認</b><strong>判断待ち</strong></li>
-          <li><span>転記</span><b>確定済み台帳へ反映</b><strong>集計対象</strong></li>
+      <div class="flow-panel">
+        <div class="panel-toolbar"><div><b>家計データの流れ</b><span>原本からアクションまで</span></div><small>REVIEW GATED</small></div>
+        <ol class="flow-steps">
+          <li><span>01 · COLLECT</span><b>原本を集める</b><p>銀行・カード・証券の明細、メール添付、レシート画像。</p><small>CSV · XLSX · PDF · EML · IMAGE</small></li>
+          <li><span>02 · DETECT</span><b>Inbox で検出</b><p>形式、件数、処理段階を表示。OCR も端末内で実行。</p><small>SOURCE KEPT</small></li>
+          <li><span>03 · REVIEW</span><b>候補を確かめる</b><p>口座、カテゴリ、重複、振替、カード引落を確認。</p><small>HUMAN DECISION</small></li>
+          <li class="confirmed"><span>04 · POST</span><b>台帳へ確定</b><p>確認済み取引だけを一貫した計上基準で保存。</p><small>CONFIRMED LEDGER</small></li>
+          <li><span>05 · ACT</span><b>次を判断する</b><p>Home、照合、予算、予測、レポートへ反映。</p><small>ACTION CENTER</small></li>
         </ol>
-      </aside>
+        <div class="review-rule"><span>REVIEW RULE</span><p><b>未確認の候補を、確定した数字に混ぜない。</b> 検出 → レビュー → 転記の状態を常に明示します。</p></div>
+      </div>
     </section>
 
     <section class="section screens-section" id="screens">
-      <div class="section-head split-head">
-        <div><p class="eyebrow">CURRENT v1.1 UI</p><h2>目的ごとに分かれ、<br>同じ台帳でつながる。</h2></div>
-        <p>Home、取引、インポートの各画面は、役割をひとつに絞っています。どの画面でも対象月と集計範囲が明示され、次の作業へそのまま移動できます。</p>
+      <div class="section-heading">
+        <div><p class="section-kicker">CURRENT PRODUCT UI</p><h2>目的ごとに分かれ、同じ台帳でつながる。</h2></div>
+        <p>各画面は役割をひとつに絞りながら、対象月・口座・家族・計上基準を引き継ぎます。</p>
       </div>
-      <div class="screen-showcase">
-        <div class="screen-tabs" role="tablist" aria-label="KakeFlow の画面">
-          <button id="tab-overview" role="tab" aria-selected="true" aria-controls="screen-panel" data-screen="overview" type="button"><b>Home</b><span>状況・アクション・データ品質</span></button>
-          <button id="tab-transactions" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="transactions" type="button" tabindex="-1"><b>取引</b><span>確定済み台帳・検索・証跡</span></button>
-          <button id="tab-import" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="import" type="button" tabindex="-1"><b>Import Inbox</b><span>検出・レビュー・転記</span></button>
+
+      <div class="screen-shell">
+        <div class="screen-sidebar">
+          <p>画面プレビュー</p>
+          <div class="screen-tabs" role="tablist" aria-label="KakeFlow の画面">
+            <button id="tab-overview" role="tab" aria-selected="true" aria-controls="screen-panel" data-screen="overview" type="button"><b>ホーム</b><span>状況・アクション・データ品質</span></button>
+            <button id="tab-transactions" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="transactions" type="button" tabindex="-1"><b>取引</b><span>確定済み台帳・検索・証跡</span></button>
+            <button id="tab-import" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="import" type="button" tabindex="-1"><b>インポート</b><span>検出・レビュー・転記</span></button>
+          </div>
+          <div class="sidebar-note"><span>LOCAL DATA</span><p>プレビューはサンプル世帯を使用しています。</p></div>
         </div>
-        <figure id="screen-panel" role="tabpanel" aria-labelledby="tab-overview">
-          <img id="screen-image" src="assets/screenshots/kakeflow-overview.png" width="1280" height="720" alt="KakeFlow の Home 画面">
-          <figcaption id="screen-caption"><b>Home</b><span>世帯の状況、優先アクション、確定データの品質をひとつの入口で確認します。</span></figcaption>
+        <figure id="screen-panel" class="screen-panel" role="tabpanel" aria-labelledby="tab-overview">
+          <div class="screen-panel-toolbar"><div><b id="screen-title">ホーム</b><span id="screen-subtitle">世帯の状況・重要アクション・データ品質</span></div><small id="screen-status">CONFIRMED DATA</small></div>
+          <img id="screen-image" src="assets/screenshots/kakeflow-overview.png" width="1280" height="720" alt="KakeFlow のホーム画面">
+          <figcaption id="screen-caption">集計結果だけでなく、カード引落、予算超過、重複候補、低信頼度 OCR など、対応が必要な項目を先に表示します。</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section investment-section" id="workspaces">
-      <div class="investment-copy">
-        <p class="eyebrow">TEN FOCUSED WORKSPACES, ONE LEDGER</p>
-        <h2>日々の記録から、<br>家族の計画まで。</h2>
-        <p>新しいナビゲーションは、機能名の羅列ではなく、家計管理の仕事に沿って整理されています。取り込み、照合、分析、共有が別々のツールに分断されません。</p>
+    <section class="section" id="workspaces">
+      <div class="section-heading">
+        <div><p class="section-kicker">TEN FOCUSED WORKSPACES</p><h2>日々の記録から、家族の計画まで。</h2></div>
+        <p>新しいナビゲーションは、機能の羅列ではなく家計管理の仕事に沿って整理されています。</p>
       </div>
-      <div class="investment-board" aria-label="KakeFlow のワークスペース">
-        <article><span>01</span><b>取り込み</b><p>Import Inbox と撮影 Inbox で、ファイル、メール添付、レシートを同じレビュー体験へ。</p></article>
-        <article><span>02</span><b>照合・資産</b><p>カード請求と銀行引落を照合し、資産・投資は日常支出と分けて純資産へ統合。</p></article>
-        <article><span>03</span><b>計画・世帯</b><p>カレンダー、月次・年次レポート、予算、目標、分類ルール、家族スペースまで連携。</p></article>
+
+      <div class="workspace-grid">
+        <article><header><span>メイン</span><small>01</small></header><h3>ホーム・取引</h3><p>家計の状況と優先アクションを確認し、確定済み台帳へ掘り下げます。</p><ul><li>Action Center</li><li>Data Quality</li><li>検索・証跡</li></ul></article>
+        <article><header><span>取り込み</span><small>02</small></header><h3>Import・撮影 Inbox</h3><p>ファイル、メール添付、レシートを同じレビュー体験へ集約します。</p><ul><li>処理段階</li><li>端末内 OCR</li><li>重複レビュー</li></ul></article>
+        <article><header><span>照合・資産</span><small>03</small></header><h3>カード・資産・投資</h3><p>請求と銀行引落を照合し、投資を日常支出と分けて純資産へ統合します。</p><ul><li>カード照合</li><li>保有・損益</li><li>残高スナップショット</li></ul></article>
+        <article><header><span>計画・分析</span><small>04</small></header><h3>レポート・予算・ルール</h3><p>カレンダー、月次・年次レビュー、予測、固定費、分類ルールを連携します。</p><ul><li>予算・目標</li><li>予測・異常</li><li>CSV・XLSX・PDF</li></ul></article>
+        <article><header><span>世帯</span><small>05</small></header><h3>家族スペース</h3><p>世帯メンバー、帰属、共有範囲を明示し、家族のレビューを分けて扱います。</p><ul><li>家族集計範囲</li><li>個人・共通</li><li>共有レビュー</li></ul></article>
       </div>
     </section>
 
-    <section class="section boundaries-section" id="release">
-      <div class="section-head split-head">
-        <div><p class="eyebrow">HONEST PREVIEW BOUNDARY</p><h2>開発中の現在。<br>公開までのこれから。</h2></div>
-        <p>このページは、新しい KakeFlow の体験を先行公開するものです。今すぐ利用できる製品や正式リリースを示すものではありません。</p>
+    <section class="section release-section" id="release">
+      <div class="section-heading">
+        <div><p class="section-kicker">HONEST PREVIEW BOUNDARY</p><h2>開発中の現在と、公開までのこれから。</h2></div>
+        <p>このページは新しい体験を先行公開するものです。今すぐ利用できる製品や正式リリースを示すものではありません。</p>
       </div>
-      <div class="boundary-grid">
-        <article class="available"><span>IN DEVELOPMENT</span><h3>現在検証していること</h3><ul><li>仕事別に再編したサイドナビゲーション</li><li>Home の Action Center と Data Quality</li><li>撮影 Inbox、予算・目標、分類ルール、家族スペース</li><li>口座・家族・計上基準のスコープ操作</li></ul></article>
-        <article><span>BEFORE PUBLIC LAUNCH</span><h3>公開前に仕上げること</h3><ul><li>macOS・Windows の配布と更新経路</li><li>対応する金融機関・形式・制約の文書化</li><li>バックアップ、復元、データ保護の説明</li><li>実データを使った packaged app の検証</li></ul></article>
-        <article class="limitations"><span>PREVIEW LIMITS</span><h3>今はまだ提供しないもの</h3><ul><li>アプリの一般ダウンロード</li><li>ソースコードと private repository</li><li>正式な対応金融機関一覧</li><li>リリース日、価格、サポート条件</li></ul></article>
+
+      <div class="release-grid">
+        <article class="release-card active"><header><span>IN DEVELOPMENT</span><small>ACTIVE</small></header><h3>現在検証していること</h3><ul><li>仕事別に再編したナビゲーション</li><li>Home の Action Center と Data Quality</li><li>撮影 Inbox、予算・目標、分類ルール</li><li>口座・家族・計上基準のスコープ操作</li></ul></article>
+        <article class="release-card"><header><span>BEFORE PUBLIC LAUNCH</span><small>NEXT</small></header><h3>公開前に仕上げること</h3><ul><li>macOS・Windows の配布と更新経路</li><li>対応形式と制約の文書化</li><li>バックアップ、復元、データ保護</li><li>実データを使った packaged app 検証</li></ul></article>
+        <article class="release-card caution"><header><span>PREVIEW LIMITS</span><small>PRIVATE</small></header><h3>今はまだ提供しないもの</h3><ul><li>アプリの一般ダウンロード</li><li>ソースコードと private repository</li><li>正式な対応金融機関一覧</li><li>リリース日、価格、サポート条件</li></ul></article>
       </div>
     </section>
 
-    <section class="closing-section">
-      <div><p class="eyebrow">LOCAL-FIRST · REVIEWABLE · ACTIONABLE</p><h2>家計の数字を、<br>次の判断につなげる。</h2></div>
-      <div class="closing-actions"><span class="button button-primary button-disabled">Coming soon</span><a class="button button-paper" href="/apps/">Back to projects</a></div>
+    <section class="closing-panel">
+      <div><p class="section-kicker">LOCAL-FIRST · REVIEWABLE · ACTIONABLE</p><h2>家計の数字を、次の判断につなげる。</h2><p>正確さの根拠と、今やるべきことが同じ場所にある家計簿を目指しています。</p></div>
+      <div class="closing-actions"><span class="button button-primary button-disabled">Coming soon</span><a class="button button-secondary" href="/apps/">Back to projects</a></div>
     </section>
   </main>
 
   <footer>
-    <a class="wordmark" href="#top">kake<span>flow</span></a>
+    <a class="wordmark" href="#top"><img class="brand-mark" src="assets/kakeflow-brand-mark.png" width="24" height="24" alt=""><b>kakeflow</b></a>
     <p>Local-first household finance for macOS and Windows.</p>
-    <p>© 2026 KakeFlow · Preview</p>
+    <p>© 2026 KakeFlow · Private preview</p>
   </footer>
 
-  <script src="kakeflow-page.js?v=20260716"></script>
+  <script src="kakeflow-page.js?v=20260716-v2"></script>
 </body>
 </html>
