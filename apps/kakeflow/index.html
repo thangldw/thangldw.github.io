@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KakeFlow — 家計の流れを、正しくひとつに。</title>
-  <meta name="description" content="KakeFlow は、銀行・カード・レシート・証券データを、根拠の残る家計簿へまとめる開発中のローカルファースト・デスクトップアプリです。">
+  <title>KakeFlow — 記録から、次のアクションへ。</title>
+  <meta name="description" content="KakeFlow は、家計データを端末内で取り込み、確認し、根拠の残る台帳から次に必要なアクションまで見渡せる、開発中のローカルファースト・デスクトップアプリです。">
   <link rel="canonical" href="https://thangldw.github.io/apps/kakeflow/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="KakeFlow — Coming soon">
-  <meta property="og:description" content="ばらばらな家計データを、照合できる台帳とダッシュボードへ。">
+  <meta property="og:title" content="KakeFlow — 記録から、次のアクションへ。">
+  <meta property="og:description" content="取り込み、確認、照合、計画を、ひとつの家計ワークスペースで。">
   <meta property="og:url" content="https://thangldw.github.io/apps/kakeflow/">
   <meta property="og:image" content="https://thangldw.github.io/apps/kakeflow/assets/screenshots/kakeflow-overview.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#f7f6f1">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="kakeflow-page.css?v=20260714">
+  <link rel="stylesheet" href="kakeflow-page.css?v=20260716">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body>
@@ -25,10 +27,10 @@
       <a class="wordmark" href="#top" aria-label="KakeFlow ホーム">kake<span>flow</span></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">メニュー</button>
       <nav id="primary-nav" aria-label="ページ内ナビゲーション">
-        <a href="#workflow">仕組み</a>
+        <a href="#workflow">使い方</a>
         <a href="#screens">画面</a>
-        <a href="#investments">投資管理</a>
-        <a href="#roadmap">公開予定</a>
+        <a href="#workspaces">できること</a>
+        <a href="#release">リリース</a>
       </nav>
       <a class="button button-small button-outline" href="/apps/">All projects</a>
     </div>
@@ -39,132 +41,132 @@
       <div class="hero-shell">
         <div class="hero-copy">
           <p class="status-line"><span aria-hidden="true"></span>COMING SOON · PRIVATE DEVELOPMENT</p>
-          <p class="eyebrow">HOUSEHOLD FINANCE, WITH A TRACEABLE SOURCE</p>
-          <h1>家計の流れを、<br><em>正しくひとつに。</em></h1>
-          <p class="hero-lede">銀行、カード、PayPay、レシート、PDF、証券口座。ばらばらの記録をあなたのパソコンでつなぎ、二重計上を防ぎながら、数字の根拠までたどれる家計簿を目指しています。</p>
+          <p class="eyebrow">FROM HOUSEHOLD RECORDS TO THE NEXT ACTION</p>
+          <h1>家計を記録する。<br><em>次にやることまでわかる。</em></h1>
+          <p class="hero-lede">銀行、カード、レシート、電子マネー、証券口座。ばらばらの記録を端末内で取り込み、確認が必要な項目を先に整理。確定した台帳から、今月の状況と次のアクションをひとつの画面で見渡せます。</p>
           <div class="hero-actions">
             <span class="button button-primary button-disabled">Coming soon</span>
-            <a class="button button-paper" href="#workflow">プロダクトの仕組みを見る</a>
+            <a class="button button-paper" href="#workflow">新しい使い方を見る</a>
           </div>
-          <p class="release-note">このページは開発中プロダクトのプレビューです。ソースコード、ダウンロード、リリースはまだ公開していません。</p>
+          <p class="release-note">掲載画面は開発中の UI プレビューです。ソースコード、ダウンロード、正式なリリース日はまだ公開していません。</p>
           <ul class="trust-row" aria-label="KakeFlow の基本原則">
             <li><strong>Local-first</strong><span>家計データは端末内で処理</span></li>
-            <li><strong>Evidence-linked</strong><span>元ファイル・行まで追跡</span></li>
-            <li><strong>Review first</strong><span>確認前に台帳へ記帳しない</span></li>
+            <li><strong>Review-gated</strong><span>確認してから台帳へ反映</span></li>
+            <li><strong>Evidence-linked</strong><span>数字から原本まで追跡</span></li>
           </ul>
         </div>
 
         <figure class="hero-product">
-          <div class="product-bar" aria-hidden="true"><span></span><span></span><span></span><b>KakeFlow · Preview</b></div>
-          <img src="assets/screenshots/kakeflow-overview.png" width="1280" height="1073" alt="KakeFlow の家計概要。純資産、収入、支出、収支推移、最近の取引、カード支払いを表示" fetchpriority="high">
-          <figcaption>家計簿・キャッシュフロー・資産負債を、同じ確定済み台帳から表示します。</figcaption>
+          <div class="product-bar" aria-hidden="true"><span></span><span></span><span></span><b>KakeFlow — 田中家</b></div>
+          <img src="assets/screenshots/kakeflow-overview.png" width="1280" height="720" alt="KakeFlow のホーム画面。純資産、収入、支出、貯蓄見込み、アクションセンター、収支推移を表示" fetchpriority="high">
+          <figcaption>Home は集計結果だけでなく、カード引落、予算超過、重複候補、低信頼度 OCR など、対応が必要な項目を先に示します。</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="principles" aria-label="KakeFlow が解決する三つの課題">
-      <article><span>01</span><div><b>原本を一つの Inbox へ</b><p>対応する明細、PDF、画像を同じ場所で確認。</p></div></article>
-      <article><span>02</span><div><b>支払いを二重に数えない</b><p>カード利用と後日の銀行引落を分けて照合。</p></div></article>
-      <article><span>03</span><div><b>数値から原本へ戻れる</b><p>集計から取引、元の行やレシートまで追跡。</p></div></article>
+    <section class="principles" aria-label="新しい KakeFlow の三つの体験">
+      <article><span>01</span><div><b>迷わない Home</b><p>状況、重要アクション、データ品質を同じ入口に。</p></div></article>
+      <article><span>02</span><div><b>確認してから記帳</b><p>マッピング、重複、OCR をレビューして確定。</p></div></article>
+      <article><span>03</span><div><b>視点をすぐ切り替える</b><p>口座・家族・発生・資金移動の範囲を明示。</p></div></article>
     </section>
 
     <section class="section workflow-section" id="workflow">
       <div class="section-head split-head">
-        <div><p class="eyebrow">ONE REVIEWABLE DATA FLOW</p><h2>原本から家計簿まで、<br>一つの見える流れに。</h2></div>
-        <p>ファイルはそのまま取引になりません。原本を保存し、抽出候補を照合し、人が確認した取引だけを台帳へ記帳する設計です。</p>
+        <div><p class="eyebrow">ONE REVIEWABLE HOUSEHOLD FLOW</p><h2>集める。確かめる。<br>判断する。</h2></div>
+        <p>KakeFlow は、ファイルを入れた瞬間に家計を上書きしません。原本を残し、候補をレビューし、確定した取引だけを台帳とレポートへつなぎます。</p>
       </div>
 
       <div class="workflow-board" id="workflow-board">
         <canvas id="workflow-lines" aria-hidden="true"></canvas>
-        <div class="board-label">KakeFlow household data canvas</div>
+        <div class="board-label">KakeFlow reviewable household flow</div>
         <section class="board-cluster source-cluster" aria-labelledby="source-title">
-          <p id="source-title">01 · SOURCES</p>
+          <p id="source-title">01 · COLLECT</p>
           <div class="source-list">
-            <article class="board-node source-node" data-node="bank"><b>銀行口座</b><span>CSV・取引明細</span></article>
-            <article class="board-node source-node" data-node="card"><b>クレジットカード</b><span>CSV・PDF 明細</span></article>
-            <article class="board-node source-node" data-node="wallet"><b>PayPay・電子マネー</b><span>複数行イベント</span></article>
-            <article class="board-node source-node" data-node="receipt"><b>レシート・PDF</b><span>画像・スキャン</span></article>
-            <article class="board-node source-node" data-node="securities"><b>証券口座</b><span>残高・取引履歴</span></article>
+            <article class="board-node source-node" data-node="bank"><b>銀行・電子マネー</b><span>CSV・XLSX・明細</span></article>
+            <article class="board-node source-node" data-node="card"><b>カード</b><span>利用明細・請求・引落</span></article>
+            <article class="board-node source-node" data-node="wallet"><b>フォルダ・メール</b><span>ローカル・Drive・Gmail</span></article>
+            <article class="board-node source-node" data-node="receipt"><b>撮影 Inbox</b><span>レシート画像・PDF・OCR</span></article>
+            <article class="board-node source-node" data-node="securities"><b>証券・資産</b><span>残高・取引・為替</span></article>
           </div>
         </section>
         <section class="board-cluster process-cluster" aria-labelledby="process-title">
-          <p id="process-title">02 · EXTRACT</p>
-          <article class="board-node sticky lavender" data-node="inbox"><small>IMMUTABLE</small><b>Import Inbox</b><span>原本を保管し形式を判定</span></article>
-          <article class="board-node sticky yellow" data-node="extract"><small>LOCAL</small><b>Extract・OCR</b><span>日付、金額、明細、証拠位置</span></article>
+          <p id="process-title">02 · DETECT</p>
+          <article class="board-node sticky lavender" data-node="inbox"><small>SOURCE KEPT</small><b>Import Inbox</b><span>形式と処理段階を見える化</span></article>
+          <article class="board-node sticky yellow" data-node="extract"><small>ON DEVICE</small><b>抽出・OCR</b><span>日付、金額、明細、証拠位置</span></article>
         </section>
         <section class="board-cluster integrity-cluster" aria-labelledby="integrity-title">
-          <p id="integrity-title">03 · RECONCILE</p>
-          <article class="board-node sticky coral" data-node="dedupe"><b>重複・振替を照合</b><span>同じ支出を一件にまとめる</span></article>
-          <article class="board-node sticky blue" data-node="receipt-match"><b>レシートをリンク</b><span>明細の証拠として関連付け</span></article>
-          <article class="board-node sticky pink" data-node="card-match"><b>カード支払いを照合</b><span>銀行引落を負債返済へ</span></article>
+          <p id="integrity-title">03 · REVIEW</p>
+          <article class="board-node sticky coral" data-node="dedupe"><b>マッピング・重複</b><span>口座、カテゴリ、振替候補を確認</span></article>
+          <article class="board-node sticky blue" data-node="receipt-match"><b>根拠をリンク</b><span>元行、PDF、レシートへ戻れる</span></article>
+          <article class="board-node sticky pink" data-node="card-match"><b>カード照合</b><span>請求と引落を負債返済へ</span></article>
         </section>
         <section class="ledger-hub" aria-labelledby="ledger-title">
-          <span>04 · CONFIRM</span><b id="ledger-title">確定済み台帳</b><small>発生ベースの複式記帳</small>
+          <span>04 · POST</span><b id="ledger-title">確定済み台帳</b><small>未確認候補は集計しない</small>
         </section>
         <section class="board-cluster outcome-cluster" aria-labelledby="outcome-title">
-          <p id="outcome-title">05 · UNDERSTAND</p>
-          <article class="board-node outcome-node" data-node="household"><b>家計簿</b><span>収支・予算・カテゴリ</span></article>
-          <article class="board-node outcome-node" data-node="cashflow"><b>キャッシュフロー</b><span>実際の入出金</span></article>
-          <article class="board-node outcome-node" data-node="balance"><b>資産・負債</b><span>純資産とカード未払</span></article>
-          <article class="board-node outcome-node" data-node="portfolio"><b>投資ポートフォリオ</b><span>評価額・損益・配分</span></article>
+          <p id="outcome-title">05 · ACT</p>
+          <article class="board-node outcome-node" data-node="household"><b>Home</b><span>状況・アクション・品質</span></article>
+          <article class="board-node outcome-node" data-node="cashflow"><b>取引・照合</b><span>検索・修正・ドリルダウン</span></article>
+          <article class="board-node outcome-node" data-node="balance"><b>計画・分析</b><span>予算・予測・固定費</span></article>
+          <article class="board-node outcome-node" data-node="portfolio"><b>資産・家族</b><span>純資産・投資・共有範囲</span></article>
         </section>
       </div>
 
-      <aside class="card-rule" aria-labelledby="card-rule-title">
-        <div><p class="eyebrow">CARD PAYMENT RULE</p><h3 id="card-rule-title">カード利用は一度だけ支出にする。</h3><p>購入時に費用とカード負債を記録し、後日の銀行引落は負債の返済として扱います。</p></div>
+      <aside class="card-rule" aria-labelledby="review-rule-title">
+        <div><p class="eyebrow">REVIEW GATE</p><h3 id="review-rule-title">未確認の候補を、確定した数字に混ぜない。</h3><p>処理段階と確認理由を見せることで、「どこまで集計済みか」と「次に何を直すか」を迷わず判断できます。</p></div>
         <ol>
-          <li><span>7/3</span><b>カードで買い物</b><strong>支出 ¥5,400</strong></li>
-          <li><span>7/27</span><b>銀行から引落</b><strong>負債 −¥5,400</strong></li>
-          <li><span>結果</span><b>支出は一件</b><strong>二重計上なし</strong></li>
+          <li><span>検出</span><b>原本と形式を保存</b><strong>集計外</strong></li>
+          <li><span>レビュー</span><b>口座・重複・根拠を確認</b><strong>判断待ち</strong></li>
+          <li><span>転記</span><b>確定済み台帳へ反映</b><strong>集計対象</strong></li>
         </ol>
       </aside>
     </section>
 
     <section class="section screens-section" id="screens">
       <div class="section-head split-head">
-        <div><p class="eyebrow">PRODUCT PREVIEW</p><h2>数字を見る。<br>根拠まで確かめる。</h2></div>
-        <p>集計だけで終わらず、取引、取り込み候補、元ファイルへ段階的に戻れる体験を設計しています。</p>
+        <div><p class="eyebrow">CURRENT v1.1 UI</p><h2>目的ごとに分かれ、<br>同じ台帳でつながる。</h2></div>
+        <p>Home、取引、インポートの各画面は、役割をひとつに絞っています。どの画面でも対象月と集計範囲が明示され、次の作業へそのまま移動できます。</p>
       </div>
       <div class="screen-showcase">
         <div class="screen-tabs" role="tablist" aria-label="KakeFlow の画面">
-          <button id="tab-overview" role="tab" aria-selected="true" aria-controls="screen-panel" data-screen="overview" type="button"><b>家計の概要</b><span>収支・純資産・カード支払い</span></button>
-          <button id="tab-transactions" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="transactions" type="button" tabindex="-1"><b>取引台帳</b><span>検索・分類・証拠リンク</span></button>
-          <button id="tab-import" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="import" type="button" tabindex="-1"><b>Import Inbox</b><span>候補・重複・照合をレビュー</span></button>
+          <button id="tab-overview" role="tab" aria-selected="true" aria-controls="screen-panel" data-screen="overview" type="button"><b>Home</b><span>状況・アクション・データ品質</span></button>
+          <button id="tab-transactions" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="transactions" type="button" tabindex="-1"><b>取引</b><span>確定済み台帳・検索・証跡</span></button>
+          <button id="tab-import" role="tab" aria-selected="false" aria-controls="screen-panel" data-screen="import" type="button" tabindex="-1"><b>Import Inbox</b><span>検出・レビュー・転記</span></button>
         </div>
         <figure id="screen-panel" role="tabpanel" aria-labelledby="tab-overview">
-          <img id="screen-image" src="assets/screenshots/kakeflow-overview.png" width="1280" height="1073" alt="KakeFlow 家計の概要画面">
-          <figcaption id="screen-caption"><b>家計の概要</b><span>支出、キャッシュフロー、カード負債の状態を一画面で把握します。</span></figcaption>
+          <img id="screen-image" src="assets/screenshots/kakeflow-overview.png" width="1280" height="720" alt="KakeFlow の Home 画面">
+          <figcaption id="screen-caption"><b>Home</b><span>世帯の状況、優先アクション、確定データの品質をひとつの入口で確認します。</span></figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section investment-section" id="investments">
+    <section class="section investment-section" id="workspaces">
       <div class="investment-copy">
-        <p class="eyebrow">INVESTMENTS, SEPARATE FROM SPENDING</p>
-        <h2>投資も、家計の全体像へ。</h2>
-        <p>証券残高は日常の支出に変換せず、別のポートフォリオとして保存。銘柄・現金・為替レートを、評価額と損益の観点で純資産へ統合します。</p>
+        <p class="eyebrow">TEN FOCUSED WORKSPACES, ONE LEDGER</p>
+        <h2>日々の記録から、<br>家族の計画まで。</h2>
+        <p>新しいナビゲーションは、機能名の羅列ではなく、家計管理の仕事に沿って整理されています。取り込み、照合、分析、共有が別々のツールに分断されません。</p>
       </div>
-      <div class="investment-board" aria-label="KakeFlow の投資管理構想">
-        <article><span>01</span><b>残高スナップショット</b><p>口座・銘柄・数量・為替レートを履歴として保持。</p></article>
-        <article><span>02</span><b>取引履歴</b><p>対応する売買を元行とともに取り込み、確認可能に。</p></article>
-        <article><span>03</span><b>評価と損益</b><p>評価額、実現・含み損益、配当、手数料、税を整理。</p></article>
+      <div class="investment-board" aria-label="KakeFlow のワークスペース">
+        <article><span>01</span><b>取り込み</b><p>Import Inbox と撮影 Inbox で、ファイル、メール添付、レシートを同じレビュー体験へ。</p></article>
+        <article><span>02</span><b>照合・資産</b><p>カード請求と銀行引落を照合し、資産・投資は日常支出と分けて純資産へ統合。</p></article>
+        <article><span>03</span><b>計画・世帯</b><p>カレンダー、月次・年次レポート、予算、目標、分類ルール、家族スペースまで連携。</p></article>
       </div>
     </section>
 
-    <section class="section boundaries-section" id="roadmap">
+    <section class="section boundaries-section" id="release">
       <div class="section-head split-head">
         <div><p class="eyebrow">HONEST PREVIEW BOUNDARY</p><h2>開発中の現在。<br>公開までのこれから。</h2></div>
-        <p>このページは方向性を先行公開するためのものです。利用可能なプロダクトやリリースを示すものではありません。</p>
+        <p>このページは、新しい KakeFlow の体験を先行公開するものです。今すぐ利用できる製品や正式リリースを示すものではありません。</p>
       </div>
       <div class="boundary-grid">
-        <article class="available"><span>IN DEVELOPMENT</span><h3>現在検証していること</h3><ul><li>ローカル取り込みと明示的レビュー</li><li>銀行・カード・電子マネーの照合</li><li>家計、Cash Flow、資産負債、投資の統合表示</li><li>元ファイルまで戻れる根拠の設計</li></ul></article>
-        <article><span>BEFORE PUBLIC LAUNCH</span><h3>公開前に仕上げること</h3><ul><li>配布と更新の安全な経路</li><li>対応形式と制約の明確な文書化</li><li>macOS・Windows の検証</li><li>プライバシーとデータ保護の説明</li></ul></article>
-        <article class="limitations"><span>PREVIEW LIMITS</span><h3>今はまだ提供しないもの</h3><ul><li>アプリのダウンロード</li><li>ソースコードと private repository</li><li>正式な対応金融機関一覧</li><li>リリース日と価格</li></ul></article>
+        <article class="available"><span>IN DEVELOPMENT</span><h3>現在検証していること</h3><ul><li>仕事別に再編したサイドナビゲーション</li><li>Home の Action Center と Data Quality</li><li>撮影 Inbox、予算・目標、分類ルール、家族スペース</li><li>口座・家族・計上基準のスコープ操作</li></ul></article>
+        <article><span>BEFORE PUBLIC LAUNCH</span><h3>公開前に仕上げること</h3><ul><li>macOS・Windows の配布と更新経路</li><li>対応する金融機関・形式・制約の文書化</li><li>バックアップ、復元、データ保護の説明</li><li>実データを使った packaged app の検証</li></ul></article>
+        <article class="limitations"><span>PREVIEW LIMITS</span><h3>今はまだ提供しないもの</h3><ul><li>アプリの一般ダウンロード</li><li>ソースコードと private repository</li><li>正式な対応金融機関一覧</li><li>リリース日、価格、サポート条件</li></ul></article>
       </div>
     </section>
 
     <section class="closing-section">
-      <div><p class="eyebrow">LOCAL-FIRST · REVIEWABLE · COMING SOON</p><h2>正しい家計簿を、<br>あなたのパソコンで。</h2></div>
+      <div><p class="eyebrow">LOCAL-FIRST · REVIEWABLE · ACTIONABLE</p><h2>家計の数字を、<br>次の判断につなげる。</h2></div>
       <div class="closing-actions"><span class="button button-primary button-disabled">Coming soon</span><a class="button button-paper" href="/apps/">Back to projects</a></div>
     </section>
   </main>
@@ -175,6 +177,6 @@
     <p>© 2026 KakeFlow · Preview</p>
   </footer>
 
-  <script src="kakeflow-page.js?v=20260714"></script>
+  <script src="kakeflow-page.js?v=20260716"></script>
 </body>
 </html>
