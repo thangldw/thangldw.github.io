@@ -17,59 +17,58 @@
   });
   navigation?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 820) closeMenu();
+    if (window.innerWidth > 760) closeMenu();
   });
 
   const screenData = {
     overview: {
       src: "assets/screenshots/kakeflow-overview.png",
-      width: 1280,
-      height: 720,
-      title: "Home",
-      alt: "KakeFlow の Home 画面",
-      description: "世帯の状況、優先アクション、確定データの品質をひとつの入口で確認します。",
+      title: "ホーム",
+      subtitle: "世帯の状況・重要アクション・データ品質",
+      status: "CONFIRMED DATA",
+      alt: "KakeFlow のホーム画面",
+      description: "集計結果だけでなく、カード引落、予算超過、重複候補、低信頼度 OCR など、対応が必要な項目を先に表示します。",
     },
     transactions: {
       src: "assets/screenshots/kakeflow-transactions.png",
-      width: 1280,
-      height: 720,
       title: "取引",
+      subtitle: "確定済み元帳・検索・証跡・ドリルダウン",
+      status: "LEDGER",
       alt: "KakeFlow の確定済み取引画面",
-      description: "対象月、口座、家族、計上基準を切り替えながら、確定済み台帳を検索します。",
+      description: "対象月、口座、家族、計上基準を切り替えながら、確定済み台帳を検索し、原本まで掘り下げます。",
     },
     import: {
       src: "assets/screenshots/kakeflow-import-inbox.png",
-      width: 1280,
-      height: 720,
-      title: "インポート Inbox",
+      title: "インポート",
+      subtitle: "ファイル検出・レビュー・転記",
+      status: "REVIEW GATED",
       alt: "KakeFlow の Import Inbox 画面",
-      description: "ファイルの検出から抽出、マッピング、レビュー、転記までの処理段階を確認します。",
+      description: "ファイルの検出から抽出、マッピング、レビュー、転記までの処理段階と、確認が必要な理由を表示します。",
     },
   };
 
   const tabs = [...document.querySelectorAll('[role="tab"][data-screen]')];
   const screenImage = document.querySelector("#screen-image");
+  const screenTitle = document.querySelector("#screen-title");
+  const screenSubtitle = document.querySelector("#screen-subtitle");
+  const screenStatus = document.querySelector("#screen-status");
   const screenCaption = document.querySelector("#screen-caption");
   const screenPanel = document.querySelector("#screen-panel");
 
   function selectScreen(tab, moveFocus = false) {
     const screen = screenData[tab.dataset.screen];
-    if (!screen || !screenImage || !screenCaption || !screenPanel) return;
+    if (!screen || !screenImage || !screenTitle || !screenSubtitle || !screenStatus || !screenCaption || !screenPanel) return;
     tabs.forEach((candidate) => {
       const selected = candidate === tab;
       candidate.setAttribute("aria-selected", String(selected));
       candidate.tabIndex = selected ? 0 : -1;
     });
     screenImage.src = screen.src;
-    screenImage.width = screen.width;
-    screenImage.height = screen.height;
     screenImage.alt = screen.alt;
-    screenCaption.replaceChildren();
-    const title = document.createElement("b");
-    const description = document.createElement("span");
-    title.textContent = screen.title;
-    description.textContent = screen.description;
-    screenCaption.append(title, description);
+    screenTitle.textContent = screen.title;
+    screenSubtitle.textContent = screen.subtitle;
+    screenStatus.textContent = screen.status;
+    screenCaption.textContent = screen.description;
     screenPanel.setAttribute("aria-labelledby", tab.id);
     if (moveFocus) tab.focus();
   }
@@ -87,99 +86,4 @@
       selectScreen(tabs[nextIndex], true);
     });
   });
-
-  const board = document.querySelector("#workflow-board");
-  const canvas = document.querySelector("#workflow-lines");
-  if (!board || !(canvas instanceof HTMLCanvasElement)) return;
-
-  const edges = [
-    ["bank", "inbox"], ["card", "inbox"], ["wallet", "inbox"], ["receipt", "inbox"], ["securities", "inbox"],
-    ["inbox", "extract"],
-    ["extract", "dedupe"], ["extract", "receipt-match"], ["extract", "card-match"],
-    ["dedupe", "ledger"], ["receipt-match", "ledger"], ["card-match", "ledger"],
-    ["ledger", "household"], ["ledger", "cashflow"], ["ledger", "balance"], ["ledger", "portfolio"],
-  ];
-  const nodes = new Map();
-  board.querySelectorAll("[data-node]").forEach((element) => nodes.set(element.dataset.node, element));
-  const ledger = board.querySelector(".ledger-hub");
-  if (ledger) nodes.set("ledger", ledger);
-
-  function pointOnSide(rect, boardRect, towardRight) {
-    return {
-      x: (towardRight ? rect.right : rect.left) - boardRect.left,
-      y: rect.top + rect.height / 2 - boardRect.top,
-    };
-  }
-
-  function drawArrow(context, from, to, color, alpha) {
-    const direction = to.x >= from.x ? 1 : -1;
-    const distance = Math.max(34, Math.abs(to.x - from.x) * .42);
-    const control1 = { x: from.x + distance * direction, y: from.y };
-    const control2 = { x: to.x - distance * direction, y: to.y };
-    context.save();
-    context.globalAlpha = alpha;
-    context.strokeStyle = color;
-    context.lineWidth = 1.5;
-    context.setLineDash([6, 5]);
-    context.beginPath();
-    context.moveTo(from.x, from.y);
-    context.bezierCurveTo(control1.x, control1.y, control2.x, control2.y, to.x, to.y);
-    context.stroke();
-    const angle = Math.atan2(to.y - control2.y, to.x - control2.x);
-    context.setLineDash([]);
-    context.fillStyle = color;
-    context.beginPath();
-    context.moveTo(to.x, to.y);
-    context.lineTo(to.x - 8 * Math.cos(angle - Math.PI / 6), to.y - 8 * Math.sin(angle - Math.PI / 6));
-    context.lineTo(to.x - 8 * Math.cos(angle + Math.PI / 6), to.y - 8 * Math.sin(angle + Math.PI / 6));
-    context.closePath();
-    context.fill();
-    context.restore();
-  }
-
-  function drawWorkflow(activeNode = null) {
-    const boardRect = board.getBoundingClientRect();
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.max(1, Math.round(boardRect.width * pixelRatio));
-    canvas.height = Math.max(1, Math.round(boardRect.height * pixelRatio));
-    canvas.style.width = `${boardRect.width}px`;
-    canvas.style.height = `${boardRect.height}px`;
-    const context = canvas.getContext("2d");
-    if (!context) return;
-    context.scale(pixelRatio, pixelRatio);
-    context.clearRect(0, 0, boardRect.width, boardRect.height);
-    edges.forEach(([fromId, toId]) => {
-      const fromNode = nodes.get(fromId);
-      const toNode = nodes.get(toId);
-      if (!fromNode || !toNode) return;
-      const fromRect = fromNode.getBoundingClientRect();
-      const toRect = toNode.getBoundingClientRect();
-      const isForward = toRect.left + toRect.width / 2 >= fromRect.left + fromRect.width / 2;
-      const related = !activeNode || fromId === activeNode || toId === activeNode;
-      const color = fromId === "card-match" || toId === "card-match" ? "#bb715d" : "#75836e";
-      drawArrow(context, pointOnSide(fromRect, boardRect, isForward), pointOnSide(toRect, boardRect, !isForward), color, related ? .86 : .18);
-    });
-  }
-
-  function setActiveNode(nodeId = null) {
-    const connected = new Set([nodeId]);
-    edges.forEach(([from, to]) => {
-      if (from === nodeId) connected.add(to);
-      if (to === nodeId) connected.add(from);
-    });
-    nodes.forEach((element, id) => {
-      element.classList.toggle("is-related", Boolean(nodeId) && connected.has(id));
-      element.classList.toggle("is-muted", Boolean(nodeId) && !connected.has(id));
-    });
-    drawWorkflow(nodeId);
-  }
-
-  nodes.forEach((element, id) => {
-    element.addEventListener("pointerenter", () => setActiveNode(id));
-    element.addEventListener("pointerleave", () => setActiveNode());
-  });
-
-  const resizeObserver = new ResizeObserver(() => drawWorkflow());
-  resizeObserver.observe(board);
-  window.addEventListener("load", () => drawWorkflow(), { once: true });
 })();
