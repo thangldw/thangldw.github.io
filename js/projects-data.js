@@ -80,7 +80,7 @@
       ariaLabel: 'Open Data Copilot',
       icon: 'fa-wand-magic-sparkles',
       status: 'Live',
-      tags: ['NL→SQL', 'DuckDB-WASM', 'Parquet', 'GitHub Actions'],
+      tags: ['NL→SQL', 'DuckDB-WASM', 'Parquet', 'Local analytics'],
       cta: 'Open Data Copilot',
       featured: true,
       featuredOrder: 6
@@ -88,13 +88,13 @@
     {
       id: 'pipeline',
       title: 'Pipeline Observability',
-      description: 'The ELT job behind Data Copilot, instrumented—freshness, per-ticker coverage, run history, and data-quality telemetry committed by its own scheduled workflow.',
-      featuredDescription: 'Freshness, coverage, and run-history monitoring for a production data pipeline.',
+      description: 'An operational snapshot of the ELT pipeline behind Data Copilot—dataset age, per-ticker coverage, extraction history, and data-quality telemetry.',
+      featuredDescription: 'Dataset age, coverage, and run-history monitoring for a reviewable data pipeline.',
       href: '/apps/pipeline/',
       ariaLabel: 'Open Pipeline Observability',
       icon: 'fa-satellite-dish',
       status: 'Live',
-      tags: ['GitHub Actions', 'Observability', 'Data quality'],
+      tags: ['ELT', 'Observability', 'Data quality', 'Manual refresh'],
       cta: 'Open Pipeline',
       featured: true,
       featuredOrder: 7
