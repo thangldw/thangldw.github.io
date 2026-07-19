@@ -14,5 +14,13 @@
     "climate_rows": 2190,
     "city_count": 6,
     "failed_count": 0
+  },
+  {
+    "ts": "2026-07-19T21:08:44Z",
+    "duration_s": 83.0,
+    "earthquake_rows": 11020,
+    "climate_rows": 2190,
+    "city_count": 6,
+    "failed_count": 0
   }
 ]

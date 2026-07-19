@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-07-19T08:36:25Z",
-  "duration_s": 33.5,
+  "last_updated": "2026-07-19T21:08:44Z",
+  "duration_s": 83.0,
   "lookback_days": 365,
   "earthquakes": {
-    "row_count": 11017,
+    "row_count": 11020,
     "date_min": "2025-07-19",
     "date_max": "2026-07-18",
     "latest_event": "2026-07-18T21:54:57Z",
@@ -12,7 +12,7 @@
     "regions": [
       {
         "region": "East Asia",
-        "rows": 1057
+        "rows": 1059
       },
       {
         "region": "Japan",
@@ -20,7 +20,7 @@
       },
       {
         "region": "Southeast Asia",
-        "rows": 3070
+        "rows": 3071
       },
       {
         "region": "Taiwan",
