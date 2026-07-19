@@ -3,8 +3,8 @@
 Finance chart API, shape it into a tidy long-format table, and write Parquet +
 metadata for the Data Copilot demo.
 
-Keyless by design: the endpoint needs no API token, so the GitHub Actions cron
-stays free and has no secret to leak. Run locally with `python scripts/fetch_stocks.py`.
+Keyless by design: the endpoint needs no API token and the refresh runs locally.
+Run with `python scripts/fetch_stocks.py`, inspect the diff, then commit explicitly.
 """
 from __future__ import annotations
 
@@ -44,7 +44,7 @@ CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range={r
 
 def fetch_one(symbol: str, retries: int = 3) -> dict:
     url = CHART_URL.format(symbol=urllib.parse.quote(symbol), range=RANGE, interval=INTERVAL)
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (data-copilot cron)"})
+    req = urllib.request.Request(url, headers={"User-Agent": "thangldw-data-copilot/1.0"})
     last_err: Exception | None = None
     for attempt in range(retries):
         try:
@@ -141,8 +141,7 @@ def main() -> int:
     }
     (OUT_DIR / "meta.json").write_text(json.dumps(meta, indent=2))
 
-    # Append this execution to the run log (kept to the last 200 runs) so the
-    # observability page can chart pipeline history — the "visible ELT" story.
+    # Keep a compact manual refresh history for the observability case study.
     runs_path = OUT_DIR / "runs.json"
     try:
         runs = json.loads(runs_path.read_text())
@@ -158,7 +157,7 @@ def main() -> int:
         "date_max": meta["date_max"],
         "duration_s": duration_s,
     })
-    runs_path.write_text(json.dumps(runs[-200:], indent=2))
+    runs_path.write_text(json.dumps(runs[-30:], indent=2))
 
     print(f"\nwrote {len(data):,} rows across {len(meta['tickers'])} tickers "
           f"({meta['date_min']} → {meta['date_max']}) in {duration_s}s")

@@ -277,24 +277,6 @@ def main() -> int:
     }
     (OUT_DIR / "meta.json").write_text(json.dumps(meta, indent=2))
 
-    runs_path = OUT_DIR / "runs.json"
-    try:
-        runs = json.loads(runs_path.read_text())
-        if not isinstance(runs, list):
-            runs = []
-    except (FileNotFoundError, ValueError):
-        runs = []
-    runs.append(
-        {
-            "ts": now_iso,
-            "duration_s": duration,
-            "earthquake_rows": len(earthquakes),
-            "climate_rows": len(climate),
-            "city_count": len(CITIES),
-            "failed_count": len(climate_meta["failed"]),
-        }
-    )
-    (OUT_DIR / "runs.json").write_text(json.dumps(runs[-200:], indent=2))
     print(f"Wrote {len(earthquakes)} earthquakes and {len(climate)} city-days in {duration}s")
     return 0
 

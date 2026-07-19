@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pipeline Observability — thang.</title>
-  <meta name="description" content="The ELT job behind Data Copilot, instrumented: freshness, per-ticker coverage, run history, and data-quality at a glance. Refreshed daily by a GitHub Actions cron.">
+  <meta name="description" content="A reviewable operational snapshot of the Data Copilot ELT pipeline: dataset age, per-ticker coverage, extraction history, and data-quality telemetry.">
   <link rel="canonical" href="https://thangldw.github.io/apps/pipeline/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pipeline Observability — Thang Luu">
-  <meta property="og:description" content="Live freshness, ticker coverage, data quality, and run history for the Data Copilot ELT pipeline.">
+  <meta property="og:description" content="Dataset age, ticker coverage, data quality, and retained extraction history for the Data Copilot ELT pipeline.">
   <meta property="og:url" content="https://thangldw.github.io/apps/pipeline/">
   <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -99,9 +99,8 @@
     <section class="intro">
       <span class="eyebrow">Data engineering · observability</span>
       <h1>Pipeline Observability</h1>
-      <p class="lead">The ELT job behind <a class="link" href="/apps/data-copilot/">Data Copilot</a>, <strong>instrumented</strong>.
-        A GitHub Actions cron extracts market data daily, transforms it to Parquet, and commits it — this page watches that job:
-        freshness, per-ticker coverage, and run history.</p>
+      <p class="lead">The ELT process behind <a class="link" href="/apps/data-copilot/">Data Copilot</a>, <strong>made reviewable</strong>.
+        This page reads a manually generated repository snapshot and exposes dataset age, per-ticker coverage, extraction history, and quality signals.</p>
     </section>
 
     <section>
@@ -126,12 +125,10 @@
     <section>
       <h2>The pipeline</h2>
       <div class="pipe">
-        <div class="field"><div class="k">Schedule</div><div class="v font-mono">cron · 21:30 UTC daily</div></div>
+        <div class="field"><div class="k">Refresh</div><div class="v font-mono">manual · reviewed before commit</div></div>
         <div class="field"><div class="k">Source</div><div class="v" id="srcField">—</div></div>
         <div class="field"><div class="k">Transform</div><div class="v font-mono">Yahoo → tidy long → Parquet (zstd)</div></div>
         <div class="field"><div class="k">Code</div><div class="v">
-          <a class="link" href="https://github.com/thangldw/thangldw.github.io/blob/master/.github/workflows/refresh-stocks.yml" target="_blank" rel="noopener">workflow.yml</a>
-          &nbsp;·&nbsp;
           <a class="link" href="https://github.com/thangldw/thangldw.github.io/blob/master/scripts/fetch_stocks.py" target="_blank" rel="noopener">fetch_stocks.py</a>
         </div></div>
       </div>
@@ -168,19 +165,9 @@
       $("#srcField").textContent = meta.source || "—";
     }
 
-    // ── TODO(thang): the freshness verdict is a judgement call ─────────────
-    // Given `days` = calendar days since the newest data point, decide the health
-    // label + severity. Markets close on weekends/holidays, so a naive "1 day = stale"
-    // is wrong: a Monday run can legitimately be 3 days behind Friday's close.
-    // Return { level: "ok" | "warn" | "bad", label: string }.
-    // A reasonable default is below — tune the thresholds to how you'd actually
-    // want to be alerted (e.g. treat a 3-day lag over a weekend as fine, but flag
-    // a 6-day gap as a real pipeline failure).
-    function freshnessVerdict(days) {
-      if (days <= 1) return { level: "ok", label: "fresh" };
-      if (days <= 4) return { level: "warn", label: "weekend/holiday lag" };
-      return { level: "bad", label: "stale — check the cron" };
-    }
+    // ── Manual snapshot semantics ─────────────
+    // Snapshot age is descriptive rather than a health verdict: repository data
+    // is refreshed manually, and market closures can create legitimate date gaps.
     // ───────────────────────────────────────────────────────────────────────
 
     function statCard(k, v, sub, cls = "") {
@@ -189,11 +176,10 @@
 
     function renderStatus(meta, runs) {
       const days = daysBetween(meta.date_max);
-      const fresh = freshnessVerdict(days);
       const lastRun = runs.length ? runs[runs.length - 1] : null;
       const failed = (meta.failed || []).length;
       const cards = [
-        statCard("Freshness", days === 0 ? "today" : days + "d", fresh.label, fresh.level),
+        statCard("Snapshot age", days === 0 ? "today" : days + "d", "manual repository snapshot"),
         statCard("Last run", lastRun ? relTime(lastRun.ts) : "—", lastRun ? lastRun.ts.slice(0, 10) : ""),
         statCard("Rows", meta.row_count.toLocaleString(), meta.date_min + " → " + meta.date_max),
         statCard("Tickers", String((meta.tickers || []).length), (meta.coverage || []).length + " with data"),
@@ -231,11 +217,11 @@
       if (runs.length >= 2) {
         lineChart($("#chart"), runs, { xKey: "ts", yKey: "row_count" });
       } else {
-        $("#chart").innerHTML = `<p class="chart-empty">History builds with each daily run — ${runs.length} logged so far.<br>Come back after a few crons to see rows over time.</p>`;
+        $("#chart").innerHTML = `<p class="chart-empty">Extraction history appears after multiple manual refreshes — ${runs.length} logged so far.</p>`;
       }
 
       const head = `<thead><tr><th>run (UTC)</th><th>rows</th><th>tickers</th><th>failed</th><th>latest date</th><th>duration</th></tr></thead>`;
-      const body = runs.slice().reverse().slice(0, 60).map(r => `<tr>
+      const body = runs.slice().reverse().slice(0, 30).map(r => `<tr>
         <td>${esc((r.ts || "").replace("T", " ").replace("Z", ""))}</td>
         <td>${(r.row_count ?? 0).toLocaleString()}</td>
         <td>${r.ticker_count ?? "—"}</td>
