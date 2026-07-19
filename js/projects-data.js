@@ -46,12 +46,13 @@
       id: 'namiquant',
       title: 'NamiQuant',
       description: 'A private research and decision-support workspace for exploring market signals, portfolio risk, and disciplined investment workflows across multiple markets.',
+      href: '/apps/namiquant/',
+      ariaLabel: 'View the public NamiQuant case study',
       icon: 'fa-chart-line',
       status: 'Private',
       statusClass: 'private',
       tags: ['Market research', 'Decision support', 'Risk awareness', 'Multi-market'],
-      cta: 'Private project · overview only',
-      ctaClass: 'ac-private',
+      cta: 'View public overview',
       featured: false
     },
     {
