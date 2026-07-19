@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NamiQuant — Private Market Research System</title>
+  <meta name="description" content="A public overview of NamiQuant, a private multi-market research and decision-support workspace built for disciplined, evidence-aware investment workflows.">
+  <link rel="canonical" href="https://thangldw.github.io/apps/namiquant/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NamiQuant — Private System, Public Overview">
+  <meta property="og:description" content="Product philosophy, interface design, and engineering principles behind a private multi-market research workspace.">
+  <meta property="og:url" content="https://thangldw.github.io/apps/namiquant/">
+  <meta property="og:image" content="https://thangldw.github.io/apps/namiquant/assets/namiquant-social.png">
+  <meta property="og:image:width" content="1731">
+  <meta property="og:image:height" content="909">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260714c">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
+  <link rel="stylesheet" href="/css/app-design-system.css?v=20260714c">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
+  <link rel="stylesheet" href="namiquant.css?v=20260720a">
+  <script>(function(){var s=localStorage.getItem('theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')})()</script>
+  <script defer src="/js/analytics.js"></script>
+</head>
+<body class="portfolio-app namiquant-app" data-app-kind="technical" data-app-route="namiquant">
+  <main class="nq-shell">
+    <section class="nq-hero" id="overview">
+      <div class="nq-hero-copy">
+        <p class="nq-kicker">Private system · Public case study</p>
+        <h1>Nami<span>Quant</span></h1>
+        <p class="nq-lead">A private multi-market research and decision-support workspace for turning fragmented information into reviewable research, explicit risk checks, and disciplined decisions.</p>
+        <div class="nq-actions">
+          <a href="#workspace">Explore the public workspace <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="quiet" href="#boundaries">See disclosure boundaries</a>
+        </div>
+        <p class="nq-disclosure"><i></i><span>This overview uses synthetic and intentionally redacted examples. It contains no live signals, portfolio holdings, trading rules, or performance claims.</span></p>
+      </div>
+
+      <div class="nq-console" aria-label="Synthetic NamiQuant research console preview">
+        <div class="console-bar"><div><i></i><i></i><i></i></div><span>NQ / RESEARCH CONSOLE</span><small>PRIVATE</small></div>
+        <div class="console-context"><span>WORKSPACE / MULTI-MARKET</span><b>Review queue</b><small>SYNTHETIC DATA</small></div>
+        <div class="console-grid">
+          <div class="console-list">
+            <div class="console-row active"><span>MARKET_01</span><b>Research</b><small>evidence changed</small></div>
+            <div class="console-row"><span>MARKET_02</span><b>Watch</b><small>review scheduled</small></div>
+            <div class="console-row"><span>█████████</span><b>Hold</b><small>risk boundary</small></div>
+            <div class="console-row"><span>MARKET_04</span><b>Archive</b><small>thesis closed</small></div>
+          </div>
+          <div class="console-detail">
+            <div class="console-detail-head"><span>DECISION CONTEXT</span><small>07 / 20</small></div>
+            <div class="redacted-title">████████████ <em>review</em></div>
+            <div class="signal-lines"><i style="--w:82%"></i><i style="--w:58%"></i><i class="muted" style="--w:71%"></i><i class="redacted" style="--w:44%"></i></div>
+            <div class="guardrail"><span>RISK REVIEW</span><b>Manual confirmation required</b><small>2 open questions · execution disabled</small></div>
+          </div>
+        </div>
+        <div class="console-foot"><span>LOCAL WORKSPACE</span><span>HUMAN DECISION</span><span>NO ORDER EXECUTION</span></div>
+      </div>
+    </section>
+
+    <section class="nq-strip" aria-label="NamiQuant operating characteristics">
+      <article><span>Scope</span><b>Multi-market</b><p>One research language across different market contexts.</p></article>
+      <article><span>Control</span><b>Human in the loop</b><p>The system organizes evidence; it does not make the final decision.</p></article>
+      <article><span>Memory</span><b>Reviewable</b><p>Questions, evidence, and decision context remain connected.</p></article>
+      <article><span>Boundary</span><b>No execution</b><p>Research support is deliberately separated from order placement.</p></article>
+    </section>
+
+    <section class="nq-section questions" id="questions">
+      <div class="nq-section-head"><div><p class="nq-kicker">Questions before answers</p><h2>What the workspace helps clarify</h2></div><p>NamiQuant is designed around the quality of a decision process—not the appearance of certainty.</p></div>
+      <div class="question-grid">
+        <article><span>01</span><h3>What deserves deeper research?</h3><p>Bring changing evidence and unresolved questions into a focused review queue.</p></article>
+        <article><span>02</span><h3>Where is risk concentrated?</h3><p>Surface portfolio and thesis-level concerns before a decision is confirmed.</p></article>
+        <article><span>03</span><h3>What supports this decision?</h3><p>Keep a reviewable chain from observation to evidence, judgment, and follow-up.</p></article>
+        <article><span>04</span><h3>What changed since last review?</h3><p>Separate genuinely new information from noise and repeated commentary.</p></article>
+      </div>
+    </section>
+
+    <section class="nq-section" id="workspace">
+      <div class="nq-section-head"><div><p class="nq-kicker">Selected interface study</p><h2>A workspace with deliberate blind spots</h2></div><p>Explore the public interaction model. Every value below is synthetic, generalized, or intentionally withheld.</p></div>
+      <div class="workspace-shell">
+        <div class="workspace-tabs" role="tablist" aria-label="NamiQuant public workspace views">
+          <button id="tab-research" type="button" role="tab" aria-selected="true" aria-controls="workspacePanel" data-view="research">Research queue<span>04</span></button>
+          <button id="tab-risk" type="button" role="tab" aria-selected="false" aria-controls="workspacePanel" data-view="risk" tabindex="-1">Risk review<span>03</span></button>
+          <button id="tab-journal" type="button" role="tab" aria-selected="false" aria-controls="workspacePanel" data-view="journal" tabindex="-1">Decision log<span>12</span></button>
+        </div>
+        <div class="workspace-panel" id="workspacePanel" role="tabpanel" aria-labelledby="tab-research"></div>
+      </div>
+      <p class="synthetic-note"><span>SYNTHETIC / REDACTED</span> Labels and values demonstrate interface behavior only. They do not represent current markets or a real portfolio.</p>
+    </section>
+
+    <section class="nq-section loop-section" id="loop">
+      <div class="nq-section-head"><div><p class="nq-kicker">Operating loop</p><h2>From observation to accountable follow-up</h2></div><p>The workflow makes uncertainty visible and preserves the reasoning around a decision.</p></div>
+      <ol class="nq-loop">
+        <li><span>01 · Observe</span><b>Notice material change</b><p>Capture the event without immediately converting it into an action.</p></li>
+        <li><span>02 · Research</span><b>Build the evidence set</b><p>Frame questions, compare sources, and record what remains uncertain.</p></li>
+        <li><span>03 · Review risk</span><b>Challenge the thesis</b><p>Make constraints and failure conditions explicit before proceeding.</p></li>
+        <li><span>04 · Decide</span><b>Record human judgment</b><p>Preserve the conclusion, its evidence window, and open reservations.</p></li>
+        <li><span>05 · Monitor</span><b>Return when facts change</b><p>Schedule follow-up and evaluate whether the original reasoning still holds.</p></li>
+      </ol>
+    </section>
+
+    <section class="nq-section boundary-section" id="boundaries">
+      <div class="nq-section-head"><div><p class="nq-kicker">Disclosure boundary</p><h2>Enough to understand the craft.<br>Not enough to reproduce the system.</h2></div><p>The public layer communicates product thinking and engineering judgment while protecting private research.</p></div>
+      <div class="boundary-grid">
+        <article class="public"><header><span>Public</span><small>Shown in this case study</small></header><ul><li>Product philosophy and problem framing</li><li>Information architecture and interaction patterns</li><li>Research, risk-review, and decision workflow</li><li>General engineering principles</li><li>Synthetic and redacted interface examples</li></ul></article>
+        <article class="private"><header><span>Private</span><small>Intentionally withheld</small></header><ul><li>Instrument-level research and portfolio data</li><li>Signal definitions, formulas, and weights</li><li>Entry, exit, and position-sizing logic</li><li>Data-provider and pipeline implementation details</li><li>Performance, backtests, and decision history</li></ul></article>
+      </div>
+    </section>
+
+    <section class="nq-principles" aria-label="NamiQuant engineering principles">
+      <article><span>01</span><h3>Local by default</h3><p>Private research stays inside the controlled workspace.</p></article>
+      <article><span>02</span><h3>Evidence-aware</h3><p>Decisions remain connected to their supporting context.</p></article>
+      <article><span>03</span><h3>Risk-conscious</h3><p>Constraints and open questions are first-class information.</p></article>
+      <article><span>04</span><h3>Human-controlled</h3><p>Automation supports review without replacing judgment.</p></article>
+    </section>
+
+    <section class="nq-closing">
+      <div><p class="nq-kicker">Private research · Public principles</p><h2>Show the decision system.<br>Protect the decision edge.</h2></div>
+      <p>NamiQuant remains a private project. This page is an intentionally bounded view of its product philosophy, workflow design, and engineering approach.</p>
+    </section>
+  </main>
+
+  <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
+  <script src="/js/site-header-v2.js?v=20260714l"></script>
+  <script src="namiquant.js?v=20260720a"></script>
+</body>
+</html>
