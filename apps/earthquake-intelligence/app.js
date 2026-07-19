@@ -23,7 +23,7 @@ function setupInteractiveMap(){
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
   L.rectangle(coverageBounds,{color:'#4657d8',weight:1.5,dashArray:'7 6',fill:false,interactive:false}).addTo(map);
   const eventLayer=L.layerGroup().addTo(map);
-  const focus=()=>map.setView([24,137],host.clientWidth<600?2:3,{animate:false});
+  const focus=()=>map.setView([24,137],host.clientWidth<600?3:4,{animate:false});
   function renderEvents(days){
     const allEvents=recent(days),sampleStep=Math.max(1,Math.ceil(allEvents.length/5500));
     const events=sampleStep===1?allEvents:allEvents.filter((event,index)=>event.magnitude>=5||index%sampleStep===0);

@@ -117,7 +117,7 @@
       featuredDescription: 'Compare climate and air quality across six Asian cities through a consistent 365-day lens.',
       href: '/apps/city-climate/',
       ariaLabel: 'Open Asian City Climate and Air Quality',
-      icon: 'fa-cloud-sun',
+      icon: 'fa-sun',
       status: 'Live',
       tags: ['Open-Meteo', 'CAMS', 'Climate', 'Air quality'],
       cta: 'Compare cities',
