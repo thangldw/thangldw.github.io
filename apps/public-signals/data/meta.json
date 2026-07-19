@@ -1,0 +1,133 @@
+{
+  "last_updated": "2026-07-19T08:36:25Z",
+  "duration_s": 33.5,
+  "lookback_days": 365,
+  "earthquakes": {
+    "row_count": 11017,
+    "date_min": "2025-07-19",
+    "date_max": "2026-07-18",
+    "latest_event": "2026-07-18T21:54:57Z",
+    "max_magnitude": 8.8,
+    "reviewed_pct": 100.0,
+    "regions": [
+      {
+        "region": "East Asia",
+        "rows": 1057
+      },
+      {
+        "region": "Japan",
+        "rows": 1440
+      },
+      {
+        "region": "Southeast Asia",
+        "rows": 3070
+      },
+      {
+        "region": "Taiwan",
+        "rows": 96
+      },
+      {
+        "region": "Western Pacific",
+        "rows": 5354
+      }
+    ],
+    "source": "USGS Earthquake Catalog (FDSN Event Web Service)",
+    "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/"
+  },
+  "climate": {
+    "row_count": 2190,
+    "date_min": "2025-07-19",
+    "date_max": "2026-07-18",
+    "cities": [
+      {
+        "city": "Tokyo",
+        "country": "Japan",
+        "lat": 35.6762,
+        "lon": 139.6503,
+        "timezone": "Asia/Tokyo"
+      },
+      {
+        "city": "Seoul",
+        "country": "South Korea",
+        "lat": 37.5665,
+        "lon": 126.978,
+        "timezone": "Asia/Seoul"
+      },
+      {
+        "city": "Taipei",
+        "country": "Taiwan",
+        "lat": 25.033,
+        "lon": 121.5654,
+        "timezone": "Asia/Taipei"
+      },
+      {
+        "city": "Bangkok",
+        "country": "Thailand",
+        "lat": 13.7563,
+        "lon": 100.5018,
+        "timezone": "Asia/Bangkok"
+      },
+      {
+        "city": "Singapore",
+        "country": "Singapore",
+        "lat": 1.3521,
+        "lon": 103.8198,
+        "timezone": "Asia/Singapore"
+      },
+      {
+        "city": "Shanghai",
+        "country": "China",
+        "lat": 31.2304,
+        "lon": 121.4737,
+        "timezone": "Asia/Shanghai"
+      }
+    ],
+    "coverage": [
+      {
+        "city": "Tokyo",
+        "rows": 365,
+        "air_rows": 365,
+        "date_min": "2025-07-19",
+        "date_max": "2026-07-18"
+      },
+      {
+        "city": "Seoul",
+        "rows": 365,
+        "air_rows": 365,
+        "date_min": "2025-07-19",
+        "date_max": "2026-07-18"
+      },
+      {
+        "city": "Taipei",
+        "rows": 365,
+        "air_rows": 365,
+        "date_min": "2025-07-19",
+        "date_max": "2026-07-18"
+      },
+      {
+        "city": "Bangkok",
+        "rows": 365,
+        "air_rows": 365,
+        "date_min": "2025-07-19",
+        "date_max": "2026-07-18"
+      },
+      {
+        "city": "Singapore",
+        "rows": 365,
+        "air_rows": 365,
+        "date_min": "2025-07-19",
+        "date_max": "2026-07-18"
+      },
+      {
+        "city": "Shanghai",
+        "rows": 365,
+        "air_rows": 365,
+        "date_min": "2025-07-19",
+        "date_max": "2026-07-18"
+      }
+    ],
+    "failed": [],
+    "source": "Open-Meteo Historical Weather and Air Quality APIs",
+    "source_url": "https://open-meteo.com/"
+  }
+}

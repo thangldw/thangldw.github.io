@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/icons.css?v=20260714">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=20260714c">
-  <link rel="stylesheet" href="css/styles.css?v=20260714j">
+  <link rel="stylesheet" href="css/styles.css?v=20260719k">
   <script>document.documentElement.dataset.theme=localStorage.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
   <script defer src="/js/analytics.js"></script>
 </head>
@@ -87,20 +87,23 @@
       </section>
 
       <section class="resume-projects" aria-labelledby="projectsTitle">
-        <div class="projects-heading"><p class="resume-kicker" id="projectsTitle">Side projects</p><a href="apps/">View all projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
-        <div class="project-grid">
-          <a class="resume-project" href="https://thangldw.github.io/ragops/"><span class="project-kind"><i class="fa-solid fa-database" aria-hidden="true"></i>Technical</span><h3>RAGOps</h3><p>Evaluation and release gates for production RAG and agent systems.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-          <a class="resume-project" href="https://thangldw.github.io/proofline/"><span class="project-kind"><i class="fa-solid fa-database" aria-hidden="true"></i>Technical</span><h3>Proofline</h3><p>Traceable decision memory with immutable sources and exact citations.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-          <a class="resume-project" href="apps/data-copilot/"><span class="project-kind"><i class="fa-solid fa-database" aria-hidden="true"></i>Technical</span><h3>Data Copilot</h3><p>In-browser natural-language analytics powered by SQL, DuckDB, and Parquet.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-          <a class="resume-project" href="apps/pipeline/"><span class="project-kind"><i class="fa-solid fa-database" aria-hidden="true"></i>Technical</span><h3>Pipeline Observability</h3><p>Freshness, coverage, and run-history monitoring for a production data pipeline.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-          <a class="resume-project" href="apps/kakeflow/"><span class="project-kind"><i class="fa-solid fa-database" aria-hidden="true"></i>Technical</span><h3>KakeFlow</h3><p>Released local-first household finance for macOS, with reviewable reconciliation and source evidence.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-          <a class="resume-project language-project" href="apps/#language"><span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>Language Collection</span><h3>N1 Language Lab</h3><p>12 browser-based tools for Japanese vocabulary, kanji, grammar, and reading.</p><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        <div class="projects-heading">
+          <p class="resume-kicker" id="projectsTitle">Side projects</p>
+          <div class="projects-actions">
+            <div class="project-nav" aria-label="Project carousel controls">
+              <button id="projectsPrev" type="button" aria-label="Show previous project"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+              <button id="projectsNext" type="button" aria-label="Show next project"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+            </div>
+            <a href="apps/">View all projects <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
         </div>
+        <div class="project-rail" id="projectRail" role="region" aria-label="Featured side projects" tabindex="0"></div>
       </section>
     </div>
   </main>
 
   <footer><div class="footer-inner">Crafted with love © 2026 — <span>stay steadfast, stay free</span></div></footer>
-  <script src="js/main.js?v=20260714h"></script>
+  <script src="js/projects-data.js?v=20260719b"></script>
+  <script src="js/main.js?v=20260719k"></script>
 </body>
 </html>

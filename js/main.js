@@ -1,4 +1,34 @@
 (function () {
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"]/g, function (character) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[character];
+    });
+  }
+
+  function renderFeaturedProjects() {
+    var rail = document.getElementById('projectRail');
+    if (!rail) return;
+    var projects = (window.portfolioProjects || [])
+      .filter(function (project) { return project.featured; })
+      .sort(function (left, right) { return left.featuredOrder - right.featuredOrder; });
+    var cards = projects.map(function (project) {
+      return '<a class="resume-project" href="' + escapeHtml(project.href) + '">' +
+        '<h3>' + escapeHtml(project.title) + '</h3>' +
+        '<p>' + escapeHtml(project.featuredDescription || project.description) + '</p>' +
+        '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
+    });
+    var collection = window.portfolioLanguageCollection;
+    if (collection) {
+      cards.push('<a class="resume-project language-project" href="' + escapeHtml(collection.href) + '">' +
+        '<span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>' + escapeHtml(collection.label) + '</span>' +
+        '<h3>' + escapeHtml(collection.title) + '</h3><p>' + escapeHtml(collection.description) + '</p>' +
+        '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>');
+    }
+    rail.innerHTML = cards.join('');
+  }
+
+  renderFeaturedProjects();
+
   var root = document.documentElement;
   var themeButton = document.getElementById('themeToggle');
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.spotlight-tab'));
@@ -6,6 +36,14 @@
   var pauseButton = document.getElementById('spotlightPause');
   var timer = null;
   var paused = false;
+  var projectRail = document.getElementById('projectRail');
+  var projectCards = projectRail ? Array.prototype.slice.call(projectRail.querySelectorAll('.resume-project')) : [];
+  var projectsPrev = document.getElementById('projectsPrev');
+  var projectsNext = document.getElementById('projectsNext');
+  var projectTimer = null;
+  var projectPaused = false;
+  var projectVisible = false;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var demos = {
     'data-copilot': {
@@ -69,6 +107,63 @@
     }, 7000);
   }
 
+  function nearestProjectIndex() {
+    if (!projectRail || !projectCards.length) return 0;
+    var railLeft = projectRail.getBoundingClientRect().left;
+    var closest = 0;
+    var distance = Infinity;
+    projectCards.forEach(function (card, index) {
+      var nextDistance = Math.abs(card.getBoundingClientRect().left - railLeft);
+      if (nextDistance < distance) {
+        closest = index;
+        distance = nextDistance;
+      }
+    });
+    return closest;
+  }
+
+  function showProject(index) {
+    if (!projectCards.length) return;
+    var target = (index + projectCards.length) % projectCards.length;
+    projectRail.scrollTo({
+      left: projectCards[target].offsetLeft - projectRail.offsetLeft,
+      behavior: reducedMotion.matches ? 'auto' : 'smooth',
+    });
+  }
+
+  function stepProject(direction) {
+    if (!projectRail || !projectCards.length) return;
+    var maxScroll = Math.max(0, projectRail.scrollWidth - projectRail.clientWidth);
+    var edgeTolerance = 2;
+    if (direction > 0 && projectRail.scrollLeft >= maxScroll - edgeTolerance) {
+      showProject(0);
+      return;
+    }
+    if (direction < 0 && projectRail.scrollLeft <= edgeTolerance) {
+      showProject(projectCards.length - 1);
+      return;
+    }
+    showProject(nearestProjectIndex() + direction);
+  }
+
+  function stopProjectRotation() {
+    if (projectTimer) window.clearInterval(projectTimer);
+    projectTimer = null;
+  }
+
+  function restartProjectRotation() {
+    stopProjectRotation();
+    if (projectPaused || !projectVisible || reducedMotion.matches || projectCards.length < 2 || document.hidden) return;
+    projectTimer = window.setInterval(function () {
+      stepProject(1);
+    }, 3000);
+  }
+
+  function setProjectPaused(next) {
+    projectPaused = next;
+    restartProjectRotation();
+  }
+
   if (themeButton) {
     themeButton.addEventListener('click', function () {
       var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -104,6 +199,52 @@
     });
   }
 
+  if (projectRail) {
+    projectRail.addEventListener('mouseenter', function () { setProjectPaused(true); });
+    projectRail.addEventListener('mouseleave', function () { setProjectPaused(false); });
+    projectRail.addEventListener('focusin', function () { setProjectPaused(true); });
+    projectRail.addEventListener('focusout', function (event) {
+      if (!projectRail.contains(event.relatedTarget)) setProjectPaused(false);
+    });
+    projectRail.addEventListener('pointerdown', function () { setProjectPaused(true); });
+    projectRail.addEventListener('keydown', function (event) {
+      if (event.target !== projectRail || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
+      event.preventDefault();
+      stepProject(event.key === 'ArrowRight' ? 1 : -1);
+    });
+  }
+
+  window.addEventListener('pointerup', function () {
+    if (projectRail && !projectRail.matches(':hover') && !projectRail.contains(document.activeElement)) setProjectPaused(false);
+  });
+
+  if (projectRail && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      projectVisible = entries[0].isIntersecting;
+      restartProjectRotation();
+    }, { threshold: 0.5 }).observe(projectRail);
+  } else {
+    projectVisible = Boolean(projectRail);
+  }
+
+  if (projectsPrev) {
+    projectsPrev.addEventListener('click', function () {
+      stepProject(-1);
+      restartProjectRotation();
+    });
+  }
+
+  if (projectsNext) {
+    projectsNext.addEventListener('click', function () {
+      stepProject(1);
+      restartProjectRotation();
+    });
+  }
+
+  reducedMotion.addEventListener('change', restartProjectRotation);
+  document.addEventListener('visibilitychange', restartProjectRotation);
+
   syncTheme();
   restartRotation();
+  restartProjectRotation();
 })();

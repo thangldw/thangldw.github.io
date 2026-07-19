@@ -10,6 +10,8 @@ A build-free static portfolio for engineering side projects and browser-based JL
 | Project catalog | [`/apps/`](https://thangldw.github.io/apps/) | This repository |
 | Data Copilot | [`/apps/data-copilot/`](https://thangldw.github.io/apps/data-copilot/) | This repository |
 | Pipeline Observability | [`/apps/pipeline/`](https://thangldw.github.io/apps/pipeline/) | This repository |
+| Earthquake Intelligence | [`/apps/earthquake-intelligence/`](https://thangldw.github.io/apps/earthquake-intelligence/) | Independent USGS case study |
+| Asian City Climate & Air Quality | [`/apps/city-climate/`](https://thangldw.github.io/apps/city-climate/) | Independent Open-Meteo/CAMS case study |
 | Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | External showcase |
 | RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | External showcase |
 | NamiQuant | Catalog entry only | Internal project; no public application |
@@ -63,6 +65,10 @@ python3 -m http.server 4173
 
 Open `http://127.0.0.1:4173/`. Use the server instead of opening files directly because the site relies on root-relative URLs and browser APIs.
 
+### Add a technical project
+
+Technical project metadata lives in [`js/projects-data.js`](js/projects-data.js). Add a project there once and the `/apps/` catalog updates automatically. Set `featured: true` and a `featuredOrder` to include it in the homepage Side projects rail; leave `featured: false` to keep it catalog-only.
+
 Before publishing, run:
 
 ```bash
@@ -75,7 +81,7 @@ The validator checks HTML parsing, duplicate IDs, local file references, canonic
 
 ```text
 .
-├── .github/workflows/    # scheduled market-data refresh
+├── .github/workflows/    # scheduled market and public-signal refreshes
 ├── apps/                 # applications and compatibility redirects
 ├── assets/               # local data, images, and icon-font subsets
 ├── css/                  # shared styles and design tokens
@@ -90,7 +96,7 @@ There is no package installation or production build. GitHub Pages serves the re
 
 ## Data refresh
 
-The portfolio does not need a custom deployment workflow. The only repository workflow, [`.github/workflows/refresh-stocks.yml`](.github/workflows/refresh-stocks.yml), refreshes Data Copilot's market data on a schedule or by manual dispatch.
+The portfolio does not need a custom deployment workflow. [`.github/workflows/refresh-stocks.yml`](.github/workflows/refresh-stocks.yml) refreshes Data Copilot's market data, while [`.github/workflows/refresh-public-signals.yml`](.github/workflows/refresh-public-signals.yml) refreshes the two independent public-signal case studies.
 
 ```mermaid
 flowchart LR
