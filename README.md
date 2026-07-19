@@ -13,7 +13,8 @@ A build-free static portfolio for engineering side projects and browser-based JL
 | Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | External showcase |
 | RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | External showcase |
 | NamiQuant | Catalog entry only | Internal project; no public application |
-| KakeFlow | [`/apps/kakeflow/`](https://thangldw.github.io/apps/kakeflow/) | Coming-soon showcase; product remains private |
+| KakeFlow | [`/apps/kakeflow/`](https://thangldw.github.io/apps/kakeflow/) | Released v1.0.0 for macOS Apple Silicon |
+| Awesome Maintainer Defense | [GitHub](https://github.com/thangldw/awesome-maintainer-defense) | Public v1.0 repository and standalone CLI |
 
 The canonical JLPT routes live under `apps/`. Old bookmarks are preserved by the redirects documented in [`apps/URL-MIGRATION.md`](apps/URL-MIGRATION.md); legacy application copies are not kept.
 
