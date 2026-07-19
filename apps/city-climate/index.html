@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Asian City Climate &amp; Air Quality — Thang Luu</title>
+  <meta name="description" content="Compare temperature, rainfall, PM2.5, and AQI across Tokyo, Seoul, Taipei, Bangkok, Singapore, and Shanghai.">
+  <link rel="canonical" href="https://thangldw.github.io/apps/city-climate/">
+  <meta property="og:type" content="website"><meta property="og:title" content="Asian City Climate &amp; Air Quality — Thang Luu">
+  <meta property="og:description" content="A professional comparative view of climate and air quality across six Asian cities.">
+  <meta property="og:url" content="https://thangldw.github.io/apps/city-climate/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/tokens.css?v=20260714c">
+  <link rel="stylesheet" href="/css/app-design-system.css?v=20260714c"><link rel="stylesheet" href="/css/app-footer.css?v=20260714f"><link rel="stylesheet" href="/apps/public-signals/signals.css?v=20260719a">
+  <script>(function(){var s=localStorage.getItem('theme');document.documentElement.dataset.theme=s||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')})()</script><script defer src="/js/analytics.js"></script>
+</head>
+<body class="portfolio-app signal-app" data-app-kind="technical" data-app-route="city-climate">
+  <main class="signal-shell">
+    <header class="signal-hero">
+      <div><p class="signal-kicker">Public signals · Urban comparison</p><h1>Asian City Climate<br>&amp; Air Quality</h1><p class="signal-lead">Compare the lived environmental conditions of six Asian cities—temperature, rainfall, particulate pollution, and AQI—through a consistent 365-day lens.</p></div>
+      <aside class="source-card"><span>Current + historical model data</span><strong>Open-Meteo · CAMS global</strong><small id="freshness">Loading coverage…</small><small class="refresh-note live-refresh" id="currentFreshness"><i></i>Loading latest conditions…</small></aside>
+    </header>
+    <section class="signal-stats" id="stats" aria-label="Dataset summary"></section>
+    <section class="current-conditions" aria-labelledby="currentTitle">
+      <div class="current-head"><div><p class="signal-kicker">Latest model conditions</p><h2 id="currentTitle">Six cities, right now</h2></div><p>Weather refreshes hourly; global CAMS air quality is checked every 6 hours and normally updates every 12 hours.</p></div>
+      <div class="current-city-grid" id="currentCities" aria-live="polite"><p class="current-loading">Loading current conditions…</p></div>
+    </section>
+    <section class="question-studio" aria-labelledby="askTitle">
+      <div class="studio-head"><div><h2 id="askTitle">Ask across cities</h2><p>The analysis normalizes the date window, compares like-for-like daily measures, and states the metric behind every conclusion.</p></div><span class="studio-badge">Comparable evidence</span></div>
+      <form class="ask-row" id="askForm"><input id="askInput" aria-label="Ask a climate or air quality question" autocomplete="off" placeholder="e.g. Which city had the worst PM2.5 in the last 30 days?"><button type="submit">Compare →</button></form>
+      <div class="prompt-list" id="prompts" aria-label="Suggested questions"></div>
+    </section>
+    <section class="answer-panel" id="answer" aria-live="polite">
+      <div class="answer-copy"><div class="answer-eyebrow">Comparative finding</div><h3 id="answerTitle">PM2.5 exposure in the last 30 days</h3><p class="answer-summary" id="answerSummary"></p><div class="answer-evidence" id="answerEvidence"></div><p class="answer-method" id="answerMethod"></p></div>
+      <div class="answer-chart"><div class="viz-head"><div><h3 id="answerChartTitle">City ranking</h3><p id="answerChartSub">Daily mean PM2.5, averaged over the same period</p></div></div><div class="chart-host compact" id="answerChart"></div></div>
+    </section>
+    <section class="dashboard-grid">
+      <article class="viz-card wide"><div class="viz-head"><div><h2>Climate–air quality positioning</h2><p>365-day city averages · X = temperature · Y = PM2.5 · marker size = rainy-day count</p></div></div><div class="chart-host climate-position-host" id="climatePositionChart"></div><p class="data-note">Dashed references show the six-city medians, not health or climate targets. Rainy day = precipitation ≥1 mm.</p></article>
+      <article class="viz-card wide"><div class="viz-head"><div><h2>Climate fingerprint</h2><p>365 daily cells per city reveal seasonality, heat persistence, and transitions</p></div><select class="viz-control" id="fingerprintMetric" aria-label="Fingerprint metric"><option value="temperature_mean">Temperature</option><option value="pm2_5">PM2.5</option><option value="precipitation_mm">Rainfall</option></select></div><div class="chart-host" id="fingerprintChart"></div></article>
+      <article class="viz-card"><div class="viz-head"><div><h2>City trajectories</h2><p>30-day rolling average; select a city to bring it into focus</p></div><select class="viz-control" id="cityFocus" aria-label="Focus city"></select></div><div class="chart-host compact" id="trendChart"></div></article>
+      <article class="viz-card"><div class="viz-head"><div><h2>Air-quality profile</h2><p>Last 30 days · mean PM2.5 and unhealthy-AQI days</p></div></div><div class="ranking" id="airRanking"></div><p class="data-note">Air quality is model-derived CAMS data and should not replace local regulatory monitors.</p></article>
+      <article class="viz-card wide"><p class="data-note">Weather values use Open-Meteo historical reanalysis; air-quality values use the CAMS global domain. City coordinates are fixed for consistent comparison. <a href="https://open-meteo.com/en/docs/historical-weather-api" target="_blank" rel="noopener">Weather methodology ↗</a> · <a href="https://open-meteo.com/en/docs/air-quality-api" target="_blank" rel="noopener">Air-quality methodology ↗</a></p></article>
+    </section>
+  </main>
+  <footer class="site-foot">Crafted with love © 2026 — <span>stay steadfast, stay free</span></footer>
+  <script src="/js/site-header-v2.js?v=20260714l"></script><script type="module" src="app.js?v=20260719b"></script>
+</body></html>
