@@ -14,7 +14,7 @@ A build-free static portfolio for engineering side projects and browser-based JL
 | Asian City Climate & Air Quality | [`/apps/city-climate/`](https://thangldw.github.io/apps/city-climate/) | Independent Open-Meteo/CAMS case study |
 | Proofline | [`/proofline/`](https://thangldw.github.io/proofline/) | External showcase |
 | RAGOps | [`/ragops/`](https://thangldw.github.io/ragops/) | External showcase |
-| NamiQuant | Catalog entry only | Internal project; no public application |
+| NamiQuant | [`/apps/namiquant/`](https://thangldw.github.io/apps/namiquant/) | Private system; public product and engineering case study |
 | KakeFlow | [`/apps/kakeflow/`](https://thangldw.github.io/apps/kakeflow/) | Released v1.0.0 for macOS Apple Silicon |
 | Awesome Maintainer Defense | [GitHub](https://github.com/thangldw/awesome-maintainer-defense) | Public v1.0 repository and standalone CLI |
 
