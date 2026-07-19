@@ -46,6 +46,7 @@
       id: 'namiquant',
       title: 'NamiQuant',
       description: 'A private research and decision-support workspace for exploring market signals, portfolio risk, and disciplined investment workflows across multiple markets.',
+      featuredDescription: 'Private multi-market research for evidence-aware, risk-conscious decisions.',
       href: '/apps/namiquant/',
       ariaLabel: 'View the public NamiQuant case study',
       icon: 'fa-chart-line',
@@ -53,7 +54,8 @@
       statusClass: 'private',
       tags: ['Market research', 'Decision support', 'Risk awareness', 'Multi-market'],
       cta: 'View public overview',
-      featured: false
+      featured: true,
+      featuredOrder: 4
     },
     {
       id: 'kakeflow',
@@ -67,7 +69,7 @@
       tags: ['Household finance', 'Local-first', 'Reconciliation', 'Tauri · React'],
       cta: 'Open KakeFlow',
       featured: true,
-      featuredOrder: 4
+      featuredOrder: 5
     },
     {
       id: 'data-copilot',
@@ -81,7 +83,7 @@
       tags: ['NL→SQL', 'DuckDB-WASM', 'Parquet', 'GitHub Actions'],
       cta: 'Open Data Copilot',
       featured: true,
-      featuredOrder: 5
+      featuredOrder: 6
     },
     {
       id: 'pipeline',
@@ -95,7 +97,7 @@
       tags: ['GitHub Actions', 'Observability', 'Data quality'],
       cta: 'Open Pipeline',
       featured: true,
-      featuredOrder: 6
+      featuredOrder: 7
     },
     {
       id: 'earthquake-intelligence',
@@ -109,7 +111,7 @@
       tags: ['USGS', 'Geospatial', 'Time series', 'Data storytelling'],
       cta: 'Explore earthquakes',
       featured: true,
-      featuredOrder: 7
+      featuredOrder: 8
     },
     {
       id: 'city-climate',
@@ -123,7 +125,7 @@
       tags: ['Open-Meteo', 'CAMS', 'Climate', 'Air quality'],
       cta: 'Compare cities',
       featured: true,
-      featuredOrder: 8
+      featuredOrder: 9
     }
   ];
 
