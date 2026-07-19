@@ -45,12 +45,12 @@
     {
       id: 'namiquant',
       title: 'NamiQuant',
-      description: 'A local swing-trading decision-support system for the US, Japanese, and Vietnamese markets. It turns market data into deterministic scores, risk gates, position sizing, portfolio allocation, and an offline dashboard without placing orders.',
+      description: 'A private research and decision-support workspace for exploring market signals, portfolio risk, and disciplined investment workflows across multiple markets.',
       icon: 'fa-chart-line',
-      status: 'Internal',
-      statusClass: 'internal',
-      tags: ['Quant scoring', 'Risk gates', 'Backtesting', 'Python · React'],
-      cta: 'Internal project · no public demo',
+      status: 'Private',
+      statusClass: 'private',
+      tags: ['Market research', 'Decision support', 'Risk awareness', 'Multi-market'],
+      cta: 'Private project · overview only',
       ctaClass: 'ac-private',
       featured: false
     },
