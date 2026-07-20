@@ -1,4 +1,4 @@
-/* Shared readability layer for the twelve Japanese-learning apps.
+/* Shared readability layer for the Japanese-learning app collection.
    This stylesheet intentionally loads after each app's original styles. */
 
 html.language-app-root {
@@ -10,6 +10,35 @@ html.language-app-root {
 body.language-app {
   font-size: 16px;
   line-height: 1.6;
+  background: var(--portfolio-bg) !important;
+  color: var(--portfolio-ink) !important;
+}
+
+/* Older standalone apps used page-local white/blue surfaces. These shared
+   overrides give every learning app a complete, legible dark theme. */
+:root[data-theme="dark"] body.language-app :where(
+  .card, .panel, .box, .ctrl, .filter-bar, .header, .hdr, .topbar,
+  .question, .question-card, .quiz-card, .result, .feedback, .explain,
+  .explain-box, .note, .modal, .modal-content, .set-card, .vocab-item,
+  .library-row, .sheet, .passage, .choice, .opt, .answer-option
+) {
+  border-color: var(--portfolio-border) !important;
+  background-color: var(--portfolio-surface) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="dark"] body.language-app :where(
+  .container, .main, .wrap, .cnt, .content, .app, .app-shell
+) {
+  color: var(--portfolio-ink) !important;
+}
+
+:root[data-theme="dark"] body.language-app :where(
+  p, small, .sub, .subtitle, .muted, .meaning, .vi, .exp, .note,
+  .feedback, .explain-box, .library-definition
+) {
+  color: var(--portfolio-body) !important;
 }
 
 body.language-app :where(input, select, textarea) {
