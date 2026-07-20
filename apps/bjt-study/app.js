@@ -773,11 +773,11 @@
   });
 
   Promise.all([
-    fetch('data/vocabulary.json').then(function (response) {
+    fetch('data/vocabulary.json?v=20260721b').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu từ vựng');
       return response.json();
     }),
-    fetch('data/grammar.json').then(function (response) {
+    fetch('data/grammar.json?v=20260721b').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu ngữ pháp');
       return response.json();
     })
