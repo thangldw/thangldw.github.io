@@ -3,14 +3,14 @@
    restrained borders, square controls, and local system fonts. */
 
 :root {
-  --portfolio-bg: #fafbfc;
-  --portfolio-surface: #ffffff;
-  --portfolio-surface-2: #f2f4f8;
-  --portfolio-ink: #10151d;
-  --portfolio-body: #4f5968;
-  --portfolio-muted: #667085;
-  --portfolio-border: #e2e6ed;
-  --portfolio-border-strong: #c7ced9;
+  --portfolio-bg: #f3f0e8;
+  --portfolio-surface: #fbfaf6;
+  --portfolio-surface-2: #e9e6dd;
+  --portfolio-ink: #1d211e;
+  --portfolio-body: #505750;
+  --portfolio-muted: #697169;
+  --portfolio-border: #d9d5cb;
+  --portfolio-border-strong: #bbb8ad;
   --portfolio-accent: #4657d8;
   --portfolio-accent-ink: #ffffff;
   --portfolio-accent-soft: #eef0ff;
@@ -28,16 +28,16 @@
 }
 
 :root[data-theme="dark"] {
-  --portfolio-bg: #0d1117;
-  --portfolio-surface: #11161f;
-  --portfolio-surface-2: #1a2230;
-  --portfolio-ink: #f2f5f9;
-  --portfolio-body: #b0bac7;
-  --portfolio-muted: #97a2b0;
-  --portfolio-border: #293343;
-  --portfolio-border-strong: #4b586a;
+  --portfolio-bg: #11130f;
+  --portfolio-surface: #191b17;
+  --portfolio-surface-2: #23271f;
+  --portfolio-ink: #f1efe8;
+  --portfolio-body: #bec2b9;
+  --portfolio-muted: #9ca398;
+  --portfolio-border: #30342d;
+  --portfolio-border-strong: #52584d;
   --portfolio-accent: #8e9cff;
-  --portfolio-accent-ink: #0d1117;
+  --portfolio-accent-ink: #11130f;
   --portfolio-accent-soft: #202844;
   --portfolio-orange: #ff9a5d;
   --portfolio-orange-soft: #35251d;

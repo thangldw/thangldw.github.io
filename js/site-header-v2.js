@@ -20,9 +20,9 @@
 
   var CSS = [
     ".tw-header{position:relative;z-index:1;width:100%;align-self:stretch;flex:0 0 auto;",
-    "background:rgba(13,17,23,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);",
-    "border-bottom:1px solid #1f2733;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;}",
-    "html[data-theme='light'] .tw-header{background:rgba(250,251,252,.92);border-bottom-color:#e6e9ee;}",
+    "background:rgba(17,19,15,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);",
+    "border-bottom:1px solid #30342d;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;}",
+    "html[data-theme='light'] .tw-header{background:rgba(243,240,232,.94);border-bottom-color:#d9d5cb;}",
     ".tw-header *{box-sizing:border-box;}",
     ".tw-header .tw-wrap{width:100%;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
     ".tw-header .tw-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic UI','Meiryo',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}",
@@ -40,7 +40,7 @@
     "html[data-theme='light'] .tw-header .tw-nav a:hover,html[data-theme='light'] .tw-header .tw-nav a.tw-active{color:#14171d;}",
     ".tw-header .tw-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;border:1px solid #262c38;background:#151922;color:#eef1f6;cursor:pointer;padding:0;transition:color .2s,border-color .2s;}",
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
-    "html[data-theme='light'] .tw-header .tw-toggle{border-color:#e4e7ee;color:#14171d;background:#ffffff;}",
+    "html[data-theme='light'] .tw-header .tw-toggle{border-color:#d9d5cb;color:#1d211e;background:#fbfaf6;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
     "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:20px;gap:8px}.tw-header .tw-mark{font-size:16px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:32px;height:32px;}}",
   ].join("");
