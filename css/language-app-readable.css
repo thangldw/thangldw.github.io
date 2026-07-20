@@ -7,7 +7,7 @@ html.language-app-root {
   text-size-adjust: 100%;
 }
 
-body.language-app {
+body.language-app[data-language-app] {
   font-size: 16px;
   line-height: 1.6;
   background: var(--portfolio-bg) !important;
@@ -16,7 +16,7 @@ body.language-app {
 
 /* Older standalone apps used page-local white/blue surfaces. These shared
    overrides give every learning app a complete, legible dark theme. */
-:root[data-theme="dark"] body.language-app :where(
+:root[data-theme="dark"] body.language-app[data-language-app] :where(
   .card, .panel, .box, .ctrl, .filter-bar, .header, .hdr, .topbar,
   .question, .question-card, .quiz-card, .result, .feedback, .explain,
   .explain-box, .note, .modal, .modal-content, .set-card, .vocab-item,
@@ -28,22 +28,103 @@ body.language-app {
   box-shadow: none !important;
 }
 
-:root[data-theme="dark"] body.language-app :where(
+:root[data-theme="dark"] body.language-app[data-language-app] :where(
   .container, .main, .wrap, .cnt, .content, .app, .app-shell
 ) {
   color: var(--portfolio-ink) !important;
 }
 
-:root[data-theme="dark"] body.language-app :where(
+:root[data-theme="dark"] body.language-app[data-language-app] :where(
   p, small, .sub, .subtitle, .muted, .meaning, .vi, .exp, .note,
   .feedback, .explain-box, .library-definition
 ) {
   color: var(--portfolio-body) !important;
 }
 
-body.language-app :where(input, select, textarea) {
+body.language-app[data-language-app] :where(input, select, textarea) {
   min-height: 40px;
   font-size: 14px !important;
+}
+
+/* Shared paper surfaces for every Japanese-learning app. The imported apps
+   historically used pure white for most cards and answers; these rules keep
+   their structure while making the light theme calmer and the dark theme
+   complete. This file loads after the portfolio design system. */
+body.language-app[data-language-app] :where(
+  .header, .hdr, .tabs, .mtabs, .stabs, .period-bar, .year-bar,
+  .ctrl, .topbar, .filter-bar
+) {
+  border-color: var(--portfolio-border) !important;
+  background: color-mix(in srgb, var(--portfolio-bg) 88%, var(--portfolio-surface)) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app[data-language-app] :where(
+  .card, .qcard, .qsetup, .res, .done, .wrong-empty, .study-card,
+  .wrong-card, .ra-card, .dtg-s, .pat-g, .pre-s, .ptu-card, .wcard,
+  .sheet, .passage, .question-card, .quiz-card, .set-card, .panel,
+  .box, .modal-content, .vocab-card, .q-card, .flashcard, .face,
+  .question-block, .vocab-box, .set-grid, .stats
+) {
+  border-color: var(--portfolio-border) !important;
+  background: color-mix(in srgb, var(--portfolio-bg) 82%, var(--portfolio-surface)) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app[data-language-app] :where(
+  .sent, .sentvn, .exp, .explain, .feedback, .study-exp, .ex-block,
+  .whead, .wbody, .note, .explain-box
+) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-body) !important;
+  box-shadow: none !important;
+}
+
+body.language-app[data-language-app] :where(
+  input, select, textarea, .optwrap, .opt, .ob, .choice, .answer-option,
+  .set-btn, .choice-btn, .navbtn, .pbtn, .ybtn, .stab, .ptab,
+  .filter-btn, .load-more, .btn, .prev-btn, .speak-btn, .speak-opt-btn,
+  .nb, .spk, .spk-sm, .tab, .mtab, .shuffle-btn, .btn-know,
+  .btn-unknow, .nav-btn, .toggle-btn
+):not(.active):not(.on):not(.selected):not(.correct):not(.wrong):not(.ok):not(.ng):not(.is-correct):not(.is-wrong) {
+  border-color: var(--portfolio-border-strong) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app[data-language-app] :where(.synb, .mbtn) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-body) !important;
+  box-shadow: none !important;
+}
+
+body.language-app[data-language-app] :where(.tab, .mtab, .stab, .ptab, .toggle-btn):is(.active, .on, .selected) {
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body.language-app[data-language-app] :where(.opt, .ob, .choice, .answer-option, .optwrap):not(.correct):not(.wrong):not(.ok):not(.ng):not(.is-correct):not(.is-wrong):hover {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent-soft) !important;
+}
+
+body.language-app[data-language-app] :is(.opt, .ob, .choice, .answer-option, .optwrap):is(.correct, .ok, .is-correct),
+body.language-app[data-language-app] :is(.optwrap, .choice, .answer-option).ok {
+  border-color: var(--portfolio-success) !important;
+  background: var(--portfolio-success-soft) !important;
+  color: var(--portfolio-success) !important;
+}
+
+body.language-app[data-language-app] :is(.opt, .ob, .choice, .answer-option, .optwrap):is(.wrong, .ng, .is-wrong),
+body.language-app[data-language-app] :is(.optwrap, .choice, .answer-option).ng {
+  border-color: var(--portfolio-danger) !important;
+  background: var(--portfolio-danger-soft) !important;
+  color: var(--portfolio-danger) !important;
 }
 
 /* Dense reference collections: three readable columns instead of four. */
@@ -128,6 +209,76 @@ body[data-language-app="n1-vocabulary-context"] .container {
   max-width: 860px;
 }
 
+/* Context Vocabulary: remove the cold-white worksheet blocks. The question
+   shell blends into the page while interactive choices retain a distinct,
+   warm surface in both themes. */
+body[data-language-app="n1-vocabulary-context"] :is(.qcard, .ctrl) {
+  border-color: var(--portfolio-border) !important;
+  background: color-mix(in srgb, var(--portfolio-bg) 88%, var(--portfolio-surface)) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] :is(.sent, .optwrap, .spk, .spk-sm, .nb, .btn, .ctrl select) {
+  border-color: var(--portfolio-border-strong) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .optwrap {
+  transition: border-color .16s ease, background-color .16s ease;
+}
+
+body[data-language-app="n1-vocabulary-context"] .optwrap:hover:not(.ok):not(.ng) {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent-soft) !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .opt {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .optwrap.ok {
+  border-color: var(--portfolio-success) !important;
+  background: var(--portfolio-success-soft) !important;
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .optwrap.ng {
+  border-color: var(--portfolio-danger) !important;
+  background: var(--portfolio-danger-soft) !important;
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] :is(.wcard, .wbody) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .whead,
+body[data-language-app="n1-vocabulary-context"] .sentvn {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+}
+
+:root[data-theme="dark"] body[data-language-app="n1-vocabulary-context"] :is(.sentvn, .extitle, .wlbl, .wval, .wval.set, .wr) {
+  color: var(--portfolio-body) !important;
+}
+
+:root[data-theme="dark"] body[data-language-app="n1-vocabulary-context"] :is(.wk, .opt) {
+  color: var(--portfolio-ink) !important;
+}
+
+:root[data-theme="dark"] body[data-language-app="n1-vocabulary-context"] :is(.wval.vn, .wval.setvn) {
+  color: var(--portfolio-accent) !important;
+}
+
+:root[data-theme="dark"] body[data-language-app="n1-vocabulary-context"] .wcard.ans .wk {
+  color: var(--portfolio-success) !important;
+}
+
 body[data-language-app="n1-grammar-exams"] .cnt {
   max-width: 820px;
 }
@@ -188,7 +339,7 @@ body[data-language-app="n1-grammar-sentence-order"] :is(.set-btn, .choice-btn, .
 }
 
 @media (max-width: 680px) {
-  body.language-app {
+  body.language-app[data-language-app] {
     font-size: 15px;
   }
 
