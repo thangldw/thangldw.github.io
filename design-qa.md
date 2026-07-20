@@ -62,6 +62,16 @@ No actionable P0, P1, or P2 mismatches remain.
 ## Follow-up polish
 
 - Consider adding a lighter outline icon set to the shared portfolio assets in a future design-system pass.
-- Consider editorial cleanup of unusually long imported definitions without changing their meaning.
+- Consider translating the remaining Japanese-only examples during a dedicated editorial pass; they are now structurally separated and no longer contaminate quiz meanings.
+
+## 2026-07-21 Japanese app suite follow-up
+
+- User reference: `/var/folders/sm/d8hb2_5s40965vv4h1zxl_xc0000gn/T/codex-clipboard-35f016ac-2d17-433f-98d8-a111bc9ba891.png`
+- Final context-vocabulary screenshot: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/context-vocabulary-paper-final.png`
+- BJT `ごねる` verification: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/bjt-goneru-final.png`
+- Audited all 12 legacy Japanese-learning apps in both light and dark themes. No visible near-white large card/answer surfaces, low-contrast dark-theme text, or desktop horizontal overflow remain.
+- Verified context-vocabulary normal, correct, and wrong answer states use the shared paper/success/danger tokens.
+- Audited all 1,565 BJT vocabulary records with the same parser used by the browser. The audit separates 385 Japanese examples, preserves examples starting with digits or Latin characters, and does not mistake the colon in `3対2` for an example delimiter.
+- Verified the full `ごねる` search, practice, answer, and feedback flow: the meaning ends at `Làm khó, gây khó dễ`; the Japanese and Vietnamese sentences appear only under `Ví dụ`.
 
 final result: passed

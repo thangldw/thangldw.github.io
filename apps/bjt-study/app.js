@@ -100,36 +100,7 @@
   }
 
   function parseVocabulary(entry) {
-    var raw = String(entry.definition || '').replace(/\s+/g, ' ').trim();
-    var readingMatch = raw.match(/^([^\[]+?)\s*\[([^\]]+)\]/);
-    var reading = entry.reading || (readingMatch ? readingMatch[1].trim() : '');
-    var sinoVietnamese = entry.sinoVietnamese || (readingMatch ? readingMatch[2].trim() : '');
-    var remainder = readingMatch ? raw.slice(readingMatch[0].length).trim() : raw;
-    var exampleJa = entry.exampleJa || '';
-    var exampleVi = entry.exampleVi || '';
-    var meaning = entry.meaning || remainder;
-
-    if (!exampleJa) {
-      var colon = remainder.lastIndexOf(':');
-      if (colon > 0) {
-        var beforeColon = remainder.slice(0, colon).trim();
-        var termStart = beforeColon.lastIndexOf(String(entry.term));
-        if (termStart > 0) {
-          exampleJa = beforeColon.slice(termStart).trim();
-          exampleVi = remainder.slice(colon + 1).trim();
-          meaning = beforeColon.slice(0, termStart).trim();
-        } else {
-          var japaneseTail = beforeColon.match(/([一-龯々〆ヵヶぁ-んァ-ヶー・〜（）0-9０-９]+)$/);
-          if (japaneseTail && japaneseTail.index > 0) {
-            exampleJa = japaneseTail[1].trim();
-            exampleVi = remainder.slice(colon + 1).trim();
-            meaning = beforeColon.slice(0, japaneseTail.index).trim();
-          }
-        }
-      }
-    }
-
-    return { reading: reading, sinoVietnamese: sinoVietnamese, meaning: meaning, exampleJa: exampleJa, exampleVi: exampleVi };
+    return window.BJTDataUtils.parseVocabulary(entry);
   }
 
   var GRAMMAR_GUIDES = {
