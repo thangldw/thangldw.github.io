@@ -1,0 +1,2539 @@
+{
+  "generatedFrom": "apps/n1-kanji-analysis/index.html",
+  "characters": {
+    "撤": {
+      "hanviet": "TRIỆT",
+      "on": "てつ・てっ",
+      "kun": "",
+      "meaning": "rút lui, bãi bỏ"
+    },
+    "収": {
+      "hanviet": "THU",
+      "on": "しゅう",
+      "kun": "おさ(める)",
+      "meaning": "thu, cất"
+    },
+    "補": {
+      "hanviet": "BỔ",
+      "on": "ほ",
+      "kun": "おぎな(う)",
+      "meaning": "bù đắp, hỗ trợ"
+    },
+    "算": {
+      "hanviet": "TOÁN",
+      "on": "さん",
+      "kun": "",
+      "meaning": "tính toán, số"
+    },
+    "報": {
+      "hanviet": "BÁO",
+      "on": "ほう",
+      "kun": "むく(いる)",
+      "meaning": "báo đáp, thông báo"
+    },
+    "情": {
+      "hanviet": "TÌNH",
+      "on": "じょう",
+      "kun": "なさけ",
+      "meaning": "tình cảm, vẻ"
+    },
+    "締": {
+      "hanviet": "ĐẾ",
+      "on": "てい",
+      "kun": "し(める)",
+      "meaning": "ký kết, đế"
+    },
+    "結": {
+      "hanviet": "KẾT",
+      "on": "けつ・けっ",
+      "kun": "むす(ぶ)",
+      "meaning": "kết, buộc"
+    },
+    "訴": {
+      "hanviet": "TỐ",
+      "on": "そ",
+      "kun": "うった(える)",
+      "meaning": "kiện, tố cáo"
+    },
+    "一": {
+      "hanviet": "NHẤT",
+      "on": "いち",
+      "kun": "ひと",
+      "meaning": "một, nhất"
+    },
+    "本": {
+      "hanviet": "BẢN",
+      "on": "ほん・ぽん",
+      "kun": "もと",
+      "meaning": "gốc, căn bản"
+    },
+    "万": {
+      "hanviet": "VẠN",
+      "on": "まん・ばん",
+      "kun": "よろず",
+      "meaning": "vạn, muôn"
+    },
+    "歳": {
+      "hanviet": "TUẾ",
+      "on": "さい",
+      "kun": "とし",
+      "meaning": "tuổi, năm"
+    },
+    "唱": {
+      "hanviet": "XƯỚNG",
+      "on": "しょう",
+      "kun": "とな(える)",
+      "meaning": "xướng, đọc to"
+    },
+    "閲": {
+      "hanviet": "DUYỆT",
+      "on": "えつ",
+      "kun": "",
+      "meaning": "xem qua, duyệt"
+    },
+    "覧": {
+      "hanviet": "LÃM",
+      "on": "らん",
+      "kun": "",
+      "meaning": "xem, ngắm"
+    },
+    "人": {
+      "hanviet": "NHÂN",
+      "on": "にん・じん",
+      "kun": "ひと",
+      "meaning": "người"
+    },
+    "捺": {
+      "hanviet": "NẠT",
+      "on": "なつ",
+      "kun": "お(す)",
+      "meaning": "ấn, đóng dấu"
+    },
+    "印": {
+      "hanviet": "ẤN",
+      "on": "いん",
+      "kun": "しるし",
+      "meaning": "dấu, ấn"
+    },
+    "記": {
+      "hanviet": "KÝ",
+      "on": "き",
+      "kun": "しる(す)",
+      "meaning": "ghi chép, ký"
+    },
+    "名": {
+      "hanviet": "DANH",
+      "on": "めい",
+      "kun": "な",
+      "meaning": "tên, danh"
+    },
+    "出": {
+      "hanviet": "XUẤT",
+      "on": "しゅつ",
+      "kun": "で(る)",
+      "meaning": "ra, xuất"
+    },
+    "客": {
+      "hanviet": "KHÁCH",
+      "on": "きゃく",
+      "kun": "",
+      "meaning": "khách"
+    },
+    "配": {
+      "hanviet": "PHỐI",
+      "on": "はい",
+      "kun": "くば(る)",
+      "meaning": "phân phối, khí sắc"
+    },
+    "付": {
+      "hanviet": "PHÓ",
+      "on": "ふ",
+      "kun": "つ(ける)",
+      "meaning": "gắn, đính kèm"
+    },
+    "解": {
+      "hanviet": "GIẢI",
+      "on": "かい・げ",
+      "kun": "と(く)",
+      "meaning": "giải, mở ra"
+    },
+    "梱": {
+      "hanviet": "CỔN",
+      "on": "こん",
+      "kun": "",
+      "meaning": "kiện hàng, đóng gói"
+    },
+    "包": {
+      "hanviet": "BAO",
+      "on": "ほう",
+      "kun": "つつ(む)",
+      "meaning": "gói, bao"
+    },
+    "入": {
+      "hanviet": "NHẬP",
+      "on": "にゅう",
+      "kun": "い(れる)",
+      "meaning": "vào, nhập"
+    },
+    "日": {
+      "hanviet": "NHẬT",
+      "on": "にち・じつ",
+      "kun": "ひ",
+      "meaning": "ngày, mặt trời"
+    },
+    "場": {
+      "hanviet": "TRƯỜNG",
+      "on": "じょう",
+      "kun": "ば",
+      "meaning": "trường, nơi"
+    },
+    "調": {
+      "hanviet": "ĐIỆU",
+      "on": "ちょう",
+      "kun": "しら(べる)",
+      "meaning": "điều, giọng"
+    },
+    "免": {
+      "hanviet": "MIỄN",
+      "on": "めん",
+      "kun": "まぬか(れる)",
+      "meaning": "miễn, tránh khỏi"
+    },
+    "折": {
+      "hanviet": "CHIẾT",
+      "on": "せつ",
+      "kun": "お(る)",
+      "meaning": "gấp, chiết"
+    },
+    "社": {
+      "hanviet": "XÃ",
+      "on": "しゃ",
+      "kun": "やしろ",
+      "meaning": "công ty, đền thờ"
+    },
+    "香": {
+      "hanviet": "HƯƠNG",
+      "on": "こう",
+      "kun": "かお(り)",
+      "meaning": "thơm, hương"
+    },
+    "不": {
+      "hanviet": "BẤT",
+      "on": "ふ・ぶ",
+      "kun": "",
+      "meaning": "không, bất"
+    },
+    "品": {
+      "hanviet": "PHẨM",
+      "on": "ひん",
+      "kun": "しな",
+      "meaning": "hàng hóa, phẩm"
+    },
+    "検": {
+      "hanviet": "KIỂM",
+      "on": "けん",
+      "kun": "",
+      "meaning": "kiểm tra, tìm"
+    },
+    "代": {
+      "hanviet": "ĐẠI",
+      "on": "だい",
+      "kun": "か(える)",
+      "meaning": "thay, đại"
+    },
+    "替": {
+      "hanviet": "THẾ",
+      "on": "たい",
+      "kun": "か(える)",
+      "meaning": "thay thế, đổi"
+    },
+    "引": {
+      "hanviet": "DẪN",
+      "on": "いん",
+      "kun": "ひ(く)",
+      "meaning": "kéo, dẫn"
+    },
+    "来": {
+      "hanviet": "LAI",
+      "on": "らい",
+      "kun": "く(る)",
+      "meaning": "đến, lai"
+    },
+    "見": {
+      "hanviet": "KIẾN",
+      "on": "けん",
+      "kun": "み(る)",
+      "meaning": "thấy, kiến"
+    },
+    "営": {
+      "hanviet": "DOANH",
+      "on": "えい",
+      "kun": "いとな(む)",
+      "meaning": "kinh doanh, điều hành"
+    },
+    "略": {
+      "hanviet": "LƯỢC",
+      "on": "りゃく",
+      "kun": "はぶ(く)",
+      "meaning": "lược, tóm tắt"
+    },
+    "手": {
+      "hanviet": "THỦ",
+      "on": "しゅ・ず",
+      "kun": "て",
+      "meaning": "tay"
+    },
+    "合": {
+      "hanviet": "HỢP",
+      "on": "ごう・がっ",
+      "kun": "あ(う)",
+      "meaning": "hợp, kết hợp"
+    },
+    "定": {
+      "hanviet": "ĐỊNH",
+      "on": "てい",
+      "kun": "さだ(める)",
+      "meaning": "định, xác định"
+    },
+    "法": {
+      "hanviet": "PHÁP",
+      "on": "ほう",
+      "kun": "",
+      "meaning": "pháp luật, phép"
+    },
+    "用": {
+      "hanviet": "DỤNG",
+      "on": "よう",
+      "kun": "もち(いる)",
+      "meaning": "dùng, dụng"
+    },
+    "保": {
+      "hanviet": "BẢO",
+      "on": "ほ",
+      "kun": "たも(つ)",
+      "meaning": "duy trì, bảo vệ"
+    },
+    "向": {
+      "hanviet": "HƯỚNG",
+      "on": "こう",
+      "kun": "む(く)",
+      "meaning": "hướng về"
+    },
+    "上": {
+      "hanviet": "THƯỢNG",
+      "on": "じょう",
+      "kun": "うえ",
+      "meaning": "trên, thượng"
+    },
+    "形": {
+      "hanviet": "HÌNH",
+      "on": "けい",
+      "kun": "かたち",
+      "meaning": "hình dạng, vật"
+    },
+    "書": {
+      "hanviet": "THƯ",
+      "on": "しょ",
+      "kun": "か(く)",
+      "meaning": "viết, sách"
+    },
+    "末": {
+      "hanviet": "MẠT",
+      "on": "まつ",
+      "kun": "すえ",
+      "meaning": "cuối, tận cùng"
+    },
+    "労": {
+      "hanviet": "LAO",
+      "on": "ろう",
+      "kun": "いたわ(る)",
+      "meaning": "lao động, quan tâm"
+    },
+    "治": {
+      "hanviet": "TRỊ",
+      "on": "ち・じ",
+      "kun": "おさ(める)・なお(る)",
+      "meaning": "cai trị, chữa lành"
+    },
+    "強": {
+      "hanviet": "CƯỜNG",
+      "on": "きょう",
+      "kun": "つよ(い)",
+      "meaning": "mạnh, cứng"
+    },
+    "別": {
+      "hanviet": "BIỆT",
+      "on": "べつ",
+      "kun": "わか(れる)",
+      "meaning": "tách biệt, khác"
+    },
+    "途": {
+      "hanviet": "ĐỒ",
+      "on": "と",
+      "kun": "みち",
+      "meaning": "đường, con đường"
+    },
+    "現": {
+      "hanviet": "HIỆN",
+      "on": "げん",
+      "kun": "あらわ(れる)",
+      "meaning": "hiện tại, xuất hiện"
+    },
+    "得": {
+      "hanviet": "ĐẮC",
+      "on": "とく・どく",
+      "kun": "え(る)",
+      "meaning": "được, đắc"
+    },
+    "害": {
+      "hanviet": "HẠI",
+      "on": "がい",
+      "kun": "",
+      "meaning": "hại, thiệt hại"
+    },
+    "優": {
+      "hanviet": "ƯU",
+      "on": "ゆう",
+      "kun": "やさ(しい)",
+      "meaning": "ưu tú, dịu dàng"
+    },
+    "挙": {
+      "hanviet": "CỬ",
+      "on": "きょ",
+      "kun": "あ(げる)",
+      "meaning": "giơ lên, cử lên"
+    },
+    "猶": {
+      "hanviet": "DO",
+      "on": "ゆう",
+      "kun": "",
+      "meaning": "do dự, còn"
+    },
+    "予": {
+      "hanviet": "DỰ",
+      "on": "よ",
+      "kun": "",
+      "meaning": "dự, trước"
+    },
+    "死": {
+      "hanviet": "TỬ",
+      "on": "し",
+      "kun": "し(ぬ)",
+      "meaning": "chết"
+    },
+    "突": {
+      "hanviet": "ĐỘT",
+      "on": "とつ",
+      "kun": "つ(く)",
+      "meaning": "đâm, đột ngột"
+    },
+    "発": {
+      "hanviet": "PHÁT",
+      "on": "はつ・ほつ",
+      "kun": "た(つ)",
+      "meaning": "phát, xuất phát"
+    },
+    "軽": {
+      "hanviet": "KHINH",
+      "on": "けい",
+      "kun": "かる(い)",
+      "meaning": "nhẹ, khinh"
+    },
+    "金": {
+      "hanviet": "KIM",
+      "on": "きん・こん",
+      "kun": "かね",
+      "meaning": "vàng, kim loại"
+    },
+    "資": {
+      "hanviet": "TƯ",
+      "on": "し",
+      "kun": "",
+      "meaning": "vốn, tài nguyên"
+    },
+    "破": {
+      "hanviet": "PHÁ",
+      "on": "は",
+      "kun": "やぶ(れる)",
+      "meaning": "phá, vỡ"
+    },
+    "棄": {
+      "hanviet": "KHÌ",
+      "on": "き",
+      "kun": "す(てる)",
+      "meaning": "bỏ, vứt"
+    },
+    "滞": {
+      "hanviet": "TRỆ",
+      "on": "たい",
+      "kun": "とどこお(る)",
+      "meaning": "đình trệ, tắc nghẽn"
+    },
+    "寄": {
+      "hanviet": "KÝ",
+      "on": "き",
+      "kun": "よ(る)",
+      "meaning": "gửi tặng, ghé lại"
+    },
+    "暫": {
+      "hanviet": "TẠM",
+      "on": "ざん",
+      "kun": "しばら(く)",
+      "meaning": "tạm thời, một lúc"
+    },
+    "応": {
+      "hanviet": "ỨNG",
+      "on": "おう",
+      "kun": "こた(える)",
+      "meaning": "ứng, đáp"
+    },
+    "今": {
+      "hanviet": "KIM",
+      "on": "こん",
+      "kun": "いま",
+      "meaning": "nay, hiện tại"
+    },
+    "舗": {
+      "hanviet": "PHỐ",
+      "on": "ほ",
+      "kun": "",
+      "meaning": "trải, lát"
+    },
+    "役": {
+      "hanviet": "DỊCH",
+      "on": "えき・やく",
+      "kun": "",
+      "meaning": "vai trò, lính"
+    },
+    "会": {
+      "hanviet": "HỘI",
+      "on": "かい・え",
+      "kun": "あ(う)",
+      "meaning": "gặp, hội"
+    },
+    "染": {
+      "hanviet": "NHIỄM",
+      "on": "せん",
+      "kun": "し(みる)",
+      "meaning": "nhuộm, thấm vào"
+    },
+    "念": {
+      "hanviet": "NIỆM",
+      "on": "ねん",
+      "kun": "",
+      "meaning": "niệm, lo nghĩ"
+    },
+    "識": {
+      "hanviet": "THỨC",
+      "on": "しき・しょく",
+      "kun": "し(る)",
+      "meaning": "biết, nhận thức"
+    },
+    "革": {
+      "hanviet": "CÁCH",
+      "on": "かく",
+      "kun": "かわ",
+      "meaning": "da thuộc, cách mạng"
+    },
+    "過": {
+      "hanviet": "QUÁ",
+      "on": "か",
+      "kun": "あやま(つ)",
+      "meaning": "sai lầm, qua"
+    },
+    "顔": {
+      "hanviet": "NHAN",
+      "on": "がん",
+      "kun": "かお",
+      "meaning": "mặt, gương mặt"
+    },
+    "根": {
+      "hanviet": "CĂN",
+      "on": "こん",
+      "kun": "ね",
+      "meaning": "rễ, gốc"
+    },
+    "物": {
+      "hanviet": "VẬT",
+      "on": "ぶつ",
+      "kun": "もの",
+      "meaning": "vật, đồ"
+    },
+    "開": {
+      "hanviet": "KHAI",
+      "on": "かい",
+      "kun": "ひら(く)",
+      "meaning": "mở, khai"
+    },
+    "夜": {
+      "hanviet": "DẠ",
+      "on": "や",
+      "kun": "よる",
+      "meaning": "đêm"
+    },
+    "風": {
+      "hanviet": "PHONG",
+      "on": "ふう・ふ",
+      "kun": "かぜ",
+      "meaning": "gió, phong cách"
+    },
+    "絶": {
+      "hanviet": "TUYỆT",
+      "on": "ぜつ",
+      "kun": "た(える)",
+      "meaning": "tuyệt, dứt"
+    },
+    "好": {
+      "hanviet": "HẢO",
+      "on": "こう",
+      "kun": "す(き)",
+      "meaning": "thích, tốt"
+    },
+    "相": {
+      "hanviet": "TƯỚNG",
+      "on": "そう",
+      "kun": "",
+      "meaning": "tướng mạo, vẻ"
+    },
+    "料": {
+      "hanviet": "LIỆU",
+      "on": "りょう",
+      "kun": "",
+      "meaning": "liệu, phí"
+    },
+    "衛": {
+      "hanviet": "VỆ",
+      "on": "えい",
+      "kun": "",
+      "meaning": "bảo vệ, vệ"
+    },
+    "管": {
+      "hanviet": "QUẢN",
+      "on": "かん",
+      "kun": "くだ",
+      "meaning": "ống, quản lý"
+    },
+    "子": {
+      "hanviet": "TỬ",
+      "on": "し",
+      "kun": "こ",
+      "meaning": "con, trẻ em"
+    },
+    "消": {
+      "hanviet": "TIÊU",
+      "on": "しょう",
+      "kun": "き(える)",
+      "meaning": "xóa, tiêu tan"
+    },
+    "同": {
+      "hanviet": "ĐỒNG",
+      "on": "どう",
+      "kun": "おな(じ)",
+      "meaning": "cùng, đồng"
+    },
+    "数": {
+      "hanviet": "SỐ",
+      "on": "すう",
+      "kun": "かず",
+      "meaning": "số, nhiều"
+    },
+    "残": {
+      "hanviet": "TÀN",
+      "on": "ざん",
+      "kun": "のこ(る)",
+      "meaning": "còn lại, tàn"
+    },
+    "有": {
+      "hanviet": "HỮU",
+      "on": "う・ゆう",
+      "kun": "あ(る)",
+      "meaning": "có"
+    },
+    "概": {
+      "hanviet": "KHÁI",
+      "on": "がい",
+      "kun": "おおむ(ね)",
+      "meaning": "đại thể, khái quát"
+    },
+    "設": {
+      "hanviet": "THIẾT",
+      "on": "せつ",
+      "kun": "もう(ける)",
+      "meaning": "thiết lập, tạo ra"
+    },
+    "復": {
+      "hanviet": "PHỤC",
+      "on": "ふく・ふっ",
+      "kun": "また",
+      "meaning": "lại, phục hồi"
+    },
+    "下": {
+      "hanviet": "HẠ",
+      "on": "か",
+      "kun": "した",
+      "meaning": "hạ, xuống"
+    },
+    "大": {
+      "hanviet": "ĐẠI",
+      "on": "だい・たい",
+      "kun": "おお(きい)",
+      "meaning": "lớn"
+    },
+    "気": {
+      "hanviet": "KHÍ",
+      "on": "き",
+      "kun": "",
+      "meaning": "khí, cảm giác"
+    },
+    "取": {
+      "hanviet": "THỦ",
+      "on": "しゅ",
+      "kun": "と(る)",
+      "meaning": "lấy, thu"
+    },
+    "表": {
+      "hanviet": "BIỂU",
+      "on": "ひょう",
+      "kun": "おもて",
+      "meaning": "bề mặt, biểu"
+    },
+    "無": {
+      "hanviet": "VÔ",
+      "on": "む・ぶ",
+      "kun": "な(い)",
+      "meaning": "không có, vô"
+    },
+    "承": {
+      "hanviet": "THỪA",
+      "on": "しょう",
+      "kun": "うけたまわ(る)",
+      "meaning": "tiếp nhận, chấp thuận"
+    },
+    "裂": {
+      "hanviet": "LIỆT",
+      "on": "れつ",
+      "kun": "さ(ける)",
+      "meaning": "xé, rách"
+    },
+    "道": {
+      "hanviet": "ĐẠO",
+      "on": "どう",
+      "kun": "みち",
+      "meaning": "đường, đạo"
+    },
+    "高": {
+      "hanviet": "CAO",
+      "on": "こう",
+      "kun": "たか(い)",
+      "meaning": "cao, lượng"
+    },
+    "器": {
+      "hanviet": "KHÍ",
+      "on": "き",
+      "kun": "うつわ",
+      "meaning": "dụng cụ, tài năng"
+    },
+    "財": {
+      "hanviet": "TÀI",
+      "on": "ざい",
+      "kun": "",
+      "meaning": "tài sản, tiền bạc"
+    },
+    "時": {
+      "hanviet": "THỜI",
+      "on": "じ",
+      "kun": "とき",
+      "meaning": "thời gian, lúc"
+    },
+    "間": {
+      "hanviet": "GIAN",
+      "on": "かん・けん",
+      "kun": "ま・あいだ",
+      "meaning": "khoảng cách, giữa"
+    },
+    "待": {
+      "hanviet": "ĐÃI",
+      "on": "たい",
+      "kun": "ま(つ)",
+      "meaning": "chờ đợi, đối xử"
+    },
+    "能": {
+      "hanviet": "NĂNG",
+      "on": "のう",
+      "kun": "",
+      "meaning": "năng lực, có thể"
+    },
+    "添": {
+      "hanviet": "THIÊM",
+      "on": "てん",
+      "kun": "そ(える)",
+      "meaning": "thêm vào, đính"
+    },
+    "控": {
+      "hanviet": "KHỐNG",
+      "on": "こう",
+      "kun": "ひか(える)",
+      "meaning": "kiềm chế, trừ"
+    },
+    "抜": {
+      "hanviet": "BẠT",
+      "on": "ばつ",
+      "kun": "ぬ(く)",
+      "meaning": "rút ra, vượt trội"
+    },
+    "身": {
+      "hanviet": "THÂN",
+      "on": "しん",
+      "kun": "み",
+      "meaning": "thân, mình"
+    },
+    "重": {
+      "hanviet": "TRỌNG",
+      "on": "ちょう・じゅう",
+      "kun": "おも(い)",
+      "meaning": "nặng, trọng"
+    },
+    "模": {
+      "hanviet": "MÔ",
+      "on": "も・ぼ",
+      "kun": "",
+      "meaning": "mẫu, khuôn"
+    },
+    "却": {
+      "hanviet": "KHƯỚC",
+      "on": "きゃく",
+      "kun": "",
+      "meaning": "lại, bác bỏ"
+    },
+    "処": {
+      "hanviet": "XỨ",
+      "on": "しょ",
+      "kun": "",
+      "meaning": "xử lý, nơi chốn"
+    },
+    "分": {
+      "hanviet": "PHÂN",
+      "on": "ぶん・ふん・ぶ",
+      "kun": "わ(ける)",
+      "meaning": "phần, chia"
+    },
+    "権": {
+      "hanviet": "QUYỀN",
+      "on": "けん",
+      "kun": "",
+      "meaning": "quyền, quyền lợi"
+    },
+    "履": {
+      "hanviet": "LÝ",
+      "on": "り",
+      "kun": "は(く)",
+      "meaning": "đi giày, thực hiện"
+    },
+    "歴": {
+      "hanviet": "LỊCH",
+      "on": "れき",
+      "kun": "",
+      "meaning": "lịch sử, trải qua"
+    },
+    "内": {
+      "hanviet": "NỘI",
+      "on": "ない",
+      "kun": "うち",
+      "meaning": "trong, nội"
+    },
+    "文": {
+      "hanviet": "VĂN",
+      "on": "ぶん",
+      "kun": "ふみ",
+      "meaning": "chữ, văn"
+    },
+    "実": {
+      "hanviet": "THỰC",
+      "on": "じつ・じっ",
+      "kun": "み・みの(る)",
+      "meaning": "thực, quả"
+    },
+    "扱": {
+      "hanviet": "CHUYẾT",
+      "on": "きゅう",
+      "kun": "あつか(う)",
+      "meaning": "xử lý, đối xử"
+    },
+    "明": {
+      "hanviet": "MINH",
+      "on": "めい",
+      "kun": "あか(るい)",
+      "meaning": "sáng, rõ ràng"
+    },
+    "封": {
+      "hanviet": "PHONG",
+      "on": "ふう",
+      "kun": "ふう(じる)",
+      "meaning": "phong bì, niêm phong"
+    },
+    "負": {
+      "hanviet": "PHỤ",
+      "on": "ふ",
+      "kun": "ま(ける)・お(う)",
+      "meaning": "gánh chịu, thua"
+    },
+    "担": {
+      "hanviet": "ĐẢM",
+      "on": "たん",
+      "kun": "かつ(ぐ)",
+      "meaning": "gánh, phụ trách"
+    },
+    "世": {
+      "hanviet": "THẾ",
+      "on": "せ・せい",
+      "kun": "よ",
+      "meaning": "thế giới, đời"
+    },
+    "動": {
+      "hanviet": "ĐỘNG",
+      "on": "どう",
+      "kun": "うご(く)",
+      "meaning": "động, chuyển động"
+    },
+    "推": {
+      "hanviet": "SUY",
+      "on": "すい",
+      "kun": "お(す)",
+      "meaning": "đẩy, suy luận"
+    },
+    "面": {
+      "hanviet": "DIỆN",
+      "on": "めん",
+      "kun": "おも・つら",
+      "meaning": "mặt, bề mặt"
+    },
+    "因": {
+      "hanviet": "NHÂN",
+      "on": "いん",
+      "kun": "よ(る)",
+      "meaning": "nhân, nguyên nhân"
+    },
+    "傾": {
+      "hanviet": "KHUYNH",
+      "on": "けい",
+      "kun": "かたむ(く)",
+      "meaning": "nghiêng, thiên về"
+    },
+    "測": {
+      "hanviet": "TRẮC",
+      "on": "そく",
+      "kun": "はか(る)",
+      "meaning": "đo lường, ước tính"
+    },
+    "急": {
+      "hanviet": "CẤP",
+      "on": "きゅう",
+      "kun": "いそ(ぐ)",
+      "meaning": "gấp, cấp"
+    },
+    "激": {
+      "hanviet": "KÍCH",
+      "on": "げき",
+      "kun": "はげ(しい)",
+      "meaning": "mạnh mẽ, kích động"
+    },
+    "緩": {
+      "hanviet": "HOÃN",
+      "on": "かん",
+      "kun": "ゆる(い)",
+      "meaning": "chậm, lỏng"
+    },
+    "為": {
+      "hanviet": "VI",
+      "on": "い",
+      "kun": "ため",
+      "meaning": "vì, do, làm"
+    },
+    "行": {
+      "hanviet": "HÀNH",
+      "on": "こう・ぎょう",
+      "kun": "い(く)",
+      "meaning": "đi, tiến hành"
+    },
+    "愛": {
+      "hanviet": "ÁI",
+      "on": "あい",
+      "kun": "",
+      "meaning": "tình yêu, thân thiện"
+    },
+    "顧": {
+      "hanviet": "CỐ",
+      "on": "こ",
+      "kun": "かえり(みる)",
+      "meaning": "nhìn lại, quan tâm"
+    },
+    "新": {
+      "hanviet": "TÂN",
+      "on": "しん",
+      "kun": "あたら(しい)",
+      "meaning": "mới"
+    },
+    "装": {
+      "hanviet": "TRANG",
+      "on": "そう・しょう",
+      "kun": "よそお(う)",
+      "meaning": "trang bị, lát"
+    },
+    "併": {
+      "hanviet": "TINH",
+      "on": "へい",
+      "kun": "なら(べる)",
+      "meaning": "song song, sáp nhập"
+    },
+    "点": {
+      "hanviet": "ĐIỂM",
+      "on": "てん",
+      "kun": "",
+      "meaning": "điểm, chấm"
+    },
+    "散": {
+      "hanviet": "TÁN",
+      "on": "さん",
+      "kun": "ち(る)",
+      "meaning": "tản mát, thưa thớt"
+    },
+    "所": {
+      "hanviet": "SỞ",
+      "on": "しょ",
+      "kun": "ところ",
+      "meaning": "nơi, chỗ"
+    },
+    "中": {
+      "hanviet": "TRUNG",
+      "on": "ちゅう",
+      "kun": "なか",
+      "meaning": "giữa, trung"
+    },
+    "野": {
+      "hanviet": "DÃ",
+      "on": "や",
+      "kun": "の",
+      "meaning": "đồng, dã"
+    },
+    "接": {
+      "hanviet": "TIẾP",
+      "on": "せつ・せっ",
+      "kun": "つ(ぐ)",
+      "meaning": "tiếp, nối"
+    },
+    "心": {
+      "hanviet": "TÂM",
+      "on": "しん",
+      "kun": "こころ",
+      "meaning": "lòng, tâm"
+    },
+    "践": {
+      "hanviet": "TIỄN",
+      "on": "せん",
+      "kun": "ふ(む)",
+      "meaning": "bước, thực hành"
+    },
+    "懇": {
+      "hanviet": "KHẨN",
+      "on": "こん",
+      "kun": "ねんご(ろ)",
+      "meaning": "ân cần, thân mật"
+    },
+    "親": {
+      "hanviet": "THÂN",
+      "on": "しん",
+      "kun": "おや・した(しい)",
+      "meaning": "thân, cha mẹ"
+    },
+    "自": {
+      "hanviet": "TỰ",
+      "on": "じ・し",
+      "kun": "みずか(ら)",
+      "meaning": "bản thân, tự"
+    },
+    "栄": {
+      "hanviet": "VINH",
+      "on": "えい",
+      "kun": "さか(える)",
+      "meaning": "thịnh vượng, vinh"
+    },
+    "養": {
+      "hanviet": "DƯỠNG",
+      "on": "よう",
+      "kun": "やしな(う)",
+      "meaning": "nuôi dưỡng, bồi dưỡng"
+    },
+    "案": {
+      "hanviet": "ÁN",
+      "on": "あん",
+      "kun": "",
+      "meaning": "phương án, đề xuất"
+    },
+    "助": {
+      "hanviet": "TRỢ",
+      "on": "じょ・すけ",
+      "kun": "たす(ける)",
+      "meaning": "giúp đỡ"
+    },
+    "前": {
+      "hanviet": "TIỀN",
+      "on": "ぜん",
+      "kun": "まえ",
+      "meaning": "trước"
+    },
+    "想": {
+      "hanviet": "TƯỞNG",
+      "on": "そう・そ",
+      "kun": "おも(う)",
+      "meaning": "suy nghĩ, tưởng"
+    },
+    "疑": {
+      "hanviet": "NGHI",
+      "on": "ぎ",
+      "kun": "うたが(う)",
+      "meaning": "nghi ngờ"
+    },
+    "者": {
+      "hanviet": "GIẢ",
+      "on": "しゃ",
+      "kun": "もの",
+      "meaning": "người, kẻ"
+    },
+    "朝": {
+      "hanviet": "TRIÊU",
+      "on": "ちょう",
+      "kun": "あさ",
+      "meaning": "buổi sáng, triều"
+    },
+    "初": {
+      "hanviet": "SƠ",
+      "on": "しょ",
+      "kun": "はじ(め)",
+      "meaning": "đầu tiên, ban đầu"
+    },
+    "端": {
+      "hanviet": "ĐẦU",
+      "on": "たん",
+      "kun": "はし・はた",
+      "meaning": "đầu mút, bên cạnh"
+    },
+    "浸": {
+      "hanviet": "TẨM",
+      "on": "しん",
+      "kun": "ひた(る)",
+      "meaning": "ngâm, đắm chìm"
+    },
+    "盛": {
+      "hanviet": "THỊNH",
+      "on": "せい・じょう",
+      "kun": "も(る)",
+      "meaning": "thịnh vượng, đầy"
+    },
+    "差": {
+      "hanviet": "SAI",
+      "on": "さ",
+      "kun": "さ(す)",
+      "meaning": "sai khác, gửi"
+    },
+    "覚": {
+      "hanviet": "GIÁC",
+      "on": "かく",
+      "kun": "おぼ(える)",
+      "meaning": "giác, nhận ra"
+    },
+    "及": {
+      "hanviet": "CẬP",
+      "on": "きゅう",
+      "kun": "およ(ぶ)",
+      "meaning": "đến, đạt tới"
+    },
+    "性": {
+      "hanviet": "TÍNH",
+      "on": "せい・しょう",
+      "kun": "",
+      "meaning": "tính chất, bản tính"
+    },
+    "圧": {
+      "hanviet": "ÁP",
+      "on": "あつ",
+      "kun": "",
+      "meaning": "áp lực, ép"
+    },
+    "逆": {
+      "hanviet": "NGHỊCH",
+      "on": "ぎゃく",
+      "kun": "さか(らう)",
+      "meaning": "nghịch, ngược"
+    },
+    "方": {
+      "hanviet": "PHƯƠNG",
+      "on": "ほう",
+      "kun": "かた",
+      "meaning": "phương, hướng"
+    },
+    "失": {
+      "hanviet": "THẤT",
+      "on": "しつ",
+      "kun": "うしな(う)",
+      "meaning": "mất, thất"
+    },
+    "極": {
+      "hanviet": "CỰC",
+      "on": "ごく",
+      "kun": "きわ(める)",
+      "meaning": "cực, tột cùng"
+    },
+    "悪": {
+      "hanviet": "ÁC",
+      "on": "お・あく",
+      "kun": "わる(い)",
+      "meaning": "xấu, ác"
+    },
+    "懸": {
+      "hanviet": "HUYỀN",
+      "on": "けん・け",
+      "kun": "か(ける)",
+      "meaning": "treo, lo lắng"
+    },
+    "守": {
+      "hanviet": "THỦ",
+      "on": "しゅ・す",
+      "kun": "まも(る)",
+      "meaning": "bảo vệ, giữ gìn"
+    },
+    "索": {
+      "hanviet": "SÁCH",
+      "on": "さく",
+      "kun": "",
+      "meaning": "tìm kiếm, sợi"
+    },
+    "落": {
+      "hanviet": "LẠC",
+      "on": "らく",
+      "kun": "お(ちる)",
+      "meaning": "rơi, lạc"
+    },
+    "追": {
+      "hanviet": "TRUY",
+      "on": "つい",
+      "kun": "お(う)",
+      "meaning": "đuổi theo, truy"
+    },
+    "特": {
+      "hanviet": "ĐẶC",
+      "on": "とく",
+      "kun": "",
+      "meaning": "đặc biệt"
+    },
+    "目": {
+      "hanviet": "MỤC",
+      "on": "もく",
+      "kun": "め",
+      "meaning": "mắt, vạch"
+    },
+    "譲": {
+      "hanviet": "NHƯỢNG",
+      "on": "じょう",
+      "kun": "ゆず(る)",
+      "meaning": "nhường, chuyển"
+    },
+    "際": {
+      "hanviet": "TẾ",
+      "on": "さい",
+      "kun": "きわ",
+      "meaning": "lúc, bên cạnh, ranh giới"
+    },
+    "隙": {
+      "hanviet": "KHÍCH",
+      "on": "げき",
+      "kun": "すき",
+      "meaning": "kẽ hở, khoảng trống"
+    },
+    "抑": {
+      "hanviet": "ỨC",
+      "on": "よく",
+      "kun": "おさ(える)",
+      "meaning": "kìm nén, ức chế"
+    },
+    "口": {
+      "hanviet": "KHẨU",
+      "on": "こう・く",
+      "kun": "くち",
+      "meaning": "miệng, cửa"
+    },
+    "借": {
+      "hanviet": "TÁ",
+      "on": "しゃく",
+      "kun": "か(りる)",
+      "meaning": "mượn, vay"
+    },
+    "甚": {
+      "hanviet": "THẬM",
+      "on": "じん",
+      "kun": "はなは(だ)",
+      "meaning": "rất, cực kỳ"
+    },
+    "拝": {
+      "hanviet": "BÁI",
+      "on": "はい",
+      "kun": "おが(む)",
+      "meaning": "lạy, kính bái"
+    },
+    "地": {
+      "hanviet": "ĐỊA",
+      "on": "ち・じ",
+      "kun": "つち",
+      "meaning": "đất, địa"
+    },
+    "紙": {
+      "hanviet": "CHỈ",
+      "on": "し",
+      "kun": "かみ",
+      "meaning": "giấy"
+    },
+    "許": {
+      "hanviet": "HỨA",
+      "on": "きょ",
+      "kun": "ゆる(す)",
+      "meaning": "cho phép, cấp phép"
+    },
+    "似": {
+      "hanviet": "TỰ",
+      "on": "じ",
+      "kun": "に(る)",
+      "meaning": "giống, tương tự"
+    },
+    "断": {
+      "hanviet": "ĐOÁN",
+      "on": "だん",
+      "kun": "た(つ)",
+      "meaning": "cắt đứt, từ chối"
+    },
+    "素": {
+      "hanviet": "TỐ",
+      "on": "そ・す",
+      "kun": "もと",
+      "meaning": "gốc, đơn giản"
+    },
+    "遺": {
+      "hanviet": "DI",
+      "on": "い",
+      "kun": "のこ(す)",
+      "meaning": "để lại, di"
+    },
+    "安": {
+      "hanviet": "AN",
+      "on": "あん",
+      "kun": "やす(い)",
+      "meaning": "yên, an toàn"
+    },
+    "丁": {
+      "hanviet": "ĐINH",
+      "on": "てい",
+      "kun": "",
+      "meaning": "lịch sự, số thứ tự"
+    },
+    "言": {
+      "hanviet": "NGÔN",
+      "on": "げん・ごん",
+      "kun": "い(う)",
+      "meaning": "lời nói, ngôn"
+    },
+    "氾": {
+      "hanviet": "PHẠM",
+      "on": "はん",
+      "kun": "",
+      "meaning": "tràn, lũ lụt"
+    },
+    "濫": {
+      "hanviet": "LÃM",
+      "on": "らん",
+      "kun": "",
+      "meaning": "lạm dụng, tràn"
+    },
+    "壊": {
+      "hanviet": "HOẠI",
+      "on": "かい",
+      "kun": "こわ(れる)",
+      "meaning": "vỡ, phá hủy"
+    },
+    "操": {
+      "hanviet": "THAO",
+      "on": "そう",
+      "kun": "あやつ(る)",
+      "meaning": "vận hành, điều khiển"
+    },
+    "随": {
+      "hanviet": "TÙY",
+      "on": "ずい",
+      "kun": "したが(う)",
+      "meaning": "theo, tùy"
+    },
+    "括": {
+      "hanviet": "QUÁT",
+      "on": "かつ",
+      "kun": "くく(る)",
+      "meaning": "buộc, gom lại"
+    },
+    "頭": {
+      "hanviet": "ĐẦU",
+      "on": "とう",
+      "kun": "あたま",
+      "meaning": "đầu, đầu tiên"
+    },
+    "微": {
+      "hanviet": "VI",
+      "on": "び",
+      "kun": "かす(か)",
+      "meaning": "nhỏ bé, vi"
+    },
+    "示": {
+      "hanviet": "THỊ",
+      "on": "じ・し",
+      "kun": "しめ(す)",
+      "meaning": "chỉ ra, biểu thị"
+    },
+    "繁": {
+      "hanviet": "PHỒN",
+      "on": "はん",
+      "kun": "しげ(る)",
+      "meaning": "phồn thịnh, rậm rạp"
+    },
+    "柄": {
+      "hanviet": "BÍNH",
+      "on": "へい",
+      "kun": "がら・え",
+      "meaning": "cán, hoa văn, tư cách"
+    },
+    "範": {
+      "hanviet": "PHẠM",
+      "on": "はん",
+      "kun": "",
+      "meaning": "quy tắc, mẫu mực"
+    },
+    "笑": {
+      "hanviet": "TIẾU",
+      "on": "しょう",
+      "kun": "わら(う)",
+      "meaning": "cười"
+    },
+    "空": {
+      "hanviet": "KHÔNG",
+      "on": "くう",
+      "kun": "むな(しい)",
+      "meaning": "trống rỗng, vô ích"
+    },
+    "老": {
+      "hanviet": "LÃO",
+      "on": "ろう",
+      "kun": "お(いる)",
+      "meaning": "già, lâu năm"
+    },
+    "作": {
+      "hanviet": "TÁC",
+      "on": "さく",
+      "kun": "つく(る)",
+      "meaning": "làm, tác"
+    },
+    "耐": {
+      "hanviet": "NẠI",
+      "on": "たい",
+      "kun": "た(える)",
+      "meaning": "chịu đựng, kháng"
+    },
+    "路": {
+      "hanviet": "LỘ",
+      "on": "ろ",
+      "kun": "みち",
+      "meaning": "đường, con đường"
+    },
+    "批": {
+      "hanviet": "PHÊ",
+      "on": "ひ",
+      "kun": "",
+      "meaning": "phê bình, phê chuẩn"
+    },
+    "潜": {
+      "hanviet": "TIỀM",
+      "on": "せん",
+      "kun": "くぐ(る)・もぐ(る)",
+      "meaning": "ẩn, lặn, chui qua"
+    },
+    "怠": {
+      "hanviet": "ĐÃI",
+      "on": "たい",
+      "kun": "おこた(る)",
+      "meaning": "lười biếng, sao nhãng"
+    },
+    "細": {
+      "hanviet": "TẾ",
+      "on": "さい",
+      "kun": "こま(かい)",
+      "meaning": "nhỏ, tế"
+    },
+    "易": {
+      "hanviet": "DỊ",
+      "on": "えき・い",
+      "kun": "やさ(しい)",
+      "meaning": "dễ, bói toán"
+    },
+    "属": {
+      "hanviet": "THUỘC",
+      "on": "ぞく・しょく",
+      "kun": "",
+      "meaning": "thuộc về"
+    },
+    "諾": {
+      "hanviet": "NẶC",
+      "on": "だく",
+      "kun": "",
+      "meaning": "đồng ý, thuận"
+    },
+    "乱": {
+      "hanviet": "LOẠN",
+      "on": "らん",
+      "kun": "みだ(れる)",
+      "meaning": "loạn, hỗn loạn"
+    },
+    "暴": {
+      "hanviet": "BẠO",
+      "on": "ばく・ぼう",
+      "kun": "あば(れる)",
+      "meaning": "bạo lực, phơi bày"
+    },
+    "張": {
+      "hanviet": "TRƯƠNG",
+      "on": "ちょう",
+      "kun": "は(る)",
+      "meaning": "căng, trương"
+    },
+    "谷": {
+      "hanviet": "CỐC",
+      "on": "こく",
+      "kun": "たに",
+      "meaning": "thung lũng, khe"
+    },
+    "錯": {
+      "hanviet": "THÁC",
+      "on": "さく・さっ",
+      "kun": "",
+      "meaning": "lộn xộn, sai"
+    },
+    "誤": {
+      "hanviet": "NGỘ",
+      "on": "ご",
+      "kun": "あやま(る)",
+      "meaning": "sai, nhầm lẫn"
+    },
+    "弔": {
+      "hanviet": "ĐIẾU",
+      "on": "ちょう",
+      "kun": "とむら(う)",
+      "meaning": "viếng tang, điếu"
+    },
+    "罪": {
+      "hanviet": "TỘI",
+      "on": "ざい",
+      "kun": "つみ",
+      "meaning": "tội lỗi"
+    },
+    "正": {
+      "hanviet": "CHÍNH",
+      "on": "せい",
+      "kun": "ただ(しい)",
+      "meaning": "chính, đúng"
+    },
+    "償": {
+      "hanviet": "THƯỜNG",
+      "on": "しょう",
+      "kun": "つぐな(う)",
+      "meaning": "đền bù, bồi thường"
+    },
+    "縮": {
+      "hanviet": "SÚC",
+      "on": "しゅく",
+      "kun": "ちぢ(む)",
+      "meaning": "co lại, rút gọn"
+    },
+    "白": {
+      "hanviet": "BẠCH",
+      "on": "はく",
+      "kun": "しろ",
+      "meaning": "trắng, bạch"
+    },
+    "息": {
+      "hanviet": "TỨC",
+      "on": "そく",
+      "kun": "いき",
+      "meaning": "hơi thở, nghỉ"
+    },
+    "土": {
+      "hanviet": "THỔ",
+      "on": "ど",
+      "kun": "つち",
+      "meaning": "đất, thổ"
+    },
+    "債": {
+      "hanviet": "TRÁI",
+      "on": "さい",
+      "kun": "",
+      "meaning": "nợ, trái phiếu"
+    },
+    "字": {
+      "hanviet": "TỰ",
+      "on": "じ",
+      "kun": "あざ",
+      "meaning": "chữ, tự"
+    },
+    "斡": {
+      "hanviet": "OẢNH",
+      "on": "あつ・あっ",
+      "kun": "",
+      "meaning": "xoay chuyển, môi giới"
+    },
+    "旋": {
+      "hanviet": "TOÀN",
+      "on": "せん",
+      "kun": "",
+      "meaning": "xoay vòng, môi giới"
+    },
+    "異": {
+      "hanviet": "DỊ",
+      "on": "い",
+      "kun": "こと(なる)",
+      "meaning": "khác lạ, dị thường"
+    },
+    "影": {
+      "hanviet": "ẢNH",
+      "on": "えい",
+      "kun": "かげ",
+      "meaning": "bóng, ảnh"
+    },
+    "釈": {
+      "hanviet": "THÍCH",
+      "on": "しゃく",
+      "kun": "",
+      "meaning": "giải thích, tha"
+    },
+    "懐": {
+      "hanviet": "HOÀI",
+      "on": "かい",
+      "kun": "ふところ",
+      "meaning": "lòng ngực, hoài"
+    },
+    "獲": {
+      "hanviet": "HOẠCH",
+      "on": "かく",
+      "kun": "え(る)",
+      "meaning": "thu hoạch, bắt được"
+    },
+    "境": {
+      "hanviet": "CẢNH",
+      "on": "きょう",
+      "kun": "さかい",
+      "meaning": "cảnh, ranh giới"
+    },
+    "連": {
+      "hanviet": "LIÊN",
+      "on": "れん",
+      "kun": "つら(なる)",
+      "meaning": "liên tiếp, liên"
+    },
+    "企": {
+      "hanviet": "XÍ",
+      "on": "き",
+      "kun": "たくら(む)",
+      "meaning": "mưu mô, lên kế hoạch"
+    },
+    "危": {
+      "hanviet": "NGUY",
+      "on": "き",
+      "kun": "あぶ(ない)",
+      "meaning": "nguy hiểm"
+    },
+    "程": {
+      "hanviet": "TRÌNH",
+      "on": "てい",
+      "kun": "ほど",
+      "meaning": "mức độ, khoảng"
+    },
+    "拠": {
+      "hanviet": "CỨ",
+      "on": "きょ",
+      "kun": "よ(る)",
+      "meaning": "dựa vào, căn cứ"
+    },
+    "煙": {
+      "hanviet": "YÊN",
+      "on": "えん",
+      "kun": "けむり",
+      "meaning": "khói, hút thuốc"
+    },
+    "融": {
+      "hanviet": "DUNG",
+      "on": "ゆう",
+      "kun": "と(ける)",
+      "meaning": "tan chảy, thông suốt"
+    },
+    "掲": {
+      "hanviet": "YẾT",
+      "on": "けい",
+      "kun": "かか(げる)",
+      "meaning": "treo, giương lên"
+    },
+    "由": {
+      "hanviet": "DO",
+      "on": "ゆ・ゆう",
+      "kun": "よ(る)",
+      "meaning": "nguyên do, từ"
+    },
+    "研": {
+      "hanviet": "NGHIÊN",
+      "on": "けん",
+      "kun": "と(ぐ)",
+      "meaning": "mài, nghiên cứu"
+    },
+    "量": {
+      "hanviet": "LƯỢNG",
+      "on": "りょう",
+      "kun": "はか(る)",
+      "meaning": "lượng, đo lường"
+    },
+    "換": {
+      "hanviet": "HOÁN",
+      "on": "かん",
+      "kun": "か(える)",
+      "meaning": "đổi, chuyển"
+    },
+    "師": {
+      "hanviet": "SƯ",
+      "on": "し",
+      "kun": "",
+      "meaning": "thầy, sư"
+    }
+  },
+  "terms": {
+    "補助": {
+      "reading": "ほじょ",
+      "meaning": "hỗ trợ, trợ giúp",
+      "example": "彼には補助が必要だ。",
+      "confuse": "補 đọc là ほ (không có う dài), 助 đọc là じょ (không phải じゅ). Hay nhầm thêm う → ほうじょ",
+      "traps": [
+        {
+          "r": "ほうじょ",
+          "meaning": "không có nghĩa (từ không tồn tại)"
+        },
+        {
+          "r": "ほじ",
+          "meaning": "保持（ほじ）= duy trì, giữ gìn — chữ khác"
+        },
+        {
+          "r": "ほうじ",
+          "meaning": "法事（ほうじ）= lễ cúng Phật — chữ khác"
+        }
+      ],
+      "collocations": [
+        "補助金（ほじょきん）— tiền trợ cấp",
+        "補助する — hỗ trợ, giúp đỡ",
+        "補助輪（ほじょりん）— bánh phụ xe đạp"
+      ],
+      "synonyms": [
+        "支援（しえん）",
+        "援助（えんじょ）",
+        "助成（じょせい）"
+      ]
+    },
+    "懸念": {
+      "reading": "けねん",
+      "meaning": "lo ngại, đáng lo",
+      "example": "景気の低迷が懸念される。",
+      "confuse": "懸 đọc けん. 念 đọc ねん. Hay nhầm けいねん、けんねん (thêm âm thừa)",
+      "traps": [
+        {
+          "r": "けいねん",
+          "meaning": "敬年 — không có nghĩa / 計年 — không tồn tại"
+        },
+        {
+          "r": "けんねん",
+          "meaning": "堅念 — không tồn tại"
+        },
+        {
+          "r": "げんねん",
+          "meaning": "幻念 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "懸念を抱く — ôm mối lo ngại",
+        "懸念される — đáng lo ngại",
+        "懸念材料（けいねんざいりょう）— yếu tố đáng lo",
+        "深刻な懸念 — mối lo nghiêm trọng"
+      ],
+      "synonyms": [
+        "心配（しんぱい）— lo lắng",
+        "危惧（きぐ）— lo ngại",
+        "憂慮（ゆうりょ）— lo âu (trang trọng)"
+      ]
+    },
+    "顧客": {
+      "reading": "こきゃく",
+      "meaning": "khách hàng, khách quen",
+      "example": "顧客のニーズを調査した。",
+      "confuse": "顧 đọc こ (không phải かん). こ+きゃく=こきゃく. Hay nhầm かんきゃく (khán giả)",
+      "traps": [
+        {
+          "r": "かんきゃく",
+          "meaning": "観客（かんきゃく）= khán giả — chữ 観 khác"
+        },
+        {
+          "r": "かんかく",
+          "meaning": "感覚（かんかく）= cảm giác\n　　間隔（かんかく）= khoảng cách — chữ khác"
+        },
+        {
+          "r": "こかく",
+          "meaning": "固角 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "顧客満足度（まんぞくど）— độ hài lòng khách hàng",
+        "顧客管理（かんり）— quản lý khách hàng",
+        "顧客ニーズ — nhu cầu khách hàng",
+        "得意顧客（とくいこきゃく）— khách hàng VIP",
+        "顧客第一（だいいち）— khách hàng là trên hết"
+      ],
+      "synonyms": [
+        "お客様（おきゃくさま）— quý khách",
+        "クライアント — client",
+        "取引先（とりひきさき）— đối tác, khách hàng",
+        "ユーザー — user"
+      ]
+    },
+    "模範": {
+      "reading": "もはん",
+      "meaning": "mẫu mực, gương mẫu",
+      "example": "彼は模範となる優秀な学生だ。",
+      "confuse": "模 đọc も (không phải ぼ、もう). 範 đọc はん. Hay nhầm ぼはん、もうはん",
+      "traps": [
+        {
+          "r": "ぼはん",
+          "meaning": "不有"
+        },
+        {
+          "r": "もうはん",
+          "meaning": "不有"
+        },
+        {
+          "r": "ぼうはん",
+          "meaning": "防犯（ぼうはん）= phòng chống tội phạm — chữ khác"
+        }
+      ],
+      "collocations": [
+        "模範となる（もはんとなる）— trở thành mẫu mực",
+        "模範生（もはんせい）— học sinh gương mẫu",
+        "模範解答（かいとう）— đáp án mẫu",
+        "模範を示す（しめす）— nêu gương",
+        "模範的な行動（こうどう）— hành động mẫu mực"
+      ],
+      "synonyms": [
+        "手本（てほん）— mẫu, gương",
+        "見本（みほん）— mẫu (sản phẩm)",
+        "規範（きはん）— chuẩn mực",
+        "手本にする — lấy làm gương"
+      ]
+    },
+    "拠点": {
+      "reading": "きょてん",
+      "meaning": "căn cứ địa, trụ sở chính",
+      "example": "我が社は中国進出に際し、まず上海に拠点を築いた。",
+      "confuse": "拠 đọc きょ (không phải しょ、ちょ、じょ). きょ+てん=きょてん",
+      "traps": [
+        {
+          "r": "しょてん",
+          "meaning": "書店（しょてん）= hiệu sách — chữ 書 khác"
+        },
+        {
+          "r": "ちょてん",
+          "meaning": "頂点（ちょうてん）= đỉnh điểm — âm và chữ khác"
+        },
+        {
+          "r": "じょてん",
+          "meaning": "不有"
+        }
+      ],
+      "collocations": [
+        "拠点を築く（きずく）— xây dựng căn cứ",
+        "拠点を置く（おく）— đặt trụ sở",
+        "海外拠点（かいがいきょてん）— cơ sở ở nước ngoài",
+        "販売拠点（はんばいきょてん）— điểm bán hàng",
+        "拠点を移す（うつす）— di chuyển căn cứ"
+      ],
+      "synonyms": [
+        "本拠地（ほんきょち）— căn cứ chính",
+        "基地（きち）— căn cứ (quân sự)",
+        "ベース — base",
+        "拠り所（よりどころ）— chỗ dựa"
+      ]
+    },
+    "氾濫": {
+      "reading": "はんらん",
+      "meaning": "lũ lụt, tràn bờ",
+      "example": "大雨で川が氾濫した。",
+      "confuse": "氾 đọc はん (không phải ほん). 濫 đọc らん. Hay nhầm ほんかん、ほんらん",
+      "traps": [
+        {
+          "r": "はんかん",
+          "meaning": "煩感 — không tồn tại"
+        },
+        {
+          "r": "ほんかん",
+          "meaning": "本官 — không tồn tại"
+        },
+        {
+          "r": "ほんらん",
+          "meaning": "本覧 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "川が氾濫する（かわがはんらん）— sông tràn bờ",
+        "情報が氾濫する（じょうほう）— thông tin tràn lan",
+        "氾濫原（はんらんげん）— đồng bằng lũ",
+        "氾濫注意（ちゅうい）— cảnh báo lũ lụt",
+        "氾濫を防ぐ（ふせぐ）— phòng chống lũ lụt"
+      ],
+      "synonyms": [
+        "洪水（こうずい）— lũ lụt",
+        "溢れる（あふれる）— tràn ra",
+        "溢水（いっすい）— nước tràn",
+        "浸水（しんすい）— ngập nước"
+      ]
+    },
+    "梱包": {
+      "reading": "こんぽう",
+      "meaning": "đóng gói, đóng thùng",
+      "example": "引っ越しの荷物を梱包した。",
+      "confuse": "梱 đọc こん (ít gặp). 包 đọc ぽう (có dakuten). こん+ぽう=こんぽう. Hay nhầm こんほう、こんぼう",
+      "traps": [
+        {
+          "r": "こんほう",
+          "meaning": "混砲 — không tồn tại"
+        },
+        {
+          "r": "こんぼう",
+          "meaning": "棍棒（こんぼう）= dùi cui — chữ khác"
+        },
+        {
+          "r": "こんぷう",
+          "meaning": "混風 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "荷物を梱包する（にもつをこんぽう）— đóng gói hành lý",
+        "梱包材（ざい）— vật liệu đóng gói",
+        "丁寧に梱包する（ていねい）— đóng gói cẩn thận",
+        "梱包サイズ — kích thước đóng gói",
+        "梱包費（ひ）— phí đóng gói"
+      ],
+      "synonyms": [
+        "包装（ほうそう）する — bao gói",
+        "パッキング — packing",
+        "箱詰め（はこづめ）— đóng thùng",
+        "荷造り（にづくり）— đóng gói hàng hóa"
+      ]
+    },
+    "追及": {
+      "reading": "ついきゅう",
+      "meaning": "truy cứu trách nhiệm",
+      "example": "社長の責任を追及した。",
+      "confuse": "追 đọc つい (không phải おい). 及 đọc きゅう. つい+きゅう=ついきゅう. Hay nhầm おいきゅう",
+      "traps": [
+        {
+          "r": "ついきょう",
+          "meaning": "不有"
+        },
+        {
+          "r": "おいきゅう",
+          "meaning": "追う（おう）＋急 — đọc theo âm kun, không phải on"
+        }
+      ],
+      "collocations": [
+        "責任を追及する（せきにんをついきゅう）— truy cứu trách nhiệm",
+        "不正を追及する（ふせい）— truy cứu sai phạm",
+        "野党が追及する（やとう）— đảng đối lập truy vấn",
+        "厳しく追及される（きびしく）— bị truy vấn gay gắt",
+        "真実を追及する（しんじつ）— truy tìm sự thật"
+      ],
+      "synonyms": [
+        "★ 追求（ついきゅう）= theo đuổi mục tiêu — KHÁC NGHĨA!",
+        "問い詰める（といつめる）— chất vấn đến cùng",
+        "糾弾（きゅうだん）する — lên án, tố cáo",
+        "責める（せめる）— trách móc"
+      ]
+    },
+    "承諾": {
+      "reading": "しょうだく",
+      "meaning": "đồng ý, chấp thuận",
+      "example": "交渉して相手の承諾を得た。",
+      "confuse": "諾 đọc だく (dakuten, ít gặp). しょう+だく=しょうだく. Hay nhầm そうだく、そうじゃく",
+      "traps": [
+        {
+          "r": "そうじゃく",
+          "meaning": "不有"
+        },
+        {
+          "r": "しょうじゃく",
+          "meaning": "不有"
+        },
+        {
+          "r": "そうだく",
+          "meaning": "総択 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "承諾を得る（えつ）— đạt được sự đồng ý",
+        "承諾する（しょうだくする）— đồng ý chấp thuận",
+        "承諾書（しょ）— văn bản chấp thuận",
+        "口頭承諾（こうとう）— đồng ý bằng lời nói"
+      ],
+      "synonyms": [
+        "同意（どうい）する — đồng ý",
+        "了承（りょうしょう）する — chấp thuận",
+        "許可（きょか）する — cho phép",
+        "OK — OK"
+      ]
+    },
+    "獲得": {
+      "reading": "かくとく",
+      "meaning": "giành được, đạt được",
+      "example": "彼は20代で社長の地位を獲得した。",
+      "confuse": "獲 đọc かく (không phải かっ). 得 đọc とく. かく+とく=かくとく. Hay nhầm かっとく (âm đôi)",
+      "traps": [
+        {
+          "r": "かくどく",
+          "meaning": "不有— かくどくは存在しない"
+        },
+        {
+          "r": "かっとく",
+          "meaning": "不有"
+        },
+        {
+          "r": "かとく",
+          "meaning": "不有 (âm đôi sai vị trí)"
+        }
+      ],
+      "collocations": [
+        "メダルを獲得する（かくとくする）— giành huy chương",
+        "情報を獲得する（じょうほう）— thu thập thông tin",
+        "権利を獲得する（けんり）— giành được quyền",
+        "獲得票数（ひょうすう）— số phiếu giành được",
+        "獲得競争（きょうそう）— cuộc cạnh tranh giành"
+      ],
+      "synonyms": [
+        "勝ち取る（かちとる）— giành lấy",
+        "手に入れる（てにいれる）— đạt được",
+        "取得（しゅとく）する — có được"
+      ]
+    },
+    "閲覧": {
+      "reading": "えつらん",
+      "meaning": "xem, duyệt đọc",
+      "example": "当図書館での閲覧は午後8時までとなります。",
+      "confuse": "閲 đọc えつ (không phải せつ、けつ). えつ+らん=えつらん",
+      "traps": [
+        {
+          "r": "せつらん",
+          "meaning": "不有"
+        },
+        {
+          "r": "けつらん",
+          "meaning": "欠覧 — không tồn tại"
+        },
+        {
+          "r": "えつたん",
+          "meaning": "鉄覧 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "閲覧する — xem, đọc",
+        "閲覧室（しつ）— phòng đọc sách",
+        "閲覧禁止（きんし）— cấm xem",
+        "ウェブ閲覧 — duyệt web",
+        "閲覧履歴（りれき）— lịch sử duyệt web"
+      ],
+      "synonyms": [
+        "読む（よむ）— đọc",
+        "参照（さんしょう）する — tham khảo",
+        "ブラウズ — browse"
+      ]
+    },
+    "捺印": {
+      "reading": "なついん",
+      "meaning": "đóng dấu, đặt con dấu",
+      "example": "ここに署名して捺印してください。",
+      "confuse": "捺 đọc なつ (ít gặp). なつ+いん=なついん. Hay nhầm ないん、らいん",
+      "traps": [
+        {
+          "r": "ないん",
+          "meaning": "内員 — không tồn tại"
+        },
+        {
+          "r": "なつうん",
+          "meaning": "不有"
+        },
+        {
+          "r": "らいん",
+          "meaning": "来印 — không tồn tại"
+        }
+      ],
+      "collocations": [
+        "署名捺印する（しょめいなついん）— ký tên đóng dấu",
+        "捺印欄（らん）— ô đóng dấu",
+        "実印捺印（じついん）— đóng dấu con dấu chính",
+        "捺印をお願いする — xin đóng dấu"
+      ],
+      "synonyms": [
+        "印鑑を押す（おす）— đóng dấu",
+        "ハンコを押す — đóng dấu (khẩu ngữ)",
+        "署名（しょめい）— ký tên",
+        "サインする — ký tên"
+      ]
+    },
+    "合併": {
+      "reading": "がっぺい",
+      "meaning": "sáp nhập, hợp nhất",
+      "example": "Ａ社とＢ社が合併した。",
+      "confuse": "合 đọc がっ (âm đôi). 併 đọc ぺい (han tự → ぺい). がっ+ぺい=がっぺい. Hay nhầm ごうへい、ごうべい",
+      "traps": [
+        {
+          "r": "ごうへい",
+          "meaning": "合閉 — không tồn tại"
+        },
+        {
+          "r": "ごうべい",
+          "meaning": "不有"
+        },
+        {
+          "r": "がっぺき",
+          "meaning": "不有— がっぺきは存在しない"
+        }
+      ],
+      "collocations": [
+        "企業が合併する — công ty sáp nhập",
+        "合併症（がっぺいしょう）— biến chứng (y tế)",
+        "吸収合併（きゅうしゅう）— thâu tóm sáp nhập",
+        "合併後（ご）— sau khi sáp nhập"
+      ],
+      "synonyms": [
+        "統合（とうごう）— hợp nhất",
+        "M&A — merger and acquisition",
+        "併合（へいごう）— sáp nhập (cưỡng bức)"
+      ]
+    },
+    "実践": {
+      "reading": "じっせん",
+      "meaning": "thực hành, thực tiễn",
+      "example": "口で言うだけでなく実践するべきだ。",
+      "confuse": "実 đọc じっ (âm đôi). 践 đọc せん. じっ+せん=じっせん. Hay nhầm じっさん、じっそん",
+      "traps": [
+        {
+          "r": "じっさん",
+          "meaning": "実算 — không tồn tại"
+        },
+        {
+          "r": "じっそん",
+          "meaning": "実損（じっそん）= thiệt hại thực tế — chữ 損 khác"
+        }
+      ],
+      "collocations": [
+        "理論を実践する — thực hành lý thuyết",
+        "実践的（じっせんてき）— mang tính thực tế",
+        "実践経験（けいけん）— kinh nghiệm thực tiễn",
+        "実践に移す — đưa vào thực hành"
+      ],
+      "synonyms": [
+        "実行（じっこう）する — thực hiện",
+        "行動（こうどう）する — hành động",
+        "実施（じっし）する — triển khai",
+        "応用（おうよう）する — ứng dụng"
+      ]
+    },
+    "斡旋": {
+      "reading": "あっせん",
+      "meaning": "làm trung gian, môi giới",
+      "example": "伯父が仕事の斡旋をしてくれた。",
+      "confuse": "斡 đọc あっ (âm đôi, ít gặp). あっ+せん=あっせん. Hay nhầm かんし、かんせん",
+      "traps": [
+        {
+          "r": "かんし",
+          "meaning": "監視（かんし）= giám sát / 干渉（かんしょう）— chữ khác"
+        },
+        {
+          "r": "かんせん",
+          "meaning": "幹線（かんせん）= đường trục chính / 感染（かんせん）= lây nhiễm"
+        }
+      ],
+      "collocations": [
+        "仕事を斡旋する — làm trung gian tìm việc",
+        "斡旋業（ぎょう）— nghề môi giới",
+        "不動産斡旋 — môi giới bất động sản",
+        "斡旋料（りょう）— phí môi giới",
+        "労働者斡旋 — giới thiệu lao động"
+      ],
+      "synonyms": [
+        "仲介（ちゅうかい）する — làm trung gian",
+        "紹介（しょうかい）する — giới thiệu",
+        "取り持つ（とりもつ）— làm cầu nối",
+        "仲立ち（なかだち）— môi giới trung gian"
+      ]
+    },
+    "会釈": {
+      "reading": "えしゃく",
+      "meaning": "cúi đầu chào nhẹ",
+      "example": "駅で知り合いに会ったので会釈した。",
+      "confuse": "会 đọc え trong 会釈 (không phải かい). 釈 đọc しゃく. え+しゃく=えしゃく. Hay nhầm かいたく",
+      "traps": [
+        {
+          "r": "かいたく",
+          "meaning": "開拓（かいたく）= khai hoang — chữ khác"
+        },
+        {
+          "r": "えたく",
+          "meaning": "不有"
+        },
+        {
+          "r": "えしゅく",
+          "meaning": "不有— えしゅくは存在しない"
+        }
+      ],
+      "collocations": [
+        "会釈する — cúi đầu chào nhẹ",
+        "軽く会釈する — gật đầu nhẹ",
+        "会釈もなく — không thèm chào hỏi",
+        "すれ違いに会釈する — chào khi đi ngang"
+      ],
+      "synonyms": [
+        "お辞儀（おじぎ）— cúi chào",
+        "挨拶（あいさつ）— chào hỏi",
+        "ペコリとする — gật đầu nhẹ (khẩu ngữ)"
+      ]
+    },
+    "丁重": {
+      "reading": "ていちょう",
+      "meaning": "lịch sự, kính cẩn, trang trọng",
+      "example": "先方には丁重にお断り申し上げた。",
+      "confuse": "重 đọc ちょう trong 丁重 (không phải じゅう). てい+ちょう=ていちょう. Hay nhầm ていじゅう",
+      "traps": [
+        {
+          "r": "ていじゅう",
+          "meaning": "定住（ていじゅう）= định cư — chữ 住 khác"
+        },
+        {
+          "r": "ちょうじゅう",
+          "meaning": "長寿（ちょうじゅ）= trường thọ — chữ khác"
+        },
+        {
+          "r": "ちょうちょう",
+          "meaning": "不有"
+        }
+      ],
+      "collocations": [
+        "丁重にお断りする（ていちょうにことわる）— lịch sự từ chối",
+        "丁重な扱い（あつかい）— sự đối xử chu đáo",
+        "丁重にお礼を言う（れい）— trân trọng cảm ơn",
+        "丁重なお辞儀（おじぎ）— cúi chào trịnh trọng"
+      ],
+      "synonyms": [
+        "丁寧（ていねい）— lịch sự, cẩn thận",
+        "慇懃（いんぎん）— lễ phép, kính cẩn",
+        "礼儀正しい（れいぎただしい）— lịch sự"
+      ]
+    },
+    "甚大": {
+      "reading": "じんだい",
+      "meaning": "rất lớn, nghiêm trọng",
+      "example": "津波は甚大な被害をもたらす。",
+      "confuse": "甚 đọc じん (không phải かん、がん、しん). じん+だい=じんだい. Hay nhầm かんだい、しんだい",
+      "traps": [
+        {
+          "r": "かんだい",
+          "meaning": "寛大（かんだい）= khoan dung — chữ 寛 khác"
+        },
+        {
+          "r": "がんだい",
+          "meaning": "元代 — không có nghĩa thông thường"
+        },
+        {
+          "r": "しんだい",
+          "meaning": "寝台（しんだい）= giường nằm / 新代 — chữ khác"
+        }
+      ],
+      "collocations": [
+        "甚大な被害 — thiệt hại vô cùng lớn",
+        "甚大な影響（えいきょう）— ảnh hưởng nghiêm trọng",
+        "甚大な損害（そんがい）— tổn thất nặng nề",
+        "甚大な打撃（だげき）— đòn giáng nặng nề"
+      ],
+      "synonyms": [
+        "甚だしい（はなはだしい）— rất mức, cực kỳ",
+        "深刻（しんこく）— nghiêm trọng",
+        "多大（ただい）な — rất nhiều, rất lớn"
+      ]
+    },
+    "別途": {
+      "reading": "べっと",
+      "meaning": "riêng biệt, ngoài ra",
+      "example": "手数料は別途お支払いいただきます。",
+      "confuse": "途 đọc と (ngắn). べつ+と=べっと (âm đôi). Hay nhầm べつと、べっず、べっとう",
+      "traps": [
+        {
+          "r": "べつと",
+          "meaning": "不有 (thiếu âm đôi)"
+        },
+        {
+          "r": "べっず",
+          "meaning": "不有"
+        },
+        {
+          "r": "べっとう",
+          "meaning": "別当（べっとう）= người quản lý chuồng ngựa\n　　別棟（べっとう）= nhà phụ — chữ khác"
+        }
+      ],
+      "collocations": [
+        "別途費用（べっとひよう）— chi phí riêng",
+        "別途お支払いいただく — thanh toán riêng",
+        "別途ご連絡します（れんらく）— sẽ liên lạc riêng",
+        "別途規定（きてい）— quy định riêng"
+      ],
+      "synonyms": [
+        "別に（べつに）— riêng biệt",
+        "個別に（こべつ）— riêng lẻ",
+        "따로 — riêng (Hàn)",
+        "separately — riêng biệt"
+      ]
+    },
+    "手配": {
+      "reading": "てはい",
+      "meaning": "sắp xếp, chuẩn bị",
+      "example": "部下が車を手配してくれた。",
+      "confuse": "Chú ý âm đọc đúng là てはい, tránh nhầm với: しゅはい, てはい, しゅくばり",
+      "traps": [
+        {
+          "r": "しゅはい",
+          "meaning": "不有"
+        },
+        {
+          "r": "しゅくばり",
+          "meaning": "不有— しゅくばりは存在しない"
+        },
+        {
+          "r": "てばい",
+          "meaning": "不有"
+        }
+      ],
+      "collocations": [
+        "タクシーを手配する（てはいする）— sắp xếp taxi",
+        "手配をする — chuẩn bị, sắp đặt",
+        "警察に手配される（けいさつ）— bị cảnh sát truy nã",
+        "手配犯（はん）— tội phạm bị truy nã",
+        "宿を手配する（やど）— đặt phòng trọ"
+      ],
+      "synonyms": [
+        "準備する（じゅんび）— chuẩn bị",
+        "アレンジする — arrange",
+        "段取りをする（だんどり）— sắp xếp",
+        "手筈を整える（てはず）— sắp đặt"
+      ]
+    },
+    "残高": {
+      "reading": "ざんだか",
+      "meaning": "số dư tài khoản",
+      "example": "預金の残高を調べた。",
+      "confuse": "Chú ý âm đọc đúng là ざんだか, tránh nhầm với: ざんこう, ざんたか, のこりだか",
+      "traps": [
+        {
+          "r": "ざんこう",
+          "meaning": "残光（ざんこう）= ánh sáng còn lại — chữ 光 khác"
+        },
+        {
+          "r": "ざんたか",
+          "meaning": "不有"
+        },
+        {
+          "r": "のこりだか",
+          "meaning": "残り高 đọc theo âm kun"
+        }
+      ],
+      "collocations": [
+        "口座の残高（こうざのざんだか）— số dư tài khoản",
+        "残高確認（かくにん）— kiểm tra số dư",
+        "残高不足（ふそく）— số dư không đủ",
+        "残高照会（しょうかい）— tra cứu số dư"
+      ],
+      "synonyms": [
+        "バランス — balance",
+        "残り（のこり）— phần còn lại",
+        "残額（ざんがく）— số tiền còn lại"
+      ]
+    },
+    "為替": {
+      "reading": "かわせ",
+      "meaning": "hối đoái, tỷ giá",
+      "example": "ここのところ、為替の相場は安定している。",
+      "confuse": "Chú ý âm đọc đúng là かわせ, tránh nhầm với: ためがえ, いたい, しにせ",
+      "traps": [
+        {
+          "r": "ためがえ",
+          "meaning": "不有"
+        },
+        {
+          "r": "いたい",
+          "meaning": "遺体（いたい）= thi thể — hoàn toàn khác"
+        },
+        {
+          "r": "しにせ",
+          "meaning": "老舗（しにせ）= cửa hàng lâu đời — hoàn toàn khác"
+        }
+      ],
+      "collocations": [
+        "為替レート（かわせレート）— tỷ giá hối đoái",
+        "為替相場（そうば）— thị trường ngoại hối",
+        "為替変動（へんどう）— biến động tỷ giá",
+        "外国為替（がいこくかわせ）— ngoại hối",
+        "為替リスク — rủi ro tỷ giá"
+      ],
+      "synonyms": [
+        "外貨（がいか）— ngoại tệ",
+        "レート — rate",
+        "両替（りょうがえ）— đổi tiền",
+        "exchange rate — tỷ giá"
+      ]
+    },
+    "懇親会": {
+      "reading": "こんしんかい",
+      "meaning": "tiệc giao lưu",
+      "example": "留学生の懇親会に参加した。",
+      "confuse": "Chú ý âm đọc đúng là こんしんかい, tránh nhầm với: きんしんかい, こんしんかい, くんしんかい",
+      "traps": [
+        {
+          "r": "きんしんかい",
+          "meaning": "不有"
+        },
+        {
+          "r": "くんしんかい",
+          "meaning": "不有"
+        },
+        {
+          "r": "こんしんけい",
+          "meaning": "研修会（けんしゅうかい）= hội nghị đào tạo — chữ khác"
+        }
+      ],
+      "collocations": [
+        "懇親会に参加する（こんしんかいにさんか）— tham dự tiệc giao lưu",
+        "懇親会を開く（ひらく）— tổ chức buổi giao lưu",
+        "歓迎懇親会（かんげい）— tiệc giao lưu chào đón",
+        "懇親会の幹事（かんじ）— người tổ chức tiệc"
+      ],
+      "synonyms": [
+        "飲み会（のみかい）— buổi nhậu",
+        "交流会（こうりゅうかい）— buổi giao lưu",
+        "歓迎会（かんげいかい）— tiệc chào đón",
+        "party — tiệc"
+      ]
+    },
+    "締結": {
+      "reading": "ていけつ",
+      "meaning": "ký kết hợp đồng hiệp ước",
+      "example": "両国の間で条約が締結された。",
+      "confuse": "Chú ý âm đọc đúng là ていけつ, tránh nhầm với: たいけつ, たいげつ, ていげつ",
+      "traps": [
+        {
+          "r": "たいけつ",
+          "meaning": "対決（たいけつ）= đối quyết, đụng độ — chữ 対 khác"
+        },
+        {
+          "r": "たいげつ",
+          "meaning": "不有"
+        },
+        {
+          "r": "ていげつ",
+          "meaning": "不有"
+        }
+      ],
+      "collocations": [
+        "条約を締結する（じょうやくをていけつ）— ký kết hiệp ước",
+        "協定を締結する（きょうてい）— ký kết hiệp định",
+        "契約の締結（けいやく）— ký kết hợp đồng",
+        "同盟を締結する（どうめい）— ký kết đồng minh"
+      ],
+      "synonyms": [
+        "調印する（ちょういん）— ký kết (chính thức)",
+        "契約する（けいやく）— ký hợp đồng",
+        "妥結する（だけつ）— đạt thỏa thuận",
+        "conclude — ký kết"
+      ]
+    },
+    "猶予": {
+      "reading": "ゆうよ",
+      "meaning": "hoãn lại, gia hạn",
+      "example": "事故の処理には一刻の猶予も許されない。",
+      "confuse": "Chú ý âm đọc đúng là ゆうよ, tránh nhầm với: ゆうよ, しゅうよ, ちゅうよ",
+      "traps": [
+        {
+          "r": "しゅうよ",
+          "meaning": "不有— しゅうよは存在しない"
+        },
+        {
+          "r": "ちゅうよ",
+          "meaning": "不有"
+        },
+        {
+          "r": "ゆうじょ",
+          "meaning": "不有"
+        }
+      ],
+      "collocations": [
+        "一刻の猶予もない（いっこく）— không có thời gian trì hoãn",
+        "執行猶予（しっこうゆうよ）— hoãn thi hành án",
+        "猶予期間（きかん）— thời hạn ân hạn",
+        "猶予を与える（あたえる）— cho thêm thời gian"
+      ],
+      "synonyms": [
+        "余裕（よゆう）— dư dả, thời gian dư",
+        "延期（えんき）— hoãn lại",
+        "grace period — ân hạn",
+        "reprieve — gia hạn"
+      ]
+    },
+    "接待": {
+      "reading": "せったい",
+      "meaning": "tiếp đãi khách hàng",
+      "example": "取引相手の会社から接待を受けた。",
+      "confuse": "Chú ý âm đọc đúng là せったい, tránh nhầm với: せつじ, せっち, せってい",
+      "traps": [
+        {
+          "r": "せつじ",
+          "meaning": "不有"
+        },
+        {
+          "r": "せっち",
+          "meaning": "設置（せっち）= lắp đặt — chữ khác"
+        },
+        {
+          "r": "せってい",
+          "meaning": "設定（せってい）= cài đặt — chữ khác"
+        }
+      ],
+      "collocations": [
+        "接待を受ける（せったいをうける）— được tiếp đãi",
+        "接待ゴルフ — golf tiếp khách hàng",
+        "接待費（ひ）— chi phí tiếp khách",
+        "接待を断る（ことわる）— từ chối sự tiếp đãi",
+        "接待交際費（こうさいひ）— chi phí giao tế"
+      ],
+      "synonyms": [
+        "もてなし — lòng hiếu khách",
+        "エンターテインメント — entertainment",
+        "hospitality — hiếu khách",
+        "歓待（かんたい）する — tiếp đãi nồng hậu"
+      ]
+    }
+  }
+}

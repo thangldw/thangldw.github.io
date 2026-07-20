@@ -14,6 +14,29 @@ body.language-app[data-language-app] {
   color: var(--portfolio-ink) !important;
 }
 
+body.language-app[data-language-app] :where(.container, .main, .wrap, .cnt, .content, .app, .app-shell, .hdr-top > div) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+body:is(
+  [data-language-app="n1-grammar-exams"],
+  [data-language-app="n1-reading-mondai9"],
+  [data-language-app="n1-vocabulary-context"]
+) h1 span {
+  display: block;
+  margin-top: 7px;
+  font-size: .7em;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
 /* Older standalone apps used page-local white/blue surfaces. These shared
    overrides give every learning app a complete, legible dark theme. */
 :root[data-theme="dark"] body.language-app[data-language-app] :where(
@@ -360,5 +383,9 @@ body[data-language-app="n1-grammar-sentence-order"] :is(.set-btn, .choice-btn, .
 
   body[data-language-app="n1-grammar-flashcards"] .wrap {
     width: min(100% - 24px, 620px);
+  }
+
+  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+    font-size: 27px !important;
   }
 }

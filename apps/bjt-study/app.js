@@ -2,17 +2,19 @@
   'use strict';
 
   var STORAGE_KEY = 'bjt-study-progress-v1';
-  var SESSION_LENGTH = 5;
   var appView = document.getElementById('appView');
   var loadingState = document.getElementById('loadingState');
   var toast = document.getElementById('toast');
   var datasets = { vocabulary: [], grammar: [] };
+  var vocabularyInsights = { characters: {}, terms: {} };
   var itemsById = new Map();
-  var currentView = 'today';
+  var currentView = 'path';
   var currentSession = null;
   var selectedAnswer = -1;
   var answered = false;
   var libraryQuery = '';
+  var libraryCategory = 'all';
+  var expandedVocabularyId = '';
   var libraryLimit = 40;
   var toastTimer = null;
 
@@ -30,10 +32,21 @@
     { level: 'Giai đoạn 3', phase: 'Chuyên sâu', jp: '総合演習', title: 'Tổng hợp BJT', subtitle: 'Từ vựng và ngữ pháp trong ngữ cảnh' }
   ];
 
-  var DAILY_STEPS = [
-    { title: 'Giao tiếp nội bộ', jp: '社内コミュニケーション', note: '5 câu từ vựng công sở', kind: 'vocabulary' },
-    { title: 'Ngữ pháp ứng dụng', jp: 'ビジネス文法', note: '5 mẫu dùng trong công việc', kind: 'grammar' },
-    { title: 'Luyện tập tổng hợp', jp: '総合練習', note: '5 câu trộn từ hai kho', kind: 'mixed' }
+  var VOCAB_CATEGORIES = [
+    { id: 'communication', label: 'Giao tiếp', jp: 'コミュニケーション', keywords: ['giao tiep', 'trao doi', 'noi chuyen', 'tro chuyen', 'phat bieu', 'trinh bay', 'tra loi', 'lien lac', 'dien thoai', 'email', 'thu tu', 'xin loi', 'cam on', 'chao hoi', 'thong bao', 'truyen dat', 'thuyet phuc', 'dam phan', 'than phien', 'kien nghi', 'thinh cau', 'khien trach', 'chi trich', 'thuc giuc', 'noi', 'hoi', 'reply', 'announce'] },
+    { id: 'organization', label: 'Tổ chức & nhân sự', jp: '組織・人事', keywords: ['cong ty', 'doanh nghiep', 'to chuc', 'nhan vien', 'nhan su', 'cap tren', 'cap duoi', 'dong nghiep', 'tuyen dung', 'phong ban', 'chuc vu', 'giam doc', 'quan ly', 'nghi viec', 'thang chuc', 'chuyen cong tac', 'nhan', 'staff', 'career', 'layoff'] },
+    { id: 'meeting', label: 'Họp & báo cáo', jp: '会議・報告', keywords: ['cuoc hop', 'hoi nghi', 'bao cao', 'bien ban', 'tai lieu', 'ke hoach', 'du an', 'tien do', 'de xuat', 'quyet dinh', 'phe duyet', 'nghi quyet', 'thao luan', 'ket luan', 'project', 'draft'] },
+    { id: 'finance', label: 'Tài chính', jp: '財務', keywords: ['tien te', 'gia ca', 'chi phi', 'doanh thu', 'loi nhuan', 'thua lo', 'ngan sach', 'thue', 'hoa don', 'thanh toan', 'tai chinh', 'ke toan', 'dau tu', 'co phieu', 'lai suat', 'dong yen', 'von', 'thu nhap', 'khoan no', 'cost', 'earnings', 'liabilities'] },
+    { id: 'legal', label: 'Hợp đồng & pháp lý', jp: '契約・法務', keywords: ['hop dong', 'ky ket', 'dieu khoan', 'phap luat', 'luat', 'vi pham', 'quy dinh', 'nghia vu', 'quyen loi', 'kien cao', 'khieu nai', 'boi thuong', 'bao hiem'] },
+    { id: 'customer', label: 'Khách hàng & dịch vụ', jp: '顧客・サービス', keywords: ['khach hang', 'khach', 'dich vu', 'tiep don', 'cua hang', 'ban hang', 'mua hang', 'don hang', 'phan nan', 'thuong hieu', 'customer', 'client'] },
+    { id: 'production', label: 'Sản xuất & logistics', jp: '生産・物流', keywords: ['san xuat', 'nha may', 'hang hoa', 'san pham', 'nguyen lieu', 'van chuyen', 'giao hang', 'kho hang', 'dong goi', 'xuat hang', 'nhap hang', 'chat luong', 'may moc', 'san luong', 'hau can', 'logistics', 'package'] },
+    { id: 'technology', label: 'Công nghệ & dữ liệu', jp: '技術・データ', keywords: ['du lieu', 'he thong', 'phan mem', 'may tinh', 'internet', 'website', 'thong tin', 'ky thuat', 'thiet bi', 'dien tu', 'mang luoi', 'tep tin', 'file'] },
+    { id: 'time', label: 'Thời gian & số lượng', jp: '時間・数量', keywords: ['thoi gian', 'ngay', 'thang', 'nam', 'thoi han', 'ky han', 'lich trinh', 'gio', 'so luong', 'muc do', 'ti le', 'phan tram', 'khoang', 'lan'] },
+    { id: 'evaluation', label: 'Đánh giá & kiểm tra', jp: '評価・確認', keywords: ['danh gia', 'kiem tra', 'xem xet', 'xac nhan', 'nhan dinh', 'khao sat', 'dieu tra', 'phan tich', 'so sanh', 'phe binh', 'tham dinh', 'do luong', 'kiem', 'audit', 'survey'] },
+    { id: 'change', label: 'Thay đổi & xử lý', jp: '変化・対応', keywords: ['thay doi', 'bien doi', 'dieu chinh', 'cai thien', 'xu ly', 'thuc hien', 'tien hanh', 'hoan thanh', 'duy tri', 'tiep tuc', 'tang len', 'giam xuong', 'them vao', 'loai bo', 'huy bo', 'khoi phuc', 'sap xep', 'bat dau', 'ket thuc', 'mo rong', 'tang', 'giam', 'chuyen', 'start', 'expand', 'reduce', 'transfer', 'launch'] },
+    { id: 'risk', label: 'Vấn đề & rủi ro', jp: '問題・リスク', keywords: ['van de', 'rui ro', 'nguy hiem', 'kho khan', 'ton that', 'thiet hai', 'anh huong', 'thieu hut', 'sai sot', 'loi lam', 'khung hoang', 'tai nan', 'tro ngai', 'bat loi', 'hu hong', 'collapse', 'risk'] },
+    { id: 'relationship', label: 'Quan hệ & thái độ', jp: '関係・態度', keywords: ['thai do', 'quan he', 'hop tac', 'giup do', 'ho tro', 'tin tuong', 'phan doi', 'dong y', 'nhuong bo', 'tu choi', 'thien chi', 'than thien', 'trach nhiem', 'ton trong'] },
+    { id: 'concept', label: 'Khái niệm khác', jp: 'その他', keywords: [] }
   ];
 
   function loadProgress() {
@@ -242,11 +255,78 @@
     };
   }
 
+  function normalizeCategoryText(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .toLocaleLowerCase('vi');
+  }
+
+  function categorizeVocabulary(entry, details) {
+    var haystack = normalizeCategoryText([entry.term, details.meaning, details.exampleVi].join(' '));
+    for (var index = 0; index < VOCAB_CATEGORIES.length - 1; index += 1) {
+      var category = VOCAB_CATEGORIES[index];
+      if (category.keywords.some(function (keyword) {
+        if (keyword.indexOf(' ') !== -1) return haystack.indexOf(keyword) !== -1;
+        var escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return new RegExp('(^|[^a-z0-9])' + escaped + '([^a-z0-9]|$)').test(haystack);
+      })) return category.id;
+    }
+    return 'concept';
+  }
+
+  function normalizeInsightTerm(value) {
+    return String(value || '')
+      .replace(/[（(][^）)]*[）)]/g, '')
+      .replace(/する$/, '')
+      .trim();
+  }
+
+  function vocabularyInsightFor(item) {
+    if (!item || item.kind !== 'vocabulary') return { parts: [], term: null };
+    var seen = {};
+    var parts = (normalizeInsightTerm(item.term).match(/[\u3400-\u9fff々]/g) || []).map(function (kanji) {
+      var detail = vocabularyInsights.characters[kanji];
+      if (!detail || seen[kanji]) return null;
+      seen[kanji] = true;
+      return { kanji: kanji, detail: detail };
+    }).filter(Boolean);
+    return {
+      parts: parts,
+      term: vocabularyInsights.terms[normalizeInsightTerm(item.term)] || null
+    };
+  }
+
+  function renderVocabularyInsight(item, compact) {
+    var insight = vocabularyInsightFor(item);
+    if (!insight.parts.length && !insight.term) return '';
+    var partRows = insight.parts.map(function (part) {
+      return '<div class="kanji-cell kanji-glyph" lang="ja">' + escapeHtml(part.kanji) + '</div>' +
+        '<div class="kanji-cell"><strong>' + escapeHtml(part.detail.hanviet || '—') + '</strong></div>' +
+        '<div class="kanji-cell reading-on" lang="ja">' + escapeHtml(part.detail.on || '—') + '</div>' +
+        '<div class="kanji-cell reading-kun" lang="ja">' + escapeHtml(part.detail.kun || '—') + '</div>' +
+        '<div class="kanji-cell">' + escapeHtml(part.detail.meaning || '—') + '</div>';
+    }).join('');
+    var term = insight.term;
+    var traps = term && term.traps && term.traps.length ? '<section class="insight-section insight-traps"><h4>Điểm dễ nhầm</h4><div class="insight-tags">' + term.traps.map(function (trap) {
+      return '<span><b lang="ja">' + escapeHtml(trap.r) + '</b>' + escapeHtml(trap.meaning ? ' — ' + trap.meaning : '') + '</span>';
+    }).join('') + '</div></section>' : '';
+    var confusion = term && term.confuse ? '<section class="insight-section insight-warning"><h4>Lưu ý</h4><p>' + escapeHtml(term.confuse) + '</p></section>' : '';
+    var collocations = term && term.collocations && term.collocations.length ? '<section class="insight-section insight-collocations"><h4>Cụm hay dùng</h4><div class="insight-tags">' + term.collocations.map(function (value) { return '<span>' + escapeHtml(value) + '</span>'; }).join('') + '</div></section>' : '';
+    var synonyms = term && term.synonyms && term.synonyms.length ? '<section class="insight-section insight-synonyms"><h4>Đồng nghĩa / gần nghĩa</h4><div class="insight-tags">' + term.synonyms.map(function (value) { return '<span>' + escapeHtml(value) + '</span>'; }).join('') + '</div></section>' : '';
+    return '<div class="vocabulary-insight' + (compact ? ' is-compact' : '') + '">' +
+      '<section class="insight-section"><h4>Phân tích chữ Hán</h4><div class="kanji-grid" role="table" aria-label="Phân tích chữ Hán">' +
+        '<div class="kanji-head">Kanji</div><div class="kanji-head">Hán Việt</div><div class="kanji-head">Âm On</div><div class="kanji-head">Âm Kun</div><div class="kanji-head">Nghĩa</div>' + partRows +
+      '</div></section>' + confusion + traps + collocations + synonyms + '</div>';
+  }
+
   function normalizeTerms(terms, kind) {
     return terms
       .filter(function (entry) { return entry && entry.term && entry.definition; })
       .map(function (entry, index) {
         var details = kind === 'vocabulary' ? parseVocabulary(entry) : parseGrammar(entry, index);
+        if (kind === 'vocabulary') details.category = categorizeVocabulary(entry, details);
         return {
           id: kind + ':' + index,
           kind: kind,
@@ -308,7 +388,7 @@
         (d.sinoVietnamese ? '<div><dt>Âm Hán Việt</dt><dd>[' + escapeHtml(d.sinoVietnamese) + ']</dd></div>' : '') +
         '<div><dt>Ý nghĩa</dt><dd>' + escapeHtml(d.meaning) + '</dd></div>' +
         (d.exampleJa ? '<div class="detail-wide"><dt>Ví dụ</dt><dd><span lang="ja">' + escapeHtml(d.exampleJa) + '</span>' + (d.exampleVi ? '<small>' + escapeHtml(d.exampleVi) + '</small>' : '') + '</dd></div>' : '') +
-      '</dl>';
+      '</dl>' + renderVocabularyInsight(item, true);
     }
     return '<dl class="study-details grammar-details">' +
       '<div class="detail-wide"><dt>Mẫu câu</dt><dd lang="ja">' + escapeHtml(item.term) + '</dd></div>' +
@@ -325,37 +405,10 @@
     return 'Chọn ý nghĩa gần nhất của từ vựng này.';
   }
 
-  function dailyQueue(stepIndex) {
-    var step = DAILY_STEPS[stepIndex];
-    var daySeed = hashString(dateKey() + ':' + stepIndex);
-    if (step.kind === 'mixed') {
-      var vocab = seededShuffle(datasets.vocabulary, daySeed).slice(0, 3);
-      var grammar = seededShuffle(datasets.grammar, daySeed + 7).slice(0, 2);
-      return seededShuffle(vocab.concat(grammar), daySeed + 19);
-    }
-    return seededShuffle(datasets[step.kind], daySeed).slice(0, SESSION_LENGTH);
-  }
-
-  function createDailySession(stepIndex) {
-    currentSession = {
-      mode: 'daily',
-      stepIndex: stepIndex,
-      title: DAILY_STEPS[stepIndex].title,
-      jp: DAILY_STEPS[stepIndex].jp,
-      queue: dailyQueue(stepIndex),
-      index: 0,
-      score: 0,
-      misses: 0,
-      seed: hashString(dateKey() + ':daily:' + stepIndex)
-    };
-    selectedAnswer = -1;
-    answered = false;
-  }
-
   function createCustomSession(options) {
     currentSession = {
       mode: options.mode,
-      stepIndex: -1,
+      returnView: options.returnView || currentView,
       title: options.title,
       jp: options.jp,
       queue: options.queue,
@@ -373,10 +426,6 @@
     return makeQuestion(currentSession.queue[currentSession.index], currentSession.seed + currentSession.index);
   }
 
-  function completedToday() {
-    return progress.completedSteps[dateKey()] || [];
-  }
-
   function sessionLabel() {
     if (currentSession.mode === 'exam') return 'BJT · Luyện đề trộn';
     if (currentSession.mode === 'review') return 'BJT · Ôn lại lỗi sai';
@@ -386,7 +435,11 @@
   }
 
   function renderPractice() {
-    if (!currentSession) createDailySession(0);
+    if (!currentSession) {
+      currentView = 'path';
+      renderPath();
+      return;
+    }
     var question = currentQuestion();
     if (!question) {
       renderSessionComplete();
@@ -394,7 +447,6 @@
     }
 
     var item = question.item;
-    var completed = completedToday();
     var percent = Math.round((currentSession.index / currentSession.queue.length) * 100);
     var optionHtml = question.options.map(function (option, index) {
       var classes = ['answer-option'];
@@ -416,41 +468,25 @@
       '</div>';
     }
 
-    var stepRail = DAILY_STEPS.map(function (step, index) {
-      var isActive = currentSession.mode === 'daily' && currentSession.stepIndex === index;
-      var isComplete = completed.indexOf(index) !== -1;
-      return '<button type="button" class="session-step' + (isActive ? ' is-active' : '') + (isComplete ? ' is-complete' : '') + '" data-action="daily-step" data-step="' + index + '">' +
-        '<span class="step-num">' + (index + 1) + '</span>' +
-        '<span class="step-copy"><strong>' + escapeHtml(step.title) + '</strong><small>' + escapeHtml(step.note) + '</small></span>' +
-      '</button>';
-    }).join('');
-
     var actionLabel = answered
       ? (currentSession.index === currentSession.queue.length - 1 ? 'Xem kết quả' : 'Câu tiếp theo')
       : 'Kiểm tra đáp án';
 
-    appView.innerHTML = '<div class="view-shell">' +
+    appView.innerHTML = '<div class="view-shell is-single">' +
       '<section class="main-column">' +
         '<div class="date-line"><span>' + escapeHtml(sessionLabel()) + '</span><time datetime="' + dateKey() + '">' + displayDate() + '</time></div>' +
         '<h1 class="view-title">' + escapeHtml(currentSession.title) + ' <span class="jp-title">· ' + escapeHtml(currentSession.jp) + '</span></h1>' +
         '<div class="lesson-progress"><strong>Bài ' + (currentSession.index + 1) + ' <span>/ ' + currentSession.queue.length + '</span></strong><span>' + currentSession.score + ' đúng · ' + currentSession.misses + ' cần ôn</span><span class="progress-track"><span class="progress-fill" style="width:' + percent + '%"></span></span></div>' +
         '<p class="scenario">Chọn lời giải thích phù hợp nhất. Sau khi trả lời, app sẽ lưu lại tiến độ và đưa những mục chưa đúng vào phần Ôn sai.</p>' +
-        '<button class="listen-button" type="button" data-action="speak"><i class="fa-solid fa-play" aria-hidden="true"></i><span>Nghe tiếng Nhật</span></button>' +
         '<div class="question-block">' +
           '<span class="question-type">' + escapeHtml(item.kind === 'grammar' ? 'Mẫu ngữ pháp' : 'Thuật ngữ BJT') + '</span>' +
-          '<h2 class="question-term" lang="ja">' + escapeHtml(item.term) + '</h2>' +
+          '<div class="question-heading"><h2 class="question-term" lang="ja">' + escapeHtml(item.term) + '</h2><button class="listen-icon" type="button" data-action="speak" aria-label="Nghe tiếng Nhật" title="Nghe tiếng Nhật"><span class="listen-glyph" aria-hidden="true"></span></button></div>' +
           '<p class="question-hint">' + escapeHtml(questionHint(question)) + '</p>' +
         '</div>' +
         '<div class="answer-list">' + optionHtml + '</div>' +
         feedbackHtml +
         '<button class="primary-action" type="button" data-action="primary"' + (!answered && selectedAnswer < 0 ? ' disabled' : '') + '><span>' + actionLabel + '</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
       '</section>' +
-      '<aside class="session-rail" aria-label="Tiến trình buổi học">' +
-        '<h2>Hôm nay: ' + (completed.length) + '/3</h2>' +
-        '<p>Ba bước ngắn, khoảng 20 phút</p>' +
-        '<div class="session-steps">' + stepRail + '</div>' +
-        '<div class="rail-note">Dữ liệu học gồm ' + formatNumber(datasets.grammar.length) + ' mẫu ngữ pháp và ' + formatNumber(datasets.vocabulary.length) + ' thuật ngữ. Tiến độ chỉ được lưu trên thiết bị này.</div>' +
-      '</aside>' +
     '</div>';
   }
 
@@ -458,13 +494,6 @@
     var total = currentSession.queue.length;
     var score = currentSession.score;
     var mode = currentSession.mode;
-    if (mode === 'daily') {
-      var completed = completedToday();
-      if (completed.indexOf(currentSession.stepIndex) === -1) completed.push(currentSession.stepIndex);
-      progress.completedSteps[dateKey()] = completed;
-      saveProgress();
-    }
-
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">HOÀN THÀNH BUỔI HỌC</span>' +
       '<h1 class="view-title">Kết quả <span class="jp-title">· 学習結果</span></h1>' +
@@ -474,7 +503,7 @@
         '<div class="summary-item"><strong>' + currentSession.misses + '</strong><span>mục cần ôn</span></div>' +
         '<div class="summary-item"><strong>' + Math.round((score / Math.max(total, 1)) * 100) + '%</strong><span>độ chính xác</span></div>' +
       '</div>' +
-      '<button class="primary-action" type="button" data-action="finish-session"><span>' + (mode === 'daily' ? 'Về buổi học hôm nay' : 'Luyện thêm một lượt') + '</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
+      '<button class="primary-action" type="button" data-action="finish-session"><span>Quay lại</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
     '</section>';
   }
 
@@ -510,23 +539,43 @@
     currentView = kind;
     libraryQuery = query == null ? libraryQuery : query;
     var source = datasets[kind];
+    var categorySource = kind === 'vocabulary' && libraryCategory !== 'all'
+      ? source.filter(function (item) { return item.details.category === libraryCategory; })
+      : source;
     var normalized = libraryQuery.trim().toLocaleLowerCase('vi');
-    var filtered = normalized ? source.filter(function (item) {
+    var filtered = normalized ? categorySource.filter(function (item) {
       return (item.term + ' ' + item.definition).toLocaleLowerCase('vi').indexOf(normalized) !== -1;
-    }) : source;
+    }) : categorySource;
     var visible = filtered.slice(0, libraryLimit);
     var rows = visible.map(function (item) {
       var summary = item.kind === 'vocabulary'
         ? [item.details.reading, item.details.sinoVietnamese ? '[' + item.details.sinoVietnamese + ']' : '', item.details.meaning].filter(Boolean).join(' · ')
         : item.details.meaning;
-      return '<article class="library-row"><strong class="library-term" lang="ja">' + escapeHtml(item.term) + '</strong><span class="library-definition">' + escapeHtml(summary) + '</span><button class="row-practice" type="button" data-action="single" data-id="' + item.id + '">Luyện mục này</button></article>';
+      var category = item.kind === 'vocabulary' ? VOCAB_CATEGORIES.find(function (entry) { return entry.id === item.details.category; }) : null;
+      var insight = item.kind === 'vocabulary' ? vocabularyInsightFor(item) : { parts: [], term: null };
+      var hasInsight = insight.parts.length || insight.term;
+      var expanded = expandedVocabularyId === item.id;
+      return '<article class="library-row' + (expanded ? ' is-expanded' : '') + '"><strong class="library-term" lang="ja">' + escapeHtml(item.term) + '</strong><span class="library-definition">' + escapeHtml(summary) + '</span>' +
+        (category ? '<span class="library-category">' + escapeHtml(category.label) + ' · ' + escapeHtml(category.jp) + '</span>' : '') +
+        '<div class="library-actions">' + (hasInsight ? '<button class="row-insight" type="button" data-action="vocab-insight" data-id="' + item.id + '" aria-expanded="' + expanded + '">' + (expanded ? 'Thu gọn' : 'Phân tích') + '</button>' : '') + '<button class="row-practice" type="button" data-action="single" data-id="' + item.id + '">Luyện mục này</button></div>' +
+        (expanded ? '<div class="library-insight">' + renderVocabularyInsight(item, false) + '</div>' : '') + '</article>';
     }).join('');
     var title = kind === 'grammar' ? 'Ngữ pháp · 文法' : 'Từ vựng · 語彙';
     var eyebrow = kind === 'grammar' ? '84 MẪU DÙNG TRONG NGỮ CẢNH' : '1.565 THUẬT NGỮ BUSINESS JAPANESE';
+    var categoryFilters = '';
+    if (kind === 'vocabulary') {
+      var allButton = '<button type="button" data-action="vocab-category" data-category="all" aria-pressed="' + (libraryCategory === 'all') + '" class="category-chip' + (libraryCategory === 'all' ? ' is-active' : '') + '"><strong>Tất cả</strong><span>' + formatNumber(source.length) + '</span></button>';
+      var categoryButtons = VOCAB_CATEGORIES.map(function (category) {
+        var count = source.filter(function (item) { return item.details.category === category.id; }).length;
+        return '<button type="button" data-action="vocab-category" data-category="' + category.id + '" aria-pressed="' + (libraryCategory === category.id) + '" class="category-chip' + (libraryCategory === category.id ? ' is-active' : '') + '"><strong>' + escapeHtml(category.label) + '</strong><small>' + escapeHtml(category.jp) + '</small><span>' + formatNumber(count) + '</span></button>';
+      }).join('');
+      categoryFilters = '<div class="category-section"><div class="category-heading"><strong>Học theo nhóm ý nghĩa</strong><span>Mỗi từ được xếp theo nghĩa sử dụng chính trong công việc.</span></div><div class="category-filter" role="group" aria-label="Nhóm ý nghĩa từ vựng">' + allButton + categoryButtons + '</div></div>';
+    }
 
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">' + eyebrow + '</span>' +
-      '<div class="section-head"><div><h1 class="view-title">' + title + '</h1><p class="view-subtitle">Tra cứu nhanh hoặc chọn một mục để bắt đầu luyện ngay.</p></div><span class="stat-inline">' + formatNumber(filtered.length) + ' kết quả</span></div>' +
+      '<div class="section-head"><div><h1 class="view-title">' + title + '</h1><p class="view-subtitle">' + (kind === 'vocabulary' ? 'Chọn nhóm ý nghĩa, tra cứu hoặc luyện từng thuật ngữ trong ngữ cảnh công việc.' : 'Tra cứu nhanh hoặc chọn một mục để bắt đầu luyện ngay.') + '</p></div><span class="stat-inline">' + formatNumber(filtered.length) + ' kết quả</span></div>' +
+      categoryFilters +
       '<div class="search-row"><input class="search-input" id="librarySearch" type="search" value="' + escapeHtml(libraryQuery) + '" placeholder="Tìm tiếng Nhật, cách đọc hoặc nghĩa tiếng Việt…" aria-label="Tìm trong kho học"><button class="secondary-action" type="button" data-action="clear-search">Xóa tìm kiếm</button></div>' +
       (rows ? '<div class="library-list">' + rows + '</div>' : '<p class="empty-state">Không tìm thấy mục phù hợp.</p>') +
       (visible.length < filtered.length ? '<button class="primary-action" type="button" data-action="load-more"><span>Xem thêm ' + Math.min(40, filtered.length - visible.length) + ' mục</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' : '') +
@@ -560,16 +609,13 @@
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">GHI NHỚ CHỦ ĐỘNG</span>' +
       '<div class="section-head"><div><h1 class="view-title">Ôn sai <span class="jp-title">· 復習</span></h1><p class="view-subtitle">Mỗi câu chưa đúng sẽ ở đây cho tới khi bạn trả lời đúng trong một lượt ôn.</p></div><span class="stat-inline">' + wrongItems.length + ' mục</span></div>' +
-      (rows ? '<div class="library-list">' + rows + '</div><button class="primary-action" type="button" data-action="start-review"><span>Ôn tất cả lỗi sai</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' : '<div class="empty-state"><strong>Chưa có lỗi sai cần ôn.</strong><p>Hãy bắt đầu buổi học hôm nay hoặc làm một lượt luyện đề.</p></div>') +
+      (rows ? '<div class="library-list">' + rows + '</div><button class="primary-action" type="button" data-action="start-review"><span>Ôn tất cả lỗi sai</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' : '<div class="empty-state"><strong>Chưa có lỗi sai cần ôn.</strong><p>Hãy bắt đầu một module trong Lộ trình hoặc làm một lượt luyện đề.</p></div>') +
     '</section>';
   }
 
   function renderCurrentView() {
     window.scrollTo({ top: 0, behavior: 'auto' });
-    if (currentView === 'today') {
-      if (!currentSession || currentSession.mode !== 'daily') createDailySession(0);
-      renderPractice();
-    } else if (currentView === 'path') {
+    if (currentView === 'path') {
       renderPath();
     } else if (currentView === 'vocabulary' || currentView === 'grammar') {
       renderLibrary(currentView, libraryQuery);
@@ -655,8 +701,9 @@
     button.addEventListener('click', function () {
       currentView = button.getAttribute('data-view');
       libraryQuery = '';
+      libraryCategory = 'all';
       libraryLimit = 40;
-      if (currentView !== 'today') currentSession = null;
+      currentSession = null;
       renderCurrentView();
       document.getElementById('primaryNav').classList.remove('is-open');
       document.getElementById('mobileNavToggle').setAttribute('aria-expanded', 'false');
@@ -695,11 +742,6 @@
       if (answered) advanceQuestion(); else checkAnswer();
     } else if (action === 'speak') {
       speakCurrent();
-    } else if (action === 'daily-step') {
-      currentView = 'today';
-      createDailySession(Number(actionButton.getAttribute('data-step')));
-      renderPractice();
-      updateNav();
     } else if (action === 'single') {
       var item = itemsById.get(actionButton.getAttribute('data-id'));
       if (item) {
@@ -713,6 +755,15 @@
       libraryQuery = '';
       libraryLimit = 40;
       renderLibrary(currentView, '');
+    } else if (action === 'vocab-category') {
+      libraryCategory = actionButton.getAttribute('data-category') || 'all';
+      expandedVocabularyId = '';
+      libraryLimit = 40;
+      renderLibrary('vocabulary', libraryQuery);
+    } else if (action === 'vocab-insight') {
+      var insightId = actionButton.getAttribute('data-id');
+      expandedVocabularyId = expandedVocabularyId === insightId ? '' : insightId;
+      renderLibrary('vocabulary', libraryQuery);
     } else if (action === 'module') {
       var moduleIndex = Number(actionButton.getAttribute('data-module'));
       var moduleItems = datasets.vocabulary.concat(datasets.grammar).filter(function (item) { return item.module === moduleIndex; });
@@ -729,16 +780,8 @@
       createCustomSession({ mode: 'review', title: 'Ôn lại lỗi sai', jp: '復習', queue: seededShuffle(reviewItems, hashString(dateKey() + ':review')) });
       renderPractice();
     } else if (action === 'finish-session') {
-      if (currentSession.mode === 'daily') {
-        currentView = 'today';
-        createDailySession(Math.min(currentSession.stepIndex + 1, 2));
-      } else if (currentSession.mode === 'review') {
-        currentView = 'review';
-        currentSession = null;
-      } else {
-        currentView = 'exam';
-        currentSession = null;
-      }
+      currentView = currentSession.returnView || 'path';
+      currentSession = null;
       renderCurrentView();
     }
   });
@@ -751,8 +794,13 @@
     fetch('data/grammar.json?v=20260721b').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu ngữ pháp');
       return response.json();
+    }),
+    fetch('data/vocabulary-insights.json?v=20260721a').then(function (response) {
+      if (!response.ok) throw new Error('Không thể tải dữ liệu phân tích chữ Hán');
+      return response.json();
     })
   ]).then(function (results) {
+    vocabularyInsights = results[2] || vocabularyInsights;
     datasets.vocabulary = normalizeTerms(results[0].terms || [], 'vocabulary');
     datasets.grammar = normalizeTerms(results[1].terms || [], 'grammar');
     datasets.vocabulary.concat(datasets.grammar).forEach(function (item) { itemsById.set(item.id, item); });
@@ -762,7 +810,6 @@
     appView.hidden = false;
     setTheme(document.documentElement.getAttribute('data-theme') || 'light');
     updateWrongCount();
-    createDailySession(0);
     renderCurrentView();
   }).catch(function (error) {
     loadingState.innerHTML = '<p><strong>Không thể mở kho học.</strong><br>' + escapeHtml(error.message) + '. Hãy tải lại trang.</p>';
