@@ -74,4 +74,11 @@ No actionable P0, P1, or P2 mismatches remain.
 - Audited all 1,565 BJT vocabulary records with the same parser used by the browser. The audit separates 385 Japanese examples, preserves examples starting with digits or Latin characters, and does not mistake the colon in `3対2` for an example delimiter.
 - Verified the full `ごねる` search, practice, answer, and feedback flow: the meaning ends at `Làm khó, gây khó dễ`; the Japanese and Vietnamese sentences appear only under `Ví dụ`.
 
+## 2026-07-21 Context Vocabulary explanation-card follow-up
+
+- User reference: `/var/folders/sm/d8hb2_5s40965vv4h1zxl_xc0000gn/T/codex-clipboard-a9b0a0aa-91a8-402d-b128-825ec5d193e5.png`
+- Final implementation: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/context-vocabulary-explanation-paper-final.png`
+- Fixed the expanded answer-detail bodies (`.wbody`) and their containing cards (`.wcard`) so every meaning, Vietnamese definition, and set-expression block uses the same warm paper surface as the quiz instead of the near-white portfolio surface.
+- Verified the complete answer flow for `添加` in light and dark themes. Light detail surfaces resolve to the warm mixed paper color; dark detail surfaces resolve to charcoal with readable text and no horizontal overflow.
+
 final result: passed
