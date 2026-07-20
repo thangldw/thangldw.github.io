@@ -130,8 +130,8 @@
   ];
 
   global.portfolioLanguageCollection = {
-    title: 'N1 Language Lab',
-    description: '12 browser-based tools for Japanese vocabulary, kanji, grammar, and reading.',
+    title: 'Japanese Language Lab',
+    description: '13 browser-based tools for BJT and JLPT Japanese vocabulary, kanji, grammar, and reading.',
     href: '/apps/#language',
     label: 'Language Collection'
   };

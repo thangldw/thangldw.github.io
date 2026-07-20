@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BJT Study — Lộ trình Business Japanese</title>
+  <meta name="description" content="Học BJT theo lộ trình với 1.565 thuật ngữ, 84 mẫu ngữ pháp, luyện tập hằng ngày và ôn lại lỗi sai ngay trong trình duyệt.">
+  <link rel="canonical" href="https://thangldw.github.io/apps/bjt-study/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="BJT Study — Business Japanese">
+  <meta property="og:description" content="Lộ trình BJT tập trung cho người Việt: từ vựng, ngữ pháp, luyện đề và ôn sai.">
+  <meta property="og:url" content="https://thangldw.github.io/apps/bjt-study/">
+  <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260714c">
+  <link rel="stylesheet" href="styles.css?v=20260721">
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <script defer src="/js/analytics.js"></script>
+  <script defer src="app.js?v=20260721"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Đi tới bài học</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Điều hướng BJT">
+      <div class="sidebar-head">
+        <a class="brand" href="/" aria-label="Về trang chủ Thang Luu">
+          <span class="brand-mark" aria-hidden="true">t:&gt;</span>
+          <span>thang<span class="brand-dot">.</span></span>
+        </a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+          <i class="fa-solid fa-list-ol" aria-hidden="true"></i><span>Menu</span>
+        </button>
+      </div>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Chức năng học tập">
+        <button class="nav-item is-active" type="button" data-view="today">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i><span>Hôm nay</span>
+        </button>
+        <button class="nav-item" type="button" data-view="path">
+          <i class="fa-solid fa-layer-group" aria-hidden="true"></i><span>Lộ trình</span>
+        </button>
+        <button class="nav-item" type="button" data-view="vocabulary">
+          <i class="fa-solid fa-language" aria-hidden="true"></i><span>Từ vựng</span>
+        </button>
+        <button class="nav-item" type="button" data-view="grammar">
+          <i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Ngữ pháp</span>
+        </button>
+        <button class="nav-item" type="button" data-view="exam">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span>Luyện đề</span>
+        </button>
+        <button class="nav-item" type="button" data-view="review">
+          <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span>Ôn sai</span>
+          <span class="nav-count" id="wrongNavCount" hidden>0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="dataset-summary" aria-label="Quy mô kho dữ liệu">
+          <span>Kho dữ liệu</span>
+          <strong><b id="grammarTotal">84</b> mẫu ngữ pháp</strong>
+          <strong><b id="vocabTotal">1.565</b> thuật ngữ</strong>
+        </div>
+        <a class="portfolio-link" href="/apps/"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>Về danh sách apps</span></a>
+        <div class="theme-switch" role="group" aria-label="Chế độ màu">
+          <button type="button" id="lightTheme" data-theme-choice="light"><i class="fa-solid fa-sun" aria-hidden="true"></i><span>Sáng</span></button>
+          <button type="button" id="darkTheme" data-theme-choice="dark"><i class="fa-solid fa-moon" aria-hidden="true"></i><span>Tối</span></button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="workspace" id="workspace" tabindex="-1">
+      <div class="loading-state" id="loadingState" role="status">
+        <span class="loading-line"></span>
+        <p>Đang chuẩn bị lộ trình BJT…</p>
+      </div>
+      <div id="appView" hidden></div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
