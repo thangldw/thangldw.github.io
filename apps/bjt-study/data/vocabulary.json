@@ -2306,7 +2306,10 @@
     },
     {
       "term": "ご足労",
-      "definition": "ごそくろう [TÚC LAO] わざわざご足労いただき、ありがとうございます: cảm ơn anh đã cất công đến đây."
+      "definition": "ごそくろう [TÚC LAO] わざわざご足労いただき、ありがとうございます: cảm ơn anh đã cất công đến đây.",
+      "meaning": "Cất công đi đến",
+      "exampleJa": "わざわざご足労いただき、ありがとうございます。",
+      "exampleVi": "Cảm ơn anh đã cất công đến đây."
     },
     {
       "term": "配慮（する）",
@@ -2370,7 +2373,10 @@
     },
     {
       "term": "まずまず",
-      "definition": "Vừa vừa, tàm tạm (まま）A: 今期の売り上げ、良かったんです。B: うん、まあ、まずまずってところかな。"
+      "definition": "Vừa vừa, tàm tạm (まま）A: 今期の売り上げ、良かったんです。B: うん、まあ、まずまずってところかな。",
+      "meaning": "Vừa vừa, tàm tạm",
+      "exampleJa": "A: 今期の売り上げ、良かったんです。B: うん、まあ、まずまずってところかな。",
+      "exampleVi": "A: Doanh số kỳ này tốt chứ? B: Ừm, cũng tạm ổn."
     },
     {
       "term": "大手",
@@ -2442,7 +2448,10 @@
     },
     {
       "term": "賜る",
-      "definition": "たまわるNhận (trang trọng của もらう、いただく）たくさんのご意見を賜り、ありがとうございます。"
+      "definition": "たまわるNhận (trang trọng của もらう、いただく）たくさんのご意見を賜り、ありがとうございます。",
+      "meaning": "Nhận (cách nói trang trọng của もらう、いただく)",
+      "exampleJa": "たくさんのご意見を賜り、ありがとうございます。",
+      "exampleVi": "Xin cảm ơn quý vị đã đóng góp nhiều ý kiến."
     },
     {
       "term": "特徴",
@@ -2582,7 +2591,10 @@
     },
     {
       "term": "悪しからず",
-      "definition": "悪しからずご了承ください : mong hãy hiểu và thông cảm cho tôi"
+      "definition": "悪しからずご了承ください : mong hãy hiểu và thông cảm cho tôi",
+      "meaning": "Xin đừng hiểu lầm; mong được thông cảm",
+      "exampleJa": "悪しからずご了承ください。",
+      "exampleVi": "Mong anh/chị hiểu và thông cảm."
     },
     {
       "term": "平素",
@@ -2602,7 +2614,10 @@
     },
     {
       "term": "売れ行き",
-      "definition": "うれゆき [MẠI HÀNH] Tình hình buôn bánBán đắt: 売れ行きがいい"
+      "definition": "うれゆき [MẠI HÀNH] Tình hình buôn bánBán đắt: 売れ行きがいい",
+      "meaning": "Tình hình bán hàng",
+      "exampleJa": "売れ行きがいい",
+      "exampleVi": "Bán chạy."
     },
     {
       "term": "在後切れ",
@@ -2822,7 +2837,10 @@
     },
     {
       "term": "捺印（する）",
-      "definition": "なついん（する） [NẠI ẤN] Đóng dấu, con dấu sau khi đóng lên giấy.Sự đóng dấu: 印鑑を押す事"
+      "definition": "なついん（する） [NẠI ẤN] Đóng dấu, con dấu sau khi đóng lên giấy.Sự đóng dấu: 印鑑を押す事",
+      "meaning": "Đóng dấu; dấu được đóng trên giấy",
+      "exampleJa": "印鑑を押す事",
+      "exampleVi": "Việc đóng con dấu."
     },
     {
       "term": "謹啓",
@@ -3134,7 +3152,10 @@
     },
     {
       "term": "控える",
-      "definition": "ひかえる[KHỐNG] Kiềm chế; hoãn: giữ gìn健康のために、お酒を控えた方がいいです。"
+      "definition": "ひかえる[KHỐNG] Kiềm chế; hoãn: giữ gìn健康のために、お酒を控えた方がいいです。",
+      "meaning": "Kiềm chế, hạn chế; hoãn lại",
+      "exampleJa": "健康のために、お酒を控えた方がいいです。",
+      "exampleVi": "Vì sức khỏe, bạn nên hạn chế uống rượu."
     },
     {
       "term": "充実",
@@ -3338,7 +3359,10 @@
     },
     {
       "term": "相応しい",
-      "definition": "ふさわしい[TƯƠNG ỨNG]Thích hợp, phù hợp, tương xứng (相応しい，適当な，適切な : suitable, appropriate): 面接にふさわしい服装"
+      "definition": "ふさわしい[TƯƠNG ỨNG]Thích hợp, phù hợp, tương xứng (相応しい，適当な，適切な : suitable, appropriate): 面接にふさわしい服装",
+      "meaning": "Thích hợp, phù hợp, tương xứng",
+      "exampleJa": "面接にふさわしい服装",
+      "exampleVi": "Trang phục phù hợp cho buổi phỏng vấn."
     },
     {
       "term": "共用",
@@ -3374,7 +3398,10 @@
     },
     {
       "term": "間",
-      "definition": "ま[GIAN]Khoảng trống, Thời gian rảnh (~ひま）用意する間もない：không có cả thời gian chuẩn bị"
+      "definition": "ま[GIAN]Khoảng trống, Thời gian rảnh (~ひま）用意する間もない：không có cả thời gian chuẩn bị",
+      "meaning": "Khoảng trống; thời gian rảnh",
+      "exampleJa": "用意する間もない",
+      "exampleVi": "Không có cả thời gian chuẩn bị."
     },
     {
       "term": "谷間",
