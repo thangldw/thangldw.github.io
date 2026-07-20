@@ -253,7 +253,7 @@ body[data-language-app="n1-vocabulary-context"] .optwrap.ng {
 
 body[data-language-app="n1-vocabulary-context"] :is(.wcard, .wbody) {
   border-color: var(--portfolio-border) !important;
-  background: var(--portfolio-surface) !important;
+  background: color-mix(in srgb, var(--portfolio-bg) 82%, var(--portfolio-surface)) !important;
   color: var(--portfolio-ink) !important;
 }
 
