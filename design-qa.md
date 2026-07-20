@@ -82,3 +82,12 @@ No actionable P0, P1, or P2 mismatches remain.
 - Verified the complete answer flow for `添加` in light and dark themes. Light detail surfaces resolve to the warm mixed paper color; dark detail surfaces resolve to charcoal with readable text and no horizontal overflow.
 
 final result: passed
+
+## 2026-07-21 Full Japanese app audit and BJT vocabulary enrichment
+
+- Full audit report: `japanese-app-audit.md`
+- Removed the duplicate BJT Hôm nay flow and made Lộ trình the default destination.
+- Added meaning-led vocabulary filters, inline Kanji analysis, reading traps, collocations, and synonyms from the existing N1 data source.
+- Added a real licensed speaker asset and placed it beside the practice term.
+- Rechecked all 12 legacy N1 apps in dark mode and tested selected-answer states in the five core quiz/reading patterns; no cold-white answer or explanation surfaces remain.
+- Added safe title wrapping and narrower mobile display sizing to the shared Japanese-app readability layer.
