@@ -85,7 +85,7 @@
 </script>
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
-<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722b">
+<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722c">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-grammar-sentence-order-drill">
@@ -95,10 +95,10 @@
   <div class="sub">Chọn mảnh ghép đúng cho vị trí <span class="star">★</span></div>
 
   <div style="text-align:center;margin-bottom:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-    <select id="periodFilter" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);font-size:.95rem;">
+    <select id="periodFilter" aria-label="Lọc theo kỳ thi" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);font-size:.95rem;">
       <option value="all">Tất cả kỳ thi</option>
     </select>
-    <select id="grammarFilter" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);font-size:.95rem;max-width:220px;">
+    <select id="grammarFilter" aria-label="Lọc theo mẫu ngữ pháp" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);font-size:.95rem;max-width:220px;">
       <option value="all">Tất cả mẫu ngữ pháp</option>
     </select>
   </div>
@@ -331,7 +331,7 @@ document.getElementById('restartBtn').onclick = () => {
 renderQuestion(0);
 </script>
 </main>
-<script src="/js/site-header-v2.js?v=20260722e"></script>
+<script src="/js/site-header-v2.js?v=20260722f"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>

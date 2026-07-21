@@ -42,7 +42,8 @@ flowchart LR
 | Viewport | 390, 680, 1280 và 1440 px | Đạt |
 | Theme | Light/dark; KakeFlow giữ ngoại lệ light-only đã ghi trong ledger | Đạt |
 | Learning Programs | G検定, BJT, JLPT N1 và 12 app JLPT con | Đạt |
-| Browser smoke | 5 luồng desktop/mobile trên Chrome headless | Đạt |
+| Browser smoke | 13 luồng hành vi trên Chrome headless | Đạt |
+| JLPT N1 matrix | 13 route × 4 viewport = 52 lượt render | Đạt |
 | Redirect | Mapping legacy ↔ canonical được đối chiếu tự động | Đạt |
 | Data | G検定 900 câu/495 keyword; BJT 1.565 thuật ngữ/84 mẫu | Đạt schema |
 
@@ -97,6 +98,7 @@ flowchart LR
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
 node scripts/smoke_learning_apps.mjs
+node scripts/qa_jlpt_n1.mjs
 git diff --check
 ```
 
@@ -177,6 +179,15 @@ Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定,
 - Tách dữ liệu khỏi HTML của Vocabulary Tabs, Vocabulary Exams, Grammar Exams, Kanji Analysis và Kanji Collocations sang `data.js` theo từng route.
 - Tổng kích thước năm HTML giảm từ khoảng 2,07 MB xuống khoảng 149 KB; các payload được cache và bảo trì độc lập với markup/logic giao diện.
 - Hash của dữ liệu đã parse trước/sau trùng khớp cho cả năm route; 13/13 Chrome smoke test tiếp tục đạt.
+
+## Full QA JLPT N1 — 2026-07-22
+
+- Chạy 52 lượt render cho hub và 12 app tại 390, 680, 1280 và 1440 px; không có overflow, lỗi JavaScript, ảnh hỏng, ID trùng, mojibake hoặc lỗi landmark/heading.
+- Bổ sung accessible label cho filter, search, quiz setup và jump control ở chín app; tăng target compact của brand và nút phát âm lên tối thiểu 34 px.
+- Sửa contrast dark mode của giải thích Grammar Exams và bảng/ghi chú Kanji Analysis bằng token `--portfolio-*`.
+- Tải local ở desktop nằm trong khoảng 49–143 ms; payload đã giải mã từ 96 KB đến 858 KB, không route nào vượt budget 2,5 MB.
+- Kiểm tra schema nội dung xác nhận Grammar Exams có 300/300 giải thích, Kanji Analysis có 348 mục, Kanji Collocations có 527 mục và mọi đáp án quiz đều trỏ tới lựa chọn hợp lệ.
+- Giới hạn dữ liệu còn lại: 345/648 mục Vocabulary Exams chưa có trường nghĩa Việt riêng; câu hỏi và đáp án vẫn đầy đủ, nhưng cần một đợt biên tập ngôn ngữ riêng thay vì tự động điền bản dịch chưa được kiểm chứng.
 
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 

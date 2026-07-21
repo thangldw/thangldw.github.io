@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/goi-tabs.css?v=20260722c">
   <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
-<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722b">
+<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722c">
 <link rel="stylesheet" href="styles.css?v=20260722a">
   <script defer src="/js/analytics.js"></script>
 </head>
@@ -48,8 +48,8 @@
   <button type="button" class="stab n" aria-pressed="false" data-pos="名詞" data-list="c">名詞</button>
 </div>
 <div class="ctrl" id="ctc">
-  <input type="text" id="sic" placeholder="漢字・かな・nghĩa..." data-filter="c">
-  <select id="fmc" data-filter="c">
+  <input type="text" id="sic" placeholder="漢字・かな・nghĩa..." aria-label="Tìm từ vựng theo Kanji, Kana hoặc nghĩa" data-filter="c">
+  <select id="fmc" aria-label="Lọc nguồn từ vựng" data-filter="c">
     <option value="">全ソース</option>
     <option value="tettei_m2">Mon2</option>
     <option value="tettei_m3">Mon3</option>
@@ -62,7 +62,7 @@
   <span class="cnt-lbl" id="vcc">—</span>
 </div>
 <div class="ctrl is-hidden" id="ctw">
-  <input type="text" id="siw" placeholder="..." data-filter="w">
+  <input type="text" id="siw" placeholder="..." aria-label="Tìm từ vựng bổ sung" data-filter="w">
   <span class="cnt-lbl" id="vcw">—</span>
 </div>
 <div class="container">
@@ -272,7 +272,7 @@ function rTab(t){
 }
 
 function rADJ(el){
-  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="siadj" placeholder="検索..." data-dynamic-filter="adj"><span id="vcadj" class="tab-count">'+DTP.length+' 語</span></div><div class="filter-pills"><button type="button" data-action="adjective-filter" data-adjective-type="all" id="atb-all" class="filter-pill on">すべて</button><button type="button" data-action="adjective-filter" data-adjective-type="adj-i" id="atb-i" class="filter-pill">イ形容詞</button><button type="button" data-action="adjective-filter" data-adjective-type="adj-na" id="atb-na" class="filter-pill">ナ形容詞</button></div><div class="grid" id="adjgrid">';
+  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="siadj" placeholder="検索..." aria-label="形容詞を検索" data-dynamic-filter="adj"><span id="vcadj" class="tab-count">'+DTP.length+' 語</span></div><div class="filter-pills"><button type="button" data-action="adjective-filter" data-adjective-type="all" id="atb-all" class="filter-pill on">すべて</button><button type="button" data-action="adjective-filter" data-adjective-type="adj-i" id="atb-i" class="filter-pill">イ形容詞</button><button type="button" data-action="adjective-filter" data-adjective-type="adj-na" id="atb-na" class="filter-pill">ナ形容詞</button></div><div class="grid" id="adjgrid">';
   DTP.forEach(function(v,i){
     var uid='adj'+i,at=v.p||'adj-i';
     var coH='';(v.co||[]).forEach(function(c){coH+='<div class="co-item n1"><span class="cjp">'+esc(c.j||c.jp||'')+'<span class="n1b">N1</span></span></div>';});
@@ -298,7 +298,7 @@ function fAdj(){
 
 function rPTU(el){
   var cats={'時間':'🕐 Thời gian','突然':'⚡ Đột ngột','程度':'📊 Mức độ','頻度':'🔄 Tần suất','数量':'🔢 Số lượng','行動':'💪 Hành động','感情':'❤️ Cảm xúc','接続':'🔗 Liên kết','批判':'⚠️ Phê phán','その他':'🌟 N1'};
-  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="siptu" placeholder="副詞検索..." data-dynamic-filter="ptu"><span id="vcptu" class="tab-count">'+PTU.length+' 語</span></div>';
+  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="siptu" placeholder="副詞検索..." aria-label="副詞を検索" data-dynamic-filter="ptu"><span id="vcptu" class="tab-count">'+PTU.length+' 語</span></div>';
   h+='<div class="filter-pills"><button type="button" id="ptb-list" data-action="ptu-mode" data-ptu-mode="list" class="filter-pill ptu on">📋 Danh sách</button><button type="button" id="ptb-pat" data-action="ptu-mode" data-ptu-mode="pat" class="filter-pill ptu">🔗 Pattern</button></div>';
   h+='<div id="ptu-content">';
   var bycat={};PTU.forEach(function(v){var c=v.cat||'その他';if(!bycat[c])bycat[c]=[];bycat[c].push(v);});
@@ -346,7 +346,7 @@ function fPTU(){
 }
 
 function rDTG(el){
-  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="sidtg" placeholder="検索..." data-dynamic-filter="dtg"><span id="vcdtg" class="tab-count">—</span></div>';
+  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="sidtg" placeholder="検索..." aria-label="複合動詞を検索" data-dynamic-filter="dtg"><span id="vcdtg" class="tab-count">—</span></div>';
   var total=0;
   Object.keys(DTG).forEach(function(gk){
     var g=DTG[gk];total+=g.words.length;
@@ -418,7 +418,7 @@ function r1696(el,q){
   var grp={both:[],only1696:[],onlyCDT:[]};
   data.forEach(function(v){var s=v.sec||'only1696';if(grp[s])grp[s].push(v);});
   var shown=Math.min(_visible1696,data.length),remaining=shown;
-  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="si1696" placeholder="検索..." data-dynamic-filter="1696"><span id="vc1696" class="tab-count">'+(shown<data.length?shown+' / '+data.length:data.length)+' 語</span></div>';
+  var h='<div class="tab-content"><div class="tab-search"><input type="text" id="si1696" placeholder="検索..." aria-label="語彙1696を検索" data-dynamic-filter="1696"><span id="vc1696" class="tab-count">'+(shown<data.length?shown+' / '+data.length:data.length)+' 語</span></div>';
   ['both','only1696','onlyCDT'].forEach(function(sec){
     var allCards=grp[sec];if(!allCards||!allCards.length||remaining<=0)return;
     var cards=allCards.slice(0,remaining);remaining-=cards.length;
@@ -533,7 +533,7 @@ function init(){
 init();
 </script>
 </main>
-<script src="/js/site-header-v2.js?v=20260722e"></script>
+<script src="/js/site-header-v2.js?v=20260722f"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>

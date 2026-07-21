@@ -169,11 +169,12 @@ Dữ liệu được ghi vào `apps/public-signals/data/`.
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
 node scripts/smoke_learning_apps.mjs
+node scripts/qa_jlpt_n1.mjs
 git diff --check
 git status --short
 ```
 
-UI audit kiểm tra semantic HTML, accessibility, thứ tự CSS và token bắt buộc. Site validator kiểm tra HTML, ID trùng, liên kết local, social metadata, sitemap, redirect chain và font bên ngoài. Smoke test dùng Chrome headless có sẵn trên máy để chạy các luồng chính của G検定, BJT, JLPT N1, Vocabulary Exams, Vocabulary Tabs, Grammar Exams, Kanji Analysis và Kanji Collocations mà không cần dependency npm. GitHub Pages phát hành trực tiếp từ `master`.
+UI audit kiểm tra semantic HTML, accessibility, thứ tự CSS và token bắt buộc. Site validator kiểm tra HTML, ID trùng, liên kết local, social metadata, sitemap, redirect chain và font bên ngoài. Smoke test dùng Chrome headless có sẵn trên máy để chạy các luồng chính của G検定, BJT, JLPT N1, Vocabulary Exams, Vocabulary Tabs, Grammar Exams, Kanji Analysis và Kanji Collocations mà không cần dependency npm. JLPT N1 QA matrix kiểm tra 13 route ở 390, 680, 1280 và 1440 px. GitHub Pages phát hành trực tiếp từ `master`.
 
 Các payload học tập lớn của năm route JLPT N1 chính được đặt trong `data.js` cùng thư mục với route. HTML chỉ giữ cấu trúc và logic giao diện; dữ liệu vẫn được tải đồng bộ trước script ứng dụng để giữ nguyên hành vi của bản static.
 

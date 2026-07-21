@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
   <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
-<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722b">
+<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722c">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-vocabulary-exams">
@@ -45,15 +45,15 @@
 <!-- VOCAB -->
 <div id="tv">
   <div class="ctrl">
-    <input type="text" id="si" placeholder="漢字・かな・nghĩa tiếng Việt...">
-    <select id="fm">
+    <input type="text" id="si" placeholder="漢字・かな・nghĩa tiếng Việt..." aria-label="Tìm từ theo Kanji, Kana hoặc nghĩa tiếng Việt">
+    <select id="fm" aria-label="Lọc theo dạng câu hỏi">
       <option value="">全問題</option>
       <option value="1">問題1（漢字読み）</option>
       <option value="2">問題2（文脈）</option>
       <option value="3">問題3（言い換え）</option>
       <option value="4">問題4（用法）</option>
     </select>
-    <select id="fy">
+    <select id="fy" aria-label="Lọc theo năm thi">
       <option value="">全年</option>
 <option value="12/2010">12/2010</option>
 <option value="12/2011">12/2011</option>
@@ -105,14 +105,14 @@
   <div class="qsetup" id="qs">
     <h2>📝 練習設定</h2>
     <div class="srow"><label>問題タイプ</label>
-      <select id="qm">
+      <select id="qm" aria-label="Chọn dạng câu hỏi cho quiz">
         <option value="all">全問題</option>
         <option value="1">問題1</option><option value="2">問題2</option>
         <option value="3">問題3</option><option value="4">問題4</option>
       </select>
     </div>
     <div class="srow"><label>年度</label>
-      <select id="qy"><option value="all">全年</option><option value="12/2010">12/2010</option>
+      <select id="qy" aria-label="Chọn năm thi cho quiz"><option value="all">全年</option><option value="12/2010">12/2010</option>
 <option value="12/2011">12/2011</option>
 <option value="12/2012">12/2012</option>
 <option value="12/2013">12/2013</option>
@@ -145,7 +145,7 @@
 <option value="7/2025">7/2025</option></select>
     </div>
     <div class="srow"><label>問題数</label>
-      <select id="qc">
+      <select id="qc" aria-label="Chọn số câu hỏi cho quiz">
         <option value="10">10問</option><option value="20" selected>20問</option>
         <option value="30">30問</option><option value="all">全問</option>
       </select>
@@ -1348,7 +1348,7 @@ document.getElementById('tq').addEventListener('click',event=>{
 rv();
 </script>
 </main>
-<script src="/js/site-header-v2.js?v=20260722e"></script>
+<script src="/js/site-header-v2.js?v=20260722f"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>
