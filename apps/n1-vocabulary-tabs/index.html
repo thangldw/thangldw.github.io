@@ -202,11 +202,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
   <link rel="stylesheet" href="/css/goi-tabs.css?v=20260722c">
   <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260722d">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
 <link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722a">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-vocabulary-tabs">
+<main id="main-content" class="semantic-main">
 <div class="hdr">
   <div class="hdr-sub">JLPT N1 · 語彙・漢字</div>
   <div class="hdr-row">
@@ -214,19 +215,19 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <span class="hbdg gr">1,673 từ</span>
   </div>
 </div>
-<div class="mtabs">
-  <button type="button" class="mtab on" aria-selected="true" onclick="sw('c',this)">Từ vựng</button>
-  <button type="button" class="mtab" aria-selected="false" onclick="sw('s1696',this)">Bộ 1696</button>
-  <button type="button" class="mtab" aria-selected="false" onclick="sw('adj',this)">Tính từ</button>
-  <button type="button" class="mtab" aria-selected="false" onclick="sw('ptu',this)">Phó từ</button>
-  <button type="button" class="mtab" aria-selected="false" onclick="sw('dtg',this)">Động từ ghép</button>
-  <button type="button" class="mtab" aria-selected="false" onclick="sw('ct',this)">Cơ thể</button>
-  <button type="button" class="mtab" aria-selected="false" onclick="sw('pre',this)">Tiền tố・接頭辞</button>
+<div class="mtabs" role="tablist" aria-label="Nhóm từ vựng JLPT N1">
+  <button id="tab-c" type="button" role="tab" class="mtab on" aria-selected="true" aria-controls="pn-c" onclick="sw('c',this)">Từ vựng</button>
+  <button id="tab-s1696" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-s1696" tabindex="-1" onclick="sw('s1696',this)">Bộ 1696</button>
+  <button id="tab-adj" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-adj" tabindex="-1" onclick="sw('adj',this)">Tính từ</button>
+  <button id="tab-ptu" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-ptu" tabindex="-1" onclick="sw('ptu',this)">Phó từ</button>
+  <button id="tab-dtg" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-dtg" tabindex="-1" onclick="sw('dtg',this)">Động từ ghép</button>
+  <button id="tab-ct" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-ct" tabindex="-1" onclick="sw('ct',this)">Cơ thể</button>
+  <button id="tab-pre" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-pre" tabindex="-1" onclick="sw('pre',this)">Tiền tố・接頭辞</button>
 </div>
-<div class="stabs" id="stc">
-  <button class="stab on" onclick="spos('',this,'c')">すべて</button>
-  <button class="stab v" onclick="spos('動詞',this,'c')">動詞</button>
-  <button class="stab n" onclick="spos('名詞',this,'c')">名詞</button>
+<div class="stabs" id="stc" role="group" aria-label="Lọc theo từ loại">
+  <button type="button" class="stab on" aria-pressed="true" onclick="spos('',this,'c')">すべて</button>
+  <button type="button" class="stab v" aria-pressed="false" onclick="spos('動詞',this,'c')">動詞</button>
+  <button type="button" class="stab n" aria-pressed="false" onclick="spos('名詞',this,'c')">名詞</button>
 </div>
 <div class="ctrl" id="ctc">
   <input type="text" id="sic" placeholder="漢字・かな・nghĩa..." oninput="rv('c')">
@@ -247,14 +248,14 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   <span class="cnt-lbl" id="vcw">—</span>
 </div>
 <div class="container">
-  <div id="pn-c"><div class="grid" id="gc"></div><div class="load-row" id="more-c"></div></div>
+  <div id="pn-c" role="tabpanel" aria-labelledby="tab-c"><div class="grid" id="gc"></div><div class="load-row" id="more-c"></div></div>
   <div id="pn-w" style="display:none"><div class="grid" id="gw"></div></div>
-  <div id="pn-s1696" style="display:none"></div>
-  <div id="pn-adj"   style="display:none"></div>
-  <div id="pn-ptu"   style="display:none"></div>
-  <div id="pn-dtg"   style="display:none"></div>
-  <div id="pn-ct"    style="display:none"></div>
-  <div id="pn-pre"   style="display:none"></div>
+  <div id="pn-s1696" role="tabpanel" aria-labelledby="tab-s1696" style="display:none"></div>
+  <div id="pn-adj" role="tabpanel" aria-labelledby="tab-adj" style="display:none"></div>
+  <div id="pn-ptu" role="tabpanel" aria-labelledby="tab-ptu" style="display:none"></div>
+  <div id="pn-dtg" role="tabpanel" aria-labelledby="tab-dtg" style="display:none"></div>
+  <div id="pn-ct" role="tabpanel" aria-labelledby="tab-ct" style="display:none"></div>
+  <div id="pn-pre" role="tabpanel" aria-labelledby="tab-pre" style="display:none"></div>
 </div>
 <div class="api-bar" id="abar">
   <div class="spin"></div>
@@ -277,9 +278,10 @@ var PAGE_SIZE=96,_visible={c:PAGE_SIZE,w:PAGE_SIZE},_visible1696=PAGE_SIZE;
 var _pc='',_pw='',_ren={},_syCache={},_abt=[];
 
 function sw(t,btn){
-  document.querySelectorAll('.mtab').forEach(function(b){b.classList.remove('on');b.setAttribute('aria-selected','false');});
+  document.querySelectorAll('.mtab').forEach(function(b){b.classList.remove('on');b.setAttribute('aria-selected','false');b.tabIndex=-1;});
   btn.classList.add('on');
   btn.setAttribute('aria-selected','true');
+  btn.tabIndex=0;
   ['c','s1696','adj','ptu','dtg','ct','pre'].forEach(function(id){
     var p=document.getElementById('pn-'+id);
     if(p)p.style.display=(id===t)?'':'none';
@@ -298,10 +300,20 @@ function sw(t,btn){
   else if(!_ren[t]){_ren[t]=1;rTab(t);}
 }
 
+document.querySelector('.mtabs').addEventListener('keydown',function(event){
+  if(['ArrowLeft','ArrowRight','Home','End'].indexOf(event.key)===-1)return;
+  var tabs=Array.from(this.querySelectorAll('[role="tab"]'));
+  var index=tabs.indexOf(event.target.closest('[role="tab"]'));
+  if(index<0)return;
+  event.preventDefault();
+  var next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+  tabs[next].click();tabs[next].focus();
+});
+
 function spos(p,btn,tab){
   if(tab==='c')_pc=p;else _pw=p;
-  document.querySelectorAll('#st'+tab+' .stab').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');rv(tab);
+  document.querySelectorAll('#st'+tab+' .stab').forEach(function(b){b.classList.remove('on');b.setAttribute('aria-pressed','false');});
+  btn.classList.add('on');btn.setAttribute('aria-pressed','true');rv(tab);
 }
 
 function rv(tab,append){
@@ -695,6 +707,7 @@ function init(){
 }
 init();
 </script>
+</main>
 <script src="/js/site-header-v2.js?v=20260721d"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>

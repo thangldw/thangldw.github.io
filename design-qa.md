@@ -178,6 +178,32 @@ flowchart LR
 
 **final result: passed**
 
+## Full HTML/CSS governance audit — 2026-07-22
+
+- **VI:** Rà soát toàn bộ 22 route canonical và trang 404; kiểm tra HTML source, DOM sau render, CSS cascade, theme, overflow, control và tab semantics.
+- **EN:** Audited all 22 canonical routes plus the 404 page across source HTML, rendered DOM, CSS cascade, themes, overflow, controls and tab semantics.
+- **JA:** 22 の canonical route と 404 ページを対象に、HTML、描画後 DOM、CSS cascade、theme、overflow、control、tab semantics を監査。
+
+### Findings and fixes / Kết quả / 結果
+
+1. Added exactly one semantic `main` to ten legacy learning pages without changing their nested layout.
+2. Replaced two visual title wrappers with real `h1` elements and added no-script `h1` fallbacks to the JLPT/BJT dynamic hubs.
+3. Completed tab semantics for Data Copilot, JLPT, BJT, Vocabulary Tabs and Paraphrase: named tablists, selected state, controls/panel linkage, keyboard navigation and roving tabindex.
+4. Added accessible names to Data Copilot's icon query action and SQL/plain-language inputs.
+5. Established [UI Standard 1.0](UI-STANDARDS.md) and a release-blocking local audit at `scripts/audit_ui_standards.py`; `scripts/validate_site.py` invokes the same contract.
+
+### Evidence / Bằng chứng / 証跡
+
+- In-app browser viewport: 1280 × 720, device pixel ratio 2.
+- No document-level horizontal overflow on any canonical route.
+- Every route renders one `main` and one `h1`; all role-based tabs expose complete `aria-selected`, `aria-controls` and `aria-labelledby` linkage after render.
+- Source screenshots were captured during this QA run but remain temporary and are not committed under the repository evidence policy.
+- Automated gate: 23 public pages pass UI Standard 1.0.
+
+**Evidence limits:** the audit validates semantics, DOM/computed CSS and representative visual states; it does not replace manual VoiceOver testing on physical devices.
+
+**final result: passed**
+
 ## Audit control, typography và responsive toàn project — 2026-07-22
 
 - **Phạm vi:** 21 route chính trong sitemap, gồm catalog, JLPT/BJT, 12 app học tiếng Nhật và các app dữ liệu/kỹ thuật.

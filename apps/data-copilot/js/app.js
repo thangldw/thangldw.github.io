@@ -269,15 +269,30 @@ async function ingestCSV(file) {
 
 // --- UI wiring --------------------------------------------------------------
 function wireTabs() {
-  document.querySelectorAll(".tab").forEach((tab) =>
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach((t) => t.classList.remove("is-active"));
-      document.querySelectorAll(".panel").forEach((p) => p.classList.remove("is-active"));
-      tab.classList.add("is-active");
-      $(`#panel-${tab.dataset.tab}`).classList.add("is-active");
-      if (tab.dataset.tab === "chart") drawChart();
-    })
-  );
+  const tabs = [...document.querySelectorAll(".tab")];
+  const activateTab = (tab) => {
+    tabs.forEach((t) => {
+      const active = t === tab;
+      t.classList.toggle("is-active", active);
+      t.setAttribute("aria-selected", String(active));
+      t.tabIndex = active ? 0 : -1;
+    });
+    document.querySelectorAll(".panel").forEach((p) => p.classList.remove("is-active"));
+    tab.classList.add("is-active");
+    $(`#panel-${tab.dataset.tab}`).classList.add("is-active");
+    if (tab.dataset.tab === "chart") drawChart();
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activateTab(tab));
+    tab.addEventListener("keydown", (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
+        (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[next].focus();
+      activateTab(tabs[next]);
+    });
+  });
 }
 
 function wireEditor() {

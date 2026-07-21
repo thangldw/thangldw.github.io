@@ -101,6 +101,26 @@ body.portfolio-app > :where(main, .container, .main, .wrap, .cnt):first-of-type 
   padding-top: 40px;
 }
 
+/* Semantic wrapper for legacy single-file apps. Their original layout lives in
+   nested containers, so the landmark must not become a second layout shell. */
+body.portfolio-app > main.semantic-main {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+body.portfolio-app .semantic-main :where(.brand, .header-title) {
+  margin-block: 0;
+}
+
+body[data-language-app="n1-reading-75"] h1.brand {
+  color: var(--ink-soft) !important;
+  font-size: 13px !important;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: .12em !important;
+}
+
 body.portfolio-app :where(h1, h2, h3, h4) {
   color: var(--portfolio-ink) !important;
   letter-spacing: -0.025em;
@@ -948,5 +968,56 @@ body.portfolio-catalog .app-card .ac-tag {
 
   body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
     font-size: 30px !important;
+  }
+}
+
+/* Bridge the original direct-child layout contract after legacy pages gain a
+   semantic main landmark. This preserves their rendered geometry exactly. */
+body.portfolio-app > main.semantic-main {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.portfolio-app > main.semantic-main > :where(.container, .main, .wrap, .cnt) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-app-kind="language"] > main.semantic-main > :where(.container, .main, .wrap, .cnt) {
+  padding-bottom: 48px;
+}
+
+body[data-language-app="n1-kanji-collocations"] > main.semantic-main > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+body[data-language-app="n1-reading-75"] > main.semantic-main > :is(.topbar, .progress-wrap) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-kanji-collocations"] > main.semantic-main > .header {
+  padding-top: 32px;
+}
+
+body[data-app-kind="language"][data-language-app="n1-kanji-collocations"] .semantic-main .header h1.header-title {
+  color: var(--portfolio-ink) !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+  line-height: 1.55 !important;
+  letter-spacing: -0.04em !important;
+}
+
+@media (max-width: 960px) {
+  body.portfolio-app > main.semantic-main > :where(.container, .main, .wrap, .cnt),
+  body[data-language-app="n1-kanji-collocations"] > main.semantic-main > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > main.semantic-main > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 680px) {
+  body.portfolio-app > main.semantic-main > :where(.container, .main, .wrap, .cnt),
+  body[data-language-app="n1-kanji-collocations"] > main.semantic-main > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > main.semantic-main > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 32px);
   }
 }

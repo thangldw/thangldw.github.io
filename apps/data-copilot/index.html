@@ -28,7 +28,7 @@
     })();
   </script>
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
-  <link rel="stylesheet" href="/css/app-design-system.css?v=20260722d">
+  <link rel="stylesheet" href="/css/app-design-system.css?v=20260722e">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="portfolio-app" data-app-kind="technical" data-app-route="data-copilot">
@@ -50,8 +50,8 @@
         </div>
       </div>
       <div class="ds-actions">
-        <button class="btn btn-ghost" id="btnStocks"><i class="fa-solid fa-chart-line"></i> Live market data</button>
-        <label class="btn btn-ghost" for="csvInput"><i class="fa-solid fa-file-arrow-up"></i> Drop / choose CSV</label>
+        <button class="btn btn-ghost" id="btnStocks" type="button"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Live market data</button>
+        <label class="btn btn-ghost" for="csvInput"><i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> Drop / choose CSV</label>
         <input type="file" id="csvInput" accept=".csv,text/csv" hidden>
       </div>
     </section>
@@ -62,35 +62,35 @@
     <section class="ask" id="ask" hidden>
       <div class="ask-bar">
         <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
-        <input id="askInput" type="text" autocomplete="off" spellcheck="false"
+        <input id="askInput" type="text" autocomplete="off" spellcheck="false" aria-label="Question in plain English"
                placeholder="Ask in plain English — “top 5 by return”, “compare Toyota and Sony”, “volatility”…">
-        <button class="btn btn-primary" id="askBtn"><i class="fa-solid fa-arrow-right"></i></button>
+        <button class="btn btn-primary" id="askBtn" type="button" aria-label="Run natural-language query"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
       </div>
       <div class="ask-examples" id="askExamples"></div>
       <div class="ask-explain" id="askExplain" hidden></div>
     </section>
 
     <!-- Tabs -->
-    <nav class="tabs" role="tablist">
-      <button class="tab is-active" data-tab="profile" role="tab"><i class="fa-solid fa-magnifying-glass-chart"></i> Profile</button>
-      <button class="tab" data-tab="query" role="tab"><i class="fa-solid fa-terminal"></i> Query</button>
-      <button class="tab" data-tab="chart" role="tab"><i class="fa-solid fa-chart-area"></i> Chart</button>
+    <nav class="tabs" role="tablist" aria-label="Data workspace views">
+      <button class="tab is-active" id="tab-profile" type="button" data-tab="profile" role="tab" aria-selected="true" aria-controls="panel-profile"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Profile</button>
+      <button class="tab" id="tab-query" type="button" data-tab="query" role="tab" aria-selected="false" aria-controls="panel-query" tabindex="-1"><i class="fa-solid fa-terminal" aria-hidden="true"></i> Query</button>
+      <button class="tab" id="tab-chart" type="button" data-tab="chart" role="tab" aria-selected="false" aria-controls="panel-chart" tabindex="-1"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Chart</button>
     </nav>
 
     <!-- Profile panel -->
-    <section class="panel is-active" id="panel-profile" role="tabpanel">
+    <section class="panel is-active" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile">
       <div class="table-scroll">
         <table class="profile-table" id="profileTable"><tbody><tr><td>Profiling…</td></tr></tbody></table>
       </div>
     </section>
 
     <!-- Query panel -->
-    <section class="panel" id="panel-query" role="tabpanel">
+    <section class="panel" id="panel-query" role="tabpanel" aria-labelledby="tab-query">
       <div class="examples" id="examples"></div>
       <div class="editor">
-        <textarea id="sql" spellcheck="false" rows="6"></textarea>
+        <textarea id="sql" spellcheck="false" rows="6" aria-label="SQL query"></textarea>
         <div class="editor-bar">
-          <button class="btn btn-primary" id="runBtn"><i class="fa-solid fa-play"></i> Run <kbd>⌘⏎</kbd></button>
+          <button class="btn btn-primary" id="runBtn" type="button"><i class="fa-solid fa-play" aria-hidden="true"></i> Run <kbd>⌘⏎</kbd></button>
           <span class="run-status font-mono" id="runStatus"></span>
         </div>
       </div>
@@ -100,7 +100,7 @@
     </section>
 
     <!-- Chart panel -->
-    <section class="panel" id="panel-chart" role="tabpanel">
+    <section class="panel" id="panel-chart" role="tabpanel" aria-labelledby="tab-chart">
       <div class="chart-controls">
         <label>X <select id="xSel"></select></label>
         <label>Y <select id="ySel"></select></label>
@@ -115,6 +115,6 @@
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 
   <script src="/js/site-header-v2.js?v=20260721d"></script>
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/app.js?v=20260722a"></script>
 </body>
 </html>

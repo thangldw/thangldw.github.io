@@ -176,12 +176,13 @@ Dữ liệu được ghi vào `apps/public-signals/data/`.
 ## Kiểm tra và phát hành
 
 ```bash
+python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
 git diff --check
 git status --short
 ```
 
-Validator kiểm tra HTML, ID trùng, liên kết local, metadata social, sitemap, redirect chain và dependency font bên ngoài. GitHub Pages phát hành trực tiếp từ nhánh `master`.
+UI audit kiểm tra cấu trúc semantic, accessibility của button/tab, thứ tự CSS và token màu bắt buộc. Validator kiểm tra thêm HTML, ID trùng, liên kết local, metadata social, sitemap, redirect chain và dependency font bên ngoài. GitHub Pages phát hành trực tiếp từ nhánh `master`.
 
 ## Cấu trúc repository
 
@@ -211,6 +212,7 @@ Tham khảo chính thức: [Miro Flowchart Templates](https://miro.com/templates
 
 ## Tài liệu liên quan
 
+- [UI Standard 1.0 · Tiêu chuẩn UI · UI標準](UI-STANDARDS.md)
 - [QA toàn repository](design-qa.md)
 - [Audit hệ sinh thái học tiếng Nhật](japanese-app-audit.md)
 - [QA JLPT N1](apps/jlpt-n1/design-qa.md)
