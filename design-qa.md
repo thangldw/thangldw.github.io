@@ -139,6 +139,37 @@ flowchart LR
 
 **final result: passed**
 
+## Touch targets và UI Standard 1.1 — 2026-07-22
+
+- **VI:** Rà lại toàn bộ 22 route canonical và trang 404 sau các lỗi control nhỏ, cascade và CSS trùng.
+- **EN:** Re-audited all 22 canonical routes plus the 404 page after fixing undersized controls, cascade conflicts and duplicate CSS.
+- **JA:** 小さすぎる操作部品、cascade の競合、重複 CSS を修正後、22 canonical route と 404 ページを再監査。
+- **Source visual truth:** ảnh mobile trước sửa của Vocabulary Paraphrase, Grammar Exams và KakeFlow từ vòng regression audit ngay trước thay đổi.
+- **Viewport matrix:** 390, 680, 1280 và 1440 px; light và dark cho mọi route hỗ trợ theme. KakeFlow giữ light-only theo ngoại lệ standalone đã ghi trong ledger.
+
+### Findings and fixes / Kết quả / 結果
+
+1. Vocabulary Paraphrase: 72 nút `Nghe` từ 19.5 px lên 34 px, radius 8 px; bỏ style/event inline ở component và thêm accessible name theo từng từ.
+2. Grammar Exams: toàn bộ year filter từ 27.1 px lên 34 px; giữ layout wrap và active state hiện có.
+3. KakeFlow: mobile menu từ 31 px lên 34 px; không đổi bố cục hoặc visual hierarchy.
+4. Header mobile, Apps catalog theme control, home project carousel và Leaflet zoom đều đạt ngưỡng compact 34 px.
+5. Vocabulary Tabs đã hợp nhất ba định nghĩa PTU lặp thành một nguồn CSS duy nhất.
+6. UI Standard nâng lên 1.1; ledger cục bộ chặn tăng `<style>`, `style=`, inline event handler và button thiếu `type` trên trang cũ, đồng thời đặt ngân sách bằng 0 cho trang mới.
+
+### Verification / Xác minh / 検証
+
+- 184 browser checks: 23 pages × 4 viewport × 2 theme; zero horizontal overflow, zero broken images, zero visible control dưới 34 px và zero theme mismatch ngoài ngoại lệ KakeFlow.
+- Focused computed styles: speech control 34 px / 8 px radius; Grammar year button 34 px / 8 px radius; KakeFlow menu 34 px / 8 px radius.
+- Before/after screenshots were compared together at the same 390 × 844 viewport; hierarchy, typography, colors and responsive flow remained stable while the target areas became easier to operate.
+- Runtime console: không có warning hoặc error trong phiên QA cuối.
+- Static gates: UI standards 23/23 pages, site validator 37 HTML pages / 14 redirects / 22 sitemap URLs, JavaScript syntax và `git diff --check` đều đạt.
+
+**Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi audit này.
+
+**Follow-up polish:** legacy debt đã được đóng băng trong ledger và chỉ được phép giảm ở các lần chỉnh sửa sau.
+
+**final result: passed**
+
 ## Làm sáng nhóm Động từ ghép — 2026-07-22
 
 - **Source visual truth:** ảnh chụp tab `Động từ ghép` do người dùng cung cấp trong task hiện tại; ảnh nguồn không được lưu vào repository.

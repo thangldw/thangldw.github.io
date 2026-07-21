@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "standard_version": "1.1",
+  "policy": "This ledger freezes existing inline UI debt. Counts may only decrease; new public pages receive a zero budget.",
+  "inline_debt": {
+    "apps/city-climate/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 1},
+    "apps/earthquake-intelligence/index.html": {"style_blocks": 0, "style_attributes": 6, "event_handlers": 0, "buttons_missing_type": 1},
+    "apps/index.html": {"style_blocks": 1, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
+    "apps/n1-grammar-exams/index.html": {"style_blocks": 1, "style_attributes": 23, "event_handlers": 22, "buttons_missing_type": 19},
+    "apps/n1-grammar-flashcards/index.html": {"style_blocks": 1, "style_attributes": 1, "event_handlers": 9, "buttons_missing_type": 7},
+    "apps/n1-grammar-sentence-order-drill/index.html": {"style_blocks": 1, "style_attributes": 4, "event_handlers": 7, "buttons_missing_type": 4},
+    "apps/n1-grammar-sentence-order/index.html": {"style_blocks": 1, "style_attributes": 2, "event_handlers": 0, "buttons_missing_type": 7},
+    "apps/n1-kanji-analysis/index.html": {"style_blocks": 1, "style_attributes": 0, "event_handlers": 32, "buttons_missing_type": 27},
+    "apps/n1-kanji-collocations/index.html": {"style_blocks": 1, "style_attributes": 8, "event_handlers": 18, "buttons_missing_type": 17},
+    "apps/n1-reading-75/index.html": {"style_blocks": 1, "style_attributes": 2, "event_handlers": 9, "buttons_missing_type": 7},
+    "apps/n1-reading-mondai9/index.html": {"style_blocks": 2, "style_attributes": 8, "event_handlers": 6, "buttons_missing_type": 3},
+    "apps/n1-vocabulary-context/index.html": {"style_blocks": 2, "style_attributes": 1, "event_handlers": 8, "buttons_missing_type": 6},
+    "apps/n1-vocabulary-exams/index.html": {"style_blocks": 2, "style_attributes": 176, "event_handlers": 20, "buttons_missing_type": 11},
+    "apps/n1-vocabulary-paraphrase/index.html": {"style_blocks": 1, "style_attributes": 12, "event_handlers": 10, "buttons_missing_type": 0},
+    "apps/n1-vocabulary-tabs/index.html": {"style_blocks": 1, "style_attributes": 73, "event_handlers": 39, "buttons_missing_type": 8},
+    "apps/namiquant/index.html": {"style_blocks": 0, "style_attributes": 4, "event_handlers": 0, "buttons_missing_type": 0},
+    "apps/pipeline/index.html": {"style_blocks": 1, "style_attributes": 3, "event_handlers": 0, "buttons_missing_type": 0},
+    "index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0}
+  },
+  "shared_token_exceptions": {
+    "apps/kakeflow/index.html": {
+      "reason": "KakeFlow is a standalone product landing page with a self-contained token sheet.",
+      "owner": "Thang Luu",
+      "expires_when": "The next full KakeFlow visual-system migration adopts the portfolio token layer."
+    }
+  }
+}
