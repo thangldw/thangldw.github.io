@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260721c">
   <link rel="stylesheet" href="/css/learning-history.css?v=20260721">
-  <link rel="stylesheet" href="styles.css?v=20260721e">
+  <link rel="stylesheet" href="styles.css?v=20260721g">
   <script>
     (function () {
       document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
@@ -75,10 +75,9 @@
           <small>Từ vựng · Ngữ pháp · Đọc hiểu</small>
         </div>
         <a class="back-apps" href="/apps/"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>Về danh sách apps</a>
-        <div class="theme-switch" aria-label="Chọn giao diện">
-          <button type="button" data-theme-choice="light"><i class="fa-solid fa-sun" aria-hidden="true"></i>Sáng</button>
-          <button type="button" data-theme-choice="dark"><i class="fa-solid fa-moon" aria-hidden="true"></i>Tối</button>
-        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển sang giao diện sáng" title="Chuyển sang giao diện sáng">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+        </button>
       </div>
     </aside>
 
@@ -89,6 +88,6 @@
 
   <script src="quiz-data.js?v=20260721b"></script>
   <script src="/js/learning-history.js?v=20260721b"></script>
-  <script src="app.js?v=20260721e"></script>
+  <script src="app.js?v=20260721f"></script>
 </body>
 </html>

@@ -374,7 +374,7 @@
     else if (state.view === 'stats') renderHistory();
     else renderSimple(state.view);
     bindViewEvents();
-    updateThemeButtons();
+    syncThemeToggle();
   }
 
   function bindViewEvents() {
@@ -442,11 +442,14 @@
     });
   }
 
-  function updateThemeButtons() {
-    var active = document.documentElement.dataset.theme;
-    document.querySelectorAll('[data-theme-choice]').forEach(function (button) {
-      button.classList.toggle('is-active', button.dataset.themeChoice === active);
-    });
+  function syncThemeToggle() {
+    var button = document.getElementById('themeToggle');
+    if (!button) return;
+    var nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    var label = nextTheme === 'dark' ? 'Chuyển sang giao diện tối' : 'Chuyển sang giao diện sáng';
+    button.setAttribute('aria-label', label);
+    button.setAttribute('title', label);
+    button.querySelector('i').className = nextTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
   }
 
   document.querySelectorAll('.nav-item').forEach(function (button) {
@@ -458,12 +461,11 @@
     });
   });
 
-  document.querySelectorAll('[data-theme-choice]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      document.documentElement.dataset.theme = button.dataset.themeChoice;
-      localStorage.setItem('theme', button.dataset.themeChoice);
-      updateThemeButtons();
-    });
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem('theme', nextTheme);
+    syncThemeToggle();
   });
 
   mobileMenu.addEventListener('click', function () {

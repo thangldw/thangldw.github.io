@@ -99,3 +99,40 @@ flowchart LR
 | P1 | Luồng chính không hoàn thành hoặc sai kết quả | Chặn release |
 | P2 | Lỗi responsive, accessibility hoặc state quan trọng | Chặn release |
 | P3 | Khác biệt polish không làm hỏng tác vụ | Ghi nhận và lên lịch |
+
+## Kiểm tra hồi quy sidebar theme — 2026-07-21
+
+- **Source visual truth:** hai ảnh sidebar JLPT N1 và BJT do người dùng cung cấp trong task hiện tại; ảnh nguồn không được lưu vào repository theo chính sách bằng chứng.
+- **Implementation screenshot:** browser capture tạm thời của [`/apps/jlpt-n1/`](https://thangldw.github.io/apps/jlpt-n1/) và [`/apps/bjt-study/`](https://thangldw.github.io/apps/bjt-study/); ảnh kiểm thử không được commit.
+- **Viewport:** 1280 × 800, device pixel ratio 2; đối chiếu tập trung vào sidebar desktop 240 px.
+- **State:** light và dark; theme toggle đã được kích hoạt theo cả hai chiều.
+- **Primary interactions tested:** light → dark, dark → light, cập nhật icon, nhãn truy cập và lưu theme dùng chung.
+- **Console:** không có warning hoặc error trên hai route.
+
+### Full-view và focused-region comparison
+
+- Full view giữ nguyên cấu trúc, typography, khoảng cách, icon, active state và nội dung hiện có.
+- Focused region xác nhận sidebar light, canvas, workspace và nút theme cùng nhận `rgb(251, 250, 246)` (`#fbfaf6`).
+- Dark mode vẫn dùng các token charcoal riêng; không bị `#fbfaf6` hoặc selector light ghi đè.
+- Mỗi sidebar chỉ còn một nút theme 44 × 44 px, không có text hiển thị; icon và `aria-label` diễn đạt theme đích.
+- Không có image asset mới; logo và icon tiếp tục dùng asset/font icon hiện hữu.
+
+### Comparison history
+
+1. **P1 — nền sidebar không đồng nhất:** JLPT pha `--n1-bg` với black; BJT dùng `--bjt-rail: #ebe7de`. Đã đổi JLPT sang `var(--n1-bg)` và BJT light rail sang `#fbfaf6`.
+2. **P2 — điều khiển theme trùng chức năng:** mỗi sidebar có hai nút kèm chữ. Đã hợp nhất thành một icon button, xóa selector và listener `data-theme-choice` cũ.
+3. **Post-fix evidence:** computed styles của `html`, `body`, sidebar, workspace và theme button đã được đọc sau cascade; light đồng nhất `rgb(251, 250, 246)`, dark giữ đúng token riêng, legacy control count bằng 0.
+
+### Required fidelity surfaces
+
+- **Fonts and typography:** không thay đổi; không phát sinh wrap hoặc clipping mới.
+- **Spacing and layout rhythm:** footer giữ nguyên nhịp; control mới thu về 44 px và canh phải.
+- **Colors and visual tokens:** light background thống nhất `#fbfaf6`; dark token không đổi.
+- **Image quality and asset fidelity:** không thêm hoặc thay image asset.
+- **Copy and content:** bỏ chữ Sáng/Tối khỏi bề mặt; giữ nhãn tiếng Việt cho assistive technology.
+
+**Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi thay đổi.
+
+**Follow-up polish:** không có.
+
+**final result: passed**
