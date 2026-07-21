@@ -130,9 +130,9 @@
   ];
 
   global.portfolioLanguageCollection = {
-    title: 'Japanese Language Lab',
-    description: '13 browser-based tools for BJT and JLPT Japanese vocabulary, kanji, grammar, and reading.',
-    href: '/apps/#language',
-    label: 'Language Collection'
+    title: 'Japanese Learning Programs',
+    description: 'JLPT N1 and BJT hubs with 12 focused tools, timed practice, review, and local learning history.',
+    href: '/apps/#learning',
+    label: 'JLPT N1 · BJT'
   };
 })(window);

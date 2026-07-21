@@ -22,8 +22,10 @@
   --portfolio-danger-soft: #fff0f0;
   --portfolio-radius: 6px;
   --portfolio-content: 1328px;
-  --portfolio-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
-  --portfolio-font-serif: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --portfolio-font-sans: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
+  --portfolio-font-jp-sans: var(--font-jp-sans, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif);
+  --portfolio-font-serif: var(--font-serif, ui-serif, Georgia, "Times New Roman", serif);
+  --portfolio-font-jp-serif: var(--font-jp-serif, "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif);
   --portfolio-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
@@ -66,6 +68,11 @@ body.portfolio-catalog * {
 body.portfolio-app :where(h1, h2, h3, h4, button, input, select, textarea),
 body.portfolio-catalog :where(h1, h2, h3, h4, button, input, select, textarea) {
   font-family: var(--font-sans, var(--portfolio-font-sans));
+}
+
+body.portfolio-app :where([lang="ja"]),
+body.portfolio-catalog :where([lang="ja"]) {
+  font-family: var(--font-jp-sans, var(--portfolio-font-jp-sans));
 }
 
 body.portfolio-app :where(.font-mono, code, kbd, pre),
