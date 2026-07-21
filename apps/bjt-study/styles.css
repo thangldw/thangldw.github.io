@@ -187,6 +187,14 @@ a { color: inherit; }
 .insight-collocations .insight-tags span { border-color: color-mix(in srgb, #2986a8 38%, var(--bjt-rule)); }
 .insight-synonyms .insight-tags { display: flex; flex-wrap: wrap; }
 .insight-synonyms .insight-tags span { border-color: color-mix(in srgb, var(--bjt-success) 38%, var(--bjt-rule)); border-radius: 999px; }
+.insight-synonyms .insight-tags span.is-related { border-style: dashed; }
+.insight-synonyms .insight-tags span small { display: block; margin-top: 2px; color: var(--bjt-muted); font-size: 9px; }
+.insight-empty { margin: 0; color: var(--bjt-muted); font-size: 12px; }
+.insight-provenance { margin: 0; border-top: 1px solid var(--bjt-rule); padding-top: 9px; color: var(--bjt-muted); font-size: 10px; line-height: 1.5; }
+.grammar-formation { border: 1px solid var(--bjt-rule); background: var(--bjt-panel); padding: 10px 12px; color: var(--bjt-ink); font-family: var(--bjt-serif); font-size: 16px; }
+.grammar-insight .insight-core { margin-top: 0; }
+.dictionary-credit { margin: 12px 0 0; color: var(--bjt-muted); font-size: 9px; line-height: 1.45; }
+.dictionary-credit a { color: inherit; text-underline-offset: 2px; }
 .empty-state { border-top: 1px solid var(--bjt-rule); padding: 46px 0; color: var(--bjt-muted); }
 
 .path-group { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 30px; border-top: 1px solid var(--bjt-rule); padding: 28px 0; }
