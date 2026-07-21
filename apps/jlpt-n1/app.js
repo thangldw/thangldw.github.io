@@ -81,6 +81,8 @@
   var quizSession = null;
   var quizTimer = null;
 
+  if (window.LearningHistory) window.LearningHistory.migrateLegacy('jlpt-n1', STORAGE_KEY);
+
   updateWrongCount();
 
   function loadProgress() {
@@ -250,6 +252,38 @@
     quizTimer = null;
   }
 
+  function startNewQuiz() {
+    var questions = shuffleQuestions(window.JLPTN1QuizData || []).slice(0, quizSize);
+    quizSession = {
+      questions: questions,
+      index: 0,
+      score: 0,
+      selected: -1,
+      seconds: 30,
+      locked: false,
+      timedOut: false,
+      history: window.LearningHistory ? window.LearningHistory.startSession({
+        courseId: 'jlpt-n1',
+        courseTitle: 'JLPT N1',
+        mode: 'quiz',
+        contentType: 'Ngữ pháp',
+        title: 'Trắc nghiệm ngữ pháp N1',
+        requestedCount: questions.length,
+        timeLimitSeconds: 30
+      }) : null
+    };
+  }
+
+  function closeQuizSession(status) {
+    if (!quizSession || !quizSession.history || !window.LearningHistory) return;
+    window.LearningHistory.finishSession(quizSession.history, {
+      status: status || 'completed',
+      answeredCount: quizSession.history.answeredCount,
+      correctCount: quizSession.score,
+      wrongCount: quizSession.history.answeredCount - quizSession.score
+    }).catch(function () {});
+  }
+
   function renderQuizSetup() {
     stopQuizTimer();
     quizSession = null;
@@ -297,15 +331,42 @@
     quizSession.selected = index;
     quizSession.timedOut = Boolean(timedOut);
     quizSession.locked = true;
-    if (index === question.answer) quizSession.score += 1;
+    var correct = index === question.answer;
+    if (correct) quizSession.score += 1;
+    if (quizSession.history && window.LearningHistory) {
+      window.LearningHistory.recordAnswer(quizSession.history, {
+        itemId: question.id,
+        contentType: 'Ngữ pháp',
+        prompt: question.prompt,
+        selectedAnswer: index >= 0 ? question.options[index] : null,
+        correctAnswer: question.options[question.answer],
+        isCorrect: correct,
+        timedOut: timedOut,
+        responseTimeSeconds: 30 - quizSession.seconds
+      }).catch(function () {});
+    }
     renderQuizQuestion();
     bindViewEvents();
   }
 
   function renderQuizResult() {
     stopQuizTimer();
+    closeQuizSession('completed');
     var percent = Math.round(quizSession.score / quizSession.questions.length * 100);
     appView.innerHTML = '<section class="view quiz-view"><header class="view-header simple-header"><div><p class="eyebrow">JLPT N1 · Kết quả · 結果</p><h1 class="view-title">' + quizSession.score + ' / ' + quizSession.questions.length + ' câu đúng</h1><p class="view-lead">Độ chính xác ' + percent + '%. Luyện lại với số câu khác để tăng khả năng nhớ và tốc độ phản xạ.</p></div></header><div class="empty-actions"><button type="button" data-action="restart-quiz">Luyện lại&nbsp; →</button><button type="button" data-action="quiz-setup">Đổi số câu&nbsp; →</button><a href="#grammar/knowledge">Ôn ngữ pháp&nbsp; →</a></div></section>';
+  }
+
+  function renderHistory() {
+    if (!window.LearningHistory) {
+      renderSimple('stats');
+      return;
+    }
+    window.LearningHistory.renderDashboard(appView, {
+      courseId: 'jlpt-n1',
+      eyebrow: 'JLPT N1 · Lịch sử · 学習記録',
+      title: 'Tiến bộ JLPT N1',
+      subtitle: 'Theo dõi từng phiên luyện, kết quả mỗi câu và nhịp độ học tập theo thời gian.'
+    });
   }
 
   function render() {
@@ -316,6 +377,7 @@
     if (MODULES[state.view]) renderSection(state.view);
     else if (state.view === 'path') renderPath();
     else if (state.view === 'quiz') renderQuizSetup();
+    else if (state.view === 'stats') renderHistory();
     else renderSimple(state.view);
     bindViewEvents();
     updateThemeButtons();
@@ -343,7 +405,7 @@
     });
     appView.querySelectorAll('[data-action="start-quiz"]').forEach(function (button) {
       button.addEventListener('click', function () {
-        quizSession = { questions: shuffleQuestions(window.JLPTN1QuizData || []).slice(0, quizSize), index: 0, score: 0, selected: -1, seconds: 30, locked: false, timedOut: false };
+        startNewQuiz();
         renderQuizQuestion();
         bindViewEvents();
       });
@@ -363,11 +425,11 @@
       });
     });
     appView.querySelectorAll('[data-action="quit-quiz"], [data-action="quiz-setup"]').forEach(function (button) {
-      button.addEventListener('click', function () { renderQuizSetup(); bindViewEvents(); });
+      button.addEventListener('click', function () { closeQuizSession('abandoned'); renderQuizSetup(); bindViewEvents(); });
     });
     appView.querySelectorAll('[data-action="restart-quiz"]').forEach(function (button) {
       button.addEventListener('click', function () {
-        quizSession = { questions: shuffleQuestions(window.JLPTN1QuizData || []).slice(0, quizSize), index: 0, score: 0, selected: -1, seconds: 30, locked: false, timedOut: false };
+        startNewQuiz();
         renderQuizQuestion();
         bindViewEvents();
       });
@@ -390,6 +452,7 @@
 
   document.querySelectorAll('.nav-item').forEach(function (button) {
     button.addEventListener('click', function () {
+      if (quizSession && quizSession.history && quizSession.history.status === 'active') closeQuizSession('abandoned');
       setHash(button.dataset.view);
       sidebarBody.classList.remove('is-open');
       mobileMenu.setAttribute('aria-expanded', 'false');

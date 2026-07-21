@@ -71,6 +71,7 @@ a { color: inherit; }
 .theme-switch button.is-active { background: var(--bjt-panel); color: var(--bjt-ink); }
 
 .workspace { min-width: 0; min-height: 100vh; background: var(--bjt-paper); }
+.workspace .lh-dashboard { --accent: var(--bjt-orange); color: var(--bjt-ink); padding: 42px clamp(36px, 4.3vw, 72px) 64px; }
 .view-shell { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 920px) minmax(230px, 1fr); }
 .view-shell.is-single { display: block; }
 .view-shell.is-single .main-column { width: min(1040px, 100%); margin-inline: auto; }
@@ -308,6 +309,7 @@ a { color: inherit; }
   .primary-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nav-item { grid-template-columns: 22px 1fr auto; }
   .main-column { padding-inline: 18px; }
+  .workspace .lh-dashboard { padding: 30px 18px 44px; }
   .view-title { font-size: 34px; }
   .date-line { flex-direction: column; gap: 4px; }
   .lesson-progress { margin-bottom: 32px; }
