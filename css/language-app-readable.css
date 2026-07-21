@@ -23,6 +23,10 @@ body.language-app[data-language-app] :where(button, input, select, textarea) {
   font-family: inherit !important;
 }
 
+body.language-app[data-language-app] :where(button, [role="button"]) {
+  min-height: 34px;
+}
+
 body.language-app[data-language-app] :where(button, .btn, label.btn) {
   border-radius: var(--language-control-radius) !important;
 }
@@ -33,6 +37,33 @@ body.language-app[data-language-app] :where(.opt, .ob, .choice, .answer-option, 
 
 body.language-app[data-language-app] :where(.spk, .spk-sm, .spk-btn, .speak-btn, .speak-opt-btn, .nb) {
   border-radius: var(--language-control-radius) !important;
+}
+
+body.language-app[data-language-app] .speech-control {
+  min-width: 44px;
+  min-height: 34px;
+  padding: 5px 9px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--portfolio-border-strong);
+  border-radius: var(--language-control-radius);
+  background: var(--portfolio-surface-2);
+  color: var(--portfolio-accent);
+  font-size: 12px !important;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+body.language-app[data-language-app] .speech-control:hover {
+  border-color: var(--portfolio-accent);
+  background: var(--portfolio-accent-soft);
+}
+
+body.language-app[data-language-app] .speech-control:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--portfolio-accent) 30%, transparent);
+  outline-offset: 2px;
 }
 
 body.language-app[data-language-app] :where([lang="ja"]) {
@@ -211,6 +242,11 @@ body[data-language-app="n1-vocabulary-exams"] .spk-btn {
   min-width: 34px;
   min-height: 34px;
   font-size: 13px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .ybtn {
+  min-height: 34px;
+  padding-block: 6px;
 }
 
 body[data-language-app="n1-kanji-analysis"] :is(.card-meaning, .card-reading, .card-example, .colloc-item, .syn-chip, .parts-table, .wrong-meaning, .wrong-reading, .confuse-text),

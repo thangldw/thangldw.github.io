@@ -163,7 +163,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in oklch, v
   .desktop-bar { display: none; }
   .nav-shell { min-height: 56px; grid-template-columns: auto 1fr auto; gap: 10px; }
   .project-link { display: none; }
-  .menu-toggle { justify-self: end; display: inline-flex; padding: 7px 9px; border: 1px solid var(--hairline); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 10px; font-weight: 700; }
+  .menu-toggle { justify-self: end; display: inline-flex; min-height: 34px; align-items: center; padding: 7px 9px; border: 1px solid var(--hairline); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 10px; font-weight: 700; }
   .nav-shell nav { position: absolute; top: 56px; right: 0; left: 0; padding: 8px 16px 12px; display: none; flex-direction: column; gap: 2px; border-bottom: 1px solid var(--hairline); background: var(--surface); }
   .nav-shell nav.is-open { display: flex; }
   .nav-shell nav a { padding: 10px; }
