@@ -11,7 +11,7 @@ const parsed = vocabulary.map((entry) => ({ entry, details: utils.parseVocabular
 const byTerm = (term) => parsed.find((item) => item.entry.term === term)?.details;
 
 assert.deepEqual(byTerm('ごねる'), {
-  reading: '',
+  reading: 'ごねる',
   sinoVietnamese: '',
   meaning: 'Làm khó, gây khó dễ',
   exampleJa: '取引先にごねられて、結局、譲歩してしまった',

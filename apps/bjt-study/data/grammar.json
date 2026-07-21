@@ -9,340 +9,1559 @@
       "meaning": "（個人の習慣や予定）・〜と決めている・強い決心〈自分で決めた習慣〉",
       "explanationVi": "Diễn tả một thói quen, nguyên tắc hoặc kế hoạch do chính người nói tự quyết định và chủ động duy trì.",
       "exampleJa": "私は仕事柄、いつも約束時間の５～１０分前には到着することにしている。一緒に撮影する人の様子をあらかじめ確認できるからだ。",
-      "exampleVi": "Do tính chất công việc, tôi luôn chủ động đến trước giờ hẹn từ 5 đến 10 phút. Nhờ vậy, tôi có thể kiểm tra trước tình hình của người sẽ chụp cùng."
+      "exampleVi": "Do tính chất công việc, tôi luôn chủ động đến trước giờ hẹn từ 5 đến 10 phút. Nhờ vậy, tôi có thể kiểm tra trước tình hình của người sẽ chụp cùng.",
+      "formation": "Vる・Vない＋ことにしている",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Vない＋ことになっている"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・Vない＋ことになっている",
-      "definition": "【意味】（会社・学校で決まった規則や予定）〜に決まっているコンプライアンス的に業務に関することをSNSにあげてはいけないことになっている。"
+      "definition": "【意味】（会社・学校で決まった規則や予定）〜に決まっているコンプライアンス的に業務に関することをSNSにあげてはいけないことになっている。",
+      "meaning": "（会社・学校で決まった規則や予定）〜に決まっている",
+      "explanationVi": "Diễn tả một quy định, lịch trình hoặc sự sắp xếp đã được tổ chức, công ty hay tập thể quyết định.",
+      "exampleJa": "コンプライアンス的に業務に関することをSNSにあげてはいけないことになっている。",
+      "exampleVi": "Theo quy định tuân thủ, không được đăng những nội dung liên quan đến công việc lên mạng xã hội.",
+      "formation": "Vる・Vない＋ことになっている",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Vない＋ことにしている"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N・これ・それ・あれ ＋ こそ",
-      "definition": "【意味】（強調）〜が〜だ ／ 正に〜だ今年こそBJT J1＋に合格するぞ！"
+      "definition": "【意味】（強調）〜が〜だ ／ 正に〜だ今年こそBJT J1＋に合格するぞ！",
+      "meaning": "（強調）〜が〜だ ／ 正に〜だ",
+      "explanationVi": "Nhấn mạnh chính danh từ đứng trước こそ với sắc thái “chính là” hoặc quyết tâm đặc biệt.",
+      "exampleJa": "今年こそBJT J1＋に合格するぞ！",
+      "exampleVi": "Năm nay nhất định tôi sẽ đỗ BJT J1+!",
+      "formation": "N・これ・それ・あれ ＋ こそ",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "ただ ＋ Vる・Aい・N ＋ のみ",
+        "N ＋において"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・時間・日にち ＋ までに",
-      "definition": "【意味】その日・時が来る前に〜その時間になる前に〜就活を始めるまでに、BJT J2 に合格したいと思っています。"
+      "definition": "【意味】その日・時が来る前に〜その時間になる前に〜就活を始めるまでに、BJT J2 に合格したいと思っています。",
+      "meaning": "その日・時が来る前に〜その時間になる前に〜",
+      "explanationVi": "Chỉ hạn cuối: một hành động phải hoàn tất trước khi thời điểm được nêu tới.",
+      "exampleJa": "就活を始めるまでに、BJT J2 に合格したいと思っています。",
+      "exampleVi": "Tôi muốn đỗ BJT J2 trước khi bắt đầu tìm việc.",
+      "formation": "Vる・時間・日にち ＋ までに",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ 限りで・限りの",
+        "時間に関するN を限りに",
+        "ようとする（直前・意志動詞）"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vた・VているAい・Nの・Aな＋ ために・ためか",
-      "definition": "【意味】〜が原因（げんいん）で昨日はとても寒かったために、カゼをひいてしまった。"
+      "definition": "【意味】〜が原因（げんいん）で昨日はとても寒かったために、カゼをひいてしまった。",
+      "meaning": "〜が原因（げんいん）で",
+      "explanationVi": "Nêu nguyên nhân dẫn đến một kết quả; thường dùng trong cách nói tương đối trang trọng.",
+      "exampleJa": "昨日はとても寒かったために、カゼをひいてしまった。",
+      "exampleVi": "Vì hôm qua trời rất lạnh nên tôi đã bị cảm.",
+      "formation": "Vた・VているAい・Nの・Aな＋ ために・ためか",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "V普通・Aい・Aな・Nの ＋ おかげで",
+        "V・A・N（普通） ＋ にもかかわらず"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・Vない ＋ ほどの＋N＋ではない",
-      "definition": "【意味】〜より程度が軽い〜くらい、程度はすごくない営業成績良かったらしいね。人に言えるほどの結果ではないよ。"
+      "definition": "【意味】〜より程度が軽い〜くらい、程度はすごくない営業成績良かったらしいね。人に言えるほどの結果ではないよ。",
+      "meaning": "〜より程度が軽い〜くらい、程度はすごくない",
+      "explanationVi": "Phủ định mức độ bằng cách nói sự việc chưa đến mức đáng để làm hoặc nói như vậy.",
+      "exampleJa": "営業成績良かったらしいね。人に言えるほどの結果ではないよ。",
+      "exampleVi": "Nghe nói thành tích kinh doanh tốt nhỉ. — Chưa phải kết quả đáng để kể với người khác đâu.",
+      "formation": "Vる・Vない ＋ ほどの＋N＋ではない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "ただ ＋ Vる・Aい・N ＋ のみ",
+        "～んばかりだ／に／の",
+        "Vた・VているAい・Nの・Aな＋ ために・ためか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～が（も）～なら～も～だ",
-      "definition": "【意味】〜も〜も、どちらもよくない親が親なら、子も子だね。このレストランは店員の態度が悪いし、料理も美味しくない。店員が店員なら、味も味ですね。"
+      "definition": "【意味】〜も〜も、どちらもよくない親が親なら、子も子だね。このレストランは店員の態度が悪いし、料理も美味しくない。店員が店員なら、味も味ですね。",
+      "meaning": "〜も〜も、どちらもよくない",
+      "explanationVi": "Nêu đánh giá rằng cả hai phía đều giống nhau, thường mang ý phê phán: A đã vậy thì B cũng thế.",
+      "exampleJa": "親が親なら、子も子だね。",
+      "exampleVi": "Cha mẹ đã như vậy thì con cái cũng vậy.",
+      "formation": "～が（も）～なら～も～だ",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vて ＋ までN ＋ までして",
+        "N ＋ にとってN ＋ にとっての ＋ N",
+        "～極まる／極まりない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V普通・Aい・Aな・Nの ＋ せいで・せいか",
-      "definition": "【意味】〜が原因で...（悪いことが起こった）薬を飲んだせいで眠くなってきた。今日は大雨のせいで電車が運休。あげくに"
+      "definition": "【意味】〜が原因で...（悪いことが起こった）薬を飲んだせいで眠くなってきた。今日は大雨のせいで電車が運休。あげくに",
+      "meaning": "〜が原因で...（悪いことが起こった）",
+      "explanationVi": "Nêu nguyên nhân dẫn đến kết quả không mong muốn, thường kèm sắc thái trách móc hoặc tiếc nuối.",
+      "exampleJa": "薬を飲んだせいで眠くなってきた。",
+      "exampleVi": "Vì uống thuốc nên tôi bắt đầu buồn ngủ.",
+      "formation": "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ おかげで"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V普通・Aい・Aな・Nの ＋ おかげで",
-      "definition": "【意味】〜が原因・理由で...（いい結果が起こった）"
+      "definition": "【意味】〜が原因・理由で...（いい結果が起こった）",
+      "meaning": "〜が原因・理由で...（いい結果が起こった）",
+      "explanationVi": "Nêu nguyên nhân tạo ra kết quả tốt và thường thể hiện sự biết ơn.",
+      "exampleJa": "皆さんのおかげで、仕事が順調に進みました。",
+      "exampleVi": "Nhờ sự giúp đỡ của mọi người mà công việc đã tiến triển thuận lợi.",
+      "formation": "V普通・Aい・Aな・Nの ＋ おかげで",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "ようとする（直前・意志動詞）",
-      "definition": "【意味】〜する直前の場面を表すうちの会社やばいです。定時に帰ろうとすると上司がどこまでも追いかけて仕事を振ってきます。 明日は定時ダッシュできますように！ごはんを食べようとした時、お客さんが来た。【意味】もうすぐ〜になる〜が始まる直前〜が終わる直前本日は 9月10日ですね～！9月ももう2週が終わろうとしています。時は矢のように過ぎる。桜の花が咲こうとしている。【意味】〜しようと努力する〜しようとがんばっている営業部は商品販売経路情報を高い精度で得ようとする。"
+      "definition": "【意味】〜する直前の場面を表すうちの会社やばいです。定時に帰ろうとすると上司がどこまでも追いかけて仕事を振ってきます。 明日は定時ダッシュできますように！ごはんを食べようとした時、お客さんが来た。【意味】もうすぐ〜になる〜が始まる直前〜が終わる直前本日は 9月10日ですね～！9月ももう2週が終わろうとしています。時は矢のように過ぎる。桜の花が咲こうとしている。【意味】〜しようと努力する〜しようとがんばっている営業部は商品販売経路情報を高い精度で得ようとする。",
+      "meaning": "〜する直前の場面を表すうちの会社やばいです。定時に帰ろうとすると上司がどこまでも追いかけて仕事を振ってきます。 明日は定時ダッシュできますように！",
+      "explanationVi": "Diễn tả thời điểm ngay trước một hành động, một sự thay đổi sắp xảy ra, hoặc nỗ lực định làm gì.",
+      "exampleJa": "ごはんを食べようとした時、お客さんが来た。",
+      "exampleVi": "Khi tôi vừa định ăn cơm thì có khách tới.",
+      "formation": "ようとする（直前・意志動詞）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N、V辞 ＋ とともに",
+        "Vる・Vた・Nの ＋ 際（に）",
+        "Vる・Vない＋ことになっている"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ など・なんて・なんか（例）",
-      "definition": "【意味】例をあげる【意味】軽視・軽蔑を表すそんなバカな話なんて言えるの。私などにきちんとできるかわかりませんが、がんばります。"
+      "definition": "【意味】例をあげる【意味】軽視・軽蔑を表すそんなバカな話なんて言えるの。私などにきちんとできるかわかりませんが、がんばります。",
+      "meaning": "例をあげる【意味】軽視・軽蔑を表すそんなバカな話なんて言えるの。",
+      "explanationVi": "Đưa ra một ví dụ; với なんて／なんか còn có thể thể hiện thái độ xem nhẹ.",
+      "exampleJa": "私などにきちんとできるかわかりませんが、がんばります。",
+      "exampleVi": "Tôi không biết người như tôi có làm tốt được không, nhưng tôi sẽ cố gắng.",
+      "formation": "N ＋ など・なんて・なんか（例）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ おかげで",
+        "ただ ＋ Vる・Aい・N ＋ のみ",
+        "Vたきり～ない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vて＋ほしい",
-      "definition": "【意味】相手に対するお願い、希望、要求を表す目上の人には使えない"
+      "definition": "【意味】相手に対するお願い、希望、要求を表す目上の人には使えない",
+      "meaning": "相手に対するお願い、希望、要求を表す目上の人には使えない",
+      "explanationVi": "Diễn tả mong muốn, yêu cầu hoặc đề nghị người khác làm gì; không phù hợp khi nói trực tiếp với bề trên.",
+      "exampleJa": "この資料をもう一度確認してほしいです。",
+      "exampleVi": "Tôi muốn bạn kiểm tra lại tài liệu này.",
+      "formation": "Vて＋ほしい",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vない （bỏ ない）＋ ざるをえない",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "N ＋に応えて"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・Aい・Aな・N（普通）＋ とは",
-      "definition": "【意味】「なんて」驚き・信じられない気持ちを表すまさか、彼が本当の犯人だったとは．．．（想像もしなかった）年上にタメ口とは、失礼だと思わないか？"
+      "definition": "【意味】「なんて」驚き・信じられない気持ちを表すまさか、彼が本当の犯人だったとは．．．（想像もしなかった）年上にタメ口とは、失礼だと思わないか？",
+      "meaning": "「なんて」驚き・信じられない気持ちを表す",
+      "explanationVi": "Bộc lộ sự ngạc nhiên hoặc khó tin trước một sự việc không ngờ tới.",
+      "exampleJa": "まさか、彼が本当の犯人だったとは．．．",
+      "exampleVi": "Không ngờ anh ấy lại là thủ phạm thật sự…",
+      "formation": "V・Aい・Aな・N（普通）＋ とは",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Ｖる + までもない／なく",
+        "Vない ＋ ずにはいられない・ないではいられない",
+        "N・これ・それ・あれ ＋ こそ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vることはない",
-      "definition": "【意味】〜する必要がない意見があるなら、上司にだって遠慮することはありません。"
+      "definition": "【意味】〜する必要がない意見があるなら、上司にだって遠慮することはありません。",
+      "meaning": "〜する必要がない",
+      "explanationVi": "Cho biết không cần thiết phải thực hiện hành động đó.",
+      "exampleJa": "意見があるなら、上司にだって遠慮することはありません。",
+      "exampleVi": "Nếu có ý kiến thì không cần phải ngại cả cấp trên.",
+      "formation": "Vることはない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vたきり～ない",
+        "Ｖる + までもない／なく",
+        "V普通・Aい・Aな・Nの ＋ おかげで"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "ただ ＋ Vる・Aい・N ＋ のみ",
-      "definition": "【意味】ただ〜だけだ〜するしかないやれることはやった。あとはただ結果を待つのみだ。"
+      "definition": "【意味】ただ〜だけだ〜するしかないやれることはやった。あとはただ結果を待つのみだ。",
+      "meaning": "ただ〜だけだ〜するしかない",
+      "explanationVi": "Nhấn mạnh rằng chỉ còn một việc duy nhất có thể làm hoặc chỉ đơn thuần là như vậy.",
+      "exampleJa": "やれることはやった。あとはただ結果を待つのみだ。",
+      "exampleVi": "Những gì có thể làm tôi đã làm; giờ chỉ còn chờ kết quả.",
+      "formation": "ただ ＋ Vる・Aい・N ＋ のみ",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Vない ＋ ほどの＋N＋ではない",
+        "N ＋ にほかならない",
+        "N・これ・それ・あれ ＋ こそ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・A・N（普通）のみならず～も",
-      "definition": "【意味】〜だけでなく〜も〜だけでなく、それ以外にもBJTは日本国内のみならず、海外でも受験可能です。同じ失敗を一度のみならず2度も3度も繰り返すのは良くないよ。"
+      "definition": "【意味】〜だけでなく〜も〜だけでなく、それ以外にもBJTは日本国内のみならず、海外でも受験可能です。同じ失敗を一度のみならず2度も3度も繰り返すのは良くないよ。",
+      "meaning": "〜だけでなく〜も〜だけでなく、それ以外にも",
+      "explanationVi": "Mở rộng phạm vi với nghĩa “không chỉ A mà cả B”.",
+      "exampleJa": "BJTは日本国内のみならず、海外でも受験可能です。",
+      "exampleVi": "BJT không chỉ có thể thi ở Nhật Bản mà còn ở nước ngoài.",
+      "formation": "V・A・N（普通）のみならず～も",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ に限らず"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N＋きりこれ・それ・あれ ＋（っ）",
-      "definition": "【意味】〜だけ〜それだけ人生は一度きりですから、やりたいことをやりましょう！"
+      "definition": "【意味】〜だけ〜それだけ人生は一度きりですから、やりたいことをやりましょう！",
+      "meaning": "〜だけ〜それだけ",
+      "explanationVi": "Giới hạn vào duy nhất một người, vật, lần hoặc cơ hội.",
+      "exampleJa": "人生は一度きりですから、やりたいことをやりましょう！",
+      "exampleVi": "Đời người chỉ có một lần, hãy làm điều mình muốn.",
+      "formation": "N＋きりこれ・それ・あれ ＋（っ）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ に限る",
+        "N ＋ 限りで・限りの",
+        "ただ ＋ Vる・Aい・N ＋ のみ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vたきり～ない",
-      "definition": "【意味】〜したのが最後で、その後ずっと...ないコロナの影響で、去年海外出張をしたきり、一度も海外へ行っていない「また連絡する」と言ったきり、連絡がこない。"
+      "definition": "【意味】〜したのが最後で、その後ずっと...ないコロナの影響で、去年海外出張をしたきり、一度も海外へ行っていない「また連絡する」と言ったきり、連絡がこない。",
+      "meaning": "〜したのが最後で、その後ずっと...ないコロナの影響で、去年海外出張をしたきり、一度も海外へ行っていない「また連絡する」と言ったきり、連絡がこない。",
+      "explanationVi": "Nói rằng kể từ lần cuối thực hiện hành động đó, trạng thái không thay đổi cho đến nay.",
+      "exampleJa": "去年海外出張をしたきり、一度も海外へ行っていない。",
+      "exampleVi": "Từ chuyến công tác nước ngoài năm ngoái, tôi chưa ra nước ngoài thêm lần nào.",
+      "formation": "Vたきり～ない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N + ながら",
+        "～とばかりに",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋において",
-      "definition": "【意味】（場所・場面・状況を表す）〜で201号室において会議が行われる予定です。【場所】今年は仕事面において去年１年間培ってきた日本語力を生かし、ワンステップレベルアップしていきたい。【場面】みんなが反対している状況において、自分だけ賛成できない【状況】"
+      "definition": "【意味】（場所・場面・状況を表す）〜で201号室において会議が行われる予定です。【場所】今年は仕事面において去年１年間培ってきた日本語力を生かし、ワンステップレベルアップしていきたい。【場面】みんなが反対している状況において、自分だけ賛成できない【状況】",
+      "meaning": "（場所・場面・状況を表す）〜で",
+      "explanationVi": "Chỉ địa điểm, lĩnh vực, hoàn cảnh hoặc bối cảnh của một hành động; mang sắc thái trang trọng.",
+      "exampleJa": "201号室において会議が行われる予定です。",
+      "exampleVi": "Cuộc họp dự kiến được tổ chức tại phòng 201.",
+      "formation": "N ＋において",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "Vる・N ＋ にあたってVる・N ＋ に際して",
+        "Vる・Vた・Nの ＋ 際（に）",
+        "N・これ・それ・あれ ＋ こそ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋に応えて",
-      "definition": "【意味】期待、要求＋ 〜に合うように〜する〜の通りに〜する〜に合わせて① 彼は両親の期待に応えて、医者になった。② お客さんの要望に応えて、タイムサービスを行う。"
+      "definition": "【意味】期待、要求＋ 〜に合うように〜する〜の通りに〜する〜に合わせて① 彼は両親の期待に応えて、医者になった。② お客さんの要望に応えて、タイムサービスを行う。",
+      "meaning": "期待、要求＋ 〜に合うように〜する〜の通りに〜する〜に合わせて①",
+      "explanationVi": "Diễn tả hành động đáp lại kỳ vọng, yêu cầu hoặc mong muốn của ai đó.",
+      "exampleJa": "彼は両親の期待に応えて、医者になった。",
+      "exampleVi": "Anh ấy đã đáp lại kỳ vọng của cha mẹ và trở thành bác sĩ.",
+      "formation": "N ＋に応えて",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vて＋ほしい",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "N ＋において"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋応じた ＋ N",
-      "definition": "【意味】〜が変わる 〜に合う～ように〜を変える社員の能力に応じて、ノルマを果たします。重量に応じて値段も変わる。給与は経験に応じて優遇します。"
+      "definition": "【意味】〜が変わる 〜に合う～ように〜を変える社員の能力に応じて、ノルマを果たします。重量に応じて値段も変わる。給与は経験に応じて優遇します。",
+      "meaning": "〜が変わる 〜に合う～ように〜を変える社員の能力に応じて、ノルマを果たします。",
+      "explanationVi": "Cho biết nội dung hoặc mức độ thay đổi phù hợp với điều kiện được nêu.",
+      "exampleJa": "重量に応じて値段も変わる。",
+      "exampleVi": "Giá cũng thay đổi tùy theo trọng lượng.",
+      "formation": "N ＋応じた ＋ N",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N＋次第でN＋次第では",
+        "ようとする（直前・意志動詞）",
+        "Vて＋ほしい"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋について",
-      "definition": "【意味】〜に関係することを〜のことを"
+      "definition": "【意味】〜に関係することを〜のことを",
+      "meaning": "〜に関係することを〜のことを",
+      "explanationVi": "Nêu chủ đề hoặc đối tượng mà lời nói, suy nghĩ hay hành động hướng tới.",
+      "exampleJa": "新しい計画について話し合います。",
+      "exampleVi": "Chúng ta sẽ trao đổi về kế hoạch mới.",
+      "formation": "N ＋について",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・A（普通）＋の ＋ に対してN＋なの/である ＋ に対して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N＋次第でN＋次第では",
-      "definition": "【意味①】〜の状況で、〜が決まる〜は、〜の状況で変わる① コロナの状態次第で、日本にいけるかどうか変わってくる。② 野菜やフルーツは、隔離措置の状態次第で値段がすごく変わる。【意味②】〜の状況で、〜になる可能性がある③ あの社長の考え次第では、プロジェクトが中止になる場合もあります。"
+      "definition": "【意味①】〜の状況で、〜が決まる〜は、〜の状況で変わる① コロナの状態次第で、日本にいけるかどうか変わってくる。② 野菜やフルーツは、隔離措置の状態次第で値段がすごく変わる。【意味②】〜の状況で、〜になる可能性がある③ あの社長の考え次第では、プロジェクトが中止になる場合もあります。",
+      "meaning": "〜の状況で、〜が決まる〜は、〜の状況で変わる①",
+      "explanationVi": "Cho biết kết quả thay đổi tùy theo tình hình hoặc điều kiện.",
+      "exampleJa": "コロナの状態次第で、日本にいけるかどうか変わってくる。",
+      "exampleVi": "Tùy tình hình dịch bệnh mà việc có thể sang Nhật hay không sẽ thay đổi.",
+      "formation": "N＋次第でN＋次第では",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N + 如何～いかんで／いかんでは／いかんによっては／いかんだ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N＋に沿って",
-      "definition": "【意味】1．（基準）〜の通りに〜に合うようにお手元の資料に沿ってご説明いたします。安全基準に沿って商品を作っております。【意味】２．〜から離れないで道路沿いのマンション （N＋ぞい）"
+      "definition": "【意味】1．（基準）〜の通りに〜に合うようにお手元の資料に沿ってご説明いたします。安全基準に沿って商品を作っております。【意味】２．〜から離れないで道路沿いのマンション （N＋ぞい）",
+      "meaning": "1．（基準）〜の通りに〜に合うように",
+      "explanationVi": "Diễn tả việc làm theo một tiêu chuẩn, đường lối hoặc dọc theo một tuyến.",
+      "exampleJa": "お手元の資料に沿ってご説明いたします。",
+      "exampleVi": "Tôi xin trình bày theo tài liệu đang có trong tay quý vị.",
+      "formation": "N＋に沿って",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "に則って",
+        "～に即して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vて ＋ までN ＋ までして",
-      "definition": "【意味】・ Aには極端だったり意外性のある例が示される。・ 話者が否定的な意見や疑問を言うとき昨日、徹夜までしてプレゼン資料を準備したのに、会議でうまく発表できなかったのよ。自分のパソコンはあったほうがいいですが、借金してまで買うことはありません。同僚を裏切ってまで出世しようとは思わない。"
+      "definition": "【意味】・ Aには極端だったり意外性のある例が示される。・ 話者が否定的な意見や疑問を言うとき昨日、徹夜までしてプレゼン資料を準備したのに、会議でうまく発表できなかったのよ。自分のパソコンはあったほうがいいですが、借金してまで買うことはありません。同僚を裏切ってまで出世しようとは思わない。",
+      "meaning": "・ Aには極端だったり意外性のある例が示される。・ 話者が否定的な意見や疑問を言うとき昨日、徹夜までしてプレゼン資料を準備したのに、会議でうまく発表できなかったのよ。自分のパソコンはあったほうがいいですが、借金してまで買うことはありません。",
+      "explanationVi": "Đưa ra một hành động cực đoan để nhấn mạnh mức độ, thường kèm đánh giá tiêu cực hoặc nghi vấn.",
+      "exampleJa": "同僚を裏切ってまで出世しようとは思わない。",
+      "exampleVi": "Tôi không định phản bội đồng nghiệp chỉ để được thăng chức.",
+      "formation": "Vて ＋ までN ＋ までして",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "～極まる／極まりない",
+        "N・これ・それ・あれ ＋ こそ",
+        "～が（も）～なら～も～だ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N/Vている + どころではない・どころじゃない",
-      "definition": "【意味】〜できる状況ではない〜している場合ではないお客さんとのトラブルがあって、食事どころじゃないんですよ。それどころじゃないんだよね。。。"
+      "definition": "【意味】〜できる状況ではない〜している場合ではないお客さんとのトラブルがあって、食事どころじゃないんですよ。それどころじゃないんだよね。。。",
+      "meaning": "〜できる状況ではない〜している場合ではない",
+      "explanationVi": "Cho biết hoàn cảnh không cho phép làm việc được nhắc đến.",
+      "exampleJa": "お客さんとのトラブルがあって、食事どころじゃないんですよ。",
+      "exampleVi": "Vì đang có rắc rối với khách hàng nên tôi không còn tâm trí ăn uống.",
+      "formation": "N/Vている + どころではない・どころじゃない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vない （bỏ ない）＋ ざるをえない",
+        "N + を余儀なくされる／させる",
+        "Ｖる + までもない／なく"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・Aい・N（辞書）・Aな ＋ どころか",
-      "definition": "【意味】予想や期待とは反対に、事実は〜だAと全然違ってB「暇だったから迷惑どころか、ありがたいぐらいだよ。」ボーナス貰えるどころかコロナのせいで給料３０％カットだよ..."
+      "definition": "【意味】予想や期待とは反対に、事実は〜だAと全然違ってB「暇だったから迷惑どころか、ありがたいぐらいだよ。」ボーナス貰えるどころかコロナのせいで給料３０％カットだよ...",
+      "meaning": "予想や期待とは反対に、事実は〜だAと全然違ってB「",
+      "explanationVi": "Nêu thực tế hoàn toàn trái ngược với dự đoán hoặc kỳ vọng.",
+      "exampleJa": "暇だったから迷惑どころか、ありがたいぐらいだよ。",
+      "exampleVi": "Không những không phiền, vì đang rảnh nên tôi còn thấy biết ơn.",
+      "formation": "V・Aい・N（辞書）・Aな ＋ どころか",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ に反してN ＋ に反する＋NN ＋ に反した＋N",
+        "V・A・N（普通）＋ ものの",
+        "Vる・N ＋ にあたってVる・N ＋ に際して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ にほかならない",
-      "definition": "【意味①】絶対に〜だ〜以外にない人間は自然の一部にほかならないということを忘れてはならない。今回のプロジェクトの成功は彼の努力の賜物に他ならない。他ならないあなたが言うことだから信じているよ。"
+      "definition": "【意味①】絶対に〜だ〜以外にない人間は自然の一部にほかならないということを忘れてはならない。今回のプロジェクトの成功は彼の努力の賜物に他ならない。他ならないあなたが言うことだから信じているよ。",
+      "meaning": "絶対に〜だ〜以外にない人間は自然の一部にほかならないということを忘れてはならない。",
+      "explanationVi": "Khẳng định mạnh rằng nguyên nhân hoặc bản chất chỉ có thể là điều được nêu.",
+      "exampleJa": "今回のプロジェクトの成功は彼の努力の賜物に他ならない。",
+      "exampleVi": "Thành công của dự án lần này chính là kết quả từ nỗ lực của anh ấy.",
+      "formation": "N ＋ にほかならない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "V普通・Aい・Aな・Nの ＋ おかげで",
+        "ただ ＋ Vる・Aい・N ＋ のみ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ によって",
-      "definition": "【意味①】（区別）〜が変わると〜も変わるそれぞれ違う会社によって、文化が違う。【意味②】（原因・理由）〜が原因で皆様のご協力により募金の目標金額を達成しました。株価の下落によって、評価損を被った。【意味③】〜で（手段・方法）〜の方法を使ってコンビニはレジを自動化することによって、人手不足を解消しようとしている"
+      "definition": "【意味①】（区別）〜が変わると〜も変わるそれぞれ違う会社によって、文化が違う。【意味②】（原因・理由）〜が原因で皆様のご協力により募金の目標金額を達成しました。株価の下落によって、評価損を被った。【意味③】〜で（手段・方法）〜の方法を使ってコンビニはレジを自動化することによって、人手不足を解消しようとしている",
+      "meaning": "（区別）〜が変わると〜も変わるそれぞれ違う会社によって、文化が違う。【意味②】（原因・理由）〜が原因で",
+      "explanationVi": "Chỉ sự phân loại, nguyên nhân, tác nhân hoặc phương tiện tùy theo ngữ cảnh.",
+      "exampleJa": "皆様のご協力により募金の目標金額を達成しました。",
+      "exampleVi": "Nhờ sự hợp tác của mọi người, chúng ta đã đạt mục tiêu gây quỹ.",
+      "formation": "N ＋ によって",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ にほかならない",
+        "N (time) + をもってN (手段) + をもって",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vない （bỏ ない）＋ ざるをえない",
-      "definition": "【意味】事情があって好きではないが〜しなければならない消費税が上がるというので、来年から商品の値上げをせざるを得ないと思います辞めざるを得ない。。。"
+      "definition": "【意味】事情があって好きではないが〜しなければならない消費税が上がるというので、来年から商品の値上げをせざるを得ないと思います辞めざるを得ない。。。",
+      "meaning": "事情があって好きではないが〜しなければならない消費税が上がるというので、来年から商品の値上げをせざるを得ないと思います辞めざるを得ない。。。",
+      "explanationVi": "Diễn tả việc buộc phải làm dù không mong muốn vì hoàn cảnh không cho phép lựa chọn khác.",
+      "exampleJa": "消費税が上がるというので、来年から商品の値上げをせざるを得ないと思います。",
+      "exampleVi": "Do thuế tiêu dùng tăng, có lẽ từ năm sau chúng tôi buộc phải tăng giá sản phẩm.",
+      "formation": "Vない （bỏ ない）＋ ざるをえない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N + を余儀なくされる／させる",
+        "Vて＋ほしい",
+        "N/Vている + どころではない・どころじゃない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N + に関わらず",
-      "definition": "【意味】〜に関係なく〜を問題にしない後ろの内容を強調している感じ。お酒が飲める、飲めないに関わらず、飲み会の参加費は3,000円だ。"
+      "definition": "【意味】〜に関係なく〜を問題にしない後ろの内容を強調している感じ。お酒が飲める、飲めないに関わらず、飲み会の参加費は3,000円だ。",
+      "meaning": "〜に関係なく〜を問題にしない後ろの内容を強調している感じ。",
+      "explanationVi": "Nói rằng kết quả không phụ thuộc vào điều kiện hay sự khác biệt được nêu.",
+      "exampleJa": "お酒が飲める、飲めないに関わらず、飲み会の参加費は3,000円だ。",
+      "exampleVi": "Bất kể có uống được rượu hay không, phí tham gia vẫn là 3.000 yên.",
+      "formation": "N + に関わらず",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V意向 + ～（よ）うが/ （よ）うが～VまいがV意向 + ～（よ）うと/ （よ）うと～Vまいと",
+        "～とあって／あれば",
+        "Vた・VているAい・Nの・Aな＋ ために・ためか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・A・N（普通） ＋ にもかかわらず",
-      "definition": "【意味】・にもかかわらず＝「のに」の硬い言い方・「Aは事実だ、確かだ。しかしB。」今日は休日にもかかわらず助けてくださって、ありがとうございました。こちらの不手際があったにも関わらず、とても親切に対応下さり感謝しています。"
+      "definition": "【意味】・にもかかわらず＝「のに」の硬い言い方・「Aは事実だ、確かだ。しかしB。」今日は休日にもかかわらず助けてくださって、ありがとうございました。こちらの不手際があったにも関わらず、とても親切に対応下さり感謝しています。",
+      "meaning": "・にもかかわらず＝「のに」の硬い言い方・「Aは事実だ、確かだ。しかしB。」",
+      "explanationVi": "Nêu sự tương phản với một sự thật đã thừa nhận; là cách nói trang trọng hơn のに.",
+      "exampleJa": "今日は休日にもかかわらず助けてくださって、ありがとうございました。",
+      "exampleVi": "Dù hôm nay là ngày nghỉ, cảm ơn anh đã tới giúp.",
+      "formation": "V・A・N（普通） ＋ にもかかわらず",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "V・A・N（普通）＋ ものの"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・A・N（普通）＋ ものの",
-      "definition": "【意味】・〜けど・ Aから予想・期待されることと、Bの現実が違う彼の能力は疑いようがないものの健康面が心配だ。「お客様は神様だ」とはいうものの、どうしても無理な要望だってある。部長には出来るといったものの、わからないことだらけだ..."
+      "definition": "【意味】・〜けど・ Aから予想・期待されることと、Bの現実が違う彼の能力は疑いようがないものの健康面が心配だ。「お客様は神様だ」とはいうものの、どうしても無理な要望だってある。部長には出来るといったものの、わからないことだらけだ...",
+      "meaning": "・〜けど・ Aから予想・期待されることと、Bの現実が違う",
+      "explanationVi": "Thừa nhận A nhưng nêu thực tế B khác với điều được kỳ vọng từ A.",
+      "exampleJa": "彼の能力は疑いようがないものの健康面が心配だ。",
+      "exampleVi": "Dù năng lực của anh ấy không có gì phải nghi ngờ, tôi vẫn lo về sức khỏe.",
+      "formation": "V・A・N（普通）＋ ものの",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・A・N（普通） ＋ にもかかわらず"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vます （bỏ ます） ＋ かねる",
-      "definition": "【意味】〜できない〜したくても 〜できない・上司やお客様に直接丁寧に断る時・ビジネスの場面でよく使われる申し訳ございませんが、御社では出来かねます。"
+      "definition": "【意味】〜できない〜したくても 〜できない・上司やお客様に直接丁寧に断る時・ビジネスの場面でよく使われる申し訳ございませんが、御社では出来かねます。",
+      "meaning": "〜できない〜したくても 〜できない・上司やお客様に直接丁寧に断る時・ビジネスの場面でよく使われる",
+      "explanationVi": "Từ chối một cách lịch sự rằng không thể đáp ứng; thường dùng trong kinh doanh.",
+      "exampleJa": "申し訳ございませんが、御社では出来かねます。",
+      "exampleVi": "Rất xin lỗi, nhưng phía công ty chúng tôi không thể thực hiện việc này.",
+      "formation": "Vます （bỏ ます） ＋ かねる",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "Vる・Vない＋ことになっている",
+        "Vた・VているAい・Nの・Aな＋ ために・ためか",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vます （bỏ ます） ＋ かねない",
-      "definition": "【意味】（悪いことが起きる）かもしれない（悪い結果になる）可能性があるこのまま放置しておくと大問題に発展しかねないので、何か対策を練らなければならない。また遅刻すると首になりかねないよ。"
+      "definition": "【意味】（悪いことが起きる）かもしれない（悪い結果になる）可能性があるこのまま放置しておくと大問題に発展しかねないので、何か対策を練らなければならない。また遅刻すると首になりかねないよ。",
+      "meaning": "（悪いことが起きる）かもしれない（悪い結果になる）可能性がある",
+      "explanationVi": "Cảnh báo khả năng một kết quả xấu có thể xảy ra.",
+      "exampleJa": "このまま放置しておくと大問題に発展しかねないので、何か対策を練らなければならない。",
+      "exampleVi": "Nếu cứ để mặc như vậy, sự việc có thể phát triển thành vấn đề lớn.",
+      "formation": "Vます （bỏ ます） ＋ かねない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N・Vる＋こと ＋ なくしては〜ない",
+        "V普通・Aい・Aな・Nの ＋ おかげで",
+        "V/A(普通）＋わけがない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vない ＋ ずにはいられない・ないではいられない",
-      "definition": "【意味】・我慢できず、自然に〜になってしまう・どうしても、〜してしまう私は半額の看板を見たら、その店に入らずにはいられない。昇進が決まって、妻に話さずにはいられない。"
+      "definition": "【意味】・我慢できず、自然に〜になってしまう・どうしても、〜してしまう私は半額の看板を見たら、その店に入らずにはいられない。昇進が決まって、妻に話さずにはいられない。",
+      "meaning": "・我慢できず、自然に〜になってしまう・どうしても、〜してしまう",
+      "explanationVi": "Diễn tả cảm xúc hoặc hành động tự nhiên mạnh đến mức không thể kìm lại.",
+      "exampleJa": "私は半額の看板を見たら、その店に入らずにはいられない。",
+      "exampleVi": "Khi thấy biển giảm giá một nửa, tôi không thể không bước vào cửa hàng.",
+      "formation": "Vない ＋ ずにはいられない・ないではいられない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Aい・Aな ＋ 限り(だ)",
+        "Ｖる + までもない／なく",
+        "Vる・Vない ＋ ほどの＋N＋ではない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V/A(普通）＋わけがない",
-      "definition": "【意味】「～無理！～ありえない」・強い否定: vô lý (mạnh), không có chuyện・主観的な判断: あなたにできないわけがない。勇気を持って、その仕事に挑戦してみてください！あれだけ準備を頑張ったんだから、うまくいかないわけがないよ。"
+      "definition": "【意味】「～無理！～ありえない」・強い否定: vô lý (mạnh), không có chuyện・主観的な判断: あなたにできないわけがない。勇気を持って、その仕事に挑戦してみてください！あれだけ準備を頑張ったんだから、うまくいかないわけがないよ。",
+      "meaning": "「～無理！～ありえない」・強い否定: vô lý (mạnh), không có chuyện・主観的な判断:",
+      "explanationVi": "Phủ định mạnh một khả năng với nghĩa “không thể có chuyện đó”.",
+      "exampleJa": "あなたにできないわけがない。勇気を持って、その仕事に挑戦してみてください！",
+      "exampleVi": "Không có chuyện bạn lại không làm được. Hãy can đảm thử sức với công việc ấy!",
+      "formation": "V/A(普通）＋わけがない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ にほかならない",
+        "Vます （bỏ ます） ＋ かねない",
+        "Vない ＋ ずにはいられない・ないではいられない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・A（普通）＋ しかない",
-      "definition": "【意味】〜以外に方法がないので: chỉ còn cách, buộc phải.（〜しなければならない）終電逃しちゃった...タクシーで帰るしかないな。コロナの影響もあるし、今回は納期を変更するしかない。"
+      "definition": "【意味】〜以外に方法がないので: chỉ còn cách, buộc phải.（〜しなければならない）終電逃しちゃった...タクシーで帰るしかないな。コロナの影響もあるし、今回は納期を変更するしかない。",
+      "meaning": "〜以外に方法がないので: chỉ còn cách, buộc phải.（〜しなければならない）",
+      "explanationVi": "Cho biết không còn phương án nào khác ngoài hành động được nêu.",
+      "exampleJa": "終電逃しちゃった...タクシーで帰るしかないな。",
+      "exampleVi": "Lỡ chuyến tàu cuối rồi… chỉ còn cách về bằng taxi.",
+      "formation": "V・A（普通）＋ しかない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N + を余儀なくされる／させる"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vた・Aい ＋ という ことにするN/ Aな＋ だという ことにする",
-      "definition": "【意味】本当は〜だが、〜ではないと考える: coi như ...本当は〜だが、〜ふりをする: giả bộ như ...彼は同僚が準備した資料を、自分で作ったことにして役員会で発表しました。あの得意先を失った権威ついては、退職した彼が失敗したことにして、俺たちは知らん顔をしておこう。この件は私の一存でやったことにしておくから、気にすることはない。でも次はかばってやれないぞ。責任転嫁 ： せきにんてんか Đùn đẩy trách nhiệm"
+      "definition": "【意味】本当は〜だが、〜ではないと考える: coi như ...本当は〜だが、〜ふりをする: giả bộ như ...彼は同僚が準備した資料を、自分で作ったことにして役員会で発表しました。あの得意先を失った権威ついては、退職した彼が失敗したことにして、俺たちは知らん顔をしておこう。この件は私の一存でやったことにしておくから、気にすることはない。でも次はかばってやれないぞ。責任転嫁 ： せきにんてんか Đùn đẩy trách nhiệm",
+      "meaning": "本当は〜だが、〜ではないと考える: coi như ...本当は〜だが、〜ふりをする: giả bộ như ...",
+      "explanationVi": "Coi một điều không đúng sự thật như đã xảy ra, hoặc giả vờ như vậy.",
+      "exampleJa": "彼は同僚が準備した資料を、自分で作ったことにして役員会で発表しました。",
+      "exampleVi": "Anh ấy coi tài liệu đồng nghiệp chuẩn bị như do mình làm rồi trình bày ở cuộc họp ban điều hành.",
+      "formation": "Vた・Aい ＋ という ことにするN/ Aな＋ だという ことにする",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Vない ＋ ほどの＋N＋ではない",
+        "ただ ＋ Vる・Aい・N ＋ のみ",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N、V辞 ＋ とともに",
-      "definition": "【意味】１。（一緒、同時）: cùng với..., đồng thời với ...〜と一緒に〜と協力して〜と同時に〜転勤とともに、引越しした。今の日本は昔と違って、共働きが主流になりました。【意味】２．変化〜が変化すると、一緒に〜も変化する時代とともに、ファッショントレンドも変わるものだ。ンターネットの普及とともに、オンラインショッピングの利用者も増えている。"
+      "definition": "【意味】１。（一緒、同時）: cùng với..., đồng thời với ...〜と一緒に〜と協力して〜と同時に〜転勤とともに、引越しした。今の日本は昔と違って、共働きが主流になりました。【意味】２．変化〜が変化すると、一緒に〜も変化する時代とともに、ファッショントレンドも変わるものだ。ンターネットの普及とともに、オンラインショッピングの利用者も増えている。",
+      "meaning": "１。（一緒、同時）: cùng với..., đồng thời với ...〜と一緒に〜と協力して〜と同時に〜",
+      "explanationVi": "Diễn tả hai việc cùng xảy ra hoặc cùng thay đổi theo thời gian.",
+      "exampleJa": "転勤とともに、引越しした。",
+      "exampleVi": "Cùng với việc chuyển công tác, tôi cũng chuyển nhà.",
+      "formation": "N、V辞 ＋ とともに",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ につれて・につれ",
+        "Vる・Ｎ ＋ にともなってVる・Ｎ ＋ にともなう ＋ N"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ にとってN ＋ にとっての ＋ N",
-      "definition": "【意味】〜の立場に立って言えば: đứng từ lập trường...nên nói là.〜の視点から言えば: từ quan điểm...nên nói là.日本社会にとって、少子化は大きな問題だ。わが社にとって、ライバル会社の新商品は、大変な脅威となる。"
+      "definition": "【意味】〜の立場に立って言えば: đứng từ lập trường...nên nói là.〜の視点から言えば: từ quan điểm...nên nói là.日本社会にとって、少子化は大きな問題だ。わが社にとって、ライバル会社の新商品は、大変な脅威となる。",
+      "meaning": "〜の立場に立って言えば: đứng từ lập trường...nên nói là.〜の視点から言えば: từ quan điểm...nên nói là.",
+      "explanationVi": "Nêu đánh giá từ lập trường hoặc góc nhìn của người hay tổ chức được nhắc đến.",
+      "exampleJa": "日本社会にとって、少子化は大きな問題だ。",
+      "exampleVi": "Đối với xã hội Nhật Bản, tỷ lệ sinh giảm là một vấn đề lớn.",
+      "formation": "N ＋ にとってN ＋ にとっての ＋ N",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N + を踏まえて",
+        "Vる・Vない＋ことになっている",
+        "～が（も）～なら～も～だ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V・A（普通）＋の ＋ に対してN＋なの/である ＋ に対して",
-      "definition": "【意味①】（対比）: đối lập với ...Aは〜 それに比べて Bは〜Aは〜 それとは違って Bは〜女性新入社員の約6割が不快感を抱いている。それに対して、男性の41.2％は「何とも思わない」と答え、ドライに構えている人が多いようだ。【意味②】〜の考えについて: đối với ... thì tán thành, phản đối意見← 賛成、反対、中立自分が言ったことに対して、ちゃんと責任を持ちなさいよ！今のプレゼンに対して、何か意見のある者は挙手をしてくれ。"
+      "definition": "【意味①】（対比）: đối lập với ...Aは〜 それに比べて Bは〜Aは〜 それとは違って Bは〜女性新入社員の約6割が不快感を抱いている。それに対して、男性の41.2％は「何とも思わない」と答え、ドライに構えている人が多いようだ。【意味②】〜の考えについて: đối với ... thì tán thành, phản đối意見← 賛成、反対、中立自分が言ったことに対して、ちゃんと責任を持ちなさいよ！今のプレゼンに対して、何か意見のある者は挙手をしてくれ。",
+      "meaning": "（対比）: đối lập với ...Aは〜 それに比べて Bは〜Aは〜 それとは違って Bは〜女性新入社員の約6割が不快感を抱いている。それに対して、男性の41.2％は「何とも思わない」と答え、ドライに構えている人が多いようだ。【意味②】〜の考えについて: đối với ... thì tán thành, phản đối意見← 賛成、反対、中立",
+      "explanationVi": "Dùng để đối chiếu hai phía hoặc chỉ đối tượng mà ý kiến, hành động hướng tới.",
+      "exampleJa": "自分が言ったことに対して、ちゃんと責任を持ちなさいよ！",
+      "exampleVi": "Hãy chịu trách nhiệm đàng hoàng đối với điều mình đã nói.",
+      "formation": "V・A（普通）＋の ＋ に対してN＋なの/である ＋ に対して",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋について"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる ＋ につれて・につれ",
-      "definition": "【意味】連れる ≒ 一緒に、ともに: cùng với (A thay đổi, B cũng cùng thay đổi)・ Aが変化するのと一緒にBも変化する時間が経つにつれて、悲しい気持ちも消えていきました。毎年、クリスマスが近づくにつれてクリスマスグッズを予約する人が増える。"
+      "definition": "【意味】連れる ≒ 一緒に、ともに: cùng với (A thay đổi, B cũng cùng thay đổi)・ Aが変化するのと一緒にBも変化する時間が経つにつれて、悲しい気持ちも消えていきました。毎年、クリスマスが近づくにつれてクリスマスグッズを予約する人が増える。",
+      "meaning": "連れる ≒ 一緒に、ともに: cùng với (A thay đổi, B cũng cùng thay đổi)・ Aが変化するのと一緒にBも変化する",
+      "explanationVi": "Cho biết cùng với sự thay đổi dần của A thì B cũng thay đổi.",
+      "exampleJa": "時間が経つにつれて、悲しい気持ちも消えていきました。",
+      "exampleVi": "Theo thời gian, cảm giác buồn bã cũng dần biến mất.",
+      "formation": "Vる ＋ につれて・につれ",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N、V辞 ＋ とともに",
+        "Vる・Ｎ ＋ にともなってVる・Ｎ ＋ にともなう ＋ N"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・Ｎ ＋ にともなってVる・Ｎ ＋ にともなう ＋ N",
-      "definition": "【意味】①〜が変化すると、〜も変化する: cùng thay đổi②〜と一緒に〜が起こる〜が起こると、続いて〜も起こる: A xảy ra, B mới xảy ra.若い社員が増えるにともなって、飲み会の数も減ってきたな...これが今回の組織改革にともなって、新たに設けられたチームだ。"
+      "definition": "【意味】①〜が変化すると、〜も変化する: cùng thay đổi②〜と一緒に〜が起こる〜が起こると、続いて〜も起こる: A xảy ra, B mới xảy ra.若い社員が増えるにともなって、飲み会の数も減ってきたな...これが今回の組織改革にともなって、新たに設けられたチームだ。",
+      "meaning": "①〜が変化すると、〜も変化する: cùng thay đổi②〜と一緒に〜が起こる〜が起こると、続いて〜も起こる: A xảy ra, B mới xảy ra.",
+      "explanationVi": "Diễn tả một thay đổi hoặc sự việc kéo theo thay đổi hay sự việc khác.",
+      "exampleJa": "若い社員が増えるにともなって、飲み会の数も減ってきたな...",
+      "exampleVi": "Cùng với việc số nhân viên trẻ tăng lên, số buổi nhậu cũng giảm.",
+      "formation": "Vる・Ｎ ＋ にともなってVる・Ｎ ＋ にともなう ＋ N",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N、V辞 ＋ とともに",
+        "Vる ＋ につれて・につれ"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・Nの ＋ 一方だ",
-      "definition": "【意味】変化が1つの方向に進行している: càng ngày càng (theo 1 hướng)A社の株は下落する一方だ。来月からの繁忙期を控え、先週から仕事は忙しくなる一方だ。"
+      "definition": "【意味】変化が1つの方向に進行している: càng ngày càng (theo 1 hướng)A社の株は下落する一方だ。来月からの繁忙期を控え、先週から仕事は忙しくなる一方だ。",
+      "meaning": "変化が1つの方向に進行している: càng ngày càng (theo 1 hướng)",
+      "explanationVi": "Diễn tả sự thay đổi tiếp tục tiến theo một chiều hướng.",
+      "exampleJa": "A社の株は下落する一方だ。",
+      "exampleVi": "Cổ phiếu công ty A cứ tiếp tục giảm.",
+      "formation": "Vる・Nの ＋ 一方だ",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vます (bỏ ます）＋ つつある",
+        "ようとする（直前・意志動詞）",
+        "Vたきり～ない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ にわたってN ＋ にわたる ＋ N",
-      "definition": "【意味】〜から〜までの広い範囲で〜: từ...đến (phạm vi rộng)〜から〜までの長い間〜: suốt thời gian dài雪の影響により、２時間にわたって電車がストップしました"
+      "definition": "【意味】〜から〜までの広い範囲で〜: từ...đến (phạm vi rộng)〜から〜までの長い間〜: suốt thời gian dài雪の影響により、２時間にわたって電車がストップしました",
+      "meaning": "〜から〜までの広い範囲で〜: từ...đến (phạm vi rộng)〜から〜までの長い間〜: suốt thời gian dài雪の影響により、２時間にわたって電車がストップしました",
+      "explanationVi": "Chỉ phạm vi rộng hoặc khoảng thời gian kéo dài từ đầu đến cuối.",
+      "exampleJa": "雪の影響により、２時間にわたって電車がストップしました。",
+      "exampleVi": "Do ảnh hưởng của tuyết, tàu đã dừng suốt hai giờ.",
+      "formation": "N ＋ にわたってN ＋ にわたる ＋ N",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ 限りで・限りの",
+        "Vる・時間・日にち ＋ までに",
+        "V・A・N（普通）のみならず～も"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vます （bỏ ます）＋ っぱなしVます ＋ っぱなしの ＋ N",
-      "definition": "【意味】〜したまま放っておく: 〜の状態がずっと続いている: trạng thái tiếp diễn suốt ...今日は上司に文句を言われっぱなしだったな...今朝、バスで通勤したけど、バスがすごく混んでいたので、時間も立ちっぱなしだった。あのライバル社との受注競争では、ここ数年負けっぱなしだ。"
+      "definition": "【意味】〜したまま放っておく: 〜の状態がずっと続いている: trạng thái tiếp diễn suốt ...今日は上司に文句を言われっぱなしだったな...今朝、バスで通勤したけど、バスがすごく混んでいたので、時間も立ちっぱなしだった。あのライバル社との受注競争では、ここ数年負けっぱなしだ。",
+      "meaning": "〜したまま放っておく: 〜の状態がずっと続いている: trạng thái tiếp diễn suốt ...",
+      "explanationVi": "Diễn tả một trạng thái được để nguyên hoặc cứ tiếp diễn không ngừng.",
+      "exampleJa": "今日は上司に文句を言われっぱなしだったな...",
+      "exampleVi": "Hôm nay tôi bị cấp trên phàn nàn suốt.",
+      "formation": "Vます （bỏ ます）＋ っぱなしVます ＋ っぱなしの ＋ N",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "V/A/N（普通）＋ 限り（は）",
+        "Vて＋ほしい"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N・Vる＋こと ＋ なくしては〜ない",
-      "definition": "【意味】〜がなければ～ない：nếu không ... thì không ...〜がなければ～できない：nếu không ... thì không thể...話し合いなくしては、問題は解決しないと思います。課長の努力なくしては、今回のプロジェクトは成功しなかっただろう。"
+      "definition": "【意味】〜がなければ～ない：nếu không ... thì không ...〜がなければ～できない：nếu không ... thì không thể...話し合いなくしては、問題は解決しないと思います。課長の努力なくしては、今回のプロジェクトは成功しなかっただろう。",
+      "meaning": "〜がなければ～ない：nếu không ... thì không ...〜がなければ～できない：nếu không ... thì không thể...",
+      "explanationVi": "Nhấn mạnh rằng nếu thiếu điều kiện A thì kết quả B không thể xảy ra.",
+      "exampleJa": "話し合いなくしては、問題は解決しないと思います。",
+      "exampleVi": "Nếu không thảo luận, tôi nghĩ vấn đề sẽ không được giải quyết.",
+      "formation": "N・Vる＋こと ＋ なくしては〜ない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V意向 + ～（よ）うが/ （よ）うが～VまいがV意向 + ～（よ）うと/ （よ）うと～Vまいと",
+        "N + に関わらず",
+        "Vます （bỏ ます） ＋ かねない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vます (bỏ ます）＋ つつ（も）",
-      "definition": "【意味】1. （も）（逆接）〜けれども: mặc dù (ngược lại)お酒は体によくないと言いつつ（も）、毎日飲んでいる。2.（同時進行動作）〜ながら...する: vừa làm ..., vừa làm...毎朝、新聞を読みつつ、コーヒーを飲みます。"
+      "definition": "【意味】1. （も）（逆接）〜けれども: mặc dù (ngược lại)お酒は体によくないと言いつつ（も）、毎日飲んでいる。2.（同時進行動作）〜ながら...する: vừa làm ..., vừa làm...毎朝、新聞を読みつつ、コーヒーを飲みます。",
+      "meaning": "1. （も）（逆接）〜けれども: mặc dù (ngược lại)",
+      "explanationVi": "Diễn tả hai hành động đồng thời, hoặc thừa nhận A nhưng thực tế vẫn B.",
+      "exampleJa": "お酒は体によくないと言いつつ（も）、毎日飲んでいる。",
+      "exampleVi": "Dù nói rượu không tốt cho sức khỏe, tôi vẫn uống mỗi ngày.",
+      "formation": "Vます (bỏ ます）＋ つつ（も）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・A・N（普通）＋ ものの",
+        "N、V辞 ＋ とともに",
+        "Vる・N ＋ にあたってVる・N ＋ に際して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vます (bỏ ます）＋ つつある",
-      "definition": "【意味】ゆっくりと〜の状態に向かっている: dần dần (theo chiều hướng)バイクではなく電車を利用する人が増えつつある。"
+      "definition": "【意味】ゆっくりと〜の状態に向かっている: dần dần (theo chiều hướng)バイクではなく電車を利用する人が増えつつある。",
+      "meaning": "ゆっくりと〜の状態に向かっている: dần dần (theo chiều hướng)",
+      "explanationVi": "Diễn tả một thay đổi đang tiến triển từ từ.",
+      "exampleJa": "バイクではなく電車を利用する人が増えつつある。",
+      "exampleVi": "Số người sử dụng tàu thay vì xe máy đang dần tăng lên.",
+      "formation": "Vます (bỏ ます）＋ つつある",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Nの ＋ 一方だ",
+        "ようとする（直前・意志動詞）",
+        "Vたきり～ない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ に反してN ＋ に反する＋NN ＋ に反した＋N",
-      "definition": "【意味】〜とは違って: trái với ...〜とは反対に: ngược lại với ...予想に反して、今年のBJTの試験は難しくなかった。"
+      "definition": "【意味】〜とは違って: trái với ...〜とは反対に: ngược lại với ...予想に反して、今年のBJTの試験は難しくなかった。",
+      "meaning": "〜とは違って: trái với ...〜とは反対に: ngược lại với ...",
+      "explanationVi": "Nêu kết quả trái với dự đoán, kỳ vọng hoặc quy tắc.",
+      "exampleJa": "予想に反して、今年のBJTの試験は難しくなかった。",
+      "exampleVi": "Trái với dự đoán, kỳ thi BJT năm nay không khó.",
+      "formation": "N ＋ に反してN ＋ に反する＋NN ＋ に反した＋N",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・Aい・N（辞書）・Aな ＋ どころか",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "ものを"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・N ＋ にあたってVる・N ＋ に際して",
-      "definition": "【意味】これから〜するとき＋未来のことに向けて心や物とかの準備: khi mà làm ...(trong tương lai) -> để chuẩn bị cho tương lai.新しい企画をするにあたり必要な人員を決めなければならない。"
+      "definition": "【意味】これから〜するとき＋未来のことに向けて心や物とかの準備: khi mà làm ...(trong tương lai) -> để chuẩn bị cho tương lai.新しい企画をするにあたり必要な人員を決めなければならない。",
+      "meaning": "これから〜するとき＋未来のことに向けて心や物とかの準備: khi mà làm ...(trong tương lai) -> để chuẩn bị cho tương lai.",
+      "explanationVi": "Nêu thời điểm chuẩn bị hoặc thực hiện một việc quan trọng; mang sắc thái trang trọng.",
+      "exampleJa": "新しい企画をするにあたり必要な人員を決めなければならない。",
+      "exampleVi": "Khi triển khai kế hoạch mới, chúng ta phải quyết định nhân sự cần thiết.",
+      "formation": "Vる・N ＋ にあたってVる・N ＋ に際して",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "Vる・Vた・Nの ＋ 際（に）"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vては",
-      "definition": "【意味】動作の反復を表す: cứ A rồi lại B, cứ B rồi lại A (lặp lại)V1てはV2 V1、V2は逆の意味今日は、雨が降っては止み、止んでは降るが繰り返される変な天気だ。"
+      "definition": "【意味】動作の反復を表す: cứ A rồi lại B, cứ B rồi lại A (lặp lại)V1てはV2 V1、V2は逆の意味今日は、雨が降っては止み、止んでは降るが繰り返される変な天気だ。",
+      "meaning": "動作の反復を表す: cứ A rồi lại B, cứ B rồi lại A (lặp lại)V1てはV2 V1、V2は逆の意味",
+      "explanationVi": "Diễn tả hai hành động hoặc trạng thái lặp đi lặp lại.",
+      "exampleJa": "今日は、雨が降っては止み、止んでは降るが繰り返される変な天気だ。",
+      "exampleVi": "Hôm nay trời cứ mưa rồi tạnh, tạnh rồi lại mưa.",
+      "formation": "Vては",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vます （bỏ ます）＋ っぱなしVます ＋ っぱなしの ＋ N",
+        "V/A/N（普通）＋ 限り（は）",
+        "Vて + しかるべき（だ）"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・Vた・Nの ＋ 際（に）",
-      "definition": "【意味】〜時/〜機会に: khi ... (cứng hơn 〜時)また東京に来られる際は、ぜひ連絡ください。"
+      "definition": "【意味】〜時/〜機会に: khi ... (cứng hơn 〜時)また東京に来られる際は、ぜひ連絡ください。",
+      "meaning": "〜時/〜機会に: khi ... (cứng hơn 〜時)",
+      "explanationVi": "Chỉ thời điểm hoặc dịp làm việc gì, trang trọng hơn とき.",
+      "exampleJa": "また東京に来られる際は、ぜひ連絡ください。",
+      "exampleVi": "Khi có dịp trở lại Tokyo, xin hãy liên lạc với tôi.",
+      "formation": "Vる・Vた・Nの ＋ 際（に）",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "Vる・N ＋ にあたってVる・N ＋ に際して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ に限らず",
-      "definition": "【意味】だけではなく: không chỉ ... mà còn (chỉ đi với Noun)カロリーゼロビールは、お腹周りが気になりはじめる30代以上の層をメインターゲットに据えていますが、当社ではビールに限らず飴やコーヒーなどにも同様なコンセプトを適用しております。。医療の現場での人手不足という問題は、今や田舎に限らず都市部にまで及んでいる。"
+      "definition": "【意味】だけではなく: không chỉ ... mà còn (chỉ đi với Noun)カロリーゼロビールは、お腹周りが気になりはじめる30代以上の層をメインターゲットに据えていますが、当社ではビールに限らず飴やコーヒーなどにも同様なコンセプトを適用しております。。医療の現場での人手不足という問題は、今や田舎に限らず都市部にまで及んでいる。",
+      "meaning": "だけではなく: không chỉ ... mà còn (chỉ đi với Noun)カロリーゼロビールは、お腹周りが気になりはじめる30代以上の層をメインターゲットに据えていますが、当社ではビールに限らず飴やコーヒーなどにも同様なコンセプトを適用しております。。",
+      "explanationVi": "Mở rộng đối tượng với nghĩa “không chỉ riêng A”.",
+      "exampleJa": "医療の現場での人手不足という問題は、今や田舎に限らず都市部にまで及んでいる。",
+      "exampleVi": "Vấn đề thiếu nhân lực trong y tế không chỉ ở nông thôn mà đã lan tới cả thành thị.",
+      "formation": "N ＋ に限らず",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・A・N（普通）のみならず～も"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる ＋ 限りNの ＋ 限り",
-      "definition": "【意味】〜の限界まで: đến giới hạn ...〜のすべてを使って〜: hết sức ...どの店も声の限り「いらっしゃいませ！」とお客さんを呼ぼうとして、とても賑やかで活気があった。〜できる限り。。。"
+      "definition": "【意味】〜の限界まで: đến giới hạn ...〜のすべてを使って〜: hết sức ...どの店も声の限り「いらっしゃいませ！」とお客さんを呼ぼうとして、とても賑やかで活気があった。〜できる限り。。。",
+      "meaning": "〜の限界まで: đến giới hạn ...〜のすべてを使って〜: hết sức ...",
+      "explanationVi": "Diễn tả việc dùng hết khả năng hoặc đạt tới giới hạn có thể.",
+      "exampleJa": "どの店も声の限り「いらっしゃいませ！」とお客さんを呼ぼうとして、とても賑やかで活気があった。",
+      "exampleVi": "Các cửa hàng đều hết sức gọi khách bằng tiếng “Kính chào quý khách!”.",
+      "formation": "Vる ＋ 限りNの ＋ 限り",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・ている・た ＋ 限りでは",
+        "Aい・Aな ＋ 限り(だ)",
+        "V/A/N（普通）＋ 限り（は）"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる・ている・た ＋ 限りでは",
-      "definition": "【意味】・〜の範囲で言うと: trong cái phạm vi này ... (thì nói)・〜の範囲内で判断すると: trong cái phạm vi này ... (thì phán đoán)写真を見る限りでは、男の子のようですが、もう１ヶ月経たないと、わからないですね。私の知る限りでは、A社しかありませんね。"
+      "definition": "【意味】・〜の範囲で言うと: trong cái phạm vi này ... (thì nói)・〜の範囲内で判断すると: trong cái phạm vi này ... (thì phán đoán)写真を見る限りでは、男の子のようですが、もう１ヶ月経たないと、わからないですね。私の知る限りでは、A社しかありませんね。",
+      "meaning": "・〜の範囲で言うと: trong cái phạm vi này ... (thì nói)・〜の範囲内で判断すると: trong cái phạm vi này ... (thì phán đoán)",
+      "explanationVi": "Đưa ra phán đoán trong phạm vi thông tin mà người nói biết hoặc quan sát được.",
+      "exampleJa": "写真を見る限りでは、男の子のようですが、もう１ヶ月経たないと、わからないですね。",
+      "exampleVi": "Theo những gì thấy trong ảnh thì có vẻ là bé trai, nhưng phải một tháng nữa mới biết chắc.",
+      "formation": "Vる・ている・た ＋ 限りでは",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Aい・Aな ＋ 限り(だ)",
+        "V/A/N（普通）＋ 限り（は）"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Aい・Aな ＋ 限り(だ)",
-      "definition": "【意味】・とても〜A限りだ: rất ... (chỉ đi với Adjective, lịch sự hơn Aだ), cứng và trịnh trọng.（上司から褒められた後メールの返事で）お力になれたようで、嬉しい限りです。そのようなお言葉を頂けて、嬉しい限りです。"
+      "definition": "【意味】・とても〜A限りだ: rất ... (chỉ đi với Adjective, lịch sự hơn Aだ), cứng và trịnh trọng.（上司から褒められた後メールの返事で）お力になれたようで、嬉しい限りです。そのようなお言葉を頂けて、嬉しい限りです。",
+      "meaning": "・とても〜A限りだ: rất ... (chỉ đi với Adjective, lịch sự hơn Aだ), cứng và trịnh trọng.（上司から褒められた後メールの返事で）",
+      "explanationVi": "Thể hiện cảm xúc ở mức rất cao bằng lối nói trang trọng.",
+      "exampleJa": "お力になれたようで、嬉しい限りです。",
+      "exampleVi": "Tôi vô cùng vui vì dường như đã giúp ích được cho anh.",
+      "formation": "Aい・Aな ＋ 限り(だ)",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Vる・ている・た ＋ 限りでは",
+        "V/A/N（普通）＋ 限り（は）"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V/A/N（普通）＋ 限り（は）",
-      "definition": "・〜する間はずっと: khi mà ... (tiếp diễn suốt)・〜の状態が続く間はずっと: chừng nào mà (tiếp diễn) ... ・絶対にあの人が課長でいる限り、この課の業績は上がらないだろう受注できる可能性がある限りは、あの会社に食い上がってみる"
+      "definition": "・〜する間はずっと: khi mà ... (tiếp diễn suốt)・〜の状態が続く間はずっと: chừng nào mà (tiếp diễn) ... ・絶対にあの人が課長でいる限り、この課の業績は上がらないだろう受注できる可能性がある限りは、あの会社に食い上がってみる",
+      "meaning": "・〜する間はずっと: khi mà ... (tiếp diễn suốt)・〜の状態が続く間はずっと: chừng nào mà (tiếp diễn) ... ・絶対にあの人が課長でいる限り、この課の業績は上がらないだろう受注できる可能性がある限りは、あの会社に食い上がってみる",
+      "explanationVi": "Diễn tả trong suốt thời gian một điều kiện hoặc trạng thái còn tiếp diễn.",
+      "exampleJa": "あの人が課長でいる限り、この課の業績は上がらないだろう。",
+      "exampleVi": "Chừng nào người đó còn làm trưởng phòng, thành tích của phòng này khó mà tăng.",
+      "formation": "V/A/N（普通）＋ 限り（は）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Vる・ている・た ＋ 限りでは",
+        "Aい・Aな ＋ 限り(だ)"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ 限りで・限りの",
-      "definition": "【意味】・（時間）〜を最後にして・〜までで: đến... cuối ... (mốc time)・（回数・空間）〜だけに限定して: chỉ trong ... (giới hạn)A：御社との契約は、今月末限りで終了させていただきます。B：そうおっしゃらずに、何とか引き続きお取引願えませんか..."
+      "definition": "【意味】・（時間）〜を最後にして・〜までで: đến... cuối ... (mốc time)・（回数・空間）〜だけに限定して: chỉ trong ... (giới hạn)A：御社との契約は、今月末限りで終了させていただきます。B：そうおっしゃらずに、何とか引き続きお取引願えませんか...",
+      "meaning": "・（時間）〜を最後にして・〜までで: đến... cuối ... (mốc time)・（回数・空間）〜だけに限定して: chỉ trong ... (giới hạn)A：",
+      "explanationVi": "Giới hạn một mốc thời gian, số lần hoặc phạm vi và coi đó là điểm cuối.",
+      "exampleJa": "御社との契約は、今月末限りで終了させていただきます。",
+      "exampleVi": "Hợp đồng với quý công ty sẽ kết thúc vào cuối tháng này.",
+      "formation": "N ＋ 限りで・限りの",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Vる・ている・た ＋ 限りでは",
+        "Aい・Aな ＋ 限り(だ)"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "時間に関するN を限りに",
-      "definition": "【意味】その時を最後にして〜: từ cái thời điểm ... là cuối cùng.今日を限りに禁煙しようと思っている。この商品は、本日を限りに販売を終了させていただきます。"
+      "definition": "【意味】その時を最後にして〜: từ cái thời điểm ... là cuối cùng.今日を限りに禁煙しようと思っている。この商品は、本日を限りに販売を終了させていただきます。",
+      "meaning": "その時を最後にして〜: từ cái thời điểm ... là cuối cùng.",
+      "explanationVi": "Xác định thời điểm được nêu là lần cuối cùng.",
+      "exampleJa": "今日を限りに禁煙しようと思っている。",
+      "exampleVi": "Tôi định từ hôm nay sẽ bỏ thuốc lá.",
+      "formation": "時間に関するN を限りに",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Vる・ている・た ＋ 限りでは",
+        "Aい・Aな ＋ 限り(だ)"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ に限って",
-      "definition": "【意味】1.（悪い事の発生）〜時だけ（悪いことが起こる）: cứ đúng lúc ...(thì... tiêu cực)学校を休んだ日に限って大事なテストがあるんだよな。。。【意味】2.〜だけ （特別に信じる）: riêng ... (tôi tin là ko làm như vậy)彼に限ってそんな間違いはしないと思います。何かの勘違いではないでしょうか。"
+      "definition": "【意味】1.（悪い事の発生）〜時だけ（悪いことが起こる）: cứ đúng lúc ...(thì... tiêu cực)学校を休んだ日に限って大事なテストがあるんだよな。。。【意味】2.〜だけ （特別に信じる）: riêng ... (tôi tin là ko làm như vậy)彼に限ってそんな間違いはしないと思います。何かの勘違いではないでしょうか。",
+      "meaning": "1.（悪い事の発生）〜時だけ（悪いことが起こる）: cứ đúng lúc ...(thì... tiêu cực)",
+      "explanationVi": "Nêu việc xấu cứ xảy ra đúng vào lúc đó, hoặc bày tỏ niềm tin đặc biệt vào một người.",
+      "exampleJa": "学校を休んだ日に限って大事なテストがあるんだよな。",
+      "exampleVi": "Cứ đúng ngày nghỉ học thì lại có bài kiểm tra quan trọng.",
+      "formation": "N ＋ に限って",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Vる・ている・た ＋ 限りでは",
+        "Aい・Aな ＋ 限り(だ)"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N ＋ に限る",
-      "definition": "【意味】１．〜（の）が一番いい: ... là nhấtやっぱり、夏はビールに限りますねー。【意味】２．〜だけ（限定）: chỉ ... (trong đối tượng nào đó)16:00までにご来店のお客様に限り、ビール300円！今週に限って毎日9時から10時までチームミーティングをすることになりました。"
+      "definition": "【意味】１．〜（の）が一番いい: ... là nhấtやっぱり、夏はビールに限りますねー。【意味】２．〜だけ（限定）: chỉ ... (trong đối tượng nào đó)16:00までにご来店のお客様に限り、ビール300円！今週に限って毎日9時から10時までチームミーティングをすることになりました。",
+      "meaning": "１．〜（の）が一番いい: ... là nhất",
+      "explanationVi": "Đưa ra lựa chọn tốt nhất hoặc giới hạn đối tượng duy nhất được áp dụng.",
+      "exampleJa": "やっぱり、夏はビールに限りますねー。",
+      "exampleVi": "Quả nhiên mùa hè thì bia là tuyệt nhất.",
+      "formation": "N ＋ に限る",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる ＋ 限りNの ＋ 限り",
+        "Vる・ている・た ＋ 限りでは",
+        "Aい・Aな ＋ 限り(だ)"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N + 如何～いかんで／いかんでは／いかんによっては／いかんだ",
-      "definition": "【意味】〜によって決まる: tùy vào A để quyết định B.〜の状態によって決める: tùy vào trạng thái A để quyết định B.Ⓜ 今度の試験の成績いかんで新しいクラスが決まる。A社との話し合いいかんでは、このプロジェクトは白紙に戻る可能性もある。cuối câu hay đi với・せねばならない・せざるを得ない・するしかない"
+      "definition": "【意味】〜によって決まる: tùy vào A để quyết định B.〜の状態によって決める: tùy vào trạng thái A để quyết định B.Ⓜ 今度の試験の成績いかんで新しいクラスが決まる。A社との話し合いいかんでは、このプロジェクトは白紙に戻る可能性もある。cuối câu hay đi với・せねばならない・せざるを得ない・するしかない",
+      "meaning": "〜によって決まる: tùy vào A để quyết định B.〜の状態によって決める: tùy vào trạng thái A để quyết định B.",
+      "explanationVi": "Cho biết kết quả được quyết định tùy theo nội dung hay tình trạng của A; rất trang trọng.",
+      "exampleJa": "今度の試験の成績いかんで新しいクラスが決まる。",
+      "exampleVi": "Tùy kết quả kỳ thi lần này mà lớp mới sẽ được quyết định.",
+      "formation": "N + 如何～いかんで／いかんでは／いかんによっては／いかんだ",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "N＋次第でN＋次第では"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～極まる／極まりない",
-      "definition": "（非常に～だ）（多くはマイナス評価）hết sức/-cực kì (cảm xúc tiêu cực), văn viết.・な形＋極まるな形（なこと）・い形いこと＋極まりないⓂ 入式の日を間違えるなんて不注意極まる（／極まりない）。"
+      "definition": "（非常に～だ）（多くはマイナス評価）hết sức/-cực kì (cảm xúc tiêu cực), văn viết.・な形＋極まるな形（なこと）・い形いこと＋極まりないⓂ 入式の日を間違えるなんて不注意極まる（／極まりない）。",
+      "meaning": "（非常に～だ）（多くはマイナス評価）hết sức/-cực kì (cảm xúc tiêu cực), văn viết.・な形＋極まるな形（なこと）・い形いこと＋極まりないⓂ 入式の日を間違えるなんて不注意極まる（／極まりない）。",
+      "explanationVi": "Diễn tả mức độ cực kỳ cao, thường dùng cho đánh giá tiêu cực trong văn viết.",
+      "exampleJa": "入式の日を間違えるなんて不注意極まる。",
+      "exampleVi": "Nhầm ngày lễ nhập học thì thật là bất cẩn hết sức.",
+      "formation": "～極まる／極まりない",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vて ＋ までN ＋ までして",
+        "～が（も）～なら～も～だ",
+        "N ＋ にとってN ＋ にとっての ＋ N"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N + の至り",
-      "definition": "（最高に～だ）（改まった表現）là nhất, vẵn viết, phát biểu.・Diễn tả trạng thái cao nhất, cực điểm của một sự việc nào đó.・Thường được dùng với : 光栄（こうえい）, 恐縮（きょうしゅく thấy ngại） và 感激.・「先生に褒めていただいて、光栄の至りです。」Ⓜ「先生に褒めていただいて、光栄の至りです。」✦チームのリーダーにならせていただき、光栄の至り です。"
+      "definition": "（最高に～だ）（改まった表現）là nhất, vẵn viết, phát biểu.・Diễn tả trạng thái cao nhất, cực điểm của một sự việc nào đó.・Thường được dùng với : 光栄（こうえい）, 恐縮（きょうしゅく thấy ngại） và 感激.・「先生に褒めていただいて、光栄の至りです。」Ⓜ「先生に褒めていただいて、光栄の至りです。」✦チームのリーダーにならせていただき、光栄の至り です。",
+      "meaning": "（最高に～だ）（改まった表現）là nhất, vẵn viết, phát biểu.・Diễn tả trạng thái cao nhất, cực điểm của một sự việc nào đó.・Thường được dùng với : 光栄（こうえい）, 恐縮（きょうしゅく thấy ngại） và 感激.・「",
+      "explanationVi": "Diễn tả trạng thái đạt tới cực điểm bằng lối nói trang trọng.",
+      "exampleJa": "先生に褒めていただいて、光栄の至りです。",
+      "exampleVi": "Được thầy khen là niềm vinh dự tột cùng.",
+      "formation": "N + の至り",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "Aい・Aな ＋ 限り(だ)",
+        "Vたきり～ない",
+        "N ＋において"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "ものを",
-      "definition": "（～のに→残念、不満、非難）vậy mà = ～のに・Diễn tả tâm trạng bất mãn, tiếc nuối với những kết quả phát sinh không như mong đợi.・Ｖ・Ａい・Ａな 名詞修飾形Ⓜ「連絡してくだされば、駅まで迎えに行きましたものを。」✦早く寝たらよかったものを、遅くまで起きていたから遅刻したんだ。"
+      "definition": "（～のに→残念、不満、非難）vậy mà = ～のに・Diễn tả tâm trạng bất mãn, tiếc nuối với những kết quả phát sinh không như mong đợi.・Ｖ・Ａい・Ａな 名詞修飾形Ⓜ「連絡してくだされば、駅まで迎えに行きましたものを。」✦早く寝たらよかったものを、遅くまで起きていたから遅刻したんだ。",
+      "meaning": "（～のに→残念、不満、非難）vậy mà = ～のに・Diễn tả tâm trạng bất mãn, tiếc nuối với những kết quả phát sinh không như mong đợi.・Ｖ・Ａい・Ａな 名詞修飾形Ⓜ「",
+      "explanationVi": "Bày tỏ tiếc nuối, bất mãn hoặc phê phán vì kết quả trái mong đợi.",
+      "exampleJa": "連絡してくだされば、駅まで迎えに行きましたものを。",
+      "exampleVi": "Nếu anh liên lạc thì tôi đã ra ga đón rồi, vậy mà…",
+      "formation": "ものを",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか",
+        "N ＋ に反してN ＋ に反する＋NN ＋ に反した＋N",
+        "N＋次第でN＋次第では"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N + を余儀なくされる／させる",
-      "definition": "やむを得ず～しなければならなくなる）（書き言葉, cứng）vì hoàn cảnh nào đó mà buộc phải làm gì ・「余儀なくされる」 thì CN là người・「余儀なくさせる」 thì CN ko là ngườiⓂ病気で帰国を余儀なくされた。Ⓜ突然の失明が彼に帰国くを余儀なくさせた。"
+      "definition": "やむを得ず～しなければならなくなる）（書き言葉, cứng）vì hoàn cảnh nào đó mà buộc phải làm gì ・「余儀なくされる」 thì CN là người・「余儀なくさせる」 thì CN ko là ngườiⓂ病気で帰国を余儀なくされた。Ⓜ突然の失明が彼に帰国くを余儀なくさせた。",
+      "meaning": "やむを得ず～しなければならなくなる）（書き言葉, cứng）vì hoàn cảnh nào đó mà buộc phải làm gì ・「余儀なくされる」 thì CN là người・「余儀なくさせる」 thì CN ko là người",
+      "explanationVi": "Diễn tả việc hoàn cảnh buộc ai đó phải làm, hoặc khiến một việc trở nên không thể tránh khỏi.",
+      "exampleJa": "病気で帰国を余儀なくされた。",
+      "exampleVi": "Vì bệnh nên tôi buộc phải về nước.",
+      "formation": "N + を余儀なくされる／させる",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・A（普通）＋ しかない"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Ｖる + までもない／なく",
-      "definition": "簡単な／当然のことだから、そこまでする必要はない）chưa đến mức phải, không cần phải Ⓜ「これは前に何度も勉強しましたから、説明するまでもないでしょう」Ⓜ「言うまでもなく、出席率があまりに悪い学生はビザの更新ができません」"
+      "definition": "簡単な／当然のことだから、そこまでする必要はない）chưa đến mức phải, không cần phải Ⓜ「これは前に何度も勉強しましたから、説明するまでもないでしょう」Ⓜ「言うまでもなく、出席率があまりに悪い学生はビザの更新ができません」",
+      "meaning": "簡単な／当然のことだから、そこまでする必要はない）chưa đến mức phải, không cần phải Ⓜ「これは前に何度も勉強しましたから、説明するまでもないでしょう」Ⓜ「言うまでもなく、出席率があまりに悪い学生はビザの更新ができません」",
+      "explanationVi": "Cho biết việc quá đơn giản hoặc hiển nhiên nên không cần làm tới mức đó.",
+      "exampleJa": "これは前に何度も勉強しましたから、説明するまでもないでしょう。",
+      "exampleVi": "Việc này đã học nhiều lần nên có lẽ không cần giải thích nữa.",
+      "formation": "Ｖる + までもない／なく",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "V・Aい・Aな・N（普通）＋ とは",
+        "Vない ＋ ずにはいられない・ないではいられない",
+        "N + を余儀なくされる／させる"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "V意向 + ～（よ）うが/ （よ）うが～VまいがV意向 + ～（よ）うと/ （よ）うと～Vまいと",
-      "definition": "（どちらの場合でも）dù có -, dù không có - , thì- ... cái ở sau ko liên quan, khổng ảnh hưởng.Ⓜ「山田さんが来ようが来まいが、10時になったら会議を始めましょう」Ⓜ 好きであろうときらいであろうと、与えられた仕事は責任を持ってやるべきだ。"
+      "definition": "（どちらの場合でも）dù có -, dù không có - , thì- ... cái ở sau ko liên quan, khổng ảnh hưởng.Ⓜ「山田さんが来ようが来まいが、10時になったら会議を始めましょう」Ⓜ 好きであろうときらいであろうと、与えられた仕事は責任を持ってやるべきだ。",
+      "meaning": "（どちらの場合でも）dù có -, dù không có - , thì- ... cái ở sau ko liên quan, khổng ảnh hưởng.Ⓜ「山田さんが来ようが来まいが、10時になったら会議を始めましょう」Ⓜ 好きであろうときらいであろうと、与えられた仕事は責任を持ってやるべきだ。",
+      "explanationVi": "Nêu rằng dù A có xảy ra hay không thì kết quả phía sau vẫn không thay đổi.",
+      "exampleJa": "山田さんが来ようが来まいが、10時になったら会議を始めましょう。",
+      "exampleVi": "Dù anh Yamada có tới hay không, cứ 10 giờ là chúng ta bắt đầu họp.",
+      "formation": "V意向 + ～（よ）うが/ （よ）うが～VまいがV意向 + ～（よ）うと/ （よ）うと～Vまいと",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N + に関わらず",
+        "N・Vる＋こと ＋ なくしては〜ない",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N + を踏まえて",
-      "definition": "N をふまえてSuy nghĩ kỹ về A rồi đưa ra B.Dựa trên N, căn cứ từ N.CHÚ Ý: Dùng chỉ việc xem xét vấn đề gì đều dựa trên căn cứ phán đoán hay tiền đề gì đó.=>Là cách nói trang trọng, dùng trong văn viếtこれまでの経緯を踏まえて議論して頂ただきたい。Tôi muốn mọi người thảo luận dựa trên những điều đã xảy ra cho đến nay.彼の意見は経験を踏まえているので説得力がある。Ý kiến của anh ta dựa trên kinh nghiệm nên rất có tính thuyết phục.今の山田さんの報告を踏まえて話し合っていただきたいと思います。Tôi muốn chúng ta thảo luận nhau dựa trên báo cáo bây giờ của anh Yamada."
+      "definition": "N をふまえてSuy nghĩ kỹ về A rồi đưa ra B.Dựa trên N, căn cứ từ N.CHÚ Ý: Dùng chỉ việc xem xét vấn đề gì đều dựa trên căn cứ phán đoán hay tiền đề gì đó.=>Là cách nói trang trọng, dùng trong văn viếtこれまでの経緯を踏まえて議論して頂ただきたい。Tôi muốn mọi người thảo luận dựa trên những điều đã xảy ra cho đến nay.彼の意見は経験を踏まえているので説得力がある。Ý kiến của anh ta dựa trên kinh nghiệm nên rất có tính thuyết phục.今の山田さんの報告を踏まえて話し合っていただきたいと思います。Tôi muốn chúng ta thảo luận nhau dựa trên báo cáo bây giờ của anh Yamada.",
+      "meaning": "N をふまえてSuy nghĩ kỹ về A rồi đưa ra B.Dựa trên N, căn cứ từ N.CHÚ Ý: Dùng chỉ việc xem xét vấn đề gì đều dựa trên căn cứ phán đoán hay tiền đề gì đó.=>Là cách nói trang trọng, dùng trong văn viếtこれまでの経緯を踏まえて議論して頂ただきたい。Tôi muốn mọi người thảo luận dựa trên những điều đã xảy ra cho đến nay.彼の意見は経験を踏まえているので説得力がある。Ý kiến của anh ta dựa trên kinh nghiệm nên rất có tính thuyết phục.今の山田さんの報告を踏まえて話し合っていただきたいと思います。Tôi muốn chúng ta thảo luận nhau dựa trên báo cáo bây giờ của anh Yamada.",
+      "explanationVi": "Nêu hành động hoặc kết luận được đưa ra sau khi cân nhắc căn cứ, tiền đề hay kinh nghiệm.",
+      "exampleJa": "これまでの経緯を踏まえて議論して頂きたい。",
+      "exampleVi": "Tôi muốn mọi người thảo luận dựa trên diễn biến cho tới nay.",
+      "formation": "N + を踏まえて",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N ＋ にとってN ＋ にとっての ＋ N",
+        "V意向 + ～（よ）うが/ （よ）うが～VまいがV意向 + ～（よ）うと/ （よ）うと～Vまいと",
+        "V普通・Aい・Aな・Nの ＋ せいで・せいか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vて + しかるべき（だ）",
-      "definition": "（～して／であって当然だ）～ Nên・Diễn tả ý nghĩa việc làm đó là hiển nhiên, việc làm đó là thích hợp.・Ｖて・Ａくて／Ｎ・Ｖな＋であってⓂ 大学生ならこのくらいの専門書は読めてしかるべきだ。"
+      "definition": "（～して／であって当然だ）～ Nên・Diễn tả ý nghĩa việc làm đó là hiển nhiên, việc làm đó là thích hợp.・Ｖて・Ａくて／Ｎ・Ｖな＋であってⓂ 大学生ならこのくらいの専門書は読めてしかるべきだ。",
+      "meaning": "（～して／であって当然だ）～ Nên・Diễn tả ý nghĩa việc làm đó là hiển nhiên, việc làm đó là thích hợp.・Ｖて・Ａくて／Ｎ・Ｖな＋であって",
+      "explanationVi": "Khẳng định một hành động hoặc trạng thái là đương nhiên và thích đáng.",
+      "exampleJa": "大学生ならこのくらいの専門書は読めてしかるべきだ。",
+      "exampleVi": "Nếu là sinh viên đại học thì đương nhiên phải đọc được sách chuyên ngành cỡ này.",
+      "formation": "Vて + しかるべき（だ）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Vない ＋ ほどの＋N＋ではない",
+        "N ＋ にほかならない",
+        "Vます （bỏ ます）＋ っぱなしVます ＋ っぱなしの ＋ N"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N + ながら",
-      "definition": "（その状態のままで）（慣用的表現）～Từ khi.../ Trong khi (trạng thái giữ nguyên không thay đổi)・Dùng trong trường hợp biểu thị một hiện trạng nào đó cứ giữ nguyên như thế kể từ lúc bắt đầu.・Thường đi với những động từ như \"居る\", \"生まれる\", \"生きる\" hay những danh từ như \"涙\", \"昔\".・Ｎ／ＶますⓂ インターネットを利用すると、居ながらにして米国の大学の授業も受けられる。"
+      "definition": "（その状態のままで）（慣用的表現）～Từ khi.../ Trong khi (trạng thái giữ nguyên không thay đổi)・Dùng trong trường hợp biểu thị một hiện trạng nào đó cứ giữ nguyên như thế kể từ lúc bắt đầu.・Thường đi với những động từ như \"居る\", \"生まれる\", \"生きる\" hay những danh từ như \"涙\", \"昔\".・Ｎ／ＶますⓂ インターネットを利用すると、居ながらにして米国の大学の授業も受けられる。",
+      "meaning": "（その状態のままで）（慣用的表現）～Từ khi.../ Trong khi (trạng thái giữ nguyên không thay đổi)・Dùng trong trường hợp biểu thị một hiện trạng nào đó cứ giữ nguyên như thế kể từ lúc bắt đầu.・Thường đi với những động từ như \"居る\", \"生まれる\", \"生きる\" hay những danh từ như \"涙\", \"昔\".・Ｎ／Ｖます",
+      "explanationVi": "Diễn tả việc vẫn giữ nguyên trạng thái từ đầu trong khi thực hiện điều gì.",
+      "exampleJa": "インターネットを利用すると、居ながらにして米国の大学の授業も受けられる。",
+      "exampleVi": "Nhờ Internet, có thể học ở đại học Mỹ ngay khi vẫn ở nhà.",
+      "formation": "N + ながら",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vたきり～ない",
+        "Vます （bỏ ます）＋ っぱなしVます ＋ っぱなしの ＋ N",
+        "Vる・N ＋ にあたってVる・N ＋ に際して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "N (time) + をもってN (手段) + をもって",
-      "definition": "Ｎ①（終了、区切りを示す ＝～で）đến khoảng time thì kết thúc,Ⓜ 西村氏は本日をもって退職されます。(~ hết hôm nay)②（手段、方法 ＝～をもちいて、～で）Bởi A (phương tiện, cách thức) làm BⓂ この1年間、一人暮らしの大変さを身をもって味わった。"
+      "definition": "Ｎ①（終了、区切りを示す ＝～で）đến khoảng time thì kết thúc,Ⓜ 西村氏は本日をもって退職されます。(~ hết hôm nay)②（手段、方法 ＝～をもちいて、～で）Bởi A (phương tiện, cách thức) làm BⓂ この1年間、一人暮らしの大変さを身をもって味わった。",
+      "meaning": "Ｎ①（終了、区切りを示す ＝～で）đến khoảng time thì kết thúc,",
+      "explanationVi": "Chỉ mốc kết thúc trang trọng, hoặc phương tiện và cách thức dùng để thực hiện.",
+      "exampleJa": "西村氏は本日をもって退職されます。",
+      "exampleVi": "Ông Nishimura sẽ nghỉ việc kể từ hết hôm nay.",
+      "formation": "N (time) + をもってN (手段) + をもって",
+      "usageNote": "Ưu tiên dùng trong văn viết hoặc ngữ cảnh công việc trang trọng; kiểm tra kỹ quan hệ giữa hai vế.",
+      "relatedPatterns": [
+        "N ＋ によって",
+        "Vる・N ＋ にあたってVる・N ＋ に際して",
+        "Vた・VているAい・Nの・Aな＋ ために・ためか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～んばかりだ／に／の",
-      "definition": "（まるで～しそうな様子だ、今にも～しそうだ）dường như V, cứ như thể là V, như thể muốn nói ~・Vない する＋ん→せんⓂ 彼女は早く帰れと言わんばかりの顔で私を睨みつけた。"
+      "definition": "（まるで～しそうな様子だ、今にも～しそうだ）dường như V, cứ như thể là V, như thể muốn nói ~・Vない する＋ん→せんⓂ 彼女は早く帰れと言わんばかりの顔で私を睨みつけた。",
+      "meaning": "（まるで～しそうな様子だ、今にも～しそうだ）dường như V, cứ như thể là V, như thể muốn nói ~・Vない する＋ん→せん",
+      "explanationVi": "Miêu tả dáng vẻ như sắp làm gì hoặc như muốn nói điều gì.",
+      "exampleJa": "彼女は早く帰れと言わんばかりの顔で私を睨みつけた。",
+      "exampleVi": "Cô ấy trừng mắt nhìn tôi với vẻ như muốn bảo tôi về nhanh đi.",
+      "formation": "～んばかりだ／に／の",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる・Vない ＋ ほどの＋N＋ではない",
+        "Vて＋ほしい",
+        "～とばかりに"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～とばかりに",
-      "definition": "（実際には言わないが、そのような様子、態度で）dường như muốn nói ~, như thể muốn nói ~・V・Aい・Aな普通形／V命令形Ⓜ 彼は私の話が退屈だとばかりにあくびをした。"
+      "definition": "（実際には言わないが、そのような様子、態度で）dường như muốn nói ~, như thể muốn nói ~・V・Aい・Aな普通形／V命令形Ⓜ 彼は私の話が退屈だとばかりにあくびをした。",
+      "meaning": "（実際には言わないが、そのような様子、態度で）dường như muốn nói ~, như thể muốn nói ~・V・Aい・Aな普通形／V命令形",
+      "explanationVi": "Miêu tả thái độ hay dáng vẻ như thể đang nói điều đó dù thực tế không nói ra.",
+      "exampleJa": "彼は私の話が退屈だとばかりにあくびをした。",
+      "exampleVi": "Anh ấy ngáp như thể muốn nói câu chuyện của tôi thật chán.",
+      "formation": "～とばかりに",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vたきり～ない",
+        "～んばかりだ／に／の",
+        "N + に関わらず"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～とあって／あれば",
-      "definition": "（～という特別な状況なので→普通と違う状況）bởi vì（Vì trạng thái đặc biệt A, đương nhiên kết quả cũng đặc biệt)（特別な状況なら→普通とは違う状況、行為）・Ｎ／Ｖ・Ａい・Ａな 普通形 Ａな→だ省略可・夏休みとあって、プールは朝から子供たちでいっぱいだ。Ⓜ「どうしても必要とあれば、10万円ぐらいお貸ししないものでもありませんよ」"
+      "definition": "（～という特別な状況なので→普通と違う状況）bởi vì（Vì trạng thái đặc biệt A, đương nhiên kết quả cũng đặc biệt)（特別な状況なら→普通とは違う状況、行為）・Ｎ／Ｖ・Ａい・Ａな 普通形 Ａな→だ省略可・夏休みとあって、プールは朝から子供たちでいっぱいだ。Ⓜ「どうしても必要とあれば、10万円ぐらいお貸ししないものでもありませんよ」",
+      "meaning": "（～という特別な状況なので→普通と違う状況）bởi vì（Vì trạng thái đặc biệt A, đương nhiên kết quả cũng đặc biệt)（特別な状況なら→普通とは違う状況、行為）・Ｎ／Ｖ・Ａい・Ａな 普通形 Ａな→だ省略可・",
+      "explanationVi": "Nêu một tình huống đặc biệt nên kết quả cũng khác với thông thường.",
+      "exampleJa": "夏休みとあって、プールは朝から子供たちでいっぱいだ。",
+      "exampleVi": "Vì đang là kỳ nghỉ hè nên bể bơi đầy trẻ em từ sáng.",
+      "formation": "～とあって／あれば",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "～となると～ともなると／なれば",
+        "N + に関わらず",
+        "Vた・VているAい・Nの・Aな＋ ために・ためか"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる + なり",
-      "definition": "（～するとすぐに）Rồi thì ngay lập tức, ngay khi・Dùng trong trường hợp thể hiện việc thực hiện một hành động tiếp nối ngay lập tức. Thường hành động đi sau là hành động bất ngờ, không đoán trước được.・Ý nghĩa tương tự như \"が早いか\" hay \"や否や\"Ⓜ ジョンさんは納豆を一口食べるなり吐き出してしまった。"
+      "definition": "（～するとすぐに）Rồi thì ngay lập tức, ngay khi・Dùng trong trường hợp thể hiện việc thực hiện một hành động tiếp nối ngay lập tức. Thường hành động đi sau là hành động bất ngờ, không đoán trước được.・Ý nghĩa tương tự như \"が早いか\" hay \"や否や\"Ⓜ ジョンさんは納豆を一口食べるなり吐き出してしまった。",
+      "meaning": "（～するとすぐに）Rồi thì ngay lập tức, ngay khi・Dùng trong trường hợp thể hiện việc thực hiện một hành động tiếp nối ngay lập tức. Thường hành động đi sau là hành động bất ngờ, không đoán trước được.・Ý nghĩa tương tự như \"が早いか\" hay \"や否や\"",
+      "explanationVi": "Diễn tả hành động thứ hai xảy ra ngay lập tức sau hành động thứ nhất, thường bất ngờ.",
+      "exampleJa": "ジョンさんは納豆を一口食べるなり吐き出してしまった。",
+      "exampleVi": "John vừa ăn một miếng nattō đã nhổ ra ngay.",
+      "formation": "Vる + なり",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる／N + なり"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "Vる／N + なり",
-      "definition": "（例えば～とか...とか）（どちらかを選ぶ）・Ｎ／Ｖる（なり） Ｎ／Ｖる（なり）■Diễn tả ý nghĩa lựa chọn hành vi nào. Ở cuối câu là cách nói như \"anh nên làm...\", \"tôi muốn anh làm...\", \"nên có thái độ rõ ràng rằng chọn cái nào\".■Vì nó bao hàm ý ép buộc phải lựa chọn, cho nên nếu dùng sai sẽ trở thành sự thất lễ.Ⓜ 「風邪をひいているみたいですね。薬を飲むなり、医者に行くなりしたほうがいいですよ。」Ⓜ 人には大なり小なり欠点がある。Ⓜ 「私になり相談してくれればよかったのに」"
+      "definition": "（例えば～とか...とか）（どちらかを選ぶ）・Ｎ／Ｖる（なり） Ｎ／Ｖる（なり）■Diễn tả ý nghĩa lựa chọn hành vi nào. Ở cuối câu là cách nói như \"anh nên làm...\", \"tôi muốn anh làm...\", \"nên có thái độ rõ ràng rằng chọn cái nào\".■Vì nó bao hàm ý ép buộc phải lựa chọn, cho nên nếu dùng sai sẽ trở thành sự thất lễ.Ⓜ 「風邪をひいているみたいですね。薬を飲むなり、医者に行くなりしたほうがいいですよ。」Ⓜ 人には大なり小なり欠点がある。Ⓜ 「私になり相談してくれればよかったのに」",
+      "meaning": "（例えば～とか...とか）（どちらかを選ぶ）・Ｎ／Ｖる（なり） Ｎ／Ｖる（なり）■Diễn tả ý nghĩa lựa chọn hành vi nào. Ở cuối câu là cách nói như \"anh nên làm...\", \"tôi muốn anh làm...\", \"nên có thái độ rõ ràng rằng chọn cái nào\".■Vì nó bao hàm ý ép buộc phải lựa chọn, cho nên nếu dùng sai sẽ trở thành sự thất lễ.Ⓜ 「",
+      "explanationVi": "Đưa ra các lựa chọn và thúc giục người nghe chọn một cách rõ ràng.",
+      "exampleJa": "風邪をひいているみたいですね。薬を飲むなり、医者に行くなりしたほうがいいですよ。",
+      "exampleVi": "Có vẻ bạn bị cảm; nên uống thuốc hoặc đi bác sĩ.",
+      "formation": "Vる／N + なり",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "Vる + なり"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～に至る／至るまで／至って",
-      "definition": "（最終的に～という段階になる、範囲が～まで達する。）đến mức, đến cả, cho đến khi, cho đến lúc đó (cảm giác chờ đợi thời gian dài)・N・ＶるⓂ 兄は3か月間1日も休まず働き続け、過労死するに至った。Ⓜ 泥棒に入られ、現金やクレジットカードはもちろん、冷蔵庫の中身に至るまで全部取られた。"
+      "definition": "（最終的に～という段階になる、範囲が～まで達する。）đến mức, đến cả, cho đến khi, cho đến lúc đó (cảm giác chờ đợi thời gian dài)・N・ＶるⓂ 兄は3か月間1日も休まず働き続け、過労死するに至った。Ⓜ 泥棒に入られ、現金やクレジットカードはもちろん、冷蔵庫の中身に至るまで全部取られた。",
+      "meaning": "（最終的に～という段階になる、範囲が～まで達する。）đến mức, đến cả, cho đến khi, cho đến lúc đó (cảm giác chờ đợi thời gian dài)・N・Ｖる",
+      "explanationVi": "Diễn tả quá trình cuối cùng đạt tới một giai đoạn hoặc phạm vi lan tới tận một điểm.",
+      "exampleJa": "兄は3か月間1日も休まず働き続け、過労死するに至った。",
+      "exampleVi": "Anh tôi làm việc ba tháng không nghỉ ngày nào và cuối cùng đã chết vì lao lực.",
+      "formation": "～に至る／至るまで／至って",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "～となると～ともなると／なれば",
+        "N ＋ 限りで・限りの",
+        "Vる・時間・日にち ＋ までに"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～となると～ともなると／なれば",
-      "definition": "（～という段階になると→次のような状況が生じる）（～という状況であるなら→次のように考えられれる）Nếu như vào trường hợp này ... (sẽ khác thông thường)・N／Ｖ・Ａい・Ａな 普通形Ⓜ 外国語は、意味は知っていても、使うとなると間違えることも多い。（という上の段階になると→次のような状況が生じる）Ⓜ 一国の首相ともなれば、その発言も行動も国を代表するものと見なされる。"
+      "definition": "（～という段階になると→次のような状況が生じる）（～という状況であるなら→次のように考えられれる）Nếu như vào trường hợp này ... (sẽ khác thông thường)・N／Ｖ・Ａい・Ａな 普通形Ⓜ 外国語は、意味は知っていても、使うとなると間違えることも多い。（という上の段階になると→次のような状況が生じる）Ⓜ 一国の首相ともなれば、その発言も行動も国を代表するものと見なされる。",
+      "meaning": "（～という段階になると→次のような状況が生じる）（～という状況であるなら→次のように考えられれる）Nếu như vào trường hợp này ... (sẽ khác thông thường)・N／Ｖ・Ａい・Ａな 普通形",
+      "explanationVi": "Nêu rằng khi đạt tới một giai đoạn hoặc vị trí đặc biệt thì tình hình cũng khác.",
+      "exampleJa": "外国語は、意味は知っていても、使うとなると間違えることも多い。",
+      "exampleVi": "Ngoại ngữ dù biết nghĩa, nhưng khi thực sự sử dụng vẫn thường mắc lỗi.",
+      "formation": "～となると～ともなると／なれば",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "～とあって／あれば",
+        "～に至る／至るまで／至って",
+        "N ＋ に限って"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～ならでは（の）",
-      "definition": "（～だけができる、～以外にはない）（褒める、感心する）chỉ - mới có thể (đánh giá cao)・NⓂ 京都には古い町ならではの落ち着きがある。 Ⓜ 「こんな大変な仕事は君ならでは不可能だ。ぜひ引き受けてくれ」"
+      "definition": "（～だけができる、～以外にはない）（褒める、感心する）chỉ - mới có thể (đánh giá cao)・NⓂ 京都には古い町ならではの落ち着きがある。 Ⓜ 「こんな大変な仕事は君ならでは不可能だ。ぜひ引き受けてくれ」",
+      "meaning": "（～だけができる、～以外にはない）（褒める、感心する）chỉ - mới có thể (đánh giá cao)・N",
+      "explanationVi": "Khen ngợi nét riêng hoặc năng lực chỉ A mới có.",
+      "exampleJa": "京都には古い町ならではの落ち着きがある。",
+      "exampleVi": "Kyoto có sự trầm tĩnh chỉ riêng một thành phố cổ mới có.",
+      "formation": "～ならでは（の）",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "ようとする（直前・意志動詞）",
+        "ただ ＋ Vる・Aい・N ＋ のみ",
+        "N ＋において"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "に則って",
-      "definition": "N+にのっとってDựa theo tiêu chuẩn gì (đã có từ trước) ... mà làm.スポーツマンシップに則って試合をする。(Chúng tôi đã đấu một trận đấu dựa trên tinh thần thể thao.)古くからの伝統に則った祭りが行われている。(Lễ hội được tổ chức theo như truyền thống từ ngày xưa.)"
+      "definition": "N+にのっとってDựa theo tiêu chuẩn gì (đã có từ trước) ... mà làm.スポーツマンシップに則って試合をする。(Chúng tôi đã đấu một trận đấu dựa trên tinh thần thể thao.)古くからの伝統に則った祭りが行われている。(Lễ hội được tổ chức theo như truyền thống từ ngày xưa.)",
+      "meaning": "N+にのっとってDựa theo tiêu chuẩn gì (đã có từ trước) ... mà làm.",
+      "explanationVi": "Diễn tả hành động tuân theo quy tắc, tiêu chuẩn hoặc truyền thống đã có.",
+      "exampleJa": "スポーツマンシップに則って試合をする。",
+      "exampleVi": "Chúng tôi thi đấu theo đúng tinh thần thể thao.",
+      "formation": "に則って",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N＋に沿って",
+        "～に即して"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     },
     {
       "term": "～に即して",
-      "definition": "（～に従って、～に当てはめて）Hợp với, tuân thủ đúng với✦ Khi dùng với nghĩa là theo một quy định, tiêu chuẩn nào đó thì dùng chữ Hán \"則\"・ＮⓂ 具体例に即してご説明いたします。"
+      "definition": "（～に従って、～に当てはめて）Hợp với, tuân thủ đúng với✦ Khi dùng với nghĩa là theo một quy định, tiêu chuẩn nào đó thì dùng chữ Hán \"則\"・ＮⓂ 具体例に即してご説明いたします。",
+      "meaning": "（～に従って、～に当てはめて）Hợp với, tuân thủ đúng với✦ Khi dùng với nghĩa là theo một quy định, tiêu chuẩn nào đó thì dùng chữ Hán \"則\"・Ｎ",
+      "explanationVi": "Diễn tả việc áp dụng hoặc giải thích sát với hoàn cảnh, thực tế hay ví dụ cụ thể.",
+      "exampleJa": "具体例に即してご説明いたします。",
+      "exampleVi": "Tôi xin giải thích dựa theo một ví dụ cụ thể.",
+      "formation": "～に即して",
+      "usageNote": "Chú ý đúng dạng từ đứng trước mẫu và sắc thái của câu; không chỉ học bằng bản dịch từng chữ.",
+      "relatedPatterns": [
+        "N＋に沿って",
+        "に則って"
+      ],
+      "sourceTypes": {
+        "explanationVi": "BJT editorial guide",
+        "relatedPatterns": "generated semantic match"
+      }
     }
   ],
-  "_watermark": "Exported from Quizlet Exporter — https://chromewebstore.google.com"
+  "_watermark": "Exported from Quizlet Exporter — https://chromewebstore.google.com",
+  "enrichment": {
+    "version": 2,
+    "generated_at": "2026-07-21T00:20:25.252Z",
+    "complete": true
+  }
 }

@@ -6,7 +6,7 @@
   var loadingState = document.getElementById('loadingState');
   var toast = document.getElementById('toast');
   var datasets = { vocabulary: [], grammar: [] };
-  var vocabularyInsights = { characters: {}, terms: {} };
+  var vocabularyInsights = { characters: {}, terms: {}, termsByIndex: [] };
   var itemsById = new Map();
   var currentView = 'path';
   var currentSession = null;
@@ -251,7 +251,11 @@
       meaning: meaning,
       explanationVi: entry.explanationVi || guide[0] || 'Mẫu câu này dùng để diễn đạt sắc thái và quan hệ ý nghĩa nêu ở phần trên; hãy chú ý dạng từ đứng trước mẫu và mức độ trang trọng trong ngữ cảnh công việc.',
       exampleJa: exampleJa,
-      exampleVi: entry.exampleVi || guide[1] || ''
+      exampleVi: entry.exampleVi || guide[1] || '',
+      formation: entry.formation || entry.term,
+      usageNote: entry.usageNote || '',
+      relatedPatterns: entry.relatedPatterns || [],
+      sourceTypes: entry.sourceTypes || {}
     };
   }
 
@@ -294,7 +298,7 @@
     }).filter(Boolean);
     return {
       parts: parts,
-      term: vocabularyInsights.terms[normalizeInsightTerm(item.term)] || null
+      term: (vocabularyInsights.termsByIndex || [])[item.index] || vocabularyInsights.terms[normalizeInsightTerm(item.term)] || null
     };
   }
 
@@ -313,12 +317,32 @@
       return '<span><b lang="ja">' + escapeHtml(trap.r) + '</b>' + escapeHtml(trap.meaning ? ' — ' + trap.meaning : '') + '</span>';
     }).join('') + '</div></section>' : '';
     var confusion = term && term.confuse ? '<section class="insight-section insight-warning"><h4>Lưu ý</h4><p>' + escapeHtml(term.confuse) + '</p></section>' : '';
-    var collocations = term && term.collocations && term.collocations.length ? '<section class="insight-section insight-collocations"><h4>Cụm hay dùng</h4><div class="insight-tags">' + term.collocations.map(function (value) { return '<span>' + escapeHtml(value) + '</span>'; }).join('') + '</div></section>' : '';
-    var synonyms = term && term.synonyms && term.synonyms.length ? '<section class="insight-section insight-synonyms"><h4>Đồng nghĩa / gần nghĩa</h4><div class="insight-tags">' + term.synonyms.map(function (value) { return '<span>' + escapeHtml(value) + '</span>'; }).join('') + '</div></section>' : '';
-    return '<div class="vocabulary-insight' + (compact ? ' is-compact' : '') + '">' +
-      '<section class="insight-section"><h4>Phân tích chữ Hán</h4><div class="kanji-grid" role="table" aria-label="Phân tích chữ Hán">' +
-        '<div class="kanji-head">Kanji</div><div class="kanji-head">Hán Việt</div><div class="kanji-head">Âm On</div><div class="kanji-head">Âm Kun</div><div class="kanji-head">Nghĩa</div>' + partRows +
-      '</div></section>' + confusion + traps + collocations + synonyms + '</div>';
+    var collocations = term && term.collocations && term.collocations.length ? '<section class="insight-section insight-collocations"><h4>Cụm / ngữ cảnh dùng</h4><div class="insight-tags">' + term.collocations.map(function (value) { return '<span>' + escapeHtml(value) + '</span>'; }).join('') + '</div></section>' : '';
+    var synonymItems = term ? (term.synonyms || []).concat(term.related || []) : [];
+    var synonyms = synonymItems.length ? '<section class="insight-section insight-synonyms"><h4>Đồng nghĩa / từ liên quan</h4><div class="insight-tags">' + synonymItems.map(function (value) {
+      if (typeof value === 'string') return '<span>' + escapeHtml(value) + '</span>';
+      return '<span class="' + (value.kind === 'synonym' ? 'is-synonym' : 'is-related') + '"><b lang="ja">' + escapeHtml(value.term) + '</b>' + (value.meaning ? escapeHtml(' — ' + value.meaning) : '') + '<small>' + (value.kind === 'synonym' ? 'Đồng nghĩa đã đối chiếu' : 'Từ liên quan trong kho BJT') + '</small></span>';
+    }).join('') + '</div></section>' : '<section class="insight-section insight-synonyms"><h4>Đồng nghĩa / từ liên quan</h4><p class="insight-empty">Chưa có từ tương đương đủ tin cậy trong nguồn đối chiếu.</p></section>';
+    var provenance = term && term.sourceTypes ? '<p class="insight-provenance">Nguồn: BJT · KANJIDIC2/JMdict · Japanese WordNet. Bẫy đọc và mục “từ liên quan” là gợi ý tự động.</p>' : '';
+    var kanjiSection = insight.parts.length
+      ? '<section class="insight-section"><h4>Phân tích chữ Hán</h4><div class="kanji-grid" role="table" aria-label="Phân tích chữ Hán"><div class="kanji-head">Kanji</div><div class="kanji-head">Hán Việt</div><div class="kanji-head">Âm On</div><div class="kanji-head">Âm Kun</div><div class="kanji-head">Nghĩa</div>' + partRows + '</div></section>'
+      : '<section class="insight-section"><h4>Phân tích cách viết</h4><p class="insight-empty">Từ này không dùng chữ Hán, vì vậy không có âm Hán Việt, On hoặc Kun.</p></section>';
+    return '<div class="vocabulary-insight' + (compact ? ' is-compact' : '') + '">' + kanjiSection + confusion + traps + collocations + synonyms + provenance + '</div>';
+  }
+
+  function renderGrammarInsight(item, compact) {
+    var details = item.details;
+    var core = compact ? '' : '<dl class="study-details grammar-details insight-core">' +
+      '<div class="detail-wide"><dt>Ý nghĩa</dt><dd lang="ja">' + escapeHtml(details.meaning) + '</dd></div>' +
+      '<div class="detail-wide"><dt>Giải thích bằng tiếng Việt</dt><dd>' + escapeHtml(details.explanationVi) + '</dd></div>' +
+      (details.exampleJa ? '<div class="detail-wide"><dt>Ví dụ</dt><dd><span lang="ja">' + escapeHtml(details.exampleJa) + '</span>' + (details.exampleVi ? '<small>' + escapeHtml(details.exampleVi) + '</small>' : '') + '</dd></div>' : '') + '</dl>';
+    var related = details.relatedPatterns && details.relatedPatterns.length
+      ? '<section class="insight-section insight-synonyms"><h4>Mẫu gần nghĩa / liên quan</h4><div class="insight-tags">' + details.relatedPatterns.map(function (pattern) { return '<span lang="ja">' + escapeHtml(pattern) + '</span>'; }).join('') + '</div></section>'
+      : '<section class="insight-section"><h4>Mẫu gần nghĩa / liên quan</h4><p class="insight-empty">Chưa có mẫu đủ gần để ghép cặp an toàn.</p></section>';
+    return '<div class="vocabulary-insight grammar-insight' + (compact ? ' is-compact' : '') + '">' + core +
+      '<section class="insight-section"><h4>Cấu trúc</h4><div class="grammar-formation" lang="ja">' + escapeHtml(details.formation || item.term) + '</div></section>' +
+      (details.usageNote ? '<section class="insight-section insight-warning"><h4>Cách dùng & điểm dễ nhầm</h4><p>' + escapeHtml(details.usageNote) + '</p></section>' : '') +
+      related + '<p class="insight-provenance">Phần giải thích và ví dụ tiếng Việt đã được biên tập cho BJT; nhóm mẫu liên quan là gợi ý học tập tự động.</p></div>';
   }
 
   function normalizeTerms(terms, kind) {
@@ -395,7 +419,7 @@
       '<div class="detail-wide"><dt>Ý nghĩa</dt><dd lang="ja">' + escapeHtml(d.meaning) + '</dd></div>' +
       '<div class="detail-wide"><dt>Giải thích bằng tiếng Việt</dt><dd>' + escapeHtml(d.explanationVi) + '</dd></div>' +
       (d.exampleJa ? '<div class="detail-wide"><dt>Ví dụ</dt><dd><span lang="ja">' + escapeHtml(d.exampleJa) + '</span>' + (d.exampleVi ? '<small>' + escapeHtml(d.exampleVi) + '</small>' : '') + '</dd></div>' : '') +
-    '</dl>';
+    '</dl>' + renderGrammarInsight(item, true);
   }
 
   function questionHint(question) {
@@ -552,13 +576,13 @@
         ? [item.details.reading, item.details.sinoVietnamese ? '[' + item.details.sinoVietnamese + ']' : '', item.details.meaning].filter(Boolean).join(' · ')
         : item.details.meaning;
       var category = item.kind === 'vocabulary' ? VOCAB_CATEGORIES.find(function (entry) { return entry.id === item.details.category; }) : null;
-      var insight = item.kind === 'vocabulary' ? vocabularyInsightFor(item) : { parts: [], term: null };
-      var hasInsight = insight.parts.length || insight.term;
+      var insight = item.kind === 'vocabulary' ? vocabularyInsightFor(item) : { parts: [], term: item.details };
+      var hasInsight = item.kind === 'grammar' || insight.parts.length || insight.term;
       var expanded = expandedVocabularyId === item.id;
       return '<article class="library-row' + (expanded ? ' is-expanded' : '') + '"><strong class="library-term" lang="ja">' + escapeHtml(item.term) + '</strong><span class="library-definition">' + escapeHtml(summary) + '</span>' +
         (category ? '<span class="library-category">' + escapeHtml(category.label) + ' · ' + escapeHtml(category.jp) + '</span>' : '') +
-        '<div class="library-actions">' + (hasInsight ? '<button class="row-insight" type="button" data-action="vocab-insight" data-id="' + item.id + '" aria-expanded="' + expanded + '">' + (expanded ? 'Thu gọn' : 'Phân tích') + '</button>' : '') + '<button class="row-practice" type="button" data-action="single" data-id="' + item.id + '">Luyện mục này</button></div>' +
-        (expanded ? '<div class="library-insight">' + renderVocabularyInsight(item, false) + '</div>' : '') + '</article>';
+        '<div class="library-actions">' + (hasInsight ? '<button class="row-insight" type="button" data-action="vocab-insight" data-id="' + item.id + '" aria-expanded="' + expanded + '">' + (expanded ? 'Thu gọn' : (item.kind === 'grammar' ? 'Chi tiết' : 'Phân tích')) + '</button>' : '') + '<button class="row-practice" type="button" data-action="single" data-id="' + item.id + '">Luyện mục này</button></div>' +
+        (expanded ? '<div class="library-insight">' + (item.kind === 'grammar' ? renderGrammarInsight(item, false) : renderVocabularyInsight(item, false)) + '</div>' : '') + '</article>';
     }).join('');
     var title = kind === 'grammar' ? 'Ngữ pháp · 文法' : 'Từ vựng · 語彙';
     var eyebrow = kind === 'grammar' ? '84 MẪU DÙNG TRONG NGỮ CẢNH' : '1.565 THUẬT NGỮ BUSINESS JAPANESE';
@@ -763,7 +787,7 @@
     } else if (action === 'vocab-insight') {
       var insightId = actionButton.getAttribute('data-id');
       expandedVocabularyId = expandedVocabularyId === insightId ? '' : insightId;
-      renderLibrary('vocabulary', libraryQuery);
+      renderLibrary(currentView, libraryQuery);
     } else if (action === 'module') {
       var moduleIndex = Number(actionButton.getAttribute('data-module'));
       var moduleItems = datasets.vocabulary.concat(datasets.grammar).filter(function (item) { return item.module === moduleIndex; });
@@ -787,15 +811,15 @@
   });
 
   Promise.all([
-    fetch('data/vocabulary.json?v=20260721b').then(function (response) {
+    fetch('data/vocabulary.json?v=20260721g').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu từ vựng');
       return response.json();
     }),
-    fetch('data/grammar.json?v=20260721b').then(function (response) {
+    fetch('data/grammar.json?v=20260721g').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu ngữ pháp');
       return response.json();
     }),
-    fetch('data/vocabulary-insights.json?v=20260721a').then(function (response) {
+    fetch('data/vocabulary-insights.json?v=20260721g').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu phân tích chữ Hán');
       return response.json();
     })
