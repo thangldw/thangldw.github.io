@@ -1,6 +1,6 @@
 /* Portfolio app design system
    Visual source: the Home resume — neutral canvas, indigo/orange accents,
-   restrained borders, square controls, and local system fonts. */
+   restrained borders, softly rounded controls, and local system fonts. */
 
 :root {
   --portfolio-bg: #fbfaf6;
@@ -20,7 +20,7 @@
   --portfolio-success-soft: #eaf6ef;
   --portfolio-danger: #b44545;
   --portfolio-danger-soft: #fff0f0;
-  --portfolio-radius: 6px;
+  --portfolio-radius: 8px;
   --portfolio-content: 1328px;
   --portfolio-font-sans: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
   --portfolio-font-jp-sans: var(--font-jp-sans, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif);
@@ -120,16 +120,21 @@ body.portfolio-app :where(.eyebrow, .section-label, .filter-label, .mode-label, 
 
 body.portfolio-app :where(input, select, textarea) {
   border: 1px solid var(--portfolio-border-strong) !important;
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   background: var(--portfolio-surface) !important;
   color: var(--portfolio-ink) !important;
   box-shadow: none !important;
 }
 
 body.portfolio-app :where(button, .btn, label.btn) {
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   box-shadow: none !important;
   letter-spacing: 0 !important;
+}
+
+body.portfolio-app :where(.skip-link),
+body.portfolio-catalog :where(.skip-link) {
+  border-radius: 8px !important;
 }
 
 body.portfolio-app :where(.site-foot, footer.site-foot) {
@@ -153,7 +158,7 @@ body.portfolio-app :is(
 ) {
   min-height: 40px;
   border: 1px solid var(--portfolio-border-strong) !important;
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   background: var(--portfolio-surface) !important;
   color: var(--portfolio-body) !important;
   font-size: 14px !important;
@@ -426,7 +431,7 @@ body[data-app-kind="language"] :is(.badge-blue, .active-orange) {
 
 body[data-app-kind="language"] :is(.opt, .choice, .m4o, .sopt) {
   border: 1px solid var(--portfolio-border) !important;
-  border-radius: 4px !important;
+  border-radius: 10px !important;
   background: var(--portfolio-surface) !important;
   color: var(--portfolio-ink) !important;
   box-shadow: none !important;
@@ -835,7 +840,7 @@ body.portfolio-catalog .catalog-controls {
 
 body.portfolio-catalog .filter {
   border-color: var(--portfolio-border-strong) !important;
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   background: var(--portfolio-surface) !important;
   color: var(--portfolio-body) !important;
 }
@@ -858,7 +863,7 @@ body.portfolio-catalog .app-card:hover {
 
 body.portfolio-catalog .app-card .ac-icon {
   border: 1px solid var(--portfolio-border);
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   background: var(--portfolio-accent-soft) !important;
   color: var(--portfolio-accent) !important;
 }

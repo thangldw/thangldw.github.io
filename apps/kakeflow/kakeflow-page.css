@@ -33,7 +33,7 @@ a { color: inherit; }
 img { display: block; max-width: 100%; }
 p { text-wrap: pretty; }
 
-.skip-link { position: fixed; z-index: 100; top: 8px; left: 8px; padding: 8px 12px; border: 1px solid var(--primary); border-radius: 6px; background: var(--surface); color: var(--primary); font-size: 12px; transform: translateY(-150%); }
+.skip-link { position: fixed; z-index: 100; top: 8px; left: 8px; padding: 8px 12px; border: 1px solid var(--primary); border-radius: 8px; background: var(--surface); color: var(--primary); font-size: 12px; transform: translateY(-150%); }
 .skip-link:focus { transform: translateY(0); }
 .desktop-bar { height: 34px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--hairline); background: var(--surface); color: var(--text-2); font-size: 10px; font-weight: 600; }
 .site-header { position: sticky; z-index: 20; top: 0; border-bottom: 1px solid var(--hairline); background: color-mix(in oklch, var(--surface) 96%, transparent); backdrop-filter: blur(12px); }
@@ -43,12 +43,12 @@ p { text-wrap: pretty; }
 .wordmark small { margin-left: 4px; padding: 2px 5px; border-radius: 3px; background: var(--surface-2); color: var(--text-2); font: 600 9px "IBM Plex Mono", ui-monospace, monospace; }
 .brand-mark { width: 24px; height: 24px; border-radius: 6px; }
 .nav-shell nav { display: flex; justify-content: flex-end; gap: 4px; }
-.nav-shell nav a, .project-link { padding: 7px 10px; border-radius: 6px; color: var(--text-2); font-size: 11.5px; font-weight: 600; text-decoration: none; }
+.nav-shell nav a, .project-link { padding: 7px 10px; border-radius: 8px; color: var(--text-2); font-size: 11.5px; font-weight: 600; text-decoration: none; }
 .nav-shell nav a:hover, .nav-shell nav a:focus-visible { background: var(--surface-2); color: var(--text); }
 .project-link { border: 1px solid var(--hairline); background: var(--surface-2); color: var(--text); }
 .menu-toggle { display: none; }
 
-.button { min-height: 38px; padding: 0 15px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: 7px; font-size: 12px; font-weight: 700; text-decoration: none; }
+.button { min-height: 38px; padding: 0 15px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; border-radius: 8px; font-size: 12px; font-weight: 700; text-decoration: none; }
 .button-primary { background: var(--primary); color: var(--primary-fg); }
 .button-secondary { border-color: var(--hairline); background: var(--surface); color: var(--text); }
 a.button:hover { border-color: var(--divider); }
@@ -103,7 +103,7 @@ a.button:hover { border-color: var(--divider); }
 .screen-sidebar { padding: 15px 12px; display: flex; flex-direction: column; border-right: 1px solid var(--hairline); background: var(--surface); }
 .screen-sidebar > p { margin: 0 8px 10px; color: var(--text-2); font-size: 10px; font-weight: 600; }
 .screen-tabs { display: grid; gap: 3px; }
-.screen-tabs button { width: 100%; padding: 9px 10px; display: grid; gap: 2px; border: 0; border-radius: 6px; background: transparent; color: var(--text); cursor: pointer; text-align: left; }
+.screen-tabs button { width: 100%; padding: 9px 10px; display: grid; gap: 2px; border: 0; border-radius: 8px; background: transparent; color: var(--text); cursor: pointer; text-align: left; }
 .screen-tabs button b { font-size: 12px; }
 .screen-tabs button span { color: var(--text-2); font-size: 9.5px; line-height: 1.45; }
 .screen-tabs button[aria-selected="true"] { background: var(--nav-selected); color: var(--primary); }
@@ -163,7 +163,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in oklch, v
   .desktop-bar { display: none; }
   .nav-shell { min-height: 56px; grid-template-columns: auto 1fr auto; gap: 10px; }
   .project-link { display: none; }
-  .menu-toggle { justify-self: end; display: inline-flex; padding: 7px 9px; border: 1px solid var(--hairline); border-radius: 6px; background: var(--surface-2); color: var(--text); font-size: 10px; font-weight: 700; }
+  .menu-toggle { justify-self: end; display: inline-flex; padding: 7px 9px; border: 1px solid var(--hairline); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 10px; font-weight: 700; }
   .nav-shell nav { position: absolute; top: 56px; right: 0; left: 0; padding: 8px 16px 12px; display: none; flex-direction: column; gap: 2px; border-bottom: 1px solid var(--hairline); background: var(--surface); }
   .nav-shell nav.is-open { display: flex; }
   .nav-shell nav a { padding: 10px; }
