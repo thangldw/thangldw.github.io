@@ -92,11 +92,14 @@ body{font-family:var(--font-sans, var(--portfolio-font-sans));background:#f7f8fa
 .spin{width:11px;height:11px;border:2px solid rgba(255,255,255,.3);border-top:2px solid #fff;border-radius:50%;animation:sp .6s linear infinite;display:inline-block;flex-shrink:0}
 @keyframes sp{to{transform:rotate(360deg)}}
 /* DTG */
-.dtg-s{margin-bottom:12px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden}
-.dtg-h{background:#1e2240;color:#fff;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px}
-.dtg-h .dp{font-size:17px;font-weight:700;font-family:system-ui,sans-serif}
-.dtg-h .dv{font-size:12px;color:rgba(255,255,255,.7)}
-.dtg-h .dc{font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;margin-left:auto}
+.dtg-s{margin-bottom:12px;background:var(--portfolio-surface);border-radius:12px;border:1px solid var(--portfolio-border);overflow:hidden}
+.dtg-h{min-height:58px;background:var(--portfolio-accent-soft);color:var(--portfolio-ink);padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background-color .15s,border-color .15s}
+.dtg-h:hover{background:color-mix(in srgb,var(--portfolio-accent-soft) 72%,var(--portfolio-accent) 28%)}
+.dtg-h:focus-visible{outline:2px solid var(--portfolio-accent);outline-offset:-3px}
+.dtg-s.open .dtg-h{border-bottom:1px solid var(--portfolio-border)}
+.dtg-h .dp{font-size:17px;font-weight:700;color:var(--portfolio-accent);font-family:var(--font-sans,var(--portfolio-font-sans))}
+.dtg-h .dv{font-size:12px;color:var(--portfolio-body)}
+.dtg-h .dc{font-size:11px;color:var(--portfolio-accent);background:color-mix(in srgb,var(--portfolio-accent) 12%,var(--portfolio-surface));padding:2px 8px;border:1px solid color-mix(in srgb,var(--portfolio-accent) 22%,var(--portfolio-border));border-radius:999px;margin-left:auto}
 .dtg-b{display:none;padding:10px}
 .dtg-s.open .dtg-b{display:block}
 .dtg-t{width:100%;border-collapse:collapse;font-size:13px}
@@ -534,16 +537,16 @@ function rDTG(el){
   var total=0;
   Object.keys(DTG).forEach(function(gk){
     var g=DTG[gk];total+=g.words.length;
-    h+='<div style="margin-bottom:11px;background:#fff;border-radius:12px;border:1px solid #e5e2d8;overflow:hidden">';
-    h+='<div role="button" tabindex="0" aria-expanded="false" style="background:#1e2240;color:#fff;padding:9px 13px;cursor:pointer;display:flex;align-items:center;gap:10px" onclick="togP(this)" onkeydown="panelKey(event,this)">';
-    h+='<span style="font-size:16px;font-weight:700;font-family:var(--font-sans, var(--portfolio-font-sans))">'+esc(g.prefix||gk)+'</span>';
-    h+='<span style="font-size:11px;color:rgba(255,255,255,.7)">'+esc(g.vi_prefix||'')+'</span>';
-    h+='<span style="font-size:11px;background:rgba(255,255,255,.2);padding:1px 7px;border-radius:10px;margin-left:auto">'+g.words.length+'語</span></div>';
-    h+='<div class="pre-b"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr><th style="background:#f5f7ff;color:#3949ab;font-weight:700;padding:6px 9px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:11.5px">動詞</th><th style="background:#f5f7ff;color:#3949ab;font-weight:700;padding:6px 9px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:11.5px">名詞</th><th style="background:#f5f7ff;color:#3949ab;font-weight:700;padding:6px 9px;text-align:left;border-bottom:2px solid #e8eaf6;font-size:11.5px">Nghĩa</th></tr>';
+    h+='<div class="dtg-s">';
+    h+='<div class="dtg-h" role="button" tabindex="0" aria-expanded="false" onclick="togP(this)" onkeydown="panelKey(event,this)">';
+    h+='<span class="dp">'+esc(g.prefix||gk)+'</span>';
+    h+='<span class="dv">'+esc(g.vi_prefix||'')+'</span>';
+    h+='<span class="dc">'+g.words.length+'語</span></div>';
+    h+='<div class="dtg-b"><table class="dtg-t"><tr><th>動詞</th><th>名詞</th><th>Nghĩa</th></tr>';
     g.words.forEach(function(w){
-      h+='<tr><td style="padding:5px 9px;border-bottom:1px solid #f0f0f0;vertical-align:top"><span style="font-weight:700;color:#b71c1c">'+esc(w.v)+'</span>'+(w.h?'<span style="font-size:11px;color:#4a5aad;margin-left:3px">（'+esc(w.h)+'）</span>':'')+(w.warn?'<div style="font-size:11px;color:#e65100;background:#fff3e0;border-radius:4px;padding:1px 6px;margin-top:2px;display:inline-block">⚠️ '+esc(w.warn)+'</div>':'')+'</td>';
-      h+='<td style="padding:5px 9px;border-bottom:1px solid #f0f0f0;font-size:12px;color:#555">'+esc(w.n||'')+'</td>';
-      h+='<td style="padding:5px 9px;border-bottom:1px solid #f0f0f0;font-size:12px;color:#b45309">'+esc(w.vi||'')+'</td></tr>';
+      h+='<tr><td><span class="dtg-v">'+esc(w.v)+'</span>'+(w.h?'<span class="dtg-kn">（'+esc(w.h)+'）</span>':'')+(w.warn?'<div class="dtg-warn-box">⚠️ '+esc(w.warn)+'</div>':'')+'</td>';
+      h+='<td class="dtg-n">'+esc(w.n||'')+'</td>';
+      h+='<td class="dtg-vi">'+esc(w.vi||'')+'</td></tr>';
     });
     h+='</table></div></div>';
   });

@@ -139,6 +139,34 @@ flowchart LR
 
 **final result: passed**
 
+## Làm sáng nhóm Động từ ghép — 2026-07-22
+
+- **Source visual truth:** ảnh chụp tab `Động từ ghép` do người dùng cung cấp trong task hiện tại; ảnh nguồn không được lưu vào repository.
+- **Implementation screenshot:** browser capture tạm thời sau sửa; ảnh kiểm thử không được commit.
+- **Viewport:** 2048 × 982, cùng kích thước với ảnh nguồn.
+- **State:** tab `Động từ ghép`, light và dark theme; 22 nhóm dữ liệu đã render.
+- **Primary interactions tested:** chuyển tab, mở nhóm bằng click, đóng nhóm bằng phím Enter và đổi theme.
+
+### Full-view và focused-region comparison
+
+- Màu nền navy cũ `#1e2240` trong light mode đã được thay bằng accent surface `#eef0ff`; chữ chính dùng `#4657d8`, mô tả dùng body token và badge dùng lớp nền có độ tương phản nhẹ.
+- Dark mode dùng `--portfolio-accent-soft` riêng (`#202844`), không nhận màu light và không quay lại hard-coded navy.
+- Kích thước hàng 58 px, radius 12 px, khoảng cách nội dung và chiều rộng danh sách được giữ nguyên; trang không phát sinh horizontal overflow.
+- Markup render động đã bỏ inline color/style cho header và bảng, chuyển sang các class `dtg-*` để CSS theme kiểm soát nhất quán.
+
+### Comparison history
+
+1. **P2 — surface quá tối trong light mode:** 22 accordion header dùng trực tiếp `#1e2240`, tạo khối màu nặng hơn phần còn lại của trang.
+2. **Fix:** chuyển header sang design tokens, dùng nền indigo nhạt, chữ accent và count pill cùng hệ màu.
+3. **Post-fix evidence:** computed light background `rgb(238, 240, 255)`; dark background `rgb(32, 40, 68)`; radius 12 px; không overflow.
+4. **Interaction evidence:** click đổi `aria-expanded` thành `true` và hiển thị bảng; Enter đổi lại `false` và đóng bảng.
+
+**Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi thay màu nhóm Động từ ghép.
+
+**Follow-up polish:** không có.
+
+**final result: passed**
+
 ## Chuẩn hóa bo góc button học tiếng Nhật — 2026-07-22
 
 - **Source visual truth:** `/Users/thang/Desktop/Screenshot 2026-07-22 at 0.09.09.png` (light) và `/Users/thang/Desktop/Screenshot 2026-07-22 at 0.09.15.png` (dark).
