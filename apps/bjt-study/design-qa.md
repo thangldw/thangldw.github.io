@@ -25,4 +25,13 @@
 - Allowed a mixed BJT question to reach 0 seconds and confirmed it was marked “Hết 30 giây” and added to review.
 - Opened and closed the mobile navigation and confirmed `scrollWidth === innerWidth`.
 
+## Score Counter Follow-up
+
+- Desktop before/after evidence: `/tmp/practice-score-count-qa/bjt-before-after.png`
+- Mobile evidence: `/tmp/practice-score-count-qa/bjt-mobile.png`
+- The practice header now displays `Đúng {score} / {total}` beside the review count and updates immediately after a correct answer.
+- The completion summary also reports `{score} / {total}` as the number of correct answers.
+- Verified the counter at 1440 px and 390 px with no overlap or horizontal overflow.
+- Browser console logs remained empty. A separate focused-region capture was unnecessary because the counter is legible in the full-view comparison.
+
 final result: passed

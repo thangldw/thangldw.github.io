@@ -85,6 +85,7 @@ a { color: inherit; }
 .lesson-progress { display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: 12px 18px; margin: 24px 0 42px; }
 .lesson-progress strong { color: var(--bjt-orange); font-size: 18px; font-weight: 650; }
 .lesson-progress span { color: var(--bjt-muted); }
+.score-status b { color: var(--bjt-orange); font-weight: 650; }
 .progress-track { grid-column: 1 / -1; height: 2px; background: var(--bjt-rule); overflow: hidden; }
 .progress-fill { display: block; width: 0; height: 100%; background: var(--bjt-orange); transition: width .35s ease; }
 .question-timer { justify-self: end; font-family: var(--bjt-mono); font-size: 20px !important; }
