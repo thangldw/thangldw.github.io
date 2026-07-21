@@ -17,7 +17,7 @@
     "apps/n1-vocabulary-context/index.html": {"style_blocks": 2, "style_attributes": 1, "event_handlers": 8, "buttons_missing_type": 6},
     "apps/n1-vocabulary-exams/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
     "apps/n1-vocabulary-paraphrase/index.html": {"style_blocks": 1, "style_attributes": 12, "event_handlers": 10, "buttons_missing_type": 0},
-    "apps/n1-vocabulary-tabs/index.html": {"style_blocks": 1, "style_attributes": 73, "event_handlers": 39, "buttons_missing_type": 8},
+    "apps/n1-vocabulary-tabs/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
     "apps/namiquant/index.html": {"style_blocks": 0, "style_attributes": 4, "event_handlers": 0, "buttons_missing_type": 0},
     "apps/pipeline/index.html": {"style_blocks": 1, "style_attributes": 3, "event_handlers": 0, "buttons_missing_type": 0},
     "index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0}
