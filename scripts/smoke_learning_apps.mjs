@@ -1,0 +1,255 @@
+#!/usr/bin/env node
+
+import { spawn } from 'node:child_process';
+import { once } from 'node:events';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { createServer } from 'node:net';
+import { tmpdir } from 'node:os';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const CHROME = process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+function freePort() {
+  return new Promise((resolvePort, reject) => {
+    const server = createServer();
+    server.on('error', reject);
+    server.listen(0, '127.0.0.1', () => {
+      const address = server.address();
+      server.close(() => resolvePort(address.port));
+    });
+  });
+}
+
+async function waitFor(url, timeout = 10000) {
+  const started = Date.now();
+  while (Date.now() - started < timeout) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) return response;
+    } catch {}
+    await new Promise(resolveWait => setTimeout(resolveWait, 100));
+  }
+  throw new Error(`Timed out waiting for ${url}`);
+}
+
+class CdpPage {
+  constructor(socket) {
+    this.socket = socket;
+    this.sequence = 0;
+    this.pending = new Map();
+    this.exceptions = [];
+    socket.addEventListener('message', event => {
+      const message = JSON.parse(event.data);
+      if (message.id && this.pending.has(message.id)) {
+        const { resolveCall, rejectCall } = this.pending.get(message.id);
+        this.pending.delete(message.id);
+        if (message.error) rejectCall(new Error(message.error.message));
+        else resolveCall(message.result);
+      } else if (message.method === 'Runtime.exceptionThrown') {
+        this.exceptions.push(message.params.exceptionDetails.text);
+      }
+    });
+  }
+
+  send(method, params = {}) {
+    const id = ++this.sequence;
+    return new Promise((resolveCall, rejectCall) => {
+      this.pending.set(id, { resolveCall, rejectCall });
+      this.socket.send(JSON.stringify({ id, method, params }));
+    });
+  }
+
+  async evaluate(expression) {
+    const result = await this.send('Runtime.evaluate', {
+      expression,
+      awaitPromise: true,
+      returnByValue: true,
+      userGesture: true
+    });
+    if (result.exceptionDetails) throw new Error(result.exceptionDetails.text);
+    return result.result.value;
+  }
+
+  async waitUntil(expression, timeout = 12000) {
+    const started = Date.now();
+    while (Date.now() - started < timeout) {
+      if (await this.evaluate(`Boolean(${expression})`)) return;
+      await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    }
+    const body = await this.evaluate('document.body.innerText.slice(0, 300)');
+    throw new Error(`Timed out waiting for expression: ${expression}; exceptions=${this.exceptions.join(' | ') || 'none'}; body=${body}`);
+  }
+
+  async navigate(url) {
+    this.exceptions.length = 0;
+    await this.send('Page.navigate', { url });
+    await this.waitUntil('document.readyState === "complete"');
+  }
+
+  close() {
+    this.socket.close();
+  }
+}
+
+async function openPage(debugPort) {
+  const response = await fetch(`http://127.0.0.1:${debugPort}/json/new?about:blank`, { method: 'PUT' });
+  if (!response.ok) throw new Error(`Could not create Chrome target: ${response.status}`);
+  const target = await response.json();
+  const socket = new WebSocket(target.webSocketDebuggerUrl);
+  await new Promise((resolveOpen, reject) => {
+    socket.addEventListener('open', resolveOpen, { once: true });
+    socket.addEventListener('error', reject, { once: true });
+  });
+  const page = new CdpPage(socket);
+  await page.send('Page.enable');
+  await page.send('Runtime.enable');
+  return page;
+}
+
+function assert(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+async function stopProcess(child) {
+  if (child.exitCode !== null) return;
+  child.kill('SIGTERM');
+  await Promise.race([
+    once(child, 'exit'),
+    new Promise(resolveWait => setTimeout(resolveWait, 3000))
+  ]);
+}
+
+async function checkPage(page, origin, test) {
+  const viewport = test.viewport || { width: 1280, height: 900 };
+  await page.send('Emulation.setDeviceMetricsOverride', {
+    width: viewport.width,
+    height: viewport.height,
+    deviceScaleFactor: 1,
+    mobile: false
+  });
+  await page.navigate(origin + test.route);
+  await page.waitUntil(test.ready);
+  const result = await page.evaluate(`(${test.check})()`);
+  assert(result.ok, `${test.name}: ${result.message || 'assertion failed'}`);
+  if (page.exceptions.length) throw new Error(`${test.name}: ${page.exceptions.join('; ')}`);
+  console.log(`✓ ${test.name}`);
+}
+
+const tests = [
+  {
+    name: 'G検定 roadmap and topics',
+    route: '/apps/gkentei/',
+    ready: 'document.querySelectorAll(".gk-module-row").length === 11',
+    check: function () {
+      const initial = document.querySelectorAll('.gk-module-row').length === 11 && document.querySelectorAll('main').length === 1;
+      document.querySelector('[data-view="topics"]').click();
+      const topics = document.querySelectorAll('.gk-topic-guide').length === 11;
+      return { ok: initial && topics, message: `roadmap=${initial}, topics=${topics}` };
+    }
+  },
+  {
+    name: 'BJT roadmap and vocabulary navigation',
+    route: '/apps/bjt-study/',
+    ready: 'document.querySelectorAll(".path-group").length === 3',
+    check: function () {
+      const roadmap = document.querySelectorAll('.module').length === 9;
+      document.querySelector('[data-view="vocabulary"]').click();
+      const vocabulary = Boolean(document.querySelector('.subject-hub'));
+      return { ok: roadmap && vocabulary, message: `roadmap=${roadmap}, vocabulary=${vocabulary}` };
+    }
+  },
+  {
+    name: 'JLPT N1 roadmap and vocabulary navigation',
+    route: '/apps/jlpt-n1/#path',
+    ready: 'document.querySelectorAll(".track-row").length === 3',
+    check: async function () {
+      const roadmap = document.querySelectorAll('.track-row').length === 3;
+      document.querySelector('[data-view="vocabulary"]').click();
+      await new Promise(resolveWait => setTimeout(resolveWait, 50));
+      const vocabulary = document.querySelectorAll('.module-row').length === 3;
+      return { ok: roadmap && vocabulary, message: `roadmap=${roadmap}, vocabulary=${vocabulary}` };
+    }
+  },
+  {
+    name: 'Vocabulary Exams filter, card and quiz',
+    route: '/apps/n1-vocabulary-exams/',
+    ready: 'document.querySelectorAll(".card").length === 96',
+    check: function () {
+      const initial = document.querySelectorAll('.card').length === 96 && document.querySelector('#hcnt').textContent === '648 từ';
+      const search = document.querySelector('#si');
+      search.value = '繁盛';
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+      const filtered = document.querySelectorAll('.card').length > 0 && document.querySelectorAll('.card').length < 96;
+      search.value = '';
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+      const card = document.querySelector('.card');
+      card.click();
+      const expanded = card.getAttribute('aria-expanded') === 'true';
+      const quizTab = document.querySelector('[data-tab="q"]');
+      quizTab.click();
+      document.querySelector('[data-action="start-quiz"]').click();
+      const options = document.querySelectorAll('[data-option]').length >= 2;
+      document.querySelector('[data-option="0"]').click();
+      const feedback = document.querySelector('#exp').classList.contains('show');
+      document.querySelector('[data-tab="ra"]').click();
+      const reference = !document.querySelector('#tra').classList.contains('is-hidden') && getComputedStyle(document.querySelector('.ra-card')).backgroundColor !== 'rgba(0, 0, 0, 0)';
+      return { ok: initial && filtered && expanded && options && feedback && reference, message: `initial=${initial}, filtered=${filtered}, expanded=${expanded}, options=${options}, feedback=${feedback}, reference=${reference}` };
+    }
+  },
+  {
+    name: 'Vocabulary Exams mobile layout',
+    route: '/apps/n1-vocabulary-exams/',
+    viewport: { width: 390, height: 844 },
+    ready: 'document.querySelectorAll(".card").length === 96',
+    check: function () {
+      const noOverflow = document.documentElement.scrollWidth <= window.innerWidth;
+      document.querySelector('[data-tab="q"]').click();
+      document.querySelector('[data-action="start-quiz"]').click();
+      const usable = document.querySelectorAll('[data-option]').length >= 2 && document.querySelector('.qa').classList.contains('active');
+      return { ok: noOverflow && usable, message: `noOverflow=${noOverflow}, usable=${usable}` };
+    }
+  }
+];
+const selectedTests = process.env.SMOKE_ROUTE
+  ? tests.filter(test => test.route.includes(process.env.SMOKE_ROUTE))
+  : tests;
+if (!selectedTests.length) throw new Error(`No smoke test matches SMOKE_ROUTE=${process.env.SMOKE_ROUTE}`);
+
+const serverPort = await freePort();
+const server = spawn('python3', ['-m', 'http.server', String(serverPort), '--bind', '127.0.0.1'], {
+  cwd: ROOT,
+  stdio: 'ignore'
+});
+
+try {
+  await waitFor(`http://127.0.0.1:${serverPort}/`);
+  const origin = `http://127.0.0.1:${serverPort}`;
+  for (const test of selectedTests) {
+    const debugPort = await freePort();
+    const profile = await mkdtemp(resolve(tmpdir(), 'thangldw-smoke-'));
+    const chrome = spawn(CHROME, [
+      '--headless=new',
+      '--disable-gpu',
+      '--disable-extensions',
+      '--no-first-run',
+      '--no-default-browser-check',
+      `--remote-debugging-port=${debugPort}`,
+      `--user-data-dir=${profile}`,
+      'about:blank'
+    ], { stdio: 'ignore' });
+    try {
+      await waitFor(`http://127.0.0.1:${debugPort}/json/version`);
+      const page = await openPage(debugPort);
+      await checkPage(page, origin, test);
+      page.close();
+    } finally {
+      await stopProcess(chrome);
+      await rm(profile, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
+    }
+  }
+  console.log(`Learning smoke tests passed: ${selectedTests.length}/${selectedTests.length}.`);
+} finally {
+  await stopProcess(server);
+}

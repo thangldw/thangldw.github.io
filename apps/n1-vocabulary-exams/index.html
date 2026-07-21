@@ -7,165 +7,6 @@
 <link rel="canonical" href="https://thangldw.github.io/apps/n1-vocabulary-exams/">
 <meta name="description" content="Tra cứu và luyện 648 từ vựng JLPT N1 từ đề thi 2010–2025, có câu ví dụ, từ đồng nghĩa và bài kiểm tra tương tác.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Vocabulary Exams 2010–2025"><meta property="og:description" content="648 từ vựng N1 từ đề thi 2010–2025 với bài luyện tương tác."><meta property="og:url" content="https://thangldw.github.io/apps/n1-vocabulary-exams/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans, var(--portfolio-font-sans));background:#f7f8fa;color:#1a1a1a;font-size:14px}
-/* ── HEADER ── */
-.header{background:#fff;color:#1a1a2e;padding:14px 20px;position:relative;z-index:1;border-bottom:1px solid #e4e7ee;box-shadow:0 1px 6px rgba(20,23,29,.05)}
-.header-sub{font-size:10px;color:#838b99;margin-bottom:3px;letter-spacing:.06em;text-transform:uppercase}
-.h-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.header h1{font-size:15px;font-weight:500;flex:1}
-.hbadge{background:#f1f3f7;border:1px solid #e4e7ee;font-size:11px;padding:2px 9px;border-radius:10px;white-space:nowrap}
-.hbadge.cnt{background:rgba(74,90,173,.5)}
-/* ── TABS ── */
-.tabs{display:flex;background:#fff;border-bottom:2px solid #e5e2d8;padding:0 16px;overflow-x:auto}
-.tab{padding:10px 16px;font-size:13px;cursor:pointer;border:0;border-bottom:3px solid transparent;background:transparent;color:#888;transition:all .15s;margin-bottom:-2px;white-space:nowrap;font-family:inherit}
-.tab.active{color:#1e2240;border-bottom-color:#4a5aad;font-weight:600}
-.tab:hover:not(.active){color:#4a5aad}
-/* ── CONTAINER ── */
-.container{width:min(1500px,100%);margin:0 auto;padding:18px 32px 60px}
-/* ── CTRL ── */
-.ctrl{display:flex;gap:7px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
-.ctrl input,.ctrl select{padding:7px 10px;border:1.5px solid #d5d2ca;border-radius:8px;font-size:13px;background:#fff;color:#1a1a1a;outline:none;transition:border .15s;font-family:inherit}
-.ctrl input:focus,.ctrl select:focus{border-color:#4a5aad}
-.ctrl input{flex:1;min-width:150px}
-.cnt-lbl{font-size:12px;color:#888;margin-left:auto;white-space:nowrap}
-/* ── POS FILTER ── */
-.pos-bar{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
-.pos-lbl{font-size:11px;color:#999;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.pbtn{padding:4px 12px;border:1.5px solid #d5d2ca;border-radius:20px;font-size:12px;cursor:pointer;background:#fff;color:#555;transition:all .15s;font-weight:500;font-family:inherit}
-.pbtn:hover{border-color:#4a5aad;color:#4a5aad}
-.pbtn.on{background:#4a5aad;color:#fff;border-color:#4a5aad}
-.pbtn.v.on{background:#b71c1c;border-color:#b71c1c}
-.pbtn.n.on{background:#1565c0;border-color:#1565c0}
-.pbtn.adj.on{background:#2e7d32;border-color:#2e7d32}
-.pbtn.adv.on{background:#6a1b9a;border-color:#6a1b9a}
-/* ── GRID ── */
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.load-row{display:flex;justify-content:center;padding:18px 0 4px}
-.load-more{min-height:44px;padding:9px 18px;border:1.5px solid #4a5aad;border-radius:9px;background:#fff;color:#3949ab;font:600 13px inherit;cursor:pointer}
-.load-more:hover,.load-more:focus-visible{background:#eef0fa}
-/* ── CARD ── */
-.card{background:#fff;border-radius:13px;border:1px solid #e5e2d8;padding:13px 14px 12px;cursor:pointer;transition:box-shadow .15s,border-color .15s;position:relative}
-.card:hover{box-shadow:0 3px 14px rgba(0,0,0,.1)}
-.card.open{border-color:#4a5aad;box-shadow:0 2px 14px rgba(74,90,173,.15)}
-/* mondai accent strip */
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0;background:#4a5aad}
-.card[data-m="1"]::before{background:#c0392b}
-.card[data-m="2"]::before{background:#1565c0}
-.card[data-m="3"]::before{background:#2e7d32}
-.card[data-m="4"]::before{background:#6a1b9a}
-/* ── CARD HEADER ── */
-.wrow{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap;padding-top:4px}
-.wk{font-size:20px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
-.wh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:system-ui,sans-serif}
-.ptag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:700}
-.ptag.v{background:#fdecea;color:#b71c1c}
-.ptag.n{background:#e3f2fd;color:#1565c0}
-.ptag.adj{background:#e8f5e9;color:#2e7d32}
-.ptag.adv{background:#f3e5f5;color:#6a1b9a}
-.ptag.oth{background:#fff3e0;color:#e65100}
-.etags{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
-.etag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:600}
-.etag.m1{background:#fdecea;color:#b71c1c}
-.etag.m2{background:#e3f2fd;color:#1565c0}
-.etag.m3{background:#e8f5e9;color:#2e7d32}
-.etag.m4{background:#f3e5f5;color:#6a1b9a}
-.spk-btn{background:none;border:1px solid #d5d2ca;border-radius:6px;padding:3px 6px;cursor:pointer;color:#888;font-size:11px;line-height:1;transition:all .15s;flex-shrink:0;font-family:inherit}
-.spk-btn:hover{border-color:#4a5aad;color:#4a5aad}
-.spk-btn.sp{border-color:#b71c1c;color:#b71c1c;animation:blink .7s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-/* meaning */
-.vi-row{margin-bottom:7px}
-.vi-badge{font-size:13px;color:#b45309;background:#fffbeb;border-radius:6px;padding:3px 9px;display:inline-block;font-weight:500}
-/* ── SYNONYMS ── */
-.synb{background:#f8f7ff;border-radius:9px;padding:8px 10px;margin-bottom:8px;border:1px solid #e8e6f8}
-.synb-lbl{font-size:10px;color:#4a5aad;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
-.syn-chips{display:flex;flex-wrap:wrap;gap:5px}
-.syi{display:flex;flex-direction:column;background:#eef0fa;border-radius:7px;padding:5px 10px;font-family:system-ui,sans-serif;line-height:1.4;min-width:0}
-.syi.pri{background:#4a5aad}
-.syi .sw{font-size:13px;font-weight:600;color:#2c357a}
-.syi.pri .sw{color:#fff}
-.syi .sh{font-size:10px;color:#7f8fd0;margin-top:1px}
-.syi.pri .sh{color:rgba(255,255,255,.7)}
-.syi .sm{font-size:10.5px;color:#546e7a;font-family:var(--font-sans, var(--portfolio-font-sans));margin-top:1px}
-.syi.pri .sm{color:rgba(255,255,255,.8)}
-/* ── COLLOCATIONS ── */
-.co-wrap{margin-bottom:4px}
-.co-lbl{font-size:10px;color:#00695c;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;display:flex;align-items:center;gap:4px}
-.co-list{display:flex;flex-direction:column;gap:4px}
-.co-item{font-size:14px;font-family:system-ui,sans-serif;background:#e0f7f4;border:1px solid #b2dfdb;border-radius:8px;padding:6px 10px;line-height:1.65}
-.co-item .cjp{font-size:14px;font-weight:600;color:#1e2240}
-.co-item .cjp b{font-weight:800;color:#00695c;font-size:14px}
-.co-item .cvi{font-size:11px;color:#546e7a;font-family:var(--font-sans, var(--portfolio-font-sans));margin-top:2px}
-.co-item.n1{border-left:3px solid #e65100;background:linear-gradient(90deg,#fff8e1 0,#e0f7f4 55px)}
-.n1b{font-size:9px;background:#e65100;color:#fff;padding:1px 5px;border-radius:4px;margin-left:5px;font-weight:700;vertical-align:middle;white-space:nowrap}
-/* ── DETAIL ── */
-.detail{display:none;margin-top:10px;padding-top:10px;border-top:1.5px dashed #e5e2d8}
-.card.open .detail{display:block}
-.ex-block{background:#fafafa;border-left:3px solid #4a5aad;border-radius:0 8px 8px 0;padding:8px 11px;margin-bottom:9px;font-size:13px;line-height:1.95;color:#333;font-family:system-ui,sans-serif}
-.ex-block strong{color:#b71c1c;font-weight:700}
-.ex-yr{font-size:10px;color:#aaa;display:block;margin-top:2px}
-.wrongs-sec{margin-bottom:8px}
-.wr-lbl{font-size:10px;color:#b71c1c;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.wr-list{display:flex;flex-direction:column;gap:4px}
-.wi{display:flex;gap:8px;align-items:flex-start;background:#fff6f6;border:1px solid #ffd5d5;border-radius:7px;padding:6px 10px}
-.wr{font-size:12px;font-weight:700;color:#b71c1c;min-width:80px;flex-shrink:0;font-family:system-ui,sans-serif}
-.wm{font-size:11.5px;color:#555;line-height:1.55}
-.hint-box{background:#f0f7f0;border:1px solid #c8e6c9;border-radius:8px;padding:8px 11px;font-size:12px;color:#2e7d32;line-height:1.7}
-.hint-lbl{font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
-mark{background:#fff176;padding:0 2px;border-radius:3px}
-/* ── MON4 OPTIONS ── */
-.m4-opts{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
-.m4o{background:#f8f7ff;border:1px solid #e0ddf8;border-radius:7px;padding:6px 10px;font-size:12px;color:#444;font-family:system-ui,sans-serif;line-height:1.6}
-.m4o.correct{background:#eaf3de;border-color:#a5d6a7;color:#1b5e20;font-weight:600}
-.m4o.wrong{background:#fff6f6;border-color:#ffcdd2;color:#7f0000}
-.m4o-num{font-size:10px;font-weight:700;margin-right:6px;color:#aaa}
-.m4o.correct .m4o-num{color:#2e7d32}
-/* ── QUIZ TAB ── */
-.qsetup{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:18px;margin-bottom:14px}
-.qsetup h2{font-size:15px;font-weight:600;color:#1e2240;margin-bottom:12px}
-.srow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
-.srow label{font-size:13px;color:#555;min-width:70px}
-.srow select{padding:7px 10px;border:1.5px solid #d5d2ca;border-radius:8px;font-size:13px;font-family:inherit}
-.bstart{background:#4a5aad;color:#fff;border:none;border-radius:9px;padding:11px;font-size:14px;cursor:pointer;width:100%;margin-top:4px;font-weight:600;transition:background .15s;font-family:inherit}
-.bstart:hover{background:#3a4a9d}
-.qa{display:none}.qa.active{display:block}
-.pbi{display:flex;justify-content:space-between;font-size:12px;color:#888;margin-bottom:5px}
-.pbw{background:#e5e2d8;border-radius:99px;height:4px;margin-bottom:14px}
-.pb{background:#4a5aad;height:4px;border-radius:99px;transition:width .3s}
-.qcard{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:16px;margin-bottom:10px}
-.qwd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.qk{font-size:25px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
-.qh{font-size:13px;color:#4a5aad;background:#eef0fa;padding:2px 8px;border-radius:6px;font-weight:600;font-family:system-ui,sans-serif}
-.qvi-box{font-size:11px;color:#b45309;background:#fffbeb;border-radius:6px;padding:2px 9px;margin-bottom:8px;display:none;font-weight:500}
-.qsen{font-size:15px;line-height:2;color:#1a1a1a;font-family:system-ui,sans-serif}
-.ul{text-decoration:underline;text-decoration-color:#4a5aad;color:#4a5aad;font-weight:600}
-.og{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.ob{background:#fff;border:1.5px solid #d5d2ca;border-radius:9px;padding:10px 12px;font-size:13px;cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:8px;transition:all .15s;font-family:system-ui,sans-serif;line-height:1.5}
-.ob .nm{font-size:11px;color:#aaa;min-width:14px;font-weight:600;flex-shrink:0;margin-top:2px}
-.ob:hover:not(:disabled){border-color:#4a5aad;background:#f0f2fc}
-.ob.ok{background:#eaf3de;border-color:#3b6d11;color:#173404}
-.ob.ng{background:#fcebeb;border-color:#a32d2d;color:#501313}
-.ob.rv{background:#eaf3de;border-color:#3b6d11}
-.ob:disabled{cursor:default}
-.exp{background:#fff;border:1.5px solid #c8d0f0;border-radius:10px;padding:14px;font-size:13px;line-height:1.8;margin-bottom:10px;display:none}
-.exp.show{display:block}
-.ew{font-size:18px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
-.eh{font-size:12px;color:#4a5aad;background:#eef0fa;padding:1px 7px;border-radius:5px;margin-left:6px;font-family:system-ui,sans-serif}
-.esyi{display:inline-block;font-size:12px;background:#eef0fa;color:#2c357a;border-radius:6px;padding:3px 9px;margin:2px 2px 0 0;font-weight:500;font-family:system-ui,sans-serif}
-.esyi.pri{background:#4a5aad;color:#fff}
-.bnext{background:#4a5aad;color:#fff;border:none;border-radius:9px;padding:11px;font-size:14px;cursor:pointer;display:none;width:100%;font-weight:600;font-family:inherit;transition:background .15s}
-.bnext.show{display:block}.bnext:hover{background:#3a4a9d}
-.res{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:30px 18px;text-align:center;display:none}
-.res.show{display:block}
-.rs{font-size:50px;font-weight:700;color:#4a5aad}.rt{font-size:17px;color:#888;margin-bottom:8px}
-.rm{font-size:13px;color:#444;margin-bottom:20px}
-.br{background:#4a5aad;color:#fff;border:none;border-radius:9px;padding:11px;font-size:14px;cursor:pointer;width:100%;font-weight:600;font-family:inherit}
-@media(max-width:1180px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:840px){.container{padding-inline:24px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.container{padding-inline:16px}.og,.grid{grid-template-columns:1fr}}
-</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
   (function () {
@@ -175,6 +16,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   })();
 </script>
   <link rel="stylesheet" href="/css/tokens.css?v=20260721c">
+  <link rel="stylesheet" href="styles.css?v=20260722a">
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
   <link rel="stylesheet" href="/css/jlpt-accessibility.css?v=20260713f">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
@@ -194,24 +36,24 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 </div>
 
 <div class="tabs">
-  <button type="button" class="tab active" aria-selected="true" onclick="sw('v',this)">単語リスト</button>
-  <button type="button" class="tab" aria-selected="false" onclick="sw('q',this)">問題練習</button>
-  <button type="button" class="tab" aria-selected="false" onclick="sw('ra',this)">Sai → Đúng</button>
+  <button type="button" class="tab active" aria-selected="true" data-tab="v">単語リスト</button>
+  <button type="button" class="tab" aria-selected="false" data-tab="q">問題練習</button>
+  <button type="button" class="tab" aria-selected="false" data-tab="ra">Sai → Đúng</button>
 </div>
 
 <div class="container">
 <!-- VOCAB -->
 <div id="tv">
   <div class="ctrl">
-    <input type="text" id="si" placeholder="漢字・かな・nghĩa tiếng Việt..." oninput="rv()">
-    <select id="fm" onchange="rv()">
+    <input type="text" id="si" placeholder="漢字・かな・nghĩa tiếng Việt...">
+    <select id="fm">
       <option value="">全問題</option>
       <option value="1">問題1（漢字読み）</option>
       <option value="2">問題2（文脈）</option>
       <option value="3">問題3（言い換え）</option>
       <option value="4">問題4（用法）</option>
     </select>
-    <select id="fy" onchange="rv()">
+    <select id="fy">
       <option value="">全年</option>
 <option value="12/2010">12/2010</option>
 <option value="12/2011">12/2011</option>
@@ -249,17 +91,17 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="pos-bar">
     <span class="pos-lbl">品詞</span>
-    <button class="pbtn on" onclick="fp2('',this)">すべて</button>
-    <button class="pbtn v" onclick="fp2('動詞',this)">動詞</button>
-    <button class="pbtn n" onclick="fp2('名詞',this)">名詞</button>
-    <button class="pbtn adj" onclick="fp2('形容詞',this)">形容詞</button>
-    <button class="pbtn adv" onclick="fp2('副詞',this)">副詞</button>
+    <button type="button" class="pbtn on" data-pos="">すべて</button>
+    <button type="button" class="pbtn v" data-pos="動詞">動詞</button>
+    <button type="button" class="pbtn n" data-pos="名詞">名詞</button>
+    <button type="button" class="pbtn adj" data-pos="形容詞">形容詞</button>
+    <button type="button" class="pbtn adv" data-pos="副詞">副詞</button>
   </div>
   <div class="grid" id="vg"></div>
   <div class="load-row" id="more-vocab"></div>
 </div>
 </div>
-<div id="tq" style="display:none">
+<div id="tq" class="is-hidden">
   <div class="qsetup" id="qs">
     <h2>📝 練習設定</h2>
     <div class="srow"><label>問題タイプ</label>
@@ -308,43 +150,30 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
         <option value="30">30問</option><option value="all">全問</option>
       </select>
     </div>
-    <button class="bstart" onclick="startQ()">練習開始 →</button>
+    <button type="button" class="bstart" data-action="start-quiz">練習開始 →</button>
   </div>
   <div class="qa" id="qa">
     <div class="pbi"><span id="qn">1/20</span><span id="sm">正解: 0</span></div>
-    <div class="pbw"><div class="pb" id="pb" style="width:0%"></div></div>
+    <div class="pbw"><div class="pb progress-zero" id="pb"></div></div>
     <div class="qcard">
       <div class="qwd">
         <span class="qk" id="qk"></span><span class="qh" id="qhi"></span>
-        <span style="font-size:10px;color:#aaa" id="qmt"></span>
+        <span class="qmeta" id="qmt"></span>
       </div>
       <div class="qvi-box" id="qvi">🇻🇳 <span id="qvt"></span></div>
       <div class="qsen" id="qsen"></div>
     </div>
     <div class="og" id="og"></div>
     <div class="exp" id="exp"></div>
-    <button class="bnext" id="bn" onclick="nextQ()">次の問題 →</button>
+    <button type="button" class="bnext" id="bn" data-action="next-question">次の問題 →</button>
   </div>
   <div class="res" id="res">
     <div class="rs" id="rsc">0</div><div class="rt" id="rtl">/0問</div>
     <div class="rm" id="rmsg"></div>
-    <button class="br" onclick="resetQ()">もう一度</button>
+    <button type="button" class="br" data-action="reset-quiz">もう一度</button>
   </div>
 </div>
-<div id="tra" style="display:none">
-<style>.ra-card{background:#fff;border-radius:12px;border:1px solid #e5e2d8;padding:14px 15px;margin-bottom:10px;border-left:4px solid #f57c00}
-.ra-word{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
-.ra-kanji{font-size:22px;font-weight:700;color:#1e2240;font-family:system-ui,sans-serif}
-.ra-vi{font-size:12px;color:#b45309;background:#fffbeb;padding:2px 8px;border-radius:6px}
-.ra-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px}
-.ra-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-top:2px}
-.ra-wrong{background:#fdecea;color:#b71c1c}
-.ra-correct{background:#e8f5e9;color:#2e7d32}
-.ra-sentence{font-size:13px;font-family:system-ui,sans-serif;line-height:1.9;color:#333}
-.ra-arrow{font-size:11px;color:#f57c00;font-weight:700;margin:5px 0;padding-left:5px}
-.ra-header{background:linear-gradient(135deg,#ff6d00,#ff8f00);color:#fff;border-radius:12px;padding:14px 16px;margin-bottom:14px}
-.ra-header h3{font-size:14px;font-weight:600;margin-bottom:5px}
-.ra-header p{font-size:12px;opacity:.85;line-height:1.5}</style>
+<div id="tra" class="is-hidden">
 <div class="container">
 <div class="ra-header">
 <h3>⚡ Đáp án SAI → về sau trở thành ĐÚNG</h3>
@@ -353,12 +182,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 <div class="ra-card">
   <div class="ra-word">
     <span class="ra-kanji">センス</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">センス</span>
+    <span class="ra-vi ra-reading">センス</span>
     <span class="ra-vi">🇻🇳 khiếu thẩm mỹ, cảm giác</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2011 Q4)</div>
-    <div class="ra-sentence">この言葉には、やや批判的な（　　）が含まれている。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: ニュアンス</span></div>
+    <div class="ra-sentence">この言葉には、やや批判的な（　　）が含まれている。<br><span class="ra-correct-note">✅ Đúng lúc này: ニュアンス</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -369,12 +198,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 <div class="ra-card">
   <div class="ra-word">
     <span class="ra-kanji">シェア</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">シェア</span>
+    <span class="ra-vi ra-reading">シェア</span>
     <span class="ra-vi">🇻🇳 thị phần, chia sẻ</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2011 Q7)</div>
-    <div class="ra-sentence">コピー用紙の（　　）が減ったら、注文しておいてください。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: ストック</span></div>
+    <div class="ra-sentence">コピー用紙の（　　）が減ったら、注文しておいてください。<br><span class="ra-correct-note">✅ Đúng lúc này: ストック</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -390,7 +219,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2012 Q1)</div>
-    <div class="ra-sentence">この本は内容が難しすぎて、初心者には（　　）が高いと思う。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: ハードル</span></div>
+    <div class="ra-sentence">この本は内容が難しすぎて、初心者には（　　）が高いと思う。<br><span class="ra-correct-note">✅ Đúng lúc này: ハードル</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -406,7 +235,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2012 Q7)</div>
-    <div class="ra-sentence">市役所のロビーで、アマチュア写真家による写真展が（　　）います。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 催されて</span></div>
+    <div class="ra-sentence">市役所のロビーで、アマチュア写真家による写真展が（　　）います。<br><span class="ra-correct-note">✅ Đúng lúc này: 催されて</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -422,7 +251,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2012 Q6)</div>
-    <div class="ra-sentence">仕事の分担を決める前に、必要な作業をすべて（　　）した。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: リストアップ</span></div>
+    <div class="ra-sentence">仕事の分担を決める前に、必要な作業をすべて（　　）した。<br><span class="ra-correct-note">✅ Đúng lúc này: リストアップ</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -438,7 +267,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2013 Q3)</div>
-    <div class="ra-sentence">職場の環境に満足していたので、その当時は転職など全く（　　）になかった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 念頭 (trong tâm trí, trong đầu)</span></div>
+    <div class="ra-sentence">職場の環境に満足していたので、その当時は転職など全く（　　）になかった。<br><span class="ra-correct-note">✅ Đúng lúc này: 念頭 (trong tâm trí, trong đầu)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -454,7 +283,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2013 Q3)</div>
-    <div class="ra-sentence">職場の環境に満足していたので、その当時は転職など全く（　　）になかった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 念頭 (trong tâm trí, trong đầu)</span></div>
+    <div class="ra-sentence">職場の環境に満足していたので、その当時は転職など全く（　　）になかった。<br><span class="ra-correct-note">✅ Đúng lúc này: 念頭 (trong tâm trí, trong đầu)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -470,7 +299,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2013 Q3)</div>
-    <div class="ra-sentence">職場の環境に満足していたので、その当時は転職など全く（　　）になかった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 念頭 (trong tâm trí, trong đầu)</span></div>
+    <div class="ra-sentence">職場の環境に満足していたので、その当時は転職など全く（　　）になかった。<br><span class="ra-correct-note">✅ Đúng lúc này: 念頭 (trong tâm trí, trong đầu)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -486,7 +315,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2013 Q6)</div>
-    <div class="ra-sentence">パーディーでは林さんが料理を作って、みんなにその（　　）を披露してくれた。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 腕前 (tay nghề, trình độ)</span></div>
+    <div class="ra-sentence">パーディーでは林さんが料理を作って、みんなにその（　　）を披露してくれた。<br><span class="ra-correct-note">✅ Đúng lúc này: 腕前 (tay nghề, trình độ)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -502,7 +331,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2014 Q4)</div>
-    <div class="ra-sentence">この会社の営業部では、社員一人一人に毎週厳しい（　　）が課されている。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: ノルマ</span></div>
+    <div class="ra-sentence">この会社の営業部では、社員一人一人に毎週厳しい（　　）が課されている。<br><span class="ra-correct-note">✅ Đúng lúc này: ノルマ</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -518,7 +347,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2015 Q6)</div>
-    <div class="ra-sentence">以下の条件に一つでも（　　）する人は、必ず事務室に申し出てください。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 該当</span></div>
+    <div class="ra-sentence">以下の条件に一つでも（　　）する人は、必ず事務室に申し出てください。<br><span class="ra-correct-note">✅ Đúng lúc này: 該当</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -534,7 +363,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2016 Q2)</div>
-    <div class="ra-sentence">林さんは服の（　　）が抜群で、いつもすてきな服装をしている。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: センス (khiếu thẩm mỹ, cảm giác)</span></div>
+    <div class="ra-sentence">林さんは服の（　　）が抜群で、いつもすてきな服装をしている。<br><span class="ra-correct-note">✅ Đúng lúc này: センス (khiếu thẩm mỹ, cảm giác)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -550,7 +379,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2016 Q3)</div>
-    <div class="ra-sentence">A社は、開発した技術が（　　）するのを防ぐため、管理体制を強化した。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 流出</span></div>
+    <div class="ra-sentence">A社は、開発した技術が（　　）するのを防ぐため、管理体制を強化した。<br><span class="ra-correct-note">✅ Đúng lúc này: 流出</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -561,12 +390,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 <div class="ra-card">
   <div class="ra-word">
     <span class="ra-kanji">円滑に</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">えんかつに</span>
+    <span class="ra-vi ra-reading">えんかつに</span>
     <span class="ra-vi">🇻🇳 trôi chảy</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2016 Q5)</div>
-    <div class="ra-sentence">駅から博物館まではバスが（　　）出ているので、ほとんど待たずに乗ることができる。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 頻繁に</span></div>
+    <div class="ra-sentence">駅から博物館まではバスが（　　）出ているので、ほとんど待たずに乗ることができる。<br><span class="ra-correct-note">✅ Đúng lúc này: 頻繁に</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -582,7 +411,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2016 Q7)</div>
-    <div class="ra-sentence">母に相談したかったが、忙しそうだったので、なかなか話を（　　）ことができなかった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 切り出す</span></div>
+    <div class="ra-sentence">母に相談したかったが、忙しそうだったので、なかなか話を（　　）ことができなかった。<br><span class="ra-correct-note">✅ Đúng lúc này: 切り出す</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -598,7 +427,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2020 Q1)</div>
-    <div class="ra-sentence">商品の値段を間違えて表示していたため、お客さんから（　　）が来た。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: クレーム</span></div>
+    <div class="ra-sentence">商品の値段を間違えて表示していたため、お客さんから（　　）が来た。<br><span class="ra-correct-note">✅ Đúng lúc này: クレーム</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -609,12 +438,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 <div class="ra-card">
   <div class="ra-word">
     <span class="ra-kanji">腕前</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">うでまえ</span>
+    <span class="ra-vi ra-reading">うでまえ</span>
     <span class="ra-vi">🇻🇳 tay nghề, trình độ</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2022 Q4)</div>
-    <div class="ra-sentence">そのいたずらは息子の（　　）に違いない。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: しわざ</span></div>
+    <div class="ra-sentence">そのいたずらは息子の（　　）に違いない。<br><span class="ra-correct-note">✅ Đúng lúc này: しわざ</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -630,7 +459,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2023 Q2)</div>
-    <div class="ra-sentence">この企業は、売り上げの一部を町に寄付することで町の人々に利益を（　　）している。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 還元 (hoàn trả / quy đổi / đem lợi ích trả lại)</span></div>
+    <div class="ra-sentence">この企業は、売り上げの一部を町に寄付することで町の人々に利益を（　　）している。<br><span class="ra-correct-note">✅ Đúng lúc này: 還元 (hoàn trả / quy đổi / đem lợi ích trả lại)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -646,7 +475,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2023 Q5)</div>
-    <div class="ra-sentence">大きな声で歌うと、ストレスの（　　）になって気分がすっきりする。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 発散</span></div>
+    <div class="ra-sentence">大きな声で歌うと、ストレスの（　　）になって気分がすっきりする。<br><span class="ra-correct-note">✅ Đúng lúc này: 発散</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -662,7 +491,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2023 Q6)</div>
-    <div class="ra-sentence">入院生活をして、健康の大切さを（　　）感じた。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: つくづく (thật sự thấm thía / つくづく～と思う)</span></div>
+    <div class="ra-sentence">入院生活をして、健康の大切さを（　　）感じた。<br><span class="ra-correct-note">✅ Đúng lúc này: つくづく (thật sự thấm thía / つくづく～と思う)</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -673,12 +502,12 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 <div class="ra-card">
   <div class="ra-word">
     <span class="ra-kanji">還元</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">かんげん</span>
+    <span class="ra-vi ra-reading">かんげん</span>
     <span class="ra-vi">🇻🇳 hoàn trả / quy đổi / đem lợi ích trả lại</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7-2024 Q2)</div>
-    <div class="ra-sentence">1年で一番忙しい時期なので、休日を（　　）して働いています。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 返上</span></div>
+    <div class="ra-sentence">1年で一番忙しい時期なので、休日を（　　）して働いています。<br><span class="ra-correct-note">✅ Đúng lúc này: 返上</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -694,7 +523,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2024 Q1)</div>
-    <div class="ra-sentence">その生物は、厳しい環境に（　　）できる能力を持っている。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 適応</span></div>
+    <div class="ra-sentence">その生物は、厳しい環境に（　　）できる能力を持っている。<br><span class="ra-correct-note">✅ Đúng lúc này: 適応</span></div>
   </div>
   <div class="ra-arrow">↓ Từ này về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -703,8 +532,8 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
 </div>
 
-<h3 style="font-size:14px;font-weight:700;color:#1e2240;margin:20px 0 10px;padding:8px 12px;background:#e3f2fd;border-radius:8px">📘 Mondai 3 — Đồng nghĩa: từ sai → về sau ra đúng (24 cặp)</h3>
-<div class="ra-card" style="border-left-color:#1565c0">
+<h3 class="ra-section-title ra-section-title-mon2">📘 Mondai 3 — Đồng nghĩa: từ sai → về sau ra đúng (24 cặp)</h3>
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">わざと</span>
     
@@ -712,7 +541,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (7/2025 問6)</div>
-    <div class="ra-sentence">娘は反抗期なので、親の言うことにことごとく反対する。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: すべて</span></div>
+    <div class="ra-sentence">娘は反抗期なので、親の言うことにことごとく反対する。<br><span class="ra-correct-note">✅ Đúng lúc này: すべて</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -720,7 +549,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">林さんはそれを（故意に）捨てたらしい。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">支援</span>
     
@@ -728,7 +557,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12/2025 問3)</div>
-    <div class="ra-sentence">この大会に出場するまでに多くの試練があった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 苦難</span></div>
+    <div class="ra-sentence">この大会に出場するまでに多くの試練があった。<br><span class="ra-correct-note">✅ Đúng lúc này: 苦難</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -736,7 +565,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">A社の（バックアップ）を受けて、新しい事業を始めた。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">大幅に</span>
     
@@ -744,7 +573,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2011 問3)</div>
-    <div class="ra-sentence">無駄な経費は（極力）減らそう。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: できる限り</span></div>
+    <div class="ra-sentence">無駄な経費は（極力）減らそう。<br><span class="ra-correct-note">✅ Đúng lúc này: できる限り</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -752,7 +581,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">この一年で収益は（格段に）増えている。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">ほっとした</span>
     
@@ -760,7 +589,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2012 問2)</div>
-    <div class="ra-sentence">試合後のインタビューで、選手たちは（すがすがしい）表情で質問に答えていた。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: さわやかな</span></div>
+    <div class="ra-sentence">試合後のインタビューで、選手たちは（すがすがしい）表情で質問に答えていた。<br><span class="ra-correct-note">✅ Đúng lúc này: さわやかな</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -768,7 +597,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">私はその一言に（安堵した ）。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">はっきり</span>
     
@@ -776,7 +605,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2012 問6)</div>
-    <div class="ra-sentence">努力をすれば（おのずと）結果に表れてくる。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 自然に</span></div>
+    <div class="ra-sentence">努力をすれば（おのずと）結果に表れてくる。<br><span class="ra-correct-note">✅ Đúng lúc này: 自然に</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -784,7 +613,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">子どものころの思い出が（ありありと）浮かんできた。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">大して</span>
     
@@ -792,7 +621,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2012 問1)</div>
-    <div class="ra-sentence">商品の原価が上がったが、販売価格への影響は（当面）ないだろう。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: しばらくは</span></div>
+    <div class="ra-sentence">商品の原価が上がったが、販売価格への影響は（当面）ないだろう。<br><span class="ra-correct-note">✅ Đúng lúc này: しばらくは</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -800,7 +629,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">中止の理由は、（ろくに）説明されなかった。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">専門家</span>
     
@@ -808,7 +637,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2012 問4)</div>
-    <div class="ra-sentence">（先方）に確認した上で、企画書の内容を決定した。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 相手</span></div>
+    <div class="ra-sentence">（先方）に確認した上で、企画書の内容を決定した。<br><span class="ra-correct-note">✅ Đúng lúc này: 相手</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -816,7 +645,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">それについては（エキスパート）にも意見を聞いてみよう。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">基準</span>
     
@@ -824,7 +653,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2013 問4)</div>
-    <div class="ra-sentence">この記述内容が正しいと言えるだけの（裏づけ）があるのだろう。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 証拠 (Chứng cứ)</span></div>
+    <div class="ra-sentence">この記述内容が正しいと言えるだけの（裏づけ）があるのだろう。<br><span class="ra-correct-note">✅ Đúng lúc này: 証拠 (Chứng cứ)</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -832,7 +661,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">自分の（尺度）を持ったほうがいい。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">重要な</span>
     
@@ -840,7 +669,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2014 問4)</div>
-    <div class="ra-sentence">これはかなり（厄介）な問題だ。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 面倒な</span></div>
+    <div class="ra-sentence">これはかなり（厄介）な問題だ。<br><span class="ra-correct-note">✅ Đúng lúc này: 面倒な</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -848,7 +677,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">池田さんには会えたが、（肝心な）話はできなかった。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">あきらめずに</span>
     
@@ -856,7 +685,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2015 問3)</div>
-    <div class="ra-sentence">高橋さんはどんな事態にも、（うろたえずに）対処した。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 慌てずに</span></div>
+    <div class="ra-sentence">高橋さんはどんな事態にも、（うろたえずに）対処した。<br><span class="ra-correct-note">✅ Đúng lúc này: 慌てずに</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -864,15 +693,15 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">（粘り強く）交渉した。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">アドバイス</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">アドバイス</span>
+    <span class="ra-vi ra-reading">アドバイス</span>
     <span class="ra-vi">🇻🇳 lời khuyên, tư vấn</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2015 問4)</div>
-    <div class="ra-sentence">鈴木さんの一言が問題解決の（糸口）になった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: ヒント</span></div>
+    <div class="ra-sentence">鈴木さんの一言が問題解決の（糸口）になった。<br><span class="ra-correct-note">✅ Đúng lúc này: ヒント</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -880,7 +709,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">私は職業柄、様々な企業からビジネスに関する（助言）を求められる。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">大げさに</span>
     
@@ -888,7 +717,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2016 問1)</div>
-    <div class="ra-sentence">この文は主人公の心情を（端的に）表している。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 明白に</span></div>
+    <div class="ra-sentence">この文は主人公の心情を（端的に）表している。<br><span class="ra-correct-note">✅ Đúng lúc này: 明白に</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -896,7 +725,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">あの人は（誇張して）話すことが多い。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">重要な</span>
     
@@ -904,7 +733,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2016 問5)</div>
-    <div class="ra-sentence">これは私にとって（ささいな）問題だ。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 小さな</span></div>
+    <div class="ra-sentence">これは私にとって（ささいな）問題だ。<br><span class="ra-correct-note">✅ Đúng lúc này: 小さな</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -912,7 +741,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">池田さんには会えたが、（肝心な）話はできなかった。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">怖がって</span>
     
@@ -920,7 +749,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2016 問6)</div>
-    <div class="ra-sentence">佐藤さんは少し（とまどって）いるようだった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 困って</span></div>
+    <div class="ra-sentence">佐藤さんは少し（とまどって）いるようだった。<br><span class="ra-correct-note">✅ Đúng lúc này: 困って</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -928,7 +757,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">妹は少し（おびえて）いるようだった。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">大幅に</span>
     
@@ -936,7 +765,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2019 問2)</div>
-    <div class="ra-sentence">無駄な経費は（極力）減らそう。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: できるだけ</span></div>
+    <div class="ra-sentence">無駄な経費は（極力）減らそう。<br><span class="ra-correct-note">✅ Đúng lúc này: できるだけ</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -944,7 +773,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">この一年で収益は（格段に）増えている。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">厳しい</span>
     
@@ -952,7 +781,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2019 問3)</div>
-    <div class="ra-sentence">池田さんはお金に関して（ルーズな）人だ。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: だらしない</span></div>
+    <div class="ra-sentence">池田さんはお金に関して（ルーズな）人だ。<br><span class="ra-correct-note">✅ Đúng lúc này: だらしない</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -960,7 +789,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">中村さんは仕事に対していつも（シビアだ）。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">大して</span>
     
@@ -968,7 +797,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2020 問5)</div>
-    <div class="ra-sentence">商品の原価が上がったが、販売価格への影響は（当面）ないだろう。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: しばらくは</span></div>
+    <div class="ra-sentence">商品の原価が上がったが、販売価格への影響は（当面）ないだろう。<br><span class="ra-correct-note">✅ Đúng lúc này: しばらくは</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -976,15 +805,15 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">中止の理由は、（ろくに）説明されなかった。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">事前に</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">じぜんに</span>
+    <span class="ra-vi ra-reading">じぜんに</span>
     <span class="ra-vi">🇻🇳 trước</span>
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2021 問4)</div>
-    <div class="ra-sentence">中止の理由は、（ろくに）説明されなかった。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 大して</span></div>
+    <div class="ra-sentence">中止の理由は、（ろくに）説明されなかった。<br><span class="ra-correct-note">✅ Đúng lúc này: 大して</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -992,7 +821,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">会議の資料は（あらかじめ）お送りします。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">慣れて</span>
     
@@ -1000,7 +829,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (07-2022 問2)</div>
-    <div class="ra-sentence">彼の言動にはほとんどの人が（閉口して）いる。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 困って</span></div>
+    <div class="ra-sentence">彼の言動にはほとんどの人が（閉口して）いる。<br><span class="ra-correct-note">✅ Đúng lúc này: 困って</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -1008,7 +837,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">この職場にもかなり（なじんで）きた。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">さわやかな</span>
     
@@ -1016,7 +845,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2022 問2)</div>
-    <div class="ra-sentence">山田さんは（温和）な性格だ。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: おだやか</span></div>
+    <div class="ra-sentence">山田さんは（温和）な性格だ。<br><span class="ra-correct-note">✅ Đúng lúc này: おだやか</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -1024,7 +853,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">試合後のインタビューで、選手たちは（すがすがしい）表情で質問に答えていた。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">方法</span>
     
@@ -1032,7 +861,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2022 問3)</div>
-    <div class="ra-sentence">おすすめの（スポット）を教えてください。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 場所</span></div>
+    <div class="ra-sentence">おすすめの（スポット）を教えてください。<br><span class="ra-correct-note">✅ Đúng lúc này: 場所</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -1040,7 +869,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">もう彼に本当のことを伝える（すべ）がない。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">方法</span>
     
@@ -1048,7 +877,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2022 問3)</div>
-    <div class="ra-sentence">おすすめの（スポット）を教えてください。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 場所</span></div>
+    <div class="ra-sentence">おすすめの（スポット）を教えてください。<br><span class="ra-correct-note">✅ Đúng lúc này: 場所</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -1056,7 +885,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">状況を（改善する手立て）がない。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">心配</span>
     
@@ -1064,7 +893,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2023 問5)</div>
-    <div class="ra-sentence">新人のときはずっと（辛抱）していた。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 我慢</span></div>
+    <div class="ra-sentence">新人のときはずっと（辛抱）していた。<br><span class="ra-correct-note">✅ Đúng lúc này: 我慢</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -1072,7 +901,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
     <div class="ra-sentence">そのことが一番（気掛かり）でした。</div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#1565c0">
+<div class="ra-card ra-card-mon2">
   <div class="ra-word">
     <span class="ra-kanji">心配</span>
     
@@ -1080,7 +909,7 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
   <div class="ra-row">
     <div class="ra-badge ra-wrong">❌ Sai (12-2023 問5)</div>
-    <div class="ra-sentence">新人のときはずっと（辛抱）していた。<br><span style="font-size:11px;color:#888">✅ Đúng lúc này: 我慢</span></div>
+    <div class="ra-sentence">新人のときはずっと（辛抱）していた。<br><span class="ra-correct-note">✅ Đúng lúc này: 我慢</span></div>
   </div>
   <div class="ra-arrow">↓ Về sau ra làm đáp án ĐÚNG</div>
   <div class="ra-row">
@@ -1089,167 +918,167 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
   </div>
 </div>
 
-<h3 style="font-size:14px;font-weight:700;color:#1e2240;margin:20px 0 10px;padding:8px 12px;background:#f3e5f5;border-radius:8px">📗 Mondai 4 — Cách dùng từ: ra thi nhiều lần (9 từ)</h3>
-<p style="font-size:12px;color:#666;margin-bottom:12px">Những từ đã xuất hiện trong Mon4 nhiều hơn 1 lần!</p>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<h3 class="ra-section-title ra-section-title-mon4">📗 Mondai 4 — Cách dùng từ: ra thi nhiều lần (9 từ)</h3>
+<p class="ra-section-copy">Những từ đã xuất hiện trong Mon4 nhiều hơn 1 lần!</p>
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">発足</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">ほっそく</span>
+    <span class="ra-vi ra-reading">ほっそく</span>
     <span class="ra-vi">🇻🇳 thành lập / chính thức bắt đầu hoạt động</span>
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2010 問3</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この団体は先月発足したばかりです。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2010 問3</span>
+      <span class="ra-example-text">この団体は先月発足したばかりです。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2017 問3</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この団体は留学生支援団体として昨年8月に発足した。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2017 問3</span>
+      <span class="ra-example-text">この団体は留学生支援団体として昨年8月に発足した。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">見落とす</span>
     
     
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2010 問6</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">メールが多すぎて、重要な連絡を見落としていた。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2010 問6</span>
+      <span class="ra-example-text">メールが多すぎて、重要な連絡を見落としていた。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2017 問5</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">「300,000円」と書いてあったのにゼロを一つ見落として3万円だと勘違いしていた。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2017 問5</span>
+      <span class="ra-example-text">「300,000円」と書いてあったのにゼロを一つ見落として3万円だと勘違いしていた。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">配布</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">はいふ</span>
+    <span class="ra-vi ra-reading">はいふ</span>
     <span class="ra-vi">🇻🇳 phân phát, phát cho nhiều người</span>
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2011 問4</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">あの店では今、化粧品の無料サンプルを配布している。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2011 問4</span>
+      <span class="ra-example-text">あの店では今、化粧品の無料サンプルを配布している。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2017 問1</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">駅の案内所では、観光案内地図を無料で配布している。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2017 問1</span>
+      <span class="ra-example-text">駅の案内所では、観光案内地図を無料で配布している。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">怠る</span>
     
     
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2012 問3</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">成功を勝ち取るためには、日々の努力を怠ってはいけない。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2012 問3</span>
+      <span class="ra-example-text">成功を勝ち取るためには、日々の努力を怠ってはいけない。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問3</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この薬品を扱うときは、常に注意を怠ってはいけない。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2020 問3</span>
+      <span class="ra-example-text">この薬品を扱うときは、常に注意を怠ってはいけない。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">秘める</span>
     
     
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2012 問2</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2012 問2</span>
+      <span class="ra-example-text">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2021 問6</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2021 問6</span>
+      <span class="ra-example-text">あの人はクールに見えるが、実は情熱を内に秘めている。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">円滑</span>
-    <span class="ra-vi" style="font-size:11px;background:#eef0fa;color:#4a5aad;margin-left:4px">えんかつ</span>
+    <span class="ra-vi ra-reading">えんかつ</span>
     <span class="ra-vi">🇻🇳 trôi chảy / suôn sẻ / thuận lợi</span>
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2013 問1</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">手順を改善したら、業務が円滑に進むようになった。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2013 問1</span>
+      <span class="ra-example-text">手順を改善したら、業務が円滑に進むようになった。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問2</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">会を円滑に運営するためには、会員の協力が不可欠だ。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2020 問2</span>
+      <span class="ra-example-text">会を円滑に運営するためには、会員の協力が不可欠だ。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">もはや</span>
     
     
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2015 問5</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2015 問5</span>
+      <span class="ra-example-text">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問1</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2020 問1</span>
+      <span class="ra-example-text">現代の広告業界において、これまでの手法はもはや通用しないだろう。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">素早い</span>
     
     
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2016 問6</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2016 問6</span>
+      <span class="ra-example-text">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2021 問2</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2021 問2</span>
+      <span class="ra-example-text">警察の素早い対応によって、逃走した犯人はその日のうちに逮捕された。</span>
     </div>
   </div>
 </div>
-<div class="ra-card" style="border-left-color:#6a1b9a">
+<div class="ra-card ra-card-mon4">
   <div class="ra-word">
     <span class="ra-kanji">収容</span>
     
     
-    <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;padding:2px 7px;border-radius:10px;font-weight:700">出題 2回</span>
+    <span class="ra-repeat-badge">出題 2回</span>
   </div>
-  <div style="display:flex;flex-direction:column;gap:5px">
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 12/2020 問5</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">この劇場は2千人の観客を収容することができます。</span>
+  <div class="ra-examples">
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 12/2020 問5</span>
+      <span class="ra-example-text">この劇場は2千人の観客を収容することができます。</span>
     </div>
-    <div style="background:#fafafa;border-left:3px solid #6a1b9a;border-radius:0 8px 8px 0;padding:6px 10px">
-      <span style="font-size:10px;background:#f3e5f5;color:#6a1b9a;border-radius:4px;padding:1px 5px;font-weight:700;margin-right:5px">✅ 7/2023 問2</span>
-      <span style="font-size:13px;font-family:var(--font-sans, var(--portfolio-font-sans));color:#333">このコンサートホールは500人を収容できる。</span>
+    <div class="ra-example">
+      <span class="ra-example-label">✅ 7/2023 問2</span>
+      <span class="ra-example-text">このコンサートホールは500人を収容できる。</span>
     </div>
   </div>
 </div>
@@ -1957,7 +1786,7 @@ function rv(append){
   document.getElementById('vc').textContent=shown<list.length?shown+' / '+list.length+' 語':list.length+' 語';
   document.getElementById('hcnt').textContent=list.length+' từ';
   document.getElementById('vg').innerHTML=list.slice(0,shown).map(v=>buildCard(v)).join('');
-  document.getElementById('more-vocab').innerHTML=shown<list.length?`<button type="button" class="load-more" onclick="loadMoreVocab()">Hiển thị thêm ${Math.min(96,list.length-shown)} mục</button>`:'';
+  document.getElementById('more-vocab').innerHTML=shown<list.length?`<button type="button" class="load-more" data-action="load-more">Hiển thị thêm ${Math.min(96,list.length-shown)} mục</button>`:'';
 }
 
 function loadMoreVocab(){visibleCount+=96;rv(true);}
@@ -1999,20 +1828,20 @@ function buildCard(v){
   }
   const mondaiList=v.mondai_list||[v.mondai];
   const etags=mEtag(mondaiList);
-  const yearEtag=((v.years||[]).slice(0,2).map(y=>`<span class="etag m${v.mondai}" style="font-size:9.5px">${esc(y)}</span>`)).join('');
-  return`<div class="card" id="c${idx}" data-m="${v.mondai||''}" role="button" tabindex="0" aria-expanded="false" onclick="tog(${idx})" onkeydown="cardKey(event,${idx})">
+  const yearEtag=((v.years||[]).slice(0,2).map(y=>`<span class="etag etag-year m${v.mondai}">${esc(y)}</span>`)).join('');
+  return`<div class="card" id="c${idx}" data-m="${v.mondai||''}" data-vocab-index="${idx}" role="button" tabindex="0" aria-expanded="false">
     <div class="wrow">
       <span class="wk">${hlQ(v.k||'',q)}</span>
       ${v.h?`<span class="wh">${esc(v.h)}</span>`:''}
       ${ptag(v.p)}
       <div class="etags">${etags}${yearEtag}</div>
-      ${v.h?`<button class="spk-btn" id="sp${idx}" aria-label="Phát âm ${esc(v.k||'')}" onclick="event.stopPropagation();spk('${(v.k||'').replace(/'/g,"\\'")}',${idx})">Nghe</button>`:''}
+      ${v.h?`<button type="button" class="spk-btn" id="sp${idx}" aria-label="Phát âm ${esc(v.k||'')}" data-action="speak-word" data-vocab-index="${idx}">Nghe</button>`:''}
     </div>
     ${v.vi?`<div class="vi-row"><span class="vi-badge">🇻🇳 ${hlQ(v.vi,q)}</span></div>`:''}
     ${(v.sy||[]).length?`<div class="synb"><div class="synb-lbl">≒ 類義語・同義語</div><div class="syn-chips">${syH}</div></div>`:''}
     ${(v.co||[]).length?`<div class="co-wrap"><div class="co-lbl">🔥 Cụm Set N1</div><div class="co-list">${coH}</div></div>`:''}
     <div class="detail">
-      ${v.s?`<div class="ex-block">${exS}<button class="spk-btn" id="exspk${idx}" aria-label="Đọc câu ví dụ" onclick="event.stopPropagation();spkS('${(v.s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}', ${idx})" style="margin-left:6px">Nghe</button><span class="ex-yr">${etags} ${yearEtag}</span></div>`:''}
+      ${v.s?`<div class="ex-block">${exS}<button type="button" class="spk-btn spk-example" id="exspk${idx}" aria-label="Đọc câu ví dụ" data-action="speak-example" data-vocab-index="${idx}">Nghe</button><span class="ex-yr">${etags} ${yearEtag}</span></div>`:''}
       ${m4optsH}
       ${wrH?`<div class="wrongs-sec"><div class="wr-lbl">❌ Đáp án sai hay gặp</div><div class="wr-list">${wrH}</div></div>`:''}
       ${v.hint?`<div class="hint-box"><div class="hint-lbl">💡 Mẹo ghi nhớ</div>${esc(v.hint)}</div>`:''}
@@ -2021,8 +1850,6 @@ function buildCard(v){
 }
 
 function tog(idx){var el=document.getElementById('c'+idx);var open=el.classList.toggle('open');el.setAttribute('aria-expanded',String(open));}
-function cardKey(event,idx){if(event.key==='Enter'||event.key===' '){event.preventDefault();tog(idx);}}
-
 // ── Speech ──
 function spk(text,idx){
   if(!window.speechSynthesis)return;
@@ -2054,9 +1881,9 @@ if(window.speechSynthesis){window.speechSynthesis.getVoices();window.speechSynth
 // ── Tabs ──
 function sw(t,btn){
   document.querySelectorAll('.tab').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});btn.classList.add('active');btn.setAttribute('aria-selected','true');
-  document.getElementById('tv').style.display=t==='v'?'':'none';
-  document.getElementById('tq').style.display=t==='q'?'':'none';
-  document.getElementById('tra').style.display=t==='ra'?'':'none';
+  document.getElementById('tv').classList.toggle('is-hidden',t!=='v');
+  document.getElementById('tq').classList.toggle('is-hidden',t!=='q');
+  document.getElementById('tra').classList.toggle('is-hidden',t!=='ra');
 }
 
 // ── Quiz ──
@@ -2094,7 +1921,7 @@ function showQ(){
   var s=String(q.s||'');
   if(q.k&&s.includes(q.k))s=s.replace(q.k,'<span class="ul">'+q.k+'</span>');
   document.getElementById('qsen').innerHTML=s||'（'+esc(q.k)+'）の意味・用法は？';
-  document.getElementById('og').innerHTML=(q.ops||[]).map((o,i)=>`<button class="ob" onclick="sel(${i})" id="o${i}"><span class="nm">${i+1}</span>${esc(o)}</button>`).join('');
+  document.getElementById('og').innerHTML=(q.ops||[]).map((o,i)=>`<button type="button" class="ob" data-option="${i}" id="o${i}"><span class="nm">${i+1}</span>${esc(o)}</button>`).join('');
   document.getElementById('exp').classList.remove('show');document.getElementById('bn').classList.remove('show');ans=false;
 }
 function sel(c){
@@ -2106,13 +1933,13 @@ function sel(c){
     if(i===c&&c!==co)b.classList.add('ng');
   }
   var syH=(q.sy||[]).map((s,i)=>`<span class="esyi${s.pri?' pri':''}">${esc(s.k||'')}${s.h?'（'+esc(s.h)+'）':''}</span>`).join('');
-  var wrH=(q.wrongs||[]).filter(w=>w.r).map(w=>`<div class="wi" style="margin-top:4px"><span class="wr">${esc(w.r)}</span><span class="wm">${esc(w.m||'')}</span></div>`).join('');
+  var wrH=(q.wrongs||[]).filter(w=>w.r).map(w=>`<div class="wi wi-spaced"><span class="wr">${esc(w.r)}</span><span class="wm">${esc(w.m||'')}</span></div>`).join('');
   document.getElementById('exp').innerHTML=
-    `<div style="margin-bottom:8px"><span class="ew">${esc(q.k||'')}</span>${q.h?`<span class="eh">${esc(q.h)}</span>`:''}</div>`+
-    (q.vi?`<div style="font-size:11px;color:#b45309;background:#fffbeb;border-radius:6px;padding:3px 8px;margin-bottom:7px;display:inline-block">🇻🇳 ${esc(q.vi)}</div>`:'') +
-    (syH?`<div style="margin-bottom:6px"><span style="font-size:10px;color:#4a5aad;font-weight:700">≒ 類義語：</span><br>${syH}</div>`:'') +
+    `<div class="explain-heading"><span class="ew">${esc(q.k||'')}</span>${q.h?`<span class="eh">${esc(q.h)}</span>`:''}</div>`+
+    (q.vi?`<div class="explain-vi">🇻🇳 ${esc(q.vi)}</div>`:'') +
+    (syH?`<div class="explain-synonyms"><span class="explain-label">≒ 類義語：</span><br>${syH}</div>`:'') +
     wrH +
-    (q.hint?`<div class="hint-box" style="margin-top:8px"><div class="hint-lbl">💡</div>${esc(q.hint)}</div>`:'');
+    (q.hint?`<div class="hint-box hint-spaced"><div class="hint-lbl">💡</div>${esc(q.hint)}</div>`:'');
   document.getElementById('exp').classList.add('show');
   document.getElementById('sm').textContent='正解: '+sc;
   document.getElementById('bn').classList.add('show');
@@ -2125,6 +1952,48 @@ function showRes(){
   document.getElementById('rmsg').textContent=(pct>=90?'🎉 N1合格レベルです！':pct>=70?'👍 よくできました！':pct>=50?'📚 復習が必要です。':'💪 もっと練習！')+'（正答率: '+pct+'%）';
 }
 function resetQ(){document.getElementById('res').classList.remove('show');document.getElementById('qs').style.display='';document.getElementById('qa').classList.remove('active');}
+
+document.querySelector('.tabs').addEventListener('click',event=>{
+  const tab=event.target.closest('[data-tab]');
+  if(tab)sw(tab.dataset.tab,tab);
+});
+document.getElementById('si').addEventListener('input',()=>rv());
+document.getElementById('fm').addEventListener('change',()=>rv());
+document.getElementById('fy').addEventListener('change',()=>rv());
+document.querySelector('.pos-bar').addEventListener('click',event=>{
+  const button=event.target.closest('[data-pos]');
+  if(button)fp2(button.dataset.pos,button);
+});
+document.getElementById('vg').addEventListener('click',event=>{
+  const action=event.target.closest('[data-action]');
+  if(action){
+    event.stopPropagation();
+    const idx=Number(action.dataset.vocabIndex);
+    if(action.dataset.action==='speak-word')spk(V[idx].k||'',idx);
+    if(action.dataset.action==='speak-example')spkS(V[idx].s||'',idx);
+    return;
+  }
+  const card=event.target.closest('[data-vocab-index]');
+  if(card)tog(Number(card.dataset.vocabIndex));
+});
+document.getElementById('vg').addEventListener('keydown',event=>{
+  const card=event.target.closest('[data-vocab-index]');
+  if(card&&(event.key==='Enter'||event.key===' ')){
+    event.preventDefault();
+    tog(Number(card.dataset.vocabIndex));
+  }
+});
+document.getElementById('more-vocab').addEventListener('click',event=>{
+  if(event.target.closest('[data-action="load-more"]'))loadMoreVocab();
+});
+document.getElementById('tq').addEventListener('click',event=>{
+  const action=event.target.closest('[data-action]');
+  if(action?.dataset.action==='start-quiz')startQ();
+  if(action?.dataset.action==='next-question')nextQ();
+  if(action?.dataset.action==='reset-quiz')resetQ();
+  const option=event.target.closest('[data-option]');
+  if(option)sel(Number(option.dataset.option));
+});
 
 rv();
 </script>
