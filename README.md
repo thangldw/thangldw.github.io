@@ -175,6 +175,8 @@ git status --short
 
 UI audit kiểm tra semantic HTML, accessibility, thứ tự CSS và token bắt buộc. Site validator kiểm tra HTML, ID trùng, liên kết local, social metadata, sitemap, redirect chain và font bên ngoài. Smoke test dùng Chrome headless có sẵn trên máy để chạy các luồng chính của G検定, BJT, JLPT N1, Vocabulary Exams, Vocabulary Tabs, Grammar Exams, Kanji Analysis và Kanji Collocations mà không cần dependency npm. GitHub Pages phát hành trực tiếp từ `master`.
 
+Các payload học tập lớn của năm route JLPT N1 chính được đặt trong `data.js` cùng thư mục với route. HTML chỉ giữ cấu trúc và logic giao diện; dữ liệu vẫn được tải đồng bộ trước script ứng dụng để giữ nguyên hành vi của bản static.
+
 ## Cấu trúc repository
 
 ```text
