@@ -7,203 +7,6 @@
 <link rel="canonical" href="https://thangldw.github.io/apps/n1-kanji-analysis/">
 <meta name="description" content="Phân tích 348 từ kanji JLPT N1 theo từng chữ, cách đọc, nghĩa, ví dụ và cấu tạo từ để ghi nhớ sâu hơn.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Kanji Analysis — 漢字分析"><meta property="og:description" content="Phân tích 348 từ kanji N1 theo chữ, cách đọc và cấu tạo."><meta property="og:url" content="https://thangldw.github.io/apps/n1-kanji-analysis/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
-<style>
-:root{
-  --ink:#1a1a2e;--paper:#f7f8fa;--card:#ffffff;
-  --red:#e53935;--green:#2e7d32;--blue:#1565c0;--purple:#6a1b9a;
-  --orange:#e65100;--teal:#00695c;--indigo:#283593;--pink:#c2185b;
-  --muted:#546e7a;--border:#cfd8dc;--gold:#f57f17;
-  --bg-red:#fff3f3;--bg-green:#f1f8e9;--bg-blue:#e3f2fd;
-  --bg-purple:#f3e5f5;--bg-orange:#fff3e0;--bg-teal:#e0f2f1;
-  --shadow:0 3px 16px rgba(0,0,0,.09);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--paper);color:var(--ink);font-family:var(--font-sans, var(--portfolio-font-sans));min-height:100vh;}
-
-/* HEADER */
-#appHeader{
-  background:#ffffff;
-  color:var(--ink);padding:16px 22px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:relative;z-index:1;gap:14px;
-  border-bottom:1px solid #e4e7ee;
-  box-shadow:0 1px 6px rgba(20,23,29,.05);
-}
-#appHeader h1{font-family:var(--font-jp-serif, var(--portfolio-font-jp-serif));font-size:1.05rem;letter-spacing:.04em;white-space:nowrap;}
-#search-input{
-  background:#f1f3f7;border:1.5px solid #e4e7ee;
-  border-radius:20px;padding:8px 16px;color:var(--ink);font-size:.84rem;width:220px;outline:none;
-  transition:all .2s;
-}
-#search-input::placeholder{color:#838b99;}
-#search-input:focus{background:#fff;border-color:#3a5bd9;}
-
-/* FILTER BAR */
-.filter-bar{
-  display:flex;gap:6px;flex-wrap:wrap;padding:14px 18px 10px;
-  align-items:center;max-width:1140px;margin:0 auto;
-}
-.filter-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-right:3px;font-weight:600;}
-.filter-btn{
-  background:#fff;border:2px solid var(--border);border-radius:20px;
-  padding:5px 13px;font-size:.78rem;cursor:pointer;transition:all .15s;
-  color:var(--ink);font-family:var(--font-sans, var(--portfolio-font-sans));font-weight:500;
-}
-.filter-btn:hover{border-color:var(--blue);color:var(--blue);}
-.filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
-.result-count{font-size:.78rem;color:var(--muted);margin-left:auto;font-weight:500;}
-
-/* GRID */
-.container{width:min(1500px,100%);margin:0 auto;padding:12px 32px 60px;}
-.vocab-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
-.load-row{display:flex;justify-content:center;padding:18px 0 4px;}
-.load-more{min-height:44px;padding:9px 18px;border:1.5px solid var(--blue);border-radius:9px;background:#fff;color:var(--blue);font:600 13px var(--font-sans, var(--portfolio-font-sans));cursor:pointer;}
-.load-more:hover,.load-more:focus-visible{background:var(--bg-blue);}
-
-/* CARD */
-.vocab-card{
-  background:var(--card);border:2px solid var(--border);border-radius:16px;
-  padding:18px 18px 15px;box-shadow:var(--shadow);cursor:pointer;transition:all .2s;
-  border-top:4px solid var(--blue);
-}
-.vocab-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.13);}
-.vocab-card.expanded{border-color:var(--blue);}
-.vocab-card:nth-child(6n+1){border-top-color:#e53935;}
-.vocab-card:nth-child(6n+2){border-top-color:#1565c0;}
-.vocab-card:nth-child(6n+3){border-top-color:#2e7d32;}
-.vocab-card:nth-child(6n+4){border-top-color:#6a1b9a;}
-.vocab-card:nth-child(6n+5){border-top-color:#e65100;}
-.vocab-card:nth-child(6n+6){border-top-color:#00695c;}
-
-/* CARD HEADER */
-.card-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:11px;}
-.card-kanji{
-  font-family:var(--font-jp-serif, var(--portfolio-font-jp-serif));font-size:2.3rem;font-weight:700;
-  color:var(--red);line-height:1;min-width:58px;text-shadow:0 1px 2px rgba(229,57,53,.15);
-}
-.card-meta{flex:1;}
-.card-reading{
-  font-family:system-ui,sans-serif;font-size:.96rem;
-  font-weight:700;color:var(--blue);margin-bottom:3px;
-}
-.card-meaning{font-size:.82rem;color:var(--muted);font-weight:500;}
-.card-round{
-  font-size:.67rem;background:#e8eaf6;color:var(--indigo);
-  padding:2px 9px;border-radius:10px;display:inline-block;margin-top:4px;font-weight:600;
-}
-.card-header-right{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.expand-arrow{color:var(--muted);font-size:.8rem;transition:transform .2s;}
-.vocab-card.expanded .expand-arrow{transform:rotate(180deg);}
-
-/* SPEAK BTN */
-.speak-btn{
-  background:none;border:1.5px solid var(--border);border-radius:8px;
-  padding:5px 7px;cursor:pointer;color:var(--muted);display:flex;align-items:center;
-  transition:all .18s;line-height:0;
-}
-.speak-btn:hover{border-color:var(--blue);color:var(--blue);background:#e3f2fd;}
-.speak-btn.speaking{border-color:var(--red);color:var(--red);background:#fff3f3;animation:pulse .8s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
-
-/* EXAMPLE */
-.card-example{
-  font-family:system-ui,sans-serif;font-size:.86rem;color:#444;
-  background:linear-gradient(135deg,#fafafa,#f5f5f5);
-  border-left:3px solid var(--blue);border-radius:0 8px 8px 0;
-  padding:8px 12px;margin-bottom:11px;line-height:1.8;
-}
-.card-example strong{color:var(--red);font-weight:700;font-size:.95rem;}
-
-/* DETAIL PANEL */
-.card-detail{display:none;border-top:2px solid #e8eaf6;padding-top:13px;margin-top:2px;}
-.vocab-card.expanded .card-detail{display:block;}
-
-/* SECTION LABEL */
-.section-label{
-  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  margin-bottom:7px;display:flex;align-items:center;gap:5px;
-}
-
-/* KANJI PARTS */
-.parts-label{color:var(--purple);}
-.parts-table{width:100%;border-collapse:collapse;margin-bottom:13px;font-size:.84rem;border-radius:10px;overflow:hidden;}
-.parts-table th{
-  font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;
-  padding:6px 9px;text-align:left;
-}
-.parts-table th:nth-child(1){background:#f3e5f5;color:var(--purple);}
-.parts-table th:nth-child(2){background:#e8eaf6;color:var(--indigo);}
-.parts-table th:nth-child(3){background:#fff3f3;color:var(--red);}
-.parts-table th:nth-child(4){background:#e3f2fd;color:var(--blue);}
-.parts-table th:nth-child(5){background:#f1f8e9;color:var(--green);}
-.parts-table td{padding:8px 9px;border-bottom:1px solid #f0f0f0;vertical-align:middle;}
-.parts-table tr:last-child td{border-bottom:none;}
-.parts-table tr:hover td{background:#fafafa;}
-.td-kanji{font-family:var(--font-jp-serif, var(--portfolio-font-jp-serif));font-size:1.7rem;font-weight:700;color:var(--ink);min-width:38px;}
-.td-hv{font-weight:800;font-size:.82rem;color:var(--purple);letter-spacing:.06em;white-space:nowrap;}
-.td-on{color:var(--red);font-family:system-ui,sans-serif;font-weight:700;font-size:.86rem;}
-.td-kun{color:var(--blue);font-family:system-ui,sans-serif;font-size:.84rem;}
-.td-meaning{color:#555;font-size:.8rem;}
-
-/* CONFUSION BOX */
-.confuse-box{
-  background:linear-gradient(135deg,#fff8e1,#fff3e0);
-  border:1.5px solid #ffcc02;border-radius:10px;padding:10px 13px;margin-bottom:11px;
-}
-.confuse-title{
-  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
-  color:var(--orange);margin-bottom:5px;
-}
-.confuse-text{font-size:.83rem;color:#5d4037;line-height:1.65;}
-
-/* WRONG READINGS */
-.wrong-section{margin-bottom:11px;}
-.wrong-label{color:var(--red);}
-.wrong-items{display:flex;flex-direction:column;gap:5px;}
-.wrong-item{
-  display:flex;align-items:flex-start;gap:10px;
-  background:linear-gradient(135deg,#fff3f3,#fce4ec);
-  border:1px solid #ffcdd2;border-radius:9px;padding:7px 11px;
-}
-.wrong-reading{
-  font-family:system-ui,sans-serif;font-size:.88rem;
-  font-weight:700;color:var(--red);min-width:80px;flex-shrink:0;
-}
-.wrong-meaning{font-size:.79rem;color:#555;line-height:1.55;white-space:pre-line;}
-
-/* COLLOCATIONS */
-.colloc-section{margin-bottom:11px;}
-.colloc-label{color:var(--teal);}
-.colloc-list{display:flex;flex-direction:column;gap:4px;}
-.colloc-item{
-  font-family:system-ui,sans-serif;font-size:.81rem;color:#1a5276;
-  background:linear-gradient(135deg,#e0f7fa,#e3f2fd);
-  border:1px solid #b2ebf2;border-radius:8px;padding:6px 11px;line-height:1.6;
-}
-
-/* SYNONYMS */
-.syn-section{}
-.syn-label{color:var(--green);}
-.syn-chips{display:flex;flex-wrap:wrap;gap:6px;}
-.syn-chip{
-  background:linear-gradient(135deg,#e8f5e9,#f1f8e9);
-  color:var(--green);border:1px solid #a5d6a7;
-  border-radius:20px;padding:3px 11px;font-size:.79rem;
-  font-family:system-ui,sans-serif;font-weight:600;
-}
-
-mark{background:#fff59d;border-radius:3px;padding:0 2px;}
-@media(max-width:1180px){.vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
-@media(max-width:840px){.container{padding-inline:24px}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-@media(max-width:600px){
-  #appHeader{padding-inline:16px;}
-  .container{padding-inline:16px;}
-  .vocab-grid{grid-template-columns:1fr;}
-  .card-kanji{font-size:1.8rem;}
-  #appHeader h1{font-size:.9rem;}
-  #search-input{width:min(155px,45vw);min-width:0;}
-}
-</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
   (function () {
@@ -215,43 +18,44 @@ mark{background:#fff59d;border-radius:3px;padding:0 2px;}
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
 <link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722b">
+<link rel="stylesheet" href="styles.css?v=20260722a">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-kanji-analysis">
 <main id="main-content" class="semantic-main">
 <header id="appHeader">
       <h1>JLPT N1 Kanji Analysis <span>漢字分析</span></h1>
-  <input id="search-input" type="text" placeholder="🔍 Tìm từ, cách đọc, nghĩa..." oninput="filterCards()">
+  <input id="search-input" type="text" placeholder="🔍 Tìm từ, cách đọc, nghĩa..." data-search="kanji">
 </header>
 
 <div class="filter-bar">
   <span class="filter-label">Đề:</span>
-  <button class="filter-btn active" onclick="setRound('all',this)">Tất cả</button>
-  <button class="filter-btn" onclick="setRound('1',this)">第1回</button>
-<button class="filter-btn" onclick="setRound('2',this)">第2回</button>
-<button class="filter-btn" onclick="setRound('3',this)">第3回</button>
-<button class="filter-btn" onclick="setRound('4',this)">第4回</button>
-<button class="filter-btn" onclick="setRound('5',this)">第5回</button>
-<button class="filter-btn" onclick="setRound('6',this)">第6回</button>
-<button class="filter-btn" onclick="setRound('7',this)">第7回</button>
-<button class="filter-btn" onclick="setRound('8',this)">第8回</button>
-<button class="filter-btn" onclick="setRound('9',this)">第9回</button>
-<button class="filter-btn" onclick="setRound('10',this)">第10回</button>
-<button class="filter-btn" onclick="setRound('11',this)">第11回</button>
-<button class="filter-btn" onclick="setRound('12',this)">第12回</button>
-<button class="filter-btn" onclick="setRound('13',this)">第13回</button>
-<button class="filter-btn" onclick="setRound('14',this)">第14回</button>
-<button class="filter-btn" onclick="setRound('15',this)">第15回</button>
-<button class="filter-btn" onclick="setRound('16',this)">第16回</button>
-<button class="filter-btn" onclick="setRound('17',this)">第17回</button>
-<button class="filter-btn" onclick="setRound('18',this)">第18回</button>
-<button class="filter-btn" onclick="setRound('19',this)">第19回</button>
-<button class="filter-btn" onclick="setRound('20',this)">第20回</button>
-<button class="filter-btn" onclick="setRound('21',this)">第21回</button>
-<button class="filter-btn" onclick="setRound('22',this)">第22回</button>
-<button class="filter-btn" onclick="setRound('23',this)">第23回</button>
-<button class="filter-btn" onclick="setRound('24',this)">第24回</button>
-<button class="filter-btn" onclick="setRound('25',this)">復習</button>
+  <button type="button" class="filter-btn active" data-round="all">Tất cả</button>
+  <button type="button" class="filter-btn" data-round="1">第1回</button>
+<button type="button" class="filter-btn" data-round="2">第2回</button>
+<button type="button" class="filter-btn" data-round="3">第3回</button>
+<button type="button" class="filter-btn" data-round="4">第4回</button>
+<button type="button" class="filter-btn" data-round="5">第5回</button>
+<button type="button" class="filter-btn" data-round="6">第6回</button>
+<button type="button" class="filter-btn" data-round="7">第7回</button>
+<button type="button" class="filter-btn" data-round="8">第8回</button>
+<button type="button" class="filter-btn" data-round="9">第9回</button>
+<button type="button" class="filter-btn" data-round="10">第10回</button>
+<button type="button" class="filter-btn" data-round="11">第11回</button>
+<button type="button" class="filter-btn" data-round="12">第12回</button>
+<button type="button" class="filter-btn" data-round="13">第13回</button>
+<button type="button" class="filter-btn" data-round="14">第14回</button>
+<button type="button" class="filter-btn" data-round="15">第15回</button>
+<button type="button" class="filter-btn" data-round="16">第16回</button>
+<button type="button" class="filter-btn" data-round="17">第17回</button>
+<button type="button" class="filter-btn" data-round="18">第18回</button>
+<button type="button" class="filter-btn" data-round="19">第19回</button>
+<button type="button" class="filter-btn" data-round="20">第20回</button>
+<button type="button" class="filter-btn" data-round="21">第21回</button>
+<button type="button" class="filter-btn" data-round="22">第22回</button>
+<button type="button" class="filter-btn" data-round="23">第23回</button>
+<button type="button" class="filter-btn" data-round="24">第24回</button>
+<button type="button" class="filter-btn" data-round="25">復習</button>
 
   <span class="result-count" id="result-count"></span>
 </div>
@@ -266,7 +70,7 @@ const DATA = [{"k": "補助", "r": "ほじょ", "m": "hỗ trợ, trợ giúp", 
 
 let currentRound='all', currentSearch='';
 
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function hl(t,q){
   if(!q)return esc(t);
   const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
@@ -284,8 +88,9 @@ function speakJapanese(text,btn){
   const jv=v.find(x=>x.lang==='ja-JP'||x.lang.startsWith('ja'));
   if(jv)u.voice=jv;
   if(btn)btn.classList.add('speaking');
-  u.onend=()=>{if(btn)btn.classList.remove('speaking');};
-  u.onerror=()=>{if(btn)btn.classList.remove('speaking');};
+  const resetSpeakButton=()=>{if(btn)btn.classList.remove('speaking');};
+  u.addEventListener('end',resetSpeakButton);
+  u.addEventListener('error',resetSpeakButton);
   window.speechSynthesis.speak(u);
 }
 if(window.speechSynthesis){
@@ -365,7 +170,7 @@ function buildCard(item,q){
   const mHl=q?hl(item.m,q):esc(item.m);
   const speakText=`${item.k}。${item.ex.replace(/<k>(.*?)<\/k>/g,'$1')}`;
 
-  return `<div class="vocab-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this)" onkeydown="cardKey(event,this)">
+  return `<div class="vocab-card" role="button" tabindex="0" aria-expanded="false" data-action="toggle-card">
     <div class="card-header">
       <div class="card-kanji">${kHl}</div>
       <div class="card-meta">
@@ -374,7 +179,7 @@ function buildCard(item,q){
         <div class="card-round">${esc(rLabel)} [${item.order}]</div>
       </div>
       <div class="card-header-right">
-        <button class="speak-btn" onclick="event.stopPropagation();speakJapanese('${speakText.replace(/'/g,"\\'")}',this);" title="Phát âm">
+        <button type="button" class="speak-btn" data-action="speak" data-speech-text="${esc(speakText)}" title="Phát âm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
@@ -391,8 +196,6 @@ function buildCard(item,q){
 }
 
 function toggle(el){const expanded=el.classList.toggle('expanded');el.setAttribute('aria-expanded',String(expanded));}
-function cardKey(event,el){if(event.key==='Enter'||event.key===' '){event.preventDefault();toggle(el);}}
-
 function getFiltered(){
   let items=DATA;
   if(currentRound!=='all')items=items.filter(v=>v.round===parseInt(currentRound));
@@ -414,7 +217,7 @@ function render(append){
   const shown=Math.min(visibleCount,items.length);
   document.getElementById('vocab-grid').innerHTML=items.slice(0,shown).map(v=>buildCard(v,currentSearch)).join('');
   document.getElementById('result-count').textContent=shown<items.length?`${shown} / ${items.length} từ`:`${items.length} từ`;
-  document.getElementById('load-row').innerHTML=shown<items.length?`<button type="button" class="load-more" onclick="loadMore()">Hiển thị thêm ${Math.min(96,items.length-shown)} mục</button>`:'';
+  document.getElementById('load-row').innerHTML=shown<items.length?`<button type="button" class="load-more" data-action="load-more">Hiển thị thêm ${Math.min(96,items.length-shown)} mục</button>`:'';
 }
 
 function loadMore(){visibleCount+=96;render(true);}
@@ -425,6 +228,22 @@ function setRound(r,btn){
   btn.classList.add('active');render();
 }
 function filterCards(){currentSearch=document.getElementById('search-input').value;render();}
+
+document.addEventListener('input',event=>{if(event.target.matches('[data-search]'))filterCards();});
+document.addEventListener('click',event=>{
+  const control=event.target.closest('[data-round],[data-action]');
+  if(!control)return;
+  if(control.dataset.round){setRound(control.dataset.round,control);return;}
+  if(control.dataset.action==='toggle-card'){toggle(control);return;}
+  if(control.dataset.action==='speak'){speakJapanese(control.dataset.speechText,control);return;}
+  if(control.dataset.action==='load-more')loadMore();
+});
+document.addEventListener('keydown',event=>{
+  if(event.key!=='Enter'&&event.key!==' ')return;
+  const card=event.target.closest('[data-action="toggle-card"]');
+  if(!card)return;
+  event.preventDefault();toggle(card);
+});
 render();
 </script>
 </main>

@@ -10,7 +10,7 @@
     "apps/n1-grammar-flashcards/index.html": {"style_blocks": 1, "style_attributes": 1, "event_handlers": 9, "buttons_missing_type": 7},
     "apps/n1-grammar-sentence-order-drill/index.html": {"style_blocks": 1, "style_attributes": 4, "event_handlers": 7, "buttons_missing_type": 4},
     "apps/n1-grammar-sentence-order/index.html": {"style_blocks": 1, "style_attributes": 2, "event_handlers": 0, "buttons_missing_type": 7},
-    "apps/n1-kanji-analysis/index.html": {"style_blocks": 1, "style_attributes": 0, "event_handlers": 32, "buttons_missing_type": 27},
+    "apps/n1-kanji-analysis/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
     "apps/n1-kanji-collocations/index.html": {"style_blocks": 1, "style_attributes": 8, "event_handlers": 18, "buttons_missing_type": 17},
     "apps/n1-reading-75/index.html": {"style_blocks": 1, "style_attributes": 2, "event_handlers": 9, "buttons_missing_type": 7},
     "apps/n1-reading-mondai9/index.html": {"style_blocks": 2, "style_attributes": 8, "event_handlers": 6, "buttons_missing_type": 3},

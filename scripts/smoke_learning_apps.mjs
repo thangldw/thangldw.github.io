@@ -294,6 +294,39 @@ const tests = [
       const usable = Boolean(document.querySelector('.result')) && Boolean(document.querySelector('.next-btn'));
       return { ok: noOverflow && usable, message: `noOverflow=${noOverflow}, usable=${usable}` };
     }
+  },
+  {
+    name: 'Kanji Analysis search, round and card details',
+    route: '/apps/n1-kanji-analysis/',
+    ready: 'document.querySelectorAll(".vocab-card").length === 96',
+    check: function () {
+      const initial = document.querySelectorAll('.vocab-card').length === 96;
+      const card = document.querySelector('.vocab-card');
+      card.click();
+      const expanded = card.getAttribute('aria-expanded') === 'true' && getComputedStyle(card.querySelector('.card-detail')).display !== 'none';
+      const search = document.querySelector('#search-input');
+      search.value = '愛嬌';
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+      const searched = document.querySelectorAll('.vocab-card').length >= 1 && document.querySelectorAll('.vocab-card').length < 96;
+      search.value = '';
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+      document.querySelector('[data-round="1"], .filter-btn:nth-of-type(2)').click();
+      const round = Array.from(document.querySelectorAll('.vocab-card .card-round')).every((label) => label.textContent.includes('第1回'));
+      return { ok: initial && expanded && searched && round, message: `initial=${initial}, expanded=${expanded}, searched=${searched}, round=${round}` };
+    }
+  },
+  {
+    name: 'Kanji Analysis mobile layout and keyboard',
+    route: '/apps/n1-kanji-analysis/',
+    viewport: { width: 390, height: 844 },
+    ready: 'document.querySelectorAll(".vocab-card").length === 96',
+    check: function () {
+      const noOverflow = document.documentElement.scrollWidth <= window.innerWidth;
+      const card = document.querySelector('.vocab-card');
+      card.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      const keyboard = card.getAttribute('aria-expanded') === 'true';
+      return { ok: noOverflow && keyboard, message: `noOverflow=${noOverflow}, keyboard=${keyboard}` };
+    }
   }
 ];
 const selectedTests = process.env.SMOKE_ROUTE
