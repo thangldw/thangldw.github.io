@@ -158,9 +158,9 @@
   ];
 
   global.portfolioLanguageCollection = {
-    title: 'Japanese Learning Programs',
-    description: 'JLPT N1 and BJT hubs with 12 focused tools, timed practice, review, and local learning history.',
+    title: 'Japanese & AI Learning Programs',
+    description: 'JLPT N1, BJT, and G検定 programs with focused study paths, timed practice, review, and local learning history.',
     href: '/apps/#learning',
-    label: 'JLPT N1 · BJT'
+    label: 'JLPT N1 · BJT · G検定'
   };
 })(window);
