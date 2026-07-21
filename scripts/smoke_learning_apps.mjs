@@ -210,6 +210,59 @@ const tests = [
       const usable = document.querySelectorAll('[data-option]').length >= 2 && document.querySelector('.qa').classList.contains('active');
       return { ok: noOverflow && usable, message: `noOverflow=${noOverflow}, usable=${usable}` };
     }
+  },
+  {
+    name: 'Vocabulary Tabs search, cards and all sections',
+    route: '/apps/n1-vocabulary-tabs/',
+    ready: 'document.querySelectorAll("#gc .card").length === 96',
+    check: async function () {
+      const initial = document.querySelectorAll('#gc .card').length === 96;
+      const search = document.querySelector('#sic');
+      search.value = '意地';
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+      const filtered = document.querySelectorAll('#gc .card').length > 0 && document.querySelectorAll('#gc .card').length < 96;
+      search.value = '';
+      search.dispatchEvent(new Event('input', { bubbles: true }));
+      const firstCard = document.querySelector('#gc .card');
+      firstCard.click();
+      const expanded = firstCard.getAttribute('aria-expanded') === 'true';
+      const sections = [
+        ['s1696', '.set-section'],
+        ['adj', '#adjgrid .card'],
+        ['ptu', '.ptu-card'],
+        ['dtg', '.dtg-s'],
+        ['ct', '.ct-chip'],
+        ['pre', '.pre-card']
+      ];
+      let allSections = true;
+      for (const [tab, selector] of sections) {
+        document.querySelector(`[data-tab="${tab}"]`).click();
+        await new Promise(resolveWait => setTimeout(resolveWait, 0));
+        allSections = allSections && Boolean(document.querySelector(`#pn-${tab} ${selector}`));
+      }
+      document.querySelector('[data-tab="ptu"]').click();
+      document.querySelector('[data-ptu-mode="pat"]').click();
+      const patternHeader = document.querySelector('.pat-h');
+      patternHeader.click();
+      const patternBody = document.querySelector('.pat-b');
+      const pattern = Boolean(patternHeader) && patternHeader.getAttribute('aria-expanded') === 'true' && getComputedStyle(patternBody).display !== 'none';
+      return { ok: initial && filtered && expanded && allSections && pattern, message: `initial=${initial}, filtered=${filtered}, expanded=${expanded}, sections=${allSections}, pattern=${pattern}` };
+    }
+  },
+  {
+    name: 'Vocabulary Tabs mobile layout and keyboard',
+    route: '/apps/n1-vocabulary-tabs/',
+    viewport: { width: 390, height: 844 },
+    ready: 'document.querySelectorAll("#gc .card").length === 96',
+    check: function () {
+      const noOverflow = document.documentElement.scrollWidth <= window.innerWidth;
+      const card = document.querySelector('#gc .card');
+      card.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      const keyboard = card.getAttribute('aria-expanded') === 'true';
+      document.querySelector('[data-tab="pre"]').click();
+      const prefixes = document.querySelectorAll('.pre-card').length > 0;
+      return { ok: noOverflow && keyboard && prefixes, message: `noOverflow=${noOverflow}, keyboard=${keyboard}, prefixes=${prefixes}` };
+    }
   }
 ];
 const selectedTests = process.env.SMOKE_ROUTE

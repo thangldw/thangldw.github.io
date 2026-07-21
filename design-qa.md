@@ -100,7 +100,7 @@ node scripts/smoke_learning_apps.mjs
 git diff --check
 ```
 
-Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定, BJT, JLPT N1; riêng Vocabulary Exams kiểm tra search, card expansion, quiz feedback, tab Sai → Đúng và mobile overflow ở 390 × 844.
+Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定, BJT, JLPT N1. Vocabulary Exams kiểm tra search, card expansion, quiz feedback và tab Sai → Đúng; Vocabulary Tabs kiểm tra search, card expansion, đủ 7 tab, Pattern, keyboard và mobile overflow ở 390 × 844.
 
 ### Browser matrix
 
@@ -141,6 +141,14 @@ Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定,
 - Debt ledger của route giảm từ 2 style block, 176 style attribute, 20 event handler và 11 button thiếu type xuống 0.
 - Dữ liệu 648 từ vẫn nằm nguyên trong JSON source; refactor không thay nội dung học hoặc đáp án.
 - Chrome smoke xác nhận filter, mở card, bắt đầu quiz, chọn đáp án, feedback và layout 390 px hoạt động.
+
+## Refactor Vocabulary Tabs — 2026-07-22
+
+- Tách CSS nội bộ sang `apps/n1-vocabulary-tabs/styles.css`; HTML chỉ còn liên kết stylesheet.
+- Chuẩn hóa renderer của 7 tab sang class có tên và một lớp event delegation dùng `data-*`.
+- Debt ledger của route giảm từ 1 style block, 73 style attribute, 39 event handler và 8 button thiếu type xuống 0.
+- Checksum của 8 payload JSON lớn không đổi, nên toàn bộ dữ liệu từ vựng và ví dụ được giữ nguyên.
+- Chrome smoke xác nhận tìm kiếm, mở card bằng chuột/bàn phím, tất cả tab, Pattern và layout 390 px hoạt động.
 
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 
