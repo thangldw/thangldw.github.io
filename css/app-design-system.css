@@ -405,7 +405,7 @@ body[data-app-kind="language"] :is(.intro, .header, .hdr, .container > h1, .main
   text-align: left !important;
 }
 
-body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1):not(.exam-title) {
   margin-top: 0;
   font-size: clamp(28px, 3vw, 40px) !important;
   font-weight: 600 !important;
@@ -966,7 +966,7 @@ body.portfolio-catalog .app-card .ac-tag {
     min-width: 112px;
   }
 
-  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1):not(.exam-title) {
     font-size: 30px !important;
   }
 }

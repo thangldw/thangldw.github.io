@@ -458,7 +458,7 @@ body[data-language-app="n1-grammar-sentence-order"] .set-btn {
     width: min(100% - 24px, 620px);
   }
 
-  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1):not(.exam-title) {
     font-size: 27px !important;
   }
 }
