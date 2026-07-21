@@ -1,425 +1,183 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apps — thang.</title>
-  <meta name="description" content="Independent engineering systems and language-learning tools by Thang Luu, shared for feedback, collaboration, and continued learning.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Apps — Thang Luu</title>
+  <meta name="description" content="Independent engineering systems, games, and learning programs by Thang Luu, shared for feedback, collaboration, and continued learning.">
   <link rel="canonical" href="https://thangldw.github.io/apps/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Apps — Thang Luu">
-  <meta property="og:description" content="Practical engineering systems and language-learning tools, shared for feedback, collaboration, and continued learning.">
+  <meta property="og:description" content="Practical engineering systems, games, and learning programs, shared for feedback, collaboration, and continued learning.">
   <meta property="og:url" content="https://thangldw.github.io/apps/">
   <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
   <meta name="twitter:card" content="summary_large_image">
-
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
-
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260721c">
-
-  <script>
-    (function () {
-      var saved = localStorage.getItem('theme');
-      var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
-
-  <style>
-    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    .font-mono { font-family: var(--font-mono); }
-    .wrap { width: min(var(--content-width), 100% - 2 * var(--space-md)); margin-inline: auto; }
-    a { color: inherit; text-decoration: none; }
-
-    .apps-main { padding-block: 64px 40px; }
-    .apps-intro { max-width: none; margin-bottom: var(--space-xl); }
-    .apps-intro .eyebrow { display: inline-flex; align-items: center; gap: .5em; color: var(--text-dim); font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: .04em; text-transform: uppercase; }
-    .apps-intro h1 { font-family: var(--font-display); font-size: var(--step-4); line-height: 1.05; letter-spacing: -.02em; margin-top: var(--space-xs); }.apps-intro h1 em{color:var(--accent);font-style:normal}
-    .apps-intro .lead { color: var(--text-muted); font-size: 13.5px; letter-spacing: -.01em; margin-top: var(--space-sm); white-space: nowrap; }
-    .apps-intro .lead strong { color: var(--text); font-weight: 600; }
-
-    .apps-cat { margin-top: var(--space-xl); }
-    .apps-cat:first-of-type { margin-top: 0; }
-    .apps-cat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-md); border-bottom: 1px solid var(--border); padding-bottom: var(--space-xs); }
-    .apps-cat-head .cat-copy { display: grid; gap: 5px; }
-    .apps-cat-head h2 { margin: 0; font-family: var(--font-display); font-size: 22px; line-height: 1.15; font-weight: 600; letter-spacing: -.02em; }
-    .apps-cat-head .cat-jp { font-family: var(--font-mono); color: var(--text-dim); font-size: 11px; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
-    .apps-cat-head .cat-count { display: grid; justify-items: end; gap: 2px; margin-left: auto; padding-left: 24px; border-left: 1px solid var(--border); font-family: var(--font-mono); color: var(--text-dim); }
-    .apps-cat-head .cat-count strong { color: var(--text); font-size: 20px; line-height: 1; font-weight: 500; }
-    .apps-cat-head .cat-count span { font-size: 10px; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; }
-
-    .apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); gap: var(--space-md); }
-
-    .app-card {
-      position: relative; display: flex; flex-direction: column;
-      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-      padding: var(--space-md); overflow: hidden; transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
-    }
-    .app-card:hover { border-color: var(--border-strong); }
-    .app-card::before { display:none }
-
-    .app-card .ac-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-sm); }
-    .app-card .ac-icon { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; font-size: 1.3rem; background: var(--accent-glow); color: var(--accent); }
-    .app-card .ac-status { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--success); border: 1px solid color-mix(in srgb, var(--success) 50%, transparent); border-radius: 999px; padding: .2em .65em; }
-    .app-card .ac-status.wip { color: var(--text-dim); border-color: var(--border); }
-    .app-card .ac-status.private { color: var(--text-dim); border-color: var(--border-strong); background: var(--surface-2); }
-
-    .app-card h3 { font-family: var(--font-display); font-size: 19px; line-height: 1.3; font-weight: 500; letter-spacing: -.015em; }
-    .app-card .ac-jp { font-family: var(--font-jp-sans); color: var(--text-dim); font-size: 13px; line-height: 1.45; margin-left: .5em; letter-spacing: 0; }
-    .app-card p { color: var(--text-muted); font-size: 15px; line-height: 1.55; margin-top: 8px; flex: 1; }
-
-    .app-card .ac-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: var(--space-sm); }
-    .app-card .ac-tag { font-family: var(--font-mono); font-size: 12px; line-height: 1.35; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: .25em .65em; }
-
-    .app-card .ac-open { display: inline-flex; align-items: center; gap: .4em; margin-top: var(--space-md); color: var(--accent); font-weight: 600; font-size: 14px; line-height: 1.4; }
-    .app-card .ac-open::after { content: "\2192"; transition: transform .2s var(--ease); }
-    .app-card:hover .ac-open::after { transform: translateX(4px); }
-    .app-card .ac-open.ac-private { color: var(--text-dim); font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
-    .app-card .ac-open.ac-private::after { content: none; }
-    .app-card a.ac-cover { position: absolute; inset: 0; z-index: 1; } /* whole card clickable */
-
-    .site-foot { margin-top: var(--space-2xl); padding: 20px 48px; border-top: 1px solid var(--border); color: var(--text-dim); font: 400 12px var(--font-mono, var(--portfolio-font-mono)); text-align: center; }
-    .site-foot span { color: #aab1bc; }
-
-    .apps-nav{height:75px;padding:0 48px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);z-index:10}.apps-brand{font:600 15px var(--font-mono)}.apps-brand b{color:var(--accent)}.apps-brand span{color:var(--muted);font-weight:400}.apps-nav nav{display:flex;gap:26px;align-items:center;color:var(--body);font-size:13px}.theme-button{width:31px;height:31px;border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--ink)}.apps-intro .eyebrow{color:var(--accent)}.apps-intro h1{font-size:44px}.apps-grid{grid-template-columns:repeat(3,1fr);gap:20px}.app-card{padding:22px}.app-card .ac-icon{width:44px;height:44px;border-radius:8px}
-    @media(max-width:1400px){.apps-intro .lead{white-space:normal}}@media(max-width:900px){.apps-grid{grid-template-columns:repeat(2,1fr)}}@media (max-width: 640px) {.apps-nav{padding:0 24px}.apps-nav nav a{display:none}.wrap{width:calc(100% - 48px)}.apps-intro h1{font-size:36px}.apps-grid{grid-template-columns:1fr}.apps-main{padding-top:48px}}
-    .theme-button{display:grid;place-items:center;cursor:pointer}.apps-menu{display:none;background:transparent;border:0;color:var(--body);font:500 12px var(--font-mono);cursor:pointer}.ac-icon i{font-size:1rem}
-    .skip-link{position:fixed;left:12px;top:-60px;z-index:99;background:var(--ink);color:var(--bg);padding:10px}.skip-link:focus{top:12px}
-    .wrap{width:min(1328px,calc(100% - 96px))}.apps-main{padding-top:16px}.apps-intro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(360px,1.2fr);column-gap:72px;row-gap:24px;align-items:center;margin-bottom:0}.apps-intro .eyebrow{grid-column:1/-1;margin-bottom:0}.apps-intro h1{font-size:clamp(42px,4vw,58px);line-height:1.02;letter-spacing:-.045em;margin:0}.apps-intro .lead{margin:0;white-space:normal;font-size:16px;line-height:1.55;max-width:720px}.apps-nav{height:68px;padding:0 56px}.apps-brand{font:700 24px var(--font-sans);letter-spacing:-.05em}.apps-brand span{display:none}.apps-nav nav{gap:38px;color:var(--ink);font-size:15px}.apps-nav nav a:first-child{color:var(--accent)}.theme-button{width:34px;height:34px;border-radius:8px;background:var(--surface)}
-    .apps-nav{display:block;width:100%;margin:0;padding:0}.apps-nav-inner{position:relative;display:flex;align-items:center;justify-content:space-between;width:75%;height:100%;margin-inline:auto}.site-foot{width:100%;margin-inline:0;padding-inline:0}.site-foot-inner{width:75%;margin-inline:auto}
-    .apps-cat{margin-top:0}.apps-cat-head{margin-bottom:0;padding:24px 0}.apps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-bottom:1px solid var(--border)}.app-card{min-height:300px;padding:28px;border-radius:0;border-width:1px 1px 0 0}.app-card[hidden]{display:none}.app-card:nth-child(3n){border-right:0}.app-card .ac-icon{border-radius:6px}.app-card .ac-tags{margin-top:20px}.app-card .ac-tag{background:transparent}.app-card .ac-open{margin-top:22px}.app-card:focus-within{outline:2px solid var(--accent);outline-offset:-3px}
-    @media(max-width:960px){.apps-intro{grid-template-columns:1fr;gap:20px}.apps-intro .eyebrow{grid-column:auto;margin-bottom:0}.apps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-card:nth-child(3n){border-right:1px solid var(--border)}.app-card:nth-child(2n){border-right:0}}
-    @media(max-width:640px){.apps-nav-inner,.site-foot-inner{width:calc(100% - 32px)}.apps-nav{height:65px;padding:0}.apps-brand{font-size:22px}.apps-menu{display:block}.apps-nav nav{display:none;position:absolute;top:65px;left:0;right:0;padding:16px;background:var(--bg);border:1px solid var(--border);border-top:0;gap:16px;font-size:13px;flex-wrap:wrap}.apps-nav.open nav{display:flex}.apps-nav nav a{display:block}.theme-button{width:34px;height:34px}.wrap{width:calc(100% - 48px)}.apps-main{padding-top:20px}.apps-intro h1{font-size:40px}.apps-cat-head{padding:20px 0}.apps-cat-head .cat-count{padding-left:16px}.apps-grid{grid-template-columns:1fr}.app-card,.app-card:nth-child(3n){border-right:0;min-height:0}}
-    /* Header scrolls with the page. */
-    .apps-nav { position: relative; top: auto; z-index: 1; }
-    .apps-brand{display:inline-flex;align-items:center;gap:10px;font-size:22px;letter-spacing:-.04em}
-    .apps-brand .brand-mark{color:var(--accent);display:inline-block;font:600 17px/1 var(--font-mono);letter-spacing:-.08em;transition:color .2s,transform .2s}
-    .apps-brand .brand-name{display:inline;color:var(--ink);font-weight:700}
-    .apps-brand .brand-dot{display:inline;color:var(--accent)}
-    .apps-brand:hover .brand-mark{color:color-mix(in srgb,var(--accent) 72%,white);transform:translateX(1px)}
-    .apps-brand:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:7px}
-    @media(max-width:640px){.apps-brand{gap:8px;font-size:20px}.apps-brand .brand-mark{font-size:16px}.apps-nav nav{display:flex;position:static;padding:0;background:transparent;border:0}}
-  </style>
-  <link rel="stylesheet" href="/css/app-design-system.css?v=20260722e">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260722a">
+  <script>document.documentElement.dataset.theme=localStorage.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')</script>
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="portfolio-catalog">
-  <a class="skip-link" href="#main">Skip to apps</a>
-  <header class="apps-nav"><div class="apps-nav-inner"><a class="apps-brand" href="/" aria-label="Thang Luu home"><span class="brand-mark" aria-hidden="true">t:&gt;</span><span class="brand-name">thang<span class="brand-dot">.</span></span></a><nav id="appsPrimaryNav" aria-label="Theme controls"><button type="button" class="theme-button" id="themeToggle" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button></nav></div></header>
-  <main class="wrap apps-main" id="main">
-    <section class="apps-intro">
-      <span class="eyebrow">Side Projects</span>
-      <h1>Ideas shaped into<br><em>working systems.</em></h1>
-      <p class="lead">These projects bring together production-oriented engineering and practical language-learning tools. They reflect how I approach real problems, document what I’m learning, and make work available for feedback. I’m always glad to hear from teams, collaborators, and people exploring similar challenges.</p>
+  <a class="skip-link" href="#catalog">Skip to projects</a>
+  <header class="apps-nav">
+    <div class="catalog-wrap apps-nav-inner">
+      <a class="apps-brand" href="/" aria-label="Thang Luu home"><span class="brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="brand-dot">.</span></span></a>
+      <button type="button" class="theme-button" id="themeToggle" aria-label="Switch to light theme"><i class="fa-solid fa-sun" aria-hidden="true"></i></button>
+    </div>
+  </header>
+
+  <main class="catalog-wrap apps-main" id="main">
+    <section class="apps-intro" aria-labelledby="appsTitle">
+      <div>
+        <span class="eyebrow">Side projects</span>
+        <h1 id="appsTitle">Ideas shaped into<em>working systems.</em></h1>
+      </div>
+      <p class="lead">Production-oriented projects that solve real problems, ship useful tools, and turn continued learning into practical systems.</p>
     </section>
 
-    <!-- ══════════ Technical ══════════ -->
-    <section class="apps-cat" id="technical" data-category="technical">
-      <div class="apps-cat-head">
-        <div class="cat-copy">
-          <h2>Technical</h2>
-          <span class="cat-jp">AI · Data · Engineering</span>
+    <section id="catalog" aria-labelledby="catalogTitle">
+      <h2 id="catalogTitle" hidden>Project catalog</h2>
+      <div class="catalog-tools">
+        <div class="catalog-toolbar">
+          <label class="catalog-search" for="projectSearch">
+            <span hidden>Search projects</span>
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input id="projectSearch" type="search" autocomplete="off" placeholder="Search projects, tags, or descriptions…">
+            <span class="search-key" aria-hidden="true">/</span>
+          </label>
+          <div class="catalog-filters" id="catalogFilters" aria-label="Filter projects by category">
+            <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-button" type="button" data-filter="data-ai" aria-pressed="false">Data &amp; AI</button>
+            <button class="filter-button" type="button" data-filter="developer-tools" aria-pressed="false">Developer tools</button>
+            <button class="filter-button" type="button" data-filter="personal-finance" aria-pressed="false">Personal finance</button>
+            <button class="filter-button" type="button" data-filter="games" aria-pressed="false">Games</button>
+            <button class="filter-button" type="button" data-filter="language-learning" aria-pressed="false">Language Learning</button>
+            <button class="filter-button" type="button" data-filter="professional-learning" aria-pressed="false">Professional Learning</button>
+          </div>
+          <output class="catalog-count" id="catalogCount" aria-live="polite">0 entries</output>
         </div>
-        <span class="cat-count"><strong id="technicalProjectCount">0</strong><span>projects</span></span>
       </div>
-      <div class="apps-grid" id="technicalProjects"></div>
+
+      <div class="project-index" id="projectIndex"></div>
+      <div class="catalog-empty" id="catalogEmpty" hidden>
+        <h2>No matching projects</h2>
+        <p>Try a broader search or choose another category.</p>
+      </div>
+      <p class="catalog-tip">Tip: Press / to focus search</p>
     </section>
-
-    <!-- ══════════ Learning Programs ══════════ -->
-    <section class="apps-cat" id="learning" data-category="learning">
-      <div class="apps-cat-head">
-        <div class="cat-copy">
-          <h2>Learning Programs</h2>
-          <span class="cat-jp">Japanese · AI · Cloud · Finance</span>
-        </div>
-        <span class="cat-count"><strong>3</strong><span>programs</span></span>
-      </div>
-      <div class="apps-grid">
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
-            <span class="ac-status">New</span>
-          </div>
-          <h3>G検定 Study Program<span class="ac-jp" lang="ja">ジェネラリスト検定</span></h3>
-          <p>A syllabus-aligned G検定 program with 900 audited questions, 495 keywords, eleven topics, timed practice, mock exams, review, and local progress history.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">G検定</span><span class="ac-tag">900 questions</span>
-          </div>
-          <span class="ac-open">Open G検定 Study</span>
-          <a class="ac-cover" href="/apps/gkentei/" aria-label="Open G検定 Study Program"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></div>
-            <span class="ac-status">New</span>
-          </div>
-          <h3>BJT Study Program<span class="ac-jp" lang="ja">ビジネス日本語</span></h3>
-          <p>Business Japanese organized into 30 meaning groups, 1,565 terms, 84 grammar patterns, timed practice, review, and local progress history.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">BJT</span><span class="ac-tag">1,649 items</span>
-          </div>
-          <span class="ac-open">Open BJT Study</span>
-          <a class="ac-cover" href="/apps/bjt-study/" aria-label="Open BJT Study Program"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-language" aria-hidden="true"></i></div>
-            <span class="ac-status">New</span>
-          </div>
-          <h3>JLPT N1 Study Program<span class="ac-jp" lang="ja">日本語能力試験 N1</span></h3>
-          <p>A unified JLPT N1 hub for vocabulary, grammar, reading, real exam questions, twelve focused modules, timed practice, and progress history.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">JLPT N1</span><span class="ac-tag">12 modules</span>
-          </div>
-          <span class="ac-open">Open JLPT N1</span>
-          <a class="ac-cover" href="/apps/jlpt-n1/" aria-label="Open JLPT N1 Study Program"></a>
-        </article>
-
-        <template id="legacyN1Catalog">
-                        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Kanji &amp; Collocations<span class="ac-jp" lang="ja">漢字・連語</span></h3>
-          <p>Mixed drill across kanji readings, collocations, and set phrases — three question banks
-            in one quiz flow.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">漢字</span><span class="ac-tag">Collocations</span>
-          </div>
-          <span class="ac-open">Open Kanji + Collocations</span>
-          <a class="ac-cover" href="/apps/n1-kanji-collocations/" aria-label="Open Kanji + Collocations"></a>
-        </article>
-
-                <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>JLPT N1 Kanji Analysis<span class="ac-jp" lang="ja">漢字分析</span></h3>
-          <p>Per-character breakdowns of N1 kanji vocabulary — readings, meanings, and the logic
-            behind each compound, word by word.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">漢字</span><span class="ac-tag">Deep dive</span>
-          </div>
-          <span class="ac-open">Open Kanji Analysis</span>
-          <a class="ac-cover" href="/apps/n1-kanji-analysis/" aria-label="Open Kanji Analysis"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>JLPT N1 Vocabulary Tabs<span class="ac-jp" lang="ja">語彙</span></h3>
-          <p>A tabbed N1 vocabulary reference with verified answers — organized for fast lookup
-            and review across topics.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">語彙</span><span class="ac-tag">Reference</span>
-          </div>
-          <span class="ac-open">Open Vocab Tabs</span>
-          <a class="ac-cover" href="/apps/n1-vocabulary-tabs/" aria-label="Open Vocab Tabs"></a>
-        </article>
-
-      <!-- Vocabulary exam drills -->
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Vocabulary Exams 2010–2025<span class="ac-jp" lang="ja">問題1〜4</span></h3>
-          <p>Every vocabulary question from the real N1 exams, 2010–2025 — 問題1 through 問題4,
-            compiled into one drillable archive.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">過去問</span><span class="ac-tag">2010–2025</span>
-          </div>
-          <span class="ac-open">Open Exam Vocab</span>
-          <a class="ac-cover" href="/apps/n1-vocabulary-exams/" aria-label="Open Exam Vocab 2010–2025"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Context Vocabulary<span class="ac-jp" lang="ja">問題2 · 504問</span></h3>
-          <p>Contextually-defined-word drills from tests 25–66 — all 504 questions of 問題2,
-            with answers.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">文脈規定</span><span class="ac-tag">504 questions</span>
-          </div>
-          <span class="ac-open">Open 問題2</span>
-          <a class="ac-cover" href="/apps/n1-vocabulary-context/" aria-label="Open 問題2 文脈規定"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Paraphrase Vocabulary<span class="ac-jp" lang="ja">問題3 · 言い換え</span></h3>
-          <p>Paraphrase / synonym drills (言い換え類義) from tests 67–81, plus review sets —
-            pick the closest meaning.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">言い換え</span><span class="ac-tag">類義語</span>
-          </div>
-          <span class="ac-open">Open 問題3</span>
-          <a class="ac-cover" href="/apps/n1-vocabulary-paraphrase/" aria-label="Open 問題3 言い換え"></a>
-        </article>
-
-      <!-- Grammar tools -->
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-clone" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Grammar Flashcards<span class="ac-jp" lang="ja">文法</span></h3>
-          <p>Flip-card drills for JLPT N1 grammar — progress bar, right/wrong tracking, and a clean flow
-            for fast repetition.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">文法</span><span class="ac-tag">Flashcards</span>
-          </div>
-          <span class="ac-open">Open N1 Flashcards</span>
-          <a class="ac-cover" href="/apps/n1-grammar-flashcards/" aria-label="Open N1 Flashcards"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Grammar Exams 2010–2024<span class="ac-jp" lang="ja">文法</span></h3>
-          <p>Every grammar question from the real exams, 2010–2024 — organized by year and pattern,
-            with explanations.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">過去問</span><span class="ac-tag">2010–2024</span>
-          </div>
-          <span class="ac-open">Open Grammar</span>
-          <a class="ac-cover" href="/apps/n1-grammar-exams/" aria-label="Open Grammar 2010–2024"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Sentence Ordering<span class="ac-jp" lang="ja">文の文法②</span></h3>
-          <p>Sentence-ordering drills for JLPT N1 (文の文法② · pick the piece for ★) — 420 questions merged from two sets,
-            each with the correct order, grammar point, and a Vietnamese walkthrough.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">文法</span><span class="ac-tag">420 questions</span>
-          </div>
-          <span class="ac-open">Open N1 文法②</span>
-          <a class="ac-cover" href="/apps/n1-grammar-sentence-order/" aria-label="Open N1 Mondai 6"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Sentence Ordering Drill<span class="ac-jp" lang="ja">問題6 · 並べ替え</span></h3>
-          <p>A second sentence-scramble bank for 問題6 — 140 questions with exam and grammar-pattern
-            filters, and a different question pool from 文法②.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">並べ替え</span><span class="ac-tag">140 questions</span>
-          </div>
-          <span class="ac-open">Open Mondai 6 Drill</span>
-          <a class="ac-cover" href="/apps/n1-grammar-sentence-order-drill/" aria-label="Open Mondai 6 Drill"></a>
-        </article>
-
-      <!-- Reading tools -->
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-book-open-reader" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Reading — 75 Passages<span class="ac-jp" lang="ja">読解</span></h3>
-          <p>The full 75-passage reading course built around the "anchor word" method —
-            passage, questions, and guided walkthroughs.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">読解</span><span class="ac-tag">75 passages</span>
-          </div>
-          <span class="ac-open">Open 読解 75 bài</span>
-          <a class="ac-cover" href="/apps/n1-reading-75/" aria-label="Open 読解 75 bài"></a>
-        </article>
-
-        <article class="app-card">
-          <div class="ac-top">
-            <div class="ac-icon"><i class="fa-solid fa-newspaper" aria-hidden="true"></i></div>
-            <span class="ac-status">Live</span>
-          </div>
-          <h3>Reading Practice<span class="ac-jp" lang="ja">問題9 · 中文</span></h3>
-          <p>Mid-length passage practice for 問題9 — reading drills with the B1→B4 method and
-            reverse / anchor-word techniques.</p>
-          <div class="ac-tags">
-            <span class="ac-tag">読解</span><span class="ac-tag">問題9</span>
-          </div>
-          <span class="ac-open">Open 問題9</span>
-          <a class="ac-cover" href="/apps/n1-reading-mondai9/" aria-label="Open 問題9 Luyện tập"></a>
-        </article>
-        </template>
-
-      </div>
-    </section>
-
   </main>
 
-  <footer class="site-foot"><div class="site-foot-inner">Crafted with care © 2026 — <span>stay steadfast, stay free</span></div></footer>
+  <footer class="site-foot"><div class="catalog-wrap">Crafted with care © 2026 — <span>stay steadfast, stay free</span></div></footer>
 
-  <script src="/js/projects-data.js?v=20260721f"></script>
+  <script src="/js/projects-data.js?v=20260722i"></script>
   <script>
     (function () {
       function escapeHtml(value) {
-        return String(value).replace(/[&<>"]/g, function (character) {
-          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[character];
+        return String(value).replace(/[&<>"']/g, function (character) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
         });
       }
 
-      function renderTechnicalProjects() {
-        var grid = document.getElementById('technicalProjects');
-        var count = document.getElementById('technicalProjectCount');
-        var projects = window.portfolioProjects || [];
-        if (!grid || !count) return;
-        count.textContent = projects.length;
-        grid.innerHTML = projects.map(function (project) {
-          var statusClass = project.statusClass ? ' ' + escapeHtml(project.statusClass) : '';
-          var ctaClass = project.ctaClass ? ' ' + escapeHtml(project.ctaClass) : '';
-          var tags = project.tags.map(function (tag) {
-            return '<span class="ac-tag">' + escapeHtml(tag) + '</span>';
-          }).join('');
-          var cover = project.href
-            ? '<a class="ac-cover" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '"></a>'
-            : '';
-          return '<article class="app-card">' +
-            '<div class="ac-top"><div class="ac-icon"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i></div>' +
-            '<span class="ac-status' + statusClass + '">' + escapeHtml(project.status) + '</span></div>' +
-            '<h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.description) + '</p>' +
-            '<div class="ac-tags">' + tags + '</div>' +
-            '<span class="ac-open' + ctaClass + '">' + escapeHtml(project.cta) + '</span>' + cover + '</article>';
-        }).join('');
+      function normalize(value) {
+        return String(value || '').toLocaleLowerCase().normalize('NFKD');
       }
 
-      renderTechnicalProjects();
+      var catalogPriority = [
+        'bizroll', 'changeora', 'diskora', 'data-copilot', 'ragops', 'pipeline',
+        'proofline', 'namiquant', 'kakeflow', 'city-climate', 'earthquake-intelligence',
+        'language-learning', 'maintainer-defense', 'professional-learning'
+      ];
 
+      var projects = (window.portfolioProjects || []).concat(window.portfolioLearningCollections || []);
+      projects.sort(function (left, right) {
+        var leftIndex = catalogPriority.indexOf(left.id);
+        var rightIndex = catalogPriority.indexOf(right.id);
+        return (leftIndex < 0 ? 999 : leftIndex) - (rightIndex < 0 ? 999 : rightIndex);
+      });
+
+      var projectIndex = document.getElementById('projectIndex');
+      var searchInput = document.getElementById('projectSearch');
+      var countOutput = document.getElementById('catalogCount');
+      var emptyState = document.getElementById('catalogEmpty');
+      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
+      var activeFilter = 'all';
+
+      function statusClass(project) {
+        if (project.statusClass === 'private') return ' is-private';
+        if (project.status === 'Collection') return ' is-collection';
+        return '';
+      }
+
+      function renderRow(project) {
+        var tags = (project.tags || []).slice(0, 3).map(function (tag) {
+          return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
+        }).join('');
+        var links = (project.links || []).map(function (link) {
+          return '<a href="' + escapeHtml(link.href) + '">' + escapeHtml(link.label) + '</a>';
+        }).join('');
+        var searchText = [project.title, project.description, (project.tags || []).join(' '), project.category].join(' ');
+        return '<article class="project-row" data-category="' + escapeHtml(project.category || 'developer-tools') + '" data-search="' + escapeHtml(normalize(searchText)) + '">' +
+          '<div class="project-icon"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i></div>' +
+          '<div class="project-copy"><div class="project-heading"><h2><a class="project-title-link" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '">' + escapeHtml(project.title) + '</a></h2>' +
+          '<span class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</span></div>' +
+          '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
+          '<div class="project-tags">' + tags + '</div>' +
+          (links ? '<div class="collection-links" aria-label="Programs in ' + escapeHtml(project.title) + '">' + links + '</div>' : '') +
+          '</div><span class="project-arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span></article>';
+      }
+
+      projectIndex.innerHTML = projects.map(renderRow).join('');
+      var rows = Array.prototype.slice.call(projectIndex.querySelectorAll('.project-row'));
+
+      function applyFilters() {
+        var query = normalize(searchInput.value.trim());
+        var visibleCount = 0;
+        rows.forEach(function (row) {
+          var categoryMatch = activeFilter === 'all' || row.dataset.category === activeFilter;
+          var queryMatch = !query || row.dataset.search.indexOf(query) !== -1;
+          var visible = categoryMatch && queryMatch;
+          row.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+        countOutput.textContent = visibleCount + (visibleCount === 1 ? ' entry' : ' entries');
+        emptyState.hidden = visibleCount !== 0;
+      }
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          activeFilter = button.dataset.filter;
+          filterButtons.forEach(function (candidate) {
+            candidate.setAttribute('aria-pressed', String(candidate === button));
+          });
+          applyFilters();
+        });
+      });
+      searchInput.addEventListener('input', applyFilters);
+      document.addEventListener('keydown', function (event) {
+        if (event.key === '/' && document.activeElement !== searchInput && !/input|textarea|select/i.test(document.activeElement.tagName)) {
+          event.preventDefault();
+          searchInput.focus();
+        }
+        if (event.key === 'Escape' && document.activeElement === searchInput && searchInput.value) {
+          searchInput.value = '';
+          applyFilters();
+        }
+      });
+      applyFilters();
+
+      var root = document.documentElement;
       var themeButton = document.getElementById('themeToggle');
       function syncThemeButton() {
-        var dark = document.documentElement.dataset.theme === 'dark';
+        var dark = root.dataset.theme === 'dark';
         themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
         themeButton.querySelector('i').className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
       }
       themeButton.addEventListener('click', function () {
-        var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        localStorage.theme = next;
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.theme = root.dataset.theme;
         syncThemeButton();
       });
       syncThemeButton();

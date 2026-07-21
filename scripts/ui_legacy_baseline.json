@@ -5,7 +5,7 @@
   "inline_debt": {
     "apps/city-climate/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 1},
     "apps/earthquake-intelligence/index.html": {"style_blocks": 0, "style_attributes": 6, "event_handlers": 0, "buttons_missing_type": 1},
-    "apps/index.html": {"style_blocks": 1, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
+    "apps/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
     "apps/n1-grammar-exams/index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0},
     "apps/n1-grammar-flashcards/index.html": {"style_blocks": 1, "style_attributes": 1, "event_handlers": 9, "buttons_missing_type": 7},
     "apps/n1-grammar-sentence-order-drill/index.html": {"style_blocks": 1, "style_attributes": 4, "event_handlers": 7, "buttons_missing_type": 4},

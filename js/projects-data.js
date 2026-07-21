@@ -1,6 +1,21 @@
 (function (global) {
   global.portfolioProjects = [
     {
+      id: 'bizroll',
+      title: 'BizRoll',
+      description: 'A 2–4 player economic strategy board game with multiplayer rooms, AI opponents, auctions, market cycles, secret objectives, and Black Swan events.',
+      featuredDescription: 'A multiplayer economic strategy game shaped by auctions, AI opponents, market cycles, and Black Swan events.',
+      href: 'https://thangldw.github.io/bizroll/',
+      ariaLabel: 'Open BizRoll',
+      icon: 'fa-cubes-stacked',
+      status: 'Live',
+      tags: ['Board game', 'Multiplayer', 'AI opponents', 'Market simulation'],
+      category: 'games',
+      cta: 'Open BizRoll',
+      featured: true,
+      featuredOrder: 0
+    },
+    {
       id: 'diskora',
       title: 'Diskora',
       description: 'A native macOS storage intelligence and cleanup app. Inspect where space goes, review safe and deep-clean candidates, detect exact or similar files and photos, and remove only what you approve.',
@@ -10,6 +25,7 @@
       icon: 'fa-magnifying-glass-chart',
       status: 'v1.0.0',
       tags: ['macOS', 'Storage analysis', 'Safe cleanup', 'Duplicate files'],
+      category: 'developer-tools',
       cta: 'Download Diskora',
       featured: true,
       featuredOrder: 1
@@ -24,6 +40,7 @@
       icon: 'fa-arrows-rotate',
       status: 'v1.0.0',
       tags: ['macOS', 'Change journal', 'Local-first', 'Filesystem snapshots'],
+      category: 'developer-tools',
       cta: 'Download Changeora',
       featured: true,
       featuredOrder: 2
@@ -38,6 +55,7 @@
       icon: 'fa-shield-halved',
       status: 'v1.0',
       tags: ['AI evaluation', 'Red team', 'FastAPI', 'CI/CD'],
+      category: 'data-ai',
       cta: 'Open RAGOps',
       featured: true,
       featuredOrder: 3
@@ -52,6 +70,7 @@
       icon: 'fa-shield-halved',
       status: 'v1.0',
       tags: ['OSS security', 'Offline auditor', 'Supply chain', 'Python'],
+      category: 'developer-tools',
       cta: 'Open on GitHub',
       featured: true,
       featuredOrder: 4
@@ -66,6 +85,7 @@
       icon: 'fa-link',
       status: 'v0.14.17',
       tags: ['Local-first', 'Provenance', 'Exact citations', 'SQLite FTS5'],
+      category: 'developer-tools',
       cta: 'Open Proofline',
       featured: true,
       featuredOrder: 5
@@ -81,6 +101,7 @@
       status: 'Private',
       statusClass: 'private',
       tags: ['Market research', 'Decision support', 'Risk awareness', 'Multi-market'],
+      category: 'personal-finance',
       cta: 'View public overview',
       featured: true,
       featuredOrder: 6
@@ -95,6 +116,7 @@
       icon: 'fa-wallet',
       status: 'v1.0.0',
       tags: ['Household finance', 'Local-first', 'Reconciliation', 'Tauri · React'],
+      category: 'personal-finance',
       cta: 'Open KakeFlow',
       featured: true,
       featuredOrder: 7
@@ -109,6 +131,7 @@
       icon: 'fa-wand-magic-sparkles',
       status: 'Live',
       tags: ['NL→SQL', 'DuckDB-WASM', 'Parquet', 'Local analytics'],
+      category: 'data-ai',
       cta: 'Open Data Copilot',
       featured: true,
       featuredOrder: 8
@@ -123,6 +146,7 @@
       icon: 'fa-satellite-dish',
       status: 'Live',
       tags: ['ELT', 'Observability', 'Data quality', 'Manual refresh'],
+      category: 'data-ai',
       cta: 'Open Pipeline',
       featured: true,
       featuredOrder: 9
@@ -137,6 +161,7 @@
       icon: 'fa-wave-square',
       status: 'Live',
       tags: ['USGS', 'Geospatial', 'Time series', 'Data storytelling'],
+      category: 'data-ai',
       cta: 'Explore earthquakes',
       featured: true,
       featuredOrder: 10
@@ -151,6 +176,7 @@
       icon: 'fa-sun',
       status: 'Live',
       tags: ['Open-Meteo', 'CAMS', 'Climate', 'Air quality'],
+      category: 'data-ai',
       cta: 'Compare cities',
       featured: true,
       featuredOrder: 11
@@ -163,4 +189,36 @@
     href: '/apps/#learning',
     label: 'Learning Programs'
   };
+
+  global.portfolioLearningCollections = [
+    {
+      id: 'language-learning',
+      title: 'Language Learning',
+      description: 'JLPT N1 and BJT study programs with focused paths, timed practice, review, and local learning history.',
+      href: '/apps/jlpt-n1/',
+      ariaLabel: 'Open the language learning programs',
+      icon: 'fa-language',
+      status: 'Collection',
+      tags: ['JLPT N1', 'BJT', 'Japanese'],
+      category: 'language-learning',
+      links: [
+        { label: 'JLPT N1', href: '/apps/jlpt-n1/' },
+        { label: 'BJT', href: '/apps/bjt-study/' }
+      ]
+    },
+    {
+      id: 'professional-learning',
+      title: 'Professional Learning',
+      description: 'Professional certification and domain learning anchored by G検定 and practical AI literacy.',
+      href: '/apps/gkentei/',
+      ariaLabel: 'Open the professional learning programs',
+      icon: 'fa-graduation-cap',
+      status: 'Collection',
+      tags: ['G検定', 'AI literacy', 'Certification'],
+      category: 'professional-learning',
+      links: [
+        { label: 'G検定', href: '/apps/gkentei/' }
+      ]
+    }
+  ];
 })(window);
