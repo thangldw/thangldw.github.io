@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260721c">
   <link rel="stylesheet" href="/css/learning-history.css?v=20260721">
-  <link rel="stylesheet" href="styles.css?v=20260721g">
+  <link rel="stylesheet" href="styles.css?v=20260721h">
   <script>
     (function () {
       document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
@@ -34,9 +34,14 @@
           <span class="brand-mark" aria-hidden="true">t:&gt;</span>
           <span>thang<span class="brand-dot">.</span></span>
         </a>
-        <button class="mobile-menu" id="mobileMenu" type="button" aria-expanded="false" aria-controls="sidebarBody" aria-label="Mở điều hướng">
-          <i class="fa-solid fa-list-ol" aria-hidden="true"></i>
-        </button>
+        <div class="sidebar-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển sang giao diện sáng" title="Chuyển sang giao diện sáng">
+            <i class="fa-solid fa-sun" aria-hidden="true"></i>
+          </button>
+          <button class="mobile-menu" id="mobileMenu" type="button" aria-expanded="false" aria-controls="sidebarBody" aria-label="Mở điều hướng">
+            <i class="fa-solid fa-list-ol" aria-hidden="true"></i>
+          </button>
+        </div>
       </div>
 
       <div class="sidebar-body" id="sidebarBody">
@@ -75,9 +80,6 @@
           <small>Từ vựng · Ngữ pháp · Đọc hiểu</small>
         </div>
         <a class="back-apps" href="/apps/"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>Về danh sách apps</a>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển sang giao diện sáng" title="Chuyển sang giao diện sáng">
-          <i class="fa-solid fa-sun" aria-hidden="true"></i>
-        </button>
       </div>
     </aside>
 
