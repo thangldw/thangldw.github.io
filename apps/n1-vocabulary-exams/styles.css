@@ -128,8 +128,9 @@ body.language-app[data-language-app="n1-vocabulary-exams"] main.semantic-main .h
   color:var(--portfolio-accent);
 }
 body.language-app[data-language-app="n1-vocabulary-exams"] main.semantic-main .tabs-shell{
-  border-block:1px solid var(--portfolio-border);
-  background:var(--portfolio-surface-2);
+  border:0;
+  border-bottom:1px solid var(--portfolio-border);
+  background:var(--portfolio-bg);
 }
 body.language-app[data-language-app="n1-vocabulary-exams"] main.semantic-main .tabs{
   width:min(var(--portfolio-content),calc(100% - 112px));
