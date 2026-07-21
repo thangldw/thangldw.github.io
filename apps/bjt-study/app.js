@@ -23,9 +23,7 @@
   var practiceSeconds = 30;
   var practiceTimer = null;
 
-  var progress = loadProgress();
-
-  if (window.LearningHistory) window.LearningHistory.migrateLegacy('bjt', STORAGE_KEY);
+  var progress = emptyProgress();
 
   var MODULES = [
     { level: 'Giai đoạn 1', phase: 'Nền tảng', jp: '社内の基本', title: 'Giao tiếp nội bộ', subtitle: 'Chào hỏi, vai trò và quy trình công sở' },
@@ -72,22 +70,22 @@
     { id: 'concept', label: 'Khái niệm khác', jp: 'その他', keywords: [] }
   ];
 
-  function loadProgress() {
-    try {
-      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      return {
-        seen: saved.seen || {},
-        correct: saved.correct || {},
-        wrong: saved.wrong || {},
-        completedSteps: saved.completedSteps || {}
-      };
-    } catch (error) {
-      return { seen: {}, correct: {}, wrong: {}, completedSteps: {} };
-    }
+  function emptyProgress() {
+    return { seen: {}, correct: {}, wrong: {}, completedSteps: {} };
+  }
+
+  function normalizeProgress(saved) {
+    saved = saved || {};
+    return {
+      seen: saved.seen || {},
+      correct: saved.correct || {},
+      wrong: saved.wrong || {},
+      completedSteps: saved.completedSteps || {}
+    };
   }
 
   function saveProgress() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    if (window.LearningHistory) window.LearningHistory.saveCourseState('bjt', progress).catch(function () {});
     updateWrongCount();
   }
 
@@ -1045,9 +1043,14 @@
     fetch('data/vocabulary-insights.json?v=20260721g').then(function (response) {
       if (!response.ok) throw new Error('Không thể tải dữ liệu phân tích chữ Hán');
       return response.json();
-    })
+    }),
+    window.LearningHistory ? Promise.all([
+      window.LearningHistory.retireLegacyKeys('bjt', [STORAGE_KEY]),
+      window.LearningHistory.loadCourseState('bjt', emptyProgress())
+    ]).then(function (stateResults) { return stateResults[1]; }) : Promise.resolve(emptyProgress())
   ]).then(function (results) {
     vocabularyInsights = results[2] || vocabularyInsights;
+    progress = normalizeProgress(results[3]);
     datasets.vocabulary = normalizeTerms(results[0].terms || [], 'vocabulary');
     datasets.grammar = normalizeTerms(results[1].terms || [], 'grammar');
     datasets.vocabulary.concat(datasets.grammar).forEach(function (item) { itemsById.set(item.id, item); });
