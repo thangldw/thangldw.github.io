@@ -263,6 +263,37 @@ const tests = [
       const prefixes = document.querySelectorAll('.pre-card').length > 0;
       return { ok: noOverflow && keyboard && prefixes, message: `noOverflow=${noOverflow}, keyboard=${keyboard}, prefixes=${prefixes}` };
     }
+  },
+  {
+    name: 'Grammar Exams answer, explanation and review',
+    route: '/apps/n1-grammar-exams/',
+    ready: 'document.querySelectorAll("#cnt .opt").length === 4',
+    check: function () {
+      const initial = document.querySelectorAll('#cnt .opt').length === 4;
+      const correct = correctLetter(filtered()[pidx]);
+      const wrongOption = Array.from(document.querySelectorAll('#cnt .opt')).find((button) => button.querySelector('.opt-num').textContent.toLowerCase() !== correct);
+      wrongOption.click();
+      const feedback = Boolean(document.querySelector('.result.ng')) && Boolean(document.querySelector('.exp'));
+      const wrongSaved = document.querySelector('#wrong-cnt').textContent === '1';
+      document.querySelector('#tab-study').click();
+      document.querySelector('.toggle-btn').click();
+      const studyExplanation = Boolean(document.querySelector('.study-exp .exp'));
+      document.querySelector('#tab-wrong').click();
+      const review = Boolean(document.querySelector('.wrong-card, .card.wrong-mode')) && document.querySelectorAll('.opt').length === 4;
+      return { ok: initial && feedback && wrongSaved && studyExplanation && review, message: `initial=${initial}, feedback=${feedback}, wrongSaved=${wrongSaved}, study=${studyExplanation}, review=${review}` };
+    }
+  },
+  {
+    name: 'Grammar Exams mobile layout',
+    route: '/apps/n1-grammar-exams/',
+    viewport: { width: 390, height: 844 },
+    ready: 'document.querySelectorAll("#cnt .opt").length === 4',
+    check: function () {
+      const noOverflow = document.documentElement.scrollWidth <= window.innerWidth;
+      document.querySelector('#cnt .opt').click();
+      const usable = Boolean(document.querySelector('.result')) && Boolean(document.querySelector('.next-btn'));
+      return { ok: noOverflow && usable, message: `noOverflow=${noOverflow}, usable=${usable}` };
+    }
   }
 ];
 const selectedTests = process.env.SMOKE_ROUTE
