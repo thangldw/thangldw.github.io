@@ -1,11 +1,11 @@
-# URL migration cho JLPT N1
+# JLPT N1 URL migration
 
-Tài liệu này là nguồn sự thật cho các route JLPT cũ. Mỗi thư mục legacy chỉ chứa một trang redirect tối thiểu; mã ứng dụng, CSS và dữ liệu chỉ tồn tại ở route canonical.
+Đây là nguồn sự thật cho các route JLPT cũ. Mỗi thư mục legacy chỉ chứa redirect tối thiểu; code, CSS và dữ liệu ứng dụng chỉ tồn tại ở route canonical.
 
 ## Luồng tương thích
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Inter, Arial, sans-serif","fontSize":"14px","lineColor":"#5F6B7A","primaryTextColor":"#1F2937","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
 flowchart LR
   Bookmark(["Bookmark cũ"]) --> Redirect["Redirect HTML tối thiểu"]
   Redirect --> Canonical["Route canonical"]
@@ -14,14 +14,15 @@ flowchart LR
   Validator["Site validator"] -. "đối chiếu" .-> Redirect
   Validator -. "kiểm tra target" .-> Canonical
 
-  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
-  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
-  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
-  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
-  class Bookmark yellow;
-  class Redirect pink;
-  class Canonical,App green;
-  class Validator blue;
+  classDef stickyYellow fill:#FFF3B0,stroke:#C99700,color:#3D2F00,stroke-width:1.5px;
+  classDef stickyBlue fill:#DCEBFF,stroke:#4C6FFF,color:#172B4D,stroke-width:1.5px;
+  classDef stickyPink fill:#FFE1EC,stroke:#D65A87,color:#4A1730,stroke-width:1.5px;
+  classDef stickyGreen fill:#DFF5E8,stroke:#2D9D62,color:#153B29,stroke-width:1.5px;
+  class Bookmark stickyYellow;
+  class Redirect stickyPink;
+  class Canonical,App stickyGreen;
+  class Validator stickyBlue;
+  linkStyle default stroke:#5F6B7A,stroke-width:1.5px;
 ```
 
 ## Bảng route
@@ -45,7 +46,7 @@ flowchart LR
 | `/apps/n1-tango/` | `/apps/n1-vocabulary-tabs/` | Vocabulary Tabs |
 | `/apps/n1-vocab/` | `/apps/n1-kanji-collocations/` | Kanji & Collocations |
 
-## Invariant của redirect
+## Ràng buộc redirect
 
 Mỗi redirect page phải có đúng ba tham chiếu cùng trỏ trực tiếp tới route canonical:
 
@@ -58,7 +59,7 @@ Redirect page không tải analytics. Route canonical không được redirect t
 ## Quy trình thay đổi route
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Inter, Arial, sans-serif","fontSize":"14px","lineColor":"#5F6B7A","primaryTextColor":"#1F2937","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
 flowchart LR
   Change(["Đổi route canonical"]) --> Keep["Giữ thư mục cũ"]
   Keep --> Targets["Cập nhật 3 target"]
@@ -69,14 +70,15 @@ flowchart LR
   Repair --> Targets
   Check -->|"Đạt"| Publish(["Phát hành"])
 
-  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
-  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
-  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
-  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
-  class Change yellow;
-  class Keep,Targets,Inventory,Sitemap blue;
-  class Check,Repair pink;
-  class Publish green;
+  classDef stickyYellow fill:#FFF3B0,stroke:#C99700,color:#3D2F00,stroke-width:1.5px;
+  classDef stickyBlue fill:#DCEBFF,stroke:#4C6FFF,color:#172B4D,stroke-width:1.5px;
+  classDef stickyPink fill:#FFE1EC,stroke:#D65A87,color:#4A1730,stroke-width:1.5px;
+  classDef stickyGreen fill:#DFF5E8,stroke:#2D9D62,color:#153B29,stroke-width:1.5px;
+  class Change stickyYellow;
+  class Keep,Targets,Inventory,Sitemap stickyBlue;
+  class Check,Repair stickyPink;
+  class Publish stickyGreen;
+  linkStyle default stroke:#5F6B7A,stroke-width:1.5px;
 ```
 
 Sau mọi thay đổi route, chạy:

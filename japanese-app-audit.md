@@ -1,56 +1,57 @@
-# Audit hệ sinh thái học tiếng Nhật
+# Audit Learning Programs
 
-**Ngày cập nhật:** 2026-07-21
+**Ngày cập nhật:** 2026-07-22
 
-**Phạm vi:** JLPT N1 hub, BJT Study và 12 app JLPT N1 con
+**Phạm vi:** G検定, BJT Study, JLPT N1 hub và 12 app JLPT con
 
 ## Bản đồ hệ sinh thái
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Inter, Arial, sans-serif","fontSize":"14px","lineColor":"#5F6B7A","primaryTextColor":"#1F2937","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
 flowchart LR
-  Catalog(["Learning Programs"]) --> JLPT["JLPT N1 Hub"]
-  Catalog --> BJT["BJT Study"]
-  Catalog -.-> Future["G検定 · AWS · FP3"]
+  Catalog(["Learning Programs"]) --> G["G検定"]
+  Catalog --> BJT["BJT"]
+  Catalog --> JLPT["JLPT N1"]
 
-  subgraph N1["12 app JLPT N1 con"]
-    JLPT --> Vocab["Từ vựng · 6 module"]
-    JLPT --> Grammar["Ngữ pháp · 4 module"]
-    JLPT --> Reading["Đọc hiểu · 2 module"]
-  end
-
-  JLPT --> JLPTPractice["Luyện tập chung"]
+  G --> GPractice["分野別 · 模擬試験"]
   BJT --> BJTPractice["Từ vựng · Ngữ pháp · Mixed"]
-  JLPTPractice --> History["Learning History"]
-  BJTPractice --> History
-  History --> DB[("IndexedDB")]
-  DB --> Backup["Export / import JSON"]
+  JLPT --> Vocab["Từ vựng · 6 module"]
+  JLPT --> Grammar["Ngữ pháp · 4 module"]
+  JLPT --> Reading["Đọc hiểu · 2 module"]
 
-  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
-  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
-  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
-  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
-  class Catalog yellow;
-  class JLPT,BJT,Future blue;
-  class Vocab,Grammar,Reading,JLPTPractice,BJTPractice pink;
-  class History,DB,Backup green;
+  GPractice --> History["Learning history"]
+  BJTPractice --> History
+  JLPT --> History
+  History --> DB[("IndexedDB")]
+  DB --> Backup["Export · import JSON"]
+
+  classDef stickyYellow fill:#FFF3B0,stroke:#C99700,color:#3D2F00,stroke-width:1.5px;
+  classDef stickyBlue fill:#DCEBFF,stroke:#4C6FFF,color:#172B4D,stroke-width:1.5px;
+  classDef stickyPink fill:#FFE1EC,stroke:#D65A87,color:#4A1730,stroke-width:1.5px;
+  classDef stickyGreen fill:#DFF5E8,stroke:#2D9D62,color:#153B29,stroke-width:1.5px;
+  class Catalog stickyYellow;
+  class G,BJT,JLPT stickyBlue;
+  class GPractice,BJTPractice,Vocab,Grammar,Reading stickyPink;
+  class History,DB,Backup stickyGreen;
+  linkStyle default stroke:#5F6B7A,stroke-width:1.5px;
 ```
 
-## Kết luận nhanh
+## Kết luận
 
-- Hai hub đã thống nhất sidebar, màu sắc, spacing, theme switch và cách gọi tên chức năng.
-- BJT cung cấp lộ trình 9 module, 1.565 thuật ngữ, 84 mẫu ngữ pháp và 30 nhóm ý nghĩa.
+- Ba chương trình dùng cùng ngôn ngữ layout, spacing, theme switch và lịch sử học local-first.
+- G検定 có 11 lĩnh vực, 900 câu, 495 keyword và mock exam 145 câu/120 phút; toàn UI bằng tiếng Nhật, giải thích sau đáp án bằng Nhật–Việt.
+- BJT có 9 module, 1.565 thuật ngữ, 84 mẫu ngữ pháp và 30 nhóm ý nghĩa.
 - JLPT tổ chức 12 app con thành 6 module từ vựng, 4 module ngữ pháp và 2 module đọc hiểu.
-- Cả hai hub có luyện tập 5, 10 hoặc 20 câu, giới hạn 30 giây mỗi câu và hiển thị đúng/tổng.
-- Learning history dùng chung lưu phiên, từng câu trả lời, thời lượng, mastery, lịch ôn và backup JSON.
-- Dark mode không còn surface trả lời trắng lạnh trong các state đã kiểm tra.
+- Learning history dùng chung lưu phiên, câu trả lời, thời lượng, mastery, lịch ôn và backup JSON.
+- Light/dark, correct/wrong/selected, keyboard focus và mobile overflow đã được kiểm tra trên các luồng chính.
 
 ## Coverage
 
-| Bề mặt | Initial state | Answer/detail state | Mobile | Kết quả |
+| Bề mặt | Initial | Answer/detail | Mobile | Kết quả |
 |---|---:|---:|---:|---|
-| JLPT N1 Hub | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| G検定 | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
 | BJT Study | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| JLPT N1 Hub | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
 | Grammar Exams | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
 | Grammar Flashcards | Đã kiểm tra | Flip state | Đã kiểm tra | Đạt |
 | Grammar Sentence Order | Đã kiểm tra | Set state | Đã kiểm tra | Đạt |
@@ -66,63 +67,55 @@ flowchart LR
 
 ## Điểm mạnh
 
-- Warm paper và warm charcoal giúp đọc lâu mà không tạo cảm giác trắng chói hoặc đen tuyệt đối.
-- Tương phản Nhật–Việt rõ; từ vựng và ngữ pháp dùng cấu trúc trường dữ liệu riêng.
+- Warm paper và warm charcoal phù hợp cho phiên đọc dài.
+- Nội dung Nhật–Việt có hierarchy rõ; dữ liệu từ vựng, ngữ pháp và giải thích không bị trộn trường.
 - Correct, wrong, selected, hover và focus state có ngữ nghĩa ổn định.
-- BJT dùng progressive disclosure để giữ danh sách gọn nhưng vẫn cung cấp Kanji, bẫy đọc, collocation và từ đồng nghĩa khi có dữ liệu.
-- Hub giúp người học đi thẳng tới nội dung theo mục tiêu thay vì phải hiểu cấu trúc 12 app con.
-- Kiến trúc history dùng chung có thể tái sử dụng cho G検定, AWS Cloud và FP3.
+- Progressive disclosure giữ danh sách gọn nhưng vẫn cung cấp chi tiết khi cần.
+- Program hub đưa người học tới mục tiêu thay vì buộc họ hiểu cấu trúc app bên dưới.
+- `js/learning-history.js` cung cấp một contract chung cho course hiện tại và tương lai.
 
-## Khoảng trống còn lại
+## Khoảng trống ưu tiên
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Inter, Arial, sans-serif","fontSize":"14px","lineColor":"#5F6B7A","primaryTextColor":"#1F2937","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
 flowchart LR
-  Current(["Hiện tại"]) --> Gap1["12 app con có progress adapter riêng"]
-  Current --> Gap2["JLPT quiz chung mới tập trung ngữ pháp"]
-  Current --> Gap3["Chưa đồng bộ nhiều thiết bị"]
+  Current(["Hiện tại"]) --> Gap1["JLPT child app dùng adapter riêng"]
+  Current --> Gap2["JLPT quiz nghiêng về ngữ pháp"]
+  Current --> Gap3["Chưa sync nhiều thiết bị"]
+  Current --> Gap4["G検定 cần expert review"]
 
-  Gap1 --> Next1["Learning adapter dùng chung"]
-  Gap2 --> Next2["Scope vocab · reading · mixed"]
-  Gap3 --> Next3["Account + cloud sync có consent"]
+  Gap1 --> Next1["Một learning adapter"]
+  Gap2 --> Next2["Vocab · reading · mixed"]
+  Gap3 --> Next3["Account · consent · conflict"]
+  Gap4 --> Next4["JDLA factual review"]
 
-  Next1 --> Goal(["Một learning platform thống nhất"])
+  Next1 --> Goal(["Learning platform thống nhất"])
   Next2 --> Goal
   Next3 --> Goal
+  Next4 --> Goal
 
-  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
-  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
-  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
-  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
-  class Current yellow;
-  class Gap1,Gap2,Gap3 pink;
-  class Next1,Next2,Next3 blue;
-  class Goal green;
+  classDef stickyYellow fill:#FFF3B0,stroke:#C99700,color:#3D2F00,stroke-width:1.5px;
+  classDef stickyBlue fill:#DCEBFF,stroke:#4C6FFF,color:#172B4D,stroke-width:1.5px;
+  classDef stickyPink fill:#FFE1EC,stroke:#D65A87,color:#4A1730,stroke-width:1.5px;
+  classDef stickyGreen fill:#DFF5E8,stroke:#2D9D62,color:#153B29,stroke-width:1.5px;
+  class Current stickyYellow;
+  class Gap1,Gap2,Gap3,Gap4 stickyPink;
+  class Next1,Next2,Next3,Next4 stickyBlue;
+  class Goal stickyGreen;
+  linkStyle default stroke:#5F6B7A,stroke-width:1.5px;
 ```
 
-### Ưu tiên 1 — hợp nhất progress adapter
-
-Mỗi app con cần gửi cùng một event contract: `session`, `answer`, `item`, `result`, `duration`, `mastery`. Đây là điều kiện để phần Thống kê JLPT phản ánh toàn bộ hoạt động thay vì chỉ quiz ở hub.
-
-### Ưu tiên 2 — mở rộng scope luyện JLPT
-
-Setup chung nên cho chọn từ vựng, ngữ pháp, đọc hiểu, mixed, câu sai và nội dung chưa gặp. Timer cần trở thành cấu hình của course thay vì giả định cố định cho mọi chứng chỉ tương lai.
-
-### Ưu tiên 3 — đồng bộ có chủ đích
-
-Local-first tiếp tục là mặc định. Cloud sync chỉ nên được thêm cùng đăng nhập, consent, chính sách xóa dữ liệu và cơ chế giải quyết xung đột nhiều thiết bị.
-
-## Chất lượng dữ liệu BJT
-
-- Phân tích parser giữ `Ý nghĩa` tách khỏi ví dụ Nhật–Việt.
-- Kanji insight chỉ hiển thị dữ liệu có nguồn; không tự bịa phần còn thiếu.
-- Những thuật ngữ không khớp luật semantic được giữ trong `Khái niệm khác` để người dùng biết giới hạn phân loại.
-- Nhóm `Khái niệm khác` vẫn cần editorial pass định kỳ khi bổ sung dữ liệu mới.
+1. Chuẩn hóa event contract `session`, `answer`, `item`, `result`, `duration`, `mastery` cho 12 app JLPT con.
+2. Mở rộng quiz JLPT sang từ vựng, đọc hiểu, mixed, câu sai và nội dung chưa gặp.
+3. Giữ local-first làm mặc định; chỉ thêm cloud sync cùng đăng nhập, consent, xóa dữ liệu và xử lý conflict.
+4. Thực hiện editorial review định kỳ cho dữ liệu BJT và factual review độc lập cho 900 câu G検定.
 
 ## Accessibility và giới hạn audit
 
-- Đã kiểm tra focus-visible, heading/button semantics, aria label cho speaker, reduced-motion và contrast trong các state chính.
-- Mobile được kiểm tra ở 390 × 844; desktop ở 1440 × 1024.
-- Đây là visual/interaction audit, không phải chứng nhận WCAG hoặc kiểm thử đầy đủ bằng screen reader.
+- Đã kiểm tra focus-visible, heading/button semantics, speaker label, reduced motion, contrast và mobile overflow trong các state chính.
+- Viewport đại diện: 390 × 844 cho mobile và 1440 × 1024 cho desktop.
+- Đây là visual/interaction audit, không phải chứng nhận WCAG hoặc kiểm thử screen reader đầy đủ.
 - Speech phụ thuộc Web Speech API và voice tiếng Nhật của thiết bị.
-- Bằng chứng tạm không được ghi thành đường dẫn lâu dài trong repository; quy trình tái kiểm tra nằm trong [design-qa.md](design-qa.md).
+- Quy trình tái kiểm tra và giới hạn bằng chứng nằm trong [design-qa.md](design-qa.md).
+
+**final result: passed**
