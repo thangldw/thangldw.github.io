@@ -42,6 +42,7 @@ flowchart LR
 | Viewport | 390, 680, 1280 và 1440 px | Đạt |
 | Theme | Light/dark; KakeFlow giữ ngoại lệ light-only đã ghi trong ledger | Đạt |
 | Learning Programs | G検定, BJT, JLPT N1 và 12 app JLPT con | Đạt |
+| Browser smoke | 5 luồng desktop/mobile trên Chrome headless | Đạt |
 | Redirect | Mapping legacy ↔ canonical được đối chiếu tự động | Đạt |
 | Data | G検定 900 câu/495 keyword; BJT 1.565 thuật ngữ/84 mẫu | Đạt schema |
 
@@ -95,8 +96,11 @@ flowchart LR
 ```bash
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
+node scripts/smoke_learning_apps.mjs
 git diff --check
 ```
+
+Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定, BJT, JLPT N1; riêng Vocabulary Exams kiểm tra search, card expansion, quiz feedback, tab Sai → Đúng và mobile overflow ở 390 × 844.
 
 ### Browser matrix
 
@@ -128,6 +132,15 @@ git diff --check
 - Chưa có đăng nhập hoặc cloud sync nhiều thiết bị; local-first vẫn là mặc định.
 - DOM/computed-style và visual checks không thay thế kiểm thử VoiceOver/NVDA trên thiết bị thật.
 - Legacy single-file debt vẫn tồn tại nhưng bị đóng băng trong `scripts/ui_legacy_baseline.json` và chỉ được phép giảm.
+
+## Refactor Vocabulary Exams — 2026-07-22
+
+- Tách hai khối CSS khỏi HTML sang `apps/n1-vocabulary-exams/styles.css`.
+- Thay inline event handler bằng event delegation theo `data-action`, `data-tab`, `data-pos` và `data-option`.
+- Thay toàn bộ inline presentation bằng class có tên; bổ sung `type="button"` cho static và dynamic control.
+- Debt ledger của route giảm từ 2 style block, 176 style attribute, 20 event handler và 11 button thiếu type xuống 0.
+- Dữ liệu 648 từ vẫn nằm nguyên trong JSON source; refactor không thay nội dung học hoặc đáp án.
+- Chrome smoke xác nhận filter, mở card, bắt đầu quiz, chọn đáp án, feedback và layout 390 px hoạt động.
 
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 
