@@ -551,7 +551,7 @@
       '<section class="main-column">' +
         '<div class="date-line"><span>' + escapeHtml(sessionLabel()) + '</span><time datetime="' + dateKey() + '">' + displayDate() + '</time></div>' +
         '<h1 class="view-title">' + escapeHtml(currentSession.title) + ' <span class="jp-title">· ' + escapeHtml(currentSession.jp) + '</span></h1>' +
-        '<div class="lesson-progress"><strong>Bài ' + (currentSession.index + 1) + ' <span>/ ' + currentSession.queue.length + '</span></strong><span>' + currentSession.score + ' đúng · ' + currentSession.misses + ' cần ôn</span><strong class="question-timer" id="bjtQuestionTimer">' + practiceSeconds + 's</strong><span class="progress-track"><span class="progress-fill" style="width:' + percent + '%"></span></span><span class="question-timer-track"><span id="bjtTimerFill" style="width:' + (practiceSeconds / 30 * 100) + '%"></span></span></div>' +
+        '<div class="lesson-progress"><strong>Bài ' + (currentSession.index + 1) + ' <span>/ ' + currentSession.queue.length + '</span></strong><span class="score-status"><b>Đúng ' + currentSession.score + ' / ' + currentSession.queue.length + '</b> · ' + currentSession.misses + ' cần ôn</span><strong class="question-timer" id="bjtQuestionTimer">' + practiceSeconds + 's</strong><span class="progress-track"><span class="progress-fill" style="width:' + percent + '%"></span></span><span class="question-timer-track"><span id="bjtTimerFill" style="width:' + (practiceSeconds / 30 * 100) + '%"></span></span></div>' +
         '<p class="scenario">Chọn lời giải thích phù hợp nhất. Sau khi trả lời, app sẽ lưu lại tiến độ và đưa những mục chưa đúng vào phần Ôn sai.</p>' +
         '<div class="question-block">' +
           '<span class="question-type">' + escapeHtml(item.kind === 'grammar' ? 'Mẫu ngữ pháp' : 'Thuật ngữ BJT') + '</span>' +
@@ -576,7 +576,7 @@
       '<h1 class="view-title">Kết quả <span class="jp-title">· 学習結果</span></h1>' +
       '<p class="view-subtitle">Bạn đã hoàn thành ' + total + ' câu trong phần ' + escapeHtml(currentSession.title) + '.</p>' +
       '<div class="summary-grid">' +
-        '<div class="summary-item"><strong>' + score + '</strong><span>câu đúng</span></div>' +
+        '<div class="summary-item"><strong>' + score + ' / ' + total + '</strong><span>câu trả lời đúng</span></div>' +
         '<div class="summary-item"><strong>' + currentSession.misses + '</strong><span>mục cần ôn</span></div>' +
         '<div class="summary-item"><strong>' + Math.round((score / Math.max(total, 1)) * 100) + '%</strong><span>độ chính xác</span></div>' +
       '</div>' +

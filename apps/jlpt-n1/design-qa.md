@@ -28,4 +28,12 @@
 - Allowed a question to reach 0 seconds and confirmed automatic “Hết 30 giây” feedback.
 - Opened the mobile layout at 390 × 844 and confirmed `scrollWidth === innerWidth`.
 
+## Score Counter Follow-up
+
+- Desktop before/after evidence: `/tmp/practice-score-count-qa/jlpt-before-after.png`
+- Mobile evidence: `/tmp/practice-score-count-qa/jlpt-mobile.png`
+- The active quiz now displays `Đúng {score} / {total}` and updates immediately after a correct answer.
+- Verified the counter at 1440 px and 390 px with no overlap or horizontal overflow.
+- Browser console logs remained empty. A separate focused-region capture was unnecessary because the counter is legible in the full-view comparison.
+
 final result: passed
