@@ -840,9 +840,12 @@
   function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
-    document.querySelectorAll('[data-theme-choice]').forEach(function (button) {
-      button.classList.toggle('is-active', button.getAttribute('data-theme-choice') === theme);
-    });
+    var button = document.getElementById('themeToggle');
+    var nextTheme = theme === 'dark' ? 'light' : 'dark';
+    var label = nextTheme === 'dark' ? 'Chuyển sang giao diện tối' : 'Chuyển sang giao diện sáng';
+    button.setAttribute('aria-label', label);
+    button.setAttribute('title', label);
+    button.querySelector('i').className = nextTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
   }
 
   function speakCurrent() {
@@ -925,9 +928,10 @@
     this.setAttribute('aria-expanded', String(open));
   });
 
-  document.querySelectorAll('[data-theme-choice]').forEach(function (button) {
-    button.addEventListener('click', function () { setTheme(button.getAttribute('data-theme-choice')); });
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
+  setTheme(document.documentElement.getAttribute('data-theme') || 'light');
 
   appView.addEventListener('input', function (event) {
     if (event.target.id !== 'librarySearch') return;

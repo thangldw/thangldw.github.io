@@ -22,7 +22,7 @@
     ".tw-header{position:relative;z-index:1;width:100%;align-self:stretch;flex:0 0 auto;",
     "background:rgba(17,19,15,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);",
     "border-bottom:1px solid #30342d;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;}",
-    "html[data-theme='light'] .tw-header{background:rgba(243,240,232,.94);border-bottom-color:#d9d5cb;}",
+    "html[data-theme='light'] .tw-header{background:rgba(251,250,246,.94);border-bottom-color:#d9d5cb;}",
     ".tw-header *{box-sizing:border-box;}",
     ".tw-header .tw-wrap{width:100%;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
     ".tw-header .tw-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}",
