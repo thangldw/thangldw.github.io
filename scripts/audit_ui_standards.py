@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import json
+import re
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -14,6 +16,16 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
 DEPRECATED_COLORS = {"#f3f0e8": "use #fbfaf6 or the shared background token"}
+STANDARD_VERSION = "1.1"
+LEGACY_BASELINE_PATH = ROOT / "scripts" / "ui_legacy_baseline.json"
+INLINE_STYLE_RE = re.compile(r"\bstyle\s*=", re.IGNORECASE)
+INLINE_EVENT_RE = re.compile(
+    r"\bon(?:click|change|input|keydown|keyup|submit|load|error|focus|blur|"
+    r"mouseover|mouseout|pointerdown|pointerup|touchstart|touchend)\s*=",
+    re.IGNORECASE,
+)
+BUTTON_TAG_RE = re.compile(r"<button\b[^>]*>", re.IGNORECASE | re.DOTALL)
+TYPE_BUTTON_RE = re.compile(r"\btype\s*=\s*(['\"])button\1", re.IGNORECASE)
 
 
 class UIParser(HTMLParser):
@@ -99,13 +111,51 @@ def public_pages() -> list[Path]:
     return sorted(set(pages))
 
 
+def legacy_counts(source: str, parser: UIParser) -> dict[str, int]:
+    """Count legacy-only patterns, including button markup inside JS templates."""
+    return {
+        "style_blocks": parser.counts["style"],
+        "style_attributes": len(INLINE_STYLE_RE.findall(source)),
+        "event_handlers": len(INLINE_EVENT_RE.findall(source)),
+        "buttons_missing_type": sum(
+            1 for tag in BUTTON_TAG_RE.findall(source) if not TYPE_BUTTON_RE.search(tag)
+        ),
+    }
+
+
+def load_legacy_baseline() -> dict[str, object]:
+    if not LEGACY_BASELINE_PATH.exists():
+        raise FileNotFoundError(f"missing {LEGACY_BASELINE_PATH.relative_to(ROOT)}")
+    return json.loads(LEGACY_BASELINE_PATH.read_text(encoding="utf-8"))
+
+
 def audit_site() -> list[str]:
     errors: list[str] = []
     pages = public_pages()
+    try:
+        baseline = load_legacy_baseline()
+    except (FileNotFoundError, json.JSONDecodeError) as exc:
+        return [str(exc)]
+    if baseline.get("standard_version") != STANDARD_VERSION:
+        errors.append(
+            f"scripts/ui_legacy_baseline.json: expected standard_version {STANDARD_VERSION}"
+        )
+    inline_debt = baseline.get("inline_debt", {})
+    token_exceptions = baseline.get("shared_token_exceptions", {})
+    if not isinstance(inline_debt, dict) or not isinstance(token_exceptions, dict):
+        return ["scripts/ui_legacy_baseline.json: invalid baseline structure"]
+    public_names = {str(page.relative_to(ROOT)) for page in pages}
+    for stale in sorted(set(inline_debt) - public_names):
+        errors.append(f"scripts/ui_legacy_baseline.json: stale page entry: {stale}")
+    for stale in sorted(set(token_exceptions) - public_names):
+        errors.append(f"scripts/ui_legacy_baseline.json: stale token exception: {stale}")
+
     for page in pages:
         relative = page.relative_to(ROOT)
+        relative_name = str(relative)
+        source = page.read_text(encoding="utf-8")
         parser = UIParser()
-        parser.feed(page.read_text(encoding="utf-8"))
+        parser.feed(source)
         parser.close()
 
         if not parser.doctype:
@@ -158,6 +208,32 @@ def audit_site() -> list[str]:
         readable_index = next((i for i, href in enumerate(parser.stylesheets) if "language-app-readable.css" in href), None)
         if readable_index is not None and (design_index is None or readable_index < design_index):
             errors.append(f"{relative}: language readability CSS must load after app-design-system.css")
+
+        uses_shared_tokens = any(
+            "tokens.css" in href or "app-design-system.css" in href
+            for href in parser.stylesheets
+        )
+        if not uses_shared_tokens:
+            exception = token_exceptions.get(relative_name)
+            required = ("reason", "owner", "expires_when")
+            if not isinstance(exception, dict) or any(not exception.get(key) for key in required):
+                errors.append(f"{relative}: must load shared tokens or have a documented exception")
+
+        actual_debt = legacy_counts(source, parser)
+        expected_debt = inline_debt.get(relative_name, {})
+        if not isinstance(expected_debt, dict):
+            errors.append(f"{relative}: invalid inline-debt baseline")
+            expected_debt = {}
+        for metric, actual in actual_debt.items():
+            expected = expected_debt.get(metric, 0)
+            if actual > expected:
+                errors.append(
+                    f"{relative}: {metric} increased from baseline {expected} to {actual}"
+                )
+            elif actual < expected:
+                errors.append(
+                    f"{relative}: {metric} improved from {expected} to {actual}; lower the baseline"
+                )
 
     for path in sorted((*ROOT.rglob("*.html"), *ROOT.rglob("*.css"))):
         source = path.read_text(encoding="utf-8").lower()

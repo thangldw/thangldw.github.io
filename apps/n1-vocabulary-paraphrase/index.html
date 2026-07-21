@@ -92,7 +92,7 @@ body{font-family:var(--font-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Helv
 </script>
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
-<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722a">
+<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722b">
   <script defer src="/js/analytics.js"></script>
 </head><body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-vocabulary-paraphrase">
 <main id="main-content" class="semantic-main">
@@ -141,27 +141,27 @@ body{font-family:var(--font-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Helv
     <div class="srow"><label>問題数</label>
       <select id="qc"><option value="10">10問</option><option value="20" selected>20問</option><option value="30">30問</option><option value="all">全問</option></select>
     </div>
-    <button class="bstart" onclick="startQ()">練習開始 →</button>
+    <button type="button" class="bstart" onclick="startQ()">練習開始 →</button>
   </div>
   <div class="qa" id="qa">
     <div class="pbi"><span id="qn">1/20</span><span id="sm">正解:0</span></div>
     <div class="pbw"><div class="pb" id="pb" style="width:0%"></div></div>
     <div class="qcard">
-      <div class="qwd"><span class="qbadge" id="qqn">1</span><span class="qk" id="qk"></span><span class="qh" id="qhi"></span><button aria-label="Phát âm từ" onclick="speakJapanese(document.getElementById('qhi').textContent)" style="background:none;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:12px;padding:3px 7px;color:#7F77DD;flex-shrink:0">Nghe</button><span style="font-size:11px;color:#aaa" id="qmt"></span></div>
+      <div class="qwd"><span class="qbadge" id="qqn">1</span><span class="qk" id="qk"></span><span class="qh" id="qhi"></span><button type="button" class="speech-control" aria-label="Phát âm từ đang luyện" data-speak-source="qhi">Nghe</button><span style="font-size:11px;color:#aaa" id="qmt"></span></div>
       <div id="qvi" style="font-size:12px;color:#b45309;background:#FFFBEB;border-radius:6px;padding:3px 8px;margin-bottom:8px;display:none">🇻🇳 <span id="qvt"></span></div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
       <div class="qs" id="qsen" style="flex:1"></div>
-      <button aria-label="Đọc câu hỏi" onclick="speakJapanese(currentSentence)" style="background:none;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:12px;padding:3px 7px;flex-shrink:0;color:#534AB7">Nghe câu</button>
+      <button type="button" class="speech-control" aria-label="Đọc toàn bộ câu hỏi" data-speak-current="sentence">Nghe câu</button>
     </div>
     </div>
     <div class="og" id="og"></div>
     <div class="exp" id="exp"></div>
-    <div class="bnav"><button class="bnext" id="bn" onclick="nextQ()">次の問題 →</button></div>
+    <div class="bnav"><button type="button" class="bnext" id="bn" onclick="nextQ()">次の問題 →</button></div>
   </div>
   <div class="res" id="res">
     <div class="rs" id="rsc">0</div><div class="rt" id="rtl">/0問</div>
     <div class="rm" id="rmsg"></div>
-    <button class="br" onclick="resetQ()">もう一度</button>
+    <button type="button" class="br" onclick="resetQ()">もう一度</button>
   </div>
 </div>
 </div>
@@ -171,10 +171,11 @@ var ct='v',qq=[],qi=0,sc=0,ans=false,visibleCount=72,currentList=[];
 function switchTab(t,btn){ct=t;document.querySelectorAll('.tab').forEach(function(e){e.classList.remove('active');e.setAttribute('aria-selected','false');e.tabIndex=-1;});if(btn){btn.classList.add('active');btn.setAttribute('aria-selected','true');btn.tabIndex=0;}document.getElementById('tv').style.display=t==='v'?'':'none';document.getElementById('tq').style.display=t==='q'?'':'none';}
 document.querySelector('.tabs').addEventListener('keydown',function(event){if(['ArrowLeft','ArrowRight','Home','End'].indexOf(event.key)===-1)return;var tabs=Array.from(this.querySelectorAll('[role="tab"]'));var index=tabs.indexOf(event.target.closest('[role="tab"]'));if(index<0)return;event.preventDefault();var next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].click();tabs[next].focus();});
 function fv(){var s=document.getElementById('si').value.toLowerCase();var r=document.getElementById('fr').value;var p=document.getElementById('fp').value;visibleCount=72;rv(V.filter(function(v){return(!r||v.r===r)&&(!p||v.p===p)&&(!s||v.k.indexOf(s)>=0||v.h.indexOf(s)>=0||v.m.indexOf(s)>=0||v.sy.join('').indexOf(s)>=0);}));}
-function rv(list){currentList=list;var shown=Math.min(visibleCount,list.length);document.getElementById('vc').textContent=shown<list.length?shown+' / '+list.length+' 語':list.length+' 語';document.getElementById('vg').innerHTML=list.slice(0,shown).map(function(v){return '<div class="card"><div class="wrow"><span class="qbadge">'+v.n+'</span><span class="wk">'+v.k+'</span><span class="wh">'+v.h+'</span><button onclick="speakJapanese(this.getAttribute(\"data-h\"))" data-h="'+v.h+'" style="background:none;border:none;cursor:pointer;font-size:15px;padding:1px 4px;color:#7F77DD" title="発音">Nghe</button><span class="ptag">'+v.p+'</span><span class="rtag">第'+v.r+'回</span></div><div class="mng">'+v.m+'</div>'+(v.vi?'<div class="vi">Nghĩa · '+v.vi+'</div>':'')+'<div class="synb"><div class="synl">≒ 類義語</div>'+v.sy.map(function(s,i){return '<span class="syi'+(i===0?' pri':'')+'">'+ s+'</span>';}).join('')+'</div><div class="clls">Cụm từ · '+v.co.map(function(c){return '<span class="ct">'+c+'</span>';}).join('')+'</div></div>';}).join('');document.getElementById('more-vocab').innerHTML=shown<list.length?'<button type="button" class="load-more" onclick="loadMoreVocab()">Hiển thị thêm '+Math.min(72,list.length-shown)+' mục</button>':'';}
+function escAttr(value){return String(value||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function rv(list){currentList=list;var shown=Math.min(visibleCount,list.length);document.getElementById('vc').textContent=shown<list.length?shown+' / '+list.length+' 語':list.length+' 語';document.getElementById('vg').innerHTML=list.slice(0,shown).map(function(v){var speechName='Phát âm '+v.k+' ('+v.h+')';return '<div class="card"><div class="wrow"><span class="qbadge">'+v.n+'</span><span class="wk">'+v.k+'</span><span class="wh">'+v.h+'</span><button type="button" class="speech-control" data-speak-text="'+escAttr(v.h)+'" aria-label="'+escAttr(speechName)+'">Nghe</button><span class="ptag">'+v.p+'</span><span class="rtag">第'+v.r+'回</span></div><div class="mng">'+v.m+'</div>'+(v.vi?'<div class="vi">Nghĩa · '+v.vi+'</div>':'')+'<div class="synb"><div class="synl">≒ 類義語</div>'+v.sy.map(function(s,i){return '<span class="syi'+(i===0?' pri':'')+'">'+ s+'</span>';}).join('')+'</div><div class="clls">Cụm từ · '+v.co.map(function(c){return '<span class="ct">'+c+'</span>';}).join('')+'</div></div>';}).join('');document.getElementById('more-vocab').innerHTML=shown<list.length?'<button type="button" class="load-more" onclick="loadMoreVocab()">Hiển thị thêm '+Math.min(72,list.length-shown)+' mục</button>':'';}
 function loadMoreVocab(){visibleCount+=72;rv(currentList);}
 function startQ(){var rf=document.getElementById('qr').value;var cs=document.getElementById('qc').value;var pool=rf==='all'?V.slice():V.filter(function(v){return v.r===rf;});pool=shuf(pool);var cnt=cs==='all'?pool.length:Math.min(parseInt(cs),pool.length);qq=pool.slice(0,cnt);qi=0;sc=0;document.getElementById('qs').style.display='none';document.getElementById('qa').classList.add('active');document.getElementById('res').classList.remove('show');showQ();}
-function showQ(){var q=qq[qi],tot=qq.length;document.getElementById('qn').textContent=(qi+1)+' / '+tot;document.getElementById('sm').textContent='正解: '+sc;document.getElementById('pb').style.width=((qi/tot)*100)+'%';document.getElementById('qk').textContent=q.k;document.getElementById('qhi').textContent=q.h;document.getElementById('qmt').textContent='第'+q.r+'回 · '+q.p;var s=q.s;if(s.indexOf(q.k)>=0){s=s.replace(q.k,'<span class="ul">'+q.k+'</span>');}else if(s.indexOf(q.h)>=0){s=s.replace(q.h,'<span class="ul">'+q.h+'</span>');}currentSentence=q.s;document.getElementById('qsen').innerHTML=s;document.getElementById('qqn').textContent=q.n||'';document.getElementById('qvt').textContent=q.vi||'';document.getElementById('qvi').style.display='none';document.getElementById('og').innerHTML=q.op.map(function(o,i){return '<button class="ob" onclick="sel('+i+')" id="o'+i+'"><span class="nm">'+(i+1)+'</span>'+o+'</button>';}).join('');document.getElementById('exp').classList.remove('show');document.getElementById('bn').classList.remove('show');ans=false;}
+function showQ(){var q=qq[qi],tot=qq.length;document.getElementById('qn').textContent=(qi+1)+' / '+tot;document.getElementById('sm').textContent='正解: '+sc;document.getElementById('pb').style.width=((qi/tot)*100)+'%';document.getElementById('qk').textContent=q.k;document.getElementById('qhi').textContent=q.h;document.getElementById('qmt').textContent='第'+q.r+'回 · '+q.p;var s=q.s;if(s.indexOf(q.k)>=0){s=s.replace(q.k,'<span class="ul">'+q.k+'</span>');}else if(s.indexOf(q.h)>=0){s=s.replace(q.h,'<span class="ul">'+q.h+'</span>');}currentSentence=q.s;document.getElementById('qsen').innerHTML=s;document.getElementById('qqn').textContent=q.n||'';document.getElementById('qvt').textContent=q.vi||'';document.getElementById('qvi').style.display='none';document.getElementById('og').innerHTML=q.op.map(function(o,i){return '<button type="button" class="ob" onclick="sel('+i+')" id="o'+i+'"><span class="nm">'+(i+1)+'</span>'+o+'</button>';}).join('');document.getElementById('exp').classList.remove('show');document.getElementById('bn').classList.remove('show');ans=false;}
 function sel(c){if(ans)return;ans=true;var q=qq[qi],co=q.a;if(c===co)sc++;for(var i=0;i<q.op.length;i++){var b=document.getElementById('o'+i);b.disabled=true;if(i===co)b.classList.add(c===co&&i===c?'ok':'rv');if(i===c&&c!==co)b.classList.add('ng');}var sh=q.sy.map(function(s,i){return '<span class="esyi'+(i===0?' pri':'')+'">'+ s+'</span>';}).join('');document.getElementById('exp').innerHTML='<div style="margin-bottom:8px"><span class="ew">'+q.k+'</span><span class="eh">'+q.h+'</span></div><div style="font-size:13px;color:#333;margin:4px 0">📖 '+q.m+'</div><div style="font-size:12px;color:#b45309;background:#FFFBEB;border-radius:6px;padding:3px 8px;margin:4px 0;display:inline-block">🇻🇳 '+(q.vi||'')+'</div><div style="margin:8px 0"><span style="font-size:11px;color:#7F77DD;font-weight:500">≒ 類義語：</span><br>'+sh+'</div><div style="font-size:11px;color:#888">📌 '+q.co.map(function(c){return '<span class="ct">'+c+'</span>';}).join('')+'</div>';if(q.vi){document.getElementById('qvi').style.display='inline-block';}document.getElementById('exp').classList.add('show');document.getElementById('sm').textContent='正解: '+sc;document.getElementById('bn').classList.add('show');}
 function nextQ(){qi++;if(qi>=qq.length)showRes();else showQ();}
 function showRes(){document.getElementById('qa').classList.remove('active');document.getElementById('res').classList.add('show');var tot=qq.length,pct=Math.round((sc/tot)*100);document.getElementById('rsc').textContent=sc;document.getElementById('rtl').textContent='/ '+tot+' 問';document.getElementById('rmsg').textContent=(pct>=90?'🎉 素晴らしい！N1合格レベルです！':pct>=70?'👍 よくできました！':pct>=50?'📚 復習が必要です。':'💪 もっと練習！')+'（正答率: '+pct+'%）';}
@@ -201,9 +202,23 @@ function speakJapanese(text) {
     window.speechSynthesis.onvoiceschanged = function() { doSpeak(); };
   }
 }
+document.addEventListener('click', function(event) {
+  var control = event.target.closest('.speech-control');
+  if (!control) return;
+  if (control.dataset.speakText) {
+    speakJapanese(control.dataset.speakText);
+    return;
+  }
+  if (control.dataset.speakSource) {
+    var source = document.getElementById(control.dataset.speakSource);
+    speakJapanese(source ? source.textContent : '');
+    return;
+  }
+  if (control.dataset.speakCurrent === 'sentence') speakJapanese(currentSentence);
+});
 rv(V);
 </script>
 </main>
-<script src="/js/site-header-v2.js?v=20260721d"></script>
+<script src="/js/site-header-v2.js?v=20260722e"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body></html>

@@ -42,7 +42,7 @@
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-toggle{border-color:#d9d5cb;color:#1d211e;background:#fbfaf6;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
-    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:20px;gap:8px}.tw-header .tw-mark{font-size:16px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:32px;height:32px;}}",
+    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:20px;gap:8px}.tw-header .tw-mark{font-size:16px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:34px;height:34px;}}",
   ].join("");
 
   /* ---- resolve current theme (mirror the tokens.css pre-paint logic) ---- */
@@ -77,7 +77,7 @@
       '<div class="tw-wrap">' +
       '<a href="/" class="tw-brand" aria-label="Thang Luu home"><span class="tw-mark" aria-hidden="true">t:&gt;</span><span class="tw-name">thang<span class="tw-dot">.</span></span></a>' +
       '<nav class="tw-nav" aria-label="Theme controls">' +
-      '<button class="tw-toggle" id="tw-toggle" aria-label="Toggle color theme" title="Toggle theme">' + iconFor(theme) + "</button>" +
+      '<button type="button" class="tw-toggle" id="tw-toggle" aria-label="Toggle color theme" title="Toggle theme">' + iconFor(theme) + "</button>" +
       "</nav></div>";
 
     var skipLink = document.body.firstElementChild;

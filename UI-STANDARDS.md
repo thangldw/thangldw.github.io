@@ -1,7 +1,7 @@
-# UI Standard 1.0 / Tiêu chuẩn UI 1.0 / UI標準 1.0
+# UI Standard 1.1 / Tiêu chuẩn UI 1.1 / UI標準 1.1
 
 **Status:** Required / Bắt buộc / 必須  
-**Version:** 1.0 — 2026-07-22  
+**Version:** 1.1 — 2026-07-22
 **Scope:** Every public HTML page and app in this repository.
 
 This file is the source of truth for new pages and for any legacy page that is edited. It complements the automated gate in `scripts/audit_ui_standards.py`.
@@ -56,6 +56,7 @@ flowchart LR
 - Default content width: `--portfolio-content: 1328px`; a page may choose a narrower task-specific container.
 - Spacing uses the shared scale in `css/tokens.css`. New CSS must not invent a parallel token system.
 - New interactive CSS must not use ID selectors or `!important`. Compatibility layers may keep documented exceptions.
+- Every new public page must load `css/tokens.css` or `css/app-design-system.css`; exceptions need a named owner, reason and expiry condition in `scripts/ui_legacy_baseline.json`.
 - No shadows unless they communicate elevation. Borders and surface contrast remain the default separation method.
 
 VI: Màu, font, spacing và radius phải đi qua token dùng chung. EN: Colors, type, spacing and radii must use shared tokens. 日本語: 色、書体、余白、角丸は共通トークンを使用します。
@@ -83,6 +84,8 @@ Lớp cuối giữ tính đồng nhất; CSS riêng chỉ giữ layout và compo
 - Use semantic landmarks: `header`, `nav`, one `main`, and `footer` where applicable.
 - Add a skip link on navigation-heavy pages.
 - Every icon-only button needs `type="button"` and an accessible name.
+- Every button outside a form submit action must declare `type="button"` explicitly.
+- Repeated contextual actions need a name that identifies their target, for example `Phát âm 拗れる (こじれる)` instead of repeating only `Nghe`.
 - Every input needs a visible `label` or `aria-label`; placeholder text is not a label.
 - External links opened with `target="_blank"` require `rel="noopener"`.
 - Tabs require a named `role="tablist"`; every tab needs `id`, `aria-selected`, `aria-controls`, roving `tabindex`; every panel needs `aria-labelledby`.
@@ -106,8 +109,9 @@ Mọi component tương tác phải định nghĩa default, hover, focus-visible
 2. Reuse `tokens.css`, the shared design system and existing icon assets.
 3. Add semantic landmarks, one source `h1`, labels and keyboard behavior.
 4. Verify light/dark at 390, 680, 1280 and 1440 px.
-5. Check long Vietnamese, English and Japanese strings, empty/loading/error states and content zoom.
-6. Run both local gates and review the diff:
+5. Measure rendered controls at those viewports: 40 px for primary controls and at least 34 px for compact secondary controls.
+6. Check long Vietnamese, English and Japanese strings, empty/loading/error states and content zoom.
+7. Run both local gates and review the diff:
 
 ```bash
 python3 scripts/audit_ui_standards.py
@@ -115,7 +119,8 @@ python3 scripts/validate_site.py
 git diff --check
 ```
 
-7. Capture representative browser evidence and record material exceptions in `design-qa.md`.
+8. Confirm zero console errors, broken images and document-level horizontal overflow.
+9. Capture representative browser evidence and record material exceptions in `design-qa.md`.
 
 ## Legacy policy / Chính sách code cũ / 既存コード方針
 
@@ -124,6 +129,12 @@ Existing single-file learning apps may retain inline data and compatibility CSS 
 Các app học cũ có thể giữ dữ liệu inline và CSS tương thích cho tới khi được sửa; code mới không được thêm inline style/event. Khi chạm vào component cũ, refactor đúng phạm vi sang token và event listener dùng chung.
 
 既存の単一 HTML 学習アプリは変更対象になるまで互換コードを保持できます。新規の inline style/event は禁止し、変更箇所から段階的に共通化します。
+
+The local debt ledger is `scripts/ui_legacy_baseline.json`. Existing counts may only decrease. A new public page starts with a zero budget for `<style>` blocks, `style=` attributes, inline event handlers and buttons without an explicit type. The audit fails when debt increases or when an improvement is not reflected in the ledger. This guard is local and does not add a GitHub Actions workflow.
+
+Sổ nợ cục bộ nằm tại `scripts/ui_legacy_baseline.json`: số lượng chỉ được giảm; trang mới bắt đầu với ngân sách bằng 0. Gate này chạy local và không tạo thêm GitHub Actions.
+
+ローカル負債台帳は `scripts/ui_legacy_baseline.json` です。既存件数は減少のみ、新規ページはゼロから開始します。この検査はローカル実行で、GitHub Actions は追加しません。
 
 ## Governance / Quản trị / 運用
 
