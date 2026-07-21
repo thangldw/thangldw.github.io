@@ -18,6 +18,11 @@ flowchart LR
     Apps --> External["Dự án ngoài repository"]
   end
 
+  subgraph Toolbox["macOS Toolbox"]
+    Products --> Diskora["Diskora · Storage cleanup"]
+    Products --> Changeora["Changeora · Change journal"]
+  end
+
   subgraph Learning["Learning Programs"]
     Apps --> JLPT["JLPT N1"]
     Apps --> BJT["BJT"]
@@ -31,6 +36,7 @@ flowchart LR
   class Visitor,Home yellow;
   class Apps blue;
   class Products,Cases,External pink;
+  class Diskora,Changeora green;
   class JLPT,BJT,Future green;
 ```
 
@@ -40,6 +46,8 @@ flowchart LR
 |---|---|---|
 | Hồ sơ | [`/`](https://thangldw.github.io/) | Hồ sơ, nguyên tắc làm việc và dự án nổi bật |
 | Danh mục | [`/apps/`](https://thangldw.github.io/apps/) | Điểm vào chung cho toàn bộ ứng dụng |
+| Diskora | [Release 1.0.0](https://github.com/thangldw/toolbox/releases/tag/diskora-v1.0.0) | Phân tích dung lượng và dọn dẹp macOS theo cơ chế duyệt trước khi xóa |
+| Changeora | [Release 1.0.0](https://github.com/thangldw/toolbox/releases/tag/changeora-v1.0.0) | Ghi snapshot và giải thích thay đổi tệp cục bộ trên macOS |
 | JLPT N1 | [`/apps/jlpt-n1/`](https://thangldw.github.io/apps/jlpt-n1/) | Hub gồm 12 công cụ từ vựng, ngữ pháp và đọc hiểu |
 | BJT | [`/apps/bjt-study/`](https://thangldw.github.io/apps/bjt-study/) | Lộ trình Business Japanese, luyện tập và ôn sai |
 | NamiQuant | [`/apps/namiquant/`](https://thangldw.github.io/apps/namiquant/) | Case study giới hạn của hệ thống giao dịch riêng |
