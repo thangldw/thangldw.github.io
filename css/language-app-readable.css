@@ -8,10 +8,22 @@ html.language-app-root {
 }
 
 body.language-app[data-language-app] {
+  font-family: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif) !important;
   font-size: 16px;
   line-height: 1.6;
   background: var(--portfolio-bg) !important;
   color: var(--portfolio-ink) !important;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+body.language-app[data-language-app] :where(button, input, select, textarea) {
+  font-family: inherit !important;
+}
+
+body.language-app[data-language-app] :where([lang="ja"]) {
+  font-family: var(--font-jp-sans, var(--portfolio-font-jp-sans, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif)) !important;
+  letter-spacing: normal;
 }
 
 body.language-app[data-language-app] :where(.container, .main, .wrap, .cnt, .content, .app, .app-shell, .hdr-top > div) {

@@ -14,7 +14,7 @@
     --anchor-bg:#FFE082; --anchor-text:#5D4037; }
   *{box-sizing:border-box;}
   body{ margin:0; background:var(--paper); color:var(--ink);
-    font-family:"Hiragino Sans",system-ui,"Yu Gothic","Segoe UI",sans-serif;
+    font-family:var(--font-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif);
     line-height:1.7; padding-bottom:60px; }
   .topbar{ background:var(--paper-2); border-bottom:1px solid var(--line); padding:14px 20px; position:relative; z-index:1; }
   .topbar-inner{ max-width:760px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
@@ -100,9 +100,9 @@
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
-  <link rel="stylesheet" href="/css/app-footer.css?v=20260714f">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260721b">
-<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260721g">
+  <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260721c">
+<link rel="stylesheet" href="../../css/language-app-readable.css?v=20260721h">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-reading-75">
@@ -361,7 +361,7 @@ function restart(){
 renderQuestion(0);
 </script>
 
-<script src="/js/site-header-v2.js?v=20260721b"></script>
+<script src="/js/site-header-v2.js?v=20260721c"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>
 </html>

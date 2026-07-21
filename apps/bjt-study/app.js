@@ -569,7 +569,7 @@
     appView.innerHTML = '<div class="view-shell is-single">' +
       '<section class="main-column">' +
         '<div class="date-line"><span>' + escapeHtml(sessionLabel()) + '</span><time datetime="' + dateKey() + '">' + displayDate() + '</time></div>' +
-        '<h1 class="view-title">' + escapeHtml(currentSession.title) + ' <span class="jp-title">· ' + escapeHtml(currentSession.jp) + '</span></h1>' +
+        '<h1 class="view-title">' + escapeHtml(currentSession.title) + ' <span class="jp-title" lang="ja">· ' + escapeHtml(currentSession.jp) + '</span></h1>' +
         '<div class="lesson-progress"><strong>Bài ' + (currentSession.index + 1) + ' <span>/ ' + currentSession.queue.length + '</span></strong><span class="score-status"><b>Đúng ' + currentSession.score + ' / ' + currentSession.queue.length + '</b> · ' + currentSession.misses + ' cần ôn</span><strong class="question-timer" id="bjtQuestionTimer">' + practiceSeconds + 's</strong><span class="progress-track"><span class="progress-fill" style="width:' + percent + '%"></span></span><span class="question-timer-track"><span id="bjtTimerFill" style="width:' + (practiceSeconds / 30 * 100) + '%"></span></span></div>' +
         '<p class="scenario">Chọn lời giải thích phù hợp nhất. Sau khi trả lời, app sẽ lưu lại tiến độ và đưa những mục chưa đúng vào phần Ôn sai.</p>' +
         '<div class="question-block">' +
@@ -593,7 +593,7 @@
     closeCurrentSession('completed');
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">HOÀN THÀNH BUỔI HỌC</span>' +
-      '<h1 class="view-title">Kết quả <span class="jp-title">· 学習結果</span></h1>' +
+      '<h1 class="view-title">Kết quả <span class="jp-title" lang="ja">· 学習結果</span></h1>' +
       '<p class="view-subtitle">Bạn đã hoàn thành ' + total + ' câu trong phần ' + escapeHtml(currentSession.title) + '.</p>' +
       '<div class="summary-grid">' +
         '<div class="summary-item"><strong>' + score + ' / ' + total + '</strong><span>câu trả lời đúng</span></div>' +
@@ -626,7 +626,7 @@
 
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">LỘ TRÌNH GỢI Ý</span>' +
-      '<div class="section-head"><div><h1 class="view-title">Lộ trình BJT <span class="jp-title">· ビジネス日本語</span></h1><p class="view-subtitle">Đi từ ngôn ngữ công sở nền tảng tới các tình huống quản trị, đàm phán và tổng hợp.</p></div><span class="stat-inline">' + Object.keys(progress.seen).length + ' mục đã học</span></div>' +
+      '<div class="section-head"><div><h1 class="view-title">Lộ trình BJT <span class="jp-title" lang="ja">· ビジネス日本語</span></h1><p class="view-subtitle">Đi từ ngôn ngữ công sở nền tảng tới các tình huống quản trị, đàm phán và tổng hợp.</p></div><span class="stat-inline">' + Object.keys(progress.seen).length + ' mục đã học</span></div>' +
       groups +
       '<p class="rail-note">Lộ trình này là cách sắp xếp học tập gợi ý từ hai bộ dữ liệu đã cung cấp, không phải phân loại cấp độ chính thức của kỳ thi BJT.</p>' +
     '</section>';
@@ -687,7 +687,7 @@
     }).join('');
     appView.innerHTML = '<section class="main-column subject-hub">' +
       '<span class="context-label">BJT · ' + (isGrammar ? 'NGỮ PHÁP' : 'TỪ VỰNG') + ' · ' + jp + '</span>' +
-      '<div class="section-head subject-head"><div><h1 class="view-title">' + title + ' <span class="jp-title">· ' + jp + '</span></h1><p class="view-subtitle">' + description + '</p></div><span class="stat-inline">' + formatNumber(count) + ' mục</span></div>' +
+      '<div class="section-head subject-head"><div><h1 class="view-title">' + title + ' <span class="jp-title" lang="ja">· ' + jp + '</span></h1><p class="view-subtitle">' + description + '</p></div><span class="stat-inline">' + formatNumber(count) + ' mục</span></div>' +
       '<div class="subject-tabs" role="tablist">' + tabs + '</div><div class="subject-module-list">' + rows + '</div>' +
     '</section>';
   }
@@ -763,7 +763,7 @@
     var scopeLabel = practiceScope === 'vocabulary' ? 'Từ vựng · 語彙' : (practiceScope === 'grammar' ? 'Ngữ pháp · 文法' : 'Từ vựng + Ngữ pháp');
     appView.innerHTML = '<section class="main-column practice-setup">' +
       '<span class="context-label">LUYỆN TẬP · ' + scopeLabel.toUpperCase() + '</span>' +
-      '<h1 class="view-title">Luyện tập ghi nhớ <span class="jp-title">· 総合練習</span></h1>' +
+      '<h1 class="view-title">Luyện tập ghi nhớ <span class="jp-title" lang="ja">· 総合練習</span></h1>' +
       '<p class="view-subtitle">Chọn độ dài phù hợp. Mỗi câu có tối đa 30 giây; đáp án và giải thích xuất hiện ngay sau khi trả lời.</p>' +
       '<div class="practice-config"><div><span class="config-label">Số câu mỗi lượt</span><div class="practice-sizes" role="group" aria-label="Chọn số câu">' + sizes + '</div></div><div class="practice-rules"><span><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span><strong>30 giây</strong> cho mỗi câu</span></span><span><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span><strong>' + scopeLabel + '</strong></span></span><span><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span><strong>Lưu lỗi sai</strong> để ôn lại</span></span></div></div>' +
       '<div class="summary-grid"><div class="summary-item"><strong>' + practiceSize + '</strong><span>câu trong lượt này</span></div><div class="summary-item"><strong>' + accuracy + '%</strong><span>độ chính xác đã ghi nhận</span></div><div class="summary-item"><strong>' + Object.keys(progress.wrong).length + '</strong><span>mục đang cần ôn</span></div></div>' +
@@ -779,7 +779,7 @@
     }).join('');
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">GHI NHỚ CHỦ ĐỘNG</span>' +
-      '<div class="section-head"><div><h1 class="view-title">Ôn sai <span class="jp-title">· 復習</span></h1><p class="view-subtitle">Mỗi câu chưa đúng sẽ ở đây cho tới khi bạn trả lời đúng trong một lượt ôn.</p></div><span class="stat-inline">' + wrongItems.length + ' mục</span></div>' +
+      '<div class="section-head"><div><h1 class="view-title">Ôn sai <span class="jp-title" lang="ja">· 復習</span></h1><p class="view-subtitle">Mỗi câu chưa đúng sẽ ở đây cho tới khi bạn trả lời đúng trong một lượt ôn.</p></div><span class="stat-inline">' + wrongItems.length + ' mục</span></div>' +
       (rows ? '<div class="library-list">' + rows + '</div><button class="primary-action" type="button" data-action="start-review"><span>Ôn tất cả lỗi sai</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' : '<div class="empty-state"><strong>Chưa có lỗi sai cần ôn.</strong><p>Hãy bắt đầu một module trong Lộ trình hoặc làm một lượt luyện tập.</p></div>') +
     '</section>';
   }
