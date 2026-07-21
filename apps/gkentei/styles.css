@@ -350,17 +350,22 @@ body[data-app-route="gkentei"] .gk-secondary-action:hover {
 .gk-section-heading h2 { margin: 5px 0 0; color: var(--portfolio-ink); font-size: 24px; letter-spacing: -.02em; }
 .gk-section-heading p { max-width: 390px; margin: 0; color: var(--portfolio-muted); font-size: 13px; line-height: 1.5; }
 
-.gk-module-list { display: grid; gap: 12px; }
+.gk-module-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 
 body[data-app-route="gkentei"] .gk-module-row {
   position: relative;
   width: 100%;
-  min-height: 112px;
+  min-height: 176px;
   display: grid;
-  grid-template-columns: 66px 62px minmax(220px, 1fr) 170px 22px;
-  align-items: center;
-  gap: 18px;
-  padding: 16px 21px;
+  grid-template-columns: 52px minmax(0, 1fr) 22px;
+  grid-template-areas:
+    "index copy arrow"
+    "icon state state"
+    "progress progress progress";
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
+  gap: 14px 16px;
+  padding: 20px;
   border: 1px solid var(--portfolio-border);
   border-radius: 10px;
   background: transparent;
@@ -378,11 +383,13 @@ body[data-app-route="gkentei"] .gk-module-row {
   background: var(--portfolio-orange);
 }
 
-.gk-module-row:hover { border-color: var(--portfolio-orange); }
-.gk-module-index { color: var(--portfolio-muted); font: 400 31px/1 var(--font-mono); }
+.gk-module-row:hover { border-color: var(--portfolio-orange); background: color-mix(in srgb, var(--portfolio-surface-2) 48%, transparent); }
+.gk-module-index { grid-area: index; color: var(--portfolio-muted); font: 400 29px/1 var(--font-mono); }
 .gk-module-icon {
-  width: 58px;
-  height: 58px;
+  grid-area: icon;
+  align-self: end;
+  width: 52px;
+  height: 52px;
   display: grid;
   place-items: center;
   border: 1px solid var(--portfolio-border);
@@ -390,12 +397,28 @@ body[data-app-route="gkentei"] .gk-module-row {
   color: var(--portfolio-muted);
 }
 
-.gk-module-copy { display: grid; gap: 7px; }
+.gk-module-copy { grid-area: copy; display: grid; gap: 7px; min-width: 0; }
 .gk-module-copy strong { color: var(--portfolio-ink); font-size: 17px; }
 .gk-module-copy small,
 .gk-module-state small { color: var(--portfolio-muted); font-size: 12px; line-height: 1.45; }
-.gk-module-state { display: grid; gap: 5px; }
+.gk-module-state { grid-area: state; align-self: end; display: grid; gap: 5px; }
 .gk-module-state strong { color: var(--portfolio-ink); font-size: 12px; }
+.gk-module-row.is-started .gk-module-state strong { color: var(--portfolio-orange); }
+.gk-module-arrow { grid-area: arrow; justify-self: end; color: var(--portfolio-muted); }
+.gk-module-row:hover .gk-module-arrow { color: var(--portfolio-orange); }
+.gk-module-progress {
+  grid-area: progress;
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  appearance: none;
+  background: var(--portfolio-surface-2);
+}
+.gk-module-progress::-webkit-progress-bar { background: var(--portfolio-surface-2); }
+.gk-module-progress::-webkit-progress-value { background: var(--portfolio-orange); }
+.gk-module-progress::-moz-progress-bar { background: var(--portfolio-orange); }
 
 .gk-setup-grid {
   display: grid;
@@ -618,7 +641,7 @@ body[data-app-route="gkentei"] .gk-example-question > button { grid-column: 2; g
   .gk-sidebar-head { padding-inline: 22px; }
   .gk-main { padding-inline: 32px; }
   .gk-view-header { grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; }
-  body[data-app-route="gkentei"] .gk-module-row { grid-template-columns: 54px 56px minmax(0, 1fr) 130px 24px; gap: 16px; }
+  body[data-app-route="gkentei"] .gk-module-row { grid-template-columns: 48px minmax(0, 1fr) 20px; gap: 13px 14px; padding: 18px; }
   .gk-bank-toolbar { grid-template-columns: 1fr 1fr; }
   .gk-search-field { grid-column: 1 / 3; }
 }
@@ -640,9 +663,9 @@ body[data-app-route="gkentei"] .gk-example-question > button { grid-column: 2; g
   .gk-main { padding: 34px 24px 48px; }
   .gk-view-header { grid-template-columns: 1fr; }
   .gk-progress-panel { max-width: 460px; }
-  body[data-app-route="gkentei"] .gk-module-row { grid-template-columns: 46px 48px minmax(0, 1fr) 20px; min-height: 112px; gap: 13px; }
+  .gk-module-list { grid-template-columns: 1fr; }
+  body[data-app-route="gkentei"] .gk-module-row { grid-template-columns: 48px minmax(0, 1fr) 20px; min-height: 164px; gap: 13px 14px; }
   .gk-module-icon { width: 46px; height: 46px; }
-  .gk-module-state { display: none; }
   .gk-setup-grid { grid-template-columns: 1fr; gap: 30px; }
   .gk-setup-rules { grid-template-columns: repeat(3, 1fr); border-left: 0; border-top: 1px solid var(--portfolio-border); padding: 24px 0 0; }
   .gk-topic-guide-grid { grid-template-columns: 1fr; }
@@ -665,11 +688,13 @@ body[data-app-route="gkentei"] .gk-example-question > button { grid-column: 2; g
   .gk-summary-strip span { font-size: 10px; }
   .gk-section-heading { display: block; }
   .gk-section-heading p { margin-top: 8px; }
-  body[data-app-route="gkentei"] .gk-module-row { grid-template-columns: 38px 44px minmax(0, 1fr) 18px; gap: 10px; padding: 14px 13px; }
+  body[data-app-route="gkentei"] .gk-module-row { grid-template-columns: 42px minmax(0, 1fr) 18px; min-height: 156px; gap: 11px 12px; padding: 15px 14px; }
   .gk-module-index { font-size: 24px; }
   .gk-module-icon { width: 42px; height: 42px; }
   .gk-module-copy strong { font-size: 15px; line-height: 1.35; }
   .gk-module-copy small { font-size: 11px; }
+  .gk-module-state strong { font-size: 11px; }
+  .gk-module-state small { font-size: 10px; }
   .gk-filter-row { grid-template-columns: 1fr; }
   .gk-setup-rules { grid-template-columns: 1fr; }
   .gk-start-action,
