@@ -1,7 +1,9 @@
 # UI Standard 1.1 / Tiêu chuẩn UI 1.1 / UI標準 1.1
 
-**Status:** Required / Bắt buộc / 必須  
+**Status:** Required / Bắt buộc / 必須
+
 **Version:** 1.1 — 2026-07-22
+
 **Scope:** Every public HTML page and app in this repository.
 
 This file is the source of truth for new pages and for any legacy page that is edited. It complements the automated gate in `scripts/audit_ui_standards.py`.
@@ -13,7 +15,7 @@ Tài liệu này là nguồn quy chuẩn duy nhất cho trang mới và cho mọ
 ## Delivery flow / Luồng phát hành / リリースフロー
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+%%{init: {"theme":"base","flowchart":{"curve":"linear","nodeSpacing":34,"rankSpacing":44},"themeVariables":{"fontFamily":"Inter, Arial, sans-serif","fontSize":"14px","lineColor":"#5F6B7A","primaryTextColor":"#1F2937","clusterBkg":"#FFFFFF","clusterBorder":"#CBD5E1"}}}%%
 flowchart LR
   Brief(["Page brief"]) --> Skeleton["Semantic HTML"]
   Skeleton --> Tokens["Shared tokens"]
@@ -24,15 +26,15 @@ flowchart LR
   Audit -->|"Yes"| Review["Browser review"]
   Review --> Release(["Publish"])
 
-  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
-  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
-  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
-  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
-  class Brief yellow;
-  class Skeleton,Tokens,States blue;
-  class Audit pink;
-  class Fix yellow;
-  class Review,Release green;
+  classDef stickyYellow fill:#FFF3B0,stroke:#C99700,color:#3D2F00,stroke-width:1.5px;
+  classDef stickyBlue fill:#DCEBFF,stroke:#4C6FFF,color:#172B4D,stroke-width:1.5px;
+  classDef stickyPink fill:#FFE1EC,stroke:#D65A87,color:#4A1730,stroke-width:1.5px;
+  classDef stickyGreen fill:#DFF5E8,stroke:#2D9D62,color:#153B29,stroke-width:1.5px;
+  class Brief,Fix stickyYellow;
+  class Skeleton,Tokens,States stickyBlue;
+  class Audit stickyPink;
+  class Review,Release stickyGreen;
+  linkStyle default stroke:#5F6B7A,stroke-width:1.5px;
 ```
 
 ## Non-negotiable contract / Hợp đồng bắt buộc / 必須ルール
