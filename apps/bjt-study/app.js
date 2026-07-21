@@ -25,6 +25,8 @@
 
   var progress = loadProgress();
 
+  if (window.LearningHistory) window.LearningHistory.migrateLegacy('bjt', STORAGE_KEY);
+
   var MODULES = [
     { level: 'Giai đoạn 1', phase: 'Nền tảng', jp: '社内の基本', title: 'Giao tiếp nội bộ', subtitle: 'Chào hỏi, vai trò và quy trình công sở' },
     { level: 'Giai đoạn 1', phase: 'Nền tảng', jp: '電話応対', title: 'Điện thoại', subtitle: 'Tiếp nhận, chuyển máy và xác nhận' },
@@ -468,11 +470,30 @@
       score: 0,
       misses: 0,
       lastTimedOut: false,
-      seed: hashString(options.mode + ':' + dateKey() + ':' + options.queue.map(function (item) { return item.id; }).join(','))
+      seed: hashString(options.mode + ':' + dateKey() + ':' + options.queue.map(function (item) { return item.id; }).join(',')),
+      history: window.LearningHistory ? window.LearningHistory.startSession({
+        courseId: 'bjt',
+        courseTitle: 'BJT',
+        mode: options.mode,
+        contentType: options.jp === '語彙' ? 'Từ vựng' : (options.jp === '文法' ? 'Ngữ pháp' : 'Tổng hợp'),
+        title: options.title,
+        requestedCount: options.queue.length,
+        timeLimitSeconds: 30
+      }) : null
     };
     practiceSeconds = 30;
     selectedAnswer = -1;
     answered = false;
+  }
+
+  function closeCurrentSession(status) {
+    if (!currentSession || !currentSession.history || !window.LearningHistory) return;
+    window.LearningHistory.finishSession(currentSession.history, {
+      status: status || 'completed',
+      answeredCount: currentSession.history.answeredCount,
+      correctCount: currentSession.score,
+      wrongCount: currentSession.misses
+    }).catch(function () {});
   }
 
   function currentQuestion() {
@@ -571,6 +592,7 @@
     var total = currentSession.queue.length;
     var score = currentSession.score;
     var mode = currentSession.mode;
+    closeCurrentSession('completed');
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">HOÀN THÀNH BUỔI HỌC</span>' +
       '<h1 class="view-title">Kết quả <span class="jp-title">· 学習結果</span></h1>' +
@@ -764,6 +786,20 @@
     '</section>';
   }
 
+  function renderHistory() {
+    stopPracticeTimer();
+    if (!window.LearningHistory) {
+      appView.innerHTML = '<section class="main-column"><h1 class="view-title">Lịch sử học tập</h1><p class="view-subtitle">Trình duyệt này chưa hỗ trợ kho lịch sử học.</p></section>';
+      return;
+    }
+    window.LearningHistory.renderDashboard(appView, {
+      courseId: 'bjt',
+      eyebrow: 'BJT · Lịch sử · 学習記録',
+      title: 'Tiến bộ BJT',
+      subtitle: 'Theo dõi từng phiên luyện, kết quả mỗi thuật ngữ và quá trình ghi nhớ theo thời gian.'
+    });
+  }
+
   function renderCurrentView() {
     window.scrollTo({ top: 0, behavior: 'auto' });
     if (currentView === 'path') {
@@ -776,6 +812,8 @@
       renderExamIntro();
     } else if (currentView === 'review') {
       renderReview();
+    } else if (currentView === 'stats') {
+      renderHistory();
     }
     updateNav();
   }
@@ -842,6 +880,18 @@
       currentSession.misses += 1;
       progress.wrong[id] = (progress.wrong[id] || 0) + 1;
     }
+    if (currentSession.history && window.LearningHistory) {
+      window.LearningHistory.recordAnswer(currentSession.history, {
+        itemId: id,
+        contentType: question.item.kind === 'grammar' ? 'Ngữ pháp' : 'Từ vựng',
+        prompt: question.item.term,
+        selectedAnswer: selectedAnswer >= 0 ? optionValue(question.options[selectedAnswer], question.mode) : null,
+        correctAnswer: optionValue(question.options[question.correctIndex], question.mode),
+        isCorrect: correct,
+        timedOut: timedOut,
+        responseTimeSeconds: 30 - practiceSeconds
+      }).catch(function () {});
+    }
     saveProgress();
     renderPractice();
   }
@@ -858,6 +908,7 @@
   document.querySelectorAll('.nav-item').forEach(function (button) {
     button.addEventListener('click', function () {
       stopPracticeTimer();
+      if (currentSession && currentSession.history && currentSession.history.status === 'active') closeCurrentSession('abandoned');
       currentView = button.getAttribute('data-view');
       if (currentView === 'exam') practiceScope = 'mixed';
       libraryQuery = '';
