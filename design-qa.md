@@ -4,6 +4,7 @@ Tài liệu này là release gate cấp repository. Chi tiết từng chương t
 
 - [JLPT N1 Design QA](apps/jlpt-n1/design-qa.md)
 - [BJT Study Design QA](apps/bjt-study/design-qa.md)
+- [G検定 Study Design QA](apps/gkentei/design-qa.md)
 - [Japanese Learning Apps Audit](japanese-app-audit.md)
 
 ## Mô hình QA
@@ -38,6 +39,7 @@ flowchart LR
 | Trang chủ và catalog | Đạt | Đạt | Đạt | Không áp dụng | Đạt |
 | JLPT N1 hub | Đạt | Đạt | Đạt | IndexedDB | Đạt |
 | BJT Study | Đạt | Đạt | Đạt | IndexedDB | Đạt |
+| G検定 Study | Đạt | Đạt | Đạt | IndexedDB · 900 câu | Đạt |
 | 12 app JLPT con | Đạt | Đạt | Đạt | Adapter riêng | Đạt, cần hợp nhất lịch sử |
 | Redirect compatibility | Đạt | Đạt | Không áp dụng | Không áp dụng | Đạt |
 
@@ -136,6 +138,22 @@ flowchart LR
 **Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi thay đổi.
 
 **Follow-up polish:** không có.
+
+**final result: passed**
+
+## G検定 Study Program — 2026-07-22
+
+- **Source visual truth:** màn hình luyện tập của `/apps/jlpt-n1/`, ảnh lỗi do người dùng cung cấp và `JDLA_G検定シラバス2024_v1.4.pdf`; ảnh tạm không được commit.
+- **Implementation:** route `/apps/gkentei/`, catalog và sitemap; chi tiết tại [G検定 Design QA](apps/gkentei/design-qa.md).
+- **Viewport/state:** 390, 680, 1280 và 1440 px; light/dark; desktop/mobile; roadmap, topic guide, example quiz, feedback, timeout, statistics và mock exam 145 câu/120 phút.
+- **Interaction evidence:** 11 topic dùng thuật ngữ Nhật, difficulty là `基礎`/`標準`/`応用`; mở例題, trả lời và quay lại topic đúng; giải thích chỉ hiện song ngữ Nhật–Việt sau lựa chọn.
+- **Focused fixes:** bỏ border lồng trong search; thay ngân hàng câu hỏi bằng topic/điểm cần nhớ/keyword/例題; Nhật hóa toàn UI; đặt metric, CTA và focus accent thành `var(--accent, #c84d24)`.
+- **Data evidence:** 900 record, 495 keyword, 11 category và ba difficulty đạt audit schema/consistency tự động; không phát hiện duplicate xung đột.
+- **Static gates:** UI Standard 1.1, site validator, JavaScript syntax và whitespace diff đều đạt.
+
+**Findings:** không còn P0, P1 hoặc P2 có thể hành động.
+
+**Follow-up polish:** P3 — factual review thủ công toàn bộ ngân hàng câu hỏi bởi chuyên gia JDLA nằm ngoài phạm vi kiểm tra tự động hiện tại.
 
 **final result: passed**
 
