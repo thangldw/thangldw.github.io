@@ -11,6 +11,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from audit_ui_standards import audit_site
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
@@ -68,7 +70,7 @@ def local_target(page: Path, reference: str) -> Path | None:
 
 
 def main() -> int:
-    errors: list[str] = []
+    errors: list[str] = audit_site()
     pages = sorted(ROOT.rglob("*.html"))
     parsed_pages: dict[Path, PageParser] = {}
 
