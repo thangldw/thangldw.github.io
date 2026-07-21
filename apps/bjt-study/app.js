@@ -17,6 +17,11 @@
   var expandedVocabularyId = '';
   var libraryLimit = 40;
   var toastTimer = null;
+  var subjectTabs = { vocabulary: 'knowledge', grammar: 'knowledge' };
+  var practiceSize = 10;
+  var practiceScope = 'mixed';
+  var practiceSeconds = 30;
+  var practiceTimer = null;
 
   var progress = loadProgress();
 
@@ -452,6 +457,7 @@
   }
 
   function createCustomSession(options) {
+    stopPracticeTimer();
     currentSession = {
       mode: options.mode,
       returnView: options.returnView || currentView,
@@ -461,8 +467,10 @@
       index: 0,
       score: 0,
       misses: 0,
+      lastTimedOut: false,
       seed: hashString(options.mode + ':' + dateKey() + ':' + options.queue.map(function (item) { return item.id; }).join(','))
     };
+    practiceSeconds = 30;
     selectedAnswer = -1;
     answered = false;
   }
@@ -473,14 +481,35 @@
   }
 
   function sessionLabel() {
-    if (currentSession.mode === 'exam') return 'BJT · Luyện đề trộn';
+    if (currentSession.mode === 'exam' && (currentSession.returnView === 'vocabulary' || currentSession.returnView === 'grammar')) return 'BJT · Luyện theo dạng';
+    if (currentSession.mode === 'exam') return 'BJT · Luyện tập tổng hợp';
+    if (currentSession.mode === 'subject') return 'BJT · Luyện theo dạng';
     if (currentSession.mode === 'review') return 'BJT · Ôn lại lỗi sai';
     if (currentSession.mode === 'module') return 'BJT · Lộ trình gợi ý';
     if (currentSession.mode === 'single') return 'BJT · Luyện nhanh';
     return 'BJT Business Japanese Proficiency Test';
   }
 
+  function stopPracticeTimer() {
+    if (practiceTimer) window.clearInterval(practiceTimer);
+    practiceTimer = null;
+  }
+
+  function startPracticeTimer() {
+    stopPracticeTimer();
+    practiceTimer = window.setInterval(function () {
+      if (!currentSession || answered) return;
+      practiceSeconds -= 1;
+      var timer = document.getElementById('bjtQuestionTimer');
+      var fill = document.getElementById('bjtTimerFill');
+      if (timer) timer.textContent = practiceSeconds + 's';
+      if (fill) fill.style.width = Math.max(0, practiceSeconds / 30 * 100) + '%';
+      if (practiceSeconds <= 0) checkAnswer(true);
+    }, 1000);
+  }
+
   function renderPractice() {
+    stopPracticeTimer();
     if (!currentSession) {
       currentView = 'path';
       renderPath();
@@ -509,7 +538,7 @@
     if (answered) {
       var correct = selectedAnswer === question.correctIndex;
       feedbackHtml = '<div class="feedback' + (correct ? '' : ' is-wrong') + '">' +
-        '<strong>' + (correct ? 'Chính xác' : 'Chưa đúng') + '</strong>' +
+        '<strong>' + (correct ? 'Chính xác' : (currentSession.lastTimedOut ? 'Hết 30 giây' : 'Chưa đúng')) + '</strong>' +
         renderItemDetails(item) +
       '</div>';
     }
@@ -522,7 +551,7 @@
       '<section class="main-column">' +
         '<div class="date-line"><span>' + escapeHtml(sessionLabel()) + '</span><time datetime="' + dateKey() + '">' + displayDate() + '</time></div>' +
         '<h1 class="view-title">' + escapeHtml(currentSession.title) + ' <span class="jp-title">· ' + escapeHtml(currentSession.jp) + '</span></h1>' +
-        '<div class="lesson-progress"><strong>Bài ' + (currentSession.index + 1) + ' <span>/ ' + currentSession.queue.length + '</span></strong><span>' + currentSession.score + ' đúng · ' + currentSession.misses + ' cần ôn</span><span class="progress-track"><span class="progress-fill" style="width:' + percent + '%"></span></span></div>' +
+        '<div class="lesson-progress"><strong>Bài ' + (currentSession.index + 1) + ' <span>/ ' + currentSession.queue.length + '</span></strong><span>' + currentSession.score + ' đúng · ' + currentSession.misses + ' cần ôn</span><strong class="question-timer" id="bjtQuestionTimer">' + practiceSeconds + 's</strong><span class="progress-track"><span class="progress-fill" style="width:' + percent + '%"></span></span><span class="question-timer-track"><span id="bjtTimerFill" style="width:' + (practiceSeconds / 30 * 100) + '%"></span></span></div>' +
         '<p class="scenario">Chọn lời giải thích phù hợp nhất. Sau khi trả lời, app sẽ lưu lại tiến độ và đưa những mục chưa đúng vào phần Ôn sai.</p>' +
         '<div class="question-block">' +
           '<span class="question-type">' + escapeHtml(item.kind === 'grammar' ? 'Mẫu ngữ pháp' : 'Thuật ngữ BJT') + '</span>' +
@@ -534,9 +563,11 @@
         '<button class="primary-action" type="button" data-action="primary"' + (!answered && selectedAnswer < 0 ? ' disabled' : '') + '><span>' + actionLabel + '</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
       '</section>' +
     '</div>';
+    if (!answered) startPracticeTimer();
   }
 
   function renderSessionComplete() {
+    stopPracticeTimer();
     var total = currentSession.queue.length;
     var score = currentSession.score;
     var mode = currentSession.mode;
@@ -581,8 +612,68 @@
     '</section>';
   }
 
-  function renderLibrary(kind, query) {
+  function subjectKindFromView() {
+    return currentView.indexOf('grammar') === 0 ? 'grammar' : 'vocabulary';
+  }
+
+  function renderSubjectHub(kind) {
     currentView = kind;
+    var isGrammar = kind === 'grammar';
+    var count = datasets[kind].length;
+    var activeTab = subjectTabs[kind];
+    var title = isGrammar ? 'Ngữ pháp BJT' : 'Từ vựng BJT';
+    var jp = isGrammar ? '文法' : '語彙';
+    var description = isGrammar
+      ? 'Học mẫu câu theo hệ thống: cấu trúc, ý nghĩa, giải thích tiếng Việt, ví dụ và bài luyện.'
+      : 'Học thuật ngữ theo hệ thống: nhóm ý nghĩa, cách đọc, Hán Việt, cách dùng và bài luyện.';
+    var tabs = [
+      { id: 'knowledge', label: 'Học kiến thức' },
+      { id: 'practice', label: 'Luyện theo dạng' },
+      { id: 'mixed', label: 'Luyện tập' }
+    ].map(function (tab) {
+      return '<button class="subject-tab' + (activeTab === tab.id ? ' is-active' : '') + '" type="button" data-action="subject-tab" data-kind="' + kind + '" data-tab="' + tab.id + '">' + tab.label + '</button>';
+    }).join('');
+    var modules;
+    if (activeTab === 'knowledge') {
+      modules = [{
+        index: '01',
+        icon: isGrammar ? 'fa-book-open' : 'fa-language',
+        title: isGrammar ? 'Kho ' + formatNumber(count) + ' mẫu ngữ pháp' : 'Kho ' + formatNumber(count) + ' thuật ngữ',
+        description: isGrammar ? 'Tra cứu cấu trúc, sắc thái, giải thích và ví dụ dịch sang tiếng Việt.' : 'Tra cứu theo nhóm ý nghĩa, phân tích chữ Hán và cụm từ thường dùng.',
+        action: 'open-library',
+        label: 'Mở kho học'
+      }];
+    } else if (activeTab === 'practice') {
+      modules = [{
+        index: '01',
+        icon: 'fa-file-lines',
+        title: isGrammar ? 'Trắc nghiệm ngữ pháp' : 'Trắc nghiệm từ vựng',
+        description: isGrammar ? 'Chọn 5, 10 hoặc 20 mẫu câu ngẫu nhiên để luyện ý nghĩa và ôn lại lỗi sai.' : 'Chọn 5, 10 hoặc 20 thuật ngữ để luyện nghĩa, cách đọc và âm Hán Việt.',
+        action: 'open-subject-setup',
+        label: 'Chọn số câu'
+      }];
+    } else {
+      modules = [{
+        index: '01',
+        icon: 'fa-graduation-cap',
+        title: 'Luyện tập tổng hợp BJT',
+        description: 'Chọn 5, 10 hoặc 20 câu trộn từ vựng và ngữ pháp để tăng khả năng ghi nhớ.',
+        action: 'open-subject-practice',
+        label: 'Mở phần luyện tập'
+      }];
+    }
+    var rows = modules.map(function (module) {
+      return '<article class="subject-module-row"><span class="subject-module-index">' + module.index + '</span><span class="subject-module-icon"><i class="fa-solid ' + module.icon + '" aria-hidden="true"></i></span><span class="subject-module-copy"><strong>' + escapeHtml(module.title) + '</strong><small>' + escapeHtml(module.description) + '</small></span><button type="button" data-action="' + module.action + '" data-kind="' + kind + '">' + escapeHtml(module.label) + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></article>';
+    }).join('');
+    appView.innerHTML = '<section class="main-column subject-hub">' +
+      '<span class="context-label">BJT · ' + (isGrammar ? 'NGỮ PHÁP' : 'TỪ VỰNG') + ' · ' + jp + '</span>' +
+      '<div class="section-head subject-head"><div><h1 class="view-title">' + title + ' <span class="jp-title">· ' + jp + '</span></h1><p class="view-subtitle">' + description + '</p></div><span class="stat-inline">' + formatNumber(count) + ' mục</span></div>' +
+      '<div class="subject-tabs" role="tablist">' + tabs + '</div><div class="subject-module-list">' + rows + '</div>' +
+    '</section>';
+  }
+
+  function renderLibrary(kind, query) {
+    currentView = kind + '-library';
     libraryQuery = query == null ? libraryQuery : query;
     var source = datasets[kind];
     var categorySource = kind === 'vocabulary' && libraryCategory !== 'all'
@@ -626,6 +717,7 @@
     }
 
     appView.innerHTML = '<section class="main-column">' +
+      '<button class="library-back" type="button" data-action="subject-hub" data-kind="' + kind + '">← ' + (kind === 'grammar' ? 'Ngữ pháp BJT' : 'Từ vựng BJT') + '</button>' +
       '<span class="context-label">' + eyebrow + '</span>' +
       '<div class="section-head"><div><h1 class="view-title">' + title + '</h1><p class="view-subtitle">' + (kind === 'vocabulary' ? 'Chọn nhóm ý nghĩa, tra cứu hoặc luyện từng thuật ngữ trong ngữ cảnh công việc.' : 'Tra cứu nhanh hoặc chọn một mục để bắt đầu luyện ngay.') + '</p></div><span class="stat-inline">' + formatNumber(filtered.length) + ' kết quả</span></div>' +
       categoryFilters +
@@ -641,16 +733,22 @@
   }
 
   function renderExamIntro() {
+    stopPracticeTimer();
     var totalSeen = Object.keys(progress.seen).length;
     var totalCorrect = Object.keys(progress.correct).length;
     var accuracy = totalSeen ? Math.round((totalCorrect / totalSeen) * 100) : 0;
-    appView.innerHTML = '<section class="main-column">' +
-      '<span class="context-label">LUYỆN ĐỀ TRỘN</span>' +
-      '<h1 class="view-title">Mô phỏng nhanh <span class="jp-title">· 総合練習</span></h1>' +
-      '<p class="view-subtitle">20 câu được lấy từ cả kho từ vựng và ngữ pháp. Mỗi lượt tạo một bộ khác nhau.</p>' +
-      '<div class="summary-grid"><div class="summary-item"><strong>20</strong><span>câu mỗi lượt</span></div><div class="summary-item"><strong>' + accuracy + '%</strong><span>độ chính xác đã ghi nhận</span></div><div class="summary-item"><strong>' + Object.keys(progress.wrong).length + '</strong><span>mục đang cần ôn</span></div></div>' +
-      '<div class="exam-intro"><h2>Chuẩn bị trước khi bắt đầu</h2><p>Không giới hạn thời gian. Đáp án và giải thích xuất hiện ngay sau mỗi câu để ưu tiên việc học, không mô phỏng cấu trúc đề thi BJT chính thức.</p></div>' +
-      '<button class="primary-action" type="button" data-action="start-exam"><span>Bắt đầu 20 câu</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
+    var sizes = [5, 10, 20].map(function (size) {
+      return '<button class="practice-size' + (practiceSize === size ? ' is-active' : '') + '" type="button" data-action="practice-size" data-size="' + size + '" aria-pressed="' + (practiceSize === size) + '"><strong>' + size + '</strong><span>câu hỏi</span></button>';
+    }).join('');
+    var scopeLabel = practiceScope === 'vocabulary' ? 'Từ vựng · 語彙' : (practiceScope === 'grammar' ? 'Ngữ pháp · 文法' : 'Từ vựng + Ngữ pháp');
+    appView.innerHTML = '<section class="main-column practice-setup">' +
+      '<span class="context-label">LUYỆN TẬP · ' + scopeLabel.toUpperCase() + '</span>' +
+      '<h1 class="view-title">Luyện tập ghi nhớ <span class="jp-title">· 総合練習</span></h1>' +
+      '<p class="view-subtitle">Chọn độ dài phù hợp. Mỗi câu có tối đa 30 giây; đáp án và giải thích xuất hiện ngay sau khi trả lời.</p>' +
+      '<div class="practice-config"><div><span class="config-label">Số câu mỗi lượt</span><div class="practice-sizes" role="group" aria-label="Chọn số câu">' + sizes + '</div></div><div class="practice-rules"><span><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span><strong>30 giây</strong> cho mỗi câu</span></span><span><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span><strong>' + scopeLabel + '</strong></span></span><span><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span><strong>Lưu lỗi sai</strong> để ôn lại</span></span></div></div>' +
+      '<div class="summary-grid"><div class="summary-item"><strong>' + practiceSize + '</strong><span>câu trong lượt này</span></div><div class="summary-item"><strong>' + accuracy + '%</strong><span>độ chính xác đã ghi nhận</span></div><div class="summary-item"><strong>' + Object.keys(progress.wrong).length + '</strong><span>mục đang cần ôn</span></div></div>' +
+      '<div class="exam-intro"><h2>Học để ghi nhớ, không mô phỏng đề thi</h2><p>Nội dung được tạo từ kho học BJT hiện có, không phải đề thi chính thức.</p></div>' +
+      '<button class="primary-action" type="button" data-action="start-exam"><span>Bắt đầu ' + practiceSize + ' câu</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
     '</section>';
   }
 
@@ -662,7 +760,7 @@
     appView.innerHTML = '<section class="main-column">' +
       '<span class="context-label">GHI NHỚ CHỦ ĐỘNG</span>' +
       '<div class="section-head"><div><h1 class="view-title">Ôn sai <span class="jp-title">· 復習</span></h1><p class="view-subtitle">Mỗi câu chưa đúng sẽ ở đây cho tới khi bạn trả lời đúng trong một lượt ôn.</p></div><span class="stat-inline">' + wrongItems.length + ' mục</span></div>' +
-      (rows ? '<div class="library-list">' + rows + '</div><button class="primary-action" type="button" data-action="start-review"><span>Ôn tất cả lỗi sai</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' : '<div class="empty-state"><strong>Chưa có lỗi sai cần ôn.</strong><p>Hãy bắt đầu một module trong Lộ trình hoặc làm một lượt luyện đề.</p></div>') +
+      (rows ? '<div class="library-list">' + rows + '</div><button class="primary-action" type="button" data-action="start-review"><span>Ôn tất cả lỗi sai</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' : '<div class="empty-state"><strong>Chưa có lỗi sai cần ôn.</strong><p>Hãy bắt đầu một module trong Lộ trình hoặc làm một lượt luyện tập.</p></div>') +
     '</section>';
   }
 
@@ -671,7 +769,9 @@
     if (currentView === 'path') {
       renderPath();
     } else if (currentView === 'vocabulary' || currentView === 'grammar') {
-      renderLibrary(currentView, libraryQuery);
+      renderSubjectHub(currentView);
+    } else if (currentView === 'vocabulary-library' || currentView === 'grammar-library') {
+      renderLibrary(subjectKindFromView(), libraryQuery);
     } else if (currentView === 'exam') {
       renderExamIntro();
     } else if (currentView === 'review') {
@@ -681,8 +781,9 @@
   }
 
   function updateNav() {
+    var activeView = currentView.replace('-library', '');
     document.querySelectorAll('.nav-item').forEach(function (button) {
-      button.classList.toggle('is-active', button.getAttribute('data-view') === currentView);
+      button.classList.toggle('is-active', button.getAttribute('data-view') === activeView);
     });
   }
 
@@ -724,11 +825,13 @@
     window.speechSynthesis.speak(utterance);
   }
 
-  function checkAnswer() {
+  function checkAnswer(timedOut) {
     var question = currentQuestion();
-    if (!question || selectedAnswer < 0) return;
+    if (!question || (selectedAnswer < 0 && !timedOut)) return;
+    stopPracticeTimer();
     answered = true;
     var correct = selectedAnswer === question.correctIndex;
+    currentSession.lastTimedOut = Boolean(timedOut);
     var id = question.item.id;
     progress.seen[id] = (progress.seen[id] || 0) + 1;
     if (correct) {
@@ -747,12 +850,16 @@
     currentSession.index += 1;
     selectedAnswer = -1;
     answered = false;
+    currentSession.lastTimedOut = false;
+    practiceSeconds = 30;
     renderPractice();
   }
 
   document.querySelectorAll('.nav-item').forEach(function (button) {
     button.addEventListener('click', function () {
+      stopPracticeTimer();
       currentView = button.getAttribute('data-view');
+      if (currentView === 'exam') practiceScope = 'mixed';
       libraryQuery = '';
       libraryCategory = 'all';
       libraryLimit = 40;
@@ -776,7 +883,7 @@
   appView.addEventListener('input', function (event) {
     if (event.target.id !== 'librarySearch') return;
     libraryLimit = 40;
-    renderLibrary(currentView, event.target.value);
+    renderLibrary(subjectKindFromView(), event.target.value);
   });
 
   appView.addEventListener('click', function (event) {
@@ -792,7 +899,7 @@
     var action = actionButton.getAttribute('data-action');
 
     if (action === 'primary') {
-      if (answered) advanceQuestion(); else checkAnswer();
+      if (answered) advanceQuestion(); else checkAnswer(false);
     } else if (action === 'speak') {
       speakCurrent();
     } else if (action === 'single') {
@@ -803,11 +910,11 @@
       }
     } else if (action === 'load-more') {
       libraryLimit += 40;
-      renderLibrary(currentView, libraryQuery);
+      renderLibrary(subjectKindFromView(), libraryQuery);
     } else if (action === 'clear-search') {
       libraryQuery = '';
       libraryLimit = 40;
-      renderLibrary(currentView, '');
+      renderLibrary(subjectKindFromView(), '');
     } else if (action === 'vocab-category') {
       libraryCategory = actionButton.getAttribute('data-category') || 'all';
       expandedVocabularyId = '';
@@ -816,7 +923,35 @@
     } else if (action === 'vocab-insight') {
       var insightId = actionButton.getAttribute('data-id');
       expandedVocabularyId = expandedVocabularyId === insightId ? '' : insightId;
-      renderLibrary(currentView, libraryQuery);
+      renderLibrary(subjectKindFromView(), libraryQuery);
+    } else if (action === 'subject-tab') {
+      var subjectKind = actionButton.getAttribute('data-kind');
+      subjectTabs[subjectKind] = actionButton.getAttribute('data-tab');
+      renderSubjectHub(subjectKind);
+      updateNav();
+    } else if (action === 'open-library') {
+      var libraryKind = actionButton.getAttribute('data-kind');
+      libraryQuery = '';
+      libraryCategory = 'all';
+      libraryLimit = 40;
+      renderLibrary(libraryKind, '');
+      updateNav();
+    } else if (action === 'subject-hub') {
+      renderSubjectHub(actionButton.getAttribute('data-kind'));
+      updateNav();
+    } else if (action === 'open-subject-setup') {
+      practiceScope = actionButton.getAttribute('data-kind');
+      currentView = 'exam';
+      renderExamIntro();
+      updateNav();
+    } else if (action === 'open-subject-practice') {
+      practiceScope = 'mixed';
+      currentView = 'exam';
+      renderExamIntro();
+      updateNav();
+    } else if (action === 'practice-size') {
+      practiceSize = Number(actionButton.getAttribute('data-size'));
+      renderExamIntro();
     } else if (action === 'module') {
       var moduleIndex = Number(actionButton.getAttribute('data-module'));
       var moduleItems = datasets.vocabulary.concat(datasets.grammar).filter(function (item) { return item.module === moduleIndex; });
@@ -824,9 +959,17 @@
       createCustomSession({ mode: 'module', title: MODULES[moduleIndex].title, jp: MODULES[moduleIndex].jp, queue: queue });
       renderPractice();
     } else if (action === 'start-exam') {
-      var vocab = seededShuffle(datasets.vocabulary, Date.now() >>> 0).slice(0, 15);
-      var grammar = seededShuffle(datasets.grammar, (Date.now() + 91) >>> 0).slice(0, 5);
-      createCustomSession({ mode: 'exam', title: 'Mô phỏng nhanh', jp: '総合練習', queue: seededShuffle(vocab.concat(grammar), Date.now() >>> 0) });
+      var practiceQueue;
+      if (practiceScope === 'vocabulary' || practiceScope === 'grammar') {
+        practiceQueue = seededShuffle(datasets[practiceScope], Date.now() >>> 0).slice(0, practiceSize);
+      } else {
+        var grammarCount = Math.max(1, Math.round(practiceSize * .25));
+        var vocabCount = practiceSize - grammarCount;
+        var vocab = seededShuffle(datasets.vocabulary, Date.now() >>> 0).slice(0, vocabCount);
+        var grammar = seededShuffle(datasets.grammar, (Date.now() + 91) >>> 0).slice(0, grammarCount);
+        practiceQueue = seededShuffle(vocab.concat(grammar), Date.now() >>> 0);
+      }
+      createCustomSession({ mode: 'exam', title: practiceScope === 'vocabulary' ? 'Luyện từ vựng' : (practiceScope === 'grammar' ? 'Luyện ngữ pháp' : 'Luyện tập tổng hợp'), jp: practiceScope === 'vocabulary' ? '語彙' : (practiceScope === 'grammar' ? '文法' : '総合練習'), queue: practiceQueue, returnView: practiceScope === 'mixed' ? 'exam' : practiceScope });
       renderPractice();
     } else if (action === 'start-review') {
       var reviewItems = Object.keys(progress.wrong).map(function (id) { return itemsById.get(id); }).filter(Boolean);
