@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link rel="stylesheet" href="/css/tokens.css?v=20260721c">
   <link rel="stylesheet" href="/css/learning-history.css?v=20260721">
-  <link rel="stylesheet" href="styles.css?v=20260721n">
+  <link rel="stylesheet" href="styles.css?v=20260721o">
   <script>
     (function () {
       var saved = localStorage.getItem('theme');
@@ -39,9 +39,14 @@
           <span class="brand-mark" aria-hidden="true">t:&gt;</span>
           <span>thang<span class="brand-dot">.</span></span>
         </a>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
-          <i class="fa-solid fa-list-ol" aria-hidden="true"></i><span>Menu</span>
-        </button>
+        <div class="sidebar-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển sang giao diện tối" title="Chuyển sang giao diện tối">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+          </button>
+          <button class="mobile-nav-toggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+            <i class="fa-solid fa-list-ol" aria-hidden="true"></i><span>Menu</span>
+          </button>
+        </div>
       </div>
 
       <nav class="primary-nav" id="primaryNav" aria-label="Chức năng học tập">
@@ -74,9 +79,6 @@
         </div>
         <p class="dictionary-credit">Cách đọc: <a href="https://www.edrdg.org/edrdg/licence.html" target="_blank" rel="noopener">EDRDG / KANJIDIC2 &amp; JMdict</a><br>Đồng nghĩa: <a href="https://bond-lab.github.io/wnja/index.en.html" target="_blank" rel="noopener">Japanese WordNet 1.1 © NICT &amp; Francis Bond et al.</a></p>
         <a class="portfolio-link" href="/apps/"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>Về danh sách apps</span></a>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Chuyển sang giao diện tối" title="Chuyển sang giao diện tối">
-          <i class="fa-solid fa-moon" aria-hidden="true"></i>
-        </button>
       </div>
     </aside>
 
