@@ -1,6 +1,34 @@
 (function (global) {
   global.portfolioProjects = [
     {
+      id: 'diskora',
+      title: 'Diskora',
+      description: 'A native macOS storage intelligence and cleanup app. Inspect where space goes, review safe and deep-clean candidates, detect exact or similar files and photos, and remove only what you approve.',
+      featuredDescription: 'Native macOS storage analysis and review-first cleanup, including duplicates and developer leftovers.',
+      href: 'https://github.com/thangldw/toolbox/releases/tag/diskora-v1.0.0',
+      ariaLabel: 'Download Diskora 1.0.0 for macOS from GitHub Releases',
+      icon: 'fa-magnifying-glass-chart',
+      status: 'v1.0.0',
+      tags: ['macOS', 'Storage analysis', 'Safe cleanup', 'Duplicate files'],
+      cta: 'Download Diskora',
+      featured: true,
+      featuredOrder: 1
+    },
+    {
+      id: 'changeora',
+      title: 'Changeora',
+      description: 'A local-first macOS change journal that records filesystem snapshots and explains what changed between them. Review added, modified, and removed items without uploading private metadata.',
+      featuredDescription: 'Local-first filesystem snapshots that make changes on your Mac visible and explainable.',
+      href: 'https://github.com/thangldw/toolbox/releases/tag/changeora-v1.0.0',
+      ariaLabel: 'Download Changeora 1.0.0 for macOS from GitHub Releases',
+      icon: 'fa-arrows-rotate',
+      status: 'v1.0.0',
+      tags: ['macOS', 'Change journal', 'Local-first', 'Filesystem snapshots'],
+      cta: 'Download Changeora',
+      featured: true,
+      featuredOrder: 2
+    },
+    {
       id: 'ragops',
       title: 'RAGOps',
       description: 'An evaluation and release-gate platform for production RAG and agent systems. Compare a candidate against an accepted baseline, detect quality and safety regressions, and produce auditable reports.',
@@ -12,7 +40,7 @@
       tags: ['AI evaluation', 'Red team', 'FastAPI', 'CI/CD'],
       cta: 'Open RAGOps',
       featured: true,
-      featuredOrder: 1
+      featuredOrder: 3
     },
     {
       id: 'maintainer-defense',
@@ -26,7 +54,7 @@
       tags: ['OSS security', 'Offline auditor', 'Supply chain', 'Python'],
       cta: 'Open on GitHub',
       featured: true,
-      featuredOrder: 2
+      featuredOrder: 4
     },
     {
       id: 'proofline',
@@ -40,7 +68,7 @@
       tags: ['Local-first', 'Provenance', 'Exact citations', 'SQLite FTS5'],
       cta: 'Open Proofline',
       featured: true,
-      featuredOrder: 3
+      featuredOrder: 5
     },
     {
       id: 'namiquant',
@@ -55,7 +83,7 @@
       tags: ['Market research', 'Decision support', 'Risk awareness', 'Multi-market'],
       cta: 'View public overview',
       featured: true,
-      featuredOrder: 4
+      featuredOrder: 6
     },
     {
       id: 'kakeflow',
@@ -69,7 +97,7 @@
       tags: ['Household finance', 'Local-first', 'Reconciliation', 'Tauri · React'],
       cta: 'Open KakeFlow',
       featured: true,
-      featuredOrder: 5
+      featuredOrder: 7
     },
     {
       id: 'data-copilot',
@@ -83,7 +111,7 @@
       tags: ['NL→SQL', 'DuckDB-WASM', 'Parquet', 'Local analytics'],
       cta: 'Open Data Copilot',
       featured: true,
-      featuredOrder: 6
+      featuredOrder: 8
     },
     {
       id: 'pipeline',
@@ -97,7 +125,7 @@
       tags: ['ELT', 'Observability', 'Data quality', 'Manual refresh'],
       cta: 'Open Pipeline',
       featured: true,
-      featuredOrder: 7
+      featuredOrder: 9
     },
     {
       id: 'earthquake-intelligence',
@@ -111,7 +139,7 @@
       tags: ['USGS', 'Geospatial', 'Time series', 'Data storytelling'],
       cta: 'Explore earthquakes',
       featured: true,
-      featuredOrder: 8
+      featuredOrder: 10
     },
     {
       id: 'city-climate',
@@ -125,7 +153,7 @@
       tags: ['Open-Meteo', 'CAMS', 'Climate', 'Air quality'],
       cta: 'Compare cities',
       featured: true,
-      featuredOrder: 9
+      featuredOrder: 11
     }
   ];
 
