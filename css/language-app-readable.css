@@ -8,6 +8,8 @@ html.language-app-root {
 }
 
 body.language-app[data-language-app] {
+  --language-control-radius: 8px;
+  --language-option-radius: 10px;
   font-family: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif) !important;
   font-size: 16px;
   line-height: 1.6;
@@ -19,6 +21,18 @@ body.language-app[data-language-app] {
 
 body.language-app[data-language-app] :where(button, input, select, textarea) {
   font-family: inherit !important;
+}
+
+body.language-app[data-language-app] :where(button, .btn, label.btn) {
+  border-radius: var(--language-control-radius) !important;
+}
+
+body.language-app[data-language-app] :where(.opt, .ob, .choice, .answer-option, .optwrap, .quiz-option) {
+  border-radius: var(--language-option-radius) !important;
+}
+
+body.language-app[data-language-app] :where(.spk, .spk-sm, .spk-btn, .speak-btn, .speak-opt-btn, .nb) {
+  border-radius: var(--language-control-radius) !important;
 }
 
 body.language-app[data-language-app] :where([lang="ja"]) {
@@ -362,6 +376,16 @@ body[data-language-app="n1-grammar-flashcards"] :is(.btn-flip, .btn-know, .btn-n
 body[data-language-app="n1-grammar-sentence-order"] :is(.set-btn, .choice-btn, .navbtn, .primary, .secondary, .back-link) {
   min-height: 42px;
   font-size: 14px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .set-grid {
+  gap: 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .set-btn {
+  border-width: 1px !important;
 }
 
 @media (max-width: 1000px) {

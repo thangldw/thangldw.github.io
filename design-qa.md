@@ -138,3 +138,42 @@ flowchart LR
 **Follow-up polish:** không có.
 
 **final result: passed**
+
+## Chuẩn hóa bo góc button học tiếng Nhật — 2026-07-22
+
+- **Source visual truth:** `/Users/thang/Desktop/Screenshot 2026-07-22 at 0.09.09.png` (light) và `/Users/thang/Desktop/Screenshot 2026-07-22 at 0.09.15.png` (dark).
+- **Implementation screenshots:** `/Users/thang/.codex/visualizations/2026/07/21/019f8268-aa28-7a12-8266-e5c88cfbd36c/japanese-button-radius-2026-07-22/`.
+- **Viewport:** 390 × 844 cho JLPT/BJT mobile; 1440 × 900 cho app JLPT độc lập.
+- **State:** light và dark; menu đóng/mở; quiz setup; quiz có bốn đáp án.
+- **Primary interactions tested:** đổi theme, mở menu mobile, chuyển sang Luyện tập, bắt đầu lượt 10 câu và render answer choices.
+- **Console:** không có warning hoặc error trong luồng JLPT/BJT sau thay đổi.
+
+### Full-view và focused-region comparison
+
+- Hai ảnh nguồn tập trung vào silhouette của icon button: khối vuông bo góc vừa phải, viền mảnh, nền theo theme và không có chữ.
+- JLPT/BJT sau sửa dùng theme button 38 × 38 px với radius 10 px; app JLPT độc lập dùng shared theme button 34 × 34 px với radius 8 px. Tỷ lệ bo góc, border và icon placement khớp visual intent của ảnh nguồn.
+- Full view của JLPT/BJT ở 390 × 844 xác nhận header, CTA và đáp án không bị lệch hoặc tràn ngang.
+- Full view Grammar Exams ở 1440 × 900 xác nhận tab, period/year filters, speech controls và answer options đều nhận radius tối thiểu 8 px.
+- Focused comparison không cần crop bổ sung: ảnh nguồn chỉ chứa component theme button và component này hiển thị rõ ở native viewport trong capture JLPT/BJT; computed style xác nhận chính xác kích thước và radius.
+
+### Comparison history
+
+1. **P1 — control language không đồng nhất:** JLPT/BJT có nhiều button radius 0 hoặc 4 px trong khi shared header đã bo 8 px. Đã thêm token control 8 px, option 10 px và icon control 10 px.
+2. **P2 — app JLPT con vẫn bị rule legacy ép vuông:** shared design system có các override 0–4 px. Đã thêm lớp override cuối trong `language-app-readable.css`, đồng thời tách các nút Sentence Ordering khỏi grid sát cạnh để radius hiển thị đúng.
+3. **Post-fix evidence:** audit 14 route học tiếng Nhật, từ 1 đến 124 visible buttons mỗi route; radius nhỏ nhất là 8 px, không còn visible button dưới 7.5 px và không route nào horizontal overflow.
+4. **Post-fix interaction evidence:** JLPT quiz size/answer lần lượt 10 px/10 px; BJT practice size/answer 10 px/10 px; primary action của cả hai là 8 px.
+
+### Required fidelity surfaces
+
+- **Fonts and typography:** không thay đổi family, weight, line-height hoặc wrapping.
+- **Spacing and layout rhythm:** giữ nguyên kích thước/tap target; chỉ Sentence Ordering thêm gap 8 px để button bo góc không dính nhau.
+- **Colors and visual tokens:** giữ nguyên warm paper, charcoal, orange active và semantic success/error.
+- **Image quality and asset fidelity:** không có image asset mới; icon hiện hữu được giữ nguyên.
+- **Copy and content:** không thay đổi nội dung học tập hoặc nhãn truy cập.
+- **Responsiveness and accessibility:** 14 route không tràn ngang ở 390 px; focus-visible và semantics button giữ nguyên.
+
+**Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi bo góc button.
+
+**Follow-up polish:** P3 — có thể chuẩn hóa radius của card không tương tác trong một vòng thiết kế riêng; không thuộc yêu cầu button hiện tại.
+
+**final result: passed**
