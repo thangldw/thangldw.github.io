@@ -100,7 +100,7 @@ node scripts/smoke_learning_apps.mjs
 git diff --check
 ```
 
-Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定, BJT, JLPT N1. Vocabulary Exams kiểm tra search, card expansion, quiz feedback và tab Sai → Đúng; Vocabulary Tabs kiểm tra search, card expansion, đủ 7 tab, Pattern và keyboard; Grammar Exams kiểm tra chọn đáp án, giải thích, lưu/ôn câu sai và mobile overflow ở 390 × 844.
+Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定, BJT, JLPT N1. Vocabulary Exams kiểm tra search, card expansion, quiz feedback và tab Sai → Đúng; Vocabulary Tabs kiểm tra search, card expansion, đủ 7 tab, Pattern và keyboard; Grammar Exams kiểm tra chọn đáp án, giải thích, lưu/ôn câu sai; Kanji Analysis kiểm tra tìm kiếm, lọc kỳ và chi tiết; Kanji Collocations kiểm tra chọn đáp án, feedback, chuyển câu, Set Phrases và mobile overflow ở 390 × 844.
 
 ### Browser matrix
 
@@ -164,6 +164,13 @@ Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定,
 - Debt ledger giảm từ 1 style block, 32 event handler và 27 button thiếu type xuống 0.
 - Checksum payload chứa 348 mục phân tích kanji không đổi.
 - Chrome smoke xác nhận tìm kiếm, lọc theo kỳ, mở chi tiết bằng chuột/bàn phím và layout 390 px hoạt động.
+
+## Refactor Kanji Collocations — 2026-07-22
+
+- Tách CSS nội bộ sang `apps/n1-kanji-collocations/styles.css` và thay toàn bộ handler inline bằng event delegation qua `data-action` / `data-mode`.
+- Thêm `type="button"`, class trạng thái cho modal/progress và giữ nguyên checksum của payload `KANJI_VOCAB`.
+- Legacy debt của route giảm từ `1 / 8 / 18 / 17` xuống `0 / 0 / 0 / 0` theo thứ tự style block / style attribute / event handler / button thiếu type.
+- Chrome smoke xác nhận chọn đáp án, feedback, lưu câu sai, chuyển câu, Set Phrases và layout 390 px hoạt động.
 
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 

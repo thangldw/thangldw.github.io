@@ -7,144 +7,6 @@
 <link rel="canonical" href="https://thangldw.github.io/apps/n1-kanji-collocations/">
 <meta name="description" content="Luyện kanji, cách đọc, cụm từ và collocation JLPT N1 trong một luồng quiz chạy hoàn toàn trên trình duyệt.">
 <meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Kanji &amp; Collocations — 漢字・連語"><meta property="og:description" content="Quiz kanji, cách đọc và collocation JLPT N1."><meta property="og:url" content="https://thangldw.github.io/apps/n1-kanji-collocations/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
-<style>
-  :root {
-    --bg: #f7f8fa;
-    --surface: #ffffff;
-    --surface2: #eef1fb;
-    --border: #d4d8f0;
-    --text: #1e2048;
-    --muted: #6b72a8;
-    --green: #16a34a;
-    --green-bg: #dcfce7;
-    --green-border: #86efac;
-    --red: #dc2626;
-    --red-bg: #fee2e2;
-    --red-border: #fca5a5;
-    --accent: #4f46e5;
-    --accent-dim: rgba(79,70,229,0.08);
-    --accent-border: rgba(79,70,229,0.25);
-    --yellow: #d97706;
-    --yellow-bg: #fef3c7;
-    --orange: #ea580c;
-    --orange-dim: rgba(234,88,12,0.08);
-    --orange-border: rgba(234,88,12,0.25);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--font-mono), var(--font-sans, var(--portfolio-font-sans)); min-height: 100vh; }
-
-  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; box-shadow: 0 1px 8px rgba(79,70,229,0.07); }
-  .header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .header-title { font-size: 15px; font-weight: 500; }
-  .badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid; }
-  .badge-blue { background: var(--accent-dim); color: var(--accent); border-color: var(--accent-border); font-weight: 500; }
-  .badge-orange { background: var(--orange-dim); color: var(--orange); border-color: var(--orange-border); font-weight: 500; }
-  .header-btns { display: flex; gap: 8px; }
-  .hbtn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 7px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; font-family: inherit; transition: all .15s; font-weight: 500; }
-  .hbtn:hover { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
-
-  .modes { background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-  .mode-label { font-size: 12px; color: var(--muted); margin-right: 2px; }
-  .mbtn { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 5px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; font-family: inherit; transition: all .15s; white-space: nowrap; font-weight: 500; }
-  .mbtn:hover { border-color: var(--accent); color: var(--text); }
-  .mbtn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .mbtn.active-orange { background: var(--orange); border-color: var(--orange); color: #fff; }
-
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-bottom: 1px solid var(--border); }
-  .stat { background: var(--surface); padding: 14px 16px; text-align: center; }
-  .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
-  .stat-val { font-size: 20px; font-weight: 500; }
-  .stat-val.green { color: var(--green); }
-  .stat-val.red { color: var(--red); }
-  .stat-val.accent { color: var(--accent); }
-
-  .progress-wrap { background: var(--surface); border-bottom: 1px solid var(--border); }
-  .progress-bar { height: 4px; background: var(--surface2); }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, #4f46e5, #7c3aed); transition: width .4s ease; border-radius: 0 2px 2px 0; }
-
-  .main { max-width: 780px; margin: 0 auto; padding: 36px 20px 80px; }
-
-  /* SET PHRASE TAG */
-  .set-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--orange-dim); border: 1px solid var(--orange-border); color: var(--orange); font-size: 11px; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; font-weight: 600; }
-
-  .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px 28px 30px; margin-bottom: 20px; text-align: center; box-shadow: 0 2px 16px rgba(79,70,229,0.07); }
-  .q-num { font-size: 13px; color: var(--muted); margin-bottom: 14px; letter-spacing: .05em; font-weight: 500; }
-  .q-kanji { font-family: system-ui, sans-serif; font-size: 72px; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.1; letter-spacing: .02em; }
-
-  /* Set phrase context */
-  .q-context { font-family: system-ui, sans-serif; font-size: 13px; color: var(--orange); background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 8px 16px; margin: 8px 0 4px; display: inline-block; line-height: 1.6; font-weight: 500; }
-  .q-context b { color: var(--orange); }
-
-  .q-meaning { font-size: 16px; color: #7c3aed; font-weight: 600; margin-bottom: 4px; background: #f5f3ff; display: inline-block; padding: 4px 16px; border-radius: 20px; }
-  .q-ask { font-size: 14px; color: var(--muted); margin-top: 6px; }
-
-  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-  .opt { background: var(--surface); border: 2px solid var(--border); color: var(--text); padding: 18px 10px; border-radius: 12px; font-size: 20px; font-family: var(--font-sans, var(--portfolio-font-sans)); cursor: pointer; transition: all .15s; text-align: center; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-  .opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); transform: translateY(-1px); box-shadow: 0 3px 10px rgba(79,70,229,0.12); }
-  .opt.correct { border-color: var(--green-border); background: var(--green-bg); color: var(--green); }
-  .opt.wrong { border-color: var(--red-border); background: var(--red-bg); color: var(--red); }
-  .opt.reveal { border-color: var(--green-border); background: var(--green-bg); color: var(--green); }
-
-  /* SET PHRASE: show example after answer */
-  .set-examples { background: #fffbf5; border: 1px solid #fed7aa; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; display: none; text-align: left; }
-  .set-examples.show { display: block; }
-  .set-examples-title { font-size: 11px; color: var(--orange); margin-bottom: 8px; letter-spacing: .06em; text-transform: uppercase; }
-  .colloc-bar { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 10px 0 2px; }
-  .colloc-chip { background: #eef1fb; border: 1px solid #c7d0f5; color: #4f46e5; font-family: system-ui, sans-serif; font-size: 13px; padding: 4px 13px; border-radius: 20px; line-height: 1.5; font-weight: 500; }
-  .speak-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--surface2); color: var(--muted); cursor: pointer; transition: all .15s; margin-top: 6px; flex-shrink: 0; }
-  .speak-btn:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); transform: scale(1.08); }
-  .speak-btn.speaking { border-color: var(--accent); background: var(--accent); color: #fff; animation: pulse-speak 1s ease-in-out infinite; }
-  @keyframes pulse-speak { 0%,100%{box-shadow:0 0 0 0 rgba(79,70,229,0.4)} 50%{box-shadow:0 0 0 7px rgba(79,70,229,0)} }
-  .speak-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .set-ex { font-family: system-ui, sans-serif; font-size: 13px; color: var(--muted); line-height: 1.8; padding: 4px 0; border-bottom: 1px solid #fed7aa; }
-  .set-ex:last-child { border-bottom: none; }
-  .set-ex .jp { color: var(--text); font-size: 14px; }
-  .set-ex .vn { color: var(--muted); font-size: 12px; }
-
-  .feedback { text-align: center; font-size: 15px; font-weight: 600; min-height: 22px; margin-bottom: 12px; }
-  .feedback.ok { color: var(--green); }
-  .feedback.ng { color: var(--red); }
-
-  .next-btn { width: 100%; background: var(--accent); border: 2px solid var(--accent); color: #fff; padding: 13px; border-radius: 12px; font-size: 14px; font-family: inherit; cursor: pointer; display: none; transition: all .15s; letter-spacing: .03em; font-weight: 600; box-shadow: 0 2px 8px rgba(79,70,229,0.25); }
-  .next-btn:hover { background: #4338ca; box-shadow: 0 4px 14px rgba(79,70,229,0.35); transform: translateY(-1px); }
-  .next-btn.show { display: block; }
-
-  .modal-overlay { position: fixed; inset: 0; background: rgba(30,32,72,0.45); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; max-width: 380px; width: 100%; box-shadow: 0 8px 40px rgba(79,70,229,0.18); text-align: center; }
-  .modal-icon { font-size: 36px; margin-bottom: 12px; }
-  .modal-title { font-size: 17px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
-  .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
-  .modal-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .modal-btn { padding: 10px 22px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface2); color: var(--text); font-family: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s; }
-  .modal-btn:hover { background: var(--border); }
-  .modal-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .modal-btn.primary:hover { background: #4338ca; }
-
-  .done-screen { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 32px; text-align: center; box-shadow: 0 4px 24px rgba(79,70,229,0.1); }
-  .done-score { font-size: 64px; font-weight: 700; background: linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
-  .done-title { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
-  .done-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
-  .done-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .done-btn { padding: 10px 22px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-family: inherit; font-size: 13px; cursor: pointer; transition: background .15s; }
-  .done-btn:hover { background: var(--border); }
-  .done-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
-
-  .streak-toast { position: fixed; top: 96px; right: 20px; background: var(--yellow-bg); color: var(--yellow); border: 1px solid #fcd34d; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; opacity: 0; transform: translateY(-8px); transition: all .3s; pointer-events: none; z-index: 200; }
-  .streak-toast.show { opacity: 1; transform: translateY(0); }
-
-  /* Legend */
-  .legend { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 7px 24px; background: #f5f7ff; border-bottom: 1px solid var(--border); font-size: 11px; color: var(--muted); }
-  .legend span { display: flex; align-items: center; gap: 5px; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; }
-  .dot-blue { background: var(--accent); }
-  .dot-orange { background: var(--orange); }
-
-  @media(max-width:480px){
-    .stats { grid-template-columns: repeat(2,1fr); }
-    .q-kanji { font-size: 38px; }
-    .main { padding: 20px 12px 80px; }
-  }
-</style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
   (function () {
@@ -156,6 +18,7 @@
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
 <link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
 <link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722b">
+<link rel="stylesheet" href="styles.css?v=20260722a">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-kanji-collocations">
@@ -168,8 +31,8 @@
     <span class="badge badge-orange" id="set-badge">— set phrases</span>
   </div>
   <div class="header-btns">
-    <button class="hbtn" onclick="restartQuiz()">Làm lại</button>
-    <button class="hbtn" onclick="shuffleDeck()">Xáo trộn</button>
+    <button type="button" class="hbtn" data-action="restart">Làm lại</button>
+    <button type="button" class="hbtn" data-action="shuffle">Xáo trộn</button>
   </div>
 </div>
 
@@ -180,13 +43,13 @@
 
 <div class="modes">
   <span class="mode-label">Chế độ:</span>
-  <button class="mbtn active" id="m-all" onclick="setMode('all',this)">Tất cả</button>
-  <button class="mbtn" id="m-verb" onclick="setMode('verb',this)">動詞</button>
-  <button class="mbtn" id="m-adj" onclick="setMode('adj',this)">形容詞</button>
-  <button class="mbtn" id="m-noun" onclick="setMode('noun',this)">名詞</button>
-  <button class="mbtn" id="m-adv" onclick="setMode('adv',this)">副詞</button>
-  <button class="mbtn" id="m-set" onclick="setMode('set',this)">🔥 Set Phrases</button>
-  <button class="mbtn" id="m-wrong" onclick="setMode('wrong',this)">Ôn sai <span id="onsai-count">(0)</span></button>
+  <button type="button" class="mbtn active" id="m-all" data-mode="all">Tất cả</button>
+  <button type="button" class="mbtn" id="m-verb" data-mode="verb">動詞</button>
+  <button type="button" class="mbtn" id="m-adj" data-mode="adj">形容詞</button>
+  <button type="button" class="mbtn" id="m-noun" data-mode="noun">名詞</button>
+  <button type="button" class="mbtn" id="m-adv" data-mode="adv">副詞</button>
+  <button type="button" class="mbtn" id="m-set" data-mode="set">🔥 Set Phrases</button>
+  <button type="button" class="mbtn" id="m-wrong" data-mode="wrong">Ôn sai <span id="onsai-count">(0)</span></button>
 </div>
 
 <div class="stats">
@@ -197,19 +60,19 @@
 </div>
 
 <div class="progress-wrap">
-  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div class="progress-bar"><div class="progress-fill progress-zero" id="prog"></div></div>
 </div>
 
 <div class="main" id="main"></div>
 
-<div class="modal-overlay" id="resume-modal" style="display:none">
+<div class="modal-overlay is-hidden" id="resume-modal">
   <div class="modal-box">
     <div class="modal-icon">📖</div>
     <div class="modal-title" id="modal-title">Tiếp tục học?</div>
     <div class="modal-sub" id="modal-sub"></div>
     <div class="modal-btns">
-      <button class="modal-btn" onclick="modalFresh()">Bắt đầu lại từ đầu</button>
-      <button class="modal-btn primary" onclick="modalResume()">Tiếp tục → </button>
+      <button type="button" class="modal-btn" data-action="modal-fresh">Bắt đầu lại từ đầu</button>
+      <button type="button" class="modal-btn primary" data-action="modal-resume">Tiếp tục → </button>
     </div>
   </div>
 </div>
@@ -604,8 +467,8 @@ function setMode(mode, el) {
     document.getElementById('modal-sub').innerHTML =
       'Bạn đang học <strong>' + modeLabel(mode) + '</strong><br>' +
       'Tiến độ: <strong>câu ' + (saved.idx + 1) + ' / ' + saved.deckKeys.length + '</strong><br>' +
-      'Đúng <strong style="color:var(--green)">' + saved.okCount + '</strong> · Sai <strong style="color:var(--red)">' + saved.ngCount + '</strong> · Lưu ' + agoStr;
-    document.getElementById('resume-modal').style.display = 'flex';
+      'Đúng <strong class="score-ok-inline">' + saved.okCount + '</strong> · Sai <strong class="score-ng-inline">' + saved.ngCount + '</strong> · Lưu ' + agoStr;
+    document.getElementById('resume-modal').classList.remove('is-hidden');
   }
   currentMode = mode;
   document.querySelectorAll('.mbtn').forEach(b => { b.classList.remove('active','active-orange'); });
@@ -614,7 +477,7 @@ function setMode(mode, el) {
 }
 
 function modalResume() {
-  document.getElementById('resume-modal').style.display = 'none';
+  document.getElementById('resume-modal').classList.add('is-hidden');
   if (!pendingResume) { restartQuiz(); return; }
   const saved = pendingResume; pendingResume = null;
   deck = saved.deckKeys.map(k => vocabByKey(k)).filter(Boolean);
@@ -631,7 +494,7 @@ function modalResume() {
 }
 
 function modalFresh() {
-  document.getElementById('resume-modal').style.display = 'none';
+  document.getElementById('resume-modal').classList.add('is-hidden');
   pendingResume = null;
   clearProgress();
   restartQuiz();
@@ -653,8 +516,8 @@ function modalFresh() {
     document.getElementById('modal-sub').innerHTML =
       'Bạn đang học <strong>' + modeLabel(currentMode) + '</strong><br>' +
       'Tiến độ: <strong>câu ' + (saved.idx + 1) + ' / ' + saved.deckKeys.length + '</strong><br>' +
-      'Đúng <strong style="color:var(--green)">' + saved.okCount + '</strong> · Sai <strong style="color:var(--red)">' + saved.ngCount + '</strong> · Lưu ' + agoStr;
-    document.getElementById('resume-modal').style.display = 'flex';
+      'Đúng <strong class="score-ok-inline">' + saved.okCount + '</strong> · Sai <strong class="score-ng-inline">' + saved.ngCount + '</strong> · Lưu ' + agoStr;
+    document.getElementById('resume-modal').classList.remove('is-hidden');
     deck = []; updateBadges(); updateStats();
   } else {
     restartQuiz();
@@ -688,8 +551,9 @@ function speakJapanese(text) {
     const voices = window.speechSynthesis.getVoices();
     const jpVoice = voices.find(v => v.lang === 'ja-JP' || v.lang.startsWith('ja'));
     if (jpVoice) utterance.voice = jpVoice;
-    utterance.onend = () => { const b = document.getElementById('speak-btn'); if(b) b.classList.remove('speaking'); };
-    utterance.onerror = () => { const b = document.getElementById('speak-btn'); if(b) b.classList.remove('speaking'); };
+    const resetSpeaker = () => { const b = document.getElementById('speak-btn'); if(b) b.classList.remove('speaking'); };
+    utterance.addEventListener('end', resetSpeaker);
+    utterance.addEventListener('error', resetSpeaker);
     window.speechSynthesis.speak(utterance);
   };
 
@@ -762,23 +626,23 @@ function renderQuestion() {
     <div class="q-card">
       <div class="q-num">Câu ${idx+1} / ${deck.length}</div>
       ${setTagHtml}
-      <div style="display:flex;align-items:center;justify-content:center;gap:12px">
+      <div class="question-heading">
         <div class="q-kanji">${card[0]}</div>
-        <button class="speak-btn" id="speak-btn" onclick="speakCurrent()" title="Phát âm tiếng Nhật">
+        <button type="button" class="speak-btn" id="speak-btn" data-action="speak-current" title="Phát âm tiếng Nhật">
           <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         </button>
       </div>
       ${collocHtml}
       ${contextHtml}
-      <div class="q-meaning" style="margin-top:6px">${card[2]}</div>
+      <div class="q-meaning q-meaning-spaced">${card[2]}</div>
       <div class="q-ask">Cách đọc (仮名) là gì?</div>
     </div>
     <div class="options">
-      ${opts.map((o,i)=>`<button class="opt" id="opt${i}" onclick="pick(${i})">${o}</button>`).join('')}
+      ${opts.map((o,i)=>`<button type="button" class="opt" id="opt${i}" data-action="answer" data-option-index="${i}">${o}</button>`).join('')}
     </div>
     <div class="feedback" id="fb"></div>
     <div class="set-examples" id="set-ex"></div>
-    <button class="next-btn" id="nb" onclick="nextQ()">Câu tiếp theo →</button>
+    <button type="button" class="next-btn" id="nb" data-action="next">Câu tiếp theo →</button>
   `;
 }
 
@@ -838,9 +702,9 @@ function renderDone(el) {
     <div class="done-title">${msg}</div>
     <div class="done-sub">Đúng ${okCount} / ${t} câu &nbsp;·&nbsp; Sai ${ngCount} câu &nbsp;·&nbsp; Cần ôn: ${wrongList.length} từ</div>
     <div class="done-btns">
-      <button class="done-btn primary" onclick="restartQuiz()">Làm lại từ đầu</button>
-      ${wrongList.length ? `<button class="done-btn" onclick="reviewWrong()">Ôn lại ${wrongList.length} câu sai</button>` : ''}
-      <button class="done-btn" onclick="setMode('set',document.getElementById('m-set'))">Chỉ Set Phrases 🔥</button>
+      <button type="button" class="done-btn primary" data-action="restart">Làm lại từ đầu</button>
+      ${wrongList.length ? `<button type="button" class="done-btn" data-action="review-wrong">Ôn lại ${wrongList.length} câu sai</button>` : ''}
+      <button type="button" class="done-btn" data-mode="set">Chỉ Set Phrases 🔥</button>
     </div>
   </div>`;
 }
@@ -887,7 +751,28 @@ function markUnknown() {
 }
 function retryCard() { answered=false; renderQuestion(); }
 
-// On load: check if there's any saved progress
+document.addEventListener('click', event => {
+  const control = event.target.closest('[data-mode], [data-action]');
+  if (!control) return;
+  if (control.dataset.mode) {
+    setMode(control.dataset.mode, document.getElementById('m-' + control.dataset.mode));
+    return;
+  }
+  const actions = {
+    restart: restartQuiz,
+    shuffle: shuffleDeck,
+    'modal-fresh': modalFresh,
+    'modal-resume': modalResume,
+    'speak-current': speakCurrent,
+    next: nextQ,
+    'review-wrong': reviewWrong
+  };
+  if (control.dataset.action === 'answer') {
+    pick(Number(control.dataset.optionIndex));
+    return;
+  }
+  actions[control.dataset.action]?.();
+});
 
 </script>
 </main>

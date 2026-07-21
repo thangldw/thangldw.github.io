@@ -327,6 +327,37 @@ const tests = [
       const keyboard = card.getAttribute('aria-expanded') === 'true';
       return { ok: noOverflow && keyboard, message: `noOverflow=${noOverflow}, keyboard=${keyboard}` };
     }
+  },
+  {
+    name: 'Kanji Collocations answer, feedback and modes',
+    route: '/apps/n1-kanji-collocations/',
+    ready: 'document.querySelectorAll(".opt").length === 4',
+    check: function () {
+      const initial = document.querySelectorAll('.opt').length === 4;
+      const wrongIndex = opts.findIndex(option => option !== correctAns);
+      document.querySelector(`#opt${wrongIndex}`).click();
+      const feedback = Boolean(document.querySelector('.feedback.ng')) && document.querySelector('#nb').classList.contains('show');
+      const wrongSaved = document.querySelector('#onsai-count').textContent === '(1)';
+      document.querySelector('#nb').click();
+      const nextQuestion = document.querySelectorAll('.opt').length === 4;
+      document.querySelector('#m-set').click();
+      const setMode = document.querySelector('#m-set').classList.contains('active-orange') && Boolean(document.querySelector('.set-tag'));
+      return { ok: initial && feedback && wrongSaved && nextQuestion && setMode, message: `initial=${initial}, feedback=${feedback}, wrongSaved=${wrongSaved}, next=${nextQuestion}, setMode=${setMode}` };
+    }
+  },
+  {
+    name: 'Kanji Collocations mobile quiz',
+    route: '/apps/n1-kanji-collocations/',
+    viewport: { width: 390, height: 844 },
+    ready: 'document.querySelectorAll(".opt").length === 4',
+    check: function () {
+      const noOverflow = document.documentElement.scrollWidth <= window.innerWidth;
+      document.querySelector('.opt').click();
+      const usable = Boolean(document.querySelector('.feedback.ok, .feedback.ng')) && document.querySelector('#nb').classList.contains('show');
+      document.querySelector('#nb').click();
+      const nextQuestion = document.querySelectorAll('.opt').length === 4;
+      return { ok: noOverflow && usable && nextQuestion, message: `noOverflow=${noOverflow}, usable=${usable}, next=${nextQuestion}` };
+    }
   }
 ];
 const selectedTests = process.env.SMOKE_ROUTE
