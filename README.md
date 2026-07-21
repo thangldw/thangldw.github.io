@@ -173,7 +173,7 @@ git diff --check
 git status --short
 ```
 
-UI audit kiểm tra semantic HTML, accessibility, thứ tự CSS và token bắt buộc. Site validator kiểm tra HTML, ID trùng, liên kết local, social metadata, sitemap, redirect chain và font bên ngoài. Smoke test dùng Chrome headless có sẵn trên máy để chạy các luồng chính của G検定, BJT, JLPT N1, Vocabulary Exams, Vocabulary Tabs, Grammar Exams và Kanji Analysis mà không cần dependency npm. GitHub Pages phát hành trực tiếp từ `master`.
+UI audit kiểm tra semantic HTML, accessibility, thứ tự CSS và token bắt buộc. Site validator kiểm tra HTML, ID trùng, liên kết local, social metadata, sitemap, redirect chain và font bên ngoài. Smoke test dùng Chrome headless có sẵn trên máy để chạy các luồng chính của G検定, BJT, JLPT N1, Vocabulary Exams, Vocabulary Tabs, Grammar Exams, Kanji Analysis và Kanji Collocations mà không cần dependency npm. GitHub Pages phát hành trực tiếp từ `master`.
 
 ## Cấu trúc repository
 
