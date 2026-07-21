@@ -15,7 +15,7 @@
 - Mobile chuyển sidebar thành header/menu, topic card xếp một cột, giải thích song ngữ xếp dọc và không phát sinh horizontal overflow.
 - Search chỉ còn một border ngoài; input con không có border, outline hoặc background riêng.
 - Accent route là `var(--accent, #c84d24)`; metric, CTA, active state và focus-visible dùng cùng sắc cam.
-- `G検定ロードマップ` dùng lưới hai cột ở desktop và một cột từ 820 px trở xuống. Mỗi thẻ giữ số syllabus, tên phân野, trạng thái `未学習`/`学習中`/`習得済み`, số câu đã học và progressbar semantic.
+- `G検定ロードマップ` dùng lưới ba cột từ 1181 px, hai cột ở 821–1180 px và một cột từ 820 px trở xuống. Mỗi thẻ giữ số syllabus, tên phân野, trạng thái `未学習`/`学習中`/`習得済み`, số câu đã học và progressbar semantic.
 
 ## Comparison history
 
@@ -26,8 +26,8 @@
 5. **P2 — metric và action dùng màu xanh:** đã đặt `--accent: #c84d24`; computed color xác nhận `rgb(200, 77, 36)`. Focus ring bị shared stylesheet ghi đè cũng đã được khóa về cùng accent.
 6. **P1 — câu minh họa chưa sát chủ đề và thoát quiz về sai màn:** đã thêm relevance scoring theo title/keyword và lưu `returnView` để quay lại `出題分野`.
 7. **Post-fix evidence:** kiểm tra lại light/dark, 390/680/1280/1440, một `main`, một `h1`, không overflow; DOM xác nhận giải thích Nhật/Việt chỉ xuất hiện sau khi chọn đáp án.
-8. **P2 — roadmap dạng hàng khó quét khi có 11 phân野:** source live `/apps/gkentei/` dùng danh sách một cột nên chỉ thấy hai mục trong viewport desktop. Đã chuyển sang card grid hai cột, giữ thứ tự 01–11 và bổ sung trạng thái cùng thanh tiến độ từng thẻ.
-9. **Post-grid evidence:** source live và implementation local được đặt trong cùng comparison input ở light mode 1280 × 720; dark mode cũng được chụp. 390 × 844 và 680 × 900 đều render một cột, `scrollWidth` bằng viewport, 11 card và một `h1`; click card 01 mở đúng `出題分野`.
+8. **P2 — roadmap dạng hàng khó quét khi có 11 phân野:** source live `/apps/gkentei/` dùng danh sách một cột nên chỉ thấy hai mục trong viewport desktop. Đã chuyển sang card grid responsive 3–2–1, giữ thứ tự 01–11 và bổ sung trạng thái cùng thanh tiến độ từng thẻ.
+9. **Post-grid evidence:** source live và implementation local được đặt trong cùng comparison input ở light mode 1280 × 720; dark mode cũng được chụp. 1280 px render ba cột, 1100 px hai cột, 390/680 px một cột; `scrollWidth` bằng viewport, có 11 card và một `h1`; click card 01 mở đúng `出題分野`.
 
 ## Required fidelity surfaces
 

@@ -144,16 +144,16 @@ flowchart LR
 ## Roadmap grid — G検定 và JLPT N1 — 2026-07-22
 
 - **Source visual truth:** bản live trước thay đổi tại `/apps/gkentei/` và `/apps/jlpt-n1/#path`; source và implementation local được capture trong cùng comparison input.
-- **Implementation:** G検定 có 11 thẻ syllabus; JLPT N1 có ba thẻ trụ cột. Desktop dùng hai cột, 820 px trở xuống dùng một cột.
+- **Implementation:** G検定 có 11 thẻ syllabus; JLPT N1 có ba thẻ trụ cột. Desktop từ 1181 px dùng ba cột, 821–1180 px dùng hai cột và 820 px trở xuống dùng một cột.
 - **Viewport/state:** 1280 × 720 light/dark, 680 × 900 và 390 × 844; state chưa học và đang học; sidebar desktop/mobile.
 - **Focused evidence:** mỗi card giữ số thứ tự, title, trạng thái, count và progressbar; native full-view đủ rõ nên không cần crop bổ sung.
-- **Responsive evidence:** ở 390 và 680 px, computed grid là một cột và document `scrollWidth` bằng viewport cho cả hai app.
+- **Responsive evidence:** computed grid là ba cột ở 1280 px, hai cột ở 1100 px và một cột ở 390/680 px; document `scrollWidth` bằng viewport cho cả hai app.
 - **Interaction evidence:** G検定 card 01 mở đúng `出題分野`; JLPT card `Từ vựng N1` chuyển đúng `#vocabulary`; dark/light không đổi token.
 - **Static gates:** UI Standard 1.1, site validator, JavaScript syntax và whitespace diff là release gate.
 
 **Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi roadmap grid.
 
-**Follow-up polish:** P3 — theo dõi mật độ khi JLPT bổ sung trụ cột thứ tư.
+**Follow-up polish:** không có.
 
 **final result: passed**
 

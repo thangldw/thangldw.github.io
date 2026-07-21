@@ -80,7 +80,7 @@ flowchart LR
 
 ### Full-view và focused-region comparison
 
-- Source dùng ba hàng toàn chiều rộng; implementation chuyển thành lưới hai cột nhưng giữ nguyên header, sidebar, typography, accent, thứ tự 01–03 và nội dung module.
+- Source dùng ba hàng toàn chiều rộng; implementation chuyển thành lưới responsive 3–2–1 nhưng giữ nguyên header, sidebar, typography, accent, thứ tự 01–03 và nội dung module.
 - Mỗi thẻ mới hiển thị rõ phần trăm, `Chưa bắt đầu`/`Đang học`/`Hoàn thành`, số module đã mở và progressbar semantic.
 - Tại 680 px và 390 px lưới rơi về một cột; `scrollWidth` bằng viewport, một `h1` và toàn bộ ba thẻ vẫn thao tác được.
 - Focused crop riêng không cần thiết vì title, state, count và progressbar đều đọc được trong full-view 1280 × 720; DOM xác nhận region `Các trụ cột học tập JLPT N1` có ba button.
@@ -88,13 +88,13 @@ flowchart LR
 ### Comparison history
 
 1. **P2 — roadmap dạng hàng chưa tận dụng chiều ngang:** ba trụ cột bị kéo dài, khoảng trống lớn và khó so sánh nhanh.
-2. **Fix:** chuyển `.overview-list` sang grid hai cột, biến mỗi `.track-row` thành card có state và progressbar; giữ nguyên click target toàn thẻ.
+2. **Fix:** chuyển `.overview-list` sang grid ba cột desktop, hai cột ở 821–1180 px và một cột mobile; mỗi `.track-row` là card có state và progressbar, giữ nguyên click target toàn thẻ.
 3. **Post-fix evidence:** source live và implementation local được đặt trong cùng comparison input ở light mode; dark mode và responsive 390/680 cũng được kiểm tra sau sửa.
 
 ### Required fidelity surfaces
 
 - **Fonts/typography:** giữ nguyên font sans/mono, scale, weight và line-height; tiêu đề dài wrap tự nhiên ở mobile.
-- **Spacing/layout:** card cùng chiều cao, gap 12 px, radius/token hiện hữu; desktop hai cột, tablet/mobile một cột.
+- **Spacing/layout:** card cùng chiều cao, gap 12 px, radius/token hiện hữu; desktop ba cột, laptop/tablet hai cột và mobile một cột.
 - **Colors/tokens:** chỉ dùng `--n1-*`; orange tiếp tục là active/progress, brand xanh không đổi.
 - **Image quality:** không có image asset mới; icon tiếp tục dùng Font Awesome local.
 - **Copy/content:** giữ nguyên nội dung Việt–Nhật và danh sách 12 module; chỉ bổ sung nhãn trạng thái rõ nghĩa.
@@ -102,6 +102,6 @@ flowchart LR
 
 **Findings:** không còn P0, P1 hoặc P2 có thể hành động trong phạm vi roadmap grid.
 
-**Follow-up polish:** P3 — có thể thử nghiệm A/B vị trí thẻ thứ ba ở desktop nếu sau này thêm trụ cột thứ tư.
+**Follow-up polish:** không có.
 
 **final result: passed**
