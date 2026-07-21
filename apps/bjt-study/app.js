@@ -34,18 +34,34 @@
 
   var VOCAB_CATEGORIES = [
     { id: 'communication', label: 'Giao tiếp', jp: 'コミュニケーション', keywords: ['giao tiep', 'trao doi', 'noi chuyen', 'tro chuyen', 'phat bieu', 'trinh bay', 'tra loi', 'lien lac', 'dien thoai', 'email', 'thu tu', 'xin loi', 'cam on', 'chao hoi', 'thong bao', 'truyen dat', 'thuyet phuc', 'dam phan', 'than phien', 'kien nghi', 'thinh cau', 'khien trach', 'chi trich', 'thuc giuc', 'noi', 'hoi', 'reply', 'announce'] },
-    { id: 'organization', label: 'Tổ chức & nhân sự', jp: '組織・人事', keywords: ['cong ty', 'doanh nghiep', 'to chuc', 'nhan vien', 'nhan su', 'cap tren', 'cap duoi', 'dong nghiep', 'tuyen dung', 'phong ban', 'chuc vu', 'giam doc', 'quan ly', 'nghi viec', 'thang chuc', 'chuyen cong tac', 'nhan', 'staff', 'career', 'layoff'] },
+    { id: 'organization', label: 'Tổ chức & nhân sự', jp: '組織・人事', keywords: ['cong ty', 'doanh nghiep', 'to chuc', 'nhan vien', 'nhan su', 'cap tren', 'cap duoi', 'dong nghiep', 'tuyen dung', 'phong ban', 'chuc vu', 'giam doc', 'quan ly', 'nghi viec', 'thang chuc', 'chuyen cong tac', 'dai ngo', 'so yeu ly lich', 'cong doan', 'nghiep doan', 'tuoi ve huu', 'uy thac', 'thue ngoai', 'giao pho', 'nhan', 'staff', 'career', 'recruit', 'outsource', 'layoff'] },
     { id: 'meeting', label: 'Họp & báo cáo', jp: '会議・報告', keywords: ['cuoc hop', 'hoi nghi', 'bao cao', 'bien ban', 'tai lieu', 'ke hoach', 'du an', 'tien do', 'de xuat', 'quyet dinh', 'phe duyet', 'nghi quyet', 'thao luan', 'ket luan', 'project', 'draft'] },
-    { id: 'finance', label: 'Tài chính', jp: '財務', keywords: ['tien te', 'gia ca', 'chi phi', 'doanh thu', 'loi nhuan', 'thua lo', 'ngan sach', 'thue', 'hoa don', 'thanh toan', 'tai chinh', 'ke toan', 'dau tu', 'co phieu', 'lai suat', 'dong yen', 'von', 'thu nhap', 'khoan no', 'cost', 'earnings', 'liabilities'] },
+    { id: 'finance', label: 'Tài chính', jp: '財務', keywords: ['tien te', 'gia ca', 'chi phi', 'doanh thu', 'loi nhuan', 'thua lo', 'ngan sach', 'thue', 'hoa don', 'thanh toan', 'tai chinh', 'ke toan', 'dau tu', 'co phieu', 'lai suat', 'dong yen', 'von', 'thu nhap', 'khoan no', 'tien luong', 'luong huu', 'tien thuong', 'tien lai', 'loi tuc', 'tai san', 'hoan tien', 'tien hoa hong', 'so du', 'cost', 'earnings', 'liabilities', 'salary', 'asset', 'deficit', 'surplus'] },
     { id: 'legal', label: 'Hợp đồng & pháp lý', jp: '契約・法務', keywords: ['hop dong', 'ky ket', 'dieu khoan', 'phap luat', 'luat', 'vi pham', 'quy dinh', 'nghia vu', 'quyen loi', 'kien cao', 'khieu nai', 'boi thuong', 'bao hiem'] },
     { id: 'customer', label: 'Khách hàng & dịch vụ', jp: '顧客・サービス', keywords: ['khach hang', 'khach', 'dich vu', 'tiep don', 'cua hang', 'ban hang', 'mua hang', 'don hang', 'phan nan', 'thuong hieu', 'customer', 'client'] },
-    { id: 'production', label: 'Sản xuất & logistics', jp: '生産・物流', keywords: ['san xuat', 'nha may', 'hang hoa', 'san pham', 'nguyen lieu', 'van chuyen', 'giao hang', 'kho hang', 'dong goi', 'xuat hang', 'nhap hang', 'chat luong', 'may moc', 'san luong', 'hau can', 'logistics', 'package'] },
-    { id: 'technology', label: 'Công nghệ & dữ liệu', jp: '技術・データ', keywords: ['du lieu', 'he thong', 'phan mem', 'may tinh', 'internet', 'website', 'thong tin', 'ky thuat', 'thiet bi', 'dien tu', 'mang luoi', 'tep tin', 'file'] },
+    { id: 'production', label: 'Sản xuất & logistics', jp: '生産・物流', keywords: ['san xuat', 'nha may', 'hang hoa', 'san pham', 'nguyen lieu', 'van chuyen', 'giao hang', 'kho hang', 'dong goi', 'xuat hang', 'nhap hang', 'chat luong', 'may moc', 'san luong', 'hau can', 'trong tai', 'cho vao', 'cho ra', 'xep hang', 'boc do', 'gui hang', 'phi ship', 'logistics', 'package', 'supply'] },
+    { id: 'technology', label: 'Công nghệ & dữ liệu', jp: '技術・データ', keywords: ['du lieu', 'he thong', 'phan mem', 'may tinh', 'internet', 'website', 'thong tin', 'ky thuat', 'thiet bi', 'dien tu', 'mang luoi', 'tep tin', 'cong nghe', 'truy cap', 'mang', 'phien ban', 'ao', 'bo dem', 'chuc nang', 'ky su', 'high tech', 'file', 'access', 'network', 'version', 'virtual', 'technology', 'engineer'] },
     { id: 'time', label: 'Thời gian & số lượng', jp: '時間・数量', keywords: ['thoi gian', 'ngay', 'thang', 'nam', 'thoi han', 'ky han', 'lich trinh', 'gio', 'so luong', 'muc do', 'ti le', 'phan tram', 'khoang', 'lan'] },
     { id: 'evaluation', label: 'Đánh giá & kiểm tra', jp: '評価・確認', keywords: ['danh gia', 'kiem tra', 'xem xet', 'xac nhan', 'nhan dinh', 'khao sat', 'dieu tra', 'phan tich', 'so sanh', 'phe binh', 'tham dinh', 'do luong', 'kiem', 'audit', 'survey'] },
     { id: 'change', label: 'Thay đổi & xử lý', jp: '変化・対応', keywords: ['thay doi', 'bien doi', 'dieu chinh', 'cai thien', 'xu ly', 'thuc hien', 'tien hanh', 'hoan thanh', 'duy tri', 'tiep tuc', 'tang len', 'giam xuong', 'them vao', 'loai bo', 'huy bo', 'khoi phuc', 'sap xep', 'bat dau', 'ket thuc', 'mo rong', 'tang', 'giam', 'chuyen', 'start', 'expand', 'reduce', 'transfer', 'launch'] },
     { id: 'risk', label: 'Vấn đề & rủi ro', jp: '問題・リスク', keywords: ['van de', 'rui ro', 'nguy hiem', 'kho khan', 'ton that', 'thiet hai', 'anh huong', 'thieu hut', 'sai sot', 'loi lam', 'khung hoang', 'tai nan', 'tro ngai', 'bat loi', 'hu hong', 'collapse', 'risk'] },
     { id: 'relationship', label: 'Quan hệ & thái độ', jp: '関係・態度', keywords: ['thai do', 'quan he', 'hop tac', 'giup do', 'ho tro', 'tin tuong', 'phan doi', 'dong y', 'nhuong bo', 'tu choi', 'thien chi', 'than thien', 'trach nhiem', 'ton trong'] },
+    { id: 'sales', label: 'Kinh doanh & marketing', jp: '営業・マーケティング', keywords: ['kinh doanh', 'thuong mai', 'thi truong', 'marketing', 'quang cao', 'tiep thi', 'khuyen mai', 'xuc tien', 'ban le', 'ban buon', 'chi nhanh', 'cua hang', 'thuong vu', 'phan phoi', 'thi phan', 'nhu cau', 'chien luoc kinh doanh', 'nghien cuu thi truong', 'chao hang', 'dai ly', 'catalogue', 'catalog', 'canh tranh', 'mua vao', 'viec mua', 'purchase'] },
+    { id: 'operations', label: 'Vận hành & nghiệp vụ', jp: '運営・業務', keywords: ['van hanh', 'hoat dong', 'nghiep vu', 'thu tuc', 'quy trinh', 'cong suat', 'tien hanh', 'thao tac', 'bo tri', 'sap xep cong viec', 'xu ly cong viec', 'cong viec hang ngay', 'ca lam', 'truc ca', 'tien do cong viec', 'hieu suat', 'nang suat', 'ket qua cong viec'] },
+    { id: 'documents', label: 'Giấy tờ & hành chính', jp: '書類・事務', keywords: ['giay to', 'ho so', 'van ban', 'con dau', 'dong dau', 'chu ky', 'ky ten', 'danh ba', 'danh sach ten', 'bieu mau', 'ban ke', 'ban tuong trinh', 'bien lai', 'phieu', 'chung tu', 'giay phep', 'giay chung nhan', 'so sach', 'tai lieu kem theo', 'ban sao', 'ban goc', 'muc luc', 'danh muc', 'sach huong dan', 'so yeu ly lich', 'cv', 'resume', 'index', 'list'] },
+    { id: 'health', label: 'Sức khỏe & an toàn', jp: '健康・安全', keywords: ['suc khoe', 'benh', 'bi om', 'kham benh', 'kham suc khoe', 'dieu tri', 'thuoc', 'binh phuc', 'chan thuong', 'vet thuong', 'dau nhuc', 'sung', 'cap cuu', 'benh vien', 'bao ho', 'an toan', 'phong chay', 'hoa hoan', 'chay no', 've sinh'] },
+    { id: 'facilities', label: 'Địa điểm & di chuyển', jp: '場所・移動', keywords: ['dia diem', 'noi chon', 'toa nha', 'van phong', 'phong hop', 'cong truong', 'cong trinh', 'co so', 'mat bang', 'thiet bi', 'may moc', 'kho bai', 'nha kho', 'nha may', 'chi nhanh', 'quay', 'san bay', 'nha ga', 'bai do xe', 'chuyen xe', 'di chuyen', 'qua giang', 'du lich', 'tour', 'resort', 'ghe qua', 'di don', 'don tiep', 'trong nuoc'] },
+    { id: 'events', label: 'Sự kiện & tiếp đón', jp: '行事・接待', keywords: ['su kien', 'buoi le', 'nghi le', 'tiec', 'tiep dai', 'tiep don', 'chao mung', 'tham du', 'hien dien', 'khai mac', 'be mac', 'chuc mung', 'can ly', 'uong', 'an uong', 'hoi cho', 'trien lam', 'hoi thao'] },
+    { id: 'learning', label: 'Học tập & năng lực', jp: '学習・能力', keywords: ['hoc tap', 'dao tao', 'giao duc', 'kien thuc', 'ky nang', 'nang luc', 'kinh nghiem', 'thi cu', 'ky thi', 'bang cap', 'chuyen mon', 'thuc tap', 'huan luyen', 'ren luyen', 'thanh thao', 'hieu biet', 'bai hoc', 'khoa hoc', 'giao tai', 'tai lieu hoc', 'seminar', 'lecture', 'college', 'role play'] },
+    { id: 'society', label: 'Xã hội & môi trường', jp: '社会・環境', keywords: ['xa hoi', 'moi truong', 'cong cong', 'dan so', 'cong dong', 'chinh sach', 'chinh phu', 'quoc gia', 'khu vuc', 'dia phuong', 'o nhiem', 'tai che', 'nang luong', 'khi hau', 'phuc loi', 'doi song', 'ho gia dinh'] },
+    { id: 'quality', label: 'Trạng thái & tính chất', jp: '状態・性質', keywords: ['trang thai', 'tinh chat', 'dac tinh', 'dac diem', 'tinh hinh', 'tam thoi', 'lam thoi', 'dinh ky', 'thuong ky', 'tong the', 'rieng biet', 'can ke', 'song song', 'truc tiep', 'gian tiep', 'toan bo', 'mot phan', 'toi thieu', 'toi da', 'chu yeu', 'thuc te', 'cu the', 'khach quan', 'hieu qua', 'hop ly', 'chinh xac'] },
+    { id: 'strategy', label: 'Quản trị & chiến lược', jp: '経営・戦略', keywords: ['quan tri', 'chien luoc', 'phuong cham', 'dinh huong', 'sang kien', 'chu so huu', 'lien minh', 'lien doanh', 'tai co cau', 'cai cach', 'doi moi', 'uy quyen', 'muc tieu', 'quy mo', 'nguon luc', 'resource', 'administration', 'initiative', 'alliance', 'innovation', 'guideline'] },
+    { id: 'media', label: 'Thiết kế & truyền thông', jp: 'デザイン・広報', keywords: ['thiet ke', 'hinh anh', 'bo cuc', 'font chu', 'hien thi', 'trinh dien', 'trung bay', 'bai dang', 'bai viet', 'cong khai', 'truyen thong', 'chu de', 'sac thai', 'dat ten', 'to roi', 'pamphlet', 'display', 'design', 'image', 'publicity', 'demonstration'] },
+    { id: 'mindset', label: 'Tư duy & cảm xúc', jp: '思考・感情', keywords: ['suy nghi', 'y tuong', 'quan ngai', 'lo ngai', 'lo lang', 'that vong', 'dong luc', 'hang hai', 'tinh than', 'niem tin', 'long tin', 'y thuc', 'ky vong', 'cam xuc', 'cam giac', 'co y', 'co tinh', 'hieu duoc', 'thoai mai', 'nghi van', 'doubt', 'idea', 'motivation', 'negative'] },
+    { id: 'trend', label: 'Mức độ & xu hướng', jp: '程度・傾向', keywords: ['xu huong', 'khuynh huong', 'cap do', 'trinh do', 'muc do', 'gioi han', 'pham vi', 'tuong doi', 'tuong duong', 'vuot troi', 'ap dao', 'can bang', 'on dinh', 'pho bien', 'uu diem', 'nhuoc diem', 'do ben', 'cuong do', 'ty le', 'tieu chuan', 'hang dau', 'trend', 'level', 'balance', 'standard', 'merit', 'demerit'] },
+    { id: 'action', label: 'Hành động & thao tác', jp: '行動・操作', keywords: ['rut lui', 'rut quan', 'tra lai', 'tra ve', 'gui den', 'gui tra', 'dem theo', 'mang theo', 'dua vao', 'lay ra', 'bo di', 'giu lai', 'gan vao', 'tach ra', 'thao roi', 'tap hop', 'thu thap', 'phan phat', 'cung cap', 'dien vao', 'ghi lai', 'luu lai', 'dang tai', 'thu nghiem', 'thu xem', 'sua chua', 'bao tri', 'khoi dong', 'day vao', 'che day', 'bao phu', 'phoi hop', 'ket hop', 'tu bo', 'giai quyet', 'tiep can', 'yeu cau', 'dat duoc', 'chuan bi', 'lua chon', 'return', 'fill in', 'record', 'maintenance', 'request'] },
+    { id: 'expression', label: 'Cách nói & sắc thái', jp: '表現・ニュアンス', keywords: ['dai khai', 'qua loa', 'hoan toan', 'nhat dinh', 'tat yeu', 'bat buoc', 'co le', 'duong nhu', 'thuong thuong', 'thong thuong', 'dan dan', 'ngay lap tuc', 'mot cach', 'het suc', 'rat nhieu', 'khong the', 'de dang', 'manh dan', 'mao muoi', 'ngan gon', 'gon nhe', 'tron tru', 'linh hoat', 'tich cuc', 'tieu cuc', 'sac thai', 'nuance', 'smooth', 'flexible', 'positive'] },
+    { id: 'modern-business', label: 'Thuật ngữ kinh doanh hiện đại', jp: 'ビジネス用語', keywords: [] },
     { id: 'concept', label: 'Khái niệm khác', jp: 'その他', keywords: [] }
   ];
 
@@ -276,6 +292,12 @@
         var escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         return new RegExp('(^|[^a-z0-9])' + escaped + '([^a-z0-9]|$)').test(haystack);
       })) return category.id;
+    }
+    var surface = String(entry.term || '').replace(/[（(][^）)]*[）)]/g, '').replace(/[〜～\s]/g, '');
+    if (/^[ァ-ヶー・]+$/.test(surface)) return 'modern-business';
+    if (/する|（する）|\(する\)/.test(entry.term)) return 'action';
+    if (/^[ぁ-んー・]+$/.test(surface)) {
+      return /[るすむくぐうつぬぶ]$/.test(surface) ? 'action' : 'expression';
     }
     return 'concept';
   }
@@ -589,11 +611,18 @@
     var categoryFilters = '';
     if (kind === 'vocabulary') {
       var allButton = '<button type="button" data-action="vocab-category" data-category="all" aria-pressed="' + (libraryCategory === 'all') + '" class="category-chip' + (libraryCategory === 'all' ? ' is-active' : '') + '"><strong>Tất cả</strong><span>' + formatNumber(source.length) + '</span></button>';
-      var categoryButtons = VOCAB_CATEGORIES.map(function (category) {
+      var renderCategoryButton = function (category) {
         var count = source.filter(function (item) { return item.details.category === category.id; }).length;
         return '<button type="button" data-action="vocab-category" data-category="' + category.id + '" aria-pressed="' + (libraryCategory === category.id) + '" class="category-chip' + (libraryCategory === category.id ? ' is-active' : '') + '"><strong>' + escapeHtml(category.label) + '</strong><small>' + escapeHtml(category.jp) + '</small><span>' + formatNumber(count) + '</span></button>';
-      }).join('');
-      categoryFilters = '<div class="category-section"><div class="category-heading"><strong>Học theo nhóm ý nghĩa</strong><span>Mỗi từ được xếp theo nghĩa sử dụng chính trong công việc.</span></div><div class="category-filter" role="group" aria-label="Nhóm ý nghĩa từ vựng">' + allButton + categoryButtons + '</div></div>';
+      };
+      var primaryCategories = VOCAB_CATEGORIES.slice(0, 14);
+      var specializedCategories = VOCAB_CATEGORIES.slice(14);
+      var primaryButtons = primaryCategories.map(renderCategoryButton).join('');
+      var specializedButtons = specializedCategories.map(renderCategoryButton).join('');
+      var specializedOpen = libraryCategory !== 'all' && specializedCategories.some(function (category) { return category.id === libraryCategory; });
+      categoryFilters = '<div class="category-section"><div class="category-heading"><strong>Học theo nhóm ý nghĩa</strong><span>Mỗi từ được xếp theo nghĩa sử dụng chính trong công việc.</span></div>' +
+        '<div class="category-filter" role="group" aria-label="Nhóm ý nghĩa chính">' + allButton + primaryButtons + '</div>' +
+        '<details class="category-more"' + (specializedOpen ? ' open' : '') + '><summary>Mở rộng nhóm chuyên đề <span>' + specializedCategories.length + ' nhóm</span></summary><div class="category-filter" role="group" aria-label="Nhóm ý nghĩa chuyên đề">' + specializedButtons + '</div></details></div>';
     }
 
     appView.innerHTML = '<section class="main-column">' +
