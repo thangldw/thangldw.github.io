@@ -213,11 +213,12 @@ mark{background:#fff59d;border-radius:3px;padding:0 2px;}
   })();
 </script>
   <link rel="stylesheet" href="/css/app-footer.css?v=20260721g">
-<link rel="stylesheet" href="../../css/app-design-system.css?v=20260722d">
+<link rel="stylesheet" href="../../css/app-design-system.css?v=20260722e">
 <link rel="stylesheet" href="../../css/language-app-readable.css?v=20260722a">
   <script defer src="/js/analytics.js"></script>
 </head>
 <body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-kanji-analysis">
+<main id="main-content" class="semantic-main">
 <header id="appHeader">
       <h1>JLPT N1 Kanji Analysis <span>漢字分析</span></h1>
   <input id="search-input" type="text" placeholder="🔍 Tìm từ, cách đọc, nghĩa..." oninput="filterCards()">
@@ -426,6 +427,7 @@ function setRound(r,btn){
 function filterCards(){currentSearch=document.getElementById('search-input').value;render();}
 render();
 </script>
+</main>
 <script src="/js/site-header-v2.js?v=20260721d"></script>
   <footer class="site-foot">Crafted with care © 2026 — <span>stay steadfast, stay free</span></footer>
 </body>

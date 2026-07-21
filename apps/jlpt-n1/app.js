@@ -184,7 +184,8 @@
     var current = currentModule(section);
     var items = section.groups[state.tab];
     var tabs = section.tabs.map(function (tab) {
-      return '<button class="view-tab' + (tab.id === state.tab ? ' is-active' : '') + '" type="button" data-tab="' + tab.id + '">' + escapeHtml(tab.label) + '</button>';
+      var active = tab.id === state.tab;
+      return '<button id="view-tab-' + view + '-' + tab.id + '" class="view-tab' + (active ? ' is-active' : '') + '" type="button" role="tab" aria-selected="' + active + '" aria-controls="module-list"' + (active ? '' : ' tabindex="-1"') + ' data-tab="' + tab.id + '">' + escapeHtml(tab.label) + '</button>';
     }).join('');
     var rows = items.map(function (item, index) {
       var complete = Boolean(progress.visited[item.id]);
@@ -197,7 +198,7 @@
         '<span class="row-arrow">' + icon('fa-arrow-right') + '</span></a>';
     }).join('');
 
-    appView.innerHTML = '<section class="view">' + headerTemplate(section, current) + '<div class="view-tabs" role="tablist">' + tabs + '</div><div class="module-list">' + rows + '</div></section>';
+    appView.innerHTML = '<section class="view">' + headerTemplate(section, current) + '<div class="view-tabs" role="tablist" aria-label="Nhóm nội dung ' + escapeHtml(section.title) + '">' + tabs + '</div><div class="module-list" id="module-list" role="tabpanel" aria-labelledby="view-tab-' + view + '-' + state.tab + '">' + rows + '</div></section>';
   }
 
   function renderPath() {
@@ -378,8 +379,20 @@
   }
 
   function bindViewEvents() {
-    appView.querySelectorAll('[data-tab]').forEach(function (button) {
+    var tabButtons = Array.from(appView.querySelectorAll('[data-tab]'));
+    tabButtons.forEach(function (button, index) {
       button.addEventListener('click', function () { setHash(state.view, button.dataset.tab); });
+      button.addEventListener('keydown', function (event) {
+        if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(event.key) === -1) return;
+        event.preventDefault();
+        var nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabButtons.length - 1 :
+          (index + (event.key === 'ArrowRight' ? 1 : -1) + tabButtons.length) % tabButtons.length;
+        tabButtons[nextIndex].click();
+        window.setTimeout(function () {
+          var selected = appView.querySelector('[role="tab"][aria-selected="true"]');
+          if (selected) selected.focus();
+        }, 0);
+      });
     });
     appView.querySelectorAll('[data-jump-tab]').forEach(function (button) {
       button.addEventListener('click', function () { setHash(state.view, button.dataset.jumpTab); });

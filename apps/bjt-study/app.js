@@ -651,7 +651,8 @@
       { id: 'practice', label: 'Luyện theo dạng' },
       { id: 'mixed', label: 'Luyện tập' }
     ].map(function (tab) {
-      return '<button class="subject-tab' + (activeTab === tab.id ? ' is-active' : '') + '" type="button" data-action="subject-tab" data-kind="' + kind + '" data-tab="' + tab.id + '">' + tab.label + '</button>';
+      var selected = activeTab === tab.id;
+      return '<button id="subject-tab-' + kind + '-' + tab.id + '" class="subject-tab' + (selected ? ' is-active' : '') + '" type="button" role="tab" aria-selected="' + selected + '" aria-controls="subject-module-list"' + (selected ? '' : ' tabindex="-1"') + ' data-action="subject-tab" data-kind="' + kind + '" data-tab="' + tab.id + '">' + tab.label + '</button>';
     }).join('');
     var modules;
     if (activeTab === 'knowledge') {
@@ -688,7 +689,7 @@
     appView.innerHTML = '<section class="main-column subject-hub">' +
       '<span class="context-label">BJT · ' + (isGrammar ? 'NGỮ PHÁP' : 'TỪ VỰNG') + ' · ' + jp + '</span>' +
       '<div class="section-head subject-head"><div><h1 class="view-title">' + title + ' <span class="jp-title" lang="ja">· ' + jp + '</span></h1><p class="view-subtitle">' + description + '</p></div><span class="stat-inline">' + formatNumber(count) + ' mục</span></div>' +
-      '<div class="subject-tabs" role="tablist">' + tabs + '</div><div class="subject-module-list">' + rows + '</div>' +
+      '<div class="subject-tabs" role="tablist" aria-label="Chế độ học ' + title + '">' + tabs + '</div><div class="subject-module-list" id="subject-module-list" role="tabpanel" aria-labelledby="subject-tab-' + kind + '-' + activeTab + '">' + rows + '</div>' +
     '</section>';
   }
 
@@ -937,6 +938,21 @@
     if (event.target.id !== 'librarySearch') return;
     libraryLimit = 40;
     renderLibrary(subjectKindFromView(), event.target.value);
+  });
+
+  appView.addEventListener('keydown', function (event) {
+    var tab = event.target.closest('[role="tab"]');
+    if (!tab || ['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(event.key) === -1) return;
+    var tabs = Array.from(tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]'));
+    var index = tabs.indexOf(tab);
+    event.preventDefault();
+    var nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
+      (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[nextIndex].click();
+    window.setTimeout(function () {
+      var selected = appView.querySelector('[role="tab"][aria-selected="true"]');
+      if (selected) selected.focus();
+    }, 0);
   });
 
   appView.addEventListener('click', function (event) {
