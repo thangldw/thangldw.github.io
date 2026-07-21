@@ -1,29 +1,32 @@
-# JLPT route compatibility
+# URL migration cho JLPT N1
 
-Canonical names replaced several short or ambiguous JLPT paths. Each legacy directory contains one minimal redirect page—no duplicated application code, scripts, styles, or data.
+Tài liệu này là nguồn sự thật cho các route JLPT cũ. Mỗi thư mục legacy chỉ chứa một trang redirect tối thiểu; mã ứng dụng, CSS và dữ liệu chỉ tồn tại ở route canonical.
 
-## Compatibility flow
+## Luồng tương thích
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
 flowchart LR
-  Start(["Legacy bookmark"]) --> Redirect["Minimal HTML redirect"]
-  Redirect --> Target["Canonical route"]
-  Target --> App(["Current application"])
+  Bookmark(["Bookmark cũ"]) --> Redirect["Redirect HTML tối thiểu"]
+  Redirect --> Canonical["Route canonical"]
+  Canonical --> App(["Ứng dụng hiện tại"])
 
-  Audit["Site validator"] -. checks .-> Redirect
-  Audit -. checks .-> Target
+  Validator["Site validator"] -. "đối chiếu" .-> Redirect
+  Validator -. "kiểm tra target" .-> Canonical
 
-  classDef legacy fill:#FFF4CC,stroke:#B88A00,color:#292300,stroke-width:1.5px;
-  classDef bridge fill:#E8E5FF,stroke:#5B5BD6,color:#24225A,stroke-width:1.5px;
-  classDef current fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1.5px;
-  classDef control fill:#DDEBFF,stroke:#4262FF,color:#172B4D,stroke-width:1.5px;
-  class Start legacy;
-  class Redirect bridge;
-  class Target,App current;
-  class Audit control;
+  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
+  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
+  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
+  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
+  class Bookmark yellow;
+  class Redirect pink;
+  class Canonical,App green;
+  class Validator blue;
 ```
 
-## Route inventory
+## Bảng route
+
+> Hai cột URL dưới đây được `scripts/validate_site.py` đọc tự động. Giữ nguyên định dạng backtick và dấu `/` cuối route.
 
 | Previous URL | Canonical URL | Application |
 |---|---|---|
@@ -42,39 +45,44 @@ flowchart LR
 | `/apps/n1-tango/` | `/apps/n1-vocabulary-tabs/` | Vocabulary Tabs |
 | `/apps/n1-vocab/` | `/apps/n1-kanji-collocations/` | Kanji & Collocations |
 
-## Redirect invariants
+## Invariant của redirect
 
-Every legacy page must contain exactly three route references:
+Mỗi redirect page phải có đúng ba tham chiếu cùng trỏ trực tiếp tới route canonical:
 
-1. a zero-delay refresh target;
-2. a canonical link;
-3. a visible fallback anchor.
+1. `meta refresh` với thời gian bằng 0;
+2. `link rel="canonical"`;
+3. fallback anchor hiển thị cho người dùng.
 
-All three references point directly to the canonical route. Redirect pages do not load analytics and canonical apps do not redirect again.
+Redirect page không tải analytics. Route canonical không được redirect thêm lần nữa.
 
-## Change procedure
+## Quy trình thay đổi route
 
 ```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
 flowchart LR
-  Change(["Canonical route changes"]) --> Keep["Keep former directory"]
-  Keep --> Point["Update three targets"]
-  Point --> Record["Update route inventory"]
-  Record --> Map["Update sitemap"]
-  Map --> Check{"Validator passes?"}
-  Check -->|No| Repair["Fix mapping or chain"]
-  Repair --> Point
-  Check -->|Yes| Done(["Publish"])
+  Change(["Đổi route canonical"]) --> Keep["Giữ thư mục cũ"]
+  Keep --> Targets["Cập nhật 3 target"]
+  Targets --> Inventory["Cập nhật bảng route"]
+  Inventory --> Sitemap["Cập nhật sitemap"]
+  Sitemap --> Check{"Validator đạt?"}
+  Check -->|"Chưa"| Repair["Sửa mapping hoặc chain"]
+  Repair --> Targets
+  Check -->|"Đạt"| Publish(["Phát hành"])
 
-  classDef start fill:#FFF4CC,stroke:#B88A00,color:#292300,stroke-width:1.5px;
-  classDef process fill:#DDEBFF,stroke:#4262FF,color:#172B4D,stroke-width:1.5px;
-  classDef decision fill:#E8E5FF,stroke:#5B5BD6,color:#24225A,stroke-width:1.5px;
-  classDef correction fill:#FFE8D7,stroke:#C96A21,color:#4A2A12,stroke-width:1.5px;
-  classDef finish fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1.5px;
-  class Change start;
-  class Keep,Point,Record,Map process;
-  class Check decision;
-  class Repair correction;
-  class Done finish;
+  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
+  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
+  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
+  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
+  class Change yellow;
+  class Keep,Targets,Inventory,Sitemap blue;
+  class Check,Repair pink;
+  class Publish green;
 ```
 
-Run `python3 scripts/validate_site.py` after every route change. The validator compares this table with the redirect pages and rejects undocumented mappings, missing targets, and redirect chains.
+Sau mọi thay đổi route, chạy:
+
+```bash
+python3 scripts/validate_site.py
+```
+
+Validator sẽ từ chối redirect không được ghi nhận, target không tồn tại, mapping thừa hoặc redirect chain.

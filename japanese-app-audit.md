@@ -1,66 +1,128 @@
-# Japanese learning apps — design audit 2026-07-21
+# Audit hệ sinh thái học tiếng Nhật
 
-## Scope and method
+**Ngày cập nhật:** 2026-07-21
 
-- Audited 13 Japanese-learning apps: BJT Study plus 12 JLPT N1 apps.
-- Opened every app in the local browser with dark mode active.
-- Exercised answer states in Grammar Exams, Kanji & Collocations, Reading 75, Reading 問題9, and Context Vocabulary.
-- Reviewed BJT Path, semantic vocabulary filters, expanded vocabulary insight, practice, and speaker control.
-- Applied the existing repository design system and the targeted-upgrade approach from Leonxlnx/taste-skill's `redesign-existing-projects` guidance.
+**Phạm vi:** JLPT N1 hub, BJT Study và 12 app JLPT N1 con
 
-## Learning flow
+## Bản đồ hệ sinh thái
 
-1. **Choose a learning area — healthy.** BJT now opens on Lộ trình; the duplicate Hôm nay destination and practice rail are removed.
-2. **Narrow the vocabulary set — healthy.** Vocabulary is divided into 14 meaning-led groups plus a transparent catch-all group. Search works inside the selected group and exposes the result count.
-3. **Inspect a term — healthy.** Available records show Kanji components, Hán Việt, On/Kun readings, confusion notes, reading traps, collocations, and synonyms through inline progressive disclosure.
-4. **Practice — healthy.** The speaker control sits beside the term as a real speaker icon. Answer selection, correct/wrong feedback, structured meaning, and examples remain on one focused column.
-5. **Review errors — healthy.** Incorrect items still enter Ôn sai; completing a session returns to the originating area.
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+flowchart LR
+  Catalog(["Learning Programs"]) --> JLPT["JLPT N1 Hub"]
+  Catalog --> BJT["BJT Study"]
+  Catalog -.-> Future["G検定 · AWS · FP3"]
 
-## App coverage
+  subgraph N1["12 app JLPT N1 con"]
+    JLPT --> Vocab["Từ vựng · 6 module"]
+    JLPT --> Grammar["Ngữ pháp · 4 module"]
+    JLPT --> Reading["Đọc hiểu · 2 module"]
+  end
 
-| App | Initial dark state | Answer/detail state | Result |
-| --- | --- | --- | --- |
-| BJT Study | checked | checked | passed |
-| N1 Grammar Exams | checked | checked | passed |
-| N1 Grammar Flashcards | checked | flip surface reviewed | passed |
-| N1 Grammar Sentence Order Drill | checked | choice surface reviewed | passed |
-| N1 Grammar Sentence Order | checked | set menu reviewed | passed |
-| N1 Kanji Analysis | checked | expanded reference pattern reviewed | passed |
-| N1 Kanji & Collocations | checked | checked | passed |
-| N1 Reading 75 | checked | checked | passed |
-| N1 Reading 問題9 | checked | checked | passed |
-| N1 Context Vocabulary | checked | checked | passed |
-| N1 Vocabulary Exams | checked | dense reference grid reviewed | passed |
-| N1 Vocabulary Paraphrase | checked | reference grid reviewed | passed |
-| N1 Vocabulary Tabs | checked | reference grid reviewed | passed |
+  JLPT --> JLPTPractice["Luyện tập chung"]
+  BJT --> BJTPractice["Từ vựng · Ngữ pháp · Mixed"]
+  JLPTPractice --> History["Learning History"]
+  BJTPractice --> History
+  History --> DB[("IndexedDB")]
+  DB --> Backup["Export / import JSON"]
 
-## Strengths
+  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
+  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
+  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
+  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
+  class Catalog yellow;
+  class JLPT,BJT,Future blue;
+  class Vocab,Grammar,Reading,JLPTPractice,BJTPractice pink;
+  class History,DB,Backup green;
+```
 
-- Warm charcoal replaces pure black and every tested answer/detail state keeps the same dark surface language.
-- Strong Japanese/Vietnamese typographic contrast makes scanning efficient without adding decorative noise.
-- Correct, incorrect, active, hover, and focus states retain distinct meanings.
-- Dense reference apps use constrained multi-column grids while quiz apps use a calmer single-task width.
-- BJT progressive disclosure adds study depth without forcing every vocabulary row to become tall.
+## Kết luận nhanh
 
-## Risks and follow-up
+- Hai hub đã thống nhất sidebar, màu sắc, spacing, theme switch và cách gọi tên chức năng.
+- BJT cung cấp lộ trình 9 module, 1.565 thuật ngữ, 84 mẫu ngữ pháp và 30 nhóm ý nghĩa.
+- JLPT tổ chức 12 app con thành 6 module từ vựng, 4 module ngữ pháp và 2 module đọc hiểu.
+- Cả hai hub có luyện tập 5, 10 hoặc 20 câu, giới hạn 30 giây mỗi câu và hiển thị đúng/tổng.
+- Learning history dùng chung lưu phiên, từng câu trả lời, thời lượng, mastery, lịch ôn và backup JSON.
+- Dark mode không còn surface trả lời trắng lạnh trong các state đã kiểm tra.
 
-- The legacy apps intentionally retain different local layouts, so the suite is coherent in color and interaction but is not a single component system.
-- 777 of 1,565 BJT terms receive at least partial Kanji-component data from the existing N1 source; 26 exact/normalized matches receive the full traps, collocations, and synonyms package. Missing records are not fabricated.
-- Automated meaning rules place every term in a group, but 933 uncommon or highly abstract terms remain in `Khái niệm khác`. A future editorial pass can manually distribute these edge cases.
-- Several legacy apps still use emoji inside old instructional copy. Replacing every emoji with one licensed icon family would improve suite-level icon consistency.
+## Coverage
 
-## Accessibility and evidence limits
+| Bề mặt | Initial state | Answer/detail state | Mobile | Kết quả |
+|---|---:|---:|---:|---|
+| JLPT N1 Hub | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| BJT Study | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| Grammar Exams | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| Grammar Flashcards | Đã kiểm tra | Flip state | Đã kiểm tra | Đạt |
+| Grammar Sentence Order | Đã kiểm tra | Set state | Đã kiểm tra | Đạt |
+| Grammar Sentence Order Drill | Đã kiểm tra | Choice state | Đã kiểm tra | Đạt |
+| Kanji Analysis | Đã kiểm tra | Expanded state | Đã kiểm tra | Đạt |
+| Kanji & Collocations | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| Reading 75 | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| Reading 問題9 | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| Context Vocabulary | Đã kiểm tra | Đã kiểm tra | Đã kiểm tra | Đạt |
+| Vocabulary Exams | Đã kiểm tra | Dense grid | Đã kiểm tra | Đạt |
+| Vocabulary Paraphrase | Đã kiểm tra | Reference grid | Đã kiểm tra | Đạt |
+| Vocabulary Tabs | Đã kiểm tra | Reference grid | Đã kiểm tra | Đạt |
 
-- Keyboard focus styling, semantic buttons/headings, aria labels on the BJT speaker control, reduced-motion support, and dark-theme contrast were inspected.
-- This was a visual and interaction audit, not a formal WCAG conformance certification or assistive-technology lab test.
-- Speech output depends on the browser's Web Speech implementation and installed Japanese voices.
+## Điểm mạnh
 
-## Screenshot evidence
+- Warm paper và warm charcoal giúp đọc lâu mà không tạo cảm giác trắng chói hoặc đen tuyệt đối.
+- Tương phản Nhật–Việt rõ; từ vựng và ngữ pháp dùng cấu trúc trường dữ liệu riêng.
+- Correct, wrong, selected, hover và focus state có ngữ nghĩa ổn định.
+- BJT dùng progressive disclosure để giữ danh sách gọn nhưng vẫn cung cấp Kanji, bẫy đọc, collocation và từ đồng nghĩa khi có dữ liệu.
+- Hub giúp người học đi thẳng tới nội dung theo mục tiêu thay vì phải hiểu cấu trúc 12 app con.
+- Kiến trúc history dùng chung có thể tái sử dụng cho G検定, AWS Cloud và FP3.
 
-- BJT path: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-full-audit-20260721/bjt-path.png`
-- BJT semantic groups: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-full-audit-20260721/bjt-vocab-groups-dark.png`
-- BJT vocabulary insight: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-full-audit-20260721/bjt-vocab-insight-dark-detail.png`
-- BJT speaker control: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-full-audit-20260721/bjt-practice-speaker-dark-final.png`
-- Per-app initial and selected-answer screenshots are stored in the same audit directory.
+## Khoảng trống còn lại
 
-final result: passed
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+flowchart LR
+  Current(["Hiện tại"]) --> Gap1["12 app con có progress adapter riêng"]
+  Current --> Gap2["JLPT quiz chung mới tập trung ngữ pháp"]
+  Current --> Gap3["Chưa đồng bộ nhiều thiết bị"]
+
+  Gap1 --> Next1["Learning adapter dùng chung"]
+  Gap2 --> Next2["Scope vocab · reading · mixed"]
+  Gap3 --> Next3["Account + cloud sync có consent"]
+
+  Next1 --> Goal(["Một learning platform thống nhất"])
+  Next2 --> Goal
+  Next3 --> Goal
+
+  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
+  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
+  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
+  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
+  class Current yellow;
+  class Gap1,Gap2,Gap3 pink;
+  class Next1,Next2,Next3 blue;
+  class Goal green;
+```
+
+### Ưu tiên 1 — hợp nhất progress adapter
+
+Mỗi app con cần gửi cùng một event contract: `session`, `answer`, `item`, `result`, `duration`, `mastery`. Đây là điều kiện để phần Thống kê JLPT phản ánh toàn bộ hoạt động thay vì chỉ quiz ở hub.
+
+### Ưu tiên 2 — mở rộng scope luyện JLPT
+
+Setup chung nên cho chọn từ vựng, ngữ pháp, đọc hiểu, mixed, câu sai và nội dung chưa gặp. Timer cần trở thành cấu hình của course thay vì giả định cố định cho mọi chứng chỉ tương lai.
+
+### Ưu tiên 3 — đồng bộ có chủ đích
+
+Local-first tiếp tục là mặc định. Cloud sync chỉ nên được thêm cùng đăng nhập, consent, chính sách xóa dữ liệu và cơ chế giải quyết xung đột nhiều thiết bị.
+
+## Chất lượng dữ liệu BJT
+
+- Phân tích parser giữ `Ý nghĩa` tách khỏi ví dụ Nhật–Việt.
+- Kanji insight chỉ hiển thị dữ liệu có nguồn; không tự bịa phần còn thiếu.
+- Những thuật ngữ không khớp luật semantic được giữ trong `Khái niệm khác` để người dùng biết giới hạn phân loại.
+- Nhóm `Khái niệm khác` vẫn cần editorial pass định kỳ khi bổ sung dữ liệu mới.
+
+## Accessibility và giới hạn audit
+
+- Đã kiểm tra focus-visible, heading/button semantics, aria label cho speaker, reduced-motion và contrast trong các state chính.
+- Mobile được kiểm tra ở 390 × 844; desktop ở 1440 × 1024.
+- Đây là visual/interaction audit, không phải chứng nhận WCAG hoặc kiểm thử đầy đủ bằng screen reader.
+- Speech phụ thuộc Web Speech API và voice tiếng Nhật của thiết bị.
+- Bằng chứng tạm không được ghi thành đường dẫn lâu dài trong repository; quy trình tái kiểm tra nằm trong [design-qa.md](design-qa.md).

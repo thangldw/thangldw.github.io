@@ -169,23 +169,6 @@
     return storePut('sessions', session).then(function () { return session; });
   }
 
-  function migrateLegacy(courseId, storageKey) {
-    var migrationKey = 'migration:' + courseId + ':' + storageKey;
-    return openDatabase().then(function (db) {
-      var transaction = db.transaction('meta', 'readwrite');
-      var store = transaction.objectStore('meta');
-      return requestPromise(store.get(migrationKey)).then(function (existing) {
-        if (existing) return existing;
-        var raw = window.localStorage.getItem(storageKey);
-        var snapshot = { key: migrationKey, courseId: courseId, source: storageKey, migratedAt: new Date().toISOString(), data: null };
-        if (raw) {
-          try { snapshot.data = JSON.parse(raw); } catch (error) { snapshot.data = raw; }
-        }
-        return storePut('meta', snapshot);
-      });
-    }).catch(function () {});
-  }
-
   function loadCourseState(courseId, fallback) {
     return openDatabase().then(function (db) {
       return requestPromise(db.transaction('meta', 'readonly').objectStore('meta').get('state:' + courseId));
@@ -391,7 +374,6 @@
     startSession: startSession,
     recordAnswer: recordAnswer,
     finishSession: finishSession,
-    migrateLegacy: migrateLegacy,
     loadCourseState: loadCourseState,
     saveCourseState: saveCourseState,
     retireLegacyKeys: retireLegacyKeys,

@@ -1,93 +1,101 @@
-# BJT Study Design QA
+# Design QA — thangldw.github.io
 
-- Source visual truth: `/Users/thang/.codex/generated_images/019f8080-13b9-77e0-bbce-852076c1b701/exec-360589a5-0e0c-4d3a-af45-45dc7981665c.png`
-- Implementation screenshot: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/bjt-structured-light-final.png`
-- Home light-theme screenshot: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/home-paper-light-final.png`
-- Mobile evidence: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/bjt-qa-mobile-1.png`
-- Viewport: desktop 1440 × 1024; mobile 390 × 844
-- State: light-theme daily lesson, first question, no answer selected
+Tài liệu này là release gate cấp repository. Chi tiết từng chương trình học nằm trong:
 
-## Full-view comparison evidence
+- [JLPT N1 Design QA](apps/jlpt-n1/design-qa.md)
+- [BJT Study Design QA](apps/bjt-study/design-qa.md)
+- [Japanese Learning Apps Audit](japanese-app-audit.md)
 
-The source and updated implementation were opened together in the same visual comparison input. The implementation preserves the source's 240px navigation rail, warm editorial canvas, orange active state, large mixed Vietnamese/Japanese lesson heading, single focused learning column, four bordered answer rows, black primary action language, and narrow three-step session rail. The major-region proportions, above-the-fold task, and responsive hierarchy are aligned.
+## Mô hình QA
 
-## Focused region comparison evidence
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+flowchart LR
+  Change(["Thay đổi code / data"]) --> Static["Syntax & validator"]
+  Static --> Visual["Desktop · mobile · theme"]
+  Visual --> Interaction["Happy path · error · timeout"]
+  Interaction --> Data["Persistence · reload · export"]
+  Data --> Gate{"Không còn lỗi P0–P2?"}
+  Gate -->|"Chưa"| Fix["Refactor và kiểm tra lại"]
+  Fix --> Static
+  Gate -->|"Đạt"| Diff["Đọc toàn bộ diff"]
+  Diff --> Publish(["Commit · push · Pages"])
 
-The lesson heading and question region were checked at original resolution because typography, wrapping, answer density, and column width are the fidelity-critical surfaces. The Japanese heading scale was reduced to 90% of the Vietnamese display size so the combined title stays on one line at 1440px, matching the source composition. The answer rows retain the source's spacing and visual order while accommodating longer real dataset definitions.
+  classDef yellow fill:#FFF2B2,stroke:#B7791F,color:#3B2F00,stroke-width:1px;
+  classDef blue fill:#D9E8FF,stroke:#4262FF,color:#172B4D,stroke-width:1px;
+  classDef green fill:#DDF5E7,stroke:#238653,color:#153B29,stroke-width:1px;
+  classDef pink fill:#FFE0EC,stroke:#C94F7C,color:#4A1730,stroke-width:1px;
+  class Change yellow;
+  class Static,Visual,Interaction,Data,Diff blue;
+  class Gate,Fix pink;
+  class Publish green;
+```
 
-## Findings
+## Trạng thái hiện tại
 
-No actionable P0, P1, or P2 mismatches remain.
+| Phạm vi | Desktop | Mobile | Dark mode | Dữ liệu | Kết quả |
+|---|---:|---:|---:|---:|---|
+| Trang chủ và catalog | Đạt | Đạt | Đạt | Không áp dụng | Đạt |
+| JLPT N1 hub | Đạt | Đạt | Đạt | IndexedDB | Đạt |
+| BJT Study | Đạt | Đạt | Đạt | IndexedDB | Đạt |
+| 12 app JLPT con | Đạt | Đạt | Đạt | Adapter riêng | Đạt, cần hợp nhất lịch sử |
+| Redirect compatibility | Đạt | Đạt | Không áp dụng | Không áp dụng | Đạt |
 
-- P3: The local Font Awesome subset uses slightly heavier filled icons than the source's outline icon language. This is acceptable because it avoids a new external dependency and remains consistent with the rest of the portfolio.
-- P3: Real Quizlet definitions vary in length, so some choices wrap to two lines while the mock uses uniformly short answers. The rows expand without clipping or horizontal overflow.
-- P3: The implementation screenshot is captured lower in the same lesson so the new structured answer fields can be inspected; the shell proportions still align with the source.
+## Design contract dùng chung
 
-## Required fidelity surfaces
+- Canvas sáng là warm paper; canvas tối là warm charcoal.
+- Orange biểu thị active/action trong learning apps; màu xanh chỉ giữ vai trò brand.
+- Sidebar desktop và mobile dùng cùng thứ tự điều hướng, spacing và trạng thái focus.
+- Answer, feedback và explanation không được quay về nền trắng lạnh trong dark mode.
+- Nội dung từ vựng tách `Từ vựng`, `Cách đọc`, `Âm Hán Việt`, `Ý nghĩa`, `Ví dụ`.
+- Nội dung ngữ pháp tách `Mẫu câu`, `Ý nghĩa`, `Giải thích tiếng Việt`, `Ví dụ`, `Bản dịch`.
+- Luyện tập hiển thị câu hiện tại, đúng/tổng, timer và trạng thái hết giờ.
+- Mọi control phải có focus-visible, nhãn truy cập được và không phụ thuộc duy nhất vào màu.
 
-- Fonts and typography: passed. System sans and Japanese Mincho fallbacks match the source's editorial sans/serif contrast; weights, line heights, antialiasing, and wrapping are stable.
-- Spacing and layout rhythm: passed. Rail widths, main-column padding, dividers, answer spacing, session-step rhythm, and subtle square radii match the reference closely.
-- Colors and visual tokens: passed. The light canvas is now warm paper (`#f3f0e8`) instead of cold white, and the dark canvas is warm charcoal (`#11130f`). Neutral rail, ink, rules, orange accent, success, and error states remain legible in both themes.
-- Image quality and asset fidelity: passed. The reference contains no photographic or illustrative assets. The implementation uses the existing licensed local icon font and does not substitute source imagery with CSS drawings or placeholders.
-- Copy and content: passed. Vocabulary feedback now separates term, reading, Sino-Vietnamese reading, meaning, and example. Grammar feedback separates pattern, meaning, Vietnamese explanation, Japanese example, and Vietnamese translation. Dataset-scale claims match the supplied files: 84 grammar patterns and 1,565 vocabulary terms.
+## Release checklist
 
-## Interaction and responsive verification
+### Code và repository
 
-- Selected an answer, checked it, and observed correct/incorrect feedback.
-- Opened vocabulary, searched for `契約`, and confirmed filtered results.
-- Switched to dark mode and back to light mode.
-- Verified dark body and card surfaces on the legacy N1 Vocabulary Exams app.
-- Verified `苦情` and `Vる・Vない＋ことにしている` through the full answer-and-feedback flow.
-- Opened the mobile navigation at 390px.
-- Confirmed mobile `scrollWidth` equals `clientWidth` (390px), with no horizontal overflow.
-- Checked browser console warnings and errors: none.
+- [ ] Không còn code chết, duplicate module hoặc debug log.
+- [ ] Không commit cache, file tạm, ảnh bằng chứng ngoài repository hoặc secret.
+- [ ] File mới có consumer rõ ràng; asset cũ không còn dùng phải được xóa.
+- [ ] `git diff --check` không báo lỗi.
+- [ ] `git status --short` chỉ chứa thay đổi thuộc phạm vi release.
 
-## Comparison history
+### Chức năng
 
-1. Initial P2: the title sat too low and the Japanese subtitle wrapped because the context label occupied a separate row and both scripts used the same 55px display size.
-2. Fix: merged the BJT context into the date row, reduced the display maximum to 48px, and set the Japanese title to 90% of the Vietnamese size.
-3. Post-fix evidence: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/bjt-qa-desktop-final.png`; the title now matches the source's single-line hierarchy and the lesson content begins at the same visual depth.
+- [ ] Happy path hoàn tất từ điểm vào đến kết quả.
+- [ ] Empty, wrong-answer, timeout và reload state hoạt động.
+- [ ] Dữ liệu mới tồn tại sau reload.
+- [ ] Export/import được kiểm tra khi schema thay đổi.
 
-## Implementation checklist
+### Giao diện
 
-- [x] Desktop source fidelity
-- [x] Mobile responsive behavior
-- [x] Primary learning flow
-- [x] Search and review states
-- [x] Light and dark themes
-- [x] Structured vocabulary and grammar feedback
-- [x] Warm-paper home theme
-- [x] Console and site validation
+- [ ] Desktop và mobile không có horizontal overflow.
+- [ ] Light/dark theme có độ tương phản và surface nhất quán.
+- [ ] Text Nhật–Việt không bị cắt, tràn hoặc lẫn trường dữ liệu.
+- [ ] Keyboard focus và reduced-motion vẫn hoạt động.
 
-## Follow-up polish
+### Phát hành
 
-- Consider adding a lighter outline icon set to the shared portfolio assets in a future design-system pass.
-- Consider translating the remaining Japanese-only examples during a dedicated editorial pass; they are now structurally separated and no longer contaminate quiz meanings.
+- [ ] Chạy `python3 scripts/validate_site.py`.
+- [ ] Chạy syntax check cho JavaScript đã thay đổi.
+- [ ] Đọc toàn bộ diff trước commit.
+- [ ] GitHub Pages deployment hoàn tất thành công.
+- [ ] Kiểm tra URL live tải đúng version asset mới.
 
-## 2026-07-21 Japanese app suite follow-up
+## Chính sách bằng chứng
 
-- User reference: `/var/folders/sm/d8hb2_5s40965vv4h1zxl_xc0000gn/T/codex-clipboard-35f016ac-2d17-433f-98d8-a111bc9ba891.png`
-- Final context-vocabulary screenshot: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/context-vocabulary-paper-final.png`
-- BJT `ごねる` verification: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/bjt-goneru-final.png`
-- Audited all 12 legacy Japanese-learning apps in both light and dark themes. No visible near-white large card/answer surfaces, low-contrast dark-theme text, or desktop horizontal overflow remain.
-- Verified context-vocabulary normal, correct, and wrong answer states use the shared paper/success/danger tokens.
-- Audited all 1,565 BJT vocabulary records with the same parser used by the browser. The audit separates 385 Japanese examples, preserves examples starting with digits or Latin characters, and does not mistake the colon in `3対2` for an example delimiter.
-- Verified the full `ごねる` search, practice, answer, and feedback flow: the meaning ends at `Làm khó, gây khó dễ`; the Japanese and Vietnamese sentences appear only under `Ví dụ`.
+- Không ghi đường dẫn `/tmp`, clipboard hoặc ảnh nằm ngoài repository vào báo cáo dài hạn.
+- Ảnh tạm chỉ dùng trong phiên QA và có thể xóa sau khi kết luận.
+- Báo cáo giữ lại viewport, state, bước tái hiện, kết quả và giới hạn kiểm tra.
+- Nếu cần bằng chứng lâu dài, asset phải được đặt trong thư mục tài liệu của repository và có liên kết tương đối.
 
-## 2026-07-21 Context Vocabulary explanation-card follow-up
+## Mức độ lỗi
 
-- User reference: `/var/folders/sm/d8hb2_5s40965vv4h1zxl_xc0000gn/T/codex-clipboard-a9b0a0aa-91a8-402d-b128-825ec5d193e5.png`
-- Final implementation: `/Users/thang/.codex/visualizations/2026/07/20/019f8080-13b9-77e0-bbce-852076c1b701/japanese-app-audit/context-vocabulary-explanation-paper-final.png`
-- Fixed the expanded answer-detail bodies (`.wbody`) and their containing cards (`.wcard`) so every meaning, Vietnamese definition, and set-expression block uses the same warm paper surface as the quiz instead of the near-white portfolio surface.
-- Verified the complete answer flow for `添加` in light and dark themes. Light detail surfaces resolve to the warm mixed paper color; dark detail surfaces resolve to charcoal with readable text and no horizontal overflow.
-
-final result: passed
-
-## 2026-07-21 Full Japanese app audit and BJT vocabulary enrichment
-
-- Full audit report: `japanese-app-audit.md`
-- Removed the duplicate BJT Hôm nay flow and made Lộ trình the default destination.
-- Added meaning-led vocabulary filters, inline Kanji analysis, reading traps, collocations, and synonyms from the existing N1 data source.
-- Added a real licensed speaker asset and placed it beside the practice term.
-- Rechecked all 12 legacy N1 apps in dark mode and tested selected-answer states in the five core quiz/reading patterns; no cold-white answer or explanation surfaces remain.
-- Added safe title wrapping and narrower mobile display sizing to the shared Japanese-app readability layer.
+| Mức | Ý nghĩa | Release gate |
+|---|---|---|
+| P0 | Mất dữ liệu, không mở được app hoặc lỗi bảo mật nghiêm trọng | Chặn release |
+| P1 | Luồng chính không hoàn thành hoặc sai kết quả | Chặn release |
+| P2 | Lỗi responsive, accessibility hoặc state quan trọng | Chặn release |
+| P3 | Khác biệt polish không làm hỏng tác vụ | Ghi nhận và lên lịch |
