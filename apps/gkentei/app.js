@@ -211,19 +211,21 @@
     var rows = categories.map(function (category, index) {
       var done = category.questions.filter(function (question) { return completed.has(question.id); }).length;
       var categoryProgress = Math.round(done / category.questions.length * 100);
-      return '<button class="gk-module-row' + (done ? ' is-started' : '') + '" type="button" data-category="' + category.code + '">' +
+      var learningState = done === category.questions.length ? '習得済み' : (done ? '学習中' : '未学習');
+      return '<button class="gk-module-row' + (done ? ' is-started' : '') + (done === category.questions.length ? ' is-complete' : '') + '" type="button" data-category="' + category.code + '">' +
         '<span class="gk-module-index">' + String(index + 1).padStart(2, '0') + '</span>' +
         '<span class="gk-module-icon">' + icon(category.icon) + '</span>' +
         '<span class="gk-module-copy"><strong lang="ja">' + escapeHtml(category.ja) + '</strong><small>シラバス2024 v1.4</small></span>' +
-        '<span class="gk-module-state"><strong>' + (done ? categoryProgress + '%' : '未学習') + '</strong><small>' + done + ' / ' + category.questions.length + ' 問</small></span>' +
-        icon('fa-arrow-right') + '</button>';
+        '<span class="gk-module-state"><strong>' + learningState + ' · ' + categoryProgress + '%</strong><small>' + done + ' / ' + category.questions.length + ' 問学習済み</small></span>' +
+        '<progress class="gk-module-progress" max="' + category.questions.length + '" value="' + done + '" aria-label="' + escapeHtml(category.ja) + 'の進捗">' + categoryProgress + '%</progress>' +
+        '<span class="gk-module-arrow">' + icon('fa-arrow-right') + '</span></button>';
     }).join('');
 
     appView.innerHTML = '<section class="gk-view">' +
       headerHtml('G検定 · シラバス2024 · 学習ロードマップ', 'G検定ロードマップ', 'シラバスv1.4の495キーワードを、人工知能の基礎から法律・ガバナンスまで体系的に学習します。', progressPanel, false) +
       '<section class="gk-summary-strip" aria-label="問題集の概要"><div><strong>900</strong><span>監査済み問題</span></div><div><strong>495</strong><span>シラバスキーワード</span></div><div><strong>55</strong><span>学習項目</span></div><div><strong>11</strong><span>重点分野</span></div></section>' +
       '<div class="gk-section-heading"><div><span>11の重点分野</span><h2>シラバス順に学ぶ</h2></div><p>苦手な分野から始めるか、上から順に学習してください。</p></div>' +
-      '<section class="gk-module-list">' + rows + '</section></section>';
+      '<section class="gk-module-list" aria-label="重点分野の学習ロードマップ">' + rows + '</section></section>';
   }
 
   function categoryOptions(selected, includeAll) {

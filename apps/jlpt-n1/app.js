@@ -208,9 +208,15 @@
       var section = MODULES[key];
       var count = sectionProgress(section);
       var names = allModules(section).map(function (item) { return item.title; }).join(' · ');
-      return '<button class="track-row" type="button" data-view-target="' + key + '"><span class="track-num">0' + (index + 1) + '</span><span class="track-title"><strong>' + escapeHtml(section.title) + '</strong><small>' + allModules(section).length + ' module</small></span><span class="track-modules">' + escapeHtml(names) + '</span><span class="track-progress"><strong>' + count.percent + '%</strong><span>' + count.done + '/' + count.total + ' đã mở</span></span></button>';
+      var learningState = count.done === count.total ? 'Hoàn thành' : (count.done ? 'Đang học' : 'Chưa bắt đầu');
+      return '<button class="track-row' + (count.done ? ' is-started' : '') + (count.done === count.total ? ' is-complete' : '') + '" type="button" data-view-target="' + key + '">' +
+        '<span class="track-num">0' + (index + 1) + '</span>' +
+        '<span class="track-title"><strong>' + escapeHtml(section.title) + '</strong><small>' + allModules(section).length + ' module</small></span>' +
+        '<span class="track-modules">' + escapeHtml(names) + '</span>' +
+        '<span class="track-progress"><strong>' + count.percent + '%</strong><span>' + learningState + ' · ' + count.done + '/' + count.total + ' đã mở</span></span>' +
+        '<progress class="track-meter" max="' + count.total + '" value="' + count.done + '" aria-label="Tiến độ ' + escapeHtml(section.title) + '">' + count.percent + '%</progress></button>';
     }).join('');
-    appView.innerHTML = '<section class="view"><header class="view-header"><div><p class="eyebrow">JLPT N1 · Lộ trình · 学習プラン</p><h1 class="view-title">Chương trình JLPT N1</h1><p class="view-lead">Mười hai công cụ hiện tại được tổ chức thành ba trụ cột để bạn luôn biết mình đang học gì và nên đi tiếp ở đâu.</p></div><div class="progress-panel"><div class="progress-copy"><span>Tiến độ chương trình</span><strong>' + Math.round(done / total * 100) + '%</strong></div><div class="progress-track"><span class="progress-fill" style="width:' + Math.round(done / total * 100) + '%"></span></div><div class="progress-detail">' + done + ' / ' + total + ' module đã mở</div><button class="primary-action" type="button" data-view-target="vocabulary"><span>' + icon('fa-play') + ' Tiếp tục lộ trình</span>' + icon('fa-arrow-right') + '</button></div></header><div class="overview-list">' + rows + '</div></section>';
+    appView.innerHTML = '<section class="view"><header class="view-header"><div><p class="eyebrow">JLPT N1 · Lộ trình · 学習プラン</p><h1 class="view-title">Chương trình JLPT N1</h1><p class="view-lead">Mười hai công cụ hiện tại được tổ chức thành ba trụ cột để bạn luôn biết mình đang học gì và nên đi tiếp ở đâu.</p></div><div class="progress-panel"><div class="progress-copy"><span>Tiến độ chương trình</span><strong>' + Math.round(done / total * 100) + '%</strong></div><div class="progress-track"><span class="progress-fill" style="width:' + Math.round(done / total * 100) + '%"></span></div><div class="progress-detail">' + done + ' / ' + total + ' module đã mở</div><button class="primary-action" type="button" data-view-target="vocabulary"><span>' + icon('fa-play') + ' Tiếp tục lộ trình</span>' + icon('fa-arrow-right') + '</button></div></header><section class="overview-list" aria-label="Các trụ cột học tập JLPT N1">' + rows + '</section></section>';
   }
 
   function renderSimple(view) {
