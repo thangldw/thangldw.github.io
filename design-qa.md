@@ -192,3 +192,49 @@ Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定,
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 
 **final result: passed**
+
+## Vocabulary Exams compact library shell — 2026-07-22
+
+### Comparison target
+
+- Source visual truth: `/var/folders/sm/d8hb2_5s40965vv4h1zxl_xc0000gn/T/codex-clipboard-e47c93fd-155c-4203-a641-e739a1090108.png`.
+- Implementation screenshot: `/tmp/n1-vocabulary-exams-after.png`.
+- Responsive evidence: `/tmp/n1-vocabulary-exams-mobile.png` and `/tmp/n1-vocabulary-exams-mobile-dark.png`.
+- Desktop viewport: 1990 × 722 CSS px; source file 1990 × 722 px; browser capture 1961 × 722 px because the in-app browser reserves its scrollbar region; device scale factor 1.
+- Mobile viewport: 390 × 844 CSS px; capture 390 × 844 px; device scale factor 1.
+- State: `単語リスト`, all filters selected, light theme for the primary comparison; mobile checked in both light and dark themes.
+
+### Full-view and focused comparison evidence
+
+The source capture was the rejected state rather than a desired mock. The comparison therefore checks whether the reported visual problems were removed while preserving the same information and controls. Source and implementation were opened together in one visual comparison input. The implementation reduces the oversized headline, constrains header and tabs to the content grid, replaces filled boxed tabs with a quiet underline state, groups search/select/count controls in one toolbar, and keeps three vocabulary columns at desktop.
+
+Focused checks covered the header title and badges, tab selected state, search/select row, part-of-speech controls and the first vocabulary-card row. No image or custom icon asset was required; the affected surface contains only typography, controls and borders.
+
+### Required fidelity surfaces
+
+- Fonts and typography: UI and Japanese font tokens are retained; desktop title is 36 px/1.08 and mobile title is 28 px without clipping.
+- Spacing and layout rhythm: content aligns to the 1328 px repository grid; header is 107 px high; tabs are 48 px; toolbar spacing follows the shared scale; no horizontal overflow at 390 or 1990 px.
+- Colors and tokens: canvas, surfaces, borders, ink, muted text and accent use shared portfolio tokens in light and dark themes.
+- Image quality: not applicable; the component has no raster, logo or illustration asset.
+- Copy and content: exam name, 問題1〜4, counts, tabs, filters and all study data are preserved.
+
+### Comparison history
+
+1. Initial finding — P1: the title dominated the screen and combined English, Japanese and date metadata in one line. Fix: split metadata, title and statistics into a compact responsive header.
+2. Initial finding — P2: tabs looked like large filled buttons and competed with the content. Fix: introduced a semantic tablist with a transparent underline-selected state and roving keyboard focus.
+3. Initial finding — P2: search, selects, count and part-of-speech filters lacked a shared container and broke visual rhythm. Fix: grouped them into a bordered toolbar with a responsive grid.
+4. Post-fix evidence: desktop and mobile captures show the fixes; 390 px has `scrollWidth === 390`; 1990 px has no document overflow; light/dark console checks contain no errors or warnings.
+
+### Findings
+
+No actionable P0, P1 or P2 findings remain. The source crop omits the global site header while the browser evidence includes it; this is an expected capture-boundary difference and does not affect the redesigned component.
+
+### Interaction verification
+
+- Mouse/touch tab selection switches the correct tabpanel.
+- ArrowRight moves focus and selection to the next tab.
+- Search, native selects and part-of-speech buttons retain minimum target sizes and accessible names.
+- Filter buttons expose `aria-pressed`; tabs expose `role`, `aria-selected`, `aria-controls` and roving `tabindex`.
+- Browser console: zero errors and warnings in mobile light/dark checks.
+
+**final result: passed**
