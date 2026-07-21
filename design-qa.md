@@ -158,6 +158,13 @@ Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定,
 - Checksum hai payload lớn chứa 300 câu, đáp án và giải thích không đổi.
 - Chrome smoke xác nhận chọn đáp án, feedback, giải thích, Danh sách, Ôn sai và layout 390 px hoạt động.
 
+## Refactor Kanji Analysis — 2026-07-22
+
+- Tách CSS nội bộ sang `apps/n1-kanji-analysis/styles.css` và thay handler inline bằng event delegation.
+- Debt ledger giảm từ 1 style block, 32 event handler và 27 button thiếu type xuống 0.
+- Checksum payload chứa 348 mục phân tích kanji không đổi.
+- Chrome smoke xác nhận tìm kiếm, lọc theo kỳ, mở chi tiết bằng chuột/bàn phím và layout 390 px hoạt động.
+
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 
 **final result: passed**
