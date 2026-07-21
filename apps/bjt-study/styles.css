@@ -222,6 +222,7 @@ a { color: inherit; }
 .grammar-insight .insight-core { margin-top: 0; }
 .dictionary-credit { margin: 12px 0 0; color: var(--bjt-muted); font-size: 9px; line-height: 1.45; }
 .dictionary-credit a { color: inherit; text-underline-offset: 2px; }
+.copyright-note { margin: 0; color: var(--bjt-muted); font-size: 10px; line-height: 1.5; }
 .empty-state { border-top: 1px solid var(--bjt-rule); padding: 46px 0; color: var(--bjt-muted); }
 
 .path-group { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 30px; border-top: 1px solid var(--bjt-rule); padding: 28px 0; }
@@ -284,7 +285,11 @@ a { color: inherit; }
   .primary-nav.is-open { display: grid; }
   .nav-item { min-height: 43px; padding-inline: 12px; }
   .nav-item::before { inset: auto 12px 0; width: auto; height: 2px; }
-  .sidebar-foot { display: none; }
+  .sidebar-foot { display: none; gap: 10px; margin-top: 0; border-top: 1px solid var(--bjt-rule); padding: 14px 18px 18px; }
+  .primary-nav.is-open + .sidebar-foot { display: grid; }
+  .sidebar-foot .dataset-summary { display: none; }
+  .dictionary-credit { margin-top: 0; font-size: 10px; }
+  .portfolio-link { min-height: 44px; }
   .view-shell { display: block; min-height: auto; }
   .main-column { padding: 30px 24px 48px; }
   .session-rail { border: 0; border-top: 1px solid var(--bjt-rule); padding: 30px 24px 34px; }
