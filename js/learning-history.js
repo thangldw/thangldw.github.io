@@ -186,6 +186,53 @@
     }).catch(function () {});
   }
 
+  function loadCourseState(courseId, fallback) {
+    return openDatabase().then(function (db) {
+      return requestPromise(db.transaction('meta', 'readonly').objectStore('meta').get('state:' + courseId));
+    }).then(function (record) {
+      return record && record.data ? record.data : fallback;
+    }).catch(function () { return fallback; });
+  }
+
+  function saveCourseState(courseId, data) {
+    return storePut('meta', {
+      key: 'state:' + courseId,
+      courseId: courseId,
+      updatedAt: new Date().toISOString(),
+      data: data
+    });
+  }
+
+  function retireLegacyKeys(courseId, storageKeys) {
+    return openDatabase().then(function (db) {
+      return new Promise(function (resolve, reject) {
+        var transaction = db.transaction('meta', 'readwrite');
+        var store = transaction.objectStore('meta');
+        var markerKey = 'legacy-retired:' + courseId;
+        var shouldRemove = false;
+        var markerRequest = store.get(markerKey);
+        markerRequest.onsuccess = function () {
+          if (markerRequest.result) return;
+          shouldRemove = true;
+          storageKeys.forEach(function (storageKey) {
+            store.delete('migration:' + courseId + ':' + storageKey);
+          });
+          store.put({
+            key: markerKey,
+            courseId: courseId,
+            retiredAt: new Date().toISOString(),
+            storageKeys: storageKeys.slice()
+          });
+        };
+        transaction.oncomplete = function () {
+          if (shouldRemove) storageKeys.forEach(function (storageKey) { window.localStorage.removeItem(storageKey); });
+          resolve();
+        };
+        transaction.onerror = function () { reject(transaction.error); };
+      });
+    });
+  }
+
   function dayKey(value) {
     var date = new Date(value);
     return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, '0'), String(date.getDate()).padStart(2, '0')].join('-');
@@ -345,6 +392,9 @@
     recordAnswer: recordAnswer,
     finishSession: finishSession,
     migrateLegacy: migrateLegacy,
+    loadCourseState: loadCourseState,
+    saveCourseState: saveCourseState,
+    retireLegacyKeys: retireLegacyKeys,
     getCourseSummary: getCourseSummary,
     exportData: exportData,
     importData: importData,

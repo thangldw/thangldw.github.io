@@ -75,41 +75,35 @@
     }
   };
 
-  var progress = loadProgress();
+  var progress = emptyProgress();
   var state = parseHash();
   var quizSize = 10;
   var quizSession = null;
   var quizTimer = null;
 
-  if (window.LearningHistory) window.LearningHistory.migrateLegacy('jlpt-n1', STORAGE_KEY);
+  function emptyProgress() {
+    return { visited: {}, lastModule: 'kanji-analysis' };
+  }
 
-  updateWrongCount();
-
-  function loadProgress() {
-    try {
-      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-      return {
-        visited: saved.visited || {},
-        lastModule: saved.lastModule || 'kanji-analysis'
-      };
-    } catch (error) {
-      return { visited: {}, lastModule: 'kanji-analysis' };
-    }
+  function normalizeProgress(saved) {
+    saved = saved || {};
+    return {
+      visited: saved.visited || {},
+      lastModule: saved.lastModule || 'kanji-analysis'
+    };
   }
 
   function saveProgress() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    if (window.LearningHistory) return window.LearningHistory.saveCourseState('jlpt-n1', progress).catch(function () {});
+    return Promise.resolve();
   }
 
   function updateWrongCount() {
-    var count = 0;
-    try {
-      var saved = JSON.parse(localStorage.getItem('jlpt_wrong') || '[]');
-      count = Array.isArray(saved) ? saved.length : 0;
-    } catch (error) {
-      count = 0;
-    }
-    document.getElementById('wrongCount').textContent = count ? String(count) : '';
+    if (!window.LearningHistory) return;
+    window.LearningHistory.getCourseSummary('jlpt-n1').then(function (summary) {
+      var count = summary.items.filter(function (item) { return item.lastResult === 'wrong'; }).length;
+      document.getElementById('wrongCount').textContent = count ? String(count) : '';
+    }).catch(function () {});
   }
 
   function allModules(section) {
@@ -343,7 +337,7 @@
         isCorrect: correct,
         timedOut: timedOut,
         responseTimeSeconds: 30 - quizSession.seconds
-      }).catch(function () {});
+      }).then(updateWrongCount).catch(function () {});
     }
     renderQuizQuestion();
     bindViewEvents();
@@ -435,10 +429,15 @@
       });
     });
     appView.querySelectorAll('.module-link').forEach(function (link) {
-      link.addEventListener('click', function () {
+      link.addEventListener('click', function (event) {
         progress.visited[link.dataset.module] = true;
         progress.lastModule = link.dataset.module;
-        saveProgress();
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+          saveProgress();
+          return;
+        }
+        event.preventDefault();
+        saveProgress().then(function () { window.location.href = link.href; });
       });
     });
   }
@@ -477,5 +476,20 @@
     render();
   });
 
-  render();
+  function initializeApp() {
+    if (!window.LearningHistory) {
+      render();
+      return;
+    }
+    Promise.all([
+      window.LearningHistory.retireLegacyKeys('jlpt-n1', [STORAGE_KEY, 'jlpt_wrong']),
+      window.LearningHistory.loadCourseState('jlpt-n1', emptyProgress())
+    ]).then(function (results) {
+      progress = normalizeProgress(results[1]);
+      updateWrongCount();
+      render();
+    }).catch(function () { render(); });
+  }
+
+  initializeApp();
 }());
