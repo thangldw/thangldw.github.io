@@ -350,22 +350,22 @@ body[data-app-route="gkentei"] .gk-secondary-action:hover {
 .gk-section-heading h2 { margin: 5px 0 0; color: var(--portfolio-ink); font-size: 24px; letter-spacing: -.02em; }
 .gk-section-heading p { max-width: 390px; margin: 0; color: var(--portfolio-muted); font-size: 13px; line-height: 1.5; }
 
-.gk-module-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.gk-module-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 
 body[data-app-route="gkentei"] .gk-module-row {
   position: relative;
   width: 100%;
-  min-height: 176px;
+  min-height: 184px;
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) 22px;
+  grid-template-columns: 46px minmax(0, 1fr) 18px;
   grid-template-areas:
     "index copy arrow"
     "icon state state"
     "progress progress progress";
   grid-template-rows: auto 1fr auto;
   align-items: start;
-  gap: 14px 16px;
-  padding: 20px;
+  gap: 13px 14px;
+  padding: 18px;
   border: 1px solid var(--portfolio-border);
   border-radius: 10px;
   background: transparent;
@@ -388,8 +388,8 @@ body[data-app-route="gkentei"] .gk-module-row {
 .gk-module-icon {
   grid-area: icon;
   align-self: end;
-  width: 52px;
-  height: 52px;
+  width: 46px;
+  height: 46px;
   display: grid;
   place-items: center;
   border: 1px solid var(--portfolio-border);
@@ -398,7 +398,7 @@ body[data-app-route="gkentei"] .gk-module-row {
 }
 
 .gk-module-copy { grid-area: copy; display: grid; gap: 7px; min-width: 0; }
-.gk-module-copy strong { color: var(--portfolio-ink); font-size: 17px; }
+.gk-module-copy strong { color: var(--portfolio-ink); font-size: 16px; line-height: 1.4; }
 .gk-module-copy small,
 .gk-module-state small { color: var(--portfolio-muted); font-size: 12px; line-height: 1.45; }
 .gk-module-state { grid-area: state; align-self: end; display: grid; gap: 5px; }
@@ -635,6 +635,10 @@ body[data-app-route="gkentei"] .gk-example-question > button { grid-column: 2; g
 .gk-history-row > div:last-child { text-align: right; }
 .gk-history-row strong { color: var(--portfolio-ink); font-size: 13px; }
 .gk-history-row span { color: var(--portfolio-muted); font-size: 11px; }
+
+@media (max-width: 1180px) {
+  .gk-module-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 @media (max-width: 1040px) {
   .gk-shell { grid-template-columns: 220px minmax(0, 1fr); }
