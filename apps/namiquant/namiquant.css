@@ -10,7 +10,7 @@
 .nq-hero h1 span { color: var(--portfolio-accent); }
 .nq-lead { max-width: 620px; margin: 28px 0 0; color: var(--portfolio-body); font-size: 18px; line-height: 1.65; }
 .nq-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 30px; }
-.nq-actions a { display: inline-flex; align-items: center; gap: 10px; min-height: 43px; padding: 0 15px; border: 1px solid var(--portfolio-accent); background: var(--portfolio-accent); color: var(--portfolio-accent-ink); font-size: 13px; font-weight: 650; }
+.nq-actions a { display: inline-flex; align-items: center; gap: 10px; min-height: 43px; padding: 0 15px; border: 1px solid var(--portfolio-accent); border-radius: 8px; background: var(--portfolio-accent); color: var(--portfolio-accent-ink); font-size: 13px; font-weight: 650; }
 .nq-actions a.quiet { border-color: var(--portfolio-border-strong); background: var(--portfolio-surface); color: var(--portfolio-body); }
 .nq-disclosure { display: flex; gap: 10px; max-width: 590px; margin: 28px 0 0; padding-top: 18px; border-top: 1px solid var(--portfolio-border); color: var(--portfolio-muted); font: 400 11px/1.55 var(--portfolio-font-mono); }
 .nq-disclosure i { width: 7px; height: 7px; flex: none; margin-top: 5px; border-radius: 50%; background: var(--nq-amber); box-shadow: 0 0 0 4px color-mix(in srgb, var(--nq-amber) 15%, transparent); }

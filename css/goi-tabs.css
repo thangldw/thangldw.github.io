@@ -28,10 +28,10 @@ body { background: var(--goi-bg); color: var(--goi-ink); }
 .hbdg { padding: 5px 10px; background: var(--goi-chip); border-color: var(--goi-border); color: var(--goi-body); font: 500 11px var(--font-mono, var(--portfolio-font-mono)); }
 .hbdg.gr { background: transparent; border-color: var(--goi-border); color: var(--goi-body); }
 
-.mtabs { gap: 4px; padding: 8px 48px 0; background: var(--goi-bg); border-bottom: 1px solid var(--goi-border); }
-.mtab { padding: 10px 13px; color: var(--goi-body); border-bottom-width: 2px; font-size: 13px; }
+.mtabs { gap: 8px; padding: 8px 48px; background: var(--goi-bg); border: 0; }
+.mtab { min-height: 40px; margin-bottom: 0; padding: 8px 13px; color: var(--goi-body); border: 1px solid var(--goi-border); border-radius: 8px; background: transparent; font-size: 13px; }
 .mtab:hover { color: var(--goi-accent); }
-.mtab.on { color: var(--goi-accent); border-bottom-color: var(--goi-accent); }
+.mtab.on { color: var(--goi-accent); border-color: var(--goi-accent); }
 .stabs { padding: 12px 48px 5px; gap: 8px; background: var(--goi-bg); border: 0; }
 .stab { min-height: 34px; padding: 6px 14px; border: 1px solid var(--goi-border); color: var(--goi-body); background: transparent; }
 .stab.on,.stab.v.on,.stab.n.on,.stab.adj.on,.stab.adv.on { color: #fff; background: var(--goi-accent); border-color: var(--goi-accent); }

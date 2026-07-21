@@ -177,3 +177,31 @@ flowchart LR
 **Follow-up polish:** P3 — có thể chuẩn hóa radius của card không tương tác trong một vòng thiết kế riêng; không thuộc yêu cầu button hiện tại.
 
 **final result: passed**
+
+## Audit control, typography và responsive toàn project — 2026-07-22
+
+- **Phạm vi:** 21 route chính trong sitemap, gồm catalog, JLPT/BJT, 12 app học tiếng Nhật và các app dữ liệu/kỹ thuật.
+- **Bằng chứng tạm:** `/Users/thang/.codex/visualizations/2026/07/21/019f8268-aa28-7a12-8266-e5c88cfbd36c/project-ui-audit-2026-07-22/`.
+- **Viewport:** 1440 × 900 và 390 × 844.
+- **State:** light và dark; kiểm tra computed cascade cho nền, chữ, border và active state.
+- **Tương tác chính:** đổi theme, mở JLPT/BJT subject, chuyển tab, mở lịch sử và render danh sách từ vựng.
+
+### Kết quả và thay đổi
+
+1. **P2 — tab active dùng underline cũ:** `n1-vocabulary-tabs`, JLPT và BJT trộn underline với button bo góc. Đã chuyển thành bordered tab 8 px, bỏ margin âm và pseudo underline.
+2. **P2 — module link và icon còn vuông:** hàng module JLPT/BJT đã trở thành surface tương tác 10 px; icon bên trong cũng dùng 10 px.
+3. **P2 — “Tiến bộ BJT” siết dấu tiếng Việt:** heading lịch sử dùng tracking `-.055em` và line-height `.98`. Đã cố định system sans, tracking `-.025em`, line-height `1.05` và weight 700.
+4. **P3 — control 0–7 px rải rác:** input, select, CTA, filter và theme control trong app dữ liệu, NamiQuant và Kakeflow đã thống nhất tối thiểu 8 px; answer option giữ 10 px.
+5. **P3 — Leaflet zoom nhìn vuông:** wrapper zoom dùng radius 8 px và `overflow: hidden`; đường phân cách giữa hai nút vẫn giữ để thể hiện segmented control.
+
+### Verification
+
+- 21/21 route không có horizontal document overflow ở cả hai viewport.
+- Không còn decorated control độc lập dưới 8 px; cạnh trong của segmented Leaflet zoom là ngoại lệ có chủ đích, wrapper ngoài 8 px.
+- Dark state của Vocabulary Tabs: body `rgb(17, 19, 15)`, card `rgb(25, 27, 23)`, active tab radius 8 px; không có màu light ghi đè.
+- Mobile JLPT: tab 8 px, module row/icon 10 px, không clipping hoặc overflow.
+- `python3 scripts/validate_site.py`: 37 HTML pages, 14 redirects, 22 sitemap URLs và toàn bộ local references hợp lệ.
+
+**Evidence limits:** screenshot không chứng minh đầy đủ WCAG; semantics, focus-visible và kích thước control được kiểm tra từ DOM/computed style, nhưng screen reader thực tế chưa được chạy.
+
+**final result: passed**
