@@ -224,6 +224,7 @@ Focused checks covered the header title and badges, tab selected state, search/s
 2. Initial finding — P2: tabs looked like large filled buttons and competed with the content. Fix: introduced a semantic tablist with a transparent underline-selected state and roving keyboard focus.
 3. Initial finding — P2: search, selects, count and part-of-speech filters lacked a shared container and broke visual rhythm. Fix: grouped them into a bordered toolbar with a responsive grid.
 4. Post-fix evidence: desktop and mobile captures show the fixes; 390 px has `scrollWidth === 390`; 1990 px has no document overflow; light/dark console checks contain no errors or warnings.
+5. Follow-up finding — P2: the full-width beige tab rail still formed a visually heavy band behind the quiet tabs. Fix: matched the rail to the page canvas and retained only the lower separator plus the active-tab underline.
 
 ### Findings
 
