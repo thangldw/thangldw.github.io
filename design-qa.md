@@ -172,6 +172,12 @@ Smoke suite mở browser thật và kiểm tra roadmap/navigation của G検定,
 - Legacy debt của route giảm từ `1 / 8 / 18 / 17` xuống `0 / 0 / 0 / 0` theo thứ tự style block / style attribute / event handler / button thiếu type.
 - Chrome smoke xác nhận chọn đáp án, feedback, lưu câu sai, chuyển câu, Set Phrases và layout 390 px hoạt động.
 
+## Tách payload JLPT N1 — 2026-07-22
+
+- Tách dữ liệu khỏi HTML của Vocabulary Tabs, Vocabulary Exams, Grammar Exams, Kanji Analysis và Kanji Collocations sang `data.js` theo từng route.
+- Tổng kích thước năm HTML giảm từ khoảng 2,07 MB xuống khoảng 149 KB; các payload được cache và bảo trì độc lập với markup/logic giao diện.
+- Hash của dữ liệu đã parse trước/sau trùng khớp cho cả năm route; 13/13 Chrome smoke test tiếp tục đạt.
+
 Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA hiện tại.
 
 **final result: passed**
