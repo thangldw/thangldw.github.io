@@ -36,6 +36,7 @@ body.language-app[data-language-app] :where(.opt, .ob, .choice, .answer-option, 
 }
 
 body.language-app[data-language-app] :where(.spk, .spk-sm, .spk-btn, .speak-btn, .speak-opt-btn, .nb) {
+  min-width: 34px;
   border-radius: var(--language-control-radius) !important;
 }
 

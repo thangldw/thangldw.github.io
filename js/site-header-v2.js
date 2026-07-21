@@ -25,7 +25,7 @@
     "html[data-theme='light'] .tw-header{background:rgba(251,250,246,.94);border-bottom-color:#d9d5cb;}",
     ".tw-header *{box-sizing:border-box;}",
     ".tw-header .tw-wrap{width:100%;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
-    ".tw-header .tw-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}",
+    ".tw-header .tw-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:34px;}",
     "html[data-theme='light'] .tw-header .tw-brand{color:#14171d;}",
     ".tw-header .tw-mark{color:#7c9cff;display:inline-block;font:600 17px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;letter-spacing:-.08em;transition:color .2s,transform .2s;}",
     ".tw-header .tw-brand:hover .tw-mark{color:#9bb2ff;transform:translateX(1px);}",
