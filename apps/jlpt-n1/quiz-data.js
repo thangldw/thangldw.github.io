@@ -1,0 +1,22 @@
+window.JLPTN1QuizData = [
+  { id: 'g01', prompt: 'この美術館の絵を全部見ようと思ったら、半日（　）足りないと思います。', options: ['にわたって', 'にかけて', 'までは', 'では'], answer: 3, explanation: 'Nếu định xem hết tất cả tranh trong bảo tàng này, tôi nghĩ nửa ngày là không đủ.' },
+  { id: 'g02', prompt: '部屋の広さも考えず、店員に勧められる（　）、大きいテーブルを買ってしまった。', options: ['まま', 'ままを', 'ままでも', 'ままなのに'], answer: 0, explanation: 'Không cân nhắc diện tích phòng, tôi đã mua chiếc bàn lớn theo đúng lời nhân viên gợi ý.' },
+  { id: 'g03', prompt: 'A会社の元社員が、突然の解雇を不当（　）、解雇取り消しを求める訴えを起こした。', options: ['となって', 'になって', 'として', 'にして'], answer: 2, explanation: 'Cựu nhân viên công ty A coi việc sa thải đột ngột là bất công và khởi kiện yêu cầu hủy quyết định.' },
+  { id: 'g04', prompt: '下水道工事中、ご不便をおかけ致しますが、どうかご理解（　）、よろしくお願い申し上げます。', options: ['いたしたく', 'いただきたく', '差し上げたく', '申しあげたく'], answer: 1, explanation: 'Trong thời gian thi công, chúng tôi mong quý vị thông cảm cho sự bất tiện.' },
+  { id: 'g05', prompt: '間違い電話をかけてきて謝りもしないとは、失礼（　）。', options: ['でならない', 'ではいられない', '極まりない', 'に越したことはない'], answer: 2, explanation: 'Gọi nhầm số mà không xin lỗi thì thật là vô cùng thất lễ.' },
+  { id: 'g06', prompt: '祝日だから、どうりで電車が空いている（　）。', options: ['こともある', 'に決まってる', 'に違いない', 'はずだ'], answer: 3, explanation: 'Vì là ngày lễ nên tàu vắng là điều hợp lý.' },
+  { id: 'g07', prompt: '政治的影響力が完全に失われる（　）、弱まることは間違いないだろう。', options: ['ことはないにしても', 'ことはないにもかかわらず', 'ほかはないにしても', 'ほかはないにもかかわらず'], answer: 0, explanation: 'Dù chưa đến mức mất hoàn toàn ảnh hưởng chính trị, chắc chắn ảnh hưởng đó sẽ suy yếu.' },
+  { id: 'g08', prompt: '子育てをするのが母親で（　）、必ずしもそうではないと思う。', options: ['なくてはならないからといって', 'なくてはならないかというと', 'あるわけにはいかないからといって', 'あるわけにはいかないかというと'], answer: 1, explanation: 'Nếu hỏi việc nuôi con có nhất thiết phải do người mẹ đảm nhiệm hay không, tôi nghĩ không hẳn vậy.' },
+  { id: 'g09', prompt: 'もう二度と恋（　）と固く心に誓ったはずだった。', options: ['こそするものか', 'などするものか', 'こそするものなのか', 'などするものなのか'], answer: 1, explanation: 'Tôi đã từng thề chắc trong lòng rằng sẽ không bao giờ yêu nữa.' },
+  { id: 'g10', prompt: '意見書は、プロセスの問題点を指摘（　）、決定そのものに反対するものではありません。', options: ['しそうになったにすぎず', 'しそうになったほどで', 'しようとしたにすぎず', 'しようとしたほどで'], answer: 2, explanation: 'Bản ý kiến chỉ nhằm chỉ ra vấn đề trong quy trình, không phản đối chính quyết định đó.' },
+  { id: 'g11', prompt: '開業90周年を迎えるの（　）最新型車両を導入する。', options: ['を限りに', 'を皮切りに', 'をよそに', 'を機に'], answer: 3, explanation: 'Nhân dịp kỷ niệm 90 năm hoạt động, công ty đưa vào sử dụng đoàn tàu mới.' },
+  { id: 'g12', prompt: 'データによって実証されなければ、多くの人に受け入れられ（　）しない。', options: ['は', 'られは', 'られては', 'ることは'], answer: 1, explanation: 'Nếu không được dữ liệu chứng minh thì lý thuyết sẽ không được nhiều người chấp nhận.' },
+  { id: 'g13', prompt: 'こちらは添加物を（　）使用していない食用油です。', options: ['いっさい', 'とても', 'きっと', 'まさか'], answer: 0, explanation: 'Đây là loại dầu ăn hoàn toàn không sử dụng chất phụ gia.' },
+  { id: 'g14', prompt: '今回のプロジェクトを任され、責任の重さに身が引き締まる（　）です。', options: ['考え', '見込み', '思い', '始末'], answer: 2, explanation: 'Được giao dự án này, tôi cảm thấy nghiêm túc và căng mình trước trọng trách.' },
+  { id: 'g15', prompt: '商品発送ミスによりご迷惑をおかけしましたことを深く（　）。', options: ['わびでいただきます', 'わびでいらっしゃいます', 'おわびいただきます', 'おわび申し上げます'], answer: 3, explanation: 'Chúng tôi thành thật xin lỗi vì sai sót giao hàng đã gây phiền hà cho quý khách.' },
+  { id: 'g16', prompt: '上司「君、困る（　）！資料にミスがあったぞ。」', options: ['じゃないか', 'のではないか', 'じゃないのか', 'のではないのか'], answer: 0, explanation: 'Cấp trên dùng じゃないか để trách móc mạnh: “Cậu làm vậy thì tôi khó xử chứ!”' },
+  { id: 'g17', prompt: '環境への貢献が、優良企業の条件の一つ（　）ようだ。', options: ['としうる', 'となりうる', 'としつつある', 'となりつつある'], answer: 3, explanation: 'Đóng góp cho môi trường dường như đang dần trở thành một tiêu chí của doanh nghiệp tốt.' },
+  { id: 'g18', prompt: '万が一、ハチに（　）大変でしょ。', options: ['刺されさえしたら', '刺されでもしたら', '刺させるなどしても', '刺させるくらいしても'], answer: 1, explanation: 'Nếu chẳng may bị ong đốt thì sẽ rất nguy hiểm.' },
+  { id: 'g19', prompt: '自慢する（　）が、私は入社以来、一度も遅刻をしたことがない。', options: ['だけのことではない', 'ほどのことではない', 'だけのことに過ぎない', 'ほどのことに過ぎない'], answer: 1, explanation: 'Không đến mức đáng khoe, nhưng từ khi vào công ty tôi chưa từng đi muộn.' },
+  { id: 'g20', prompt: '本人が気づくまで、もう何も言う（　）。', options: ['べきでしょう', 'べきなのでしょう', 'べきではないのでしょうか', 'べきなのではないでしょう'], answer: 2, explanation: 'Hay là tôi không nên nói gì thêm cho tới khi chính người đó nhận ra?' }
+];

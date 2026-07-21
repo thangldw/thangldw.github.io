@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260721b">
-  <link rel="stylesheet" href="styles.css?v=20260721a">
+  <link rel="stylesheet" href="styles.css?v=20260721b">
   <script>
     (function () {
       document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark';
@@ -33,21 +33,6 @@
       </div>
 
       <div class="sidebar-body" id="sidebarBody">
-        <div class="program-switcher" aria-label="Chọn chương trình">
-          <a class="program-link is-current" href="/apps/jlpt-n1/">
-            <i class="fa-solid fa-language" aria-hidden="true"></i>
-            <span>JLPT N1</span>
-          </a>
-          <a class="program-link program-bjt" href="/apps/bjt-study/">
-            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
-            <span>BJT</span>
-          </a>
-          <a class="program-hub" href="/apps/#learning">
-            <span>Tất cả chương trình</span>
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </a>
-        </div>
-
         <nav class="primary-nav" aria-label="Nội dung chương trình">
           <button class="nav-item" type="button" data-view="path">
             <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span>Lộ trình</span>
@@ -63,6 +48,9 @@
           </button>
           <button class="nav-item" type="button" data-view="exams">
             <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span>Luyện đề</span>
+          </button>
+          <button class="nav-item" type="button" data-view="quiz">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span>Luyện tập</span><small>30s</small>
           </button>
           <button class="nav-item" type="button" data-view="review">
             <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span>Ôn sai</span><small class="wrong-count" id="wrongCount">0</small>
@@ -92,6 +80,7 @@
     </main>
   </div>
 
-  <script src="app.js?v=20260721a"></script>
+  <script src="quiz-data.js?v=20260721b"></script>
+  <script src="app.js?v=20260721b"></script>
 </body>
 </html>

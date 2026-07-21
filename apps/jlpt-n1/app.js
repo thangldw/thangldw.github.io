@@ -77,6 +77,9 @@
 
   var progress = loadProgress();
   var state = parseHash();
+  var quizSize = 10;
+  var quizSession = null;
+  var quizTimer = null;
 
   updateWrongCount();
 
@@ -129,7 +132,7 @@
     var parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
     var view = parts[0] || 'vocabulary';
     var tab = parts[1] || 'knowledge';
-    if (!MODULES[view] && ['path', 'exams', 'review', 'stats'].indexOf(view) === -1) view = 'vocabulary';
+    if (!MODULES[view] && ['path', 'exams', 'quiz', 'review', 'stats'].indexOf(view) === -1) view = 'vocabulary';
     if (MODULES[view] && !MODULES[view].groups[tab]) tab = MODULES[view].tabs[0].id;
     return { view: view, tab: tab };
   }
@@ -198,18 +201,7 @@
         '<span class="row-arrow">' + icon('fa-arrow-right') + '</span></a>';
     }).join('');
 
-    var support = '';
-    if (view === 'vocabulary' && state.tab === 'knowledge') {
-      support = '<section class="support-section"><div class="support-head"><h2>Luyện theo dạng</h2><button type="button" data-jump-tab="practice">Xem tất cả →</button></div>' +
-        '<div class="support-grid">' + section.groups.practice.map(supportLink).join('') + '</div></section>' +
-        '<a class="exam-row module-link" data-module="vocab-exams" href="/apps/n1-vocabulary-exams/">' + icon('fa-file-lines') + '<span><strong>Đề từ vựng 2010–2025</strong><small>Luyện đề từ vựng theo năm thi.</small></span>' + icon('fa-arrow-right') + '</a>';
-    }
-
-    appView.innerHTML = '<section class="view">' + headerTemplate(section, current) + '<div class="view-tabs" role="tablist">' + tabs + '</div><div class="module-list">' + rows + '</div>' + support + '</section>';
-  }
-
-  function supportLink(item) {
-    return '<a class="support-link module-link" data-module="' + escapeHtml(item.id) + '" href="' + escapeHtml(item.href) + '">' + icon(item.icon) + '<span><strong>' + escapeHtml(item.title) + '</strong><small>' + escapeHtml(item.description) + '</small></span>' + icon('fa-arrow-right') + '</a>';
+    appView.innerHTML = '<section class="view">' + headerTemplate(section, current) + '<div class="view-tabs" role="tablist">' + tabs + '</div><div class="module-list">' + rows + '</div></section>';
   }
 
   function renderPath() {
@@ -239,15 +231,91 @@
     var actions = content.actions.map(function (action) {
       return '<a href="' + action[1] + '">' + escapeHtml(action[0]) + '&nbsp; →</a>';
     }).join('');
-    appView.innerHTML = '<section class="view"><header class="view-header"><div><p class="eyebrow">' + content.eyebrow + '</p><h1 class="view-title">' + content.title + '</h1><p class="view-lead">' + content.lead + '</p></div></header><div class="empty-view"><h2>Một chương trình, nhiều cách luyện</h2><p>Chọn nội dung phù hợp với mục tiêu hiện tại của bạn.</p><div class="empty-actions">' + actions + '</div></div></section>';
+    appView.innerHTML = '<section class="view simple-view"><header class="view-header simple-header"><div><p class="eyebrow">' + content.eyebrow + '</p><h1 class="view-title">' + content.title + '</h1><p class="view-lead">' + content.lead + '</p></div></header><div class="empty-view"><h2>Một chương trình, nhiều cách luyện</h2><p>Chọn nội dung phù hợp với mục tiêu hiện tại của bạn.</p><div class="empty-actions">' + actions + '</div></div></section>';
+  }
+
+  function shuffleQuestions(items) {
+    var result = items.slice();
+    for (var index = result.length - 1; index > 0; index -= 1) {
+      var swap = Math.floor(Math.random() * (index + 1));
+      var current = result[index];
+      result[index] = result[swap];
+      result[swap] = current;
+    }
+    return result;
+  }
+
+  function stopQuizTimer() {
+    if (quizTimer) window.clearInterval(quizTimer);
+    quizTimer = null;
+  }
+
+  function renderQuizSetup() {
+    stopQuizTimer();
+    quizSession = null;
+    var sizes = [5, 10, 20].map(function (size) {
+      return '<button class="quiz-size' + (quizSize === size ? ' is-active' : '') + '" type="button" data-quiz-size="' + size + '" aria-pressed="' + (quizSize === size) + '"><strong>' + size + '</strong><span>câu hỏi</span></button>';
+    }).join('');
+    appView.innerHTML = '<section class="view quiz-view"><header class="view-header simple-header"><div><p class="eyebrow">JLPT N1 · Luyện tập · 練習</p><h1 class="view-title">Trắc nghiệm ghi nhớ</h1><p class="view-lead">Chọn độ dài phù hợp. Mỗi câu có tối đa 30 giây; đáp án và bản dịch xuất hiện ngay sau khi trả lời.</p></div></header>' +
+      '<div class="quiz-setup"><div><span class="setup-label">Số câu mỗi lượt</span><div class="quiz-sizes" role="group" aria-label="Chọn số câu">' + sizes + '</div></div>' +
+      '<div class="quiz-rules"><span>' + icon('fa-graduation-cap') + '<span><strong>30 giây</strong> cho mỗi câu</span></span><span>' + icon('fa-language') + '<span><strong>Ngữ pháp N1</strong> theo ngữ cảnh</span></span><span>' + icon('fa-book-open') + '<span><strong>Giải thích tiếng Việt</strong> sau mỗi đáp án</span></span></div>' +
+      '<button class="primary-action quiz-start" type="button" data-action="start-quiz"><span>' + icon('fa-play') + ' Bắt đầu ' + quizSize + ' câu</span>' + icon('fa-arrow-right') + '</button></div></section>';
+  }
+
+  function startQuizTimer() {
+    stopQuizTimer();
+    quizTimer = window.setInterval(function () {
+      if (!quizSession || quizSession.locked) return;
+      quizSession.seconds -= 1;
+      var timer = document.getElementById('quizTimer');
+      var fill = document.getElementById('quizTimerFill');
+      if (timer) timer.textContent = quizSession.seconds + 's';
+      if (fill) fill.style.width = Math.max(0, quizSession.seconds / 30 * 100) + '%';
+      if (quizSession.seconds <= 0) submitQuizAnswer(-1, true);
+    }, 1000);
+  }
+
+  function renderQuizQuestion() {
+    var question = quizSession.questions[quizSession.index];
+    var answered = quizSession.locked;
+    var options = question.options.map(function (option, index) {
+      var status = '';
+      if (answered && index === question.answer) status = ' is-correct';
+      else if (answered && index === quizSession.selected) status = ' is-wrong';
+      return '<button class="quiz-option' + status + '" type="button" data-quiz-answer="' + index + '"' + (answered ? ' disabled' : '') + '><span>' + String.fromCharCode(65 + index) + '</span><strong lang="ja">' + escapeHtml(option) + '</strong></button>';
+    }).join('');
+    var feedback = answered ? '<div class="quiz-feedback' + (quizSession.selected === question.answer ? ' is-correct' : ' is-wrong') + '"><strong>' + (quizSession.selected === question.answer ? 'Chính xác' : (quizSession.timedOut ? 'Hết 30 giây' : 'Chưa chính xác')) + '</strong><p>Đáp án: <span lang="ja">' + escapeHtml(question.options[question.answer]) + '</span></p><p>' + escapeHtml(question.explanation) + '</p></div>' : '';
+    appView.innerHTML = '<section class="view quiz-view"><div class="quiz-topline"><button type="button" data-action="quit-quiz">← Thoát lượt</button><span>Câu ' + (quizSession.index + 1) + ' / ' + quizSession.questions.length + '</span><strong id="quizTimer">' + quizSession.seconds + 's</strong></div><div class="quiz-timer-track"><span id="quizTimerFill" style="width:' + (quizSession.seconds / 30 * 100) + '%"></span></div>' +
+      '<div class="quiz-card"><span class="setup-label">Chọn đáp án phù hợp nhất</span><h1 lang="ja">' + escapeHtml(question.prompt) + '</h1><div class="quiz-options">' + options + '</div>' + feedback + (answered ? '<button class="primary-action quiz-next" type="button" data-action="next-quiz"><span>' + (quizSession.index + 1 === quizSession.questions.length ? 'Xem kết quả' : 'Câu tiếp theo') + '</span>' + icon('fa-arrow-right') + '</button>' : '') + '</div></section>';
+    if (!answered) startQuizTimer();
+  }
+
+  function submitQuizAnswer(index, timedOut) {
+    if (!quizSession || quizSession.locked) return;
+    stopQuizTimer();
+    var question = quizSession.questions[quizSession.index];
+    quizSession.selected = index;
+    quizSession.timedOut = Boolean(timedOut);
+    quizSession.locked = true;
+    if (index === question.answer) quizSession.score += 1;
+    renderQuizQuestion();
+    bindViewEvents();
+  }
+
+  function renderQuizResult() {
+    stopQuizTimer();
+    var percent = Math.round(quizSession.score / quizSession.questions.length * 100);
+    appView.innerHTML = '<section class="view quiz-view"><header class="view-header simple-header"><div><p class="eyebrow">JLPT N1 · Kết quả · 結果</p><h1 class="view-title">' + quizSession.score + ' / ' + quizSession.questions.length + ' câu đúng</h1><p class="view-lead">Độ chính xác ' + percent + '%. Luyện lại với số câu khác để tăng khả năng nhớ và tốc độ phản xạ.</p></div></header><div class="empty-actions"><button type="button" data-action="restart-quiz">Luyện lại&nbsp; →</button><button type="button" data-action="quiz-setup">Đổi số câu&nbsp; →</button><a href="#grammar/knowledge">Ôn ngữ pháp&nbsp; →</a></div></section>';
   }
 
   function render() {
     document.querySelectorAll('.nav-item').forEach(function (button) {
       button.classList.toggle('is-active', button.dataset.view === state.view);
     });
+    stopQuizTimer();
     if (MODULES[state.view]) renderSection(state.view);
     else if (state.view === 'path') renderPath();
+    else if (state.view === 'quiz') renderQuizSetup();
     else renderSimple(state.view);
     bindViewEvents();
     updateThemeButtons();
@@ -262,6 +330,47 @@
     });
     appView.querySelectorAll('[data-view-target]').forEach(function (button) {
       button.addEventListener('click', function () { setHash(button.dataset.viewTarget); });
+    });
+    appView.querySelectorAll('[data-quiz-size]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        quizSize = Number(button.dataset.quizSize);
+        renderQuizSetup();
+        bindViewEvents();
+      });
+    });
+    appView.querySelectorAll('[data-quiz-answer]').forEach(function (button) {
+      button.addEventListener('click', function () { submitQuizAnswer(Number(button.dataset.quizAnswer), false); });
+    });
+    appView.querySelectorAll('[data-action="start-quiz"]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        quizSession = { questions: shuffleQuestions(window.JLPTN1QuizData || []).slice(0, quizSize), index: 0, score: 0, selected: -1, seconds: 30, locked: false, timedOut: false };
+        renderQuizQuestion();
+        bindViewEvents();
+      });
+    });
+    appView.querySelectorAll('[data-action="next-quiz"]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        if (quizSession.index + 1 >= quizSession.questions.length) renderQuizResult();
+        else {
+          quizSession.index += 1;
+          quizSession.selected = -1;
+          quizSession.seconds = 30;
+          quizSession.locked = false;
+          quizSession.timedOut = false;
+          renderQuizQuestion();
+        }
+        bindViewEvents();
+      });
+    });
+    appView.querySelectorAll('[data-action="quit-quiz"], [data-action="quiz-setup"]').forEach(function (button) {
+      button.addEventListener('click', function () { renderQuizSetup(); bindViewEvents(); });
+    });
+    appView.querySelectorAll('[data-action="restart-quiz"]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        quizSession = { questions: shuffleQuestions(window.JLPTN1QuizData || []).slice(0, quizSize), index: 0, score: 0, selected: -1, seconds: 30, locked: false, timedOut: false };
+        renderQuizQuestion();
+        bindViewEvents();
+      });
     });
     appView.querySelectorAll('.module-link').forEach(function (link) {
       link.addEventListener('click', function () {
