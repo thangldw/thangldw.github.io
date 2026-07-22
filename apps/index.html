@@ -140,7 +140,11 @@
           var queryMatch = !query || row.dataset.search.indexOf(query) !== -1;
           var visible = categoryMatch && queryMatch;
           row.hidden = !visible;
-          if (visible) visibleCount += 1;
+          row.classList.remove('is-left', 'is-right');
+          if (visible) {
+            row.classList.add(visibleCount % 2 === 0 ? 'is-left' : 'is-right');
+            visibleCount += 1;
+          }
         });
         countOutput.textContent = visibleCount + (visibleCount === 1 ? ' entry' : ' entries');
         emptyState.hidden = visibleCount !== 0;
