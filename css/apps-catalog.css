@@ -7,10 +7,11 @@ button,input{font:inherit}
 .skip-link{position:fixed;left:16px;top:-64px;z-index:100;padding:10px 14px;background:var(--ink);color:var(--bg)}
 .skip-link:focus{top:12px}
 
-.apps-nav{height:68px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 95%,transparent)}
+.apps-nav{height:58px;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 95%,transparent)}
 .apps-nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%}
 .apps-brand{display:inline-flex;align-items:center;gap:10px;font-size:22px;font-weight:700;letter-spacing:-.04em}
-.apps-brand .brand-mark{color:var(--accent);font:600 17px/1 var(--font-mono);letter-spacing:-.08em}
+.apps-brand .brand-mark{width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto;border:2px solid var(--accent);border-radius:12px 4px;color:var(--accent);font:650 15px/1 var(--font-mono);letter-spacing:-.08em;transition:border-color .2s,color .2s,transform .2s}
+.apps-brand:hover .brand-mark{border-color:color-mix(in srgb,var(--accent) 72%,white);color:color-mix(in srgb,var(--accent) 72%,white);transform:translateY(-1px)}
 .apps-brand .brand-dot{color:var(--accent)}
 .apps-brand:focus-visible,.theme-button:focus-visible,.filter-button:focus-visible,.catalog-search input:focus-visible,.project-title-link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .theme-button{display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
@@ -73,7 +74,7 @@ button,input{font:inherit}
 .catalog-empty h2{margin:0;font-size:20px}
 .catalog-empty p{margin:8px 0 0;color:var(--body);font-size:13px}
 
-.site-foot{border-top:1px solid var(--border);padding:20px 0;color:var(--muted);font:400 11px var(--font-mono);text-align:center}
+.site-foot{border-top:1px solid var(--border);padding:12px 0;color:var(--muted);font:400 11px var(--font-mono);text-align:center}
 .site-foot span{color:var(--strong)}
 
 @media(max-width:1080px){
@@ -83,12 +84,14 @@ button,input{font:inherit}
   .project-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:760px){
+  .apps-nav{height:56px}
   .catalog-wrap{width:calc(100% - 32px)}
   .apps-intro{padding:32px 0 26px}.apps-intro h1{font-size:clamp(26px,7vw,38px);white-space:normal}.apps-intro .lead{white-space:normal}
   .catalog-toolbar{grid-template-columns:1fr;gap:12px}.catalog-count{grid-column:auto;justify-self:start;margin:0;padding:0;border:0;text-align:left}.catalog-filters{margin-inline:-2px}
   .project-card-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
+  .apps-brand{gap:8px;font-size:20px}.apps-brand .brand-mark{width:32px;height:32px;border-radius:10px 4px;font-size:13px}
   .apps-intro .lead{font-size:14px}
   .catalog-tools{padding-top:18px}.catalog-search input{height:44px}
   .project-library{padding:17px}.project-title-link{min-height:210px}.project-library-heading h2{font-size:20px}
