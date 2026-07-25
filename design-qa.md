@@ -193,6 +193,59 @@ Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA 
 
 **final result: passed**
 
+## Apps Catalog aligned to Certification Hub — 2026-07-25
+
+### Comparison target
+
+- Source visual truth: `/Users/thang/.codex/visualizations/2026/07/24/019f94af-b751-7910-9676-5066f128c626/apps-catalog-cert-reference/reference-cert-desktop.png`
+- Implementation screenshot: `/Users/thang/.codex/visualizations/2026/07/24/019f94af-b751-7910-9676-5066f128c626/apps-catalog-cert-reference/apps-after-desktop.png`
+- Responsive implementation screenshot: `/Users/thang/.codex/visualizations/2026/07/24/019f94af-b751-7910-9676-5066f128c626/apps-catalog-cert-reference/apps-after-mobile.png`
+- Combined comparison: `/Users/thang/.codex/visualizations/2026/07/24/019f94af-b751-7910-9676-5066f128c626/apps-catalog-cert-reference/desktop-comparison.png`
+- Desktop viewport: 1440 × 1000 CSS px at device scale 1
+- Source pixels: 1440 × 1144
+- Implementation pixels: 1440 × 1600
+- Mobile viewport and pixels: 390 × 844 CSS px; 390 × 4047 full-page capture
+- State: light theme, all projects visible, no search query
+
+### Full-view and focused comparison evidence
+
+The implementation now follows the certification hub's centered 1180 px frame, warm `#fbfaf6` canvas, rust `#a83a00` emphasis, navy headings, compact two-line brand lockup, restrained border system, bordered collection surface, four-column desktop grid, and single-column mobile grid. It is taller because it intentionally preserves 13 project cards instead of 9 certification cards.
+
+The combined comparison keeps the header, hero, collection heading, and first card rows visible together at the same desktop width. No separate imagery crop was required because neither design uses photographic or illustrative assets; typography, borders, controls, and card hierarchy remain readable in the combined evidence.
+
+Intentional product differences are the personal `thang.` brand, the project search and category filters, project-specific accent colors, and the existing project descriptions, tags, statuses, and links.
+
+### Required fidelity surfaces
+
+- Fonts and typography: Existing system UI and mono stacks are retained. Heading weight, scale, line height, eyebrow treatment, and small metadata hierarchy now match the certification hub closely.
+- Spacing and layout rhythm: Centered 1180 px frame, 44/32 px hero rhythm, 23 px library padding, 12 px card gaps, 7–9 px radii, and responsive 4/2/1-column grids align with the reference.
+- Colors and visual tokens: Canvas, white surface, navy text, rust emphasis, muted text, and border colors map to the reference. Dark mode retains equivalent contrast through scoped overrides.
+- Image quality and asset fidelity: Neither page depends on raster imagery. Existing Font Awesome icons remain crisp and no placeholder or generated imagery was introduced.
+- Copy and content: All original Apps hero copy, search, filters, 13 projects, tags, statuses, CTAs, URLs, empty state, and footer text are preserved.
+
+### Interaction and runtime checks
+
+- Certification Study filter returns 1 matching entry: `Certification Study`.
+- Search for `climate` returns 1 matching entry: `Asian City Climate`.
+- Theme toggle works light → dark → light; the dark canvas resolves to `rgb(17, 19, 15)`.
+- Mobile uses one card column at 390 px with no document-level horizontal overflow.
+- Browser console contains no errors.
+- Static validation passes 48 HTML pages and all local references.
+- UI standards audit passes 25 public pages.
+
+### Comparison history
+
+1. Earlier P2 drift: the Apps catalog used indigo as its global emphasis color, green-black text tokens, a plain single-line wordmark, and taller 230 px cards.
+2. Fixes: scoped the certification palette, added the reference-style two-line brand lockup, matched the 1180 px frame and section typography, reduced the card minimum to 210 px, and retained the required Apps-only controls.
+3. Post-fix evidence: `desktop-comparison.png`.
+4. No actionable P0, P1, or P2 differences remain.
+
+### Follow-up polish
+
+- P3: The search and filter row is necessarily denser than the certification reference because those controls are part of the Apps catalog's core workflow.
+
+**final result: passed**
+
 ## Vocabulary Exams compact library shell — 2026-07-22
 
 ### Comparison target
