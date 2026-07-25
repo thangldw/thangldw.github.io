@@ -27,11 +27,11 @@
     ".tw-header .tw-wrap{width:100%;padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px;}",
     ".tw-header .tw-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em;color:#f2f5f9;text-decoration:none;display:inline-flex;align-items:center;gap:10px;min-height:34px;}",
     "html[data-theme='light'] .tw-header .tw-brand{color:#14171d;}",
-    ".tw-header .tw-mark{color:#7c9cff;display:inline-block;font:600 17px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;letter-spacing:-.08em;transition:color .2s,transform .2s;}",
-    ".tw-header .tw-brand:hover .tw-mark{color:#9bb2ff;transform:translateX(1px);}",
+    ".tw-header .tw-mark{width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto;border:2px solid #7c9cff;border-radius:12px 4px;color:#7c9cff;font:600 15px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono',monospace;letter-spacing:-.08em;transition:border-color .2s,color .2s,transform .2s;}",
+    ".tw-header .tw-brand:hover .tw-mark{border-color:#9bb2ff;color:#9bb2ff;transform:translateY(-1px);}",
     ".tw-header .tw-brand:focus-visible{outline:2px solid #7c9cff;outline-offset:4px;border-radius:7px;}",
     ".tw-header .tw-dot{color:#7c9cff;}",
-    "html[data-theme='light'] .tw-header .tw-mark{color:#3a5bd9;}",
+    "html[data-theme='light'] .tw-header .tw-mark{border-color:#3a5bd9;color:#3a5bd9;}",
     "html[data-theme='light'] .tw-header .tw-dot{color:#3a5bd9;}",
     ".tw-header .tw-nav{display:flex;align-items:center;gap:38px;}",
     ".tw-header .tw-nav a{color:#9aa6b4;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:500;line-height:1;transition:color .2s;}",
@@ -42,7 +42,7 @@
     ".tw-header .tw-toggle:hover{color:#7c9cff;border-color:#7c9cff;}",
     "html[data-theme='light'] .tw-header .tw-toggle{border-color:#d9d5cb;color:#1d211e;background:#fbfaf6;}",
     ".tw-header .tw-toggle svg{width:17px;height:17px;}",
-    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:20px;gap:8px}.tw-header .tw-mark{font-size:16px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:34px;height:34px;}}",
+    "@media(max-width:680px){.tw-header .tw-wrap{height:65px;padding:0 16px}.tw-header .tw-brand{font-size:20px;gap:8px}.tw-header .tw-mark{width:32px;height:32px;border-radius:10px 4px;font-size:13px}.tw-header .tw-nav{gap:8px}.tw-header .tw-nav a{font-size:12.5px}.tw-header .tw-toggle{width:34px;height:34px;}}",
   ].join("");
 
   /* ---- resolve current theme (mirror the tokens.css pre-paint logic) ---- */

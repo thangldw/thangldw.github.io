@@ -73,9 +73,16 @@ body[data-app-route="gkentei"] > .skip-link:focus { top: 0; }
 }
 
 .gk-brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 2px solid var(--portfolio-accent);
+  border-radius: 12px 4px;
   color: var(--portfolio-accent);
-  font: 700 17px/1 var(--font-mono);
-  letter-spacing: -.04em;
+  font: 700 15px/1 var(--font-mono);
+  letter-spacing: -.08em;
 }
 
 .gk-brand-dot { color: var(--portfolio-accent, #4657d8); }
