@@ -36,7 +36,7 @@ p { text-wrap: pretty; }
 .skip-link { position: fixed; z-index: 100; top: 8px; left: 8px; padding: 8px 12px; border: 1px solid var(--primary); border-radius: 8px; background: var(--surface); color: var(--primary); font-size: 12px; transform: translateY(-150%); }
 .skip-link:focus { transform: translateY(0); }
 .desktop-bar { height: 34px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--hairline); background: var(--surface); color: var(--text-2); font-size: 10px; font-weight: 600; }
-.site-header { position: sticky; z-index: 20; top: 0; border-bottom: 1px solid var(--hairline); background: color-mix(in oklch, var(--surface) 96%, transparent); backdrop-filter: blur(12px); }
+.site-header { position: sticky; z-index: 20; top: 0; background: color-mix(in oklch, var(--surface) 96%, transparent); backdrop-filter: blur(12px); }
 .nav-shell { width: min(var(--max), calc(100% - 32px)); min-height: 58px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px; }
 .wordmark { width: fit-content; display: inline-flex; align-items: center; gap: 8px; color: var(--text); text-decoration: none; }
 .wordmark b { font-size: 15px; letter-spacing: -.02em; }
@@ -140,7 +140,7 @@ a.button:hover { border-color: var(--divider); }
 .closing-panel > div > p:last-child { margin: 9px 0 0; color: var(--text-2); font-size: 11px; }
 .closing-actions { display: flex; gap: 8px; }
 
-footer { width: min(var(--max), calc(100% - 32px)); min-height: 82px; margin: 0 auto; padding: 22px 0; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; border-top: 1px solid var(--hairline); }
+footer { width: min(var(--max), calc(100% - 32px)); min-height: 82px; margin: 0 auto; padding: 22px 0; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; }
 footer p { margin: 0; color: var(--text-2); font-size: 9.5px; }
 footer p:last-child { text-align: right; }
 a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in oklch, var(--primary) 35%, transparent); outline-offset: 2px; }
@@ -164,7 +164,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid color-mix(in oklch, v
   .nav-shell { min-height: 56px; grid-template-columns: auto 1fr auto; gap: 10px; }
   .project-link { display: none; }
   .menu-toggle { justify-self: end; display: inline-flex; min-height: 34px; align-items: center; padding: 7px 9px; border: 1px solid var(--hairline); border-radius: 8px; background: var(--surface-2); color: var(--text); font-size: 10px; font-weight: 700; }
-  .nav-shell nav { position: absolute; top: 56px; right: 0; left: 0; padding: 8px 16px 12px; display: none; flex-direction: column; gap: 2px; border-bottom: 1px solid var(--hairline); background: var(--surface); }
+  .nav-shell nav { position: absolute; top: 56px; right: 0; left: 0; padding: 8px 16px 12px; display: none; flex-direction: column; gap: 2px; background: var(--surface); }
   .nav-shell nav.is-open { display: flex; }
   .nav-shell nav a { padding: 10px; }
   .hero { padding-top: 44px; }
