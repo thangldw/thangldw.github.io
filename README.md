@@ -9,7 +9,7 @@ Website: [thangldw.github.io](https://thangldw.github.io/)
 | Group | Routes |
 |---|---|
 | Portfolio | `/`, `/apps/` |
-| Product and solution pages | `/apps/kakeflow/`, `/apps/namiquant/`, `/apps/data-copilot/`, `/apps/pipeline/`, `/apps/earthquake-intelligence/`, `/apps/city-climate/` |
+| Product and solution pages | `/apps/namiquant/`, `/apps/data-copilot/`, `/apps/pipeline/`, `/apps/earthquake-intelligence/`, `/apps/city-climate/` |
 | Certification hubs | `/apps/cert/`, `/apps/gkentei/`, `/apps/bjt-study/`, `/apps/jlpt-n1/` |
 | JLPT practice | Canonical `/apps/n1-*` routes listed in `sitemap.xml` |
 
