@@ -93,18 +93,13 @@
         return String(value || '').toLocaleLowerCase().normalize('NFKD');
       }
 
-      var catalogPriority = [
-        'bizroll', 'changeora', 'diskora', 'ragops',
-        'proofline', 'kakeflow',
-        'certification-study', 'maintainer-defense'
-      ];
-
       var projects = (window.portfolioProjects || []).concat(window.portfolioLearningCollections || []);
-      projects.sort(function (left, right) {
-        var leftIndex = catalogPriority.indexOf(left.id);
-        var rightIndex = catalogPriority.indexOf(right.id);
-        return (leftIndex < 0 ? 999 : leftIndex) - (rightIndex < 0 ? 999 : rightIndex);
-      });
+      for (var index = projects.length - 1; index > 0; index -= 1) {
+        var target = Math.floor(Math.random() * (index + 1));
+        var current = projects[index];
+        projects[index] = projects[target];
+        projects[target] = current;
+      }
 
       var projectIndex = document.getElementById('projectIndex');
       var searchInput = document.getElementById('projectSearch');
