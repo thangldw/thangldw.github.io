@@ -196,10 +196,10 @@
   ];
 
   global.portfolioLanguageCollection = {
-    title: 'Learning Programs',
-    description: 'JLPT N1, BJT, and G検定 programs with focused study paths, timed practice, review, and local learning history.',
+    title: 'Certification Study',
+    description: 'Focused dashboards, exam practice, notes, and local learning history for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.',
     href: '/apps/cert/',
-    label: 'Learning Programs'
+    label: '9 certification programs'
   };
 
   global.portfolioLearningCollections = [
