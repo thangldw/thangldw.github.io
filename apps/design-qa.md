@@ -3,10 +3,13 @@
 ## Evidence
 
 - Source visual truth: `/tmp/cert-hub-reference.png` captured from `/apps/cert/`.
+- Alignment issue reported by the user: `/tmp/apps-uneven-cards-source.png`.
 - Desktop implementation: `/tmp/apps-catalog-after.png`.
+- Equal-height desktop implementation: `/tmp/apps-equal-cards-desktop.png`.
 - Tablet implementation: `/tmp/apps-catalog-tablet.png`.
 - Mobile implementation: `/tmp/apps-catalog-mobile.png`.
 - Side-by-side comparison: `/tmp/apps-card-grid-comparison.png`.
+- Equal-height before/after comparison: `/tmp/apps-equal-cards-comparison.png`.
 - State: light theme, `All` filter, empty search.
 - Viewports: 1440 × 1024 desktop, 820 × 900 tablet, and 390 × 844 mobile.
 
@@ -20,6 +23,7 @@
 - Search, six category filters, empty results, keyboard search focus, theme switching, project links, and live result counts continue to work.
 - Responsive layout is verified at all three target sizes: four columns at 1440 px, two columns at 820 px, and one column at 390 px.
 - Desktop, tablet, and mobile checks have no page-level horizontal overflow. The filter row intentionally scrolls horizontally when it cannot fit.
+- All 13 card links now fill their grid cells. Measured card heights are uniform at each tested breakpoint: 255 px desktop, 231 px tablet, and 255 px mobile.
 - Browser console verification returned no errors.
 
 ## Comparison Notes
@@ -27,6 +31,16 @@
 - The card proportions, spacing, border radius, accent treatment, footer divider, and hover lift closely match the selected certification reference.
 - Project cards carry more descriptive text and tags than certification cards, so their minimum height is slightly larger while preserving the same vertical structure.
 - The reference's inline SVGs were not copied. The implementation uses the site's existing icon font to remain consistent with the rest of the portfolio.
+- The empty-results message remains available for zero-result searches. The redundant catalog tip was removed while the `/` keyboard shortcut remains functional.
+
+## Comparison History
+
+### Equal-height pass
+
+- [P2] Card borders ended at different heights when tags wrapped to a second line.
+- Cause: the grid item stretched to the row height, but the linked card surface only used `min-height`.
+- Fix: added equal implicit grid rows and made each linked card fill the full width and height of its grid cell.
+- Post-fix evidence: all 13 measured card heights match at desktop, tablet, and mobile breakpoints; the combined before/after comparison shows aligned lower borders and CTA dividers.
 
 ## Functional Verification
 
