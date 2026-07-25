@@ -192,33 +192,15 @@
 
   global.portfolioLearningCollections = [
     {
-      id: 'language-learning',
-      title: 'Language Learning',
-      description: 'JLPT N1 and BJT study programs with focused paths, timed practice, review, and local learning history.',
+      id: 'certification-study',
+      title: 'Certification Study',
+      description: 'One focused study space for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.',
       href: '/apps/cert/',
-      ariaLabel: 'Open the language learning programs',
-      icon: 'fa-language',
-      status: 'Collection',
-      tags: ['JLPT N1', 'BJT', 'Japanese'],
-      category: 'language-learning',
-      links: [
-        { label: 'JLPT N1', href: '/apps/jlpt-n1/' },
-        { label: 'BJT', href: '/apps/bjt-study/' }
-      ]
-    },
-    {
-      id: 'professional-learning',
-      title: 'Professional Learning',
-      description: 'Professional certification and domain learning anchored by G検定 and practical AI literacy.',
-      href: '/apps/cert/',
-      ariaLabel: 'Open the professional learning programs',
+      ariaLabel: 'Open the certification study programs',
       icon: 'fa-graduation-cap',
       status: 'Collection',
-      tags: ['G検定', 'AI literacy', 'Certification'],
-      category: 'professional-learning',
-      links: [
-        { label: 'G検定', href: '/apps/gkentei/' }
-      ]
+      tags: ['9 certifications', 'Exam practice', 'Local-first'],
+      category: 'certification-study'
     }
   ];
 })(window);

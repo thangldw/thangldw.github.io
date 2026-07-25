@@ -20,20 +20,20 @@
 - Spacing and layout rhythm: the hero, toolbar, two-column index, center divider, row separators, and above-the-fold density align with the normalized source.
 - Colors and tokens: the existing warm background, near-black type, indigo accent, green status, and hairline borders are preserved through shared tokens in both themes.
 - Image and icon quality: the design uses the repository's local icon font, with no placeholder or handcrafted image assets. Some glyphs differ from the generated mock but remain semantically appropriate and stylistically consistent.
-- Copy and content: production metadata is intentionally more precise than the mock. The implementation reports 14 catalog entries, shows released versions where available, and keeps the real project descriptions.
+- Copy and content: production metadata is intentionally more precise than the mock. The implementation reports 13 catalog entries, shows released versions where available, and keeps the real project descriptions.
 - Responsiveness: the 390 × 844 pass has no page-level horizontal overflow. Filters scroll horizontally, project rows collapse to one column, and the next chip remains partially visible as a scroll cue.
-- Accessibility and interaction: search, all seven filters, empty results, keyboard search focus, theme switching, project links, collection links, live result counts, focus styles, and reduced-motion support are present.
+- Accessibility and interaction: search, all six filters, empty results, keyboard search focus, theme switching, project links, live result counts, focus styles, and reduced-motion support are present.
 
 ## Comparison History
 
 ### Pass 1
 
-- [P2] The Professional Learning filter was clipped at 1440 px.
+- [P2] The learning filters were clipped at 1440 px.
 - [P2] The hero and rows were taller than the selected mock, reducing the visible catalog density.
 
 Fixes made:
 
-- Reduced toolbar gaps, chip padding, and metadata width so all seven categories fit at the target viewport.
+- Reduced toolbar gaps, chip padding, and metadata width so all six categories fit at the target viewport.
 - Tightened desktop hero padding, title scale, and project-row height.
 - Re-captured the implementation and repeated full-view and focused comparisons.
 
@@ -41,7 +41,7 @@ Post-fix evidence:
 
 - All filters are fully visible at 1440 × 1024.
 - The catalog begins at the same vertical position as the source and shows six project rows above the fold.
-- Search returned BizRoll as one result; Games returned BizRoll; Language Learning and Professional Learning each returned their own collection.
+- Search returned BizRoll as one result; Games returned BizRoll; Certification Study returned the unified certification collection.
 - Theme switching returned `dark` and restored `light`; the browser console had no warnings or errors.
 
 ## Follow-up Polish
@@ -52,7 +52,7 @@ Post-fix evidence:
 
 - [x] BizRoll appears in the home carousel and project catalog.
 - [x] Search and category filters work.
-- [x] Language Learning and Professional Learning are separate collections.
+- [x] Language Learning and Professional Learning are consolidated into Certification Study.
 - [x] Desktop and mobile layouts are visually verified.
 - [x] Site validator and UI standards audit pass.
 
