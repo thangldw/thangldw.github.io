@@ -21,7 +21,7 @@ function setupInteractiveMap(){
   const coverageBounds=L.latLngBounds([[-12,95],[60,180]]);
   const map=L.map(host,{preferCanvas:false,worldCopyJump:true,minZoom:2,zoomControl:true,attributionControl:true});
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'}).addTo(map);
-  L.rectangle(coverageBounds,{color:'#4657d8',weight:1.5,dashArray:'7 6',fill:false,interactive:false}).addTo(map);
+  L.rectangle(coverageBounds,{color:'#a83a00',weight:1.5,dashArray:'7 6',fill:false,interactive:false}).addTo(map);
   const eventLayer=L.layerGroup().addTo(map);
   const focus=()=>map.setView([24,137],host.clientWidth<600?3:4,{animate:false});
   function renderEvents(days){

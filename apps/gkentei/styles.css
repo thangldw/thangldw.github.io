@@ -85,7 +85,7 @@ body[data-app-route="gkentei"] > .skip-link:focus { top: 0; }
   letter-spacing: -.08em;
 }
 
-.gk-brand-dot { color: var(--portfolio-accent, #4657d8); }
+.gk-brand-dot { color: var(--portfolio-accent, #a83a00); }
 .gk-sidebar-actions { display: flex; gap: 8px; }
 
 .gk-icon-button {

@@ -11,7 +11,7 @@
   --portfolio-muted: #697169;
   --portfolio-border: #d9d5cb;
   --portfolio-border-strong: #bbb8ad;
-  --portfolio-accent: #4657d8;
+  --portfolio-accent: #a83a00;
   --portfolio-accent-ink: #ffffff;
   --portfolio-accent-soft: #eef0ff;
   --portfolio-orange: #a83a00;
@@ -161,7 +161,6 @@ body.portfolio-app :where(.site-foot, footer.site-foot) {
   width: 100%;
   margin-top: 56px;
   padding: 20px 24px;
-  border-top: 1px solid var(--portfolio-border) !important;
   background: var(--portfolio-bg) !important;
   color: var(--portfolio-muted) !important;
   font: 400 12px/1.5 var(--font-mono, var(--portfolio-font-mono)) !important;

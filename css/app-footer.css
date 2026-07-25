@@ -36,18 +36,17 @@ body {
 }
 
 :where(button, a, input, select, textarea):focus-visible {
-  outline: 2px solid var(--accent, #4657d8);
+  outline: 2px solid var(--accent, #a83a00);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent, #4657d8) 22%, transparent);
+  background: color-mix(in srgb, var(--accent, #a83a00) 22%, transparent);
 }
 
 .site-foot {
   margin-top: 5rem;
   padding: 20px 48px;
-  border-top: 1px solid var(--border, #e6e9ee);
   background: var(--bg, #fafbfc);
   color: var(--text-dim, #8a92a0);
   font: 400 12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
