@@ -141,7 +141,7 @@ def main() -> int:
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", namespace)}
 
-    required_og = {"og:type", "og:title", "og:description", "og:url", "og:image"}
+    required_og = {"og:type", "og:title", "og:description", "og:url"}
     for absolute in sorted(sitemap_urls):
         if not absolute or not absolute.startswith(SITE_URL + "/"):
             errors.append(f"sitemap.xml: invalid site URL {absolute}")
@@ -161,18 +161,22 @@ def main() -> int:
             errors.append(
                 f"{page_file.relative_to(ROOT)}: meta description must be 60–170 characters"
             )
-        missing_og = sorted(required_og - page.meta_properties.keys())
+        page_required_og = required_og | ({"og:image"} if path != "/" else set())
+        missing_og = sorted(page_required_og - page.meta_properties.keys())
         if missing_og:
             errors.append(f"{page_file.relative_to(ROOT)}: missing {', '.join(missing_og)}")
         elif page.meta_properties["og:url"] != absolute:
             errors.append(f"{page_file.relative_to(ROOT)}: og:url must match canonical")
-        else:
+        elif "og:image" in page.meta_properties:
             image_url = page.meta_properties["og:image"]
             image_path = ROOT / urlsplit(image_url).path.lstrip("/")
             if not image_url.startswith(SITE_URL + "/") or not image_path.is_file():
                 errors.append(f"{page_file.relative_to(ROOT)}: invalid og:image {image_url}")
-        if page.meta_names.get("twitter:card") != "summary_large_image":
+        twitter_card = page.meta_names.get("twitter:card")
+        if path != "/" and twitter_card != "summary_large_image":
             errors.append(f"{page_file.relative_to(ROOT)}: expected twitter summary_large_image")
+        elif twitter_card and twitter_card != "summary_large_image":
+            errors.append(f"{page_file.relative_to(ROOT)}: invalid twitter:card {twitter_card}")
 
     if errors:
         print("Site validation failed:", file=sys.stderr)

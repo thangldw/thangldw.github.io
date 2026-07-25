@@ -53,6 +53,7 @@ Không đổi tên các class shell trên. Mở rộng bằng component nhỏ, k
 
 - Màu chỉ lấy từ `css/tokens.css`; component dùng alias trong `css/app-design-system.css`.
 - Accent toàn site là rust/orange. Không hard-code palette xanh cũ hoặc tạo accent riêng cho chrome chung.
+- Favicon toàn site dùng dấu `t:>` rust/orange trong khung vuông bo góc, đồng bộ với brand mark trên header.
 - Header luôn dùng `js/site-header-v2.js`; không viết header/theme toggle riêng.
 - Primary action: `.btn.btn-primary`, nền accent và `--color-on-accent`.
 - Secondary action: `.btn` hoặc `.btn-ghost`, surface trung tính.
@@ -65,6 +66,7 @@ Không đổi tên các class shell trên. Mở rộng bằng component nhỏ, k
 
 - Một `main`, một source `h1`, heading tuần tự.
 - Có `lang`, charset, viewport, title, description, canonical, Open Graph và Twitter metadata.
+- Trang chủ `/` chủ ý không dùng `og:image` hoặc `twitter:card`; các URL khác trong sitemap vẫn phải cung cấp social image và `summary_large_image`.
 - Control có accessible name, `type="button"` khi không submit, keyboard và `:focus-visible`.
 - Không thêm `<style>`, `style=`, inline event handler hoặc raw color vào content page.
 - Không thêm framework, package manager, build step hay CDN mới nếu static HTML/CSS/JS hiện tại đáp ứng được.
