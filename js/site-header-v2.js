@@ -78,7 +78,7 @@
       root.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
       this.innerHTML = iconFor(next);
-      // let theme-aware pages (e.g. Data Copilot's chart) react
+      // Let theme-aware pages react.
       document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: next } }));
     });
   }

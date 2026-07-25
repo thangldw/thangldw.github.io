@@ -46,20 +46,6 @@
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var demos = {
-    'data-copilot': {
-      icon: 'fa-comments',
-      title: 'Data Copilot',
-      description: 'Chat with your data. Ask questions in plain English—across CSVs, SQL, and charts—and get answers, queries, and next steps.',
-      purpose: 'Help teams explore, understand, and act on data faster with reliable context and transparent results.',
-      href: 'apps/data-copilot/'
-    },
-    pipeline: {
-      icon: 'fa-wave-square',
-      title: 'Pipeline Observability',
-      description: 'See freshness, coverage, and run history for the ELT pipeline behind Data Copilot—without hiding operational trade-offs.',
-      purpose: 'Make data delivery observable, explainable, and easier for teams to operate with confidence.',
-      href: 'apps/pipeline/'
-    },
     ragops: {
       icon: 'fa-shield-halved',
       title: 'RAGOps',

@@ -9,7 +9,6 @@ Website: [thangldw.github.io](https://thangldw.github.io/)
 | Group | Routes |
 |---|---|
 | Portfolio | `/`, `/apps/` |
-| Product and solution pages | `/apps/namiquant/`, `/apps/data-copilot/`, `/apps/pipeline/`, `/apps/earthquake-intelligence/`, `/apps/city-climate/` |
 | Certification hubs | `/apps/cert/`, `/apps/gkentei/`, `/apps/bjt-study/`, `/apps/jlpt-n1/` |
 | JLPT practice | Canonical `/apps/n1-*` routes listed in `sitemap.xml` |
 
@@ -41,11 +40,6 @@ Current data locations include:
 - `apps/n1-*/data.js`
 - embedded question data in active learning pages
 
-Runtime snapshots used by active technical pages are also retained:
-
-- `apps/data-copilot/data/`
-- `apps/public-signals/data/`
-
 ## Local development
 
 ```bash
@@ -53,25 +47,6 @@ python3 -m http.server 4173
 ```
 
 Open `http://127.0.0.1:4173/`. Root-relative assets and browser APIs make `file://` unsuitable.
-
-## Data refresh
-
-Market data:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install pandas pyarrow
-python3 scripts/fetch_stocks.py
-```
-
-Public climate and earthquake signals:
-
-```bash
-python3 scripts/fetch_public_signals.py
-```
-
-Review schema and diff before committing generated data.
 
 ## Validation
 
