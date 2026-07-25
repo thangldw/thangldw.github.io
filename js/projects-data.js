@@ -198,7 +198,7 @@
   global.portfolioLanguageCollection = {
     title: 'Learning Programs',
     description: 'JLPT N1, BJT, and G検定 programs with focused study paths, timed practice, review, and local learning history.',
-    href: '/apps/#learning',
+    href: '/apps/cert/',
     label: 'Learning Programs'
   };
 
