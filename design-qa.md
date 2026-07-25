@@ -209,7 +209,7 @@ Không còn finding P0, P1 hoặc P2 có thể hành động trong phạm vi QA 
 
 ### Full-view and focused comparison evidence
 
-The implementation now follows the certification hub's centered 1180 px frame, warm `#fbfaf6` canvas, rust `#a83a00` emphasis, navy headings, compact two-line brand lockup, restrained border system, bordered collection surface, four-column desktop grid, and single-column mobile grid. It is taller because it intentionally preserves 13 project cards instead of 9 certification cards.
+The implementation now follows the certification hub's centered 1180 px frame, warm `#fbfaf6` canvas, rust `#a83a00` emphasis, navy headings, compact personal brand lockup, restrained border system, bordered collection surface, four-column desktop grid, and single-column mobile grid. It is taller because it intentionally preserves 13 project cards instead of 9 certification cards.
 
 The combined comparison keeps the header, hero, collection heading, and first card rows visible together at the same desktop width. No separate imagery crop was required because neither design uses photographic or illustrative assets; typography, borders, controls, and card hierarchy remain readable in the combined evidence.
 
@@ -236,7 +236,7 @@ Intentional product differences are the personal `thang.` brand, the project sea
 ### Comparison history
 
 1. Earlier P2 drift: the Apps catalog used indigo as its global emphasis color, green-black text tokens, a plain single-line wordmark, and taller 230 px cards.
-2. Fixes: scoped the certification palette, added the reference-style two-line brand lockup, matched the 1180 px frame and section typography, reduced the card minimum to 210 px, and retained the required Apps-only controls.
+2. Fixes: scoped the certification palette, matched the framed personal brand lockup, aligned the 1180 px frame and section typography, reduced the card minimum to 210 px, and retained the required Apps-only controls.
 3. Post-fix evidence: `desktop-comparison.png`.
 4. No actionable P0, P1, or P2 differences remain.
 
