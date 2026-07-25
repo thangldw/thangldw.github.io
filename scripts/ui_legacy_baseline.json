@@ -23,6 +23,11 @@
     "index.html": {"style_blocks": 0, "style_attributes": 0, "event_handlers": 0, "buttons_missing_type": 0}
   },
   "shared_token_exceptions": {
+    "apps/cert/index.html": {
+      "reason": "CERT-READY is built from its standalone repository with a self-contained design system.",
+      "owner": "Thang Luu",
+      "expires_when": "The shared deployment pipeline supports consuming portfolio tokens without coupling the source repositories."
+    },
     "apps/kakeflow/index.html": {
       "reason": "KakeFlow is a standalone product landing page with a self-contained token sheet.",
       "owner": "Thang Luu",

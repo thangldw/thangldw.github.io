@@ -40,6 +40,7 @@ flowchart LR
 |---|---|---|
 | Hồ sơ | [`/`](https://thangldw.github.io/) | Hồ sơ, nguyên tắc làm việc và dự án nổi bật |
 | Danh mục | [`/apps/`](https://thangldw.github.io/apps/) | Điểm vào chung cho toàn bộ ứng dụng |
+| CERT-READY | [`/apps/cert/`](https://thangldw.github.io/apps/cert/) | Trung tâm ôn tập và luyện thi dùng chung cho 9 chứng chỉ |
 | G検定 | [`/apps/gkentei/`](https://thangldw.github.io/apps/gkentei/) | Lộ trình 11 lĩnh vực, 495 keyword và luyện thi 145 câu |
 | BJT | [`/apps/bjt-study/`](https://thangldw.github.io/apps/bjt-study/) | Business Japanese, luyện tập và ôn sai |
 | JLPT N1 | [`/apps/jlpt-n1/`](https://thangldw.github.io/apps/jlpt-n1/) | Hub gồm 12 công cụ từ vựng, ngữ pháp và đọc hiểu |
