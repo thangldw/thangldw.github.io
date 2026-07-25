@@ -67,6 +67,7 @@ Không đổi tên các class shell trên. Mở rộng bằng component nhỏ, k
 - Một `main`, một source `h1`, heading tuần tự.
 - Có `lang`, charset, viewport, title, description, canonical, Open Graph và Twitter metadata.
 - Trang chủ `/` chủ ý không dùng `og:image` hoặc `twitter:card`; các URL khác trong sitemap vẫn phải cung cấp social image và `summary_large_image`.
+- Xáo trộn các card trong Project library một lần khi tải trang `/apps/`, sau đó giữ nguyên thứ tự đó trong lúc tìm kiếm và lọc.
 - Control có accessible name, `type="button"` khi không submit, keyboard và `:focus-visible`.
 - Không thêm `<style>`, `style=`, inline event handler hoặc raw color vào content page.
 - Không thêm framework, package manager, build step hay CDN mới nếu static HTML/CSS/JS hiện tại đáp ứng được.
