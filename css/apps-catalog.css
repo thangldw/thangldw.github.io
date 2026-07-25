@@ -41,8 +41,8 @@ button,input{font:inherit}
 .project-library-heading .eyebrow{display:block;margin:0 0 6px;color:var(--accent);font:600 10px/1.4 var(--font-mono);letter-spacing:.07em;text-transform:uppercase}
 .project-library-heading h2{margin:0;color:var(--ink);font-size:22px;font-weight:650;line-height:1.25;letter-spacing:-.025em}
 .project-library-heading>i{margin-top:2px;color:var(--muted);font-size:22px}
-.project-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
-.project-card{min-width:0}
+.project-card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;margin-top:18px}
+.project-card{min-width:0;display:flex}
 .project-card[data-accent="rust"]{--project-accent:#a83a00}
 .project-card[data-accent="ochre"]{--project-accent:#b06f24}
 .project-card[data-accent="violet"]{--project-accent:#7956a8}
@@ -53,7 +53,7 @@ button,input{font:inherit}
 .project-card[data-accent="purple"]{--project-accent:#684fa3}
 .project-card[data-accent="amber"]{--project-accent:#9b6420}
 .project-card[hidden]{display:none}
-.project-title-link{min-height:230px;display:flex;flex-direction:column;padding:18px;border:1px solid var(--border);border-top:3px solid var(--project-accent);border-radius:7px;background:var(--surface);color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.project-title-link{width:100%;height:100%;min-height:230px;display:flex;flex-direction:column;padding:18px;border:1px solid var(--border);border-top:3px solid var(--project-accent);border-radius:7px;background:var(--surface);color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
 .project-title-link:hover{transform:translateY(-2px);border-color:var(--project-accent);box-shadow:0 10px 26px color-mix(in srgb,var(--ink) 10%,transparent)}
 .project-card-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-width:0}
 .project-category{min-width:0;display:flex;align-items:center;gap:7px;color:var(--project-accent);font-size:11px;font-weight:750;line-height:1.3}
@@ -72,7 +72,6 @@ button,input{font:inherit}
 .catalog-empty{padding:64px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
 .catalog-empty h2{margin:0;font-size:20px}
 .catalog-empty p{margin:8px 0 0;color:var(--body);font-size:13px}
-.catalog-tip{margin:14px 0 0;color:var(--muted);font:500 10px var(--font-mono)}
 
 .site-foot{border-top:1px solid var(--border);padding:20px 0;color:var(--muted);font:400 11px var(--font-mono);text-align:center}
 .site-foot span{color:var(--strong)}
