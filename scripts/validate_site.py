@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import re
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -21,6 +20,10 @@ EXTERNAL_FONT_PATTERNS = {
     "Google Fonts stylesheet": "fonts.googleapis.com",
     "Google Fonts asset": "fonts.gstatic.com",
     "Font Awesome CDN": "use.fontawesome.com",
+}
+ALLOWED_MARKDOWN = {
+    Path("AGENTS.md"),
+    Path("README.md"),
 }
 
 
@@ -74,6 +77,22 @@ def main() -> int:
     pages = sorted(ROOT.rglob("*.html"))
     parsed_pages: dict[Path, PageParser] = {}
 
+    markdown_files = {
+        path.relative_to(ROOT)
+        for path in ROOT.rglob("*.md")
+        if ".git" not in path.parts
+    }
+    for stale_markdown in sorted(markdown_files - ALLOWED_MARKDOWN):
+        errors.append(
+            f"{stale_markdown}: only README.md and AGENTS.md are durable repository docs"
+        )
+    for metadata_file in sorted(
+        path for path in ROOT.rglob(".DS_Store") if ".git" not in path.parts
+    ):
+        errors.append(
+            f"{metadata_file.relative_to(ROOT)}: local metadata must not be kept"
+        )
+
     for page in pages:
         parser = PageParser()
         try:
@@ -112,32 +131,11 @@ def main() -> int:
             if pattern in content:
                 errors.append(f"{path.relative_to(ROOT)}: external font dependency ({label})")
 
-    migration = (ROOT / "apps/URL-MIGRATION.md").read_text(encoding="utf-8")
-    mappings = re.findall(r"\| `(/apps/[^`]+/)` \| `(/apps/[^`]+/)` \|", migration)
-    if not mappings:
-        errors.append("apps/URL-MIGRATION.md: no URL mappings found")
-    elif len(mappings) != len(set(mappings)):
-        errors.append("apps/URL-MIGRATION.md: duplicate URL mapping")
-
-    documented_redirects = set(mappings)
-    discovered_redirects: set[tuple[str, str]] = set()
     for page, parser in parsed_pages.items():
-        if not parser.refreshes:
-            continue
-        route = "/" + page.parent.relative_to(ROOT).as_posix().strip("/") + "/"
-        for refresh in parser.refreshes:
-            target = re.search(r"url\s*=\s*([^;\s]+)", refresh, flags=re.IGNORECASE)
-            if target:
-                discovered_redirects.add((route, target.group(1)))
-
-    for previous, canonical in sorted(discovered_redirects - documented_redirects):
-        errors.append(
-            f"apps/URL-MIGRATION.md: undocumented redirect {previous} -> {canonical}"
-        )
-    for previous, canonical in sorted(documented_redirects - discovered_redirects):
-        errors.append(
-            f"apps/URL-MIGRATION.md: stale mapping {previous} -> {canonical}"
-        )
+        if parser.refreshes:
+            errors.append(
+                f"{page.relative_to(ROOT)}: legacy redirect pages are not allowed"
+            )
 
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
@@ -176,26 +174,6 @@ def main() -> int:
         if page.meta_names.get("twitter:card") != "summary_large_image":
             errors.append(f"{page_file.relative_to(ROOT)}: expected twitter summary_large_image")
 
-    for previous, canonical in mappings:
-        previous_file = ROOT / previous.lstrip("/") / "index.html"
-        canonical_file = ROOT / canonical.lstrip("/") / "index.html"
-        if not previous_file.exists() or not canonical_file.exists():
-            errors.append(f"mapping missing file: {previous} -> {canonical}")
-            continue
-        previous_page = parsed_pages[previous_file]
-        canonical_page = parsed_pages[canonical_file]
-        if not any(canonical in value for value in previous_page.refreshes):
-            errors.append(f"{previous}: redirect does not target {canonical}")
-        if previous_page.canonicals != [canonical]:
-            errors.append(f"{previous}: canonical link must target {canonical}")
-        if canonical not in previous_page.references:
-            errors.append(f"{previous}: missing fallback link to {canonical}")
-        if canonical_page.refreshes:
-            errors.append(f"{previous}: redirect chain detected through {canonical}")
-        absolute = SITE_URL + canonical
-        if absolute not in sitemap_urls:
-            errors.append(f"sitemap.xml: missing {absolute}")
-
     if errors:
         print("Site validation failed:", file=sys.stderr)
         for error in errors:
@@ -203,8 +181,8 @@ def main() -> int:
         return 1
 
     print(
-        f"Validated {len(pages)} HTML pages, {len(mappings)} redirects, "
-        f"{len(sitemap_urls)} sitemap URLs with social metadata, and all local references."
+        f"Validated {len(pages)} HTML pages, {len(sitemap_urls)} sitemap URLs "
+        "with social metadata, no legacy redirects, and all local references."
     )
     return 0
 

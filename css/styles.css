@@ -108,6 +108,14 @@
   .home-v2 .method-band .outline{width:100%;min-width:0}
 }
 
+/* Filled accent controls inherit the paired foreground token in both themes.
+   This final compatibility rule neutralizes older white/dark overrides. */
+.primary,
+.home-v2 .primary,
+.resume-home .primary {
+  color: var(--accent-ink) !important;
+}
+
 /* Site headers belong to the document flow and scroll away with the page. */
 html{scroll-padding-top:0}
 header{position:relative;top:auto;z-index:1}

@@ -1,9 +1,9 @@
 :root {
-  --signal-cyan: #36c5f0;
-  --signal-violet: #7c8cff;
-  --signal-orange: #ff8a4c;
-  --signal-red: #ef5b68;
-  --signal-green: #45c48b;
+  --signal-cyan: var(--color-series-cyan);
+  --signal-violet: var(--color-series-violet);
+  --signal-orange: var(--color-series-rust);
+  --signal-red: var(--color-danger);
+  --signal-green: var(--color-success);
 }
 
 body.signal-app { min-height: 100vh; background: var(--portfolio-bg); }
@@ -53,9 +53,10 @@ body.signal-app { min-height: 100vh; background: var(--portfolio-bg); }
 .ask-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 22px; }
 .ask-row input { min-height: 54px; padding: 0 17px; font-size: 15px; }
 .ask-row button { min-height: 54px; padding: 0 22px; border: 1px solid var(--portfolio-accent); background: var(--portfolio-accent); color: var(--portfolio-accent-ink); font-weight: 650; cursor: pointer; }
+.ask-row button:hover { filter: brightness(1.06); }
 .prompt-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .prompt-chip { min-height: 34px !important; padding: 6px 11px; border: 1px solid var(--portfolio-border) !important; background: var(--portfolio-surface) !important; color: var(--portfolio-body) !important; font: 500 12px/1.25 var(--portfolio-font-sans) !important; cursor: pointer; }
-.prompt-chip:hover { border-color: var(--portfolio-accent) !important; color: var(--portfolio-accent) !important; }
+.prompt-chip:hover { border-color: var(--portfolio-accent) !important; background: var(--portfolio-accent-soft) !important; color: var(--portfolio-accent) !important; }
 
 .answer-panel { display: grid; grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr); margin-top: 14px; border: 1px solid var(--portfolio-border); background: var(--portfolio-surface); }
 .answer-copy { padding: 26px; border-right: 1px solid var(--portfolio-border); }
@@ -102,9 +103,10 @@ body.signal-app { min-height: 100vh; background: var(--portfolio-bg); }
 .world-map-host { min-height: 0; }
 .map-coverage-label { fill: var(--portfolio-accent); font: 600 10px var(--portfolio-font-mono); letter-spacing: .06em; }
 .coverage-key { margin-left: auto; font-family: var(--portfolio-font-mono); }
-.depth-share { fill: #10151d; font: 700 10px var(--portfolio-font-mono); }
+.depth-share { fill: var(--color-on-accent); font: 700 10px var(--portfolio-font-mono); }
 .map-controls { display: flex; align-items: center; gap: 8px; }
 .map-focus { border: 1px solid var(--portfolio-border-strong); background: var(--portfolio-surface); color: var(--portfolio-body); cursor: pointer; white-space: nowrap; }
+.map-focus:hover { border-color: var(--portfolio-accent); background: var(--portfolio-accent-soft); color: var(--portfolio-accent); }
 .seismic-leaflet { width: 100%; height: 560px; border: 1px solid var(--portfolio-border); background: var(--portfolio-surface-2); z-index: 0; }
 .seismic-leaflet .leaflet-control-zoom { overflow: hidden; border-radius: 8px; }
 .seismic-leaflet .leaflet-control-zoom a { width: 34px; height: 34px; line-height: 34px; }
@@ -116,6 +118,7 @@ body.signal-app { min-height: 100vh; background: var(--portfolio-bg); }
 .seismic-leaflet .leaflet-tooltip b { display: block; color: var(--portfolio-ink); }
 .globe-controls { display: flex; gap: 8px; align-items: center; }
 .globe-toggle { border: 1px solid var(--portfolio-border-strong); background: var(--portfolio-surface); color: var(--portfolio-body); cursor: pointer; white-space: nowrap; }
+.globe-toggle:hover { border-color: var(--portfolio-accent); background: var(--portfolio-accent-soft); color: var(--portfolio-accent); }
 .globe-host { position: relative; min-height: 520px; overflow: hidden; border: 1px solid var(--portfolio-border); background: var(--portfolio-bg); }
 .globe-host canvas { display: block; width: 100%; height: 520px; cursor: grab; touch-action: none; }
 .globe-host canvas:active { cursor: grabbing; }

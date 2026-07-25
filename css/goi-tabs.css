@@ -1,23 +1,13 @@
 :root {
-  --goi-bg: var(--bg, #fafbfc);
-  --goi-surface: var(--surface, #fff);
-  --goi-ink: var(--ink, #10151d);
-  --goi-body: var(--body, #5b6472);
-  --goi-muted: var(--muted, #8a92a0);
-  --goi-border: var(--border, #e6e9ee);
-  --goi-accent: var(--accent, #a83a00);
-  --goi-chip: var(--chip, #eef0f6);
-}
-
-html[data-theme="dark"] {
-  --goi-bg: #0d1117;
-  --goi-surface: #11161f;
-  --goi-ink: #f2f5f9;
-  --goi-body: #b0bac7;
-  --goi-muted: #a6b0bd;
-  --goi-border: #3a4656;
-  --goi-accent: #8e9cff;
-  --goi-chip: #1a2230;
+  --goi-bg: var(--color-canvas, #fbfaf6);
+  --goi-surface: var(--color-surface, #fbfaf6);
+  --goi-ink: var(--color-text, #1d211e);
+  --goi-body: var(--color-text-body, #505750);
+  --goi-muted: var(--color-text-muted, #697169);
+  --goi-border: var(--color-border, #d9d5cb);
+  --goi-accent: var(--color-accent, #a83a00);
+  --goi-on-accent: var(--color-on-accent, #ffffff);
+  --goi-chip: var(--color-surface-subtle, #e9e6dd);
 }
 
 body { background: var(--goi-bg); color: var(--goi-ink); }
@@ -34,7 +24,7 @@ body { background: var(--goi-bg); color: var(--goi-ink); }
 .mtab.on { color: var(--goi-accent); border-color: var(--goi-accent); }
 .stabs { padding: 12px 48px 5px; gap: 8px; background: var(--goi-bg); border: 0; }
 .stab { min-height: 34px; padding: 6px 14px; border: 1px solid var(--goi-border); color: var(--goi-body); background: transparent; }
-.stab.on,.stab.v.on,.stab.n.on,.stab.adj.on,.stab.adv.on { color: #fff; background: var(--goi-accent); border-color: var(--goi-accent); }
+.stab.on,.stab.v.on,.stab.n.on,.stab.adj.on,.stab.adv.on { color: var(--goi-on-accent); background: var(--goi-accent); border-color: var(--goi-accent); }
 
 .ctrl { max-width: 1500px; padding: 12px 48px 8px; gap: 10px; }
 .ctrl input[type="text"],.ctrl select { min-height: 40px; padding: 8px 12px; border: 1px solid var(--goi-border); background: var(--goi-surface); color: var(--goi-ink); }
@@ -54,9 +44,9 @@ body { background: var(--goi-bg); color: var(--goi-ink); }
 .syi { background: var(--goi-chip); }
 .syi.pri { background: var(--goi-accent); }
 .syi .sw { color: var(--goi-ink); }
-.syi.pri .sw { color: #fff; }
+.syi.pri .sw { color: var(--goi-on-accent); }
 .syi .sh,.syi .sm { color: var(--goi-muted); }
-.syi.pri .sh,.syi.pri .sm { color: #fff; }
+.syi.pri .sh,.syi.pri .sm { color: var(--goi-on-accent); }
 
 html[data-theme="dark"] :where(.dtg-s,.ptu-card,.pat-g,.pre-s,.ct-chip,.detail,.ex-block,.dtg-t td,.pre-t td) { background: var(--goi-surface); color: var(--goi-ink); border-color: var(--goi-border); }
 html[data-theme="dark"] :where(.dtg-t tr:hover td,.pre-t tr:hover td) { background: var(--goi-chip); }

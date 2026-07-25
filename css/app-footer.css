@@ -4,8 +4,8 @@ html {
 }
 
 body {
-  background: var(--bg, #fafbfc);
-  color: var(--text, var(--ink, #10151d));
+  background: var(--color-canvas, #fbfaf6);
+  color: var(--color-text, #1d211e);
   font-family: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
   font-size: 15px;
   line-height: 1.65;
@@ -24,7 +24,7 @@ body {
 }
 
 :where(h1, h2, h3, h4) {
-  color: var(--text, var(--ink, #10151d));
+  color: var(--color-text, #1d211e);
   font-family: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
   line-height: 1.25;
   letter-spacing: -.015em;
@@ -36,29 +36,29 @@ body {
 }
 
 :where(button, a, input, select, textarea):focus-visible {
-  outline: 2px solid var(--accent, #a83a00);
+  outline: 2px solid var(--color-accent, #a83a00);
   outline-offset: 2px;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent, #a83a00) 22%, transparent);
+  background: color-mix(in srgb, var(--color-accent, #a83a00) 22%, transparent);
 }
 
 .site-foot {
   margin-top: 5rem;
   padding: 20px 48px;
-  background: var(--bg, #fafbfc);
-  color: var(--text-dim, #8a92a0);
+  background: var(--color-canvas, #fbfaf6);
+  color: var(--color-text-muted, #697169);
   font: 400 12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   text-align: center;
 }
 
 .site-foot span {
-  color: #667085;
+  color: var(--color-text-strong, #343a35);
   font-style: normal;
 }
 
-html[data-theme="dark"] .site-foot span { color: #b0bac7; }
+html[data-theme="dark"] .site-foot span { color: var(--color-text-strong); }
 
 @media (max-width: 680px) {
   .site-foot { padding-inline: 24px; }

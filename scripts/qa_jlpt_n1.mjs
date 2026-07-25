@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const ROUTES = [
+const DEFAULT_ROUTES = [
   '/apps/jlpt-n1/',
   '/apps/n1-vocabulary-tabs/',
   '/apps/n1-kanji-analysis/',
@@ -25,7 +25,13 @@ const ROUTES = [
   '/apps/n1-reading-75/',
   '/apps/n1-reading-mondai9/'
 ];
-const VIEWPORTS = [390, 680, 1280, 1440];
+const ROUTES = process.env.QA_ROUTES
+  ? process.env.QA_ROUTES.split(',').map(route => route.trim()).filter(Boolean)
+  : DEFAULT_ROUTES;
+const VIEWPORTS = process.env.QA_VIEWPORTS
+  ? process.env.QA_VIEWPORTS.split(',').map(Number).filter(Number.isFinite)
+  : [390, 680, 1280, 1440];
+const SUITE_LABEL = process.env.QA_LABEL || 'JLPT N1';
 
 function freePort() {
   return new Promise((resolvePort, reject) => {
@@ -145,7 +151,11 @@ try {
     for (const route of ROUTES) {
       page.exceptions.length = 0;
       await page.send('Page.navigate', { url: `http://127.0.0.1:${serverPort}${route}?qa=${width}` });
-      await page.waitUntil('document.readyState === "complete" && document.querySelectorAll("main").length === 1');
+      await page.waitUntil(
+        'document.readyState === "complete" && ' +
+        'document.querySelectorAll("main").length === 1 && ' +
+        'document.querySelectorAll("h1").length === 1'
+      );
       await new Promise(resolveWait => setTimeout(resolveWait, 100));
       const result = await page.evaluate(`(() => {
         const visible = element => {
@@ -201,7 +211,7 @@ try {
         const expected = field === 'mainCount' || field === 'h1Count' ? 1 : field === 'overflow' || field === 'mojibake' ? false : 0;
         if (result[field] !== expected) failures.push(`${key}: ${field}=${result[field]}`);
       }
-      if (!['vi', 'ja'].includes(result.lang)) failures.push(`${key}: lang=${result.lang || '(missing)'}`);
+      if (!['en', 'vi', 'ja'].includes(result.lang)) failures.push(`${key}: lang=${result.lang || '(missing)'}`);
       if (page.exceptions.length) failures.push(`${key}: console=${page.exceptions.join(' | ')}`);
       if (result.undersizedControls) warnings.push(`${key}: undersizedControls=${result.undersizedControls} ${JSON.stringify(result.undersizedSamples)}`);
       if (result.decodedKB > 2500) warnings.push(`${key}: decodedKB=${result.decodedKB}`);
@@ -217,11 +227,11 @@ try {
 
 const desktopPerformance = performanceRows.filter(row => row.width === 1440);
 console.table(desktopPerformance);
-console.log(`JLPT N1 matrix checked: ${ROUTES.length} routes × ${VIEWPORTS.length} viewports = ${performanceRows.length} renders.`);
+console.log(`${SUITE_LABEL} matrix checked: ${ROUTES.length} routes × ${VIEWPORTS.length} viewports = ${performanceRows.length} renders.`);
 if (warnings.length) console.log(`Warnings (${warnings.length}):\n${warnings.join('\n')}`);
 if (failures.length) {
   console.error(`Failures (${failures.length}):\n${failures.join('\n')}`);
   process.exitCode = 1;
 } else {
-  console.log('JLPT N1 structural, language, accessibility and responsive gates passed.');
+  console.log(`${SUITE_LABEL} structural, language, accessibility and responsive gates passed.`);
 }

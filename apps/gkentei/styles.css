@@ -1,7 +1,7 @@
-body[data-app-route="gkentei"] { --accent: #c84d24; }
+body[data-app-route="gkentei"] { --accent: var(--portfolio-accent); }
 
 body.portfolio-app[data-app-route="gkentei"] :where(a, button, input, select, textarea):focus-visible {
-  outline: 2px solid var(--accent, #c84d24) !important;
+  outline: 2px solid var(--accent) !important;
   outline-offset: 3px;
 }
 
@@ -85,7 +85,7 @@ body[data-app-route="gkentei"] > .skip-link:focus { top: 0; }
   letter-spacing: -.08em;
 }
 
-.gk-brand-dot { color: var(--portfolio-accent, #a83a00); }
+.gk-brand-dot { color: var(--portfolio-brand); }
 .gk-sidebar-actions { display: flex; gap: 8px; }
 
 .gk-icon-button {
@@ -606,7 +606,7 @@ body[data-app-route="gkentei"] .gk-search-field input {
   color: var(--portfolio-ink);
 }
 body[data-app-route="gkentei"] .gk-search-field:focus-within {
-  outline: 2px solid var(--accent, #c84d24);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 .gk-bank-heading { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 12px; }
