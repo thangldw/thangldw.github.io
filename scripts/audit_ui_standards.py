@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-import json
+import math
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -14,10 +14,34 @@ from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE_URL = "https://thangldw.github.io"
 DEPRECATED_COLORS = {"#f3f0e8": "use #fbfaf6 or the shared background token"}
-STANDARD_VERSION = "1.1"
-LEGACY_BASELINE_PATH = ROOT / "scripts" / "ui_legacy_baseline.json"
+COLOR_TOKEN_PATH = ROOT / "css" / "tokens.css"
+SHARED_HEADER_PATH = ROOT / "js" / "site-header-v2.js"
+REQUIRED_COLOR_ROLES = {
+    "--color-canvas",
+    "--color-surface",
+    "--color-surface-raised",
+    "--color-surface-subtle",
+    "--color-text",
+    "--color-text-body",
+    "--color-text-strong",
+    "--color-text-muted",
+    "--color-border",
+    "--color-border-strong",
+    "--color-accent",
+    "--color-on-accent",
+    "--color-accent-soft",
+    "--color-brand",
+    "--color-brand-soft",
+    "--color-success",
+    "--color-success-soft",
+    "--color-danger",
+    "--color-danger-soft",
+    "--color-warning",
+    "--color-warning-soft",
+    "--color-info",
+    "--color-info-soft",
+}
 INLINE_STYLE_RE = re.compile(r"\bstyle\s*=", re.IGNORECASE)
 INLINE_EVENT_RE = re.compile(
     r"\bon(?:click|change|input|keydown|keyup|submit|load|error|focus|blur|"
@@ -33,6 +57,7 @@ class UIParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.doctype = False
         self.html_attrs: dict[str, str] = {}
+        self.body_attrs: dict[str, str] = {}
         self.counts: Counter[str] = Counter()
         self.ids: list[str] = []
         self.meta_names: dict[str, str] = {}
@@ -47,6 +72,8 @@ class UIParser(HTMLParser):
         self.tabs: list[dict[str, str]] = []
         self.tabpanels: list[dict[str, str]] = []
         self.stylesheets: list[str] = []
+        self.scripts: list[str] = []
+        self.style_layers: list[str] = []
 
     def handle_decl(self, decl: str) -> None:
         if decl.lower().strip() == "doctype html":
@@ -57,6 +84,8 @@ class UIParser(HTMLParser):
         self.counts[tag] += 1
         if tag == "html":
             self.html_attrs = values
+        if tag == "body":
+            self.body_attrs = values
         if values.get("id"):
             self.ids.append(values["id"])
         if tag == "meta":
@@ -83,7 +112,13 @@ class UIParser(HTMLParser):
         elif role == "tabpanel":
             self.tabpanels.append(values)
         if tag == "link" and "stylesheet" in values.get("rel", "").lower().split():
-            self.stylesheets.append(values.get("href", ""))
+            href = values.get("href", "")
+            self.stylesheets.append(href)
+            self.style_layers.append(href)
+        elif tag == "style":
+            self.style_layers.append("<style>")
+        if tag == "script" and values.get("src"):
+            self.scripts.append(values["src"])
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "title":
@@ -111,8 +146,8 @@ def public_pages() -> list[Path]:
     return sorted(set(pages))
 
 
-def legacy_counts(source: str, parser: UIParser) -> dict[str, int]:
-    """Count legacy-only patterns, including button markup inside JS templates."""
+def inline_presentation_counts(source: str, parser: UIParser) -> dict[str, int]:
+    """Count presentation debt, including button markup inside JS templates."""
     return {
         "style_blocks": parser.counts["style"],
         "style_attributes": len(INLINE_STYLE_RE.findall(source)),
@@ -122,37 +157,94 @@ def legacy_counts(source: str, parser: UIParser) -> dict[str, int]:
         ),
     }
 
+def css_block(source: str, selector: str) -> str:
+    match = re.search(re.escape(selector) + r"\s*\{([^}]+)\}", source, re.DOTALL)
+    return match.group(1) if match else ""
 
-def load_legacy_baseline() -> dict[str, object]:
-    if not LEGACY_BASELINE_PATH.exists():
-        raise FileNotFoundError(f"missing {LEGACY_BASELINE_PATH.relative_to(ROOT)}")
-    return json.loads(LEGACY_BASELINE_PATH.read_text(encoding="utf-8"))
+
+def color_values(block: str) -> dict[str, str]:
+    return {
+        name: value.lower()
+        for name, value in re.findall(
+            r"(--color-[\w-]+)\s*:\s*(#[0-9a-fA-F]{6})\s*;", block
+        )
+    }
+
+
+def relative_luminance(color: str) -> float:
+    channels = [int(color[index:index + 2], 16) / 255 for index in (1, 3, 5)]
+    linear = [
+        channel / 12.92
+        if channel <= 0.04045
+        else math.pow((channel + 0.055) / 1.055, 2.4)
+        for channel in channels
+    ]
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+
+def contrast_ratio(left: str, right: str) -> float:
+    lighter, darker = sorted(
+        (relative_luminance(left), relative_luminance(right)), reverse=True
+    )
+    return (lighter + 0.05) / (darker + 0.05)
+
+
+def audit_color_contract() -> list[str]:
+    if not COLOR_TOKEN_PATH.exists():
+        return ["css/tokens.css: missing canonical color contract"]
+    source = COLOR_TOKEN_PATH.read_text(encoding="utf-8")
+    light = color_values(css_block(source, ":root"))
+    dark = color_values(css_block(source, ':root[data-theme="dark"]'))
+    errors = []
+    for theme, values in (("light", light), ("dark", dark)):
+        missing = sorted(REQUIRED_COLOR_ROLES - values.keys())
+        if missing:
+            errors.append(
+                f"css/tokens.css: {theme} theme missing color roles: {', '.join(missing)}"
+            )
+            continue
+        checks = (
+            ("accent text", values["--color-accent"], values["--color-canvas"]),
+            ("filled accent", values["--color-on-accent"], values["--color-accent"]),
+        )
+        for label, foreground, background in checks:
+            ratio = contrast_ratio(foreground, background)
+            if ratio < 4.5:
+                errors.append(
+                    f"css/tokens.css: {theme} {label} contrast {ratio:.2f}:1 is below 4.5:1"
+                )
+    return errors
+
+
+def audit_shared_header() -> list[str]:
+    if not SHARED_HEADER_PATH.exists():
+        return ["js/site-header-v2.js: missing shared sub-page header"]
+    source = SHARED_HEADER_PATH.read_text(encoding="utf-8").lower()
+    errors = []
+    for role in (
+        "--color-canvas",
+        "--color-surface-raised",
+        "--color-text",
+        "--color-border",
+        "--color-accent",
+        "--color-accent-soft",
+    ):
+        if role not in source:
+            errors.append(f"js/site-header-v2.js: shared header must use {role}")
+    for legacy_color in ("#7c9cff", "#3a5bd9", "#151922", "#262c38"):
+        if legacy_color in source:
+            errors.append(
+                f"js/site-header-v2.js: legacy header color {legacy_color} is not allowed"
+            )
+    return errors
 
 
 def audit_site() -> list[str]:
-    errors: list[str] = []
+    errors: list[str] = audit_color_contract() + audit_shared_header()
     pages = public_pages()
-    try:
-        baseline = load_legacy_baseline()
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        return [str(exc)]
-    if baseline.get("standard_version") != STANDARD_VERSION:
-        errors.append(
-            f"scripts/ui_legacy_baseline.json: expected standard_version {STANDARD_VERSION}"
-        )
-    inline_debt = baseline.get("inline_debt", {})
-    token_exceptions = baseline.get("shared_token_exceptions", {})
-    if not isinstance(inline_debt, dict) or not isinstance(token_exceptions, dict):
-        return ["scripts/ui_legacy_baseline.json: invalid baseline structure"]
-    public_names = {str(page.relative_to(ROOT)) for page in pages}
-    for stale in sorted(set(inline_debt) - public_names):
-        errors.append(f"scripts/ui_legacy_baseline.json: stale page entry: {stale}")
-    for stale in sorted(set(token_exceptions) - public_names):
-        errors.append(f"scripts/ui_legacy_baseline.json: stale token exception: {stale}")
 
     for page in pages:
         relative = page.relative_to(ROOT)
-        relative_name = str(relative)
         source = page.read_text(encoding="utf-8")
         parser = UIParser()
         parser.feed(source)
@@ -204,36 +296,60 @@ def audit_site() -> list[str]:
             if not panel.get("aria-labelledby"):
                 errors.append(f"{relative}: tabpanel requires aria-labelledby")
 
-        design_index = next((i for i, href in enumerate(parser.stylesheets) if "app-design-system.css" in href), None)
-        readable_index = next((i for i, href in enumerate(parser.stylesheets) if "language-app-readable.css" in href), None)
+        design_index = next((i for i, href in enumerate(parser.style_layers) if "app-design-system.css" in href), None)
+        readable_index = next((i for i, href in enumerate(parser.style_layers) if "language-app-readable.css" in href), None)
         if readable_index is not None and (design_index is None or readable_index < design_index):
             errors.append(f"{relative}: language readability CSS must load after app-design-system.css")
+        if design_index is not None:
+            unexpected_trailing = [
+                layer for layer in parser.style_layers[design_index + 1:]
+                if "language-app-readable.css" not in layer
+            ]
+            if unexpected_trailing:
+                errors.append(
+                    f"{relative}: app-design-system.css must be the final layer before "
+                    f"language readability CSS; found {', '.join(unexpected_trailing)} after it"
+                )
+        if readable_index is not None and readable_index != len(parser.style_layers) - 1:
+            errors.append(
+                f"{relative}: language-app-readable.css must be the final style layer"
+            )
 
         uses_shared_tokens = any(
             "tokens.css" in href or "app-design-system.css" in href
             for href in parser.stylesheets
         )
-        if not uses_shared_tokens:
-            exception = token_exceptions.get(relative_name)
-            required = ("reason", "owner", "expires_when")
-            if not isinstance(exception, dict) or any(not exception.get(key) for key in required):
-                errors.append(f"{relative}: must load shared tokens or have a documented exception")
+        page_kind = parser.body_attrs.get("data-page-kind", "")
+        if not uses_shared_tokens and page_kind not in {"product", "exam-shell"}:
+            errors.append(
+                f"{relative}: must load the shared design system or declare a supported page kind"
+            )
 
-        actual_debt = legacy_counts(source, parser)
-        expected_debt = inline_debt.get(relative_name, {})
-        if not isinstance(expected_debt, dict):
-            errors.append(f"{relative}: invalid inline-debt baseline")
-            expected_debt = {}
-        for metric, actual in actual_debt.items():
-            expected = expected_debt.get(metric, 0)
-            if actual > expected:
+        body_classes = set(parser.body_attrs.get("class", "").split())
+        if "content-page" in body_classes:
+            if page_kind != "content":
                 errors.append(
-                    f"{relative}: {metric} increased from baseline {expected} to {actual}"
+                    f"{relative}: content page must declare data-page-kind=content"
                 )
-            elif actual < expected:
+            required_styles = (
+                "tokens.css",
+                "app-footer.css",
+                "app-design-system.css",
+            )
+            for required_style in required_styles:
+                if not any(required_style in href for href in parser.stylesheets):
+                    errors.append(
+                        f"{relative}: content page must load {required_style}"
+                    )
+            if not any("site-header-v2.js" in src for src in parser.scripts):
                 errors.append(
-                    f"{relative}: {metric} improved from {expected} to {actual}; lower the baseline"
+                    f"{relative}: content page must load the shared site header"
                 )
+            for metric, count in inline_presentation_counts(source, parser).items():
+                if count:
+                    errors.append(
+                        f"{relative}: content page requires zero {metric}; found {count}"
+                    )
 
     for path in sorted((*ROOT.rglob("*.html"), *ROOT.rglob("*.css"))):
         source = path.read_text(encoding="utf-8").lower()

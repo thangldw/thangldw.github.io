@@ -1,37 +1,23 @@
 :root {
-  --bjt-orange: #e65312;
-  --bjt-orange-soft: #fff2eb;
-  --bjt-paper: #fbfaf6;
-  --bjt-rail: #fbfaf6;
-  --bjt-ink: #1d211e;
-  --bjt-body: #505750;
-  --bjt-muted: #697169;
-  --bjt-rule: #d9d5cb;
-  --bjt-rule-strong: #bbb8ad;
-  --bjt-panel: #fbfaf6;
-  --bjt-dark: #111111;
-  --bjt-success: #24734b;
-  --bjt-danger: #b94035;
+  --bjt-orange: var(--color-accent);
+  --bjt-orange-soft: var(--color-accent-soft);
+  --bjt-paper: var(--color-canvas);
+  --bjt-rail: var(--color-surface);
+  --bjt-ink: var(--color-text);
+  --bjt-body: var(--color-text-body);
+  --bjt-muted: var(--color-text-muted);
+  --bjt-rule: var(--color-border);
+  --bjt-rule-strong: var(--color-border-strong);
+  --bjt-panel: var(--color-surface);
+  --bjt-dark: var(--color-text);
+  --bjt-success: var(--color-success);
+  --bjt-danger: var(--color-danger);
   --bjt-control-radius: 8px;
   --bjt-option-radius: 10px;
   --bjt-font: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
   --bjt-jp-sans: var(--font-jp-sans, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif);
   --bjt-serif: var(--font-jp-serif, "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif);
-}
-
-:root[data-theme="dark"] {
-  --bjt-paper: #11130f;
-  --bjt-rail: #171914;
-  --bjt-ink: #f6f3ed;
-  --bjt-body: #c2bfb7;
-  --bjt-muted: #97948d;
-  --bjt-rule: #30312d;
-  --bjt-rule-strong: #4b4c46;
-  --bjt-panel: #191b17;
-  --bjt-dark: #f2efe9;
-  --bjt-orange-soft: #342116;
-  --bjt-success: #73d09b;
-  --bjt-danger: #ff8d82;
+  --bjt-mono: var(--font-mono, ui-monospace, monospace);
 }
 
 * { box-sizing: border-box; }
@@ -49,8 +35,8 @@ a { color: inherit; }
 .sidebar { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; border-right: 1px solid var(--bjt-rule); background: var(--bjt-rail); }
 .sidebar-head { min-height: 92px; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; border-bottom: 1px solid transparent; }
 .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--bjt-ink); font-size: 22px; font-weight: 700; letter-spacing: -.035em; text-decoration: none; }
-.brand-mark { width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 auto; border: 2px solid var(--portfolio-accent, #a83a00); border-radius: 12px 4px; color: var(--portfolio-accent, #a83a00); font: 650 15px/1 var(--font-mono, ui-monospace, monospace); letter-spacing: -.08em; }
-.brand-dot { color: var(--portfolio-accent, #a83a00); }
+.brand-mark { width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 auto; border: 2px solid var(--color-brand); border-radius: 12px 4px; color: var(--color-brand); font: 650 15px/1 var(--font-mono, ui-monospace, monospace); letter-spacing: -.08em; }
+.brand-dot { color: var(--color-brand); }
 .sidebar-actions { display: flex; align-items: center; gap: 8px; }
 .mobile-nav-toggle { display: none; align-items: center; gap: 7px; border: 1px solid var(--bjt-rule); border-radius: 10px; background: var(--bjt-panel); padding: 8px 10px; }
 
@@ -142,7 +128,7 @@ a { color: inherit; }
 .session-step:last-child::after { display: none; }
 .step-num { position: relative; z-index: 1; width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--bjt-rule-strong); border-radius: 50%; background: var(--bjt-paper); color: var(--bjt-muted); font-size: 13px; }
 .session-step.is-active { color: var(--bjt-orange); }
-.session-step.is-active .step-num, .session-step.is-complete .step-num { border-color: var(--bjt-orange); background: var(--bjt-orange); color: white; }
+.session-step.is-active .step-num, .session-step.is-complete .step-num { border-color: var(--bjt-orange); background: var(--bjt-orange); color: var(--color-on-accent); }
 .step-copy strong { display: block; margin-top: 4px; font-size: 14px; font-weight: 600; }
 .step-copy small { display: block; margin-top: 3px; color: var(--bjt-muted); font-size: 11px; }
 .rail-note { margin-top: 22px; border-top: 1px solid var(--bjt-rule); padding-top: 22px; color: var(--bjt-muted); font-size: 12px; }
