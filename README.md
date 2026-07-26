@@ -25,7 +25,7 @@ Ordinary content and utility pages use:
 - `js/site-shell.js`
 - `body.site-page.portfolio-app.content-page`
 
-Every public non-exam page uses the same static header, footer, brand and theme toggle from the shared site shell. Product/solution pages may use a custom `main` composition. Exam and learning pages may keep task-specific interaction, but shared chrome and colors should still use semantic tokens whenever compatible.
+Content pages, `/apps/` and `404.html` use the same static header and footer. The single-page portfolio resume at `/` embeds the shared brand and theme control in its main profile and intentionally has no header or footer. Exam and learning pages keep task-specific navigation while reusing semantic tokens whenever compatible.
 
 ## Data safety
 

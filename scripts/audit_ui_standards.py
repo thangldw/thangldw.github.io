@@ -352,6 +352,7 @@ def audit_site() -> list[str]:
 
         body_classes = set(parser.body_attrs.get("class", "").split())
         if page_kind != "exam-shell":
+            is_home_resume = relative == Path("index.html") and "resume-home" in body_classes
             site_headers = [
                 attrs for attrs in parser.headers
                 if "site-header" in set(attrs.get("class", "").split())
@@ -362,16 +363,26 @@ def audit_site() -> list[str]:
             ]
             if "site-page" not in body_classes:
                 errors.append(f"{relative}: public page must include body.site-page")
-            if len(site_headers) != 1:
-                errors.append(
-                    f"{relative}: shared shell requires exactly one header.site-header; "
-                    f"found {len(site_headers)}"
-                )
-            if len(site_footers) != 1:
-                errors.append(
-                    f"{relative}: shared shell requires exactly one footer.site-foot; "
-                    f"found {len(site_footers)}"
-                )
+            if is_home_resume:
+                if site_headers:
+                    errors.append(f"{relative}: resume homepage must not use header.site-header")
+                if site_footers:
+                    errors.append(f"{relative}: resume homepage must not use footer.site-foot")
+                if "resume-utility" not in source:
+                    errors.append(
+                        f"{relative}: resume homepage must embed brand and theme controls"
+                    )
+            else:
+                if len(site_headers) != 1:
+                    errors.append(
+                        f"{relative}: shared shell requires exactly one header.site-header; "
+                        f"found {len(site_headers)}"
+                    )
+                if len(site_footers) != 1:
+                    errors.append(
+                        f"{relative}: shared shell requires exactly one footer.site-foot; "
+                        f"found {len(site_footers)}"
+                    )
             if shell_index is None:
                 errors.append(f"{relative}: public page must load site-shell.css")
             elif shell_index != len(parser.style_layers) - 1:
