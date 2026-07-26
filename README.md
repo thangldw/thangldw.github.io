@@ -20,12 +20,12 @@ Read [AGENTS.md](AGENTS.md) before creating or editing a page.
 Ordinary content and utility pages use:
 
 - `css/tokens.css`
-- `css/app-footer.css`
 - `css/app-design-system.css`
-- `js/site-header-v2.js`
-- `body.portfolio-app.content-page`
+- `css/site-shell.css`
+- `js/site-shell.js`
+- `body.site-page.portfolio-app.content-page`
 
-Product/solution pages may use a custom composition. Exam and learning pages may keep task-specific interaction, but shared chrome and colors should still use semantic tokens whenever compatible.
+Every public non-exam page uses the same static header, footer, brand and theme toggle from the shared site shell. Product/solution pages may use a custom `main` composition. Exam and learning pages may keep task-specific interaction, but shared chrome and colors should still use semantic tokens whenever compatible.
 
 ## Data safety
 
