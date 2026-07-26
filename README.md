@@ -9,10 +9,9 @@ Website: [thangldw.github.io](https://thangldw.github.io/)
 | Group | Routes |
 |---|---|
 | Portfolio | `/`, `/apps/` |
-| Certification hubs | `/apps/cert/`, `/apps/gkentei/`, `/apps/bjt-study/`, `/apps/jlpt-n1/` |
-| JLPT practice | Canonical `/apps/n1-*` routes listed in `sitemap.xml` |
+| Certification study | `/apps/cert/` and its `/apps/cert/{slug}/` study spaces |
 
-Legacy redirect routes and historical QA documents are intentionally not kept.
+Legacy certification hubs, standalone JLPT practice routes, redirect routes and historical QA documents are intentionally not kept.
 
 ## Design source of truth
 
@@ -30,15 +29,9 @@ Product/solution pages may use a custom composition. Exam and learning pages may
 
 ## Data safety
 
-Question banks, answers, vocabulary, grammar, reading passages and exam datasets are repository assets, not cleanup candidates. Do not delete, shorten, reorder or regenerate them unless the task explicitly names the dataset.
+Certification source data lives in the private `thangldw/cert` repository. `apps/cert/` is its generated GitHub Pages release artifact and should not be edited by hand.
 
-Current data locations include:
-
-- `apps/gkentei/questions.json`
-- `apps/bjt-study/data/`
-- `apps/jlpt-n1/quiz-data.js`
-- `apps/n1-*/data.js`
-- embedded question data in active learning pages
+Question banks, answers, vocabulary and exam datasets must be changed in `thangldw/cert`, validated there, and then released here.
 
 ## Local development
 
@@ -53,8 +46,7 @@ Open `http://127.0.0.1:4173/`. Root-relative assets and browser APIs make `file:
 ```bash
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
-node scripts/smoke_learning_apps.mjs
-node scripts/qa_jlpt_n1.mjs
+node scripts/smoke_cert.mjs
 git diff --check
 git status --short
 ```
