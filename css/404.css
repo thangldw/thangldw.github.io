@@ -152,90 +152,6 @@
   text-align: right;
 }
 
-.not-found-page .dad-mission {
-  padding: 40px 0 12px;
-}
-
-.not-found-page .dad-mission-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.not-found-page .dad-mission-heading h2 {
-  margin: 0;
-  font-size: clamp(25px, 3vw, 34px) !important;
-}
-
-.not-found-page .dad-prompt {
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  flex: 0 0 auto;
-  border: 2px solid var(--color-accent);
-  border-radius: 13px 5px;
-  color: var(--color-accent);
-  font: 650 16px/1 var(--font-mono);
-  letter-spacing: -.08em;
-}
-
-.not-found-page .dad-mission-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 22px;
-}
-
-.not-found-page .dad-mission-grid article {
-  min-width: 0;
-  padding: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface-raised);
-}
-
-.not-found-page .dad-mission-grid article > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.not-found-page .dad-mission-grid article > div span {
-  color: var(--color-accent);
-  font: 700 11px/1.4 var(--font-mono);
-}
-
-.not-found-page .dad-mission-grid article > div small {
-  color: var(--color-success);
-  font: 650 9px/1.4 var(--font-mono);
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-
-.not-found-page .dad-mission-grid article h3 {
-  margin: 28px 0 7px;
-  font-size: 17px !important;
-}
-
-.not-found-page .dad-mission-grid article p {
-  margin: 0;
-  color: var(--color-text-body);
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-.not-found-page .dad-mission-grid .is-missing {
-  border-color: color-mix(in srgb, var(--color-accent) 48%, var(--color-border));
-  background: color-mix(in srgb, var(--color-accent-soft) 45%, var(--color-surface-raised));
-}
-
-.not-found-page .dad-mission-grid .is-missing > div small {
-  color: var(--color-accent);
-}
-
 @media (max-width: 980px) {
   .not-found-page .dad-hero {
     grid-template-columns: 1fr;
@@ -288,25 +204,4 @@
     text-align: left;
   }
 
-  .not-found-page .dad-mission {
-    padding-top: 32px;
-  }
-
-  .not-found-page .dad-mission-heading {
-    align-items: flex-start;
-  }
-
-  .not-found-page .dad-prompt {
-    width: 40px;
-    height: 40px;
-    font-size: 14px;
-  }
-
-  .not-found-page .dad-mission-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .not-found-page .dad-mission-grid article h3 {
-    margin-top: 22px;
-  }
 }
