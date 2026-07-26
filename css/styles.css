@@ -137,7 +137,7 @@ header{position:relative;top:auto;z-index:1}
 .resume-home .resume-profile{padding:30px 56px 24px;border-right:1px solid var(--border)}
 .resume-home .resume-utility{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:34px}
 .resume-home .resume-profile>h1{margin:0 0 8px;font-size:48px;line-height:1;letter-spacing:-.05em}
-.resume-home .profile-section{margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
+.resume-home .profile-section{margin-top:28px;padding-top:20px}
 .resume-home .profile-section>h2{margin:0 0 17px;color:var(--muted);font:500 12px var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
 .resume-home .profile-section article+article{margin-top:16px}
 .resume-home .profile-section article h3{margin:0 0 6px;font-size:15px;font-weight:500}
