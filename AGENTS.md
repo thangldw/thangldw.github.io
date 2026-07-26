@@ -78,7 +78,7 @@ Không đổi tên các class shell trên. Mở rộng bằng component nhỏ, k
 - Không xoá, rút gọn, format hàng loạt hoặc tái sinh dữ liệu câu hỏi, đáp án, từ vựng, ngữ pháp, reading hay exam nếu yêu cầu không chỉ đích danh tập dữ liệu.
 - Giữ nguyên ID, thứ tự, schema và liên kết giữa UI với data.
 - Trước và sau thay đổi exam, chạy các audit dữ liệu liên quan và learning smoke test.
-- Snapshot nghiệp vụ đang được app hiện hành dùng không phải file rác.
+- Dữ liệu nguồn của CERT nằm trong private repository `thangldw/cert`; `apps/cert/` tại đây là release artifact đã build và không được sửa tay.
 
 ## 6. Repository hygiene
 
@@ -94,8 +94,7 @@ Chạy tối thiểu:
 ```bash
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
-node scripts/smoke_learning_apps.mjs
-node scripts/qa_jlpt_n1.mjs
+node scripts/smoke_cert.mjs
 git diff --check
 ```
 
