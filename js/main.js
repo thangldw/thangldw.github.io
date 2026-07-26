@@ -29,8 +29,6 @@
 
   renderFeaturedProjects();
 
-  var root = document.documentElement;
-  var themeButton = document.getElementById('themeToggle');
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.spotlight-tab'));
   var panel = document.getElementById('spotlightPanel');
   var pauseButton = document.getElementById('spotlightPause');
@@ -54,14 +52,6 @@
       href: 'https://github.com/thangldw/ragops'
     }
   };
-
-  function syncTheme() {
-    if (!themeButton) return;
-    var dark = root.dataset.theme === 'dark';
-    themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-    var icon = themeButton.querySelector('i');
-    if (icon) icon.className = dark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-  }
 
   function renderSpotlight(key, focusTab) {
     var demo = demos[key];
@@ -150,15 +140,6 @@
     restartProjectRotation();
   }
 
-  if (themeButton) {
-    themeButton.addEventListener('click', function () {
-      var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
-      localStorage.theme = next;
-      syncTheme();
-    });
-  }
-
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
       renderSpotlight(tab.dataset.spotlight, false);
@@ -230,7 +211,6 @@
   reducedMotion.addEventListener('change', restartProjectRotation);
   document.addEventListener('visibilitychange', restartProjectRotation);
 
-  syncTheme();
   restartRotation();
   restartProjectRotation();
 })();

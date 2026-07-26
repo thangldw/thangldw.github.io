@@ -16,7 +16,8 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parent.parent
 DEPRECATED_COLORS = {"#f3f0e8": "use #fbfaf6 or the shared background token"}
 COLOR_TOKEN_PATH = ROOT / "css" / "tokens.css"
-SHARED_HEADER_PATH = ROOT / "js" / "site-header-v2.js"
+SHARED_SHELL_CSS_PATH = ROOT / "css" / "site-shell.css"
+SHARED_SHELL_SCRIPT_PATH = ROOT / "js" / "site-shell.js"
 REQUIRED_COLOR_ROLES = {
     "--color-canvas",
     "--color-surface",
@@ -74,6 +75,8 @@ class UIParser(HTMLParser):
         self.stylesheets: list[str] = []
         self.scripts: list[str] = []
         self.style_layers: list[str] = []
+        self.headers: list[dict[str, str]] = []
+        self.footers: list[dict[str, str]] = []
 
     def handle_decl(self, decl: str) -> None:
         if decl.lower().strip() == "doctype html":
@@ -86,6 +89,10 @@ class UIParser(HTMLParser):
             self.html_attrs = values
         if tag == "body":
             self.body_attrs = values
+        if tag == "header":
+            self.headers.append(values)
+        if tag == "footer":
+            self.footers.append(values)
         if values.get("id"):
             self.ids.append(values["id"])
         if tag == "meta":
@@ -216,11 +223,17 @@ def audit_color_contract() -> list[str]:
     return errors
 
 
-def audit_shared_header() -> list[str]:
-    if not SHARED_HEADER_PATH.exists():
-        return ["js/site-header-v2.js: missing shared sub-page header"]
-    source = SHARED_HEADER_PATH.read_text(encoding="utf-8").lower()
+def audit_shared_shell() -> list[str]:
     errors = []
+    if not SHARED_SHELL_CSS_PATH.exists():
+        errors.append("css/site-shell.css: missing canonical site shell")
+        return errors
+    if not SHARED_SHELL_SCRIPT_PATH.exists():
+        errors.append("js/site-shell.js: missing canonical site shell behavior")
+        return errors
+
+    css_source = SHARED_SHELL_CSS_PATH.read_text(encoding="utf-8").lower()
+    script_source = SHARED_SHELL_SCRIPT_PATH.read_text(encoding="utf-8").lower()
     for role in (
         "--color-canvas",
         "--color-surface-raised",
@@ -229,18 +242,29 @@ def audit_shared_header() -> list[str]:
         "--color-accent",
         "--color-accent-soft",
     ):
-        if role not in source:
-            errors.append(f"js/site-header-v2.js: shared header must use {role}")
+        if role not in css_source:
+            errors.append(f"css/site-shell.css: shared shell must use {role}")
+    for component in (
+        ".site-header",
+        ".site-foot",
+        ".site-brand",
+        ".site-theme-toggle",
+    ):
+        if component not in css_source:
+            errors.append(f"css/site-shell.css: missing canonical component {component}")
+    for behavior in ("themetoggle", "localstorage", "themechange"):
+        if behavior not in script_source:
+            errors.append(f"js/site-shell.js: missing shared behavior {behavior}")
     for legacy_color in ("#7c9cff", "#3a5bd9", "#151922", "#262c38"):
-        if legacy_color in source:
+        if legacy_color in css_source or legacy_color in script_source:
             errors.append(
-                f"js/site-header-v2.js: legacy header color {legacy_color} is not allowed"
+                f"shared site shell: legacy color {legacy_color} is not allowed"
             )
     return errors
 
 
 def audit_site() -> list[str]:
-    errors: list[str] = audit_color_contract() + audit_shared_header()
+    errors: list[str] = audit_color_contract() + audit_shared_shell()
     pages = public_pages()
 
     for page in pages:
@@ -298,21 +322,22 @@ def audit_site() -> list[str]:
 
         design_index = next((i for i, href in enumerate(parser.style_layers) if "app-design-system.css" in href), None)
         readable_index = next((i for i, href in enumerate(parser.style_layers) if "language-app-readable.css" in href), None)
+        shell_index = next((i for i, href in enumerate(parser.style_layers) if "site-shell.css" in href), None)
         if readable_index is not None and (design_index is None or readable_index < design_index):
             errors.append(f"{relative}: language readability CSS must load after app-design-system.css")
         if design_index is not None:
             unexpected_trailing = [
                 layer for layer in parser.style_layers[design_index + 1:]
-                if "language-app-readable.css" not in layer
+                if "language-app-readable.css" not in layer and "site-shell.css" not in layer
             ]
             if unexpected_trailing:
                 errors.append(
-                    f"{relative}: app-design-system.css must be the final layer before "
-                    f"language readability CSS; found {', '.join(unexpected_trailing)} after it"
+                    f"{relative}: only language readability CSS and site-shell.css may "
+                    f"follow app-design-system.css; found {', '.join(unexpected_trailing)}"
                 )
-        if readable_index is not None and readable_index != len(parser.style_layers) - 1:
+        if readable_index is not None and shell_index is not None and readable_index > shell_index:
             errors.append(
-                f"{relative}: language-app-readable.css must be the final style layer"
+                f"{relative}: language-app-readable.css must load before site-shell.css"
             )
 
         uses_shared_tokens = any(
@@ -326,6 +351,34 @@ def audit_site() -> list[str]:
             )
 
         body_classes = set(parser.body_attrs.get("class", "").split())
+        if page_kind != "exam-shell":
+            site_headers = [
+                attrs for attrs in parser.headers
+                if "site-header" in set(attrs.get("class", "").split())
+            ]
+            site_footers = [
+                attrs for attrs in parser.footers
+                if "site-foot" in set(attrs.get("class", "").split())
+            ]
+            if "site-page" not in body_classes:
+                errors.append(f"{relative}: public page must include body.site-page")
+            if len(site_headers) != 1:
+                errors.append(
+                    f"{relative}: shared shell requires exactly one header.site-header; "
+                    f"found {len(site_headers)}"
+                )
+            if len(site_footers) != 1:
+                errors.append(
+                    f"{relative}: shared shell requires exactly one footer.site-foot; "
+                    f"found {len(site_footers)}"
+                )
+            if shell_index is None:
+                errors.append(f"{relative}: public page must load site-shell.css")
+            elif shell_index != len(parser.style_layers) - 1:
+                errors.append(f"{relative}: site-shell.css must be the final style layer")
+            if not any("site-shell.js" in src for src in parser.scripts):
+                errors.append(f"{relative}: public page must load site-shell.js")
+
         if "content-page" in body_classes:
             if page_kind != "content":
                 errors.append(
@@ -333,18 +386,14 @@ def audit_site() -> list[str]:
                 )
             required_styles = (
                 "tokens.css",
-                "app-footer.css",
                 "app-design-system.css",
+                "site-shell.css",
             )
             for required_style in required_styles:
                 if not any(required_style in href for href in parser.stylesheets):
                     errors.append(
                         f"{relative}: content page must load {required_style}"
                     )
-            if not any("site-header-v2.js" in src for src in parser.scripts):
-                errors.append(
-                    f"{relative}: content page must load the shared site header"
-                )
             for metric, count in inline_presentation_counts(source, parser).items():
                 if count:
                     errors.append(

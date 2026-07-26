@@ -138,16 +138,6 @@ body.portfolio-catalog :where(.skip-link) {
   border-radius: 8px !important;
 }
 
-body.portfolio-app :where(.site-foot, footer.site-foot) {
-  width: 100%;
-  margin-top: 56px;
-  padding: 20px 24px;
-  background: var(--portfolio-bg) !important;
-  color: var(--portfolio-muted) !important;
-  font: 400 12px/1.5 var(--font-mono, var(--portfolio-font-mono)) !important;
-  text-align: center;
-}
-
 /* Shared button language. */
 body.portfolio-app :is(
   .btn, .hbtn, .mbtn, .filter-btn, .load-more, .mtab, .stab, .ptab, .tab,
@@ -789,11 +779,6 @@ body[data-language-app="n1-vocabulary-paraphrase"] .clls {
 
 body[data-language-app="n1-vocabulary-paraphrase"] :is(.wrow, .qwd) button {
   color: var(--portfolio-accent) !important;
-}
-
-body.portfolio-app :where(.site-foot, footer.site-foot) span,
-body.portfolio-catalog :where(.site-foot, footer.site-foot) span {
-  color: var(--portfolio-muted) !important;
 }
 
 /* Apps catalog: retain its information architecture, align the visual rhythm. */

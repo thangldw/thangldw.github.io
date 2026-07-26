@@ -18,19 +18,33 @@ Content page mới phải dùng đúng shared shell:
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/css/tokens.css?v=YYYYMMDD">
 <!-- CSS riêng, nếu thực sự cần, đặt ở đây -->
-<link rel="stylesheet" href="/css/app-footer.css?v=YYYYMMDD">
 <link rel="stylesheet" href="/css/app-design-system.css?v=YYYYMMDD">
+<link rel="stylesheet" href="/css/site-shell.css?v=YYYYMMDD">
+<script src="/js/site-shell.js?v=YYYYMMDD"></script>
 ```
 
 ```html
-<body class="portfolio-app content-page" data-page-kind="content">
+<body class="site-page portfolio-app content-page" data-page-kind="content">
   <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="site-shell-inner">
+      <a class="site-brand" href="/" aria-label="Thang Luu home">
+        <span class="site-brand-mark" aria-hidden="true">t:&gt;</span>
+        <span>thang<span class="site-brand-dot">.</span></span>
+      </a>
+      <nav class="site-theme-controls" aria-label="Theme controls">
+        <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
   <main class="content-shell" id="main">
-    <header class="content-hero">
+    <section class="content-hero">
       <span class="content-eyebrow">Category</span>
       <h1>Page title</h1>
       <p class="content-lead">One concise description.</p>
-    </header>
+    </section>
     <section class="content-section" aria-labelledby="section-title">
       <h2 id="section-title">Section title</h2>
       <div class="content-grid">
@@ -41,20 +55,21 @@ Content page mới phải dùng đúng shared shell:
       </div>
     </section>
   </main>
-  <footer class="site-foot">Crafted with care © 2026</footer>
+  <footer class="site-foot">
+    <div class="site-shell-inner">Crafted with care © 2026 — <span>stay steadfast, stay free</span></div>
+  </footer>
   <script defer src="/js/analytics.js"></script>
-  <script src="/js/site-header-v2.js?v=YYYYMMDD"></script>
 </body>
 ```
 
-Không đổi tên các class shell trên. Mở rộng bằng component nhỏ, không copy nguyên CSS từ page khác.
+Không đổi tên các class shell trên. Mọi public page không phải exam shell đều dùng cùng static header/footer này. Mở rộng bằng component nhỏ, không copy nguyên CSS từ page khác.
 
 ## 3. Visual và component rules
 
 - Màu chỉ lấy từ `css/tokens.css`; component dùng alias trong `css/app-design-system.css`.
 - Accent toàn site là rust/orange. Không hard-code palette xanh cũ hoặc tạo accent riêng cho chrome chung.
 - Favicon toàn site dùng dấu `t:>` rust/orange trong khung vuông bo góc, đồng bộ với brand mark trên header.
-- Header luôn dùng `js/site-header-v2.js`; không viết header/theme toggle riêng.
+- Header, footer, brand và theme toggle chỉ do `css/site-shell.css` + `js/site-shell.js` quản lý; không viết phiên bản riêng.
 - Primary action: `.btn.btn-primary`, nền accent và `--color-on-accent`.
 - Secondary action: `.btn` hoặc `.btn-ghost`, surface trung tính.
 - Selected tab/filter: accent-soft + accent text; không dùng màu primary filled cho trạng thái selected.
@@ -71,7 +86,8 @@ Không đổi tên các class shell trên. Mở rộng bằng component nhỏ, k
 - Control có accessible name, `type="button"` khi không submit, keyboard và `:focus-visible`.
 - Không thêm `<style>`, `style=`, inline event handler hoặc raw color vào content page.
 - Không thêm framework, package manager, build step hay CDN mới nếu static HTML/CSS/JS hiện tại đáp ứng được.
-- CSS riêng chỉ chứa layout/component đặc thù và phải load trước `app-footer.css` + `app-design-system.css`.
+- CSS riêng chỉ chứa layout/component của `main`, không được style `.site-header`, `.site-foot`, `.site-shell-inner` hoặc `.site-theme-toggle`.
+- `css/site-shell.css` luôn là stylesheet cuối cùng trên public page không phải exam shell. CSS riêng phải load trước `app-design-system.css` và `site-shell.css`.
 
 ## 5. Data và exam safety
 
