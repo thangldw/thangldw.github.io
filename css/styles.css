@@ -151,7 +151,7 @@ header{position:relative;top:auto;z-index:1}
 .resume-home .profile-connect .availability{margin:0 0 8px}
 .resume-home .resume-content{display:flex;min-width:0;padding:42px 56px 0;flex-direction:column}
 .resume-home .about-overview{margin-top:16px}
-.resume-home .about-intro>h2{margin:0;font-size:clamp(36px,3vw,46px);line-height:1.04;letter-spacing:-.05em;font-weight:600;text-wrap:balance}
+.resume-home .about-intro>h2{margin:0;font-size:clamp(36px,3vw,46px);line-height:1.04;letter-spacing:-.05em;font-weight:600}
 .resume-home .about-intro>h2 em{color:var(--accent);font-style:normal}
 .resume-home .keep-phrase{white-space:nowrap}
 .resume-home .about-lead{margin:30px 0 0;color:var(--body);font-size:14px;line-height:1.55;text-wrap:pretty}
@@ -185,7 +185,7 @@ header{position:relative;top:auto;z-index:1}
   .resume-home .resume-utility{grid-column:1/-1;margin-bottom:8px}
   .resume-home .resume-profile>h1{grid-column:1/-1;margin-block:0}
   .resume-home .profile-section{margin:0;padding-top:18px}.resume-home .profile-section article+article{margin-top:14px}.resume-home .profile-connect{grid-column:1/-1}.resume-home .availability{grid-column:1/-1;margin:0}
-  .resume-home .resume-content{padding:40px var(--home-pad)}.resume-home .about-intro>h2 br{display:none}.resume-home .about-principles{gap:18px}
+  .resume-home .resume-content{padding:40px var(--home-pad)}.resume-home .about-principles{gap:18px}
   .resume-home .method-grid{grid-template-columns:1fr;gap:26px}.resume-home .method-grid article,.resume-home .method-grid article:first-child,.resume-home .method-grid article:nth-child(2),.resume-home .method-grid article:nth-child(3),.resume-home .method-grid article:nth-child(4),.resume-home .method-grid article:last-child{padding:0 0 24px;border-top:0;border-right:0;border-bottom:1px solid var(--border)}.resume-home .method-grid article:last-child{padding-bottom:0;border-bottom:0}
   .resume-home .projects-actions{gap:10px}.resume-home .project-nav{display:none}.resume-home .project-rail{border-bottom:1px solid var(--border)}.resume-home .resume-project{flex-basis:min(82vw,310px);padding:18px 42px 18px 16px}.resume-home .project-kind{right:40px}
 }
