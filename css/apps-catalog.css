@@ -6,7 +6,8 @@ button,input{font:inherit}
 .catalog-wrap{width:min(1600px,calc(100% - 32px));margin-inline:auto}
 .filter-button:focus-visible,.catalog-search input:focus-visible,.project-title-link:focus-visible{outline:2px solid var(--catalog-accent);outline-offset:3px}
 
-.apps-main{padding:0 0 48px}
+.apps-main{position:relative;padding:0 0 48px}
+.apps-main>.site-theme-toggle{position:absolute;top:28px;right:0;z-index:2}
 .apps-intro{padding:28px 0 24px}
 .apps-intro .eyebrow{display:block;margin:0;color:var(--catalog-accent);font-size:11px;font-weight:700;line-height:1.4;letter-spacing:.04em;text-transform:uppercase}
 .apps-intro h1{margin:8px 0 0;color:var(--catalog-ink);font-size:clamp(32px,5vw,58px);font-weight:650;line-height:1.08;letter-spacing:-.035em;white-space:nowrap}
@@ -72,6 +73,7 @@ button,input{font:inherit}
 }
 @media(max-width:760px){
   .catalog-wrap{width:calc(100% - 32px)}
+  .apps-main>.site-theme-toggle{top:22px}
   .apps-intro{padding:22px 0 20px}.apps-intro h1{font-size:clamp(26px,7vw,38px);white-space:normal}.apps-intro .lead{white-space:normal}
   .catalog-toolbar{grid-template-columns:1fr;gap:12px}.catalog-count{grid-column:auto;justify-self:start;margin:0;padding:0;border:0;text-align:left}.catalog-filters{margin-inline:-2px}
   .project-card-grid{grid-template-columns:1fr}
