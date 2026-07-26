@@ -353,6 +353,10 @@ def audit_site() -> list[str]:
         body_classes = set(parser.body_attrs.get("class", "").split())
         if page_kind != "exam-shell":
             is_home_resume = relative == Path("index.html") and "resume-home" in body_classes
+            is_shellless_product = (
+                page_kind == "product"
+                and parser.body_attrs.get("data-site-shell") == "none"
+            )
             site_headers = [
                 attrs for attrs in parser.headers
                 if "site-header" in set(attrs.get("class", "").split())
@@ -363,12 +367,12 @@ def audit_site() -> list[str]:
             ]
             if "site-page" not in body_classes:
                 errors.append(f"{relative}: public page must include body.site-page")
-            if is_home_resume:
+            if is_home_resume or is_shellless_product:
                 if site_headers:
-                    errors.append(f"{relative}: resume homepage must not use header.site-header")
+                    errors.append(f"{relative}: shellless page must not use header.site-header")
                 if site_footers:
-                    errors.append(f"{relative}: resume homepage must not use footer.site-foot")
-                if "resume-utility" not in source:
+                    errors.append(f"{relative}: shellless page must not use footer.site-foot")
+                if is_home_resume and "resume-utility" not in source:
                     errors.append(
                         f"{relative}: resume homepage must embed brand and theme controls"
                     )
