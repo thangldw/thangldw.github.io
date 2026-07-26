@@ -62,14 +62,14 @@ Content page mới phải dùng đúng shared shell:
 </body>
 ```
 
-Không đổi tên các class shell trên. Mọi public page không phải exam shell đều dùng cùng static header/footer này. Mở rộng bằng component nhỏ, không copy nguyên CSS từ page khác.
+Không đổi tên các class shell trên. Content page, `/apps/` và `404.html` dùng cùng static header/footer này. Riêng portfolio resume `/` không có header/footer: brand và theme toggle nằm trong `.resume-utility` bên trong `main`. Exam shell dùng điều hướng theo tác vụ. Mở rộng bằng component nhỏ, không copy nguyên CSS từ page khác.
 
 ## 3. Visual và component rules
 
 - Màu chỉ lấy từ `css/tokens.css`; component dùng alias trong `css/app-design-system.css`.
 - Accent toàn site là rust/orange. Không hard-code palette xanh cũ hoặc tạo accent riêng cho chrome chung.
 - Favicon toàn site dùng dấu `t:>` rust/orange trong khung vuông bo góc, đồng bộ với brand mark trên header.
-- Header, footer, brand và theme toggle chỉ do `css/site-shell.css` + `js/site-shell.js` quản lý; không viết phiên bản riêng.
+- Header, footer, brand và theme toggle chỉ do `css/site-shell.css` + `js/site-shell.js` quản lý; portfolio resume chỉ thay đổi vị trí của brand/theme controls, không tạo phiên bản riêng.
 - Primary action: `.btn.btn-primary`, nền accent và `--color-on-accent`.
 - Secondary action: `.btn` hoặc `.btn-ghost`, surface trung tính.
 - Selected tab/filter: accent-soft + accent text; không dùng màu primary filled cho trạng thái selected.
@@ -86,7 +86,7 @@ Không đổi tên các class shell trên. Mọi public page không phải exam 
 - Control có accessible name, `type="button"` khi không submit, keyboard và `:focus-visible`.
 - Không thêm `<style>`, `style=`, inline event handler hoặc raw color vào content page.
 - Không thêm framework, package manager, build step hay CDN mới nếu static HTML/CSS/JS hiện tại đáp ứng được.
-- CSS riêng chỉ chứa layout/component của `main`, không được style `.site-header`, `.site-foot`, `.site-shell-inner` hoặc `.site-theme-toggle`.
+- CSS riêng chỉ chứa layout/component của `main`, không được style `.site-header`, `.site-foot`, `.site-shell-inner`, `.site-brand` hoặc `.site-theme-toggle`.
 - `css/site-shell.css` luôn là stylesheet cuối cùng trên public page không phải exam shell. CSS riêng phải load trước `app-design-system.css` và `site-shell.css`.
 
 ## 5. Data và exam safety

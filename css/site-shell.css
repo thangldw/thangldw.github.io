@@ -1,5 +1,5 @@
-/* Canonical site chrome. Every public non-exam page uses these exact
-   header, footer, brand, theme-control, and skip-link components. */
+/* Canonical site chrome. Public content pages use the shared header/footer;
+   the portfolio resume reuses its brand and theme controls inside main. */
 
 .site-page {
   min-width: 320px;
