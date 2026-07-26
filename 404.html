@@ -14,7 +14,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
-  <link rel="stylesheet" href="/css/404.css?v=20260726b">
+  <link rel="stylesheet" href="/css/404.css?v=20260726c">
   <link rel="stylesheet" href="/css/app-footer.css?v=20260725a">
   <link rel="stylesheet" href="/css/app-design-system.css?v=20260725f">
   <script defer src="/js/analytics.js"></script>
@@ -23,50 +23,54 @@
 <body class="portfolio-app content-page not-found-page" data-page-kind="content">
   <a class="skip-link" href="#main">Skip to content</a>
   <main class="content-shell" id="main">
-    <header class="content-hero not-found-hero">
-      <div class="not-found-copy">
-        <span class="content-eyebrow">404 · Route not found</span>
-        <h1>This page has wandered off course.</h1>
-        <p class="content-lead">The address may have changed or the page may no longer be available. Choose a destination below to get back on track.</p>
+    <section class="dad-hero" aria-labelledby="notFoundTitle">
+      <div class="dad-copy">
+        <span class="content-eyebrow">404 · Dad mode activated</span>
+        <div class="dad-error-code" aria-label="Error 404">
+          <strong>404</strong>
+          <span>Page on parental leave</span>
+        </div>
+        <h1 id="notFoundTitle">Dad’s on duty. This page slipped away.</h1>
+        <p class="content-lead">Between a bottle, a cuddle, and one very urgent tiny sock, the page you were looking for wandered off. Let’s get you somewhere useful.</p>
         <div class="content-actions">
           <a class="btn btn-primary" href="/">Return home</a>
           <a class="btn" href="/apps/">Browse applications</a>
         </div>
+        <p class="dad-reassurance"><strong>Good news:</strong> the baby is happy. The missing page is the only thing we couldn’t find.</p>
       </div>
-      <div class="not-found-code" aria-hidden="true">
-        <span>HTTP</span>
-        <strong>404</strong>
-        <small>NO MATCHING ROUTE</small>
-      </div>
-    </header>
+      <figure class="dad-scene">
+        <img src="/assets/404-dad-on-duty.webp" width="1693" height="929" alt="A busy father reaching for his laptop while securely holding his smiling baby">
+        <figcaption>
+          <span><i aria-hidden="true"></i> Dad mode · active</span>
+          <strong>One hand for the baby. One hand for everything else.</strong>
+        </figcaption>
+      </figure>
+    </section>
 
-    <section class="content-section not-found-destinations" aria-labelledby="destinationsTitle">
-      <div class="not-found-section-heading">
+    <section class="dad-mission" aria-labelledby="missionTitle">
+      <div class="dad-mission-heading">
         <div>
-          <span class="content-eyebrow">Available destinations</span>
-          <h2 id="destinationsTitle">Continue somewhere useful</h2>
+          <span class="content-eyebrow">Family mission log</span>
+          <h2 id="missionTitle">Current priority queue</h2>
         </div>
-        <span class="not-found-prompt" aria-hidden="true">t:&gt;</span>
+        <span class="dad-prompt" aria-hidden="true">t:&gt;</span>
       </div>
-      <div class="content-grid">
-        <a class="content-card destination-card" href="/">
-          <span class="destination-index">01</span>
-          <h3>Portfolio</h3>
-          <p>Learn about my work, approach, and current side projects.</p>
-          <span class="destination-link">Go home <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="content-card destination-card" href="/apps/">
-          <span class="destination-index">02</span>
-          <h3>Application library</h3>
-          <p>Browse practical tools, games, learning programs, and experiments.</p>
-          <span class="destination-link">Explore apps <span aria-hidden="true">→</span></span>
-        </a>
-        <a class="content-card destination-card" href="/apps/cert/">
-          <span class="destination-index">03</span>
-          <h3>Certification library</h3>
-          <p>Open a focused study space for your next certification.</p>
-          <span class="destination-link">Choose a certification <span aria-hidden="true">→</span></span>
-        </a>
+      <div class="dad-mission-grid">
+        <article>
+          <div><span>01</span><small>Complete</small></div>
+          <h3>Bottle emergency</h3>
+          <p>Warm, tested, and delivered to the tiny stakeholder.</p>
+        </article>
+        <article>
+          <div><span>02</span><small>Complete</small></div>
+          <h3>Cuddle deployment</h3>
+          <p>Successfully shipped with giggles and zero downtime.</p>
+        </article>
+        <article class="is-missing">
+          <div><span>03</span><small>Still missing</small></div>
+          <h3>Your requested page</h3>
+          <p>No route found. Dad recommends returning to safer territory.</p>
+        </article>
       </div>
     </section>
   </main>
