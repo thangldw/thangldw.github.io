@@ -42,10 +42,23 @@
     });
   }
 
+  function observeThemeControl() {
+    if (!document.body || typeof MutationObserver === "undefined") return;
+    new MutationObserver(bindThemeControl).observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  function initializeThemeControl() {
+    bindThemeControl();
+    observeThemeControl();
+  }
+
   root.dataset.theme = root.dataset.theme === "dark" || root.dataset.theme === "light"
     ? root.dataset.theme
     : preferredTheme();
 
-  if (document.body) bindThemeControl();
-  else document.addEventListener("DOMContentLoaded", bindThemeControl);
+  if (document.body) initializeThemeControl();
+  else document.addEventListener("DOMContentLoaded", initializeThemeControl);
 })();

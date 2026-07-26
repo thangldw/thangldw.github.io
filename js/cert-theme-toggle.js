@@ -15,20 +15,8 @@
     button.type = "button";
     button.className = "site-theme-toggle";
     button.id = "themeToggle";
-    button.dataset.siteShellBound = "true";
     button.innerHTML = '<i class="fa-solid fa-moon" aria-hidden="true"></i>';
     syncButton(button);
-    button.addEventListener("click", function () {
-      var theme = root.dataset.theme === "dark" ? "light" : "dark";
-      root.dataset.theme = theme;
-      try {
-        localStorage.setItem("theme", theme);
-      } catch {
-        // Keep the selected theme active for the current page.
-      }
-      syncButton(button);
-      document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: theme } }));
-    });
     return button;
   }
 
