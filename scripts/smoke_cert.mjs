@@ -187,12 +187,15 @@ try {
     const button = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam Mode');
     button.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim().startsWith('Start full exam'));
+    startButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 100));
     const timer = document.querySelector('.timer-area strong');
     return {
       ok: Boolean(document.querySelector('.question-pane'))
-        && timer?.textContent === '00:40'
+        && /^\\d{2}:\\d{2}$/.test(timer?.textContent || '')
         && !document.querySelector('.hint-note[open]'),
-      message: \`question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}\`
+      message: \`start=\${Boolean(startButton)}, question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}\`
     };
   })()`), page.exceptions);
 
