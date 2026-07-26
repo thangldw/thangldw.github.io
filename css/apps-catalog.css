@@ -3,7 +3,7 @@ html{scroll-behavior:smooth}
 .portfolio-catalog{--catalog-bg:var(--color-canvas);--catalog-surface:var(--color-surface-raised);--catalog-ink:var(--color-text);--catalog-body:var(--color-text-body);--catalog-strong:var(--color-text-strong);--catalog-muted:var(--color-text-muted);--catalog-border:var(--color-border);--catalog-border-strong:var(--color-border-strong);--catalog-accent:var(--color-accent);--catalog-accent-ink:var(--color-on-accent);margin:0;background:var(--catalog-bg);color:var(--catalog-ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
-.catalog-wrap{width:min(1180px,calc(100% - 48px));margin-inline:auto}
+.catalog-wrap{width:min(1600px,calc(100% - 32px));margin-inline:auto}
 .filter-button:focus-visible,.catalog-search input:focus-visible,.project-title-link:focus-visible{outline:2px solid var(--catalog-accent);outline-offset:3px}
 
 .apps-main{padding:0 0 48px}
