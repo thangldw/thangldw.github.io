@@ -4,7 +4,7 @@ html{scroll-behavior:smooth}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 .catalog-wrap{width:min(1600px,calc(100% - 32px));margin-inline:auto}
-.filter-button:focus-visible,.catalog-search input:focus-visible,.project-title-link:focus-visible{outline:2px solid var(--catalog-accent);outline-offset:3px}
+.filter-button:focus-visible,.catalog-search input:focus-visible{outline:2px solid var(--catalog-accent);outline-offset:3px}
 
 .apps-main{position:relative;padding:0 0 48px}
 .apps-main>.site-theme-toggle{position:absolute;top:28px;right:0;z-index:2}
@@ -45,8 +45,6 @@ button,input{font:inherit}
 .project-card[data-accent="purple"]{--project-accent:var(--color-series-purple)}
 .project-card[data-accent="amber"]{--project-accent:var(--color-series-amber)}
 .project-card[hidden]{display:none}
-.project-title-link{width:100%;height:100%;min-height:210px;display:flex;flex-direction:column;padding:18px;border:1px solid var(--catalog-border);border-top:3px solid var(--project-accent);border-radius:7px;background:var(--catalog-surface);color:inherit;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
-.project-title-link:hover{transform:translateY(-2px);border-color:var(--project-accent);box-shadow:0 10px 26px color-mix(in srgb,var(--catalog-ink) 10%,transparent)}
 .project-card-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-width:0}
 .project-category{min-width:0;display:flex;align-items:center;gap:7px;color:var(--project-accent);font-size:11px;font-weight:750;line-height:1.3}
 .project-category i{flex:0 0 auto;font-size:10px}
@@ -81,6 +79,6 @@ button,input{font:inherit}
 @media(max-width:480px){
   .apps-intro .lead{font-size:14px}
   .catalog-tools{padding-top:18px}.catalog-search input{height:44px}
-  .project-library{padding:17px}.project-title-link{min-height:210px}.project-library-heading h2{font-size:20px}
+  .project-library{padding:17px}.project-library-heading h2{font-size:20px}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.filter-button,.project-title-link,.project-card-meta i{transition:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.filter-button,.project-card-meta i{transition:none}}

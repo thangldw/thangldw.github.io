@@ -154,18 +154,38 @@ try {
   const origin = `http://127.0.0.1:${serverPort}`;
   const page = await openPage(debugPort);
 
+  await page.navigate(`${origin}/apps/`, 1280);
+  await page.waitUntil('document.querySelector(".project-title-link")');
+  assertResult('Apps catalog shared project cards', await page.evaluate(`(() => {
+    const card = document.querySelector('.project-title-link');
+    const style = getComputedStyle(card);
+    return {
+      ok: style.display === 'flex'
+        && style.flexDirection === 'column'
+        && style.minHeight === '210px'
+        && style.padding === '18px'
+        && document.documentElement.scrollWidth <= window.innerWidth,
+      message: \`display=\${style.display}, direction=\${style.flexDirection}, minHeight=\${style.minHeight}, padding=\${style.padding}\`
+    };
+  })()`), page.exceptions);
+
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil('document.querySelectorAll(".project-title-link").length === 9');
   assertResult('Certification library', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-title-link')];
     const hrefs = cards.map(card => card.getAttribute('href'));
+    const style = getComputedStyle(cards[0]);
     return {
       ok: document.title === 'Certification Library'
         && cards.length === 9
         && new Set(hrefs).size === 9
         && hrefs.every(href => /^\\/apps\\/cert\\/[a-z0-9-]+\\/$/.test(href))
+        && style.display === 'flex'
+        && style.flexDirection === 'column'
+        && style.minHeight === '210px'
+        && style.padding === '18px'
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}\`
+      message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
     };
   })()`), page.exceptions);
 
@@ -221,7 +241,7 @@ try {
   })()`), page.exceptions);
 
   page.close();
-  console.log('CERT smoke tests passed: 5/5.');
+  console.log('CERT smoke tests passed: 6/6.');
 } finally {
   await stopProcess(chrome);
   await stopProcess(server);
