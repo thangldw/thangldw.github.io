@@ -1,6 +1,21 @@
 (function (global) {
   global.portfolioProjects = [
     {
+      id: 'japan-pr-guide',
+      title: 'Japan PR Guide',
+      description: 'A bilingual English–Vietnamese HSP points calculator, permanent-residence route diagnosis, university bonus lookup, and route-specific evidence checklist for Japan.',
+      featuredDescription: 'Bilingual HSP scoring and permanent-residence planning for Japan.',
+      href: '/apps/japan-pr-guide/',
+      ariaLabel: 'Open the Japan PR Guide',
+      icon: 'fa-file-lines',
+      accent: 'rust',
+      status: 'Live',
+      tags: ['Japan immigration', 'HSP points', 'PR checklist', 'English · Vietnamese'],
+      category: 'developer-tools',
+      cta: 'Open guide',
+      featured: false
+    },
+    {
       id: 'bizroll',
       title: 'BizRoll',
       description: 'A 2–4 player economic strategy board game with multiplayer rooms, AI opponents, auctions, market cycles, secret objectives, and Black Swan events.',
