@@ -1,0 +1,21 @@
+/* Shared horizontal frame for the home page and top-level app pages. */
+:root {
+  --page-frame-max-width: 1600px;
+  --page-frame-gutter: 16px;
+}
+
+body.portfolio-catalog .catalog-wrap,
+body.site-page[data-page-kind="product"] > main.shell {
+  width: min(
+    var(--page-frame-max-width),
+    calc(100% - (2 * var(--page-frame-gutter)))
+  );
+  margin-inline: auto;
+}
+
+body[data-page-kind="exam-shell"] .certification-hub {
+  padding-inline: max(
+    var(--page-frame-gutter),
+    calc((100vw - var(--page-frame-max-width)) / 2)
+  );
+}
