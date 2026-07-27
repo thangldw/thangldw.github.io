@@ -155,9 +155,9 @@ try {
   const page = await openPage(debugPort);
 
   await page.navigate(`${origin}/apps/cert/`, 1280);
-  await page.waitUntil('document.querySelectorAll(".hub-cert-card").length === 9');
+  await page.waitUntil('document.querySelectorAll(".project-title-link").length === 9');
   assertResult('Certification library', await page.evaluate(`(() => {
-    const cards = [...document.querySelectorAll('.hub-cert-card')];
+    const cards = [...document.querySelectorAll('.project-title-link')];
     const hrefs = cards.map(card => card.getAttribute('href'));
     return {
       ok: document.title === 'Certification Library'
