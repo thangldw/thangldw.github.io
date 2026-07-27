@@ -212,7 +212,7 @@ body {
 
 .calculator-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 420px;
+  grid-template-columns: minmax(0, 1fr) 360px;
   gap: 0;
 }
 
@@ -555,7 +555,7 @@ select {
 
 .score-card {
   min-width: 0;
-  padding-left: 44px;
+  padding-left: 36px;
 }
 
 .score-sticky {
@@ -749,6 +749,21 @@ select {
   border-bottom: 1px solid var(--border);
 }
 
+#visa-guide .section-head > [data-t="visaIntro"] {
+  max-width: none;
+}
+
+@media (min-width: 1101px) {
+  #visa-guide .section-head {
+    grid-template-columns: minmax(0, 1fr) max-content;
+  }
+
+  #diagnosis .section-head > [data-t="diagnosisIntro"],
+  #visa-guide .section-head > [data-t="visaIntro"] {
+    white-space: nowrap;
+  }
+}
+
 .visa-subhead {
   display: flex;
   gap: 12px;
@@ -929,7 +944,10 @@ select {
 }
 
 #diagnosis .section-head {
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr);
+  gap: 32px;
+  align-items: end;
 }
 
 #documents .section-head {
@@ -939,7 +957,16 @@ select {
 #diagnosis .section-head > [data-t="diagnosisIntro"],
 #documents .section-head > [data-t="docsIntro"] {
   max-width: none;
+}
+
+#documents .section-head > [data-t="docsIntro"] {
   margin-top: 8px;
+}
+
+@media (min-width: 1101px) {
+  #diagnosis .section-head {
+    grid-template-columns: minmax(0, 1fr) max-content;
+  }
 }
 
 [data-t="diagnosisIntro"] .bi-en,
@@ -1089,6 +1116,36 @@ select {
   padding: 8px;
 }
 
+.document-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.document-scope {
+  display: inline-flex;
+  align-items: center;
+  min-height: 18px;
+  padding: 2px 6px;
+  border: 1px solid;
+  border-radius: 999px;
+  font: 700 8px/1.2 var(--mono);
+  letter-spacing: .02em;
+}
+
+.document-scope-pr {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.document-scope-hsp {
+  border-color: color-mix(in srgb, var(--green) 28%, var(--border));
+  background: var(--green-soft);
+  color: var(--green);
+}
+
 #documents .document small {
   margin-top: 3px;
   font-size: 10px;
@@ -1138,7 +1195,7 @@ select {
 
 @media (min-width: 1500px) {
   .calculator-layout {
-    grid-template-columns: minmax(0, 1fr) 480px;
+    grid-template-columns: minmax(0, 1fr) 400px;
   }
 
   .calculator-main {
@@ -1146,7 +1203,7 @@ select {
   }
 
   .score-card {
-    padding-left: 56px;
+    padding-left: 40px;
   }
 
 }
@@ -1194,6 +1251,16 @@ summary:focus-visible {
 @media (max-width: 900px) {
   html {
     scroll-padding-top: 24px;
+  }
+
+  #visa-guide .section-head,
+  #diagnosis .section-head {
+    display: block;
+  }
+
+  #visa-guide .section-head > [data-t="visaIntro"],
+  #diagnosis .section-head > [data-t="diagnosisIntro"] {
+    margin-top: 8px;
   }
 
   .journey-inner {
