@@ -324,7 +324,7 @@ function documentDescription(document,route){
 
 function documentScopeTags(id){
   if(HSP_SHARED_DOCUMENTS.has(id)){
-    return `<span class="document-tags"><span class="document-scope document-scope-shared">PR + HSP · Cả hai hồ sơ đều cần</span></span>`;
+    return ``;
   }
   return `<span class="document-tags"><span class="document-scope document-scope-pr-only">PR Only</span></span>`;
 }
