@@ -130,7 +130,7 @@
   ];
 
   global.portfolioLanguageCollection = {
-    title: 'Certification Study',
+    title: 'Certification Library',
     description: 'Focused dashboards, exam practice, notes, and local learning history for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.',
     href: '/apps/cert/',
     label: '9 certification programs'
@@ -139,15 +139,16 @@
   global.portfolioLearningCollections = [
     {
       id: 'certification-study',
-      title: 'Certification Study',
+      title: 'Certification Library',
       description: 'One focused study space for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.',
       href: '/apps/cert/',
-      ariaLabel: 'Open the certification study programs',
+      ariaLabel: 'Open the Certification Library',
       icon: 'fa-graduation-cap',
       accent: 'rust',
       status: 'Collection',
       tags: ['9 certifications', 'Exam practice', 'Local-first'],
-      category: 'certification-study'
+      category: 'certification-study',
+      cta: 'Open library'
     }
   ];
 })(window);
