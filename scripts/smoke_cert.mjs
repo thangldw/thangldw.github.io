@@ -189,6 +189,33 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.evaluate(`localStorage.setItem("theme", "dark")`);
+  const childThemeChecks = [];
+  for (const slug of ['ap', 'aws', 'bjt', 'fp3', 'g', 'jlpt', 'pmp', 'sg', 'toeic']) {
+    await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
+    await page.waitUntil('document.querySelector(".metric-grid")');
+    const result = await page.evaluate(`(async () => {
+      await new Promise(resolveWait => setTimeout(resolveWait, 100));
+      return {
+        theme: document.documentElement.dataset.theme,
+        locked: document.documentElement.dataset.themeLocked,
+        toggleCount: document.querySelectorAll("#themeToggle").length,
+        storedTheme: localStorage.getItem("theme")
+      };
+    })()`);
+    childThemeChecks.push({ slug, ...result, exceptions: [...page.exceptions] });
+  }
+  assertResult('Child certifications stay light without theme toggles', {
+    ok: childThemeChecks.every(check =>
+      check.theme === 'light'
+      && check.locked === 'true'
+      && check.toggleCount === 0
+      && check.storedTheme === 'dark'
+      && check.exceptions.length === 0
+    ),
+    message: JSON.stringify(childThemeChecks)
+  }, []);
+
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".metric-grid")');
   assertResult('G certification dashboard', await page.evaluate(`(() => {
@@ -241,7 +268,7 @@ try {
   })()`), page.exceptions);
 
   page.close();
-  console.log('CERT smoke tests passed: 6/6.');
+  console.log('CERT smoke tests passed: 7/7.');
 } finally {
   await stopProcess(chrome);
   await stopProcess(server);
