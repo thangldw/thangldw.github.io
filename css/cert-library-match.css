@@ -1,26 +1,50 @@
 /*
  * Keep the certification hub library visually aligned with the project library
  * on /apps/ while preserving the certification-specific content and accents.
+ *
+ * Strategy: set --catalog-* CSS custom properties on the hub-certifications
+ * container so that apps-catalog.css and project-title-link.css cascade
+ * correctly. Cert-specific structural overrides follow.
  */
+
+/* --- Alias catalog tokens ------------------------------------------------ */
+
 .hub-certifications {
+  --catalog-bg: var(--color-canvas);
+  --catalog-surface: var(--color-surface-raised);
+  --catalog-ink: var(--color-text);
+  --catalog-body: var(--color-text-body);
+  --catalog-strong: var(--color-text-strong);
+  --catalog-muted: var(--color-text-muted);
+  --catalog-border: var(--color-border);
+  --catalog-border-strong: var(--color-border-strong);
+  --catalog-accent: var(--color-accent);
+  --catalog-accent-ink: var(--color-on-accent);
+
   margin-top: 8px;
-  border-color: #d9d5cb;
-  background: rgb(255 255 255 / 48%);
-  color: #1d211e;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
-    Arial, sans-serif;
+  padding: 23px;
+  border: 1px solid var(--catalog-border);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--catalog-surface) 48%, transparent);
+  color: var(--catalog-ink);
+  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.5;
 }
 
+/* --- Section heading ----------------------------------------------------- */
+
 .hub-certifications .section-heading {
+  display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 24px;
 }
 
 .hub-certifications .section-heading .eyebrow {
   display: block;
   margin: 0 0 5px;
+  color: var(--catalog-accent);
   font-size: 11px;
   font-weight: 700;
   line-height: 1.4;
@@ -30,48 +54,114 @@
 
 .hub-certifications .section-heading h2 {
   margin: 0;
-  color: #1d211e;
+  color: var(--catalog-ink);
   font-size: 19px;
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: -.02em;
 }
 
-.hub-certifications .section-heading > svg {
+.hub-certifications .section-heading > svg,
+.hub-certifications .section-heading > i {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--catalog-accent);
   width: 22px;
   height: 22px;
-  margin-top: 2px;
+  font-size: 22px;
 }
 
+/* --- Grid layout ---------------------------------------------------------- */
+
 .hub-certifications .hub-cert-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: 1fr;
+  gap: 12px;
+  margin-top: 18px;
 }
+
+/* --- Card accent via data attribute (matches apps-catalog.css) ------------ */
+
+.hub-certifications .project-title-link[data-accent="rust"] {
+  --project-accent: var(--color-series-rust);
+}
+.hub-certifications .project-title-link[data-accent="ochre"] {
+  --project-accent: var(--color-series-ochre);
+}
+.hub-certifications .project-title-link[data-accent="violet"] {
+  --project-accent: var(--color-series-violet);
+}
+.hub-certifications .project-title-link[data-accent="blue"] {
+  --project-accent: var(--color-series-blue);
+}
+.hub-certifications .project-title-link[data-accent="green"] {
+  --project-accent: var(--color-series-green);
+}
+.hub-certifications .project-title-link[data-accent="rose"] {
+  --project-accent: var(--color-series-rose);
+}
+.hub-certifications .project-title-link[data-accent="indigo"] {
+  --project-accent: var(--color-series-indigo);
+}
+.hub-certifications .project-title-link[data-accent="purple"] {
+  --project-accent: var(--color-series-purple);
+}
+.hub-certifications .project-title-link[data-accent="amber"] {
+  --project-accent: var(--color-series-amber);
+}
+
+/* --- Card: project-title-link overrides ----------------------------------- */
 
 .hub-certifications .project-title-link {
   min-height: 250px;
-  color: #1d211e;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
-    Arial, sans-serif;
-  line-height: 1.5;
 }
 
+.hub-certifications .project-title-link .card-top,
+.hub-certifications .project-title-link > div:first-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.hub-certifications .project-title-link .card-top span,
 .hub-certifications .project-title-link > div:first-child span {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--project-accent, var(--cert-accent, var(--catalog-accent)));
   font-size: 11px;
   font-weight: 750;
   line-height: 1.3;
 }
 
+.hub-certifications .project-title-link .card-top span i,
+.hub-certifications .project-title-link > div:first-child span i {
+  flex: 0 0 auto;
+  font-size: 10px;
+}
+
+.hub-certifications .project-title-link .card-top small,
 .hub-certifications .project-title-link > div:first-child small {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  flex: 0 1 auto;
+  overflow: hidden;
+  color: var(--catalog-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: .025em;
+  text-overflow: ellipsis;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .hub-certifications .project-title-link h3 {
-  color: #1d211e;
+  margin: 22px 0 0;
+  color: var(--catalog-ink);
   font-size: 14px;
   font-weight: 700;
   line-height: 1.55;
@@ -79,46 +169,74 @@
 }
 
 .hub-certifications .project-title-link p {
-  color: #555d59;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  margin: 8px 0 14px;
+  color: var(--catalog-body);
+  font-size: 10px;
   line-height: 1.6;
 }
 
+/* --- Card meta footer ---------------------------------------------------- */
+
 .hub-certifications .hub-cert-meta {
-  border-color: #d9d5cb;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--catalog-border);
+  color: var(--project-accent, var(--cert-accent, var(--catalog-accent)));
+  font-family: var(--font-mono);
+  font-size: 9px;
   font-weight: 650;
   line-height: 1.3;
 }
 
-:root[data-theme="dark"] .hub-certifications {
-  border-color: #30342d;
-  background: rgb(31 33 29 / 48%);
-  color: #f1efe8;
+.hub-certifications .hub-cert-meta span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-:root[data-theme="dark"] .hub-certifications .section-heading h2,
-:root[data-theme="dark"] .hub-certifications .project-title-link h3 {
-  color: #f1efe8;
+.hub-certifications .hub-cert-meta i {
+  flex: 0 0 auto;
+  font-size: 10px;
+  transition: translate .18s;
 }
 
-:root[data-theme="dark"] .hub-certifications .project-title-link {
-  border-color: #30342d;
-  border-top-color: color-mix(in srgb, var(--cert-accent) 58%, white);
-  background: #1f211d;
-  color: #f1efe8;
+.hub-certifications .project-title-link:hover .hub-cert-meta i {
+  translate: 3px 0;
 }
 
-:root[data-theme="dark"] .hub-certifications .project-title-link p {
-  color: #c3c5bd;
+/* --- Responsive ------------------------------------------------------------ */
+
+@media (max-width: 1080px) {
+  .hub-certifications .hub-cert-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-:root[data-theme="dark"] .hub-certifications .hub-cert-meta {
-  border-color: #30342d;
+@media (max-width: 760px) {
+  .hub-certifications .hub-cert-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
+  .hub-certifications {
+    padding: 17px;
+  }
   .hub-certifications .section-heading h2 {
     font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-certifications .hub-cert-meta i {
+    transition: none;
   }
 }
