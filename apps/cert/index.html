@@ -43,5 +43,41 @@
         <p>JavaScript is required to use the certification study application.</p>
       </main>
     </noscript>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const obs = new MutationObserver(() => {
+          const cards = document.querySelectorAll(".hub-certifications .project-title-link");
+          if (!cards.length) return;
+          cards.forEach(card => {
+            if (card.dataset.enriched) return;
+            card.dataset.enriched = "1";
+            const title = card.querySelector("h3") || card.querySelector("h2");
+            const desc = card.querySelector("p");
+            const category = card.querySelector("span");
+            const issuer = card.querySelector("small");
+            if (!title) return;
+            const qMatch = card.textContent.match(/(\d+)\s*question/i);
+            const questionCount = qMatch ? qMatch[1] : "—";
+            const catText = category ? category.textContent.trim() : "";
+            const issuerText = issuer ? issuer.textContent.trim() : "";
+            const titleText = title.textContent.trim();
+            const descText = desc ? desc.textContent.trim() : "";
+            let metaText = catText ? catText + " · " : "";
+            metaText += Number(questionCount) > 0 ? questionCount + " questions" : "Study space";
+            const oldMeta = card.querySelector(".hub-cert-meta");
+            if (oldMeta) {
+              oldMeta.innerHTML = '<span>' + metaText + '</span><i class="ri-arrow-right-line"></i>';
+            }
+            if (desc && !desc.textContent.split(/\s+/).length) {
+              desc.textContent = titleText + " — certification study practice";
+            }
+          });
+          if (document.querySelectorAll(".hub-certifications .project-title-link[data-enriched]").length >= cards.length) {
+            obs.disconnect();
+          }
+        });
+        obs.observe(document.getElementById("root"), { childList: true, subtree: true });
+      });
+    </script>
   </body>
 </html>
