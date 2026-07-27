@@ -380,7 +380,7 @@ $("#universitySearch").addEventListener("input",searchUniversities);
 $("#routeType").addEventListener("change",renderDiagnosisQuestions);
 $("#diagnosisForm").addEventListener("submit",diagnose);
 $("#copySummary").addEventListener("click",async()=>{
-  const text=`JapanVisa Pro — HSP 1(${activity})\nScore / Điểm: ${currentScore}\n${$("#scoreStatus").textContent}\n${$("#hardStops").innerText}`;
+  const text=`HSP Points — ${activity}\nScore / Điểm: ${currentScore}\n${$("#scoreStatus").textContent}\n${$("#hardStops").innerText}`;
   try{await navigator.clipboard.writeText(text);$("#copySummary").innerHTML=bi("copied");setTimeout(()=>$("#copySummary").innerHTML=bi("copy"),1200)}catch{}
 });
 $("#resetDocuments").addEventListener("click",()=>{localStorage.removeItem("jppr-documents");renderDocuments()});
