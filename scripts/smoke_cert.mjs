@@ -182,7 +182,7 @@ try {
         && hrefs.every(href => /^\\/apps\\/cert\\/[a-z0-9-]+\\/$/.test(href))
         && style.display === 'flex'
         && style.flexDirection === 'column'
-        && style.minHeight === '210px'
+        && style.minHeight === '250px'
         && style.padding === '18px'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
