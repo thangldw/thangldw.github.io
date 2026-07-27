@@ -1134,13 +1134,13 @@ select {
   letter-spacing: .02em;
 }
 
-.document-scope-pr {
+.document-scope-pr-only {
   border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
   background: var(--accent-soft);
   color: var(--accent);
 }
 
-.document-scope-hsp {
+.document-scope-shared {
   border-color: color-mix(in srgb, var(--green) 28%, var(--border));
   background: var(--green-soft);
   color: var(--green);
