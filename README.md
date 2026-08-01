@@ -27,13 +27,23 @@
 ### Architecture
 
 ```mermaid
+%%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":48,"rankSpacing":72,"padding":18},"themeVariables":{"background":"#FFFDF8","fontFamily":"Inter, Arial, sans-serif","primaryTextColor":"#1F1F1F","lineColor":"#5F5F5F"}}}%%
 flowchart LR
-    A["Portfolio<br/>/"] --> D["Shared static assets"]
-    B["Application catalog<br/>/apps/"] --> D
-    C["Standalone applications<br/>/apps/*/"] --> D
-    E["Generated certification release<br/>/apps/cert/"] --> F["Static validation"]
+    A["Portfolio<br/>/"]:::yellow --> D["Shared static assets"]:::blue
+    B["Application catalog<br/>/apps/"]:::pink --> D
+    C["Standalone applications<br/>/apps/*/"]:::purple --> D
+    E["Generated certification release<br/>/apps/cert/"]:::orange --> F["Static validation"]:::green
     D --> F
-    F --> G["GitHub Pages"]
+    F --> G["GitHub Pages"]:::cyan
+
+    classDef yellow fill:#FFF1A8,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    classDef blue fill:#B9DFFF,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    classDef pink fill:#FFC8DD,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    classDef purple fill:#D8CCFF,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    classDef orange fill:#FFD0A8,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    classDef green fill:#BFE8C8,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    classDef cyan fill:#BEEBEA,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
+    linkStyle default stroke:#5F5F5F,stroke-width:2px
 ```
 
 The repository deliberately avoids a framework and package-manager dependency. Shared design tokens, page structure, analytics, and catalog data are maintained as static assets. Validation scripts enforce the repository contract before deployment.
