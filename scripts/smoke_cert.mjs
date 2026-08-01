@@ -169,6 +169,40 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('Toolbox releases in the apps catalog', await page.evaluate(`(() => {
+    const cards = [...document.querySelectorAll('.project-card')];
+    const byTitle = title => cards.find(card => card.querySelector('h2')?.textContent.trim() === title);
+    const diskora = byTitle('Diskora');
+    const changeora = byTitle('Changeora');
+    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v1.3.0';
+    return {
+      ok: diskora?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
+        && changeora?.querySelector('.project-status')?.textContent.trim() === 'v1.3.0'
+        && diskora?.querySelector('a')?.href === releaseUrl
+        && changeora?.querySelector('a')?.href === releaseUrl
+        && diskora.textContent.includes('Undo Center')
+        && changeora.textContent.includes('FSEvents'),
+      message: 'diskora=' + diskora?.textContent.trim() + ', changeora=' + changeora?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
+  await page.navigate(`${origin}/`, 1280);
+  await page.waitUntil('document.querySelector("#projectRail .resume-project")');
+  assertResult('Toolbox releases in home side projects', await page.evaluate(`(() => {
+    const projects = [...document.querySelectorAll('#projectRail .resume-project')];
+    const byTitle = title => projects.find(project => project.querySelector('h3')?.textContent.trim() === title);
+    const diskora = byTitle('Diskora');
+    const changeora = byTitle('Changeora');
+    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v1.3.0';
+    return {
+      ok: diskora?.href === releaseUrl
+        && changeora?.href === releaseUrl
+        && diskora.textContent.includes('Undo Center')
+        && changeora.textContent.includes('FSEvents'),
+      message: 'diskora=' + diskora?.textContent.trim() + ', changeora=' + changeora?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil('document.querySelectorAll(".project-title-link").length === 9');
   assertResult('Certification library', await page.evaluate(`(() => {
