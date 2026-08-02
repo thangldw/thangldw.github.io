@@ -2,337 +2,292 @@
 
 [English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
+A dependency-light portfolio, application catalog, and static application host deployed with GitHub Pages.
+
+```mermaid
+%%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":38,"rankSpacing":58},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
+flowchart LR
+    PJ["projects-data.json<br/>project source"]:::yellow --> PL["Runtime catalog<br/>loader"]:::blue
+    CM["Certification public<br/>manifest"]:::pink --> PL
+    PL --> H["Portfolio home<br/>featured projects"]:::purple
+    PL --> A["/apps/<br/>full catalog"]:::green
+    CS["Private cert source<br/>+ question banks"]:::orange --> CB["Local production<br/>build"]:::blue
+    CB --> CA["/apps/cert/<br/>generated app"]:::cyan
+    CB --> CM
+    H --> GP["GitHub Pages"]:::yellow
+    A --> GP
+    CA --> GP
+    classDef yellow fill:#FFF4A3,stroke:#C9A227,stroke-width:2px,color:#172B4D
+    classDef blue fill:#D9EAFD,stroke:#4C78A8,stroke-width:2px,color:#172B4D
+    classDef pink fill:#FFE1E6,stroke:#C96A7B,stroke-width:2px,color:#172B4D
+    classDef purple fill:#E9DDF7,stroke:#8064A2,stroke-width:2px,color:#172B4D
+    classDef green fill:#DDF5E3,stroke:#4F9D69,stroke-width:2px,color:#172B4D
+    classDef orange fill:#FFE2C3,stroke:#C97A2B,stroke-width:2px,color:#172B4D
+    classDef cyan fill:#D9F3F0,stroke:#3B8F87,stroke-width:2px,color:#172B4D
+```
+
 ## English
 
-### Overview
+### Purpose and operating model
 
-`thangldw.github.io` is a static personal portfolio and application catalog hosted on GitHub Pages. It presents selected product work, a Japan permanent-residency guide, and browser-based certification study tools.
+`thangldw.github.io` is a static personal portfolio and application host. It has no application server, database, package-manager build step, or persistent backend. GitHub Pages serves committed HTML, CSS, JavaScript, JSON, fonts, images, and generated application artifacts.
 
 - Production: [https://thangldw.github.io/](https://thangldw.github.io/)
-- Runtime: static HTML, CSS, and JavaScript
-- Hosting: GitHub Pages
-- Build step: none
-- Persistent backend: none
+- Default branch: `master`
+- Runtime: standards-based browser APIs
+- Deployment: GitHub Pages from the repository root
+- Analytics: shared local script included once on non-redirect pages
 
 ### Public routes
 
-| Route | Purpose | Maintenance notes |
+| Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Portfolio and selected work | Primary public entry point |
-| `/apps/` | Application catalog | Uses shared project-card data and styles |
-| `/apps/japan-pr-guide/` | Japan permanent-residency guide | Standalone browser application |
-| `/apps/cert/` | Certification study library | Generated release; its public manifest drives catalog metadata while question banks stay bundled |
-| `/404.html` | Custom not-found page | Must remain compatible with GitHub Pages |
+| `/` | Portfolio profile and featured side projects | Root HTML plus shared project catalog |
+| `/apps/` | Searchable and filterable application catalog | `js/projects-data.json` |
+| `/apps/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
+| `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` source repository |
+| `/apps/cert/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
+| `/404.html` | GitHub Pages fallback | Repository source |
 
-### Architecture
+Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
 
-```mermaid
-%%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":48,"rankSpacing":72,"padding":18},"themeVariables":{"background":"#FFFDF8","fontFamily":"Inter, Arial, sans-serif","primaryTextColor":"#1F1F1F","lineColor":"#5F5F5F"}}}%%
-flowchart LR
-    A["Portfolio<br/>/"]:::yellow --> D["Shared static assets"]:::blue
-    B["Application catalog<br/>/apps/"]:::pink --> D
-    C["Standalone applications<br/>/apps/*/"]:::purple --> D
-    E["Generated certification release<br/>/apps/cert/"]:::orange --> F["Static validation"]:::green
-    D --> F
-    F --> G["GitHub Pages"]:::cyan
+### Shared catalog architecture
 
-    classDef yellow fill:#FFF1A8,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    classDef blue fill:#B9DFFF,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    classDef pink fill:#FFC8DD,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    classDef purple fill:#D8CCFF,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    classDef orange fill:#FFD0A8,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    classDef green fill:#BFE8C8,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    classDef cyan fill:#BEEBEA,stroke:#1F1F1F,stroke-width:2px,color:#1F1F1F,rx:14px,ry:14px
-    linkStyle default stroke:#5F5F5F,stroke-width:2px
-```
+`js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. Both the home page and `/apps/` wait for the same readiness promise before rendering.
 
-The repository deliberately avoids a framework and package-manager dependency. Shared design tokens, page structure, and analytics are maintained as static assets. `js/projects-data.json` is the single source of truth for both the application catalog and featured home-page projects; both pages fetch it with revalidation at runtime. Validation scripts enforce the repository contract before deployment.
+The loader also reads `/apps/cert/certifications-manifest.json`. It derives the certification count, names, labels, and collection tags at runtime. Adding a certification therefore does not require manually editing the home page or application catalog.
+
+The public certification manifest is an explicit metadata allowlist. It contains identity, issuer, routes, syllabus and public exam information, but not prompts, choices, answer keys, explanations, domains, glossary content, or learner data. Question banks remain inside the compiled React bundle.
 
 ### Repository layout
 
 ```text
-.
-├── index.html                 # Portfolio home page
-├── 404.html                   # GitHub Pages fallback
+thangldw.github.io/
+├── index.html
+├── 404.html
 ├── apps/
-│   ├── index.html             # Application catalog
-│   ├── japan-pr-guide/        # Japan permanent-residency guide
-│   └── cert/                  # Generated certification release
-├── assets/                    # Images and locally hosted fonts
-├── css/                       # Design tokens, shared shell, and route styles
-├── js/                        # Shared behavior, analytics, and projects-data.json
-├── scripts/                   # Validation and browser smoke tests
+│   ├── index.html
+│   ├── japan-pr-guide/
+│   └── cert/                  # Generated artifact; do not hand-edit
+├── assets/                    # Social images and local fonts
+├── css/                       # Tokens, shared shell, and route styles
+├── js/
+│   ├── projects-data.json     # Project metadata source of truth
+│   ├── projects-data.js       # Runtime loader and schema guard
+│   └── shared behavior
+├── scripts/                   # Static audits and browser smoke tests
 ├── robots.txt
 └── sitemap.xml
 ```
-
-### Prerequisites
-
-- Python 3.10 or later
-- Node.js 22 or later for the browser smoke test
-- Google Chrome at its standard macOS path, or `CHROME_BIN` set to another Chrome-compatible executable
-
-No dependency installation is required.
 
 ### Local development
 
-Start a local static server from the repository root:
+Requirements:
+
+- Python 3.10 or later
+- Node.js 22 or later
+- Google Chrome at the standard macOS path, or `CHROME_BIN` pointing to a compatible executable
+
+No dependency installation is required.
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Open [http://localhost:4173/](http://localhost:4173/). Changes to HTML, CSS, and JavaScript are available after a browser refresh.
+Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather than opening files directly because runtime JSON loading requires HTTP.
 
 ### Quality gates
 
-Run all checks before publishing:
-
 ```bash
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
 node scripts/smoke_cert.mjs
 ```
 
-| Check | Coverage |
+| Gate | Coverage |
 | --- | --- |
-| `audit_ui_standards.py` | Shared UI contract, accessibility conventions, design tokens, and prohibited inline presentation patterns |
-| `validate_site.py` | HTML parsing, local references, analytics inclusion, sitemap routes, canonical URLs, and social metadata |
-| `smoke_cert.mjs` | Headless-Chrome behavior for the application catalog and certification workflows |
+| UI audit | Shared shell, design tokens, contrast, accessibility conventions, and prohibited presentation debt |
+| Site validator | HTML parsing, local links, Markdown policy, JSON contracts, analytics, sitemap, canonical and social metadata |
+| Browser smoke suite | Project JSON loading, certification manifest propagation, catalog layout, every certification route, theme isolation, exam mode, and responsive behavior |
 
-The smoke test starts isolated temporary servers and a temporary Chrome profile, then removes them when the run finishes.
+Tests use isolated temporary servers and Chrome profiles and remove them after completion.
 
-### Content and change policy
+### Updating projects
 
-- Treat `apps/cert/` as generated release output. Its source of truth is the private `thangldw/cert` repository, whose local build emits a public metadata-only `certifications-manifest.json`; question content remains in the compiled bundle.
-- Make shared visual changes through `css/tokens.css`, `css/site-shell.css`, and the relevant shared component stylesheet whenever possible.
-- Keep internal links root-relative so they behave consistently locally and on GitHub Pages.
-- When adding a public route, update `sitemap.xml`, canonical metadata, Open Graph metadata, and the validation expectations together.
-- Store fonts locally; the validation suite rejects external font dependencies.
-- Update project metadata only in `js/projects-data.json`; the home page and `/apps/` render from that shared catalog.
-- Keep `README.md` as the only durable Markdown document unless the validation policy is intentionally updated.
-- Never commit secrets, credentials, private datasets, local metadata, or machine-specific paths.
+Edit only `js/projects-data.json`.
 
-### Release workflow
+1. Keep IDs unique and stable.
+2. Provide all required catalog fields and a safe destination URL.
+3. Set `featured: true` and `featuredOrder` to show a project on the home page.
+4. Run validation and browser smoke tests.
+5. Commit and push.
 
-1. Update source files or synchronize generated certification artifacts from their source repository.
-2. Run all quality gates.
-3. Review `git diff` and confirm that generated files changed only when intended.
-4. Commit with a focused message and push to the default branch.
-5. Verify the production routes and social metadata after GitHub Pages finishes deploying.
+Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
-History rewrites and force pushes are exceptional maintenance operations. Coordinate them before use because existing clones and pull-request references may retain obsolete commits.
+### Publishing Certification Library
 
-### Contribution guidelines
+The private `thangldw/cert` repository owns certification manifests, question banks, application code, and build scripts.
 
-Keep changes small, route-focused, and independently verifiable. Preserve the static, dependency-light architecture unless a documented requirement justifies changing it. Bug reports and proposals should include the affected route, reproduction steps, expected behavior, actual behavior, and browser or viewport details when relevant.
+1. In the source repository, run `npm ci`, data validation, tests, and `npm run build`.
+2. Inspect `dist/client/certifications-manifest.json` and confirm it contains metadata only.
+3. Synchronize the complete `dist/client/` output to `apps/cert/`.
+4. Preserve required site integration layers such as analytics and shared styling when the release process applies them.
+5. Run all website quality gates.
+6. Push the source repository before the generated website artifact.
+7. Wait for GitHub Pages to report `built`, then verify the hub and representative child routes.
 
----
+The local certification build creates canonical child routes and updates the manifest automatically. GitHub Actions are not required. A deliberate local build and deployment are still required.
+
+### Deployment and rollback
+
+1. Start from a clean working tree and review all generated changes.
+2. Run every relevant quality gate.
+3. Commit a focused change and push `master`.
+4. Monitor GitHub Pages until its state is `built`.
+5. Verify production HTML, JSON responses, and critical rendered content.
+
+Do not silently replace generated assets in an unrelated commit. If production is broken, revert the focused commit or publish a corrective commit, rerun validation, and verify deployment again. Avoid force pushes.
+
+### Security and privacy
+
+- Never commit secrets, credentials, private datasets, learner backups, or machine-specific paths.
+- Keep fonts and production assets local; external font dependencies are rejected.
+- Validate all JSON before rendering and escape catalog text inserted into HTML.
+- Treat certification bundle minification as deterrence, not enforceable access control.
+- Certification learner data remains in browser storage; the website does not collect or synchronize it.
+- Analytics must not run on redirect pages and must appear exactly once elsewhere.
+
+### Contribution policy
+
+Keep changes route-focused, accessible, responsive, and independently verifiable. Shared visual behavior belongs in tokens or shared styles rather than inline presentation. New routes require sitemap, canonical, Open Graph, social-image, analytics, validation, and smoke-test updates.
 
 ## Tiếng Việt
 
-### Tổng quan
+### Mục đích và mô hình vận hành
 
-`thangldw.github.io` là portfolio cá nhân và danh mục ứng dụng tĩnh được phát hành bằng GitHub Pages. Website giới thiệu các sản phẩm tiêu biểu, cẩm nang thường trú tại Nhật Bản và các công cụ ôn thi chứng chỉ chạy trực tiếp trên trình duyệt.
+`thangldw.github.io` là portfolio và host ứng dụng tĩnh. Website không có application server, database, backend lưu trữ hoặc bước build bằng package manager. GitHub Pages phục vụ trực tiếp HTML, CSS, JavaScript, JSON, font, ảnh và artifact ứng dụng đã sinh.
 
-- Môi trường production: [https://thangldw.github.io/](https://thangldw.github.io/)
-- Runtime: HTML, CSS và JavaScript tĩnh
-- Hosting: GitHub Pages
-- Bước build: không có
-- Backend lưu trữ lâu dài: không có
+- Production: [https://thangldw.github.io/](https://thangldw.github.io/)
+- Default branch: `master`
+- Runtime: API chuẩn của trình duyệt
+- Deploy: GitHub Pages từ root repository
 
-### Các route công khai
+### Route công khai
 
-| Route | Mục đích | Lưu ý bảo trì |
+| Route | Trách nhiệm | Nguồn chuẩn |
 | --- | --- | --- |
-| `/` | Portfolio và các sản phẩm tiêu biểu | Điểm truy cập công khai chính |
-| `/apps/` | Danh mục ứng dụng | Dùng chung dữ liệu và style của project card |
-| `/apps/japan-pr-guide/` | Cẩm nang thường trú tại Nhật Bản | Ứng dụng trình duyệt độc lập |
-| `/apps/cert/` | Thư viện ôn thi chứng chỉ | Bản build sinh tự động; public manifest cập nhật catalog còn question bank vẫn nằm trong bundle |
-| `/404.html` | Trang không tìm thấy tùy chỉnh | Phải tương thích với GitHub Pages |
+| `/` | Portfolio và Side Projects tiêu biểu | Root HTML và catalog project dùng chung |
+| `/apps/` | Danh mục ứng dụng có search/filter | `js/projects-data.json` |
+| `/apps/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
+| `/apps/cert/` | Certification Library đã build | Repo private `thangldw/cert` |
+| Certification manifest | Metadata và count công khai | Local production build của repo cert |
+| `/404.html` | Fallback của GitHub Pages | Source repository |
 
-### Kiến trúc
+Mọi route trong sitemap phải có canonical, description, Open Graph và social image hợp lệ khi cần.
 
-Repository chủ động không sử dụng framework hoặc dependency từ package manager. Design token, cấu trúc trang và analytics được quản lý dưới dạng tài nguyên tĩnh dùng chung. `js/projects-data.json` là nguồn chuẩn duy nhất cho cả danh mục ứng dụng và Side Projects trên trang chủ; hai trang fetch lại dữ liệu này ở runtime. Các script kiểm tra bảo đảm repository tuân thủ hợp đồng kỹ thuật trước khi triển khai.
+### Kiến trúc catalog dùng chung
 
-```text
-.
-├── index.html                 # Trang portfolio chính
-├── 404.html                   # Trang dự phòng của GitHub Pages
-├── apps/
-│   ├── index.html             # Danh mục ứng dụng
-│   ├── japan-pr-guide/        # Cẩm nang thường trú tại Nhật Bản
-│   └── cert/                  # Bản phát hành chứng chỉ được sinh tự động
-├── assets/                    # Hình ảnh và font được lưu cục bộ
-├── css/                       # Design token, site shell và style theo route
-├── js/                        # Hành vi dùng chung, analytics và projects-data.json
-├── scripts/                   # Kiểm tra tĩnh và browser smoke test
-├── robots.txt
-└── sitemap.xml
-```
+`js/projects-data.json` là nguồn duy nhất cho metadata project. Loader kiểm tra và fetch JSON ở runtime; trang chủ và `/apps/` cùng chờ một readiness promise trước khi render.
 
-### Điều kiện cần
+Loader đồng thời đọc public certification manifest để tự tính số lượng, tên, label và tag của collection. Vì vậy thêm chứng chỉ không cần sửa thủ công trang chủ hoặc application catalog.
 
-- Python 3.10 trở lên
-- Node.js 22 trở lên để chạy browser smoke test
-- Google Chrome tại đường dẫn macOS mặc định, hoặc biến `CHROME_BIN` trỏ đến executable tương thích với Chrome
+Manifest chứng chỉ chỉ dùng allowlist metadata công khai: định danh, issuer, route, syllabus và thông tin kỳ thi. Nó không chứa prompt, choice, đáp án, giải thích, domain, glossary hoặc dữ liệu người học. Question bank vẫn ở trong React bundle.
 
-Không cần cài dependency.
+### Cấu trúc và phát triển local
 
-### Phát triển local
-
-Khởi động static server từ thư mục gốc của repository:
+Dùng cây thư mục ở phần English. `apps/cert/` là generated artifact, không sửa bundle thủ công. Cần Python 3.10+, Node.js 22+ và Chrome. Không cần cài dependency.
 
 ```bash
 python3 -m http.server 4173
 ```
 
-Mở [http://localhost:4173/](http://localhost:4173/). Các thay đổi HTML, CSS và JavaScript sẽ có hiệu lực sau khi refresh trình duyệt.
+Mở [http://localhost:4173/](http://localhost:4173/). Phải dùng HTTP server vì browser fetch JSON ở runtime.
 
-### Cổng kiểm soát chất lượng
+### Cổng chất lượng
 
-Chạy toàn bộ kiểm tra trước khi phát hành:
+Chạy UI audit, site validator và browser smoke suite bằng các command trong phần English. Các gate kiểm tra shared shell, token/contrast/accessibility, link và metadata, contract JSON, analytics, sitemap, project loader, certification manifest, mọi route chứng chỉ, theme, exam mode và responsive layout.
 
-```bash
-python3 scripts/audit_ui_standards.py
-python3 scripts/validate_site.py
-node scripts/smoke_cert.mjs
-```
+### Cập nhật project
 
-| Kiểm tra | Phạm vi |
-| --- | --- |
-| `audit_ui_standards.py` | Hợp đồng UI dùng chung, quy ước accessibility, design token và các kiểu trình bày inline bị cấm |
-| `validate_site.py` | Phân tích HTML, liên kết nội bộ, analytics, sitemap, canonical URL và social metadata |
-| `smoke_cert.mjs` | Hành vi trên Headless Chrome của danh mục ứng dụng và luồng ôn thi chứng chỉ |
+Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, dùng `featured` cùng `featuredOrder` cho trang chủ, sau đó chạy validation/smoke test và push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
 
-Smoke test tự khởi động các server và Chrome profile tạm biệt lập, sau đó xóa chúng khi hoàn tất.
+### Publish Certification Library
 
-### Quy tắc nội dung và thay đổi
+Repo private `thangldw/cert` quản lý dữ liệu, question bank, application code và build:
 
-- Xem `apps/cert/` là artifact phát hành được sinh tự động. Nguồn chuẩn nằm trong repository private `thangldw/cert`; local build của repo đó tạo `certifications-manifest.json` chỉ chứa metadata công khai, còn nội dung câu hỏi vẫn nằm trong bundle đã compile.
-- Ưu tiên thực hiện thay đổi giao diện dùng chung qua `css/tokens.css`, `css/site-shell.css` và stylesheet component liên quan.
-- Dùng liên kết nội bộ bắt đầu từ root để hành vi nhất quán giữa local và GitHub Pages.
-- Khi thêm route công khai, phải cập nhật đồng thời `sitemap.xml`, canonical metadata, Open Graph metadata và các điều kiện validation.
-- Lưu font trong repository; bộ validation không cho phép dependency font bên ngoài.
-- Chỉ cập nhật metadata project trong `js/projects-data.json`; trang chủ và `/apps/` cùng render từ catalog này.
-- Chỉ giữ `README.md` làm tài liệu Markdown lâu dài, trừ khi chủ động cập nhật chính sách validation.
-- Không commit secret, credential, dữ liệu private, metadata cục bộ hoặc đường dẫn phụ thuộc máy.
+1. Chạy `npm ci`, validation, test và production build.
+2. Kiểm tra public manifest chỉ có metadata.
+3. Đồng bộ toàn bộ `dist/client/` sang `apps/cert/`.
+4. Giữ các integration layer cần thiết của website.
+5. Chạy toàn bộ quality gate của website.
+6. Push source repo trước generated artifact.
+7. Chờ GitHub Pages báo `built` rồi kiểm tra production.
 
-### Quy trình phát hành
+Build local tự tạo route và manifest; không cần GitHub Actions. Tuy nhiên vẫn cần build, review và deploy có chủ đích.
 
-1. Cập nhật source hoặc đồng bộ artifact chứng chỉ từ repository nguồn.
-2. Chạy toàn bộ cổng kiểm soát chất lượng.
-3. Kiểm tra `git diff` và xác nhận file sinh tự động chỉ thay đổi khi có chủ đích.
-4. Commit với nội dung tập trung và push lên default branch.
-5. Sau khi GitHub Pages triển khai xong, kiểm tra các route production và social metadata.
+### Deploy, bảo mật và đóng góp
 
-Rewrite lịch sử và force-push chỉ dành cho bảo trì ngoại lệ. Cần phối hợp trước khi thực hiện vì clone cũ và tham chiếu pull request có thể tiếp tục giữ commit lỗi thời.
+Luôn bắt đầu từ working tree sạch, kiểm tra generated diff, chạy test, commit tập trung, push `master`, chờ Pages deploy và xác minh HTML/JSON/UI production. Nếu lỗi, revert commit tập trung hoặc tạo corrective commit; không force-push.
 
-### Hướng dẫn đóng góp
+Không commit secret, credential, private dataset, learner backup hoặc đường dẫn máy. Font và asset phải local. JSON phải được validate và text phải escape trước khi chèn HTML. Minification chỉ là deterrence. Dữ liệu học nằm trong browser storage và không được website đồng bộ.
 
-Giữ mỗi thay đổi nhỏ, tập trung vào một route và có thể kiểm chứng độc lập. Duy trì kiến trúc tĩnh, ít dependency, trừ khi có yêu cầu được ghi nhận rõ ràng. Báo lỗi và đề xuất nên nêu route bị ảnh hưởng, cách tái hiện, kết quả mong đợi, kết quả thực tế và thông tin trình duyệt hoặc viewport nếu có liên quan.
-
----
+Thay đổi cần tập trung theo route, accessible, responsive và test được. Route mới phải cập nhật sitemap, canonical, Open Graph, social image, analytics, validation và smoke test.
 
 ## 日本語
 
-### 概要
+### Purpose と operating model
 
-`thangldw.github.io` は、GitHub Pages で公開している静的な個人ポートフォリオ兼アプリケーションカタログです。主なプロダクト、日本の永住権ガイド、ブラウザ上で動作する資格学習ツールを掲載しています。
+`thangldw.github.io` は static portfolio と application host です。Application server、database、persistent backend、package-manager build step はありません。GitHub Pages が committed HTML、CSS、JavaScript、JSON、font、image、generated artifact を配信します。
 
-- 本番環境: [https://thangldw.github.io/](https://thangldw.github.io/)
-- ランタイム: 静的 HTML、CSS、JavaScript
-- ホスティング: GitHub Pages
-- ビルド工程: なし
-- 永続バックエンド: なし
+- Production: [https://thangldw.github.io/](https://thangldw.github.io/)
+- Default branch: `master`
+- Runtime: standard browser API
+- Deployment: repository root から GitHub Pages
 
-### 公開ルート
+### Public route
 
-| ルート | 目的 | 保守上の注意 |
+| Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | ポートフォリオと主な実績 | 主要な公開エントリーポイント |
-| `/apps/` | アプリケーションカタログ | プロジェクトカードのデータとスタイルを共有 |
-| `/apps/japan-pr-guide/` | 日本の永住権ガイド | 独立したブラウザアプリケーション |
-| `/apps/cert/` | 資格学習ライブラリ | 自動生成 release。Public manifest が catalog metadata を更新し、question bank は bundle 内に保持 |
-| `/404.html` | カスタム Not Found ページ | GitHub Pages との互換性を維持すること |
+| `/` | Portfolio と featured project | Root HTML と shared project catalog |
+| `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
+| `/apps/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
+| `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` repo |
+| Certification manifest | Public metadata と count | Cert local production build |
+| `/404.html` | GitHub Pages fallback | Repository source |
 
-### アーキテクチャ
+Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
 
-このリポジトリは、意図的にフレームワークやパッケージマネージャー由来の依存関係を使用していません。デザイントークン、ページ構造、アクセス解析は共有の静的アセットとして管理します。`js/projects-data.json` は application catalog と home page の featured project に共通する唯一の source of truth で、両ページが runtime に再検証付きで取得します。検証スクリプトにより、デプロイ前にリポジトリの技術的な規約を確認します。
+### Shared catalog architecture
 
-```text
-.
-├── index.html                 # ポートフォリオのトップページ
-├── 404.html                   # GitHub Pages のフォールバックページ
-├── apps/
-│   ├── index.html             # アプリケーションカタログ
-│   ├── japan-pr-guide/        # 日本の永住権ガイド
-│   └── cert/                  # 自動生成された資格学習リリース
-├── assets/                    # 画像とローカル配信フォント
-├── css/                       # デザイントークン、共通シェル、ルート別スタイル
-├── js/                        # 共通動作、アクセス解析、projects-data.json
-├── scripts/                   # 静的検証とブラウザスモークテスト
-├── robots.txt
-└── sitemap.xml
-```
+`js/projects-data.json` が project metadata の唯一の source です。Loader が runtime に validation/fetch し、home page と `/apps/` は同じ readiness promise 後に render します。
 
-### 前提条件
+Loader は public certification manifest も読み、certification count、name、label、tag を自動生成します。Certification 追加時に home page や application catalog を手動編集する必要はありません。
 
-- Python 3.10 以降
-- ブラウザスモークテスト用の Node.js 22 以降
-- macOS の標準パスにある Google Chrome、または Chrome 互換実行ファイルを指定した `CHROME_BIN`
+Certification manifest は identity、issuer、route、syllabus、public exam metadata の allowlist だけです。Prompt、choice、answer、explanation、domain、glossary、learner data を含まず、question bank は React bundle 内に保持します。
 
-依存パッケージのインストールは不要です。
+### Local development と quality gate
 
-### ローカル開発
-
-リポジトリのルートで静的サーバーを起動します。
+English セクションの directory tree を参照してください。`apps/cert/` は generated artifact で、bundle を直接編集しません。Python 3.10+、Node.js 22+、Chrome が必要です。Dependency install は不要です。
 
 ```bash
 python3 -m http.server 4173
-```
-
-[http://localhost:4173/](http://localhost:4173/) を開きます。HTML、CSS、JavaScript の変更は、ブラウザを更新すると反映されます。
-
-### 品質ゲート
-
-公開前にすべての検証を実行します。
-
-```bash
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
 node scripts/smoke_cert.mjs
 ```
 
-| 検証 | 対象 |
-| --- | --- |
-| `audit_ui_standards.py` | 共通 UI 規約、アクセシビリティ規約、デザイントークン、禁止されているインライン表現 |
-| `validate_site.py` | HTML 解析、ローカル参照、アクセス解析、サイトマップ、canonical URL、ソーシャルメタデータ |
-| `smoke_cert.mjs` | Headless Chrome 上のアプリケーションカタログと資格学習フロー |
+JSON runtime loading のため file を直接開かず HTTP server を使います。Quality gate は shared shell、token、contrast、accessibility、link、metadata、JSON contract、analytics、sitemap、catalog loading、manifest propagation、全 certification route、theme、exam mode、responsive behavior を確認します。
 
-スモークテストは分離された一時サーバーと Chrome プロファイルを起動し、完了後に削除します。
+### Project と certification の更新
 
-### コンテンツと変更の方針
+Project metadata は `js/projects-data.json` だけで編集します。Stable unique ID、required field、安全な URL、`featured`/`featuredOrder` を設定し、test 後に push します。JSON content update のたびに HTML cache key を変える必要はありません。
 
-- `apps/cert/` は自動生成されたリリース成果物として扱います。正規のソースは非公開リポジトリ `thangldw/cert` にあります。その local build が public metadata のみを含む `certifications-manifest.json` を生成し、問題内容は compiled bundle 内に保持します。
-- 共通の見た目を変更する場合は、可能な限り `css/tokens.css`、`css/site-shell.css`、該当する共有コンポーネントのスタイルシートを使用します。
-- ローカル環境と GitHub Pages で同じ動作になるように、内部リンクはルート相対パスにします。
-- 公開ルートを追加する際は、`sitemap.xml`、canonical メタデータ、Open Graph メタデータ、検証条件を同時に更新します。
-- フォントはリポジトリ内で配信します。検証スイートは外部フォントへの依存を許可しません。
-- Project metadata は `js/projects-data.json` だけで更新し、home page と `/apps/` は同じ catalog から render します。
-- 検証ポリシーを意図的に変更しない限り、永続的な Markdown ドキュメントは `README.md` のみにします。
-- シークレット、認証情報、非公開データセット、ローカルメタデータ、マシン固有のパスをコミットしないでください。
+Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して `dist/client/` 全体を `apps/cert/` に同期します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
 
-### リリース手順
+### Deployment、security、contribution
 
-1. ソースファイルを更新するか、資格学習の生成済み成果物をソースリポジトリから同期します。
-2. すべての品質ゲートを実行します。
-3. `git diff` を確認し、自動生成ファイルが意図した場合にのみ変更されていることを確認します。
-4. 変更内容を明確に表すメッセージでコミットし、デフォルトブランチへプッシュします。
-5. GitHub Pages のデプロイ完了後、本番ルートとソーシャルメタデータを確認します。
+Clean working tree、generated diff review、全 test、focused commit、`master` push、Pages completion、production HTML/JSON/UI verification の順で進めます。障害時は focused revert または corrective commit を使い、force-push を避けます。
 
-履歴の書き換えと force-push は例外的な保守作業です。既存のクローンや pull request の参照に古いコミットが残る可能性があるため、実行前に関係者と調整してください。
+Secret、credential、private dataset、learner backup、machine-specific path を commit しません。Font/asset は local に置き、JSON を validate し、HTML 挿入前に text を escape します。Minification は deterrence であり access control ではありません。Learner data は browser storage 内に留まります。
 
-### コントリビューションガイド
-
-変更は小さく保ち、対象ルートを明確にし、単独で検証できるようにしてください。明文化された要件がない限り、静的で依存関係の少ないアーキテクチャを維持します。不具合報告や提案には、対象ルート、再現手順、期待する動作、実際の動作、および必要に応じてブラウザやビューポートの情報を含めてください。
+変更は route-focused、accessible、responsive、independently verifiable にします。新 route では sitemap、canonical、Open Graph、social image、analytics、validation、smoke test を更新します。
