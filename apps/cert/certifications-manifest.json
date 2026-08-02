@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 9,
+  "certificationCount": 10,
   "certifications": [
     {
       "id": "g",
@@ -162,6 +162,24 @@
         "questionCount": 65,
         "format": "複数選択・スケールドスコア",
         "structure": "SAA-C03"
+      }
+    },
+    {
+      "id": "gh-300",
+      "slug": "gh-300",
+      "displayOrder": 10,
+      "accent": "#2f81f7",
+      "shortName": "GH-300",
+      "name": "GitHub Copilot",
+      "issuer": "Microsoft / GitHub",
+      "syllabusVersion": "GH-300-2026",
+      "href": "/apps/cert/gh-300/",
+      "availableQuestionCount": 147,
+      "exam": {
+        "durationMinutes": 100,
+        "questionCount": 54,
+        "format": "Single-choice and multiple-choice questions",
+        "structure": "GH-300 GitHub Copilot certification exam"
       }
     }
   ]

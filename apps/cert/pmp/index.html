@@ -1,29 +1,31 @@
 <!doctype html>
-<html lang="en" data-theme="light" data-theme-locked="true">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
     <meta
       name="description"
-      content="Local-first study, practice, review, and exam preparation across nine certifications."
+      content="Local-first study, practice, review, and exam preparation across 10 certifications."
     />
     <link rel="canonical" href="https://thangldw.github.io/apps/cert/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Certification Library" />
     <meta
       property="og:description"
-      content="Study by domain, take practice exams, review explanations, and keep local learning history across nine certifications."
+      content="Study by domain, take practice exams, review explanations, and keep local learning history across 10 certifications."
     />
     <meta property="og:url" content="https://thangldw.github.io/apps/cert/" />
     <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <title>PMP</title>
+    <script>
+      document.documentElement.dataset.theme =
+        localStorage.getItem("theme") ||
+        (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    </script>
     <script defer src="/js/analytics.js"></script>
-    <script defer src="/js/site-shell.js?v=20260727b"></script>
-    <script type="module" crossorigin src="/apps/cert/assets/index-DyRLHlV8.js?v=20260727b"></script>
-    <link rel="stylesheet" href="/css/icons.css?v=20260714">
-    <link rel="stylesheet" crossorigin href="/apps/cert/assets/index--b6gRPJC.css?v=20260727c">
+    <script type="module" crossorigin src="/apps/cert/assets/index-cqmSbMIj.js"></script>
+    <link rel="stylesheet" crossorigin href="/apps/cert/assets/index-DdjpvS_E.css">
   </head>
   <body data-page-kind="exam-shell">
     <div id="root"></div>

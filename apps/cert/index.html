@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Local-first study, practice, review, and exam preparation across nine certifications."
+      content="Local-first study, practice, review, and exam preparation across 10 certifications."
     />
     <link rel="canonical" href="https://thangldw.github.io/apps/cert/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Certification Library" />
     <meta
       property="og:description"
-      content="Study by domain, take practice exams, review explanations, and keep local learning history across nine certifications."
+      content="Study by domain, take practice exams, review explanations, and keep local learning history across 10 certifications."
     />
     <meta property="og:url" content="https://thangldw.github.io/apps/cert/" />
     <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg" />
@@ -24,16 +24,8 @@
         (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     </script>
     <script defer src="/js/analytics.js"></script>
-    <script defer src="/js/site-shell.js?v=20260727b"></script>
-    <script defer src="/js/cert-theme-toggle.js?v=20260727b"></script>
-    <script type="module" crossorigin src="/apps/cert/assets/index-DyRLHlV8.js?v=20260727b"></script>
-    <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
-    <link rel="stylesheet" href="/css/icons.css?v=20260714">
-    <link rel="stylesheet" href="/css/cert-theme-toggle.css?v=20260727a">
-    <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
-    <link rel="stylesheet" crossorigin href="/apps/cert/assets/index--b6gRPJC.css?v=20260727c">
-    <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
-    <link rel="stylesheet" href="/css/cert-library-match.css?v=20260727a">
+    <script type="module" crossorigin src="/apps/cert/assets/index-cqmSbMIj.js"></script>
+    <link rel="stylesheet" crossorigin href="/apps/cert/assets/index-DdjpvS_E.css">
   </head>
   <body data-page-kind="exam-shell">
     <div id="root"></div>
@@ -43,41 +35,5 @@
         <p>JavaScript is required to use the certification study application.</p>
       </main>
     </noscript>
-    <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        const obs = new MutationObserver(() => {
-          const cards = document.querySelectorAll(".hub-certifications .project-title-link");
-          if (!cards.length) return;
-          cards.forEach(card => {
-            if (card.dataset.enriched) return;
-            card.dataset.enriched = "1";
-            const title = card.querySelector("h3") || card.querySelector("h2");
-            const desc = card.querySelector("p");
-            const category = card.querySelector("span");
-            const issuer = card.querySelector("small");
-            if (!title) return;
-            const qMatch = card.textContent.match(/(\d+)\s*question/i);
-            const questionCount = qMatch ? qMatch[1] : "—";
-            const catText = category ? category.textContent.trim() : "";
-            const issuerText = issuer ? issuer.textContent.trim() : "";
-            const titleText = title.textContent.trim();
-            const descText = desc ? desc.textContent.trim() : "";
-            let metaText = catText ? catText + " · " : "";
-            metaText += Number(questionCount) > 0 ? questionCount + " questions" : "Study space";
-            const oldMeta = card.querySelector(".hub-cert-meta");
-            if (oldMeta) {
-              oldMeta.innerHTML = '<span>' + metaText + '</span><i class="ri-arrow-right-line"></i>';
-            }
-            if (desc && !desc.textContent.split(/\s+/).length) {
-              desc.textContent = titleText + " — certification study practice";
-            }
-          });
-          if (document.querySelectorAll(".hub-certifications .project-title-link[data-enriched]").length >= cards.length) {
-            obs.disconnect();
-          }
-        });
-        obs.observe(document.getElementById("root"), { childList: true, subtree: true });
-      });
-    </script>
   </body>
 </html>
