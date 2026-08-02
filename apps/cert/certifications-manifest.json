@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 10,
+  "certificationCount": 11,
   "certifications": [
     {
       "id": "g",
@@ -180,6 +180,24 @@
         "questionCount": 54,
         "format": "Single-choice and multiple-choice questions",
         "structure": "GH-300 GitHub Copilot certification exam"
+      }
+    },
+    {
+      "id": "ccar-f",
+      "slug": "ccar-f",
+      "displayOrder": 11,
+      "accent": "#d97757",
+      "shortName": "CCAR-F",
+      "name": "Claude Certified Architect — Foundations",
+      "issuer": "Anthropic",
+      "syllabusVersion": "CCAR-F-2026",
+      "href": "/apps/cert/ccar-f/",
+      "availableQuestionCount": 162,
+      "exam": {
+        "durationMinutes": 120,
+        "questionCount": 60,
+        "format": "Scenario-based multiple choice, one best answer",
+        "structure": "Five architecture domains; four scenarios selected from six"
       }
     }
   ]
