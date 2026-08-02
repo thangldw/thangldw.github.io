@@ -46,7 +46,7 @@ flowchart LR
     linkStyle default stroke:#5F5F5F,stroke-width:2px
 ```
 
-The repository deliberately avoids a framework and package-manager dependency. Shared design tokens, page structure, analytics, and catalog data are maintained as static assets. Validation scripts enforce the repository contract before deployment.
+The repository deliberately avoids a framework and package-manager dependency. Shared design tokens, page structure, and analytics are maintained as static assets. `js/projects-data.json` is the single source of truth for both the application catalog and featured home-page projects; both pages fetch it with revalidation at runtime. Validation scripts enforce the repository contract before deployment.
 
 ### Repository layout
 
@@ -60,7 +60,7 @@ The repository deliberately avoids a framework and package-manager dependency. S
 │   └── cert/                  # Generated certification release
 ├── assets/                    # Images and locally hosted fonts
 ├── css/                       # Design tokens, shared shell, and route styles
-├── js/                        # Shared behavior, analytics, and catalog data
+├── js/                        # Shared behavior, analytics, and projects-data.json
 ├── scripts/                   # Validation and browser smoke tests
 ├── robots.txt
 └── sitemap.xml
@@ -109,6 +109,7 @@ The smoke test starts isolated temporary servers and a temporary Chrome profile,
 - Keep internal links root-relative so they behave consistently locally and on GitHub Pages.
 - When adding a public route, update `sitemap.xml`, canonical metadata, Open Graph metadata, and the validation expectations together.
 - Store fonts locally; the validation suite rejects external font dependencies.
+- Update project metadata only in `js/projects-data.json`; the home page and `/apps/` render from that shared catalog.
 - Keep `README.md` as the only durable Markdown document unless the validation policy is intentionally updated.
 - Never commit secrets, credentials, private datasets, local metadata, or machine-specific paths.
 
@@ -152,7 +153,7 @@ Keep changes small, route-focused, and independently verifiable. Preserve the st
 
 ### Kiến trúc
 
-Repository chủ động không sử dụng framework hoặc dependency từ package manager. Design token, cấu trúc trang, analytics và dữ liệu danh mục được quản lý dưới dạng tài nguyên tĩnh dùng chung. Các script kiểm tra bảo đảm repository tuân thủ hợp đồng kỹ thuật trước khi triển khai.
+Repository chủ động không sử dụng framework hoặc dependency từ package manager. Design token, cấu trúc trang và analytics được quản lý dưới dạng tài nguyên tĩnh dùng chung. `js/projects-data.json` là nguồn chuẩn duy nhất cho cả danh mục ứng dụng và Side Projects trên trang chủ; hai trang fetch lại dữ liệu này ở runtime. Các script kiểm tra bảo đảm repository tuân thủ hợp đồng kỹ thuật trước khi triển khai.
 
 ```text
 .
@@ -164,7 +165,7 @@ Repository chủ động không sử dụng framework hoặc dependency từ pac
 │   └── cert/                  # Bản phát hành chứng chỉ được sinh tự động
 ├── assets/                    # Hình ảnh và font được lưu cục bộ
 ├── css/                       # Design token, site shell và style theo route
-├── js/                        # Hành vi dùng chung, analytics và dữ liệu danh mục
+├── js/                        # Hành vi dùng chung, analytics và projects-data.json
 ├── scripts/                   # Kiểm tra tĩnh và browser smoke test
 ├── robots.txt
 └── sitemap.xml
@@ -213,6 +214,7 @@ Smoke test tự khởi động các server và Chrome profile tạm biệt lập
 - Dùng liên kết nội bộ bắt đầu từ root để hành vi nhất quán giữa local và GitHub Pages.
 - Khi thêm route công khai, phải cập nhật đồng thời `sitemap.xml`, canonical metadata, Open Graph metadata và các điều kiện validation.
 - Lưu font trong repository; bộ validation không cho phép dependency font bên ngoài.
+- Chỉ cập nhật metadata project trong `js/projects-data.json`; trang chủ và `/apps/` cùng render từ catalog này.
 - Chỉ giữ `README.md` làm tài liệu Markdown lâu dài, trừ khi chủ động cập nhật chính sách validation.
 - Không commit secret, credential, dữ liệu private, metadata cục bộ hoặc đường dẫn phụ thuộc máy.
 
@@ -256,7 +258,7 @@ Giữ mỗi thay đổi nhỏ, tập trung vào một route và có thể kiểm
 
 ### アーキテクチャ
 
-このリポジトリは、意図的にフレームワークやパッケージマネージャー由来の依存関係を使用していません。デザイントークン、ページ構造、アクセス解析、カタログデータは共有の静的アセットとして管理します。検証スクリプトにより、デプロイ前にリポジトリの技術的な規約を確認します。
+このリポジトリは、意図的にフレームワークやパッケージマネージャー由来の依存関係を使用していません。デザイントークン、ページ構造、アクセス解析は共有の静的アセットとして管理します。`js/projects-data.json` は application catalog と home page の featured project に共通する唯一の source of truth で、両ページが runtime に再検証付きで取得します。検証スクリプトにより、デプロイ前にリポジトリの技術的な規約を確認します。
 
 ```text
 .
@@ -268,7 +270,7 @@ Giữ mỗi thay đổi nhỏ, tập trung vào một route và có thể kiểm
 │   └── cert/                  # 自動生成された資格学習リリース
 ├── assets/                    # 画像とローカル配信フォント
 ├── css/                       # デザイントークン、共通シェル、ルート別スタイル
-├── js/                        # 共通動作、アクセス解析、カタログデータ
+├── js/                        # 共通動作、アクセス解析、projects-data.json
 ├── scripts/                   # 静的検証とブラウザスモークテスト
 ├── robots.txt
 └── sitemap.xml
@@ -317,6 +319,7 @@ node scripts/smoke_cert.mjs
 - ローカル環境と GitHub Pages で同じ動作になるように、内部リンクはルート相対パスにします。
 - 公開ルートを追加する際は、`sitemap.xml`、canonical メタデータ、Open Graph メタデータ、検証条件を同時に更新します。
 - フォントはリポジトリ内で配信します。検証スイートは外部フォントへの依存を許可しません。
+- Project metadata は `js/projects-data.json` だけで更新し、home page と `/apps/` は同じ catalog から render します。
 - 検証ポリシーを意図的に変更しない限り、永続的な Markdown ドキュメントは `README.md` のみにします。
 - シークレット、認証情報、非公開データセット、ローカルメタデータ、マシン固有のパスをコミットしないでください。
 

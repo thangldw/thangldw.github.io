@@ -73,9 +73,16 @@
     </section>
   </main>
 
-  <script src="/js/projects-data.js?v=20260802toolbox13"></script>
+  <script src="/js/projects-data.js?v=json-v1"></script>
   <script>
-    (function () {
+    (async function () {
+      try {
+        await window.portfolioProjectsReady;
+      } catch (error) {
+        document.getElementById('catalogCount').textContent = 'Catalog unavailable';
+        document.getElementById('catalogEmpty').hidden = false;
+        return;
+      }
       function escapeHtml(value) {
         return String(value).replace(/[&<>"']/g, function (character) {
           return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];

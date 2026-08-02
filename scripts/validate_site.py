@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -75,6 +76,45 @@ def main() -> int:
     errors: list[str] = audit_site()
     pages = sorted(ROOT.rglob("*.html"))
     parsed_pages: dict[Path, PageParser] = {}
+
+    catalog_path = ROOT / "js/projects-data.json"
+    try:
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        projects = catalog.get("projects")
+        learning_collections = catalog.get("learningCollections")
+        if catalog.get("schemaVersion") != 1:
+            errors.append("js/projects-data.json: unsupported schemaVersion")
+        if not isinstance(projects, list) or not isinstance(learning_collections, list):
+            errors.append("js/projects-data.json: projects and learningCollections must be arrays")
+        else:
+            entries = projects + learning_collections
+            required_project_fields = {
+                "id", "title", "description", "href", "ariaLabel", "icon",
+                "accent", "status", "tags", "category", "cta",
+            }
+            identifiers: list[str] = []
+            for index, project in enumerate(entries):
+                if not isinstance(project, dict):
+                    errors.append(f"js/projects-data.json: entry {index} must be an object")
+                    continue
+                missing = sorted(required_project_fields - project.keys())
+                if missing:
+                    errors.append(
+                        f"js/projects-data.json: entry {index} missing {', '.join(missing)}"
+                    )
+                if not isinstance(project.get("tags"), list):
+                    errors.append(f"js/projects-data.json: entry {index} tags must be an array")
+                if isinstance(project.get("id"), str):
+                    identifiers.append(project["id"])
+            duplicates = sorted(
+                identifier for identifier, count in Counter(identifiers).items() if count > 1
+            )
+            if duplicates:
+                errors.append(
+                    f"js/projects-data.json: duplicate ids: {', '.join(duplicates)}"
+                )
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"js/projects-data.json: cannot load catalog: {exc}")
 
     markdown_files = {
         path.relative_to(ROOT)

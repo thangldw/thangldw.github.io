@@ -1,4 +1,9 @@
-(function () {
+(async function () {
+  try {
+    await window.portfolioProjectsReady;
+  } catch (error) {
+    return;
+  }
   function escapeHtml(value) {
     return String(value).replace(/[&<>"]/g, function (character) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[character];
