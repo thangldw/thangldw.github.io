@@ -116,6 +116,76 @@ def main() -> int:
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"js/projects-data.json: cannot load catalog: {exc}")
 
+    certification_manifest_path = ROOT / "apps/cert/certifications-manifest.json"
+    try:
+        certification_manifest = json.loads(
+            certification_manifest_path.read_text(encoding="utf-8")
+        )
+        certifications = certification_manifest.get("certifications")
+        if certification_manifest.get("schemaVersion") != "1.0":
+            errors.append(
+                "apps/cert/certifications-manifest.json: unsupported schemaVersion"
+            )
+        if not isinstance(certifications, list):
+            errors.append(
+                "apps/cert/certifications-manifest.json: certifications must be an array"
+            )
+        elif certification_manifest.get("certificationCount") != len(certifications):
+            errors.append(
+                "apps/cert/certifications-manifest.json: certificationCount mismatch"
+            )
+        else:
+            allowed_fields = {
+                "id", "slug", "displayOrder", "accent", "shortName", "name",
+                "issuer", "syllabusVersion", "href", "availableQuestionCount", "exam",
+            }
+            allowed_exam_fields = {
+                "durationMinutes", "questionCount", "format", "structure",
+            }
+            manifest_ids: list[str] = []
+            for index, certification in enumerate(certifications):
+                if not isinstance(certification, dict):
+                    errors.append(
+                        f"apps/cert/certifications-manifest.json: entry {index} must be an object"
+                    )
+                    continue
+                unexpected = sorted(certification.keys() - allowed_fields)
+                missing = sorted(allowed_fields - certification.keys())
+                if unexpected or missing:
+                    errors.append(
+                        "apps/cert/certifications-manifest.json: "
+                        f"entry {index} fields differ; missing={missing}, unexpected={unexpected}"
+                    )
+                exam = certification.get("exam")
+                if not isinstance(exam, dict) or set(exam.keys()) != allowed_exam_fields:
+                    errors.append(
+                        f"apps/cert/certifications-manifest.json: entry {index} has invalid exam metadata"
+                    )
+                identifier = certification.get("id")
+                if isinstance(identifier, str):
+                    manifest_ids.append(identifier)
+                href = certification.get("href")
+                if isinstance(href, str):
+                    target = local_target(certification_manifest_path, href)
+                    if target is not None and not target.exists():
+                        errors.append(
+                            f"apps/cert/certifications-manifest.json: broken href {href}"
+                        )
+            duplicate_manifest_ids = sorted(
+                identifier
+                for identifier, count in Counter(manifest_ids).items()
+                if count > 1
+            )
+            if duplicate_manifest_ids:
+                errors.append(
+                    "apps/cert/certifications-manifest.json: duplicate ids: "
+                    + ", ".join(duplicate_manifest_ids)
+                )
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(
+            f"apps/cert/certifications-manifest.json: cannot load manifest: {exc}"
+        )
+
     markdown_files = {
         path.relative_to(ROOT)
         for path in ROOT.rglob("*.md")

@@ -21,7 +21,7 @@
 | `/` | Portfolio and selected work | Primary public entry point |
 | `/apps/` | Application catalog | Uses shared project-card data and styles |
 | `/apps/japan-pr-guide/` | Japan permanent-residency guide | Standalone browser application |
-| `/apps/cert/` | Certification study library | Generated release output; do not edit manually |
+| `/apps/cert/` | Certification study library | Generated release; its public manifest drives catalog metadata while question banks stay bundled |
 | `/404.html` | Custom not-found page | Must remain compatible with GitHub Pages |
 
 ### Architecture
@@ -104,7 +104,7 @@ The smoke test starts isolated temporary servers and a temporary Chrome profile,
 
 ### Content and change policy
 
-- Treat `apps/cert/` as generated release output. Its source of truth is the private `thangldw/cert` repository.
+- Treat `apps/cert/` as generated release output. Its source of truth is the private `thangldw/cert` repository, whose local build emits a public metadata-only `certifications-manifest.json`; question content remains in the compiled bundle.
 - Make shared visual changes through `css/tokens.css`, `css/site-shell.css`, and the relevant shared component stylesheet whenever possible.
 - Keep internal links root-relative so they behave consistently locally and on GitHub Pages.
 - When adding a public route, update `sitemap.xml`, canonical metadata, Open Graph metadata, and the validation expectations together.
@@ -148,7 +148,7 @@ Keep changes small, route-focused, and independently verifiable. Preserve the st
 | `/` | Portfolio và các sản phẩm tiêu biểu | Điểm truy cập công khai chính |
 | `/apps/` | Danh mục ứng dụng | Dùng chung dữ liệu và style của project card |
 | `/apps/japan-pr-guide/` | Cẩm nang thường trú tại Nhật Bản | Ứng dụng trình duyệt độc lập |
-| `/apps/cert/` | Thư viện ôn thi chứng chỉ | Artifact được sinh tự động; không sửa thủ công |
+| `/apps/cert/` | Thư viện ôn thi chứng chỉ | Bản build sinh tự động; public manifest cập nhật catalog còn question bank vẫn nằm trong bundle |
 | `/404.html` | Trang không tìm thấy tùy chỉnh | Phải tương thích với GitHub Pages |
 
 ### Kiến trúc
@@ -209,7 +209,7 @@ Smoke test tự khởi động các server và Chrome profile tạm biệt lập
 
 ### Quy tắc nội dung và thay đổi
 
-- Xem `apps/cert/` là artifact phát hành được sinh tự động. Nguồn chuẩn nằm trong repository private `thangldw/cert`.
+- Xem `apps/cert/` là artifact phát hành được sinh tự động. Nguồn chuẩn nằm trong repository private `thangldw/cert`; local build của repo đó tạo `certifications-manifest.json` chỉ chứa metadata công khai, còn nội dung câu hỏi vẫn nằm trong bundle đã compile.
 - Ưu tiên thực hiện thay đổi giao diện dùng chung qua `css/tokens.css`, `css/site-shell.css` và stylesheet component liên quan.
 - Dùng liên kết nội bộ bắt đầu từ root để hành vi nhất quán giữa local và GitHub Pages.
 - Khi thêm route công khai, phải cập nhật đồng thời `sitemap.xml`, canonical metadata, Open Graph metadata và các điều kiện validation.
@@ -253,7 +253,7 @@ Giữ mỗi thay đổi nhỏ, tập trung vào một route và có thể kiểm
 | `/` | ポートフォリオと主な実績 | 主要な公開エントリーポイント |
 | `/apps/` | アプリケーションカタログ | プロジェクトカードのデータとスタイルを共有 |
 | `/apps/japan-pr-guide/` | 日本の永住権ガイド | 独立したブラウザアプリケーション |
-| `/apps/cert/` | 資格学習ライブラリ | 自動生成されたリリース成果物。手作業で編集しないこと |
+| `/apps/cert/` | 資格学習ライブラリ | 自動生成 release。Public manifest が catalog metadata を更新し、question bank は bundle 内に保持 |
 | `/404.html` | カスタム Not Found ページ | GitHub Pages との互換性を維持すること |
 
 ### アーキテクチャ
@@ -314,7 +314,7 @@ node scripts/smoke_cert.mjs
 
 ### コンテンツと変更の方針
 
-- `apps/cert/` は自動生成されたリリース成果物として扱います。正規のソースは非公開リポジトリ `thangldw/cert` にあります。
+- `apps/cert/` は自動生成されたリリース成果物として扱います。正規のソースは非公開リポジトリ `thangldw/cert` にあります。その local build が public metadata のみを含む `certifications-manifest.json` を生成し、問題内容は compiled bundle 内に保持します。
 - 共通の見た目を変更する場合は、可能な限り `css/tokens.css`、`css/site-shell.css`、該当する共有コンポーネントのスタイルシートを使用します。
 - ローカル環境と GitHub Pages で同じ動作になるように、内部リンクはルート相対パスにします。
 - 公開ルートを追加する際は、`sitemap.xml`、canonical メタデータ、Open Graph メタデータ、検証条件を同時に更新します。

@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0",
+  "certificationCount": 9,
+  "certifications": [
+    {
+      "id": "g",
+      "slug": "g",
+      "displayOrder": 1,
+      "accent": "#a83a00",
+      "shortName": "G検定",
+      "name": "G検定（ジェネラリスト検定）",
+      "issuer": "JDLA",
+      "syllabusVersion": "2024-v1.4",
+      "href": "/apps/cert/g/",
+      "availableQuestionCount": 900,
+      "exam": {
+        "durationMinutes": 100,
+        "questionCount": 145,
+        "format": "オンライン試験・知識問題（多肢選択式）",
+        "structure": "G検定シラバス2024 v1.4・全11分野"
+      }
+    },
+    {
+      "id": "fp3",
+      "slug": "fp3",
+      "displayOrder": 2,
+      "accent": "#b06f24",
+      "shortName": "3級FP",
+      "name": "3級ファイナンシャル・プランニング技能検定",
+      "issuer": "日本FP協会",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/fp3/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 150,
+        "questionCount": 80,
+        "format": "CBT方式・通年受検",
+        "structure": "学科＋実技（資産設計提案業務）"
+      }
+    },
+    {
+      "id": "bjt",
+      "slug": "bjt",
+      "displayOrder": 3,
+      "accent": "#7956a8",
+      "shortName": "BJT",
+      "name": "BJTビジネス日本語能力テスト",
+      "issuer": "日本漢字能力検定協会",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/bjt/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 120,
+        "questionCount": 80,
+        "format": "CBT方式・スコア 0–800",
+        "structure": "聴解・聴読解・読解"
+      }
+    },
+    {
+      "id": "sg",
+      "slug": "sg",
+      "displayOrder": 4,
+      "accent": "#236aa8",
+      "shortName": "SG",
+      "name": "情報セキュリティマネジメント試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/sg/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 120,
+        "questionCount": 60,
+        "format": "CBT方式・IRT評価",
+        "structure": "科目A＋科目B"
+      }
+    },
+    {
+      "id": "ap",
+      "slug": "ap",
+      "displayOrder": 5,
+      "accent": "#35745a",
+      "shortName": "AP",
+      "name": "応用情報技術者試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/ap/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 300,
+        "questionCount": 91,
+        "format": "2026年度 CBT方式・科目A＋科目B",
+        "structure": "Applied Information Technology Engineer Examination"
+      }
+    },
+    {
+      "id": "jlpt",
+      "slug": "jlpt",
+      "displayOrder": 6,
+      "accent": "#a04458",
+      "shortName": "JLPT N1",
+      "name": "日本語能力試験 N1",
+      "issuer": "国際交流基金・日本国際教育支援協会",
+      "syllabusVersion": "N1",
+      "href": "/apps/cert/jlpt/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 165,
+        "questionCount": 110,
+        "format": "年2回・マークシート",
+        "structure": "言語知識・読解＋聴解"
+      }
+    },
+    {
+      "id": "toeic",
+      "slug": "toeic",
+      "displayOrder": 7,
+      "accent": "#246a98",
+      "shortName": "TOEIC",
+      "name": "TOEIC Listening & Reading Test",
+      "issuer": "IIBC",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/toeic/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 120,
+        "questionCount": 200,
+        "format": "マークシート・スコア 10–990",
+        "structure": "Listening 100問＋Reading 100問"
+      }
+    },
+    {
+      "id": "pmp",
+      "slug": "pmp",
+      "displayOrder": 8,
+      "accent": "#684fa3",
+      "shortName": "PMP",
+      "name": "Project Management Professional（PMP）",
+      "issuer": "PMI",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/pmp/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 240,
+        "questionCount": 180,
+        "format": "CBT・2回の休憩",
+        "structure": "2026年版試験"
+      }
+    },
+    {
+      "id": "aws",
+      "slug": "aws",
+      "displayOrder": 9,
+      "accent": "#9b6420",
+      "shortName": "AWS SAA",
+      "name": "AWS Certified Solutions Architect – Associate",
+      "issuer": "Amazon Web Services",
+      "syllabusVersion": "SAA-C03",
+      "href": "/apps/cert/aws/",
+      "availableQuestionCount": 3,
+      "exam": {
+        "durationMinutes": 130,
+        "questionCount": 65,
+        "format": "複数選択・スケールドスコア",
+        "structure": "SAA-C03"
+      }
+    }
+  ]
+}

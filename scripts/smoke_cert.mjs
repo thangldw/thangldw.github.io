@@ -152,6 +152,16 @@ try {
     waitFor(`http://127.0.0.1:${debugPort}/json/version`)
   ]);
   const origin = `http://127.0.0.1:${serverPort}`;
+  const certificationManifest = await fetch(
+    `${origin}/apps/cert/certifications-manifest.json`,
+    { cache: 'no-store' }
+  ).then(response => response.json());
+  if (
+    certificationManifest.schemaVersion !== '1.0'
+    || certificationManifest.certificationCount !== certificationManifest.certifications.length
+  ) {
+    throw new Error('Certification manifest is invalid.');
+  }
   const page = await openPage(debugPort);
 
   await page.navigate(`${origin}/apps/`, 1280);
@@ -186,6 +196,18 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('Certification manifest updates portfolio catalogs', await page.evaluate(`(() => {
+    const manifest = window.portfolioCertificationManifest;
+    const card = [...document.querySelectorAll('.project-card')]
+      .find(candidate => candidate.querySelector('h2')?.textContent.trim() === 'Certification Library');
+    return {
+      ok: manifest?.schemaVersion === '1.0'
+        && manifest.certificationCount === manifest.certifications.length
+        && card?.textContent.includes(manifest.certificationCount + ' certifications'),
+      message: 'count=' + manifest?.certificationCount + ', card=' + card?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
   await page.navigate(`${origin}/`, 1280);
   await page.waitUntil('document.querySelector("#projectRail .resume-project")');
   assertResult('Toolbox releases in home side projects', await page.evaluate(`(() => {
@@ -204,16 +226,21 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/`, 1280);
-  await page.waitUntil('document.querySelectorAll(".project-title-link").length === 9');
+  await page.waitUntil(
+    `document.querySelectorAll(".project-title-link").length === ${certificationManifest.certificationCount}`
+  );
   assertResult('Certification library', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-title-link')];
     const hrefs = cards.map(card => card.getAttribute('href'));
+    const expectedHrefs = ${JSON.stringify(
+      certificationManifest.certifications.map(certification => certification.href)
+    )};
     const style = getComputedStyle(cards[0]);
     return {
       ok: document.title === 'Certification Library'
-        && cards.length === 9
-        && new Set(hrefs).size === 9
-        && hrefs.every(href => /^\\/apps\\/cert\\/[a-z0-9-]+\\/$/.test(href))
+        && cards.length === ${certificationManifest.certificationCount}
+        && new Set(hrefs).size === ${certificationManifest.certificationCount}
+        && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'flex'
         && style.flexDirection === 'column'
         && style.minHeight === '250px'
@@ -225,7 +252,7 @@ try {
 
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
   const childThemeChecks = [];
-  for (const slug of ['ap', 'aws', 'bjt', 'fp3', 'g', 'jlpt', 'pmp', 'sg', 'toeic']) {
+  for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
     await page.waitUntil('document.querySelector(".metric-grid")');
     const result = await page.evaluate(`(async () => {
@@ -302,7 +329,7 @@ try {
   })()`), page.exceptions);
 
   page.close();
-  console.log('CERT smoke tests passed: 7/7.');
+  console.log('CERT smoke tests passed.');
 } finally {
   await stopProcess(chrome);
   await stopProcess(server);
