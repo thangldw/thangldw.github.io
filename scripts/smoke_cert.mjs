@@ -164,6 +164,30 @@ try {
   }
   const page = await openPage(debugPort);
 
+  await page.navigate(`${origin}/`, 1280);
+  const canonicalFontFamily = await page.evaluate('getComputedStyle(document.body).fontFamily');
+  const sharedFontPaths = [
+    ['/', 'Homepage font'],
+    ['/404.html', '404 font'],
+    ['/apps/', 'Apps catalog font'],
+    ['/apps/japan-pr-guide/', 'Japan PR Guide font'],
+    ['/apps/cert/', 'Certification library font'],
+    ['/apps/cert/g/', 'Certification child font']
+  ];
+  for (const [fontPath, fontLabel] of sharedFontPaths) {
+    await page.navigate(`${origin}${fontPath}`, 1280);
+    assertResult(fontLabel, await page.evaluate(`(() => {
+      const actual = getComputedStyle(document.body).fontFamily;
+      const control = document.querySelector('button, input, select, textarea');
+      const actualControl = control ? getComputedStyle(control).fontFamily : actual;
+      const expected = ${JSON.stringify(canonicalFontFamily)};
+      return {
+        ok: actual === expected && actualControl === expected,
+        message: 'expected=' + expected + ', actual=' + actual + ', control=' + actualControl
+      };
+    })()`), page.exceptions);
+  }
+
   await page.navigate(`${origin}/apps/`, 1280);
   await page.waitUntil('document.querySelector(".project-title-link")');
   assertResult('Apps catalog shared project cards', await page.evaluate(`(() => {
