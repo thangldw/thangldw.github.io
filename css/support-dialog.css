@@ -115,7 +115,16 @@
 }
 
 .support-dialog-heading {
+  position: static;
+  top: auto;
+  z-index: auto;
+  display: block;
+  width: auto;
+  height: auto;
   padding-right: 46px;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .support-dialog-heading .support-kicker,
