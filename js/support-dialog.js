@@ -18,7 +18,7 @@
   function dialogMarkup() {
     return '<dialog class="support-dialog" id="supportDialog" aria-labelledby="supportDialogTitle" aria-describedby="supportDialogIntro">' +
       '<div class="support-dialog-shell">' +
-        '<button class="support-dialog-close" id="supportClose" type="button" aria-label="Close support options">Close</button>' +
+        '<button class="support-dialog-close" id="supportClose" type="button" aria-label="Close support options">&times;</button>' +
         '<header class="support-dialog-heading">' +
           '<p class="support-kicker">Support</p>' +
           '<h2 id="supportDialogTitle">Support my work</h2>' +
