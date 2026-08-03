@@ -270,7 +270,7 @@ try {
         && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'flex'
         && style.flexDirection === 'column'
-        && style.minHeight === '210px'
+        && style.minHeight === '224px'
         && style.padding === '18px'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
