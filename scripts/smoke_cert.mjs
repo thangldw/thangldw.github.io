@@ -231,9 +231,14 @@ try {
     trigger?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const sponsorForm = dialog?.querySelector('.sponsor-form');
+    const heading = dialog?.querySelector('.support-dialog-heading');
+    const headingStyle = heading ? getComputedStyle(heading) : null;
     const qr = dialog?.querySelector('.support-bank img');
     const result = {
       ok: dialog?.open === true
+        && headingStyle?.display === 'block'
+        && headingStyle?.position === 'static'
+        && headingStyle?.height !== '75px'
         && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
         && sponsorForm?.target === '_blank'
         && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
@@ -245,6 +250,7 @@ try {
         && qr?.complete === true
         && qr?.naturalWidth === 845,
       message: 'open=' + dialog?.open
+        + ', heading=' + headingStyle?.display + '/' + headingStyle?.position + '/' + headingStyle?.height
         + ', sponsor=' + sponsorForm?.action
         + ', target=' + sponsorForm?.target
         + ', kofi=' + dialog?.querySelector('.support-kofi-button')?.href
