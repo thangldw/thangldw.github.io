@@ -48,7 +48,7 @@
       "issuer": "日本漢字能力検定協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/bjt/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 1652,
       "exam": {
         "durationMinutes": 120,
         "questionCount": 80,
