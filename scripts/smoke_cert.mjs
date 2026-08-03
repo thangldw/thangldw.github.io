@@ -165,6 +165,7 @@ try {
   const page = await openPage(debugPort);
 
   await page.navigate(`${origin}/`, 1280);
+  await page.evaluate('document.fonts.ready');
   const canonicalFontFamily = await page.evaluate('getComputedStyle(document.body).fontFamily');
   const sharedFontPaths = [
     ['/', 'Homepage font'],
@@ -176,14 +177,24 @@ try {
   ];
   for (const [fontPath, fontLabel] of sharedFontPaths) {
     await page.navigate(`${origin}${fontPath}`, 1280);
+    await page.evaluate('document.fonts.ready');
     assertResult(fontLabel, await page.evaluate(`(() => {
       const actual = getComputedStyle(document.body).fontFamily;
       const control = document.querySelector('button, input, select, textarea');
       const actualControl = control ? getComputedStyle(control).fontFamily : actual;
+      const heading = document.querySelector('h1');
+      const actualHeading = heading ? getComputedStyle(heading).fontFamily : actual;
       const expected = ${JSON.stringify(canonicalFontFamily)};
       return {
-        ok: actual === expected && actualControl === expected,
-        message: 'expected=' + expected + ', actual=' + actual + ', control=' + actualControl
+        ok: document.fonts.check('16px Inter')
+          && actual === expected
+          && actualControl === expected
+          && actualHeading === expected,
+        message: 'loaded=' + document.fonts.check('16px Inter')
+          + ', expected=' + expected
+          + ', actual=' + actual
+          + ', control=' + actualControl
+          + ', heading=' + actualHeading
       };
     })()`), page.exceptions);
   }
