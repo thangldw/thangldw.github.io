@@ -236,6 +236,8 @@ try {
     const headingStyle = heading ? getComputedStyle(heading) : null;
     const intro = dialog?.querySelector('#supportDialogIntro');
     const introStyle = intro ? getComputedStyle(intro) : null;
+    const international = dialog?.querySelector('.support-international');
+    const bank = dialog?.querySelector('.support-bank');
     const qr = dialog?.querySelector('.support-bank img');
     const result = {
       ok: dialog?.open === true
@@ -246,6 +248,9 @@ try {
         && headingStyle?.height !== '75px'
         && introStyle?.whiteSpace === 'normal'
         && intro?.scrollWidth <= intro?.clientWidth
+        && international?.getBoundingClientRect().width <= 322
+        && bank?.getBoundingClientRect().width >= 270
+        && bank?.getBoundingClientRect().width <= 276
         && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
         && sponsorForm?.target === '_blank'
         && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
@@ -259,6 +264,7 @@ try {
       message: 'open=' + dialog?.open
         + ', heading=' + headingStyle?.display + '/' + headingStyle?.position + '/' + headingStyle?.height
         + ', intro=' + introStyle?.whiteSpace + '/' + intro?.scrollWidth + '/' + intro?.clientWidth
+        + ', columns=' + international?.getBoundingClientRect().width + '/' + bank?.getBoundingClientRect().width
         + ', sponsor=' + sponsorForm?.action
         + ', target=' + sponsorForm?.target
         + ', kofi=' + dialog?.querySelector('.support-kofi-button')?.href
@@ -286,6 +292,8 @@ try {
       const sponsorForm = dialog?.querySelector('.sponsor-form');
       const amountLabel = dialog?.querySelector('.sponsor-amount-label');
       const intro = dialog?.querySelector('#supportDialogIntro');
+      const international = dialog?.querySelector('.support-international');
+      const bank = dialog?.querySelector('.support-bank');
       const qr = dialog?.querySelector('.support-bank img');
       const triggerRect = trigger?.getBoundingClientRect();
       const isJapanGuide = window.location.pathname === '/apps/japan-pr-guide/';
@@ -299,6 +307,11 @@ try {
           && dialog?.querySelectorAll('.fa-github, .fa-wallet').length === 0
           && getComputedStyle(intro).whiteSpace === 'normal'
           && intro.scrollWidth <= intro.clientWidth
+          && (isJapanGuide || (
+            international.getBoundingClientRect().width <= 322
+            && bank.getBoundingClientRect().width >= 270
+            && bank.getBoundingClientRect().width <= 276
+          ))
           && dialog.scrollWidth <= dialog.clientWidth
           && dialog.scrollHeight <= dialog.clientHeight
           && (!isJapanGuide || (

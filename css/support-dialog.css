@@ -41,7 +41,7 @@
   --support-chip: #ece9e2;
   --support-accent: #b83a06;
   --support-accent-ink: #fff;
-  width: min(680px, calc(100% - 40px));
+  width: min(640px, calc(100% - 40px));
   max-width: none;
   max-height: min(500px, calc(100dvh - 40px));
   margin: auto;
@@ -159,7 +159,7 @@
 
 .support-options {
   display: grid;
-  grid-template-columns: minmax(330px, 1.05fr) minmax(260px, .8fr);
+  grid-template-columns: minmax(0, 320px) minmax(260px, 1fr);
   gap: 10px;
   margin-top: 12px;
 }
