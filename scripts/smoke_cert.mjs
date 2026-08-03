@@ -225,6 +225,33 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('Support dialog uses explicit external and local payment destinations', await page.evaluate(`(async () => {
+    const trigger = document.querySelector('#supportOpen');
+    const dialog = document.querySelector('#supportDialog');
+    trigger?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const sponsorForm = dialog?.querySelector('.sponsor-form');
+    const qr = dialog?.querySelector('.support-bank img');
+    const result = {
+      ok: dialog?.open === true
+        && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
+        && sponsorForm?.target === '_blank'
+        && dialog?.querySelector('.support-kofi-heading a')?.href === 'https://ko-fi.com/thangldw'
+        && dialog?.querySelector('#kofiframe')?.src.startsWith('https://ko-fi.com/thangldw/')
+        && qr?.getAttribute('src') === 'assets/support-vietqr-mb.jpg'
+        && qr?.complete === true
+        && qr?.naturalWidth === 845,
+      message: 'open=' + dialog?.open
+        + ', sponsor=' + sponsorForm?.action
+        + ', target=' + sponsorForm?.target
+        + ', kofi=' + dialog?.querySelector('.support-kofi-heading a')?.href
+        + ', qrSrc=' + qr?.getAttribute('src')
+        + ', qr=' + qr?.naturalWidth + 'x' + qr?.naturalHeight
+    };
+    dialog?.close();
+    return result;
+  })()`), page.exceptions);
+
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil(
     `document.querySelectorAll(".hub-cert-card").length === ${certificationManifest.certificationCount}`

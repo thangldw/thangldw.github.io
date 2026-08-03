@@ -70,6 +70,7 @@ thangldw.github.io/
 │   ├── japan-pr-guide/
 │   └── cert/                  # Generated artifact; do not hand-edit
 ├── assets/                    # Social images and local fonts
+│   └── fonts/licenses/        # Upstream font notices and provenance
 ├── css/                       # Tokens, shared shell, and route styles
 ├── js/
 │   ├── projects-data.json     # Project metadata source of truth
@@ -123,6 +124,12 @@ Edit only `js/projects-data.json`.
 5. Commit and push.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
+
+### Support dialog and asset provenance
+
+The portfolio home includes an optional Support dialog. GitHub Sponsors opens an external confirmation flow, Ko-fi is embedded with an explicit external fallback, and Vietnamese bank support uses the local `assets/support-vietqr-mb.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
+
+Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. `scripts/validate_site.py` permits only these durable license documents plus the root README; temporary Markdown reports and QA screenshots must stay outside the repository.
 
 ### Publishing Certification Library
 
@@ -211,6 +218,10 @@ Chạy UI audit, site validator và browser smoke suite bằng các command tron
 
 Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, dùng `featured` cùng `featuredOrder` cho trang chủ, sau đó chạy validation/smoke test và push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
 
+### Support và nguồn gốc asset
+
+Trang chủ có dialog Support tùy chọn. GitHub Sponsors mở luồng xác nhận bên ngoài, Ko-fi được nhúng kèm link mở ngoài dự phòng, và chuyển khoản Việt Nam dùng ảnh local `assets/support-vietqr-mb.jpg`. Website tĩnh không thu thập thông tin thanh toán. Phải xác minh người nhận QR trước mỗi release thay đổi ảnh. Hồ sơ nguồn và license font tự host nằm trong `assets/fonts/licenses/`; report Markdown và ảnh QA tạm không được commit.
+
 ### Publish Certification Library
 
 Repo private `thangldw/cert` quản lý dữ liệu, question bank, application code và build:
@@ -283,6 +294,8 @@ JSON runtime loading のため file を直接開かず HTTP server を使いま�
 Project metadata は `js/projects-data.json` だけで編集します。Stable unique ID、required field、安全な URL、`featured`/`featuredOrder` を設定し、test 後に push します。JSON content update のたびに HTML cache key を変える必要はありません。
 
 Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して `dist/client/` 全体を `apps/cert/` に同期します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
+
+Home の optional Support dialog は external GitHub Sponsors flow、external fallback 付き embedded Ko-fi、local VietQR asset を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
 
 ### Deployment、security、contribution
 

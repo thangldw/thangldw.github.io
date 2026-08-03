@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/icons.css?v=20260714">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=20260725f">
-  <link rel="stylesheet" href="css/styles.css?v=20260727a">
+  <link rel="stylesheet" href="css/styles.css?v=20260803support8">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260726b">
   <script src="/js/site-shell.js?v=20260727b"></script>
   <script defer src="/js/analytics.js"></script>
@@ -53,6 +53,10 @@
         <a href="mailto:thangldw@gmail.com"><span><i class="fa-regular fa-envelope" aria-hidden="true"></i>Email</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         <a href="https://www.linkedin.com/in/thangldw" target="_blank" rel="noopener noreferrer"><span><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>LinkedIn</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         <a href="https://github.com/thangldw" target="_blank" rel="noopener noreferrer"><span><i class="fa-brands fa-github" aria-hidden="true"></i>GitHub</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        <button class="support-trigger" id="supportOpen" type="button">
+          <span><i class="fa-solid fa-wallet" aria-hidden="true"></i>Support my work</span>
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
       </section>
     </aside>
 
@@ -99,7 +103,69 @@
     </div>
   </main>
 
+  <dialog class="support-dialog" id="supportDialog" aria-labelledby="supportDialogTitle" aria-describedby="supportDialogIntro">
+    <div class="support-dialog-shell">
+      <button class="support-dialog-close" id="supportClose" type="button" aria-label="Close support options">
+        Close
+      </button>
+      <header class="support-dialog-heading">
+        <p class="resume-kicker">Support</p>
+        <h2 id="supportDialogTitle">Support my work</h2>
+        <p id="supportDialogIntro">If these projects have been useful to you, your support helps me maintain them and build new learning tools. Support is always optional.</p>
+      </header>
+      <div class="support-options">
+        <article class="support-option support-github">
+          <span class="support-option-icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
+          <p class="support-option-label">International</p>
+          <h3>GitHub Sponsors</h3>
+          <p>Choose a contribution type and enter an amount in USD.</p>
+          <form class="sponsor-form" action="https://github.com/sponsors/thangldw/sponsorships" method="get" target="_blank" rel="noopener">
+            <fieldset class="sponsor-frequency">
+              <legend class="sr-only">Contribution type</legend>
+              <input class="sponsor-frequency-input" type="radio" name="frequency" id="sponsorMonthly" value="recurring" checked>
+              <label for="sponsorMonthly">Monthly</label>
+              <input class="sponsor-frequency-input" type="radio" name="frequency" id="sponsorOneTime" value="one-time">
+              <label for="sponsorOneTime">One-time</label>
+            </fieldset>
+            <label class="sponsor-amount-label" for="sponsorAmount">Amount <span>USD</span></label>
+            <div class="sponsor-amount-control">
+              <span aria-hidden="true">$</span>
+              <input id="sponsorAmount" name="amount" type="number" min="1" max="12000" step="1" inputmode="numeric" placeholder="5" aria-describedby="sponsorAmountHelp" required>
+            </div>
+            <button class="support-primary" type="submit">
+              Continue on GitHub <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+            <p class="sponsor-help" id="sponsorAmountHelp">GitHub will open to review and confirm your sponsorship.</p>
+          </form>
+        </article>
+        <article class="support-option support-kofi">
+          <div class="support-kofi-heading">
+            <div>
+              <p class="support-option-label">International</p>
+              <h3>Ko-fi</h3>
+            </div>
+            <a href="https://ko-fi.com/thangldw" target="_blank" rel="noopener noreferrer" aria-label="Open Thang Luu on Ko-fi in a new tab">Open <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <iframe id="kofiframe" src="https://ko-fi.com/thangldw/?hidefeed=true&amp;widget=true&amp;embed=true&amp;preview=true" height="712" title="Support Thang Luu on Ko-fi" loading="lazy"></iframe>
+        </article>
+        <article class="support-option support-bank">
+          <div class="support-bank-heading">
+            <div>
+              <p class="support-option-label">Vietnam</p>
+              <h3>Bank transfer</h3>
+            </div>
+            <span>MB Bank</span>
+          </div>
+          <figure>
+            <img src="assets/support-vietqr-mb.jpg" width="845" height="1151" alt="VietQR for an MB Bank transfer to Luu Duc Thang">
+            <figcaption>Scan with a Vietnamese banking app.</figcaption>
+          </figure>
+        </article>
+      </div>
+    </div>
+  </dialog>
+
   <script src="/js/projects-data.js?v=json-v1"></script>
-  <script src="/js/main.js?v=20260802json1"></script>
+  <script src="/js/main.js?v=20260803support2"></script>
 </body>
 </html>
