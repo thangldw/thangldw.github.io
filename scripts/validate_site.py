@@ -24,6 +24,8 @@ EXTERNAL_FONT_PATTERNS = {
 }
 ALLOWED_MARKDOWN = {
     Path("README.md"),
+    Path("assets/fonts/licenses/be-vietnam-pro/SOURCE.md"),
+    Path("assets/fonts/licenses/font-awesome-6.4.2/SOURCE.md"),
 }
 
 
@@ -193,7 +195,7 @@ def main() -> int:
     }
     for stale_markdown in sorted(markdown_files - ALLOWED_MARKDOWN):
         errors.append(
-            f"{stale_markdown}: only README.md is a durable repository document"
+            f"{stale_markdown}: Markdown file is not in the durable-document allowlist"
         )
     for metadata_file in sorted(
         path for path in ROOT.rglob(".DS_Store") if ".git" not in path.parts

@@ -219,3 +219,25 @@
   restartRotation();
   restartProjectRotation();
 })();
+
+(function () {
+  var supportOpen = document.getElementById('supportOpen');
+  var supportDialog = document.getElementById('supportDialog');
+  var supportClose = document.getElementById('supportClose');
+  if (!supportOpen || !supportDialog || typeof supportDialog.showModal !== 'function') return;
+
+  supportOpen.addEventListener('click', function () {
+    supportDialog.showModal();
+    document.body.classList.add('support-dialog-open');
+  });
+  supportDialog.addEventListener('close', function () {
+    document.body.classList.remove('support-dialog-open');
+  });
+  supportDialog.addEventListener('click', function (event) {
+    if (event.target === supportDialog) supportDialog.close();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && supportDialog.open) supportDialog.close();
+  });
+  if (supportClose) supportClose.addEventListener('click', function () { supportDialog.close(); });
+})();
