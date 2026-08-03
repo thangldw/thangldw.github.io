@@ -41,9 +41,9 @@
   --support-chip: #ece9e2;
   --support-accent: #b83a06;
   --support-accent-ink: #fff;
-  width: min(640px, calc(100% - 40px));
+  width: min(590px, calc(100% - 40px));
   max-width: none;
-  max-height: min(500px, calc(100dvh - 40px));
+  max-height: min(520px, calc(100dvh - 40px));
   margin: auto;
   padding: 0;
   border: 1px solid var(--support-border-strong);
@@ -123,7 +123,7 @@
   display: block;
   width: auto;
   height: auto;
-  padding-right: 46px;
+  padding: 0 36px 0 0;
   background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
@@ -159,7 +159,7 @@
 
 .support-options {
   display: grid;
-  grid-template-columns: minmax(0, 320px) minmax(260px, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin-top: 12px;
 }
