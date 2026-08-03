@@ -91,14 +91,16 @@
   position: absolute;
   top: 14px;
   right: 14px;
-  padding: 6px 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   border: 1px solid var(--support-border);
   border-radius: 5px;
   background: var(--support-surface);
   color: var(--support-ink);
-  font: 650 8px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .03em;
-  text-transform: uppercase;
+  font: 500 18px/1 var(--font-ui, Inter, system-ui, sans-serif);
   cursor: pointer;
 }
 

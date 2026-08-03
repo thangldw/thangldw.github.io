@@ -231,6 +231,7 @@ try {
     trigger?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const sponsorForm = dialog?.querySelector('.sponsor-form');
+    const closeButton = dialog?.querySelector('#supportClose');
     const heading = dialog?.querySelector('.support-dialog-heading');
     const headingStyle = heading ? getComputedStyle(heading) : null;
     const intro = dialog?.querySelector('#supportDialogIntro');
@@ -238,6 +239,8 @@ try {
     const qr = dialog?.querySelector('.support-bank img');
     const result = {
       ok: dialog?.open === true
+        && closeButton?.textContent.trim() === '×'
+        && closeButton?.getAttribute('aria-label') === 'Close support options'
         && headingStyle?.display === 'block'
         && headingStyle?.position === 'static'
         && headingStyle?.height !== '75px'
