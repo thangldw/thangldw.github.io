@@ -17,6 +17,9 @@ from audit_ui_standards import audit_site
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
 ANALYTICS_SCRIPT = "/js/analytics.js"
+SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20260803font2"
+SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
+SITE_FONT_LICENSE = Path("assets/fonts/Inter-LICENSE.txt")
 EXTERNAL_FONT_PATTERNS = {
     "Google Fonts stylesheet": "fonts.googleapis.com",
     "Google Fonts asset": "fonts.gstatic.com",
@@ -78,6 +81,14 @@ def main() -> int:
     errors: list[str] = audit_site()
     pages = sorted(ROOT.rglob("*.html"))
     parsed_pages: dict[Path, PageParser] = {}
+
+    for required_font_file in (SITE_FONT_ASSET, SITE_FONT_LICENSE):
+        if not (ROOT / required_font_file).is_file():
+            errors.append(f"{required_font_file}: required self-hosted Inter file is missing")
+
+    site_shell = (ROOT / "css/site-shell.css").read_text(encoding="utf-8")
+    if '@font-face' not in site_shell or '--site-font-ui: "Inter"' not in site_shell:
+        errors.append("css/site-shell.css: Inter must remain the canonical site UI font")
 
     catalog_path = ROOT / "js/projects-data.json"
     try:
@@ -229,6 +240,16 @@ def main() -> int:
         elif analytics_references != [ANALYTICS_SCRIPT]:
             errors.append(
                 f"{page.relative_to(ROOT)}: expected one {ANALYTICS_SCRIPT} reference"
+            )
+
+        font_references = [
+            reference
+            for reference in parser.references
+            if reference.startswith("/css/site-shell.css?v=")
+        ]
+        if font_references != [SITE_FONT_STYLESHEET]:
+            errors.append(
+                f"{page.relative_to(ROOT)}: expected one {SITE_FONT_STYLESHEET} reference"
             )
 
         for reference in parser.references:
