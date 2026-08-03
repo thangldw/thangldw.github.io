@@ -278,6 +278,26 @@ try {
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
+  await page.navigate(`${origin}/apps/cert/`, 2048);
+  await page.waitUntil(
+    `document.documentElement.dataset.theme === "dark" && document.querySelectorAll(".hub-cert-card").length === ${certificationManifest.certificationCount}`
+  );
+  assertResult('Certification library dark canvas fills wide viewports', await page.evaluate(`(() => {
+    const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
+    const bodyBackground = getComputedStyle(document.body).backgroundColor;
+    const hubBackground = getComputedStyle(document.querySelector('.certification-hub')).backgroundColor;
+    return {
+      ok: htmlBackground === 'rgb(17, 19, 15)'
+        && bodyBackground === 'rgb(17, 19, 15)'
+        && hubBackground === 'rgb(17, 19, 15)'
+        && document.documentElement.scrollWidth <= window.innerWidth,
+      message: 'html=' + htmlBackground
+        + ', body=' + bodyBackground
+        + ', hub=' + hubBackground
+        + ', viewport=' + window.innerWidth
+    };
+  })()`), page.exceptions);
+
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
