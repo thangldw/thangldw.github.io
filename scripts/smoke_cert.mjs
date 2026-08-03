@@ -246,11 +246,11 @@ try {
         && headingStyle?.display === 'block'
         && headingStyle?.position === 'static'
         && headingStyle?.height !== '75px'
+        && headingStyle?.paddingLeft === '0px'
+        && parseFloat(headingStyle?.paddingRight) <= 36
         && introStyle?.whiteSpace === 'normal'
         && intro?.scrollWidth <= intro?.clientWidth
-        && international?.getBoundingClientRect().width <= 322
-        && bank?.getBoundingClientRect().width >= 270
-        && bank?.getBoundingClientRect().width <= 276
+        && Math.abs(international?.getBoundingClientRect().width - bank?.getBoundingClientRect().width) <= 2
         && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
         && sponsorForm?.target === '_blank'
         && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
@@ -263,6 +263,7 @@ try {
         && qr?.naturalWidth === 845,
       message: 'open=' + dialog?.open
         + ', heading=' + headingStyle?.display + '/' + headingStyle?.position + '/' + headingStyle?.height
+        + '/' + headingStyle?.paddingLeft + '/' + headingStyle?.paddingRight
         + ', intro=' + introStyle?.whiteSpace + '/' + intro?.scrollWidth + '/' + intro?.clientWidth
         + ', columns=' + international?.getBoundingClientRect().width + '/' + bank?.getBoundingClientRect().width
         + ', sponsor=' + sponsorForm?.action
@@ -307,11 +308,7 @@ try {
           && dialog?.querySelectorAll('.fa-github, .fa-wallet').length === 0
           && getComputedStyle(intro).whiteSpace === 'normal'
           && intro.scrollWidth <= intro.clientWidth
-          && (isJapanGuide || (
-            international.getBoundingClientRect().width <= 322
-            && bank.getBoundingClientRect().width >= 270
-            && bank.getBoundingClientRect().width <= 276
-          ))
+          && (isJapanGuide || Math.abs(international.getBoundingClientRect().width - bank.getBoundingClientRect().width) <= 2)
           && dialog.scrollWidth <= dialog.clientWidth
           && dialog.scrollHeight <= dialog.clientHeight
           && (!isJapanGuide || (
