@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi" class="language-app-root route-n1-kanji-analysis">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>JLPT N1 Kanji Analysis — 漢字分析 — thang.</title>
+<link rel="canonical" href="https://thangldw.github.io/apps/n1-kanji-analysis/">
+<meta name="description" content="Phân tích 348 từ kanji JLPT N1 theo từng chữ, cách đọc, nghĩa, ví dụ và cấu tạo từ để ghi nhớ sâu hơn.">
+<meta property="og:type" content="website"><meta property="og:title" content="JLPT N1 Kanji Analysis — 漢字分析"><meta property="og:description" content="Phân tích 348 từ kanji N1 theo chữ, cách đọc và cấu tạo."><meta property="og:url" content="https://thangldw.github.io/apps/n1-kanji-analysis/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+<link rel="stylesheet" href="styles.css?v=20260722b">
+  <script defer src="/js/analytics.js"></script>
+  <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
+  <link rel="stylesheet" href="../../n1-module-shell.css">
+</head>
+<body class="language-app portfolio-app" data-app-kind="language" data-language-app="n1-kanji-analysis">
+<main id="main-content" class="semantic-main">
+<header id="appHeader">
+      <h1>JLPT N1 Kanji Analysis <span>漢字分析</span></h1>
+  <input id="search-input" type="text" placeholder=" Tìm từ, cách đọc, nghĩa..." aria-label="Tìm Kanji theo từ, cách đọc hoặc nghĩa" data-search="kanji">
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">Đề:</span>
+  <button type="button" class="filter-btn active" data-round="all">Tất cả</button>
+  <button type="button" class="filter-btn" data-round="1">第1回</button>
+<button type="button" class="filter-btn" data-round="2">第2回</button>
+<button type="button" class="filter-btn" data-round="3">第3回</button>
+<button type="button" class="filter-btn" data-round="4">第4回</button>
+<button type="button" class="filter-btn" data-round="5">第5回</button>
+<button type="button" class="filter-btn" data-round="6">第6回</button>
+<button type="button" class="filter-btn" data-round="7">第7回</button>
+<button type="button" class="filter-btn" data-round="8">第8回</button>
+<button type="button" class="filter-btn" data-round="9">第9回</button>
+<button type="button" class="filter-btn" data-round="10">第10回</button>
+<button type="button" class="filter-btn" data-round="11">第11回</button>
+<button type="button" class="filter-btn" data-round="12">第12回</button>
+<button type="button" class="filter-btn" data-round="13">第13回</button>
+<button type="button" class="filter-btn" data-round="14">第14回</button>
+<button type="button" class="filter-btn" data-round="15">第15回</button>
+<button type="button" class="filter-btn" data-round="16">第16回</button>
+<button type="button" class="filter-btn" data-round="17">第17回</button>
+<button type="button" class="filter-btn" data-round="18">第18回</button>
+<button type="button" class="filter-btn" data-round="19">第19回</button>
+<button type="button" class="filter-btn" data-round="20">第20回</button>
+<button type="button" class="filter-btn" data-round="21">第21回</button>
+<button type="button" class="filter-btn" data-round="22">第22回</button>
+<button type="button" class="filter-btn" data-round="23">第23回</button>
+<button type="button" class="filter-btn" data-round="24">第24回</button>
+<button type="button" class="filter-btn" data-round="25">復習</button>
+
+  <span class="result-count" id="result-count"></span>
+</div>
+
+<div class="container">
+  <div class="vocab-grid" id="vocab-grid"></div>
+  <div class="load-row" id="load-row"></div>
+</div>
+
+<script src="data.js?v=20260722a"></script>
+<script>
+
+let currentRound='all', currentSearch='';
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function hl(t,q){
+  if(!q)return esc(t);
+  const re=new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi');
+  return esc(t).replace(re,m=>`<mark>${m}</mark>`);
+}
+
+// Speech
+function speakJapanese(text,btn){
+  if(!text||!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.speak-btn').forEach(b=>b.classList.remove('speaking'));
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ja-JP';u.rate=0.9;u.pitch=1;u.volume=1;
+  const v=window.speechSynthesis.getVoices();
+  const jv=v.find(x=>x.lang==='ja-JP'||x.lang.startsWith('ja'));
+  if(jv)u.voice=jv;
+  if(btn)btn.classList.add('speaking');
+  const resetSpeakButton=()=>{if(btn)btn.classList.remove('speaking');};
+  u.addEventListener('end',resetSpeakButton);
+  u.addEventListener('error',resetSpeakButton);
+  window.speechSynthesis.speak(u);
+}
+if(window.speechSynthesis){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
+}
+
+function buildCard(item,q){
+  const rLabel=item.round===25?'復習問題':`第${item.round}回`;
+  let exHtml=esc(item.ex);
+  const kEsc=esc(item.k);
+  exHtml=exHtml.replace(new RegExp(kEsc.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'),`<strong>${kEsc}</strong>`);
+
+  // PARTS
+  let partsHtml='';
+  if(item.parts&&item.parts.length){
+    const rows=item.parts.map(p=>`<tr>
+      <td class="td-kanji">${esc(p.kanji)}</td>
+      <td class="td-hv">${esc(p.hanviet||'')}</td>
+      <td class="td-on">${esc(p.on||'—')}</td>
+      <td class="td-kun">${esc(p.kun||'—')}</td>
+      <td class="td-meaning">${esc(p.meaning||'')}</td>
+    </tr>`).join('');
+    partsHtml=`<div class="section-label parts-label"> Phân tích chữ Hán</div>
+    <table class="parts-table">
+      <thead><tr><th>漢字</th><th>Hán Việt</th><th>音読み</th><th>訓読み</th><th>Nghĩa</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  }
+
+  // CONFUSION
+  const confuseHtml=item.confuse?`<div class="confuse-box">
+    <div class="confuse-title"> Điểm dễ nhầm</div>
+    <div class="confuse-text">${esc(item.confuse)}</div>
+  </div>`:'';
+
+  // WRONG
+  let wrongHtml='';
+  const we=item.wrong_explained||[];
+  const wrongs=we.length?we:(item.wrong||[]).map(r=>({r,meaning:''}));
+  if(wrongs.length&&!(wrongs[0].meaning&&wrongs[0].meaning.startsWith('→ cần'))){
+    wrongHtml=`<div class="wrong-section">
+      <div class="section-label wrong-label"> Bẫy đáp án</div>
+      <div class="wrong-items">
+        ${wrongs.map(w=>`<div class="wrong-item">
+          <span class="wrong-reading">${esc(w.r)}</span>
+          <span class="wrong-meaning">${esc(w.meaning||'')}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // COLLOCATIONS
+  let collocHtml='';
+  if(item.collocations&&item.collocations.length){
+    collocHtml=`<div class="colloc-section">
+      <div class="section-label colloc-label"> Cụm hay dùng</div>
+      <div class="colloc-list">
+        ${item.collocations.map(c=>`<div class="colloc-item">${esc(c)}</div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // SYNONYMS
+  let synHtml='';
+  if(item.synonyms&&item.synonyms.length){
+    synHtml=`<div class="syn-section">
+      <div class="section-label syn-label">≈ Đồng nghĩa</div>
+      <div class="syn-chips">
+        ${item.synonyms.map(s=>`<span class="syn-chip">${esc(s)}</span>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  const kHl=q?hl(item.k,q):esc(item.k);
+  const rHl=q?hl(item.r,q):esc(item.r);
+  const mHl=q?hl(item.m,q):esc(item.m);
+  const speakText=`${item.k}。${item.ex.replace(/<k>(.*?)<\/k>/g,'$1')}`;
+
+  return `<div class="vocab-card" role="button" tabindex="0" aria-expanded="false" data-action="toggle-card">
+    <div class="card-header">
+      <div class="card-kanji">${kHl}</div>
+      <div class="card-meta">
+        <div class="card-reading">【${rHl}】</div>
+        <div class="card-meaning">${mHl}</div>
+        <div class="card-round">${esc(rLabel)} [${item.order}]</div>
+      </div>
+      <div class="card-header-right">
+        <button type="button" class="speak-btn" data-action="speak" data-speech-text="${esc(speakText)}" title="Phát âm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+        </button>
+        <div class="expand-arrow">▼</div>
+      </div>
+    </div>
+    <div class="card-example">${exHtml}</div>
+    <div class="card-detail">
+      ${partsHtml}${confuseHtml}${wrongHtml}${collocHtml}${synHtml}
+    </div>
+  </div>`;
+}
+
+function toggle(el){const expanded=el.classList.toggle('expanded');el.setAttribute('aria-expanded',String(expanded));}
+function getFiltered(){
+  let items=DATA;
+  if(currentRound!=='all')items=items.filter(v=>v.round===parseInt(currentRound));
+  if(currentSearch){
+    const q=currentSearch.toLowerCase();
+    items=items.filter(v=>
+      v.k.includes(currentSearch)||v.r.includes(q)||v.m.toLowerCase().includes(q)||
+      (v.wrong||[]).some(w=>w.includes(q))||
+      (v.synonyms||[]).some(s=>s.toLowerCase().includes(q))
+    );
+  }
+  return items;
+}
+
+let visibleCount=96;
+function render(append){
+  const items=getFiltered();
+  if(!append)visibleCount=96;
+  const shown=Math.min(visibleCount,items.length);
+  document.getElementById('vocab-grid').innerHTML=items.slice(0,shown).map(v=>buildCard(v,currentSearch)).join('');
+  document.getElementById('result-count').textContent=shown<items.length?`${shown} / ${items.length} từ`:`${items.length} từ`;
+  document.getElementById('load-row').innerHTML=shown<items.length?`<button type="button" class="load-more" data-action="load-more">Hiển thị thêm ${Math.min(96,items.length-shown)} mục</button>`:'';
+}
+
+function loadMore(){visibleCount+=96;render(true);}
+
+function setRound(r,btn){
+  currentRound=r;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');render();
+}
+function filterCards(){currentSearch=document.getElementById('search-input').value;render();}
+
+document.addEventListener('input',event=>{if(event.target.matches('[data-search]'))filterCards();});
+document.addEventListener('click',event=>{
+  const control=event.target.closest('[data-round],[data-action]');
+  if(!control)return;
+  if(control.dataset.round){setRound(control.dataset.round,control);return;}
+  if(control.dataset.action==='toggle-card'){toggle(control);return;}
+  if(control.dataset.action==='speak'){speakJapanese(control.dataset.speechText,control);return;}
+  if(control.dataset.action==='load-more')loadMore();
+});
+document.addEventListener('keydown',event=>{
+  if(event.key!=='Enter'&&event.key!==' ')return;
+  const card=event.target.closest('[data-action="toggle-card"]');
+  if(!card)return;
+  event.preventDefault();toggle(card);
+});
+render();
+</script>
+</main>
+</body>
+</html>
