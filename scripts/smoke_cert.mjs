@@ -239,6 +239,8 @@ try {
         && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
         && dialog?.querySelector('.support-kofi-button img')?.src === 'https://storage.ko-fi.com/cdn/kofi6.png?v=6'
         && dialog?.querySelector('#kofiframe') === null
+        && dialog?.querySelectorAll('.support-option-icon').length === 0
+        && dialog?.querySelectorAll('.fa-github, .fa-wallet').length === 0
         && qr?.getAttribute('src') === 'assets/support-vietqr-mb.jpg'
         && qr?.complete === true
         && qr?.naturalWidth === 845,
@@ -252,6 +254,57 @@ try {
     dialog?.close();
     return result;
   })()`), page.exceptions);
+
+  const sharedSupportPaths = [
+    ['/apps/', 'Apps catalog'],
+    ['/apps/japan-pr-guide/', 'Japan PR Guide'],
+    ['/apps/cert/', 'Certification library support'],
+    ['/apps/cert/g/', 'Certification child support']
+  ];
+  for (const [supportPath, supportLabel] of sharedSupportPaths) {
+    await page.navigate(`${origin}${supportPath}`, 1280);
+    await page.waitUntil('document.querySelector(".support-floating-trigger")');
+    assertResult(supportLabel, await page.evaluate(`(async () => {
+      const trigger = document.querySelector('.support-floating-trigger');
+      const dialog = document.querySelector('#supportDialog');
+      trigger?.click();
+      await new Promise(resolveWait => setTimeout(resolveWait, 50));
+      const sponsorForm = dialog?.querySelector('.sponsor-form');
+      const amountLabel = dialog?.querySelector('.sponsor-amount-label');
+      const qr = dialog?.querySelector('.support-bank img');
+      const triggerRect = trigger?.getBoundingClientRect();
+      const isJapanGuide = window.location.pathname === '/apps/japan-pr-guide/';
+      const result = {
+        ok: triggerRect?.width > 0
+          && triggerRect?.height > 0
+          && dialog?.open === true
+          && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
+          && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
+          && dialog?.querySelectorAll('.support-option-icon').length === 0
+          && dialog?.querySelectorAll('.fa-github, .fa-wallet').length === 0
+          && dialog.scrollWidth <= dialog.clientWidth
+          && dialog.scrollHeight <= dialog.clientHeight
+          && (!isJapanGuide || (
+            dialog.classList.contains('support-dialog--japan')
+            && getComputedStyle(amountLabel).display === 'flex'
+            && amountLabel.getBoundingClientRect().height < 30
+          ))
+          && qr?.getAttribute('src') === '/assets/support-vietqr-mb.jpg'
+          && qr?.complete === true
+          && qr?.naturalWidth === 845,
+        message: 'trigger=' + triggerRect?.width + 'x' + triggerRect?.height
+          + ', open=' + dialog?.open
+          + ', sponsor=' + sponsorForm?.action
+          + ', kofi=' + dialog?.querySelector('.support-kofi-button')?.href
+          + ', dialog=' + dialog?.clientWidth + 'x' + dialog?.clientHeight
+          + ', scroll=' + dialog?.scrollWidth + 'x' + dialog?.scrollHeight
+          + ', amountLabel=' + amountLabel?.getBoundingClientRect().height + '/' + getComputedStyle(amountLabel).display
+          + ', qr=' + qr?.naturalWidth + 'x' + qr?.naturalHeight
+      };
+      dialog?.close();
+      return result;
+    })()`), page.exceptions);
+  }
 
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil(
@@ -361,6 +414,24 @@ try {
     ok: document.documentElement.scrollWidth <= window.innerWidth,
     message: \`scrollWidth=\${document.documentElement.scrollWidth}, viewport=\${window.innerWidth}\`
   }))()`), page.exceptions);
+  assertResult('Shared support mobile layout', await page.evaluate(`(async () => {
+    const trigger = document.querySelector('.support-floating-trigger');
+    trigger?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const dialog = document.querySelector('#supportDialog');
+    const options = dialog?.querySelector('.support-options');
+    const rect = dialog?.getBoundingClientRect();
+    const result = {
+      ok: dialog?.open === true
+        && rect?.width <= window.innerWidth
+        && dialog.scrollWidth <= dialog.clientWidth
+        && document.documentElement.scrollWidth <= window.innerWidth
+        && getComputedStyle(options).gridTemplateColumns.split(' ').length === 1,
+      message: \`dialog=\${rect?.width}x\${rect?.height}, grid=\${getComputedStyle(options).gridTemplateColumns}, scrollWidth=\${document.documentElement.scrollWidth}\`
+    };
+    dialog?.close();
+    return result;
+  })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/aws/`, 1280);
   await page.waitUntil('document.querySelector(".metric-grid")');
