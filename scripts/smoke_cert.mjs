@@ -233,12 +233,16 @@ try {
     const sponsorForm = dialog?.querySelector('.sponsor-form');
     const heading = dialog?.querySelector('.support-dialog-heading');
     const headingStyle = heading ? getComputedStyle(heading) : null;
+    const intro = dialog?.querySelector('#supportDialogIntro');
+    const introStyle = intro ? getComputedStyle(intro) : null;
     const qr = dialog?.querySelector('.support-bank img');
     const result = {
       ok: dialog?.open === true
         && headingStyle?.display === 'block'
         && headingStyle?.position === 'static'
         && headingStyle?.height !== '75px'
+        && introStyle?.whiteSpace === 'normal'
+        && intro?.scrollWidth <= intro?.clientWidth
         && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
         && sponsorForm?.target === '_blank'
         && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
@@ -251,6 +255,7 @@ try {
         && qr?.naturalWidth === 845,
       message: 'open=' + dialog?.open
         + ', heading=' + headingStyle?.display + '/' + headingStyle?.position + '/' + headingStyle?.height
+        + ', intro=' + introStyle?.whiteSpace + '/' + intro?.scrollWidth + '/' + intro?.clientWidth
         + ', sponsor=' + sponsorForm?.action
         + ', target=' + sponsorForm?.target
         + ', kofi=' + dialog?.querySelector('.support-kofi-button')?.href
@@ -277,6 +282,7 @@ try {
       await new Promise(resolveWait => setTimeout(resolveWait, 50));
       const sponsorForm = dialog?.querySelector('.sponsor-form');
       const amountLabel = dialog?.querySelector('.sponsor-amount-label');
+      const intro = dialog?.querySelector('#supportDialogIntro');
       const qr = dialog?.querySelector('.support-bank img');
       const triggerRect = trigger?.getBoundingClientRect();
       const isJapanGuide = window.location.pathname === '/apps/japan-pr-guide/';
@@ -288,6 +294,8 @@ try {
           && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
           && dialog?.querySelectorAll('.support-option-icon').length === 0
           && dialog?.querySelectorAll('.fa-github, .fa-wallet').length === 0
+          && getComputedStyle(intro).whiteSpace === 'normal'
+          && intro.scrollWidth <= intro.clientWidth
           && dialog.scrollWidth <= dialog.clientWidth
           && dialog.scrollHeight <= dialog.clientHeight
           && (!isJapanGuide || (
@@ -330,7 +338,7 @@ try {
         && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'flex'
         && style.flexDirection === 'column'
-        && style.minHeight === '224px'
+        && style.minHeight === '210px'
         && style.padding === '18px'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
