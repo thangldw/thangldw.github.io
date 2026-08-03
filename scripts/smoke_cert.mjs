@@ -236,15 +236,16 @@ try {
       ok: dialog?.open === true
         && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
         && sponsorForm?.target === '_blank'
-        && dialog?.querySelector('.support-kofi-heading a')?.href === 'https://ko-fi.com/thangldw'
-        && dialog?.querySelector('#kofiframe')?.src.startsWith('https://ko-fi.com/thangldw/')
+        && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
+        && dialog?.querySelector('.support-kofi-button img')?.src === 'https://storage.ko-fi.com/cdn/kofi6.png?v=6'
+        && dialog?.querySelector('#kofiframe') === null
         && qr?.getAttribute('src') === 'assets/support-vietqr-mb.jpg'
         && qr?.complete === true
         && qr?.naturalWidth === 845,
       message: 'open=' + dialog?.open
         + ', sponsor=' + sponsorForm?.action
         + ', target=' + sponsorForm?.target
-        + ', kofi=' + dialog?.querySelector('.support-kofi-heading a')?.href
+        + ', kofi=' + dialog?.querySelector('.support-kofi-button')?.href
         + ', qrSrc=' + qr?.getAttribute('src')
         + ', qr=' + qr?.naturalWidth + 'x' + qr?.naturalHeight
     };

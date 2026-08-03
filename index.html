@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/icons.css?v=20260714">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/tokens.css?v=20260725f">
-  <link rel="stylesheet" href="css/styles.css?v=20260803support8">
+  <link rel="stylesheet" href="css/styles.css?v=20260803support9">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260726b">
   <script src="/js/site-shell.js?v=20260727b"></script>
   <script defer src="/js/analytics.js"></script>
@@ -114,40 +114,41 @@
         <p id="supportDialogIntro">If these projects have been useful to you, your support helps me maintain them and build new learning tools. Support is always optional.</p>
       </header>
       <div class="support-options">
-        <article class="support-option support-github">
-          <span class="support-option-icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
-          <p class="support-option-label">International</p>
-          <h3>GitHub Sponsors</h3>
-          <p>Choose a contribution type and enter an amount in USD.</p>
-          <form class="sponsor-form" action="https://github.com/sponsors/thangldw/sponsorships" method="get" target="_blank" rel="noopener">
-            <fieldset class="sponsor-frequency">
-              <legend class="sr-only">Contribution type</legend>
-              <input class="sponsor-frequency-input" type="radio" name="frequency" id="sponsorMonthly" value="recurring" checked>
-              <label for="sponsorMonthly">Monthly</label>
-              <input class="sponsor-frequency-input" type="radio" name="frequency" id="sponsorOneTime" value="one-time">
-              <label for="sponsorOneTime">One-time</label>
-            </fieldset>
-            <label class="sponsor-amount-label" for="sponsorAmount">Amount <span>USD</span></label>
-            <div class="sponsor-amount-control">
-              <span aria-hidden="true">$</span>
-              <input id="sponsorAmount" name="amount" type="number" min="1" max="12000" step="1" inputmode="numeric" placeholder="5" aria-describedby="sponsorAmountHelp" required>
-            </div>
-            <button class="support-primary" type="submit">
-              Continue on GitHub <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
-            <p class="sponsor-help" id="sponsorAmountHelp">GitHub will open to review and confirm your sponsorship.</p>
-          </form>
-        </article>
-        <article class="support-option support-kofi">
-          <div class="support-kofi-heading">
-            <div>
-              <p class="support-option-label">International</p>
-              <h3>Ko-fi</h3>
-            </div>
-            <a href="https://ko-fi.com/thangldw" target="_blank" rel="noopener noreferrer" aria-label="Open Thang Luu on Ko-fi in a new tab">Open <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-          </div>
-          <iframe id="kofiframe" src="https://ko-fi.com/thangldw/?hidefeed=true&amp;widget=true&amp;embed=true&amp;preview=true" height="712" title="Support Thang Luu on Ko-fi" loading="lazy"></iframe>
-        </article>
+        <section class="support-international" aria-label="International support options">
+          <article class="support-github">
+            <span class="support-option-icon" aria-hidden="true"><i class="fa-brands fa-github"></i></span>
+            <p class="support-option-label">International</p>
+            <h3>GitHub Sponsors</h3>
+            <p>Choose a contribution type and enter an amount in USD.</p>
+            <form class="sponsor-form" action="https://github.com/sponsors/thangldw/sponsorships" method="get" target="_blank" rel="noopener">
+              <fieldset class="sponsor-frequency">
+                <legend class="sr-only">Contribution type</legend>
+                <input class="sponsor-frequency-input" type="radio" name="frequency" id="sponsorMonthly" value="recurring" checked>
+                <label for="sponsorMonthly">Monthly</label>
+                <input class="sponsor-frequency-input" type="radio" name="frequency" id="sponsorOneTime" value="one-time">
+                <label for="sponsorOneTime">One-time</label>
+              </fieldset>
+              <label class="sponsor-amount-label" for="sponsorAmount">Amount <span>USD</span></label>
+              <div class="sponsor-amount-control">
+                <span aria-hidden="true">$</span>
+                <input id="sponsorAmount" name="amount" type="number" min="1" max="12000" step="1" inputmode="numeric" placeholder="5" aria-describedby="sponsorAmountHelp" required>
+              </div>
+              <button class="support-primary" type="submit">
+                Continue on GitHub <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+              <p class="sponsor-help" id="sponsorAmountHelp">GitHub will open to review and confirm your sponsorship.</p>
+            </form>
+          </article>
+          <article class="support-kofi">
+            <span class="support-option-icon" aria-hidden="true"><i class="fa-solid fa-wallet"></i></span>
+            <p class="support-option-label">International</p>
+            <h3>Ko-fi</h3>
+            <p class="support-kofi-copy">Leave a one-time tip securely through Ko-fi.</p>
+            <a class="support-kofi-button" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer" aria-label="Buy me a coffee on Ko-fi">
+              <img src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" height="36" alt="Buy Me a Coffee at ko-fi.com">
+            </a>
+          </article>
+        </section>
         <article class="support-option support-bank">
           <div class="support-bank-heading">
             <div>
