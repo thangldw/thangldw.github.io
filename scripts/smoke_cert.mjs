@@ -226,7 +226,7 @@ try {
   })()`), page.exceptions);
 
   assertResult('Support dialog uses explicit external and local payment destinations', await page.evaluate(`(async () => {
-    const trigger = document.querySelector('#supportOpen');
+    const trigger = document.querySelector('.support-floating-trigger');
     const dialog = document.querySelector('#supportDialog');
     trigger?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
@@ -241,7 +241,7 @@ try {
         && dialog?.querySelector('#kofiframe') === null
         && dialog?.querySelectorAll('.support-option-icon').length === 0
         && dialog?.querySelectorAll('.fa-github, .fa-wallet').length === 0
-        && qr?.getAttribute('src') === 'assets/support-vietqr-mb.jpg'
+        && qr?.getAttribute('src') === '/assets/support-vietqr-mb.jpg'
         && qr?.complete === true
         && qr?.naturalWidth === 845,
       message: 'open=' + dialog?.open

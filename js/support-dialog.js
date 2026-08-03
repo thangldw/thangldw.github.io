@@ -8,7 +8,8 @@
 
   function shouldShowSupport() {
     var path = normalizedPath();
-    return path === "/apps/"
+    return path === "/"
+      || path === "/apps/"
       || path === "/apps/japan-pr-guide/"
       || path === "/apps/cert/"
       || path.indexOf("/apps/cert/") === 0;
