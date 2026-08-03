@@ -146,11 +146,13 @@
 }
 
 .support-dialog-heading > p:last-child {
+  max-width: 62ch;
   margin: 0;
   color: var(--support-body);
   font-size: 10px;
   line-height: 1.4;
-  white-space: nowrap;
+  white-space: normal;
+  text-wrap: pretty;
 }
 
 .support-options {
