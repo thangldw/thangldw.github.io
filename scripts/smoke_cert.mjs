@@ -258,6 +258,8 @@ try {
     const closeButton = dialog?.querySelector('#supportClose');
     const heading = dialog?.querySelector('.support-dialog-heading');
     const headingStyle = heading ? getComputedStyle(heading) : null;
+    const supportKicker = heading?.querySelector('.support-kicker');
+    const supportKickerStyle = supportKicker ? getComputedStyle(supportKicker) : null;
     const intro = dialog?.querySelector('#supportDialogIntro');
     const introStyle = intro ? getComputedStyle(intro) : null;
     const international = dialog?.querySelector('.support-international');
@@ -272,6 +274,7 @@ try {
         && headingStyle?.height !== '75px'
         && headingStyle?.paddingLeft === '0px'
         && parseFloat(headingStyle?.paddingRight) <= 36
+        && supportKickerStyle?.fontFamily === getComputedStyle(document.body).fontFamily
         && introStyle?.whiteSpace === 'normal'
         && intro?.scrollWidth <= intro?.clientWidth
         && Math.abs(international?.getBoundingClientRect().width - bank?.getBoundingClientRect().width) <= 2
@@ -288,6 +291,7 @@ try {
       message: 'open=' + dialog?.open
         + ', heading=' + headingStyle?.display + '/' + headingStyle?.position + '/' + headingStyle?.height
         + '/' + headingStyle?.paddingLeft + '/' + headingStyle?.paddingRight
+        + ', kickerFont=' + supportKickerStyle?.fontFamily
         + ', intro=' + introStyle?.whiteSpace + '/' + intro?.scrollWidth + '/' + intro?.clientWidth
         + ', columns=' + international?.getBoundingClientRect().width + '/' + bank?.getBoundingClientRect().width
         + ', sponsor=' + sponsorForm?.action

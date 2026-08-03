@@ -138,6 +138,10 @@
   text-transform: uppercase;
 }
 
+.support-dialog-heading .support-kicker {
+  font-family: var(--font-ui, Inter, system-ui, sans-serif);
+}
+
 .support-dialog-heading h2 {
   margin: 4px 0 5px;
   color: var(--support-ink);
