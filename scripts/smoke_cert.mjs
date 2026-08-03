@@ -227,10 +227,10 @@ try {
 
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil(
-    `document.querySelectorAll(".project-title-link").length === ${certificationManifest.certificationCount}`
+    `document.querySelectorAll(".hub-cert-card").length === ${certificationManifest.certificationCount}`
   );
   assertResult('Certification library', await page.evaluate(`(() => {
-    const cards = [...document.querySelectorAll('.project-title-link')];
+    const cards = [...document.querySelectorAll('.hub-cert-card')];
     const hrefs = cards.map(card => card.getAttribute('href'));
     const expectedHrefs = ${JSON.stringify(
       certificationManifest.certifications.map(certification => certification.href)
@@ -243,7 +243,7 @@ try {
         && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'flex'
         && style.flexDirection === 'column'
-        && style.minHeight === '250px'
+        && style.minHeight === '210px'
         && style.padding === '18px'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
@@ -266,10 +266,10 @@ try {
     })()`);
     childThemeChecks.push({ slug, ...result, exceptions: [...page.exceptions] });
   }
-  assertResult('Child certifications stay light without theme toggles', {
+  assertResult('Child certifications honor the stored theme without local toggles', {
     ok: childThemeChecks.every(check =>
-      check.theme === 'light'
-      && check.locked === 'true'
+      check.theme === 'dark'
+      && check.locked === undefined
       && check.toggleCount === 0
       && check.storedTheme === 'dark'
       && check.exceptions.length === 0
