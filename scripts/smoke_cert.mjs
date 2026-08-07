@@ -518,6 +518,7 @@ try {
     const button = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam Mode');
     button.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    const examStartText = document.body.innerText;
     const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim().startsWith('Start exam'));
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
@@ -525,6 +526,8 @@ try {
     return {
       ok: Boolean(document.querySelector('.question-pane'))
         && /^\\d{2}:\\d{2}$/.test(timer?.textContent || '')
+        && examStartText.includes('The timer cannot be paused')
+        && !document.querySelector('.pause-button')
         && !document.querySelector('.hint-note[open]'),
       message: \`start=\${Boolean(startButton)}, question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}\`
     };
