@@ -30,7 +30,7 @@
       "issuer": "日本FP協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/fp3/",
-      "availableQuestionCount": 1031,
+      "availableQuestionCount": 994,
       "exam": {
         "durationMinutes": 150,
         "questionCount": 80,
