@@ -480,6 +480,8 @@ try {
         && text.includes('Start with a quick diagnostic')
         && text.includes('Start 7 questions')
         && text.includes('Score unlocks after 40 unassisted answers, all domains, and one full mock.')
+        && text.includes('Your study data is saved only in this browser')
+        && text.includes('Backup or restore')
         && !text.includes('42%')
         && !text.includes('How to Use')
         && !document.querySelector('.study-tip'),
