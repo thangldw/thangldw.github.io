@@ -132,9 +132,9 @@ def main() -> int:
             )
             if not isinstance(kakeflow, dict):
                 errors.append("js/projects-data.json: missing KakeFlow project")
-            elif kakeflow.get("href") != "https://github.com/thangldw/kakeflow":
+            elif kakeflow.get("href") != "https://thangldw.github.io/kakeflow/":
                 errors.append(
-                    "js/projects-data.json: KakeFlow must link to the canonical repository"
+                    "js/projects-data.json: KakeFlow must link to its public landing page"
                 )
             if "kakeflow-releases" in catalog_path.read_text(encoding="utf-8"):
                 errors.append(
