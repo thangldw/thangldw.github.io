@@ -484,6 +484,7 @@ try {
         && text.includes('Backup or restore')
         && !text.includes('42%')
         && !text.includes('How to Use')
+        && !document.querySelector('.self-study-path')
         && !document.querySelector('.study-tip'),
       message: \`title=\${document.title}, text=\${text.slice(0, 160)}\`
     };
