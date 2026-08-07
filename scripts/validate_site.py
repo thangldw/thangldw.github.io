@@ -126,6 +126,20 @@ def main() -> int:
                 errors.append(
                     f"js/projects-data.json: duplicate ids: {', '.join(duplicates)}"
                 )
+            kakeflow = next(
+                (project for project in projects if project.get("id") == "kakeflow"),
+                None,
+            )
+            if not isinstance(kakeflow, dict):
+                errors.append("js/projects-data.json: missing KakeFlow project")
+            elif kakeflow.get("href") != "https://github.com/thangldw/kakeflow":
+                errors.append(
+                    "js/projects-data.json: KakeFlow must link to the canonical repository"
+                )
+            if "kakeflow-releases" in catalog_path.read_text(encoding="utf-8"):
+                errors.append(
+                    "js/projects-data.json: retired KakeFlow repository must not be referenced"
+                )
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"js/projects-data.json: cannot load catalog: {exc}")
 
