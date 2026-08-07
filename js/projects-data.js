@@ -2,7 +2,7 @@
   'use strict';
 
   function requireProject(project, index) {
-    var required = ['id', 'title', 'description', 'href', 'ariaLabel', 'icon', 'accent', 'status', 'tags', 'category', 'cta'];
+    var required = ['id', 'title', 'description', 'href', 'ariaLabel', 'icon', 'accent', 'status', 'tags', 'category', 'categoryLabel', 'cta'];
     if (!project || typeof project !== 'object') {
       throw new TypeError('Project at index ' + index + ' must be an object.');
     }

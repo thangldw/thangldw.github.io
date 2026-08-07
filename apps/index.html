@@ -130,10 +130,10 @@
         var tags = (project.tags || []).slice(0, 3).map(function (tag) {
           return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
         }).join('');
-        var searchText = [project.title, project.description, (project.tags || []).join(' '), project.category].join(' ');
+        var searchText = [project.title, project.description, (project.tags || []).join(' '), project.category, project.categoryLabel].join(' ');
         return '<article class="project-card" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-category="' + escapeHtml(project.category || 'developer-tools') + '" data-search="' + escapeHtml(normalize(searchText)) + '">' +
           '<a class="project-title-link" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '">' +
-          '<div class="project-card-top"><span class="project-category"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i>' + escapeHtml(categoryLabel(project.category)) + '</span>' +
+          '<div class="project-card-top"><span class="project-category"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i>' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span>' +
           '<small class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</small></div>' +
           '<h2>' + escapeHtml(project.title) + '</h2>' +
           '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
