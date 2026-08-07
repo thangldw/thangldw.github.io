@@ -475,7 +475,7 @@ try {
     const text = document.body.innerText;
     return {
       ok: document.title === 'G検定'
-        && text.includes('0 of 900 questions answered')
+        && text.includes('0 unassisted · 0 hint-assisted')
         && !text.includes('42%')
         && !text.includes('How to Use')
         && !document.querySelector('.study-tip'),
@@ -530,7 +530,7 @@ try {
     const text = document.body.innerText;
     return {
       ok: document.title === 'AWS SAA'
-        && text.includes('0 of 3 questions answered')
+        && text.includes('0 unassisted · 0 hint-assisted')
         && !text.includes('51%')
         && !text.includes('How to Use')
         && !document.querySelector('.study-tip'),
