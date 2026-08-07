@@ -505,12 +505,23 @@ try {
     const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Start 7 questions');
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    const hintButton = document.querySelector('.hint-reveal-button');
+    hintButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    const opened = hintButton?.getAttribute('aria-expanded') === 'true';
+    hintButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    const collapsed = hintButton?.getAttribute('aria-expanded') === 'false';
+    hintButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    const reopened = hintButton?.getAttribute('aria-expanded') === 'true';
     const text = document.body.innerText;
     return {
       ok: Boolean(document.querySelector('.confidence-capture'))
         && text.includes('How confident are you?')
-        && document.querySelectorAll('.confidence-capture button').length === 3,
-      message: \`start=\${Boolean(startButton)}, confidence=\${Boolean(document.querySelector('.confidence-capture'))}, buttons=\${document.querySelectorAll('.confidence-capture button').length}\`
+        && document.querySelectorAll('.confidence-capture button').length === 3
+        && opened && collapsed && reopened,
+      message: \`start=\${Boolean(startButton)}, confidence=\${Boolean(document.querySelector('.confidence-capture'))}, hint=\${opened}/\${collapsed}/\${reopened}\`
     };
   })()`), page.exceptions);
 
