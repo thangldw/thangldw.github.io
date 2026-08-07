@@ -13,6 +13,7 @@
       "status": "Live",
       "tags": ["Japan immigration", "HSP points", "PR checklist", "English · Vietnamese"],
       "category": "developer-tools",
+      "categoryLabel": "Japan immigration",
       "cta": "Open guide",
       "featured": false
     },
@@ -28,6 +29,7 @@
       "status": "Live",
       "tags": ["Board game", "Multiplayer", "AI opponents", "Market simulation"],
       "category": "games",
+      "categoryLabel": "Strategy game",
       "cta": "Open BizRoll",
       "featured": true,
       "featuredOrder": 0
@@ -44,6 +46,7 @@
       "status": "v1.2.0",
       "tags": ["macOS", "Undo Center", "Duplicate scanning", "Local-first"],
       "category": "developer-tools",
+      "categoryLabel": "macOS utility",
       "cta": "Download Diskora",
       "featured": true,
       "featuredOrder": 1
@@ -60,6 +63,7 @@
       "status": "v1.3.0",
       "tags": ["macOS", "FSEvents", "Explainable risk", "Local-first"],
       "category": "developer-tools",
+      "categoryLabel": "macOS utility",
       "cta": "Download Changeora",
       "featured": true,
       "featuredOrder": 2
@@ -76,6 +80,7 @@
       "status": "v1.0",
       "tags": ["AI evaluation", "Red team", "FastAPI", "CI/CD"],
       "category": "data-ai",
+      "categoryLabel": "AI evaluation",
       "cta": "Open on GitHub",
       "featured": true,
       "featuredOrder": 3
@@ -92,6 +97,7 @@
       "status": "v1.0",
       "tags": ["OSS security", "Offline auditor", "Supply chain", "Python"],
       "category": "developer-tools",
+      "categoryLabel": "OSS security",
       "cta": "Open on GitHub",
       "featured": true,
       "featuredOrder": 4
@@ -108,6 +114,7 @@
       "status": "v0.14.17",
       "tags": ["Local-first", "Provenance", "Exact citations", "SQLite FTS5"],
       "category": "developer-tools",
+      "categoryLabel": "Engineering memory",
       "cta": "Open on GitHub",
       "featured": true,
       "featuredOrder": 5
@@ -124,6 +131,7 @@
       "status": "v1.2.0",
       "tags": ["Household finance", "Local-first", "MIT License", "Tauri · React"],
       "category": "personal-finance",
+      "categoryLabel": "Household finance",
       "cta": "Open KakeFlow",
       "featured": true,
       "featuredOrder": 7
@@ -147,6 +155,7 @@
       "status": "Collection",
       "tags": ["9 certifications", "Exam practice", "Local-first"],
       "category": "certification-study",
+      "categoryLabel": "Exam preparation",
       "cta": "Open library"
     }
   ]
