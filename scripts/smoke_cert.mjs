@@ -497,6 +497,7 @@ try {
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Study by Domain')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const startButton = document.querySelector('.module-card button:not([disabled])');
+    const firstDomainLabel = document.querySelector('.module-card > div span')?.textContent.trim();
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
     const activeNavigation = document.querySelector('.nav-item.active span')?.textContent.trim();
@@ -510,12 +511,13 @@ try {
       .map(item => item.textContent.trim());
     return {
       ok: activeNavigation === 'Study by Domain'
+        && firstDomainLabel === 'RECOMMENDED'
         && !document.querySelector('.learn-mode-primer')
         && !text.includes('CONCEPT BRIEFING')
         && vietnameseClosedByDefault
         && vietnameseOpensOnRequest
         && modeLabels.join('|') === 'Smart Study|Exam',
-      message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, modes=\${modeLabels.join('|')}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}, vietnamese=\${vietnameseClosedByDefault}/\${vietnameseOpensOnRequest}\`
+      message: \`start=\${Boolean(startButton)}, recommended=\${firstDomainLabel}, active=\${activeNavigation}, modes=\${modeLabels.join('|')}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}, vietnamese=\${vietnameseClosedByDefault}/\${vietnameseOpensOnRequest}\`
     };
   })()`), page.exceptions);
 
