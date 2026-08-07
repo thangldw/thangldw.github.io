@@ -504,12 +504,8 @@ try {
     const text = document.body.innerText;
     return {
       ok: activeNavigation === 'Study by Domain'
-        && Boolean(document.querySelector('.learn-mode-primer'))
-        && text.includes('CONCEPT BRIEFING')
-        && text.includes('Context')
-        && text.includes('Recall')
-        && text.includes('Explain')
-        && text.includes('Review')
+        && !document.querySelector('.learn-mode-primer')
+        && !text.includes('CONCEPT BRIEFING')
         && vietnameseClosedByDefault
         && vietnameseOpensOnRequest,
       message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}, vietnamese=\${vietnameseClosedByDefault}/\${vietnameseOpensOnRequest}\`
