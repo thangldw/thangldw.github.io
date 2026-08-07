@@ -476,6 +476,8 @@ try {
     return {
       ok: document.title === 'G検定'
         && text.includes('0 unassisted · 0 hint-assisted')
+        && text.includes('Start with a quick diagnostic')
+        && text.includes('Start 7 questions')
         && !text.includes('42%')
         && !text.includes('How to Use')
         && !document.querySelector('.study-tip'),
