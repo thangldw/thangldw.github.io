@@ -548,6 +548,7 @@ try {
     return {
       ok: Boolean(document.querySelector('.confidence-capture'))
         && text.includes('How confident are you?')
+        && !text.includes('Reveal only after trying to recall')
         && document.querySelectorAll('.confidence-capture button').length === 3
         && opened && collapsed && reopened
         && mutedWhenClosed && clearWhenOpened,
