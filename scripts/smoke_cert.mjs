@@ -486,6 +486,22 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('G self-study confidence capture', await page.evaluate(`(async () => {
+    const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Start 7 questions');
+    startButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    const text = document.body.innerText;
+    return {
+      ok: Boolean(document.querySelector('.confidence-capture'))
+        && text.includes('How confident are you?')
+        && document.querySelectorAll('.confidence-capture button').length === 3,
+      message: \`start=\${Boolean(startButton)}, confidence=\${Boolean(document.querySelector('.confidence-capture'))}, buttons=\${document.querySelectorAll('.confidence-capture button').length}\`
+    };
+  })()`), page.exceptions);
+
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
+  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.waitUntil('document.querySelector(".metric-grid")');
   assertResult('G Exam Mode', await page.evaluate(`(async () => {
     const button = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam Mode');
     button.click();
