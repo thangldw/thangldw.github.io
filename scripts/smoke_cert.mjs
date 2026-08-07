@@ -537,13 +537,21 @@ try {
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
     const timer = document.querySelector('.timer-area strong');
+    const navigator = document.querySelector('.number-grid');
+    const navigatorButtons = [...document.querySelectorAll('.number-grid button')];
+    navigatorButtons.at(-1)?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const lastQuestionCurrent = navigatorButtons.at(-1)?.getAttribute('aria-current') === 'step';
     return {
       ok: Boolean(document.querySelector('.question-pane'))
         && /^\\d{2}:\\d{2}$/.test(timer?.textContent || '')
         && examStartText.includes('The timer cannot be paused')
         && !document.querySelector('.pause-button')
-        && !document.querySelector('.hint-note[open]'),
-      message: \`start=\${Boolean(startButton)}, question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}\`
+        && !document.querySelector('.hint-note[open]')
+        && navigatorButtons.length === 145
+        && lastQuestionCurrent
+        && navigator.scrollTop > 0,
+      message: \`start=\${Boolean(startButton)}, question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}, navigator=\${navigatorButtons.length}/\${navigator.scrollTop}\`
     };
   })()`), page.exceptions);
 
