@@ -486,6 +486,18 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('G key-term active recall', await page.evaluate(`(async () => {
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Active recall')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const reveal = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Reveal definition');
+    return { ok: Boolean(document.querySelector('.term-recall-card')) && Boolean(reveal), message: \`card=\${Boolean(document.querySelector('.term-recall-card'))}, reveal=\${Boolean(reveal)}\` };
+  })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.waitUntil('document.querySelector(".metric-grid")');
+
   assertResult('G self-study confidence capture', await page.evaluate(`(async () => {
     const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Start 7 questions');
     startButton?.click();
