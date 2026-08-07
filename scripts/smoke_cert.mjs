@@ -231,6 +231,18 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('Canonical KakeFlow project in the apps catalog', await page.evaluate(`(() => {
+    const card = [...document.querySelectorAll('.project-card')]
+      .find(candidate => candidate.querySelector('h2')?.textContent.trim() === 'KakeFlow');
+    return {
+      ok: card?.querySelector('a')?.href === 'https://github.com/thangldw/kakeflow'
+        && card?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
+        && card.textContent.includes('MIT License')
+        && card.textContent.includes('Open on GitHub'),
+      message: 'kakeflow=' + card?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
   assertResult('Certification manifest updates portfolio catalogs', await page.evaluate(`(() => {
     const manifest = window.portfolioCertificationManifest;
     const card = [...document.querySelectorAll('.project-card')]
@@ -257,6 +269,16 @@ try {
         && diskora.textContent.includes('Undo Center')
         && changeora.textContent.includes('FSEvents'),
       message: 'diskora=' + diskora?.textContent.trim() + ', changeora=' + changeora?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
+  assertResult('Canonical KakeFlow project in home side projects', await page.evaluate(`(() => {
+    const project = [...document.querySelectorAll('#projectRail .resume-project')]
+      .find(candidate => candidate.querySelector('h3')?.textContent.trim() === 'KakeFlow');
+    return {
+      ok: project?.href === 'https://github.com/thangldw/kakeflow'
+        && project.textContent.includes('Open-source local-first household finance'),
+      message: 'kakeflow=' + project?.textContent.trim()
     };
   })()`), page.exceptions);
 
