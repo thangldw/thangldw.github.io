@@ -372,6 +372,7 @@ try {
     })()`), page.exceptions);
   }
 
+  await page.evaluate(`localStorage.removeItem("theme")`);
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil(
     `document.querySelectorAll(".hub-cert-card").length === ${certificationManifest.certificationCount}`
@@ -385,6 +386,8 @@ try {
     const style = getComputedStyle(cards[0]);
     return {
       ok: document.title === 'Certification Library'
+        && document.documentElement.dataset.theme === 'light'
+        && document.querySelector('.hub-theme-toggle')?.getAttribute('aria-label') === 'Switch to dark theme'
         && cards.length === ${certificationManifest.certificationCount}
         && new Set(hrefs).size === ${certificationManifest.certificationCount}
         && hrefs.every(href => expectedHrefs.includes(href))
@@ -393,7 +396,7 @@ try {
         && style.minHeight === '210px'
         && style.padding === '18px'
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`title=\${document.title}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
+      message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
     };
   })()`), page.exceptions);
 
