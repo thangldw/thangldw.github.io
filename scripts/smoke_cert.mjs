@@ -473,6 +473,8 @@ try {
   await page.waitUntil('document.querySelector(".metric-grid")');
   assertResult('G certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
+    const bankResources = performance.getEntriesByType('resource')
+      .filter(entry => entry.name.includes('/apps/cert/protected-data/'));
     return {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'ja'
@@ -485,8 +487,9 @@ try {
         && !text.includes('42%')
         && !text.includes('How to Use')
         && !document.querySelector('.self-study-path')
-        && !document.querySelector('.study-tip'),
-      message: \`title=\${document.title}, text=\${text.slice(0, 160)}\`
+        && !document.querySelector('.study-tip')
+        && bankResources.length === 1,
+      message: \`title=\${document.title}, bankResources=\${bankResources.length}, text=\${text.slice(0, 160)}\`
     };
   })()`), page.exceptions);
 
@@ -503,13 +506,16 @@ try {
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
     const vietnameseOpensOnRequest = vietnameseDisclosure?.open === true;
     const text = document.body.innerText;
+    const modeLabels = [...document.querySelectorAll('.study-mode-control span')]
+      .map(item => item.textContent.trim());
     return {
       ok: activeNavigation === 'Study by Domain'
         && !document.querySelector('.learn-mode-primer')
         && !text.includes('CONCEPT BRIEFING')
         && vietnameseClosedByDefault
-        && vietnameseOpensOnRequest,
-      message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}, vietnamese=\${vietnameseClosedByDefault}/\${vietnameseOpensOnRequest}\`
+        && vietnameseOpensOnRequest
+        && modeLabels.join('|') === 'Smart Study|Exam',
+      message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, modes=\${modeLabels.join('|')}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}, vietnamese=\${vietnameseClosedByDefault}/\${vietnameseOpensOnRequest}\`
     };
   })()`), page.exceptions);
 
