@@ -506,9 +506,14 @@ try {
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
     const hintButton = document.querySelector('.hint-reveal-button');
+    const closedHintStyle = getComputedStyle(hintButton);
+    const mutedWhenClosed = Number.parseFloat(closedHintStyle.opacity) < 0.7
+      && closedHintStyle.filter.includes('blur');
     hintButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
     const opened = hintButton?.getAttribute('aria-expanded') === 'true';
+    const openedHintStyle = getComputedStyle(hintButton);
+    const clearWhenOpened = openedHintStyle.opacity === '1' && openedHintStyle.filter === 'none';
     hintButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
     const collapsed = hintButton?.getAttribute('aria-expanded') === 'false';
@@ -520,8 +525,9 @@ try {
       ok: Boolean(document.querySelector('.confidence-capture'))
         && text.includes('How confident are you?')
         && document.querySelectorAll('.confidence-capture button').length === 3
-        && opened && collapsed && reopened,
-      message: \`start=\${Boolean(startButton)}, confidence=\${Boolean(document.querySelector('.confidence-capture'))}, hint=\${opened}/\${collapsed}/\${reopened}\`
+        && opened && collapsed && reopened
+        && mutedWhenClosed && clearWhenOpened,
+      message: \`start=\${Boolean(startButton)}, confidence=\${Boolean(document.querySelector('.confidence-capture'))}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}\`
     };
   })()`), page.exceptions);
 
