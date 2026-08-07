@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 11,
+  "certificationCount": 12,
   "certifications": [
     {
       "id": "g",
@@ -30,7 +30,7 @@
       "issuer": "日本FP協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/fp3/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 1031,
       "exam": {
         "durationMinutes": 150,
         "questionCount": 80,
@@ -198,6 +198,24 @@
         "questionCount": 60,
         "format": "Scenario-based multiple choice, one best answer",
         "structure": "Five architecture domains; four scenarios selected from six"
+      }
+    },
+    {
+      "id": "fp2",
+      "slug": "fp2",
+      "displayOrder": 12,
+      "accent": "#2563a6",
+      "shortName": "2級FP",
+      "name": "2級ファイナンシャル・プランニング技能検定",
+      "issuer": "日本FP協会",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/fp2/",
+      "availableQuestionCount": 655,
+      "exam": {
+        "durationMinutes": 210,
+        "questionCount": 100,
+        "format": "CBT方式・通年受検",
+        "structure": "学科＋実技（資産設計提案業務）"
       }
     }
   ]
