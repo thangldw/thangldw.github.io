@@ -475,6 +475,7 @@ try {
     const text = document.body.innerText;
     return {
       ok: document.title === 'G検定'
+        && document.documentElement.lang === 'ja'
         && text.includes('0 unassisted · 0 hint-assisted')
         && text.includes('Start with a quick diagnostic')
         && text.includes('Start 7 questions')
@@ -580,6 +581,7 @@ try {
     const text = document.body.innerText;
     return {
       ok: document.title === 'AWS SAA'
+        && document.documentElement.lang === 'en'
         && text.includes('0 unassisted · 0 hint-assisted')
         && !text.includes('51%')
         && !text.includes('How to Use')
