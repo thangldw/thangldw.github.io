@@ -103,7 +103,7 @@ def main() -> int:
             entries = projects + learning_collections
             required_project_fields = {
                 "id", "title", "description", "href", "ariaLabel", "icon",
-                "accent", "status", "tags", "category", "cta",
+                "accent", "status", "tags", "category", "categoryLabel", "cta",
             }
             identifiers: list[str] = []
             for index, project in enumerate(entries):
