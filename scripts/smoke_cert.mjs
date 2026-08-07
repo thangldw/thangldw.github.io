@@ -533,12 +533,28 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 390);
   await page.waitUntil('document.querySelector(".metric-grid")');
   assertResult('G mobile layout', await page.evaluate(`(() => ({
     ok: document.documentElement.scrollWidth <= window.innerWidth,
     message: \`scrollWidth=\${document.documentElement.scrollWidth}, viewport=\${window.innerWidth}\`
   }))()`), page.exceptions);
+  assertResult('G mobile study controls', await page.evaluate(`(async () => {
+    const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim().startsWith('Start ') && candidate.textContent.includes('questions'));
+    startButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 250));
+    const trigger = document.querySelector('.support-floating-trigger');
+    return {
+      ok: Boolean(document.querySelector('.question-actions'))
+        && getComputedStyle(document.querySelector('.side-nav')).scrollSnapType.includes('x')
+        && getComputedStyle(trigger).display === 'none',
+      message: \`start=\${startButton?.textContent}, actions=\${Boolean(document.querySelector('.question-actions'))}, support=\${getComputedStyle(trigger).display}\`
+    };
+  })()`), page.exceptions);
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
+  await page.navigate(`${origin}/apps/cert/g/`, 390);
+  await page.waitUntil('document.querySelector(".metric-grid")');
   assertResult('Shared support mobile layout', await page.evaluate(`(async () => {
     const trigger = document.querySelector('.support-floating-trigger');
     trigger?.click();
