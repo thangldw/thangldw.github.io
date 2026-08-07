@@ -519,6 +519,23 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('G unified review queue', await page.evaluate(`(async () => {
+    document.querySelector('.secondary-action')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Smart Study')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const text = document.body.innerText;
+    const queueButton = [...document.querySelectorAll('button')]
+      .find(candidate => candidate.textContent.trim() === 'Start review queue');
+    return {
+      ok: text.includes('Your review queue')
+        && text.includes('New questions stay out')
+        && Boolean(queueButton)
+        && !queueButton.disabled,
+      message: \`queue=\${Boolean(queueButton)}, disabled=\${queueButton?.disabled}, text=\${text.slice(0, 180)}\`
+    };
+  })()`), page.exceptions);
+
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".metric-grid")');
