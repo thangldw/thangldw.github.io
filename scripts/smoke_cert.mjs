@@ -554,15 +554,28 @@ try {
     hintButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
     const reopened = hintButton?.getAttribute('aria-expanded') === 'true';
+    const confidenceCapture = Boolean(document.querySelector('.confidence-capture'));
+    const confidenceButtons = [...document.querySelectorAll('.confidence-capture button')];
+    const preSubmitText = document.body.innerText;
+    document.querySelector('.answer input')?.click();
+    confidenceButtons.at(-1)?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    document.querySelector('.primary-action')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const text = document.body.innerText;
+    const ratingText = [...document.querySelectorAll('.review-rating button')]
+      .map(button => button.innerText.replace(/\\s+/g, ' ').trim());
     return {
-      ok: Boolean(document.querySelector('.confidence-capture'))
-        && text.includes('How confident are you?')
-        && !text.includes('Reveal only after trying to recall')
-        && document.querySelectorAll('.confidence-capture button').length === 3
+      ok: confidenceCapture
+        && preSubmitText.includes('How confident are you?')
+        && !preSubmitText.includes('Reveal only after trying to recall')
+        && confidenceButtons.length === 3
         && opened && collapsed && reopened
-        && mutedWhenClosed && clearWhenOpened,
-      message: \`start=\${Boolean(startButton)}, confidence=\${Boolean(document.querySelector('.confidence-capture'))}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}\`
+        && mutedWhenClosed && clearWhenOpened
+        && text.includes('Why this is correct')
+        && text.includes('Memory cue')
+        && ratingText.some(label => label.toLowerCase().includes('again') && label.includes('10 min')),
+      message: \`start=\${Boolean(startButton)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, ratings=\${ratingText.join('|')}\`
     };
   })()`), page.exceptions);
 
