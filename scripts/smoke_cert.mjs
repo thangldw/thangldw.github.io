@@ -478,6 +478,7 @@ try {
         && text.includes('0 unassisted · 0 hint-assisted')
         && text.includes('Start with a quick diagnostic')
         && text.includes('Start 7 questions')
+        && text.includes('Score unlocks after 40 unassisted answers, all domains, and one full mock.')
         && !text.includes('42%')
         && !text.includes('How to Use')
         && !document.querySelector('.study-tip'),
