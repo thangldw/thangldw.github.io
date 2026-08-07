@@ -496,6 +496,11 @@ try {
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
     const activeNavigation = document.querySelector('.nav-item.active span')?.textContent.trim();
+    const vietnameseDisclosure = document.querySelector('.vietnamese-question-wrap');
+    const vietnameseClosedByDefault = vietnameseDisclosure?.open === false;
+    vietnameseDisclosure?.querySelector('summary')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    const vietnameseOpensOnRequest = vietnameseDisclosure?.open === true;
     const text = document.body.innerText;
     return {
       ok: activeNavigation === 'Study by Domain'
@@ -504,8 +509,10 @@ try {
         && text.includes('Context')
         && text.includes('Recall')
         && text.includes('Explain')
-        && text.includes('Review'),
-      message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}\`
+        && text.includes('Review')
+        && vietnameseClosedByDefault
+        && vietnameseOpensOnRequest,
+      message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}, vietnamese=\${vietnameseClosedByDefault}/\${vietnameseOpensOnRequest}\`
     };
   })()`), page.exceptions);
 
