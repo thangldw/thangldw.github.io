@@ -156,7 +156,7 @@
       "issuer": "Amazon Web Services",
       "syllabusVersion": "SAA-C03",
       "href": "/apps/cert/aws/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 710,
       "exam": {
         "durationMinutes": 130,
         "questionCount": 65,
