@@ -489,6 +489,30 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('G guided domain learning session', await page.evaluate(`(async () => {
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Study by Domain')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const startButton = document.querySelector('.module-card button:not([disabled])');
+    startButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    const activeNavigation = document.querySelector('.nav-item.active span')?.textContent.trim();
+    const text = document.body.innerText;
+    return {
+      ok: activeNavigation === 'Study by Domain'
+        && Boolean(document.querySelector('.learn-mode-primer'))
+        && text.includes('CONCEPT BRIEFING')
+        && text.includes('Context')
+        && text.includes('Recall')
+        && text.includes('Explain')
+        && text.includes('Review'),
+      message: \`start=\${Boolean(startButton)}, active=\${activeNavigation}, primer=\${Boolean(document.querySelector('.learn-mode-primer'))}\`
+    };
+  })()`), page.exceptions);
+
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
+  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.waitUntil('document.querySelector(".metric-grid")');
+
   assertResult('G key-term active recall', await page.evaluate(`(async () => {
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
