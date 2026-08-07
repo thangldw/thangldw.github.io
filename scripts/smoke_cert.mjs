@@ -577,16 +577,23 @@ try {
     navigatorButtons.at(-1)?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const lastQuestionCurrent = navigatorButtons.at(-1)?.getAttribute('aria-current') === 'step';
+    const finishButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Finish exam');
+    finishButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    const finishPrompt = document.querySelector('#finish-exam-title')?.textContent;
+    const continueButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Continue exam');
+    continueButton?.click();
     return {
       ok: Boolean(document.querySelector('.question-pane'))
-        && /^\\d{2}:\\d{2}$/.test(timer?.textContent || '')
+        && /^\\d{2,3}:\\d{2}$/.test(timer?.textContent || '')
         && examStartText.includes('The timer cannot be paused')
         && !document.querySelector('.pause-button')
         && !document.querySelector('.hint-note[open]')
+        && finishPrompt === 'Submit your exam now?'
         && navigatorButtons.length === 145
         && lastQuestionCurrent
         && navigator.scrollTop > 0,
-      message: \`start=\${Boolean(startButton)}, question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}, navigator=\${navigatorButtons.length}/\${navigator.scrollTop}\`
+      message: \`start=\${Boolean(startButton)}, question=\${Boolean(document.querySelector('.question-pane'))}, timer=\${timer?.textContent}, finish=\${finishPrompt}, navigator=\${navigatorButtons.length}/\${navigator.scrollTop}\`
     };
   })()`), page.exceptions);
 
