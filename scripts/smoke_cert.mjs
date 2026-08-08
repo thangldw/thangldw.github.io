@@ -200,23 +200,23 @@ try {
   }
 
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelector(".project-title-link")');
-  assertResult('Apps catalog shared project cards', await page.evaluate(`(() => {
-    const card = document.querySelector('.project-title-link');
-    const style = getComputedStyle(card);
+  await page.waitUntil('document.querySelector(".project-row")');
+  assertResult('Apps catalog project table', await page.evaluate(`(() => {
+    const table = document.querySelector('.project-table');
+    const scroller = document.querySelector('.project-table-scroll');
+    const style = getComputedStyle(table);
     return {
-      ok: style.display === 'flex'
-        && style.flexDirection === 'column'
-        && style.minHeight === '210px'
-        && style.padding === '18px'
+      ok: style.borderCollapse === 'collapse'
+        && style.minWidth === '1080px'
+        && scroller.scrollWidth >= scroller.clientWidth
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`display=\${style.display}, direction=\${style.flexDirection}, minHeight=\${style.minHeight}, padding=\${style.padding}\`
+      message: \`collapse=\${style.borderCollapse}, minWidth=\${style.minWidth}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}\`
     };
   })()`), page.exceptions);
 
   assertResult('Toolbox releases in the apps catalog', await page.evaluate(`(() => {
-    const cards = [...document.querySelectorAll('.project-card')];
-    const byTitle = title => cards.find(card => card.querySelector('h2')?.textContent.trim() === title);
+    const rows = [...document.querySelectorAll('.project-row')];
+    const byTitle = title => rows.find(row => row.querySelector('.project-name strong')?.textContent.trim() === title);
     const diskora = byTitle('Diskora');
     const changeora = byTitle('Changeora');
     const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v1.3.0';
@@ -232,21 +232,21 @@ try {
   })()`), page.exceptions);
 
   assertResult('KakeFlow landing page in the apps catalog', await page.evaluate(`(() => {
-    const card = [...document.querySelectorAll('.project-card')]
-      .find(candidate => candidate.querySelector('h2')?.textContent.trim() === 'KakeFlow');
+    const card = [...document.querySelectorAll('.project-row')]
+      .find(candidate => candidate.querySelector('.project-name strong')?.textContent.trim() === 'KakeFlow');
     return {
       ok: card?.querySelector('a')?.href === 'https://thangldw.github.io/kakeflow/'
         && card?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
         && card.textContent.includes('MIT License')
-        && card.textContent.includes('Open KakeFlow'),
+        && card?.querySelector('.project-action')?.getAttribute('aria-label') === 'Open KakeFlow',
       message: 'kakeflow=' + card?.textContent.trim()
     };
   })()`), page.exceptions);
 
   assertResult('Certification manifest updates portfolio catalogs', await page.evaluate(`(() => {
     const manifest = window.portfolioCertificationManifest;
-    const card = [...document.querySelectorAll('.project-card')]
-      .find(candidate => candidate.querySelector('h2')?.textContent.trim() === 'Certification Library');
+    const card = [...document.querySelectorAll('.project-row')]
+      .find(candidate => candidate.querySelector('.project-name strong')?.textContent.trim() === 'Certification Library');
     return {
       ok: manifest?.schemaVersion === '1.0'
         && manifest.certificationCount === manifest.certifications.length
@@ -358,10 +358,12 @@ try {
       const bank = dialog?.querySelector('.support-bank');
       const qr = dialog?.querySelector('.support-bank img');
       const triggerRect = trigger?.getBoundingClientRect();
+      const isAppsCatalog = window.location.pathname === '/apps/';
       const isJapanGuide = window.location.pathname === '/apps/japan-pr-guide/';
       const result = {
-        ok: triggerRect?.width > 0
-          && triggerRect?.height > 0
+        ok: (isAppsCatalog
+          ? triggerRect?.width === 0 && triggerRect?.height === 0
+          : triggerRect?.width > 0 && triggerRect?.height > 0)
           && dialog?.open === true
           && sponsorForm?.action === 'https://github.com/sponsors/thangldw/sponsorships'
           && dialog?.querySelector('.support-kofi-button')?.href === 'https://ko-fi.com/F4N224DDUV'
@@ -397,35 +399,36 @@ try {
   await page.evaluate(`localStorage.removeItem("theme")`);
   await page.navigate(`${origin}/apps/cert/`, 1280);
   await page.waitUntil(
-    `document.querySelectorAll(".hub-cert-card").length === ${certificationManifest.certificationCount}`
+    `document.querySelectorAll(".hub-cert-list-item").length === ${certificationManifest.certificationCount}`
   );
   assertResult('Certification library', await page.evaluate(`(() => {
-    const cards = [...document.querySelectorAll('.hub-cert-card')];
-    const hrefs = cards.map(card => card.getAttribute('href'));
+    const entries = [...document.querySelectorAll('.hub-cert-list-item')];
+    const hrefs = entries.map(entry => entry.getAttribute('href'));
     const expectedHrefs = ${JSON.stringify(
       certificationManifest.certifications.map(certification => certification.href)
     )};
-    const style = getComputedStyle(cards[0]);
+    const style = getComputedStyle(entries[0]);
+    const descriptionStyle = getComputedStyle(entries[0].querySelector('.hub-cert-description'));
     return {
       ok: document.title === 'Certification Library'
         && document.documentElement.dataset.theme === 'light'
         && document.querySelector('.hub-theme-toggle')?.getAttribute('aria-label') === 'Switch to dark theme'
-        && cards.length === ${certificationManifest.certificationCount}
+        && entries.length === ${certificationManifest.certificationCount}
         && new Set(hrefs).size === ${certificationManifest.certificationCount}
         && hrefs.every(href => expectedHrefs.includes(href))
-        && style.display === 'flex'
-        && style.flexDirection === 'column'
-        && style.minHeight === '210px'
-        && style.padding === '18px'
+        && style.display === 'grid'
+        && style.minHeight === '42px'
+        && style.padding === '4px 10px'
+        && descriptionStyle.display === 'block'
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, cards=\${cards.length}, unique=\${new Set(hrefs).size}, minHeight=\${style.minHeight}\`
+      message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}\`
     };
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
   await page.navigate(`${origin}/apps/cert/`, 2048);
   await page.waitUntil(
-    `document.documentElement.dataset.theme === "dark" && document.querySelectorAll(".hub-cert-card").length === ${certificationManifest.certificationCount}`
+    `document.documentElement.dataset.theme === "dark" && document.querySelectorAll(".hub-cert-list-item").length === ${certificationManifest.certificationCount}`
   );
   assertResult('Certification library dark canvas fills wide viewports', await page.evaluate(`(() => {
     const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
@@ -478,7 +481,9 @@ try {
     return {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'en'
-        && text.includes('0 unassisted · 0 hint-assisted')
+        && text.includes("Today's target")
+        && text.includes('Next full mock')
+        && text.includes('Priority domain')
         && text.includes('Start with a quick diagnostic')
         && text.includes('Start 7 questions')
         && text.includes('Score unlocks after 40 unassisted answers, all domains, and two valid full mocks.')
@@ -591,7 +596,7 @@ try {
         && confidenceButtons.length === 3
         && opened && collapsed && reopened
         && mutedWhenClosed && clearWhenOpened
-        && text.includes('Why this is correct')
+        && text.includes('Correct answer and explanation')
         && text.includes('Memory cue')
         && ratingText.some(label => label.toLowerCase().includes('again') && label.includes('10 min')),
       message: \`start=\${Boolean(startButton)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, ratings=\${ratingText.join('|')}\`
@@ -683,7 +688,9 @@ try {
     return {
       ok: document.title === 'AWS SAA'
         && document.documentElement.lang === 'en'
-        && text.includes('0 unassisted · 0 hint-assisted')
+        && text.includes("Today's target")
+        && text.includes('Next full mock')
+        && text.includes('Priority domain')
         && !text.includes('51%')
         && !text.includes('How to Use')
         && !document.querySelector('.study-tip'),
