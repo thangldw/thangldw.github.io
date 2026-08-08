@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 12,
+  "certificationCount": 13,
   "certifications": [
     {
       "id": "g",
@@ -12,7 +12,7 @@
       "issuer": "JDLA",
       "syllabusVersion": "2024-v1.4",
       "href": "/apps/cert/g/",
-      "availableQuestionCount": 900,
+      "availableQuestionCount": 1135,
       "exam": {
         "durationMinutes": 100,
         "questionCount": 145,
@@ -30,7 +30,7 @@
       "issuer": "日本FP協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/fp3/",
-      "availableQuestionCount": 994,
+      "availableQuestionCount": 1209,
       "exam": {
         "durationMinutes": 150,
         "questionCount": 80,
@@ -48,7 +48,7 @@
       "issuer": "日本漢字能力検定協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/bjt/",
-      "availableQuestionCount": 1652,
+      "availableQuestionCount": 1626,
       "exam": {
         "durationMinutes": 120,
         "questionCount": 80,
@@ -66,7 +66,7 @@
       "issuer": "IPA",
       "syllabusVersion": "2026",
       "href": "/apps/cert/sg/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 457,
       "exam": {
         "durationMinutes": 120,
         "questionCount": 60,
@@ -84,7 +84,7 @@
       "issuer": "IPA",
       "syllabusVersion": "2026",
       "href": "/apps/cert/ap/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 232,
       "exam": {
         "durationMinutes": 300,
         "questionCount": 91,
@@ -102,7 +102,7 @@
       "issuer": "国際交流基金・日本国際教育支援協会",
       "syllabusVersion": "N1",
       "href": "/apps/cert/jlpt/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 122,
       "exam": {
         "durationMinutes": 165,
         "questionCount": 110,
@@ -120,7 +120,7 @@
       "issuer": "IIBC",
       "syllabusVersion": "2026",
       "href": "/apps/cert/toeic/",
-      "availableQuestionCount": 3,
+      "availableQuestionCount": 163,
       "exam": {
         "durationMinutes": 120,
         "questionCount": 200,
@@ -154,9 +154,9 @@
       "shortName": "AWS SAA",
       "name": "AWS Certified Solutions Architect – Associate",
       "issuer": "Amazon Web Services",
-      "syllabusVersion": "SAA-C03",
+      "syllabusVersion": "SAA-C03-2026",
       "href": "/apps/cert/aws/",
-      "availableQuestionCount": 710,
+      "availableQuestionCount": 708,
       "exam": {
         "durationMinutes": 130,
         "questionCount": 65,
@@ -172,7 +172,7 @@
       "shortName": "GH-300",
       "name": "GitHub Copilot",
       "issuer": "Microsoft / GitHub",
-      "syllabusVersion": "GH-300-2026",
+      "syllabusVersion": "GH-300-2026-08",
       "href": "/apps/cert/gh-300/",
       "availableQuestionCount": 147,
       "exam": {
@@ -216,6 +216,24 @@
         "questionCount": 100,
         "format": "CBT方式・通年受検",
         "structure": "学科＋実技（資産設計提案業務）"
+      }
+    },
+    {
+      "id": "fe",
+      "slug": "fe",
+      "displayOrder": 13,
+      "accent": "#2f6f8f",
+      "shortName": "FE",
+      "name": "基本情報技術者試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/fe/",
+      "availableQuestionCount": 285,
+      "exam": {
+        "durationMinutes": 190,
+        "questionCount": 80,
+        "format": "CBT方式・IRT評価",
+        "structure": "科目A 60問＋科目B 20問"
       }
     }
   ]

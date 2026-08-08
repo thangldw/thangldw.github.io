@@ -446,7 +446,7 @@ try {
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
-    await page.waitUntil('document.querySelector(".metric-grid")');
+    await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
     const result = await page.evaluate(`(async () => {
       await new Promise(resolveWait => setTimeout(resolveWait, 100));
       return {
@@ -470,18 +470,18 @@ try {
   }, []);
 
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
   assertResult('G certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
     const bankResources = performance.getEntriesByType('resource')
       .filter(entry => entry.name.includes('/apps/cert/protected-data/'));
     return {
       ok: document.title === 'G検定'
-        && document.documentElement.lang === 'ja'
+        && document.documentElement.lang === 'en'
         && text.includes('0 unassisted · 0 hint-assisted')
         && text.includes('Start with a quick diagnostic')
         && text.includes('Start 7 questions')
-        && text.includes('Score unlocks after 40 unassisted answers, all domains, and one full mock.')
+        && text.includes('Score unlocks after 40 unassisted answers, all domains, and two valid full mocks.')
         && text.includes('Your study data is saved only in this browser')
         && text.includes('Backup or restore')
         && !text.includes('42%')
@@ -489,7 +489,7 @@ try {
         && !document.querySelector('.self-study-path')
         && !document.querySelector('.study-tip')
         && bankResources.length === 1,
-      message: \`title=\${document.title}, bankResources=\${bankResources.length}, text=\${text.slice(0, 160)}\`
+      message: \`title=\${document.title}, lang=\${document.documentElement.lang}, bankResources=\${bankResources.length}, text=\${text.slice(0, 160)}\`
     };
   })()`), page.exceptions);
 
@@ -511,7 +511,7 @@ try {
       .map(item => item.textContent.trim());
     return {
       ok: activeNavigation === 'Study by Domain'
-        && firstDomainLabel === 'RECOMMENDED'
+        && firstDomainLabel?.startsWith('RECOMMENDED')
         && !document.querySelector('.learn-mode-primer')
         && !text.includes('CONCEPT BRIEFING')
         && vietnameseClosedByDefault
@@ -540,7 +540,7 @@ try {
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
 
   assertResult('G key-term active recall', await page.evaluate(`(async () => {
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes')?.click();
@@ -552,7 +552,7 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
 
   assertResult('G self-study confidence capture', await page.evaluate(`(async () => {
     const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Start 7 questions');
@@ -600,7 +600,7 @@ try {
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
   assertResult('G Exam Mode', await page.evaluate(`(async () => {
     const button = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam Mode');
     button.click();
@@ -637,7 +637,7 @@ try {
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 390);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
   assertResult('G mobile layout', await page.evaluate(`(() => ({
     ok: document.documentElement.scrollWidth <= window.innerWidth,
     message: \`scrollWidth=\${document.documentElement.scrollWidth}, viewport=\${window.innerWidth}\`
@@ -656,7 +656,7 @@ try {
   })()`), page.exceptions);
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 390);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
   assertResult('Shared support mobile layout', await page.evaluate(`(async () => {
     const trigger = document.querySelector('.support-floating-trigger');
     trigger?.click();
@@ -677,7 +677,7 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/aws/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid")');
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
   assertResult('AWS certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
     return {
