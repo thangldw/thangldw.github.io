@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 13,
+  "certificationCount": 15,
   "certifications": [
     {
       "id": "g",
@@ -30,7 +30,7 @@
       "issuer": "日本FP協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/fp3/",
-      "availableQuestionCount": 1209,
+      "availableQuestionCount": 1208,
       "exam": {
         "durationMinutes": 150,
         "questionCount": 80,
@@ -210,7 +210,7 @@
       "issuer": "日本FP協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/fp2/",
-      "availableQuestionCount": 655,
+      "availableQuestionCount": 882,
       "exam": {
         "durationMinutes": 210,
         "questionCount": 100,
@@ -234,6 +234,42 @@
         "questionCount": 80,
         "format": "CBT方式・IRT評価",
         "structure": "科目A 60問＋科目B 20問"
+      }
+    },
+    {
+      "id": "tokei-2",
+      "slug": "tokei-2",
+      "displayOrder": 14,
+      "accent": "#6b4f9b",
+      "shortName": "統計2級",
+      "name": "統計検定2級",
+      "issuer": "日本統計学会公式認定",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/tokei-2/",
+      "availableQuestionCount": 160,
+      "exam": {
+        "durationMinutes": 90,
+        "questionCount": 35,
+        "format": "CBT方式・4～5肢選択問題",
+        "structure": "35問程度。大学基礎科目レベルの統計学と問題解決力を評価"
+      }
+    },
+    {
+      "id": "nw",
+      "slug": "nw",
+      "displayOrder": 15,
+      "accent": "#006e78",
+      "shortName": "NW",
+      "name": "ネットワークスペシャリスト試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/nw/",
+      "availableQuestionCount": 137,
+      "exam": {
+        "durationMinutes": 300,
+        "questionCount": 58,
+        "format": "CBT方式。科目Aは四肢択一、科目Bは記述式",
+        "structure": "科目A-1 30問、A-2 25問、B-1 3問中2問、B-2 2問中1問"
       }
     }
   ]
