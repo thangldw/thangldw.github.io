@@ -13,22 +13,28 @@
   function renderFeaturedProjects() {
     var rail = document.getElementById('projectRail');
     if (!rail) return;
+    var collection = window.portfolioLanguageCollection;
+    if (collection) {
+      collection = Object.assign({ isLanguageCollection: true }, collection);
+    }
     var projects = (window.portfolioProjects || [])
       .filter(function (project) { return project.featured; })
-      .sort(function (left, right) { return left.featuredOrder - right.featuredOrder; });
+      .concat(collection || [])
+      .sort(function (left, right) {
+        return left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
+      });
     var cards = projects.map(function (project) {
+      if (project.isLanguageCollection) {
+        return '<a class="resume-project language-project" href="' + escapeHtml(project.href) + '">' +
+          '<span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>' + escapeHtml(project.label) + '</span>' +
+          '<h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.description) + '</p>' +
+          '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
+      }
       return '<a class="resume-project" href="' + escapeHtml(project.href) + '">' +
         '<h3>' + escapeHtml(project.title) + '</h3>' +
         '<p>' + escapeHtml(project.featuredDescription || project.description) + '</p>' +
         '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
     });
-    var collection = window.portfolioLanguageCollection;
-    if (collection) {
-      cards.push('<a class="resume-project language-project" href="' + escapeHtml(collection.href) + '">' +
-        '<span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>' + escapeHtml(collection.label) + '</span>' +
-        '<h3>' + escapeHtml(collection.title) + '</h3><p>' + escapeHtml(collection.description) + '</p>' +
-        '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>');
-    }
     rail.innerHTML = cards.join('');
   }
 
