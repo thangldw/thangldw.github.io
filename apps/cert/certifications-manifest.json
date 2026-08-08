@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 15,
+  "certificationCount": 20,
   "certifications": [
     {
       "id": "g",
@@ -66,7 +66,7 @@
       "issuer": "IPA",
       "syllabusVersion": "2026",
       "href": "/apps/cert/sg/",
-      "availableQuestionCount": 457,
+      "availableQuestionCount": 846,
       "exam": {
         "durationMinutes": 120,
         "questionCount": 60,
@@ -84,7 +84,7 @@
       "issuer": "IPA",
       "syllabusVersion": "2026",
       "href": "/apps/cert/ap/",
-      "availableQuestionCount": 232,
+      "availableQuestionCount": 968,
       "exam": {
         "durationMinutes": 300,
         "questionCount": 91,
@@ -270,6 +270,96 @@
         "questionCount": 58,
         "format": "CBT方式。科目Aは四肢択一、科目Bは記述式",
         "structure": "科目A-1 30問、A-2 25問、B-1 3問中2問、B-2 2問中1問"
+      }
+    },
+    {
+      "id": "sc",
+      "slug": "sc",
+      "displayOrder": 16,
+      "accent": "#8b1e3f",
+      "shortName": "SC",
+      "name": "情報処理安全確保支援士試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/sc/",
+      "availableQuestionCount": 157,
+      "exam": {
+        "durationMinutes": 240,
+        "questionCount": 57,
+        "format": "CBT方式。科目Aは四肢択一、科目Bは記述式",
+        "structure": "科目A-1 30問、A-2 25問、科目B 4問中2問"
+      }
+    },
+    {
+      "id": "db",
+      "slug": "db",
+      "displayOrder": 17,
+      "accent": "#315c8c",
+      "shortName": "DB",
+      "name": "データベーススペシャリスト試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/db/",
+      "availableQuestionCount": 139,
+      "exam": {
+        "durationMinutes": 300,
+        "questionCount": 58,
+        "format": "CBT方式。科目Aは四肢択一、科目B-1・B-2は記述式",
+        "structure": "科目A-1 30問、A-2 25問、B-1 3問中2問、B-2 2問中1問"
+      }
+    },
+    {
+      "id": "boki1",
+      "slug": "boki1",
+      "displayOrder": 18,
+      "accent": "#6f2c1f",
+      "shortName": "簿記1級",
+      "name": "日商簿記1級",
+      "issuer": "日本商工会議所",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/boki1/",
+      "availableQuestionCount": 114,
+      "exam": {
+        "durationMinutes": 180,
+        "questionCount": 4,
+        "format": "統一試験・記述計算式",
+        "structure": "商業簿記・会計学 90分、工業簿記・原価計算 90分"
+      }
+    },
+    {
+      "id": "boki2",
+      "slug": "boki2",
+      "displayOrder": 19,
+      "accent": "#8c4a24",
+      "shortName": "簿記2級",
+      "name": "日商簿記2級",
+      "issuer": "日本商工会議所",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/boki2/",
+      "availableQuestionCount": 154,
+      "exam": {
+        "durationMinutes": 90,
+        "questionCount": 5,
+        "format": "統一試験またはネット試験",
+        "structure": "商業簿記・工業簿記（原価計算を含む）、5題以内"
+      }
+    },
+    {
+      "id": "boki3",
+      "slug": "boki3",
+      "displayOrder": 20,
+      "accent": "#a66b2b",
+      "shortName": "簿記3級",
+      "name": "日商簿記3級",
+      "issuer": "日本商工会議所",
+      "syllabusVersion": "2026",
+      "href": "/apps/cert/boki3/",
+      "availableQuestionCount": 156,
+      "exam": {
+        "durationMinutes": 60,
+        "questionCount": 3,
+        "format": "統一試験またはネット試験",
+        "structure": "商業簿記、3題以内"
       }
     }
   ]
