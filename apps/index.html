@@ -17,8 +17,8 @@
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
   <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
-  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260727b">
   <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260808-table2">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
@@ -54,19 +54,27 @@
             <button class="filter-button" type="button" data-filter="games" aria-pressed="false">Games</button>
             <button class="filter-button" type="button" data-filter="certification-study" aria-pressed="false">Certification Study</button>
           </div>
-          <output class="catalog-count" id="catalogCount" aria-live="polite">0 entries</output>
+          <output class="catalog-count" id="catalogCount" aria-live="polite">A–Z · 0 entries</output>
         </div>
       </div>
 
       <section class="project-library" aria-labelledby="projectLibraryHeading">
-        <div class="project-library-heading">
-          <div>
-            <span class="eyebrow">Project library</span>
-            <h2 id="projectLibraryHeading">Explore the collection</h2>
-          </div>
-          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+        <h2 id="projectLibraryHeading" hidden>Project library, sorted alphabetically</h2>
+        <div class="project-table-scroll" tabindex="0" aria-label="Project library table. Sorted by project name from A to Z.">
+          <table class="project-table">
+            <thead>
+              <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Tags</th>
+                <th scope="col">Version</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="projectIndex"></tbody>
+          </table>
         </div>
-        <div class="project-card-grid" id="projectIndex"></div>
       </section>
       <div class="catalog-empty" id="catalogEmpty" hidden>
         <h2>No matching projects</h2>
@@ -95,13 +103,11 @@
         return String(value || '').toLocaleLowerCase().normalize('NFKD');
       }
 
-      var projects = (window.portfolioProjects || []).concat(window.portfolioLearningCollections || []);
-      for (var index = projects.length - 1; index > 0; index -= 1) {
-        var target = Math.floor(Math.random() * (index + 1));
-        var current = projects[index];
-        projects[index] = projects[target];
-        projects[target] = current;
-      }
+      var projects = (window.portfolioProjects || [])
+        .concat(window.portfolioLearningCollections || [])
+        .sort(function (left, right) {
+          return left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
+        });
 
       var projectIndex = document.getElementById('projectIndex');
       var searchInput = document.getElementById('projectSearch');
@@ -126,36 +132,35 @@
         return '';
       }
 
-      function renderCard(project) {
+      function renderRow(project) {
         var tags = (project.tags || []).slice(0, 3).map(function (tag) {
           return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
         }).join('');
         var searchText = [project.title, project.description, (project.tags || []).join(' '), project.category, project.categoryLabel].join(' ');
-        return '<article class="project-card" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-category="' + escapeHtml(project.category || 'developer-tools') + '" data-search="' + escapeHtml(normalize(searchText)) + '">' +
-          '<a class="project-title-link" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '">' +
-          '<div class="project-card-top"><span class="project-category"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i>' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span>' +
-          '<small class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</small></div>' +
-          '<h2>' + escapeHtml(project.title) + '</h2>' +
-          '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
-          '<div class="project-tags">' + tags + '</div>' +
-          '<div class="project-card-meta"><span>' + escapeHtml(project.cta || 'Open project') + '</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>' +
-          '</a></article>';
+        return '<tr class="project-row" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-category="' + escapeHtml(project.category || 'developer-tools') + '" data-search="' + escapeHtml(normalize(searchText)) + '">' +
+          '<td><a class="project-name" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '"><span class="project-icon"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i></span><strong>' + escapeHtml(project.title) + '</strong></a></td>' +
+          '<td><span class="project-category">' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span></td>' +
+          '<td><p class="project-description">' + escapeHtml(project.description) + '</p></td>' +
+          '<td><div class="project-tags">' + tags + '</div></td>' +
+          '<td><span class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</span></td>' +
+          '<td><a class="project-action" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.cta || ('Open ' + project.title)) + '"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></td>' +
+          '</tr>';
       }
 
-      projectIndex.innerHTML = projects.map(renderCard).join('');
-      var cards = Array.prototype.slice.call(projectIndex.querySelectorAll('.project-card'));
+      projectIndex.innerHTML = projects.map(renderRow).join('');
+      var rows = Array.prototype.slice.call(projectIndex.querySelectorAll('.project-row'));
 
       function applyFilters() {
         var query = normalize(searchInput.value.trim());
         var visibleCount = 0;
-        cards.forEach(function (card) {
-          var categoryMatch = activeFilter === 'all' || card.dataset.category === activeFilter;
-          var queryMatch = !query || card.dataset.search.indexOf(query) !== -1;
+        rows.forEach(function (row) {
+          var categoryMatch = activeFilter === 'all' || row.dataset.category === activeFilter;
+          var queryMatch = !query || row.dataset.search.indexOf(query) !== -1;
           var visible = categoryMatch && queryMatch;
-          card.hidden = !visible;
+          row.hidden = !visible;
           if (visible) visibleCount += 1;
         });
-        countOutput.textContent = visibleCount + (visibleCount === 1 ? ' entry' : ' entries');
+        countOutput.textContent = 'A–Z · ' + visibleCount + (visibleCount === 1 ? ' entry' : ' entries');
         emptyState.hidden = visibleCount !== 0;
       }
 
