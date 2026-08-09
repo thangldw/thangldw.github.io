@@ -409,6 +409,8 @@ try {
     )};
     const style = getComputedStyle(entries[0]);
     const descriptionStyle = getComputedStyle(entries[0].querySelector('.hub-cert-description'));
+    const hskEntry = entries.find(entry => entry.getAttribute('href') === '/apps/cert/hsk-3-0/');
+    const aipEntry = entries.find(entry => entry.getAttribute('href') === '/apps/cert/aws-aip-c01/');
     return {
       ok: document.title === 'Certification Library'
         && document.documentElement.dataset.theme === 'light'
@@ -420,6 +422,9 @@ try {
         && style.minHeight === '42px'
         && style.padding === '3px 10px'
         && descriptionStyle.display === 'block'
+        && hskEntry?.dataset.category === 'language'
+        && hskEntry?.querySelector('.hub-cert-category')?.textContent.trim() === 'Chinese language'
+        && aipEntry?.dataset.category === 'ai'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}\`
     };
@@ -471,6 +476,32 @@ try {
     ),
     message: JSON.stringify(childThemeChecks)
   }, []);
+
+  await page.navigate(origin + '/apps/cert/pmp/', 1280);
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  assertResult('PMP complete July 2026 bank and learning metadata', await page.evaluate(`(async () => {
+    const dashboardText = document.body.innerText;
+    const termsButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes');
+    termsButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const termsText = document.body.innerText;
+    const noteCount = document.querySelectorAll('.reference-notes details').length;
+    const graphButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph');
+    graphButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    return {
+      ok: dashboardText.includes('0 / 180 answered')
+        && !dashboardText.includes('Preview question bank')
+        && termsText.includes('64 terms')
+        && noteCount === 3
+        && Boolean(document.querySelector('.knowledge-universe-stage')),
+      message: 'dashboard180=' + dashboardText.includes('0 / 180 answered')
+        + ', preview=' + dashboardText.includes('Preview question bank')
+        + ', terms64=' + termsText.includes('64 terms')
+        + ', notes=' + noteCount
+        + ', graph=' + Boolean(document.querySelector('.knowledge-universe-stage'))
+    };
+  })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
