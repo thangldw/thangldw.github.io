@@ -418,7 +418,7 @@ try {
         && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'grid'
         && style.minHeight === '42px'
-        && style.padding === '4px 10px'
+        && style.padding === '3px 10px'
         && descriptionStyle.display === 'block'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}\`
