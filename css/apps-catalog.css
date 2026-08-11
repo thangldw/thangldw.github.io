@@ -1,6 +1,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 .portfolio-catalog{--catalog-bg:var(--color-canvas);--catalog-surface:var(--color-surface-raised);--catalog-ink:var(--color-text);--catalog-body:var(--color-text-body);--catalog-strong:var(--color-text-strong);--catalog-muted:var(--color-text-muted);--catalog-border:var(--color-border);--catalog-border-strong:var(--color-border-strong);--catalog-accent:var(--color-accent);--catalog-accent-ink:var(--color-on-accent);margin:0;background:var(--catalog-bg);color:var(--catalog-ink);font-family:var(--font-sans);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+:root:not([data-theme="dark"]) .portfolio-catalog{--color-canvas:#fbfcfe;--catalog-bg:#fbfcfe}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 body.portfolio-catalog .catalog-wrap{width:min(1488px,calc(100% - 64px));margin-inline:auto}

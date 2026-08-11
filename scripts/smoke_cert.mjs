@@ -199,6 +199,30 @@ try {
     })()`), page.exceptions);
   }
 
+  const pageBackgroundChecks = [
+    ['/', 'Homepage'],
+    ['/apps/', 'Apps catalog']
+  ];
+  for (const [backgroundPath, backgroundLabel] of pageBackgroundChecks) {
+    await page.evaluate(`localStorage.removeItem("theme")`);
+    await page.navigate(`${origin}${backgroundPath}`, 1280);
+    assertResult(`${backgroundLabel} light background`, await page.evaluate(`(() => ({
+      ok: document.documentElement.dataset.theme === 'light'
+        && getComputedStyle(document.body).backgroundColor === 'rgb(251, 252, 254)',
+      message: 'theme=' + document.documentElement.dataset.theme
+        + ', background=' + getComputedStyle(document.body).backgroundColor
+    }))()`), page.exceptions);
+
+    await page.evaluate(`localStorage.setItem("theme", "dark")`);
+    await page.navigate(`${origin}${backgroundPath}`, 1280);
+    assertResult(`${backgroundLabel} dark background`, await page.evaluate(`(() => ({
+      ok: document.documentElement.dataset.theme === 'dark'
+        && getComputedStyle(document.body).backgroundColor === 'rgb(17, 19, 15)',
+      message: 'theme=' + document.documentElement.dataset.theme
+        + ', background=' + getComputedStyle(document.body).backgroundColor
+    }))()`), page.exceptions);
+  }
+
   await page.navigate(`${origin}/apps/`, 1280);
   await page.waitUntil('document.querySelector(".project-row")');
   assertResult('Apps catalog responsive project index', await page.evaluate(`(() => {
