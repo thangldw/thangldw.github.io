@@ -201,18 +201,38 @@ try {
 
   await page.navigate(`${origin}/apps/`, 1280);
   await page.waitUntil('document.querySelector(".project-row")');
-  assertResult('Apps catalog project table', await page.evaluate(`(() => {
+  assertResult('Apps catalog responsive project index', await page.evaluate(`(() => {
     const table = document.querySelector('.project-table');
     const scroller = document.querySelector('.project-table-scroll');
+    const row = document.querySelector('.project-row');
     const style = getComputedStyle(table);
     return {
-      ok: style.borderCollapse === 'collapse'
-        && style.minWidth === '1080px'
-        && scroller.scrollWidth >= scroller.clientWidth
+      ok: style.minWidth === '0px'
+        && getComputedStyle(row).display === 'grid'
+        && scroller.scrollWidth <= scroller.clientWidth
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`collapse=\${style.borderCollapse}, minWidth=\${style.minWidth}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}\`
+      message: \`minWidth=\${style.minWidth}, row=\${getComputedStyle(row).display}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}\`
     };
   })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/`, 390);
+  await page.waitUntil('document.querySelector(".project-row")');
+  assertResult('Apps catalog mobile rows', await page.evaluate(`(() => {
+    const scroller = document.querySelector('.project-table-scroll');
+    const row = document.querySelector('.project-row');
+    const description = row?.querySelector('.project-description');
+    return {
+      ok: document.documentElement.scrollWidth <= window.innerWidth
+        && scroller.scrollWidth <= scroller.clientWidth
+        && getComputedStyle(row).display === 'grid'
+        && getComputedStyle(description).display !== 'none'
+        && description.scrollWidth <= description.clientWidth,
+      message: \`document=\${document.documentElement.scrollWidth}/\${window.innerWidth}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}, row=\${getComputedStyle(row).display}, description=\${description?.clientWidth}/\${description?.scrollWidth}\`
+    };
+  })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/`, 1280);
+  await page.waitUntil('document.querySelector(".project-row")');
 
   assertResult('Toolbox releases in the apps catalog', await page.evaluate(`(() => {
     const rows = [...document.querySelectorAll('.project-row')];
