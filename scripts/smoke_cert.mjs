@@ -334,7 +334,7 @@ try {
       ? getComputedStyle(project).getPropertyValue('--project-hover-surface').trim()
       : '';
     return {
-      ok: hoverSurface === '#eef3f8',
+      ok: hoverSurface === '#f3f6fa',
       message: 'hoverSurface=' + hoverSurface
     };
   })()`), page.exceptions);
