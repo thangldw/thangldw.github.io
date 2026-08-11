@@ -81,11 +81,11 @@ class CdpPage {
     throw new Error(`Timed out waiting for ${expression}`);
   }
 
-  async navigate(url, width) {
+  async navigate(url, width, height = 900) {
     this.exceptions.length = 0;
     await this.send('Emulation.setDeviceMetricsOverride', {
       width,
-      height: 900,
+      height,
       deviceScaleFactor: 1,
       mobile: false
     });
@@ -239,19 +239,45 @@ try {
     };
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/`, 390);
+  const appsDesktopViewports = [
+    [1280, 720],
+    [1440, 900],
+    [1440, 1000]
+  ];
+  for (const [desktopWidth, desktopHeight] of appsDesktopViewports) {
+    await page.navigate(`${origin}/apps/`, desktopWidth, desktopHeight);
+    await page.waitUntil('document.querySelectorAll(".project-row").length === 9');
+    assertResult(`Apps catalog fits ${desktopWidth}x${desktopHeight}`, await page.evaluate(`(() => {
+      const scroller = document.querySelector('.project-table-scroll');
+      const visibleRows = document.querySelectorAll('.project-row:not([hidden])');
+      return {
+        ok: document.documentElement.scrollHeight <= window.innerHeight
+          && document.documentElement.scrollWidth <= window.innerWidth
+          && scroller.scrollHeight <= scroller.clientHeight
+          && visibleRows.length === 9,
+        message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
+          + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
+          + ', scroller=' + scroller.clientWidth + 'x' + scroller.clientHeight
+          + '/' + scroller.scrollWidth + 'x' + scroller.scrollHeight
+          + ', rows=' + visibleRows.length
+      };
+    })()`), page.exceptions);
+  }
+
+  await page.navigate(`${origin}/apps/`, 390, 844);
   await page.waitUntil('document.querySelector(".project-row")');
   assertResult('Apps catalog mobile rows', await page.evaluate(`(() => {
     const scroller = document.querySelector('.project-table-scroll');
     const row = document.querySelector('.project-row');
     const description = row?.querySelector('.project-description');
     return {
-      ok: document.documentElement.scrollWidth <= window.innerWidth
+      ok: document.documentElement.scrollHeight > window.innerHeight
+        && document.documentElement.scrollWidth <= window.innerWidth
         && scroller.scrollWidth <= scroller.clientWidth
         && getComputedStyle(row).display === 'grid'
         && getComputedStyle(description).display !== 'none'
         && description.scrollWidth <= description.clientWidth,
-      message: \`document=\${document.documentElement.scrollWidth}/\${window.innerWidth}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}, row=\${getComputedStyle(row).display}, description=\${description?.clientWidth}/\${description?.scrollWidth}\`
+      message: \`document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}/\${window.innerWidth}x\${window.innerHeight}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}, row=\${getComputedStyle(row).display}, description=\${description?.clientWidth}/\${description?.scrollWidth}\`
     };
   })()`), page.exceptions);
 
