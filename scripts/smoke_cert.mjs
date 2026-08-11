@@ -439,14 +439,34 @@ try {
         && new Set(hrefs).size === ${certificationManifest.certificationCount}
         && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'grid'
-        && style.minHeight === '42px'
-        && style.padding === '3px 10px'
+        && style.minHeight === '56px'
+        && style.padding === '8px 6px'
         && descriptionStyle.display === 'block'
+        && descriptionStyle.fontSize === '13px'
         && hskEntry?.dataset.category === 'language'
         && hskEntry?.querySelector('.hub-cert-category')?.textContent.trim() === 'Chinese language'
         && aipEntry?.dataset.category === 'ai'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}\`
+    };
+  })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/`, 390);
+  await page.waitUntil(
+    `document.querySelectorAll(".hub-cert-list-item").length === ${certificationManifest.certificationCount}`
+  );
+  assertResult('Certification library mobile rows', await page.evaluate(`(() => {
+    const entry = document.querySelector('.hub-cert-list-item');
+    const description = entry?.querySelector('.hub-cert-description');
+    const style = entry && getComputedStyle(entry);
+    return {
+      ok: style?.display === 'grid'
+        && style?.minHeight === '96px'
+        && getComputedStyle(description).display === 'block'
+        && document.documentElement.scrollWidth <= window.innerWidth,
+      message: 'display=' + style?.display
+        + ', minHeight=' + style?.minHeight
+        + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
 
@@ -736,9 +756,12 @@ try {
   await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
   assertResult('AWS certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
+    const shell = document.querySelector('.app-shell');
     return {
       ok: document.title === 'AWS SAA'
         && document.documentElement.lang === 'en'
+        && getComputedStyle(shell).gridTemplateColumns.startsWith('252px ')
+        && document.documentElement.scrollWidth <= window.innerWidth
         && text.includes("Today's target")
         && text.includes('Next full mock')
         && text.includes('Priority domain')
@@ -748,6 +771,16 @@ try {
       message: \`title=\${document.title}, text=\${text.slice(0, 160)}\`
     };
   })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/aws/`, 390);
+  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  assertResult('AWS certification dashboard mobile layout', await page.evaluate(`(() => ({
+    ok: getComputedStyle(document.querySelector('.app-shell')).gridTemplateColumns.startsWith('78px ')
+      && document.documentElement.scrollWidth <= window.innerWidth
+      && document.querySelector('.study-now-card')?.getBoundingClientRect().width <= window.innerWidth,
+    message: 'grid=' + getComputedStyle(document.querySelector('.app-shell')).gridTemplateColumns
+      + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
+  }))()`), page.exceptions);
 
   page.close();
   console.log('CERT smoke tests passed.');
