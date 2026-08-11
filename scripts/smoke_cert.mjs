@@ -325,8 +325,20 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.evaluate(`localStorage.removeItem("theme")`);
   await page.navigate(`${origin}/`, 1280);
   await page.waitUntil('document.querySelector("#projectRail .resume-project")');
+  assertResult('Home project hover uses the cool neutral surface', await page.evaluate(`(() => {
+    const project = document.querySelector('#projectRail .resume-project');
+    const hoverSurface = project
+      ? getComputedStyle(project).getPropertyValue('--project-hover-surface').trim()
+      : '';
+    return {
+      ok: hoverSurface === '#eef3f8',
+      message: 'hoverSurface=' + hoverSurface
+    };
+  })()`), page.exceptions);
+
   assertResult('Toolbox releases in home side projects', await page.evaluate(`(() => {
     const projects = [...document.querySelectorAll('#projectRail .resume-project')];
     const byTitle = title => projects.find(project => project.querySelector('h3')?.textContent.trim() === title);
