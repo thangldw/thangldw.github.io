@@ -15,10 +15,23 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="university.css"><link rel="stylesheet" href="redesign.css?v=20260727-pr-only-tags"><link rel="stylesheet" href="/css/page-frame.css?v=20260727b"><link rel="stylesheet" href="/css/support-dialog.css?v=20260803i"><link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="university.css"><link rel="stylesheet" href="redesign.css?v=20260812"><link rel="stylesheet" href="/css/page-frame.css?v=20260727b"><link rel="stylesheet" href="/css/support-dialog.css?v=20260803i"><link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
 </head>
 <body class="site-page" data-page-kind="product" data-site-shell="none">
   <a class="skip" href="#calculator">Skip to calculator / Đi tới phần tính điểm</a>
+
+  <header id="appHeader" class="app-header">
+    <div class="app-header-inner shell">
+      <a class="app-brand" href="#top" aria-label="Highly Skilled Professional calculator home">
+        <img src="assets/hsp-mark.png" width="40" height="40" alt="">
+        <span>Highly Skilled Professional</span>
+      </a>
+      <nav class="app-meta" aria-label="Calculator information">
+        <span><i class="ri-shield-check-line" aria-hidden="true"></i> Rules checked · August 2026</span>
+        <a href="#sources">About HSP</a>
+      </nav>
+    </div>
+  </header>
 
   <main id="top" class="shell">
     <section id="calculator" class="workspace-section calculator-section">
@@ -27,7 +40,7 @@
           <section class="hero">
             <p class="eyebrow" data-t="heroEye">Japan · Highly Skilled Professional & Permanent Residence</p>
             <h1 data-th="heroTitle">Highly Skilled Professional Points Calculator</h1>
-            <p class="lead" data-t="heroLead">Calculate your Highly Skilled Professional points, check permanent-residence routes, and build an evidence-ready application plan.</p>
+            <p class="lead" data-t="heroLead">Calculate your score, see the 70/80 thresholds, and review the matching permanent-residence route.</p>
           </section>
 
       <div class="section-head calculator-head">
@@ -36,9 +49,9 @@
       </div>
 
       <div class="activity-tabs" role="radiogroup" aria-label="HSP activity category">
-        <button type="button" class="activity active" data-activity="a" role="radio" aria-checked="true"><small>1号イ · HSP (i)(a)</small><b data-t="activityA">Academic research</b><span data-t="activityADesc">Research, research guidance or education</span></button>
-        <button type="button" class="activity" data-activity="b" role="radio" aria-checked="false"><small>1号ロ · HSP (i)(b)</small><b data-t="activityB">Specialized / technical</b><span data-t="activityBDesc">Advanced natural- or human-science work</span></button>
-        <button type="button" class="activity" data-activity="c" role="radio" aria-checked="false"><small>1号ハ · HSP (i)(c)</small><b data-t="activityC">Business management</b><span data-t="activityCDesc">Managing or administering a business</span></button>
+        <button type="button" class="activity active" data-activity="a" role="radio" aria-checked="true"><i class="ri-book-open-line" aria-hidden="true"></i><i class="activity-check ri-checkbox-circle-fill" aria-hidden="true"></i><small>1号イ · HSP (i)(a)</small><b data-t="activityA">Academic research</b><span data-t="activityADesc">Research, research guidance or education</span></button>
+        <button type="button" class="activity" data-activity="b" role="radio" aria-checked="false"><i class="ri-code-box-line" aria-hidden="true"></i><i class="activity-check ri-checkbox-circle-fill" aria-hidden="true"></i><small>1号ロ · HSP (i)(b)</small><b data-t="activityB">Specialized / technical</b><span data-t="activityBDesc">Advanced natural- or human-science work</span></button>
+        <button type="button" class="activity" data-activity="c" role="radio" aria-checked="false"><i class="ri-briefcase-4-line" aria-hidden="true"></i><i class="activity-check ri-checkbox-circle-fill" aria-hidden="true"></i><small>1号ハ · HSP (i)(c)</small><b data-t="activityC">Business management</b><span data-t="activityCDesc">Managing or administering a business</span></button>
       </div>
 
       <div id="activityCaution" class="caution"></div>
@@ -47,15 +60,14 @@
           <section class="form-group core-group">
             <div class="form-group-head"><span>02</span><div><h3 data-t="basics">Core factors</h3><p data-t="exclusive">One value from each row; points cannot be stacked within a row.</p></div></div>
             <div class="field-grid">
-              <label class="core-field"><i class="ri-graduation-cap-line" aria-hidden="true"></i><span data-t="degree">Highest qualifying degree</span><select id="degree"></select></label>
-              <label class="core-field"><i class="ri-user-star-line" aria-hidden="true"></i><span data-t="experience">Relevant professional experience</span><select id="experience"></select></label>
+              <label class="core-field"><i class="ri-graduation-cap-line" aria-hidden="true"></i><span data-t="degree">Highest qualifying degree</span><select id="degree"></select><output id="degreePoints" class="field-points">0 pts</output></label>
+              <label class="core-field"><i class="ri-user-star-line" aria-hidden="true"></i><span data-t="experience">Relevant professional experience</span><select id="experience"></select><output id="experiencePoints" class="field-points">0 pts</output></label>
               <label id="ageField" class="core-field"><i class="ri-calendar-line" aria-hidden="true"></i><span data-t="age">Age at reference date</span><select id="age">
                 <option value="99" data-t="ageSelect">Select age group — 0</option><option value="29" data-t="ageUnder30">Under 30</option><option value="32" data-t="age3034">30–34</option><option value="37" data-t="age3539">35–39</option><option value="42" data-t="age40">40 or older</option>
-              </select></label>
-              <label class="core-field"><i class="ri-money-cny-circle-line" aria-hidden="true"></i><span data-t="income">Gross annual remuneration</span><select id="income"></select><small data-t="incomeHelp">Before tax and social-insurance deductions; use provable expected remuneration.</small></label>
-              <label id="positionField" class="core-field" hidden><i class="ri-briefcase-4-line" aria-hidden="true"></i><span data-t="position">Corporate position</span><select id="position"><option value="0" data-t="positionNone">Other / none — 0</option><option value="5" data-t="director">Director / executive officer — 5</option><option value="10" data-t="representative">Representative director / equivalent — 10</option></select></label>
+              </select><output id="agePoints" class="field-points">0 pts</output></label>
+              <label class="core-field"><i class="ri-money-cny-circle-line" aria-hidden="true"></i><span data-t="income">Gross annual remuneration</span><select id="income"></select><output id="incomePoints" class="field-points">0 pts</output><small data-t="incomeHelp">Before tax and social-insurance deductions; use provable expected remuneration.</small></label>
+              <label id="positionField" class="core-field" hidden><i class="ri-briefcase-4-line" aria-hidden="true"></i><span data-t="position">Corporate position</span><select id="position"><option value="0" data-t="positionNone">Other / none — 0</option><option value="5" data-t="director">Director / executive officer — 5</option><option value="10" data-t="representative">Representative director / equivalent — 10</option></select><output id="positionPoints" class="field-points">0 pts</output></label>
             </div>
-            <label class="option-row"><input id="multipleDegrees" type="checkbox"><span><b data-t="multiDegree">Two or more degrees in different fields</b><small data-t="multiDegreeHelp">Doctoral, master's or professional degrees in multiple fields — +5</small></span></label>
           </section>
 
           <section id="researchGroup" class="form-group">
@@ -68,37 +80,56 @@
             <label><span data-t="qualificationCount">Number of qualifying national / notified IT qualifications</span><select id="qualification"><option value="0" data-t="none">None — 0</option><option value="1" data-t="oneQualification">One — 5</option><option value="2" data-t="twoQualifications">Two or more — 10</option></select></label>
           </section>
 
-          <section class="form-group bonus-group">
-            <div class="form-group-head"><span>04</span><div><h3 data-t="bonusTitle">Special additions</h3><p data-t="bonusIntro">Claim only items you can prove with the specified official evidence.</p></div></div>
-            <div class="option-list">
+          <details id="bonusDisclosure" class="form-group bonus-group">
+            <summary><span>04</span><div><h3 data-t="bonusTitle">Special additions</h3><p data-t="bonusIntro">Claim only items you can prove with the specified official evidence.</p></div><i class="ri-arrow-down-s-line" aria-hidden="true"></i></summary>
+            <div class="bonus-groups">
+              <section class="bonus-column"><h4>Language &amp; education</h4><p>Ngôn ngữ &amp; học vấn</p><div class="option-list">
               <label class="option-row"><input id="japanUniversity" type="checkbox"><span><b data-t="japanUniversity">Graduated from a Japanese university / graduate school</b><small>+10</small></span></label>
               <label><span data-t="japanese">Japanese proficiency by examination</span><select id="japanese"><option value="0" data-t="none">None — 0</option><option value="n2" data-t="n2">JLPT N2 / BJT 400+ — 10</option><option value="n1" data-t="n1">JLPT N1 / BJT 480+ — 15</option></select></label>
               <label class="option-row"><input id="foreignJapaneseMajor" type="checkbox"><span><b data-t="foreignJapaneseMajor">Graduated from a foreign university after majoring in Japanese</b><small data-t="foreignJapaneseMajorHelp">Includes a Business Japanese major when the diploma or transcript establishes Japanese as the formal major — +15</small></span></label>
+              <label class="option-row"><input id="multipleDegrees" type="checkbox"><span><b data-t="multiDegree">Two or more degrees in different fields</b><small data-t="multiDegreeHelp">Doctoral, master's or professional degrees in multiple fields — +5</small></span></label>
               <div class="university-lookup"><span data-t="universityBonus">Qualifying university category</span><input id="universitySearch" type="search" autocomplete="off" placeholder="Search university name…"><input id="universityBonus" type="hidden" value="0"><div id="universityResults" class="university-results"></div><div id="selectedUniversity" class="selected-university"></div><label class="option-row manual-university"><input id="innovativeAsiaManual" type="checkbox"><span><b data-t="innovativeAsiaManual">Innovative Asia partner university (official-list confirmation)</b><small data-t="universityNonstack">University categories do not stack — maximum +10</small></span></label></div>
+              </div></section>
+              <section class="bonus-column"><h4>Employer &amp; activity</h4><p>Nhà tuyển dụng &amp; hoạt động</p><div class="option-list">
               <label class="option-row"><input id="innovationSupport" type="checkbox"><span><b data-t="innovation">Employer receives qualifying innovation support</b><small>+10</small></span></label>
               <label class="option-row dependent"><input id="innovationSme" type="checkbox"><span><b data-t="innovationSme">Employer above is also a qualifying SME</b><small data-t="requiresInnovation">Requires the innovation-support criterion — +10</small></span></label>
               <label class="option-row"><input id="localSupport" type="checkbox"><span><b data-t="localSupport">Employer receives a qualifying local-government measure</b><small>+10</small></span></label>
               <label class="option-row"><input id="smeResearch" type="checkbox"><span><b data-t="smeResearch">SME with R&D expenses exceeding 3% of revenue</b><small>+5</small></span></label>
-              <label class="option-row"><input id="foreignAward" type="checkbox"><span><b data-t="foreignAward">Recognized foreign qualification or award</b><small>+5</small></span></label>
               <label class="option-row"><input id="advancedProject" type="checkbox"><span><b data-t="advancedProject">Works on a designated advanced growth-field project</b><small>+10</small></span></label>
-              <label class="option-row"><input id="jicaTraining" type="checkbox"><span><b data-t="jicaTraining">Completed qualifying JICA Innovative Asia training (1+ year)</b><small>+5</small></span></label>
               <label id="assetManagementRow" class="option-row" hidden><input id="assetManagement" type="checkbox"><span><b data-t="assetManagement">Engaged in designated investment-management work</b><small>+10</small></span></label>
               <label id="investmentRow" class="option-row" hidden><input id="investment" type="checkbox"><span><b data-t="investment">Invested ¥100 million or more in a Japanese organization</b><small>+5</small></span></label>
+              </div></section>
+              <section class="bonus-column"><h4>Qualifications &amp; achievements</h4><p>Bằng cấp &amp; thành tích</p><div class="option-list">
+                <label class="option-row"><input id="foreignAward" type="checkbox"><span><b data-t="foreignAward">Recognized foreign qualification or award</b><small>+5</small></span></label>
+                <label class="option-row"><input id="jicaTraining" type="checkbox"><span><b data-t="jicaTraining">Completed qualifying JICA Innovative Asia training (1+ year)</b><small>+5</small></span></label>
+                <p class="bonus-guidance">Research achievements and notified IT qualifications are calculated in the activity-specific section above.</p>
+              </div></section>
             </div>
-          </section>
+          </details>
         </form>
         </div>
 
-        <aside class="score-card">
+        <aside id="scoreSummary" class="score-card">
           <div class="score-sticky">
-            <p class="eyebrow" data-t="estimatedScore">Estimated score</p>
-            <div class="score-number"><strong id="score" aria-live="polite">0</strong><span><span class="bi-en">PTS</span><span class="bi-vi">ĐIỂM</span></span></div>
+            <div class="mobile-score-hero">
+              <p>HIGHLY SKILLED PROFESSIONAL POINTS CALCULATOR</p>
+              <h2>Calculate your HSP score</h2>
+              <span>Tính điểm HSP của bạn</span>
+            </div>
+            <p class="score-label" data-t="estimatedScore">Estimated score</p>
+            <div class="score-number"><strong id="score" aria-live="polite">0</strong><span><b>/ 100</b><span class="bi-en">PTS</span><span class="bi-vi">ĐIỂM</span></span></div>
+            <p class="score-section-label"><b>Your status</b><span>Trạng thái</span></p>
+            <div id="scoreQualification" class="score-qualification"><i class="ri-time-line" aria-hidden="true"></i><span><b>Complete the core factors</b><small>Hoàn tất các yếu tố cốt lõi</small></span></div>
             <div class="meter" aria-hidden="true"><i id="meter"></i><b class="mark70"></b><b class="mark80"></b></div>
             <div class="meter-labels"><span>0</span><span>70</span><span>80</span><span>100+</span></div>
+            <div class="threshold-grid"><p><b>70 points</b><span>3-year PR route</span><small>Lộ trình PR 3 năm</small></p><p><b>80 points</b><span>1-year PR route</span><small>Lộ trình PR 1 năm</small></p></div>
             <div id="scoreStatus" class="score-status"></div>
             <div id="hardStops" class="hard-stops"></div>
+            <div id="scoreRoute" class="score-route" aria-live="polite"></div>
+            <div class="evidence-readiness"><p><span>Evidence checklist</span><b id="scoreEvidenceProgress">0 of 0</b></p><div><i id="scoreEvidenceMeter"></i></div></div>
             <details open><summary data-t="breakdown">Point breakdown</summary><div id="breakdown"></div></details>
-            <a class="primary-journey-button" href="#diagnosis"><span><b><span class="bi-en">Check permanent-residence route</span></b></span><i class="ri-arrow-right-line" aria-hidden="true"></i></a>
+            <a class="primary-journey-button" href="#diagnosis"><span><b>Review PR requirements</b></span><i class="ri-arrow-right-line" aria-hidden="true"></i></a>
+            <p class="privacy-note"><i class="ri-lock-2-line" aria-hidden="true"></i><span>Your data stays in this browser.<small>Dữ liệu chỉ lưu trong trình duyệt này.</small></span></p>
             <div class="score-trust"><i class="ri-shield-check-line" aria-hidden="true"></i><p><strong data-t="noticeTitle">Official scoring table applied.</strong><span data-t="noticeText">Logic is aligned with the ISA Excel table effective from April 1, 2023. This is planning support, not a legal decision; reconfirm the rules in force on your filing date.</span></p></div>
             <button id="copySummary" class="secondary-button" type="button" data-t="copy">Copy summary</button>
           </div>
@@ -204,6 +235,7 @@
         <a href="https://www.moj.go.jp/isa/applications/status/newimmiact_3_procedure_index.html" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA · HSP procedure &amp; documents</span><span class="bi-vi">ISA · Thủ tục &amp; hồ sơ HSP</span></b><span data-t="sourceHspApply">Current HSP procedures, forms and supporting-document rules</span></a>
         <a href="https://www.moj.go.jp/isa/content/930001657.pdf" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA point table (PDF)</span><span class="bi-vi">Bảng điểm ISA (PDF)</span></b><span data-t="sourcePdf">Official scoring reference supplied for this tool</span></a>
         <a href="https://www.moj.go.jp/isa/applications/resources/newimmiact_3_qa.html" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA · HSP Q&amp;A</span><span class="bi-vi">ISA · Hỏi đáp HSP</span></b><span data-t="sourceQa">Official explanations of remuneration, activities and restrictions</span></a>
+        <a href="https://www.moj.go.jp/isa/publications/newslist/list-procedures.html" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA · Procedure updates</span><span class="bi-vi">ISA · Cập nhật thủ tục</span></b><span><span class="bi-en">Official update index checked August 2026 · Includes May 2026 bonus-list revisions</span><span class="bi-vi">Mục lục cập nhật được kiểm tra tháng 8/2026 · Có sửa đổi danh sách điểm cộng tháng 5/2026</span></span></a>
         <a href="https://www.moj.go.jp/isa/applications/resources/nyukan_nyukan50.html" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA · Permanent-residence guidelines</span><span class="bi-vi">ISA · Hướng dẫn vĩnh trú</span></b><span data-t="sourcePrGuideline">Permanent-residence guidelines revised February 2026</span></a>
         <a href="https://www.moj.go.jp/isa/applications/procedures/16-4.html" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA · Permanent-residence procedure</span><span class="bi-vi">ISA · Thủ tục xin vĩnh trú</span></b><span data-t="sourcePrApply">Current procedure, forms, fee and processing-period guidance</span></a>
         <a href="https://www.moj.go.jp/isa/content/001335478.pdf" target="_blank" rel="noopener noreferrer"><b><span class="bi-en">ISA · University list</span><span class="bi-vi">ISA · Danh sách đại học</span></b><span data-t="sourceUniversity">World-ranking university list published January 2026</span></a>
@@ -213,14 +245,9 @@
     </section>
   </main>
 
-  <a class="mobile-score-bar" href="#diagnosis">
-    <span><small><span class="bi-en">Estimated score</span><span class="bi-vi">Điểm ước tính</span></small><b><strong id="mobileScore">0</strong> points / điểm</b></span>
-    <span><span class="bi-en">Check route</span><span class="bi-vi">Kiểm tra lộ trình</span><i class="ri-arrow-right-line" aria-hidden="true"></i></span>
-  </a>
-
   <script src="/js/site-shell.js?v=20260727b"></script>
   <script src="/js/support-dialog.js?v=20260803e"></script>
-  <script src="universities.js"></script><script src="app.js?v=20260727-pr-only-tags"></script>
+  <script src="universities.js"></script><script src="scoring.js?v=20260812"></script><script src="app.js?v=20260812"></script>
   <script defer src="/js/analytics.js"></script>
 </body>
 </html>
