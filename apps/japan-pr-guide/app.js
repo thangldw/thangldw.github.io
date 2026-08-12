@@ -45,14 +45,18 @@ Object.assign(I18N.en,{
   noticeText:"Scoring uses the ISA point table effective April 1, 2023. Linked rules and bonus lists were checked in August 2026. Planning support only; verify again on your filing date.",
   sourceIsa:"Official point tables and bonus references checked August 2026",
   sourceQa:"Official HSP Q&A current April 2026",
-  sourcePrGuideline:"Permanent-residence guidelines revised February 24, 2026"
+  sourcePrGuideline:"Permanent-residence guidelines revised February 24, 2026",
+  jicaOverlap:"JICA training points are excluded when Japanese-university graduation points are claimed.",
+  jicaTrainingHelp:"+5 · not with Japanese-university +10."
 });
 Object.assign(I18N.vi,{
   heroLead:"Tính điểm, so sánh ngưỡng 70 và 80, rồi xem lộ trình vĩnh trú tương ứng.",
   noticeText:"Cách tính dùng bảng điểm ISA có hiệu lực từ 01/04/2023. Quy định và danh sách thưởng được kiểm tra tháng 8/2026. Chỉ hỗ trợ lập kế hoạch; hãy xác minh lại tại ngày nộp.",
   sourceIsa:"Bảng điểm và danh sách thưởng chính thức được kiểm tra tháng 8/2026",
   sourceQa:"Hỏi đáp HSP chính thức cập nhật tháng 4/2026",
-  sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi ngày 24/02/2026"
+  sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi ngày 24/02/2026",
+  jicaOverlap:"Không cộng điểm đào tạo JICA khi đã khai điểm tốt nghiệp cơ sở giáo dục đại học tại Nhật.",
+  jicaTrainingHelp:"+5 · không cộng cùng điểm đại học Nhật +10."
 });
 
 const DOCS=[

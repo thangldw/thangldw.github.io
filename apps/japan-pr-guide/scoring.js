@@ -62,8 +62,10 @@
     if (input.smeResearch) points += 5;
     if (input.foreignAward) points += 5;
     if (input.advancedProject) points += 10;
-    if (input.jicaTraining) points += 5;
-    if (input.jicaTraining && input.japanUniversity) warnings.push('jicaOverlap');
+    if (input.jicaTraining) {
+      if (input.japanUniversity) warnings.push('jicaOverlap');
+      else points += 5;
+    }
     if (input.activity !== 'a' && input.assetManagement) points += 10;
     if (input.activity === 'c' && input.investment) points += 5;
 
