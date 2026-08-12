@@ -87,7 +87,7 @@
               <label class="option-row"><input id="japanUniversity" type="checkbox"><span><b data-t="japanUniversity">Graduated from a Japanese university / graduate school</b><small>+10</small></span></label>
               <label><span data-t="japanese">Japanese proficiency by examination</span><select id="japanese"><option value="0" data-t="none">None — 0</option><option value="n2" data-t="n2">JLPT N2 / BJT 400+ — 10</option><option value="n1" data-t="n1">JLPT N1 / BJT 480+ — 15</option></select></label>
               <label class="option-row"><input id="foreignJapaneseMajor" type="checkbox"><span><b data-t="foreignJapaneseMajor">Graduated from a foreign university after majoring in Japanese</b><small data-t="foreignJapaneseMajorHelp">Includes a Business Japanese major when the diploma or transcript establishes Japanese as the formal major — +15</small></span></label>
-              <label class="option-row"><input id="multipleDegrees" type="checkbox"><span><b data-t="multiDegree">Two or more degrees in different fields</b><small data-t="multiDegreeHelp">Doctoral, master's or professional degrees in multiple fields — +5</small></span></label>
+              <label id="multipleDegreesRow" class="option-row dependent"><input id="multipleDegrees" type="checkbox"><span><b data-t="multiDegree">Two or more degrees in different fields</b><small data-t="multiDegreeHelp">Doctoral, master's or professional degrees in multiple fields — +5</small></span></label>
               <div class="university-lookup"><span data-t="universityBonus">Qualifying university category</span><input id="universitySearch" type="search" autocomplete="off" placeholder="Search university name…"><input id="universityBonus" type="hidden" value="0"><div id="universityResults" class="university-results"></div><div id="selectedUniversity" class="selected-university"></div><label class="option-row manual-university"><input id="innovativeAsiaManual" type="checkbox"><span><b data-t="innovativeAsiaManual">Innovative Asia partner university (official-list confirmation)</b><small data-t="universityNonstack">University categories do not stack — maximum +10</small></span></label></div>
               </div></section>
               <section class="bonus-column"><h4>Employer &amp; activity</h4><p>Nhà tuyển dụng &amp; hoạt động</p><div class="option-list">
@@ -250,7 +250,7 @@
 
   <script src="/js/site-shell.js?v=20260727b"></script>
   <script src="/js/support-dialog.js?v=20260803e"></script>
-  <script src="universities.js"></script><script src="scoring.js?v=20260812b"></script><script src="app.js?v=20260812c"></script>
+  <script src="universities.js"></script><script src="scoring.js?v=20260812c"></script><script src="app.js?v=20260812d"></script>
   <script defer src="/js/analytics.js"></script>
 </body>
 </html>

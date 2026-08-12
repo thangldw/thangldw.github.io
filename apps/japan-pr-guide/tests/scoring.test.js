@@ -20,6 +20,39 @@ test('age points do not apply to business management', () => {
   assert.equal(scoring.agePoints('c', 29), 0);
 });
 
+test('multiple-degree bonus requires a master, doctorate, or professional degree', () => {
+  const bachelorOnly = scoring.calculateScore({
+    activity: 'a',
+    degree: 10,
+    multipleDegrees: true,
+  });
+  assert.equal(bachelorOnly.parts.multipleDegrees, 0);
+  assert.deepEqual(bachelorOnly.warnings, ['multipleDegreeDependency']);
+
+  const qualifyingDegree = scoring.calculateScore({
+    activity: 'a',
+    degree: 20,
+    multipleDegrees: true,
+  });
+  assert.equal(qualifyingDegree.parts.multipleDegrees, 5);
+  assert.deepEqual(qualifyingDegree.warnings, []);
+});
+
+test('invalid multiple-degree claim cannot create a false 70-point route', () => {
+  const result = scoring.calculateScore({
+    activity: 'a',
+    degree: 10,
+    multipleDegrees: true,
+    experience: 15,
+    age: 29,
+    income: 7,
+  });
+
+  assert.equal(result.score, 65);
+  assert.equal(result.eligible, false);
+  assert.equal(result.route, 'none');
+});
+
 test('research achievements use official category caps', () => {
   assert.equal(scoring.researchPoints('a', 0), 0);
   assert.equal(scoring.researchPoints('a', 1), 20);
