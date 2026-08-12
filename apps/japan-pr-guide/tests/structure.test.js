@@ -71,9 +71,17 @@ test('design tokens and responsive calculator contract are present', () => {
   assert.match(css, /--app-accent:\s*#b63a12/i);
   assert.match(css, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+clamp\(320px,\s*31vw,\s*430px\)/);
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
-  assert.match(css, /\.score-card\s*\{[^}]*order:\s*-1/s);
   assert.match(css, /min-height:\s*44px/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+});
+
+test('score spine uses bounded responsive sticky layouts without fixed overlays', () => {
+  assert.match(css, /@media\s*\(min-width:\s*1024px\)[\s\S]*?\.score-spine\s*\{[^}]*position:\s*sticky[^}]*top:\s*80px/s);
+  assert.match(css, /@media\s*\(max-width:\s*1023px\)[\s\S]*?\.score-spine\s*\{[^}]*position:\s*sticky[^}]*max-height:\s*64px/s);
+  assert.doesNotMatch(css, /\.score-(?:dock|spine)\s*\{[^}]*position:\s*fixed/s);
+  assert.doesNotMatch(css, /\.score-spine\s*\{[^}]*overflow(?:-y)?:\s*(?:auto|scroll)/s);
+  assert.match(css, /#coreFactors\s*\{[^}]*scroll-margin-top:/s);
+  assert.match(app, /function alignDisclosure\(disclosure\)/);
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
@@ -89,5 +97,5 @@ test('long reference workflows are collapsed until requested', () => {
   }
   assert.match(html, /<summary class="section-head">/);
   assert.doesNotMatch(css, /\.score-sticky\s*\{[^}]*overflow:\s*auto/s);
-  assert.match(css, /\.workspace-disclosure:not\(\[open\]\)\s*>\s*:not\(summary\)\s*\{[^}]*display:\s*none/s);
+  assert.match(css, /\.workspace-disclosure:not\(\[open\]\)\s*>\s*:not\(summary\):not\(\.workflow-score-context-row\)\s*\{[^}]*display:\s*none/s);
 });
