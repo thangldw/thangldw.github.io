@@ -49,8 +49,17 @@ test('design tokens and responsive calculator contract are present', () => {
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
-  assert.match(html, /redesign\.css\?v=20260812b/);
+  assert.match(html, /redesign\.css\?v=20260812d/);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*bottom:\s*12px\s*!important/s);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*width:\s*44px\s*!important/s);
   assert.match(css, /\.support-floating-trigger span\s*\{[^}]*clip:\s*rect\(0 0 0 0\)/s);
+});
+
+test('long reference workflows are collapsed until requested', () => {
+  for (const id of ['visa-guide', 'diagnosis', 'documents', 'sources']) {
+    assert.match(html, new RegExp(`<details[^>]+id="${id}"[^>]+workspace-disclosure`));
+  }
+  assert.match(html, /<summary class="section-head">/);
+  assert.doesNotMatch(css, /\.score-sticky\s*\{[^}]*overflow:\s*auto/s);
+  assert.match(css, /\.workspace-disclosure:not\(\[open\]\)\s*>\s*:not\(summary\)\s*\{[^}]*display:\s*none/s);
 });
