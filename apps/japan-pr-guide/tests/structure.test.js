@@ -78,7 +78,7 @@ test('design tokens and responsive calculator contract are present', () => {
 test('score spine uses bounded responsive sticky layouts without fixed overlays', () => {
   assert.match(css, /@media\s*\(min-width:\s*1024px\)[\s\S]*?\.score-spine\s*\{[^}]*position:\s*sticky[^}]*top:\s*80px/s);
   assert.match(css, /@media\s*\(max-width:\s*1023px\)[\s\S]*?\.score-spine\s*\{[^}]*position:\s*sticky[^}]*max-height:\s*64px/s);
-  assert.doesNotMatch(css, /\.score-(?:dock|spine)\s*\{[^}]*position:\s*fixed/s);
+  assert.doesNotMatch(css, /\.score-(?:dock|spine|card)\s*\{[^}]*position:\s*fixed/s);
   assert.doesNotMatch(css, /\.score-spine\s*\{[^}]*overflow(?:-y)?:\s*(?:auto|scroll)/s);
   assert.match(css, /#coreFactors\s*\{[^}]*scroll-margin-top:/s);
   assert.match(app, /function alignDisclosure\(disclosure\)/);
