@@ -556,7 +556,7 @@ try {
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
-    await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+    await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
     const result = await page.evaluate(`(async () => {
       await new Promise(resolveWait => setTimeout(resolveWait, 100));
       return {
@@ -580,7 +580,7 @@ try {
   }, []);
 
   await page.navigate(origin + '/apps/cert/pmp/', 1280);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('PMP complete July 2026 bank and learning metadata', await page.evaluate(`(async () => {
     const dashboardText = document.body.innerText;
     const termsButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes');
@@ -606,7 +606,7 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
     const bankResources = performance.getEntriesByType('resource')
@@ -678,7 +678,7 @@ try {
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
 
   assertResult('G key-term active recall', await page.evaluate(`(async () => {
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes')?.click();
@@ -690,10 +690,10 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
 
   assertResult('G self-study confidence capture', await page.evaluate(`(async () => {
-    const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Start 7 questions');
+    const startButton = document.querySelector('.study-now-action');
     startButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 100));
     const hintButton = document.querySelector('.hint-reveal-button');
@@ -738,7 +738,7 @@ try {
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G Exam Mode', await page.evaluate(`(async () => {
     const button = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam Mode');
     button.click();
@@ -773,9 +773,32 @@ try {
     };
   })()`), page.exceptions);
 
+  for (const width of [700, 641]) {
+    await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
+    await page.navigate(`${origin}/apps/cert/g/`, width);
+    await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
+    assertResult(`G compact ledger layout at ${width}px`, await page.evaluate(`(async () => {
+      const columns = element => getComputedStyle(element).gridTemplateColumns.split(' ').filter(Boolean).length;
+      const dashboardColumns = columns(document.querySelector('.dashboard-ledger-row'));
+      [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Study by Domain')?.click();
+      await new Promise(resolveWait => setTimeout(resolveWait, 75));
+      const moduleColumns = columns(document.querySelector('.module-card'));
+      [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Smart Study')?.click();
+      await new Promise(resolveWait => setTimeout(resolveWait, 75));
+      const practiceColumns = columns(document.querySelector('.practice-card'));
+      return {
+        ok: dashboardColumns === 2
+          && moduleColumns === 1
+          && practiceColumns === 1
+          && document.documentElement.scrollWidth <= window.innerWidth,
+        message: \`dashboard=\${dashboardColumns}, module=\${moduleColumns}, practice=\${practiceColumns}, scroll=\${document.documentElement.scrollWidth}/\${window.innerWidth}\`
+      };
+    })()`), page.exceptions);
+  }
+
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 390);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G mobile layout', await page.evaluate(`(() => ({
     ok: document.documentElement.scrollWidth <= window.innerWidth,
     message: \`scrollWidth=\${document.documentElement.scrollWidth}, viewport=\${window.innerWidth}\`
@@ -794,7 +817,7 @@ try {
   })()`), page.exceptions);
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 390);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('Shared support mobile layout', await page.evaluate(`(async () => {
     const trigger = document.querySelector('.support-floating-trigger');
     trigger?.click();
@@ -815,7 +838,7 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/aws/`, 1280);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('AWS certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
     const shell = document.querySelector('.app-shell');
@@ -835,7 +858,7 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/aws/`, 390);
-  await page.waitUntil('document.querySelector(".metric-grid:not(.skeleton-metrics)")');
+  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('AWS certification dashboard mobile layout', await page.evaluate(`(() => ({
     ok: getComputedStyle(document.querySelector('.app-shell')).gridTemplateColumns.startsWith('78px ')
       && document.documentElement.scrollWidth <= window.innerWidth
