@@ -28,6 +28,7 @@ test('score rail directly explains eligibility, thresholds, route, and privacy',
 test('score is bounded to the calculator and reused as static workflow context', () => {
   assert.match(html, /id="scoreSpine"/);
   assert.match(html, /id="scoreSpineStatus"[^>]+role="status"[^>]+aria-live="polite"[^>]+aria-atomic="true"/);
+  assert.equal((html.match(/aria-live="polite"/g) || []).length, 1);
   assert.match(html, /id="scoreDetails"/);
   assert.match(html, /id="coreFactors"/);
   assert.equal((html.match(/class="workflow-score-context-row"/g) || []).length, 3);
