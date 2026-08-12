@@ -418,4 +418,20 @@ $("#copySummary").addEventListener("click",async()=>{
 });
 $("#resetDocuments").addEventListener("click",()=>{localStorage.removeItem("jppr-documents");renderDocuments()});
 
+function openDisclosureTarget(hash=location.hash){
+  if(!hash||hash==="#")return;
+  const target=document.querySelector(hash);
+  if(target?.classList.contains("workspace-disclosure"))target.open=true;
+}
+$$('.workspace-disclosure').forEach(disclosure=>disclosure.addEventListener('toggle',()=>{
+  if(!disclosure.open)return;
+  $$('.workspace-disclosure').forEach(other=>{if(other!==disclosure)other.open=false});
+}));
+document.addEventListener('click',event=>{
+  const link=event.target.closest('a[href^="#"]');
+  if(link)openDisclosureTarget(link.getAttribute('href'));
+});
+window.addEventListener('hashchange',()=>openDisclosureTarget());
+openDisclosureTarget();
+
 translate();
