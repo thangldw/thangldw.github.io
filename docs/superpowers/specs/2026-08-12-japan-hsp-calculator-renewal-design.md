@@ -25,17 +25,17 @@ The calculator-first direction is selected over the wizard and evidence-cockpit 
 - HSP threshold: 70 points; 80 points is the one-year PR residence-period route.
 - PR guideline source: ISA guideline revised 24 February 2026.
 - HSP Q&A source: ISA Q&A current April 2026.
-- HSP bonus-support list source: ISA innovation-support list current March 2026.
+- HSP bonus-support list source: ISA update index records a May 2026 revision; linked HSP lists were checked in August 2026.
 - University bonus source: ISA university list current January 2026.
 - J-Skip online filing note: ISA online system revision January 2026.
 
-The scoring table remains tied to the official table introduced 1 April 2023, while the app's source metadata must separately show when the current surrounding rules and bonus lists were checked. UI copy therefore says `Rules checked · April 2026`, not that all point values took effect in 2026.
+The scoring table remains tied to the official table introduced 1 April 2023, while the app's source metadata must separately show when the current surrounding rules and bonus lists were checked. UI copy therefore says `Rules checked · August 2026`, not that all point values took effect in 2026.
 
 ## Information architecture
 
 ### Header
 
-Compact HSP mark, product name, `Rules checked · April 2026`, and an `About HSP` link to official references.
+Compact HSP mark, product name, `Rules checked · August 2026`, and an `About HSP` link to official references.
 
 ### Calculator workspace
 
