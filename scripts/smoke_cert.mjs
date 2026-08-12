@@ -611,6 +611,7 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G certification dashboard', await page.evaluate(`(() => {
@@ -690,13 +691,53 @@ try {
 
   assertResult('G key-term active recall', await page.evaluate(`(async () => {
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 250));
+    const search = document.querySelector('input[aria-label="Search key terms"]');
+    const setInputValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+    setInputValue.call(search, 'Attention');
+    search.dispatchEvent(new Event('input', { bubbles: true }));
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const exactTerm = document.querySelector('.glossary-list details');
+    exactTerm?.querySelector('summary')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    const openConcept = [...(exactTerm?.querySelectorAll('button') || [])]
+      .find(candidate => candidate.textContent.trim() === 'Open concept');
+    const sourceFromTerm = [...(exactTerm?.querySelectorAll('button') || [])]
+      .find(candidate => candidate.textContent.trim() === 'Practice source question');
+    openConcept?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 250));
+    const exactConcept = document.querySelector('.focus-study-detail h3')?.textContent.trim();
+    const conceptRatings = [...document.querySelectorAll('.focus-confidence-row button')];
+    conceptRatings.find(button => button.textContent.trim() === 'again')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const stored = JSON.parse(localStorage.getItem('thangldw:apps:certification-library:state:v3') || '{}');
+    const termLearning = stored.progress?.g?.termLearning || {};
+    const storedRating = Object.values(termLearning).find(record => record.lastRating === 'again');
+    [...document.querySelectorAll('button')]
+      .find(candidate => candidate.textContent.trim() === 'Practice source question')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 250));
+    const sourceQuestionOpened = Boolean(document.querySelector('.question-pane'));
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 250));
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Active recall')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const reveal = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Reveal definition');
-    return { ok: Boolean(document.querySelector('.term-recall-card')) && Boolean(reveal), message: \`card=\${Boolean(document.querySelector('.term-recall-card'))}, reveal=\${Boolean(reveal)}\` };
+    const summary = document.querySelector('[aria-label="Term recall progress"]')?.textContent.trim();
+    return {
+      ok: Boolean(document.querySelector('.term-recall-card'))
+        && Boolean(reveal)
+        && Boolean(openConcept)
+        && Boolean(sourceFromTerm)
+        && exactConcept === 'Attention'
+        && conceptRatings.length === 4
+        && storedRating?.dueAt
+        && sourceQuestionOpened
+        && /due · \\d+ studied/.test(summary || ''),
+      message: \`card=\${Boolean(document.querySelector('.term-recall-card'))}, actions=\${Boolean(openConcept)}/\${Boolean(sourceFromTerm)}, concept=\${exactConcept}, ratings=\${conceptRatings.length}, stored=\${Boolean(storedRating?.dueAt)}, question=\${sourceQuestionOpened}, summary=\${summary}\`
+    };
   })()`), page.exceptions);
 
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
 
