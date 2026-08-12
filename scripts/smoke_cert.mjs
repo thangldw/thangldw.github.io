@@ -591,16 +591,22 @@ try {
     const graphButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph');
     graphButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const focusByDefault = document.querySelector('.graph-mode-switch button[aria-pressed="true"]')?.textContent.trim() === 'Focus'
+      && Boolean(document.querySelector('.focus-study-detail'));
+    [...document.querySelectorAll('.graph-mode-switch button')].find(candidate => candidate.textContent.trim() === 'Overview')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
     return {
       ok: dashboardText.includes('0 / 180 answered')
         && !dashboardText.includes('Preview question bank')
         && termsText.includes('64 terms')
         && noteCount === 3
+        && focusByDefault
         && Boolean(document.querySelector('.knowledge-universe-stage')),
       message: 'dashboard180=' + dashboardText.includes('0 / 180 answered')
         + ', preview=' + dashboardText.includes('Preview question bank')
         + ', terms64=' + termsText.includes('64 terms')
         + ', notes=' + noteCount
+        + ', focus=' + focusByDefault
         + ', graph=' + Boolean(document.querySelector('.knowledge-universe-stage'))
     };
   })()`), page.exceptions);
@@ -617,8 +623,10 @@ try {
         && text.includes("Today's target")
         && text.includes('Next full mock')
         && text.includes('Priority domain')
-        && text.includes('Start with a quick diagnostic')
-        && text.includes('Start 7 questions')
+        && text.includes('Learn one concept first')
+        && text.includes('Open concept')
+        && text.includes('1 concept')
+        && document.querySelectorAll('.duration-picker').length === 0
         && text.includes('Score unlocks after 40 unassisted answers, each domain meets its evidence minimum, and two recent valid full mocks.')
         && text.includes('Your study data is saved only in this browser')
         && text.includes('Backup or restore')
@@ -695,7 +703,13 @@ try {
   assertResult('G self-study confidence capture', await page.evaluate(`(async () => {
     const startButton = document.querySelector('.study-now-action');
     startButton?.click();
-    await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    await new Promise(resolveWait => setTimeout(resolveWait, 150));
+    const conceptFirst = document.querySelector('.focus-map-shell.concept-first-entry');
+    const detailBeforeMap = conceptFirst?.querySelector('.focus-study-detail')?.compareDocumentPosition(
+      conceptFirst.querySelector('.focus-map-stage')
+    ) & Node.DOCUMENT_POSITION_FOLLOWING;
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Practice source question')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 150));
     const hintButton = document.querySelector('.hint-reveal-button');
     const closedHintStyle = getComputedStyle(hintButton);
     const mutedWhenClosed = Number.parseFloat(closedHintStyle.opacity) < 0.7
@@ -729,7 +743,9 @@ try {
     const ratingText = [...document.querySelectorAll('.review-rating button')]
       .map(button => button.innerText.replace(/\\s+/g, ' ').trim());
     return {
-      ok: confidenceCapture
+      ok: Boolean(conceptFirst)
+        && Boolean(detailBeforeMap)
+        && confidenceCapture
         && preSubmitText.includes('How confident are you?')
         && !preSubmitText.includes('Reveal only after trying to recall')
         && confidenceButtons.length === 3
@@ -739,7 +755,7 @@ try {
         && text.includes('Correct answer and explanation')
         && text.includes('Memory cue')
         && ratingText.some(label => label.toLowerCase().includes('again') && label.includes('10 min')),
-      message: \`start=\${Boolean(startButton)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, disclosuresClosed=\${disclosuresClosed}, ratings=\${ratingText.join('|')}\`
+      message: \`start=\${Boolean(startButton)}, conceptFirst=\${Boolean(conceptFirst)}/\${Boolean(detailBeforeMap)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, disclosuresClosed=\${disclosuresClosed}, ratings=\${ratingText.join('|')}\`
     };
   })()`), page.exceptions);
 
@@ -811,15 +827,19 @@ try {
     message: \`scrollWidth=\${document.documentElement.scrollWidth}, viewport=\${window.innerWidth}\`
   }))()`), page.exceptions);
   assertResult('G mobile study controls', await page.evaluate(`(async () => {
-    const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim().startsWith('Start ') && candidate.textContent.includes('questions'));
+    const startButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Open concept');
     startButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 200));
+    const conceptFirst = document.querySelector('.focus-map-shell.concept-first-entry');
+    [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Practice source question')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 250));
     const trigger = document.querySelector('.support-floating-trigger');
     return {
-      ok: Boolean(document.querySelector('.question-actions'))
+      ok: Boolean(conceptFirst)
+        && Boolean(document.querySelector('.question-actions'))
         && getComputedStyle(document.querySelector('.side-nav')).scrollSnapType.includes('x')
         && getComputedStyle(trigger).display === 'none',
-      message: \`start=\${startButton?.textContent}, actions=\${Boolean(document.querySelector('.question-actions'))}, support=\${getComputedStyle(trigger).display}\`
+      message: \`start=\${startButton?.textContent}, conceptFirst=\${Boolean(conceptFirst)}, actions=\${Boolean(document.querySelector('.question-actions'))}, support=\${getComputedStyle(trigger).display}\`
     };
   })()`), page.exceptions);
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
