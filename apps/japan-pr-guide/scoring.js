@@ -78,6 +78,17 @@
     return { eligible: true, route: score >= 80 ? 'hsp80' : 'hsp70', hardStops };
   }
 
+  function nextThresholdProgress(result = {}) {
+    if ((result.hardStops || []).length || result.route === 'hsp80') {
+      return { target: null, pointsNeeded: 0 };
+    }
+    const target = result.route === 'hsp70' ? 80 : 70;
+    return {
+      target,
+      pointsNeeded: Math.max(0, target - Number(result.score || 0)),
+    };
+  }
+
   function calculateScore(input = {}) {
     const activity = input.activity || 'a';
     const degree = Number(input.degree || 0);
@@ -117,6 +128,7 @@
     researchPoints,
     specialAdditionPoints,
     classifyScore,
+    nextThresholdProgress,
     calculateScore,
   };
 });

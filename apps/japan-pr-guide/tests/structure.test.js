@@ -6,6 +6,7 @@ const path = require('node:path');
 const appRoot = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(appRoot, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(appRoot, 'redesign.css'), 'utf8');
+const universityCss = fs.readFileSync(path.join(appRoot, 'university.css'), 'utf8');
 const app = fs.readFileSync(path.join(appRoot, 'app.js'), 'utf8');
 
 test('calculator header exposes product identity and source freshness', () => {
@@ -82,6 +83,23 @@ test('score spine uses bounded responsive sticky layouts without fixed overlays'
   assert.doesNotMatch(css, /\.score-spine\s*\{[^}]*overflow(?:-y)?:\s*(?:auto|scroll)/s);
   assert.match(css, /#coreFactors\s*\{[^}]*scroll-margin-top:/s);
   assert.match(app, /function alignDisclosure\(disclosure\)/);
+});
+
+test('workflow edit-score links expose their own 44px hit target', () => {
+  assert.match(css, /\.workflow-score-context-row\s*>\s*a\s*\{[^}]*display:\s*inline-flex[^}]*min-width:\s*44px[^}]*min-height:\s*44px[^}]*align-items:\s*center/s);
+});
+
+test('70-point route fans out its 80-point gap to every score context', () => {
+  assert.match(app, /needPoints80:"more points needed for 80"/);
+  assert.match(app, /needPoints80:"điểm nữa để đạt 80"/);
+  assert.match(app, /function updateScoreContexts\(scoringResult\)[\s\S]*?nextThresholdProgress\(scoringResult\)/);
+  assert.match(app, /plainBi\("path70"\)[\s\S]*?progress\.pointsNeeded[\s\S]*?plainBi\("needPoints80"\)/);
+  assert.match(app, /scoringResult\.route==="hsp70"[\s\S]*?bi\("path70"\)[\s\S]*?progress\.pointsNeeded[\s\S]*?bi\("needPoints80"\)/);
+});
+
+test('populated university results remain in page flow without a nested vertical scroller', () => {
+  assert.doesNotMatch(universityCss, /\.university-results\s*\{[^}]*max-height:/s);
+  assert.doesNotMatch(universityCss, /\.university-results\s*\{[^}]*overflow(?:-y)?:\s*(?:auto|scroll)/s);
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
