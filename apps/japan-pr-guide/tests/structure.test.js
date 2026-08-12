@@ -6,6 +6,7 @@ const path = require('node:path');
 const appRoot = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(appRoot, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(appRoot, 'redesign.css'), 'utf8');
+const app = fs.readFileSync(path.join(appRoot, 'app.js'), 'utf8');
 
 test('calculator header exposes product identity and source freshness', () => {
   assert.match(html, /<header[^>]+id="appHeader"/);
@@ -36,6 +37,14 @@ test('scoring module loads before the DOM integration script', () => {
   const appIndex = html.indexOf('app.js');
   assert.ok(scoringIndex > -1);
   assert.ok(appIndex > scoringIndex);
+  assert.match(html, /scoring\.js\?v=20260812b/);
+  assert.match(html, /app\.js\?v=20260812c/);
+});
+
+test('JICA bonus discloses the Japanese-university exclusion at the input', () => {
+  assert.match(html, /data-t="jicaTrainingHelp"/);
+  assert.match(app, /jicaTrainingHelp:"\+5 · not with Japanese-university \+10\."/);
+  assert.match(app, /jicaTrainingHelp:"\+5 · không cộng cùng điểm đại học Nhật \+10\."/);
 });
 
 test('design tokens and responsive calculator contract are present', () => {
