@@ -40,6 +40,21 @@ docsEye:"04 · BỘ HỒ SƠ",docsTitle:"Chứng cứ, không chỉ danh mục �
 sourcesEye:"05 · XÁC MINH",sourcesTitle:"Nguồn chính và tài liệu tham khảo",sourceIsa:"Bảng điểm, tiêu chí và chứng cứ hiện hành",sourceHspApply:"Thủ tục, biểu mẫu và quy tắc chứng từ HSP hiện hành",sourcePdf:"Bảng điểm chính thức được cung cấp cho công cụ",sourceQa:"Giải thích chính thức về thù lao, hoạt động và điều kiện ràng buộc",sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi tháng 2/2026",sourcePrApply:"Thủ tục, biểu mẫu, lệ phí và thời gian xử lý hiện hành",sourceUniversity:"Danh sách trường theo xếp hạng công bố tháng 1/2026",sourceMhlw:"Biện pháp dành cho cơ quan sử dụng lao động liên quan điểm cộng",sourceBusiness:"Tiêu chuẩn hiện hành có hiệu lực từ 16/10/2025",footer:"Thiết kế riêng tư · không tài khoản · không tải dữ liệu lên · xác minh trước khi nộp"
 }};
 
+Object.assign(I18N.en,{
+  heroLead:"Calculate your score, compare the 70 and 80 point thresholds, and review the matching permanent-residence route.",
+  noticeText:"Scoring uses the ISA point table effective April 1, 2023. Linked rules and bonus lists were checked in August 2026. Planning support only; verify again on your filing date.",
+  sourceIsa:"Official point tables and bonus references checked August 2026",
+  sourceQa:"Official HSP Q&A current April 2026",
+  sourcePrGuideline:"Permanent-residence guidelines revised February 24, 2026"
+});
+Object.assign(I18N.vi,{
+  heroLead:"Tính điểm, so sánh ngưỡng 70 và 80, rồi xem lộ trình vĩnh trú tương ứng.",
+  noticeText:"Cách tính dùng bảng điểm ISA có hiệu lực từ 01/04/2023. Quy định và danh sách thưởng được kiểm tra tháng 8/2026. Chỉ hỗ trợ lập kế hoạch; hãy xác minh lại tại ngày nộp.",
+  sourceIsa:"Bảng điểm và danh sách thưởng chính thức được kiểm tra tháng 8/2026",
+  sourceQa:"Hỏi đáp HSP chính thức cập nhật tháng 4/2026",
+  sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi ngày 24/02/2026"
+});
+
 const DOCS=[
 ["identity","application","Permanent Residence Application Form","永住許可申請書","Use the current ISA form; complete every applicable field and sign.","Đúng mẫu ISA hiện hành; điền đủ mục áp dụng và ký tên."],
 ["identity","photo","Photo 4 cm × 3 cm","写真（縦4cm×横3cm）","Taken within 6 months; plain background; name on back. From June 14, 2026, a photo is generally required from age 1.","Chụp trong 6 tháng; nền trơn; ghi tên phía sau. Từ 14/06/2026, người từ 1 tuổi thường phải nộp ảnh."],
@@ -207,12 +222,34 @@ function calculate(){
   currentScore=scoringResult.score;
   $("#score").textContent=currentScore;
   if($("#mobileScore"))$("#mobileScore").textContent=currentScore;
+  const corePointOutputs={degree:"degreePoints",experience:"experiencePoints",age:"agePoints",income:"incomePoints",position:"positionPoints"};
+  Object.entries(corePointOutputs).forEach(([part,id])=>{
+    const output=$("#"+id);
+    if(output)output.textContent=`${scoringResult.parts[part]||0} pts`;
+  });
   $("#meter").style.width=`${Math.min(currentScore,100)}%`;
+  const qualification=$("#scoreQualification");
+  qualification.className="score-qualification"+(scoringResult.eligible?" qualified":scoringResult.hardStops.length?" blocked":"");
+  qualification.innerHTML=scoringResult.eligible
+    ?`<i class="ri-checkbox-circle-fill" aria-hidden="true"></i><span><b>Qualified for HSP</b><small>Đủ điều kiện HSP</small></span>`
+    :scoringResult.hardStops.length
+      ?`<i class="ri-error-warning-line" aria-hidden="true"></i><span><b>Review the eligibility gate</b><small>Kiểm tra điều kiện bắt buộc</small></span>`
+      :`<i class="ri-time-line" aria-hidden="true"></i><span><b>Complete the core factors</b><small>Hoàn tất các yếu tố cốt lõi</small></span>`;
   const status=$("#scoreStatus");
   status.className="score-status"+(scoringResult.eligible?" good":"");
-  status.innerHTML=scoringResult.route==="hsp80"?bi("path80"):scoringResult.route==="hsp70"?bi("path70"):`<b>${Math.max(0,70-currentScore)}</b> ${bi("needPoints")} · ${bi("below70")}`;
+  status.innerHTML=scoringResult.hardStops.length
+    ?biPair("The score threshold does not override a mandatory eligibility gate.","Điểm số không thay thế điều kiện bắt buộc.")
+    :scoringResult.route==="hsp80"?bi("path80"):scoringResult.route==="hsp70"?bi("path70"):`<b>${Math.max(0,70-currentScore)}</b> ${bi("needPoints")} · ${bi("below70")}`;
   const stops=[...scoringResult.hardStops.map(bi),...currentWarnings];
   $("#hardStops").innerHTML=stops.map(s=>`<div>• ${s}</div>`).join("");
+  const route=$("#scoreRoute");
+  route.innerHTML=scoringResult.hardStops.length
+    ?`<b>Eligibility gate not met</b><span>Resolve the mandatory condition before relying on the points · Cần xử lý điều kiện bắt buộc trước khi dùng điểm</span>`
+    :scoringResult.route==="hsp80"
+    ?`<b>80-point threshold met</b><span>Potential 1-year HSP permanent-residence route · Có thể theo lộ trình vĩnh trú HSP 1 năm</span>`
+    :scoringResult.route==="hsp70"
+      ?`<b>70-point threshold met</b><span>Potential 3-year HSP permanent-residence route · Có thể theo lộ trình vĩnh trú HSP 3 năm</span>`
+      :`<b>${Math.max(0,70-currentScore)} points to the HSP threshold</b><span>Điểm còn thiếu để đạt ngưỡng HSP</span>`;
   $("#breakdown").innerHTML=parts.filter(p=>p[1]>0).map(p=>`<div class="breakdown-row"><span>${p[0]}</span><b>+${p[1]}</b></div>`).join("")||`<div class="breakdown-row"><span>—</span><b>0</b></div>`;
   renderDiagnosisQuestions();
 }
@@ -359,7 +396,10 @@ function renderDocuments(){
   const all=relevantDocuments();
   const shown=all.filter(d=>documentFilter==="all"||d[0]===documentFilter);
   $("#documentList").innerHTML=shown.map(d=>`<label class="document ${state[d[1]]?"done":""}"><input type="checkbox" data-doc="${d[1]}" ${state[d[1]]?"checked":""}><span>${documentScopeTags(d[1])}<b>${biPair(d[2],DOC_TITLES_VI[d[1]]||d[2])}</b><em lang="ja"><i>日本語</i>${d[3]}</em><small>${documentDescription(d,route)}</small></span></label>`).join("");
-  $("#documentProgress").textContent=`${all.filter(d=>state[d[1]]).length} / ${all.length}`;
+  const completed=all.filter(d=>state[d[1]]).length;
+  $("#documentProgress").textContent=`${completed} / ${all.length}`;
+  if($("#scoreEvidenceProgress"))$("#scoreEvidenceProgress").textContent=`${completed} of ${all.length}`;
+  if($("#scoreEvidenceMeter"))$("#scoreEvidenceMeter").style.width=`${all.length?Math.round(completed/all.length*100):0}%`;
   $$(".document input").forEach(input=>input.onchange=()=>{state[input.dataset.doc]=input.checked;localStorage.setItem("jppr-documents",JSON.stringify(state));renderDocuments()});
 }
 
