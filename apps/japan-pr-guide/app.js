@@ -40,6 +40,21 @@ docsEye:"04 · BỘ HỒ SƠ",docsTitle:"Chứng cứ, không chỉ danh mục �
 sourcesEye:"05 · XÁC MINH",sourcesTitle:"Nguồn chính và tài liệu tham khảo",sourceIsa:"Bảng điểm, tiêu chí và chứng cứ hiện hành",sourceHspApply:"Thủ tục, biểu mẫu và quy tắc chứng từ HSP hiện hành",sourcePdf:"Bảng điểm chính thức được cung cấp cho công cụ",sourceQa:"Giải thích chính thức về thù lao, hoạt động và điều kiện ràng buộc",sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi tháng 2/2026",sourcePrApply:"Thủ tục, biểu mẫu, lệ phí và thời gian xử lý hiện hành",sourceUniversity:"Danh sách trường theo xếp hạng công bố tháng 1/2026",sourceMhlw:"Biện pháp dành cho cơ quan sử dụng lao động liên quan điểm cộng",sourceBusiness:"Tiêu chuẩn hiện hành có hiệu lực từ 16/10/2025",footer:"Thiết kế riêng tư · không tài khoản · không tải dữ liệu lên · xác minh trước khi nộp"
 }};
 
+Object.assign(I18N.en,{
+  heroLead:"Calculate your score, compare the 70 and 80 point thresholds, and review the matching permanent-residence route.",
+  noticeText:"Scoring uses the ISA point table effective April 1, 2023. Linked rules and bonus lists were checked in August 2026. Planning support only; verify again on your filing date.",
+  sourceIsa:"Official point tables and bonus references checked August 2026",
+  sourceQa:"Official HSP Q&A current April 2026",
+  sourcePrGuideline:"Permanent-residence guidelines revised February 24, 2026"
+});
+Object.assign(I18N.vi,{
+  heroLead:"Tính điểm, so sánh ngưỡng 70 và 80, rồi xem lộ trình vĩnh trú tương ứng.",
+  noticeText:"Cách tính dùng bảng điểm ISA có hiệu lực từ 01/04/2023. Quy định và danh sách thưởng được kiểm tra tháng 8/2026. Chỉ hỗ trợ lập kế hoạch; hãy xác minh lại tại ngày nộp.",
+  sourceIsa:"Bảng điểm và danh sách thưởng chính thức được kiểm tra tháng 8/2026",
+  sourceQa:"Hỏi đáp HSP chính thức cập nhật tháng 4/2026",
+  sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi ngày 24/02/2026"
+});
+
 const DOCS=[
 ["identity","application","Permanent Residence Application Form","永住許可申請書","Use the current ISA form; complete every applicable field and sign.","Đúng mẫu ISA hiện hành; điền đủ mục áp dụng và ký tên."],
 ["identity","photo","Photo 4 cm × 3 cm","写真（縦4cm×横3cm）","Taken within 6 months; plain background; name on back. From June 14, 2026, a photo is generally required from age 1.","Chụp trong 6 tháng; nền trơn; ghi tên phía sau. Từ 14/06/2026, người từ 1 tuổi thường phải nộp ảnh."],
@@ -85,6 +100,7 @@ const HSP_SHARED_DOCUMENTS=new Set(["photo","passport","tableNow","pointEvidence
 let activity="a";
 let currentScore=0;
 let currentWarnings=[];
+let currentClassification={eligible:false,route:"none",hardStops:[]};
 let documentFilter="all";
 localStorage.removeItem("jppr-lang");
 const $=s=>document.querySelector(s);
@@ -162,64 +178,78 @@ function renderActivity(){
   clearUniversity();
   calculate();
 }
-function incomePoints(income,age){
-  if(activity==="c"){
-    if(income>=30)return 50;if(income>=25)return 40;if(income>=20)return 30;if(income>=15)return 20;if(income>=10)return 10;return 0;
-  }
-  if(income>=10)return 40;if(income>=9)return 35;if(income>=8)return 30;
-  if(income>=7&&age<40)return 25;if(income>=6&&age<40)return 20;
-  if(income>=5&&age<35)return 15;if(income>=4&&age<30)return 10;return 0;
-}
-function agePoints(age){if(activity==="c")return 0;if(age<30)return 15;if(age<35)return 10;if(age<40)return 5;return 0}
 function checked(id){return $("#"+id).checked}
 function calculate(){
   const age=Number($("#age").value),income=Number($("#income").value);
-  currentWarnings=[];
+  const scoringResult=window.HSPScoring.calculateScore({
+    activity,
+    degree:Number($("#degree").value),
+    experience:Number($("#experience").value),
+    age,
+    income,
+    position:Number($("#position").value),
+    multipleDegrees:checked("multipleDegrees"),
+    researchCount:$$(".research-check:checked").length,
+    qualificationCount:Number($("#qualification").value),
+    japanUniversity:checked("japanUniversity"),
+    japanese:$("#japanese").value,
+    foreignJapaneseMajor:checked("foreignJapaneseMajor"),
+    universityBonus:Number($("#universityBonus").value),
+    innovativeAsiaManual:checked("innovativeAsiaManual"),
+    innovationSupport:checked("innovationSupport"),
+    innovationSme:checked("innovationSme"),
+    localSupport:checked("localSupport"),
+    smeResearch:checked("smeResearch"),
+    foreignAward:checked("foreignAward"),
+    advancedProject:checked("advancedProject"),
+    jicaTraining:checked("jicaTraining"),
+    assetManagement:checked("assetManagement"),
+    investment:checked("investment")
+  });
+  currentWarnings=scoringResult.warnings.map(bi);
+  currentClassification={eligible:scoringResult.eligible,route:scoringResult.route,hardStops:scoringResult.hardStops};
   const parts=[
-    [bi("scoreDegree"),Number($("#degree").value)],
-    [bi("scoreMultiDegree"),checked("multipleDegrees")?5:0],
-    [bi("scoreExperience"),Number($("#experience").value)],
-    [bi("scoreIncome"),incomePoints(income,age)],
-    [bi("scoreAge"),agePoints(age)]
+    [bi("scoreDegree"),scoringResult.parts.degree],
+    [bi("scoreMultiDegree"),scoringResult.parts.multipleDegrees],
+    [bi("scoreExperience"),scoringResult.parts.experience],
+    [bi("scoreIncome"),scoringResult.parts.income],
+    [bi("scoreAge"),scoringResult.parts.age]
   ];
-  if(activity==="c")parts.push([bi("scorePosition"),Number($("#position").value)]);
-  const researchCount=$$(".research-check:checked").length;
-  const researchPoints=activity==="a"?(researchCount===0?0:researchCount===1?20:25):activity==="b"&&researchCount?15:0;
-  if(activity!=="c")parts.push([bi("scoreResearch"),researchPoints]);
-  if(activity==="b")parts.push([bi("scoreQualification"),Number($("#qualification").value)==2?10:Number($("#qualification").value)==1?5:0]);
-  let special=0;
-  if(checked("japanUniversity"))special+=10;
-  const jp=$("#japanese").value;
-  const japaneseMajor=checked("foreignJapaneseMajor");
-  if(jp==="n1"||japaneseMajor)special+=15;
-  if(jp==="n2"){
-    if(checked("japanUniversity")||japaneseMajor)currentWarnings.push(bi("n2Overlap"));else special+=10;
-  }
-  special+=Math.max(Number($("#universityBonus").value),checked("innovativeAsiaManual")?10:0);
-  if(checked("innovationSupport"))special+=10;
-  if(checked("innovationSme")){
-    if(checked("innovationSupport"))special+=10;else currentWarnings.push(bi("innovationDependency"));
-  }
-  if(checked("localSupport"))special+=10;
-  if(checked("smeResearch"))special+=5;
-  if(checked("foreignAward"))special+=5;
-  if(checked("advancedProject"))special+=10;
-  if(checked("jicaTraining"))special+=5;
-  if(checked("jicaTraining")&&checked("japanUniversity"))currentWarnings.push(bi("jicaOverlap"));
-  if(activity!=="a"&&checked("assetManagement"))special+=10;
-  if(activity==="c"&&checked("investment"))special+=5;
-  parts.push([bi("scoreSpecial"),special]);
-  currentScore=parts.reduce((sum,p)=>sum+p[1],0);
+  if(activity==="c")parts.push([bi("scorePosition"),scoringResult.parts.position]);
+  if(activity!=="c")parts.push([bi("scoreResearch"),scoringResult.parts.research]);
+  if(activity==="b")parts.push([bi("scoreQualification"),scoringResult.parts.qualification]);
+  parts.push([bi("scoreSpecial"),scoringResult.parts.special]);
+  currentScore=scoringResult.score;
   $("#score").textContent=currentScore;
   if($("#mobileScore"))$("#mobileScore").textContent=currentScore;
+  const corePointOutputs={degree:"degreePoints",experience:"experiencePoints",age:"agePoints",income:"incomePoints",position:"positionPoints"};
+  Object.entries(corePointOutputs).forEach(([part,id])=>{
+    const output=$("#"+id);
+    if(output)output.textContent=`${scoringResult.parts[part]||0} pts`;
+  });
   $("#meter").style.width=`${Math.min(currentScore,100)}%`;
+  const qualification=$("#scoreQualification");
+  qualification.className="score-qualification"+(scoringResult.eligible?" qualified":scoringResult.hardStops.length?" blocked":"");
+  qualification.innerHTML=scoringResult.eligible
+    ?`<i class="ri-checkbox-circle-fill" aria-hidden="true"></i><span><b>Qualified for HSP</b><small>Đủ điều kiện HSP</small></span>`
+    :scoringResult.hardStops.length
+      ?`<i class="ri-error-warning-line" aria-hidden="true"></i><span><b>Review the eligibility gate</b><small>Kiểm tra điều kiện bắt buộc</small></span>`
+      :`<i class="ri-time-line" aria-hidden="true"></i><span><b>Complete the core factors</b><small>Hoàn tất các yếu tố cốt lõi</small></span>`;
   const status=$("#scoreStatus");
-  status.className="score-status"+(currentScore>=70?" good":"");
-  status.innerHTML=currentScore>=80?bi("path80"):currentScore>=70?bi("path70"):`<b>${70-currentScore}</b> ${bi("needPoints")} · ${bi("below70")}`;
-  const stops=[];
-  if(activity!=="a"&&income<3)stops.push(bi("incomeStop"));
-  stops.push(...currentWarnings);
+  status.className="score-status"+(scoringResult.eligible?" good":"");
+  status.innerHTML=scoringResult.hardStops.length
+    ?biPair("The score threshold does not override a mandatory eligibility gate.","Điểm số không thay thế điều kiện bắt buộc.")
+    :scoringResult.route==="hsp80"?bi("path80"):scoringResult.route==="hsp70"?bi("path70"):`<b>${Math.max(0,70-currentScore)}</b> ${bi("needPoints")} · ${bi("below70")}`;
+  const stops=[...scoringResult.hardStops.map(bi),...currentWarnings];
   $("#hardStops").innerHTML=stops.map(s=>`<div>• ${s}</div>`).join("");
+  const route=$("#scoreRoute");
+  route.innerHTML=scoringResult.hardStops.length
+    ?`<b>Eligibility gate not met</b><span>Resolve the mandatory condition before relying on the points · Cần xử lý điều kiện bắt buộc trước khi dùng điểm</span>`
+    :scoringResult.route==="hsp80"
+    ?`<b>80-point threshold met</b><span>Potential 1-year HSP permanent-residence route · Có thể theo lộ trình vĩnh trú HSP 1 năm</span>`
+    :scoringResult.route==="hsp70"
+      ?`<b>70-point threshold met</b><span>Potential 3-year HSP permanent-residence route · Có thể theo lộ trình vĩnh trú HSP 3 năm</span>`
+      :`<b>${Math.max(0,70-currentScore)} points to the HSP threshold</b><span>Điểm còn thiếu để đạt ngưỡng HSP</span>`;
   $("#breakdown").innerHTML=parts.filter(p=>p[1]>0).map(p=>`<div class="breakdown-row"><span>${p[0]}</span><b>+${p[1]}</b></div>`).join("")||`<div class="breakdown-row"><span>—</span><b>0</b></div>`;
   renderDiagnosisQuestions();
 }
@@ -229,7 +259,7 @@ function question(id,key){return `<div class="question"><span data-question-key=
 function effectiveRoute(){
   const selected=$("#routeType").value;
   if(selected!=="auto")return selected;
-  return currentScore>=80?"hsp80":currentScore>=70?"hsp70":"hspUnavailable";
+  return currentClassification.route==="hsp80"?"hsp80":currentClassification.route==="hsp70"?"hsp70":"hspUnavailable";
 }
 function generalRequirements(route){
   if(route==="spouse"||route==="child")return GENERAL.filter(k=>!["Conduct","Livelihood"].includes(k));
@@ -366,7 +396,10 @@ function renderDocuments(){
   const all=relevantDocuments();
   const shown=all.filter(d=>documentFilter==="all"||d[0]===documentFilter);
   $("#documentList").innerHTML=shown.map(d=>`<label class="document ${state[d[1]]?"done":""}"><input type="checkbox" data-doc="${d[1]}" ${state[d[1]]?"checked":""}><span>${documentScopeTags(d[1])}<b>${biPair(d[2],DOC_TITLES_VI[d[1]]||d[2])}</b><em lang="ja"><i>日本語</i>${d[3]}</em><small>${documentDescription(d,route)}</small></span></label>`).join("");
-  $("#documentProgress").textContent=`${all.filter(d=>state[d[1]]).length} / ${all.length}`;
+  const completed=all.filter(d=>state[d[1]]).length;
+  $("#documentProgress").textContent=`${completed} / ${all.length}`;
+  if($("#scoreEvidenceProgress"))$("#scoreEvidenceProgress").textContent=`${completed} of ${all.length}`;
+  if($("#scoreEvidenceMeter"))$("#scoreEvidenceMeter").style.width=`${all.length?Math.round(completed/all.length*100):0}%`;
   $$(".document input").forEach(input=>input.onchange=()=>{state[input.dataset.doc]=input.checked;localStorage.setItem("jppr-documents",JSON.stringify(state));renderDocuments()});
 }
 
