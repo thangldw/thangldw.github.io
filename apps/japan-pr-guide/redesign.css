@@ -1589,6 +1589,7 @@ body { background: var(--app-bg); color: var(--app-ink); font-size: 15px; }
 .workspace-disclosure { overflow: clip; }
 .workspace-disclosure:not([open]) > :not(summary):not(.workflow-score-context-row) { display: none; }
 .workflow-score-context-row { display: flex; min-height: 44px; align-items: center; justify-content: space-between; }
+.workflow-score-context-row > a { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; }
 #coreFactors { scroll-margin-top: 84px; }
 .workspace-disclosure { scroll-margin-top: 84px; }
 .workspace-disclosure > .section-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr) auto; gap: 24px; align-items: center; min-height: 82px; margin: 0; padding: 12px 4px; border: 0; list-style: none; cursor: pointer; }
