@@ -185,6 +185,20 @@ function renderActivity(){
   calculate();
 }
 function checked(id){return $("#"+id).checked}
+function updateScoreContexts(scoringResult){
+  const score=scoringResult.score;
+  const route=scoringResult.hardStops.length
+    ?"Review eligibility / Kiểm tra điều kiện"
+    :scoringResult.route==="hsp80"
+      ?"Potential 1-year PR route / Có thể theo lộ trình PR 1 năm"
+      :scoringResult.route==="hsp70"
+        ?"Potential 3-year PR route / Có thể theo lộ trình PR 3 năm"
+        :`${Math.max(0,70-score)} points to 70 / còn ${Math.max(0,70-score)} điểm`;
+  $("#scoreSpineStatus").textContent=`${score} points. ${route}`;
+  $$('[data-score-context]').forEach(element=>{
+    element.textContent=`Calculated HSP: ${score} · ${route}`;
+  });
+}
 function calculate(){
   const age=Number($("#age").value),income=Number($("#income").value);
   const degree=Number($("#degree").value);
@@ -232,15 +246,8 @@ function calculate(){
   if(activity==="b")parts.push([bi("scoreQualification"),scoringResult.parts.qualification]);
   parts.push([bi("scoreSpecial"),scoringResult.parts.special]);
   currentScore=scoringResult.score;
+  updateScoreContexts(scoringResult);
   $("#score").textContent=currentScore;
-  $("#scoreDockValue").textContent=currentScore;
-  $("#scoreDockStatus").textContent=scoringResult.hardStops.length
-    ?"Eligibility gate · Điều kiện bắt buộc"
-    :scoringResult.route==="hsp80"
-      ?"80+ · PR 1 year / 1 năm"
-      :scoringResult.route==="hsp70"
-        ?"70+ · PR 3 years / 3 năm"
-        :`${Math.max(0,70-currentScore)} to 70 · còn ${Math.max(0,70-currentScore)} điểm`;
   if($("#mobileScore"))$("#mobileScore").textContent=currentScore;
   const corePointOutputs={degree:"degreePoints",experience:"experiencePoints",age:"agePoints",income:"incomePoints",position:"positionPoints"};
   Object.entries(corePointOutputs).forEach(([part,id])=>{
@@ -453,10 +460,5 @@ document.addEventListener('click',event=>{
 });
 window.addEventListener('hashchange',()=>openDisclosureTarget());
 openDisclosureTarget();
-
-const scoreDock=$("#scoreDock");
-new IntersectionObserver(([entry])=>{
-  scoreDock.hidden=entry.isIntersecting;
-},{rootMargin:"-72px 0px 0px 0px",threshold:.2}).observe($("#score"));
 
 translate();
