@@ -619,7 +619,7 @@ try {
         && text.includes('Priority domain')
         && text.includes('Start with a quick diagnostic')
         && text.includes('Start 7 questions')
-        && text.includes('Score unlocks after 40 unassisted answers, all domains, and two valid full mocks.')
+        && text.includes('Score unlocks after 40 unassisted answers, each domain meets its evidence minimum, and two recent valid full mocks.')
         && text.includes('Your study data is saved only in this browser')
         && text.includes('Backup or restore')
         && !text.includes('42%')
@@ -719,6 +719,12 @@ try {
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
     document.querySelector('.primary-action')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const learningDetails = document.querySelector('.learning-details');
+    const learningControls = document.querySelector('.learning-controls');
+    const disclosuresClosed = learningDetails?.open === false && learningControls?.open === false;
+    learningDetails?.querySelector('summary')?.click();
+    learningControls?.querySelector('summary')?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 25));
     const text = document.body.innerText;
     const ratingText = [...document.querySelectorAll('.review-rating button')]
       .map(button => button.innerText.replace(/\\s+/g, ' ').trim());
@@ -729,10 +735,11 @@ try {
         && confidenceButtons.length === 3
         && opened && collapsed && reopened
         && mutedWhenClosed && clearWhenOpened
+        && disclosuresClosed
         && text.includes('Correct answer and explanation')
         && text.includes('Memory cue')
         && ratingText.some(label => label.toLowerCase().includes('again') && label.includes('10 min')),
-      message: \`start=\${Boolean(startButton)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, ratings=\${ratingText.join('|')}\`
+      message: \`start=\${Boolean(startButton)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, disclosuresClosed=\${disclosuresClosed}, ratings=\${ratingText.join('|')}\`
     };
   })()`), page.exceptions);
 
