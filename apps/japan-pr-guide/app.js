@@ -47,7 +47,8 @@ Object.assign(I18N.en,{
   sourceQa:"Official HSP Q&A current April 2026",
   sourcePrGuideline:"Permanent-residence guidelines revised February 24, 2026",
   jicaOverlap:"JICA training points are excluded when Japanese-university graduation points are claimed.",
-  jicaTrainingHelp:"+5 · not with Japanese-university +10."
+  jicaTrainingHelp:"+5 · not with Japanese-university +10.",
+  multipleDegreeDependency:"The multiple-degree bonus requires a master's, doctorate, or professional degree."
 });
 Object.assign(I18N.vi,{
   heroLead:"Tính điểm, so sánh ngưỡng 70 và 80, rồi xem lộ trình vĩnh trú tương ứng.",
@@ -56,7 +57,8 @@ Object.assign(I18N.vi,{
   sourceQa:"Hỏi đáp HSP chính thức cập nhật tháng 4/2026",
   sourcePrGuideline:"Hướng dẫn vĩnh trú sửa đổi ngày 24/02/2026",
   jicaOverlap:"Không cộng điểm đào tạo JICA khi đã khai điểm tốt nghiệp cơ sở giáo dục đại học tại Nhật.",
-  jicaTrainingHelp:"+5 · không cộng cùng điểm đại học Nhật +10."
+  jicaTrainingHelp:"+5 · không cộng cùng điểm đại học Nhật +10.",
+  multipleDegreeDependency:"Điểm nhiều bằng yêu cầu bằng thạc sĩ, tiến sĩ hoặc bằng chuyên môn."
 });
 
 const DOCS=[
@@ -185,14 +187,20 @@ function renderActivity(){
 function checked(id){return $("#"+id).checked}
 function calculate(){
   const age=Number($("#age").value),income=Number($("#income").value);
+  const degree=Number($("#degree").value);
+  const multipleDegrees=$("#multipleDegrees");
+  const multipleDegreeEligible=degree>=20;
+  if(!multipleDegreeEligible)multipleDegrees.checked=false;
+  multipleDegrees.disabled=!multipleDegreeEligible;
+  $("#multipleDegreesRow").classList.toggle("disabled",!multipleDegreeEligible);
   const scoringResult=window.HSPScoring.calculateScore({
     activity,
-    degree:Number($("#degree").value),
+    degree,
     experience:Number($("#experience").value),
     age,
     income,
     position:Number($("#position").value),
-    multipleDegrees:checked("multipleDegrees"),
+    multipleDegrees:multipleDegrees.checked,
     researchCount:$$(".research-check:checked").length,
     qualificationCount:Number($("#qualification").value),
     japanUniversity:checked("japanUniversity"),
