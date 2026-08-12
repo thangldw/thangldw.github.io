@@ -37,14 +37,20 @@ test('scoring module loads before the DOM integration script', () => {
   const appIndex = html.indexOf('app.js');
   assert.ok(scoringIndex > -1);
   assert.ok(appIndex > scoringIndex);
-  assert.match(html, /scoring\.js\?v=20260812b/);
-  assert.match(html, /app\.js\?v=20260812c/);
+  assert.match(html, /scoring\.js\?v=20260812c/);
+  assert.match(html, /app\.js\?v=20260812d/);
 });
 
 test('JICA bonus discloses the Japanese-university exclusion at the input', () => {
   assert.match(html, /data-t="jicaTrainingHelp"/);
   assert.match(app, /jicaTrainingHelp:"\+5 · not with Japanese-university \+10\."/);
   assert.match(app, /jicaTrainingHelp:"\+5 · không cộng cùng điểm đại học Nhật \+10\."/);
+});
+
+test('multiple-degree input is guarded by the selected degree', () => {
+  assert.match(html, /id="multipleDegreesRow"/);
+  assert.match(app, /multipleDegrees\.disabled=!multipleDegreeEligible/);
+  assert.match(app, /if\(!multipleDegreeEligible\)multipleDegrees\.checked=false/);
 });
 
 test('design tokens and responsive calculator contract are present', () => {
