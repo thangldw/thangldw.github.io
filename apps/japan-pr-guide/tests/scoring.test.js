@@ -63,13 +63,30 @@ test('innovation SME addition requires the parent support criterion', () => {
   assert.deepEqual(withParent.warnings, []);
 });
 
-test('JICA training warns when Japanese university points are also claimed', () => {
+test('JICA training is excluded when Japanese university points are claimed', () => {
   const result = scoring.specialAdditionPoints({
     japanUniversity: true,
     jicaTraining: true,
   });
 
-  assert.equal(result.points, 15);
+  assert.equal(result.points, 10);
+  assert.deepEqual(result.warnings, ['jicaOverlap']);
+});
+
+test('excluded JICA overlap cannot create a false 70-point route', () => {
+  const result = scoring.calculateScore({
+    activity: 'a',
+    degree: 30,
+    experience: 15,
+    age: 32,
+    income: 2.9,
+    japanUniversity: true,
+    jicaTraining: true,
+  });
+
+  assert.equal(result.score, 65);
+  assert.equal(result.eligible, false);
+  assert.equal(result.route, 'none');
   assert.deepEqual(result.warnings, ['jicaOverlap']);
 });
 
