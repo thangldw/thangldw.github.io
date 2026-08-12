@@ -80,12 +80,16 @@
 
   function calculateScore(input = {}) {
     const activity = input.activity || 'a';
+    const degree = Number(input.degree || 0);
     const age = Number(input.age ?? 99);
     const income = Number(input.income || 0);
     const special = specialAdditionPoints({ ...input, activity });
+    const warnings = [...special.warnings];
+    const multipleDegreePoints = input.multipleDegrees && degree >= 20 ? 5 : 0;
+    if (input.multipleDegrees && degree < 20) warnings.push('multipleDegreeDependency');
     const parts = {
-      degree: Number(input.degree || 0),
-      multipleDegrees: input.multipleDegrees ? 5 : 0,
+      degree,
+      multipleDegrees: multipleDegreePoints,
       experience: Number(input.experience || 0),
       income: incomePoints(activity, income, age),
       age: agePoints(activity, age),
@@ -102,7 +106,7 @@
     return {
       score,
       parts,
-      warnings: special.warnings,
+      warnings,
       ...classification,
     };
   }
