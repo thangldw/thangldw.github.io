@@ -25,15 +25,16 @@ test('score rail directly explains eligibility, thresholds, route, and privacy',
   assert.match(html, /Review PR requirements/);
 });
 
-test('live score remains available after the main score rail leaves the viewport', () => {
-  assert.match(html, /id="scoreDock"[^>]+hidden/);
-  assert.match(html, /id="scoreDockValue"/);
-  assert.match(html, /id="scoreDockStatus"/);
-  assert.match(app, /new IntersectionObserver/);
-  assert.match(app, /scoreDock\.hidden=entry\.isIntersecting/);
-  assert.match(app, /scoreDockValue"\)\.textContent=currentScore/);
-  assert.match(css, /\.score-dock\s*\{[^}]*position:\s*fixed/s);
-  assert.doesNotMatch(css, /\.score-dock\s*\{[^}]*overflow(?:-y)?:\s*(?:auto|scroll)/s);
+test('score is bounded to the calculator and reused as static workflow context', () => {
+  assert.match(html, /id="scoreSpine"/);
+  assert.match(html, /id="scoreSpineStatus"[^>]+role="status"[^>]+aria-live="polite"[^>]+aria-atomic="true"/);
+  assert.match(html, /id="scoreDetails"/);
+  assert.match(html, /id="coreFactors"/);
+  assert.equal((html.match(/class="workflow-score-context-row"/g) || []).length, 3);
+  assert.equal((html.match(/href="#coreFactors"/g) || []).length, 3);
+  assert.doesNotMatch(html, /id="scoreDock"/);
+  assert.doesNotMatch(app, /new IntersectionObserver/);
+  assert.match(app, /function updateScoreContexts\(scoringResult\)/);
 });
 
 test('bonus inputs use one disclosure and three semantic groups', () => {
@@ -49,7 +50,7 @@ test('scoring module loads before the DOM integration script', () => {
   assert.ok(scoringIndex > -1);
   assert.ok(appIndex > scoringIndex);
   assert.match(html, /scoring\.js\?v=20260812c/);
-  assert.match(html, /app\.js\?v=20260812e/);
+  assert.match(html, /app\.js\?v=20260813a/);
 });
 
 test('JICA bonus discloses the Japanese-university exclusion at the input', () => {
@@ -75,11 +76,10 @@ test('design tokens and responsive calculator contract are present', () => {
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
-  assert.match(html, /redesign\.css\?v=20260812e/);
+  assert.match(html, /redesign\.css\?v=20260813a/);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*bottom:\s*12px\s*!important/s);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*width:\s*44px\s*!important/s);
   assert.match(css, /\.support-floating-trigger span\s*\{[^}]*clip:\s*rect\(0 0 0 0\)/s);
-  assert.match(css, /@media\s*\(max-width:\s*760px\)[\s\S]*?\.score-dock\s*\{[^}]*right:\s*68px[^}]*bottom:\s*12px/s);
 });
 
 test('long reference workflows are collapsed until requested', () => {
