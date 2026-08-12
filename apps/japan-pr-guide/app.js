@@ -85,6 +85,7 @@ const HSP_SHARED_DOCUMENTS=new Set(["photo","passport","tableNow","pointEvidence
 let activity="a";
 let currentScore=0;
 let currentWarnings=[];
+let currentClassification={eligible:false,route:"none",hardStops:[]};
 let documentFilter="all";
 localStorage.removeItem("jppr-lang");
 const $=s=>document.querySelector(s);
@@ -162,63 +163,55 @@ function renderActivity(){
   clearUniversity();
   calculate();
 }
-function incomePoints(income,age){
-  if(activity==="c"){
-    if(income>=30)return 50;if(income>=25)return 40;if(income>=20)return 30;if(income>=15)return 20;if(income>=10)return 10;return 0;
-  }
-  if(income>=10)return 40;if(income>=9)return 35;if(income>=8)return 30;
-  if(income>=7&&age<40)return 25;if(income>=6&&age<40)return 20;
-  if(income>=5&&age<35)return 15;if(income>=4&&age<30)return 10;return 0;
-}
-function agePoints(age){if(activity==="c")return 0;if(age<30)return 15;if(age<35)return 10;if(age<40)return 5;return 0}
 function checked(id){return $("#"+id).checked}
 function calculate(){
   const age=Number($("#age").value),income=Number($("#income").value);
-  currentWarnings=[];
+  const scoringResult=window.HSPScoring.calculateScore({
+    activity,
+    degree:Number($("#degree").value),
+    experience:Number($("#experience").value),
+    age,
+    income,
+    position:Number($("#position").value),
+    multipleDegrees:checked("multipleDegrees"),
+    researchCount:$$(".research-check:checked").length,
+    qualificationCount:Number($("#qualification").value),
+    japanUniversity:checked("japanUniversity"),
+    japanese:$("#japanese").value,
+    foreignJapaneseMajor:checked("foreignJapaneseMajor"),
+    universityBonus:Number($("#universityBonus").value),
+    innovativeAsiaManual:checked("innovativeAsiaManual"),
+    innovationSupport:checked("innovationSupport"),
+    innovationSme:checked("innovationSme"),
+    localSupport:checked("localSupport"),
+    smeResearch:checked("smeResearch"),
+    foreignAward:checked("foreignAward"),
+    advancedProject:checked("advancedProject"),
+    jicaTraining:checked("jicaTraining"),
+    assetManagement:checked("assetManagement"),
+    investment:checked("investment")
+  });
+  currentWarnings=scoringResult.warnings.map(bi);
+  currentClassification={eligible:scoringResult.eligible,route:scoringResult.route,hardStops:scoringResult.hardStops};
   const parts=[
-    [bi("scoreDegree"),Number($("#degree").value)],
-    [bi("scoreMultiDegree"),checked("multipleDegrees")?5:0],
-    [bi("scoreExperience"),Number($("#experience").value)],
-    [bi("scoreIncome"),incomePoints(income,age)],
-    [bi("scoreAge"),agePoints(age)]
+    [bi("scoreDegree"),scoringResult.parts.degree],
+    [bi("scoreMultiDegree"),scoringResult.parts.multipleDegrees],
+    [bi("scoreExperience"),scoringResult.parts.experience],
+    [bi("scoreIncome"),scoringResult.parts.income],
+    [bi("scoreAge"),scoringResult.parts.age]
   ];
-  if(activity==="c")parts.push([bi("scorePosition"),Number($("#position").value)]);
-  const researchCount=$$(".research-check:checked").length;
-  const researchPoints=activity==="a"?(researchCount===0?0:researchCount===1?20:25):activity==="b"&&researchCount?15:0;
-  if(activity!=="c")parts.push([bi("scoreResearch"),researchPoints]);
-  if(activity==="b")parts.push([bi("scoreQualification"),Number($("#qualification").value)==2?10:Number($("#qualification").value)==1?5:0]);
-  let special=0;
-  if(checked("japanUniversity"))special+=10;
-  const jp=$("#japanese").value;
-  const japaneseMajor=checked("foreignJapaneseMajor");
-  if(jp==="n1"||japaneseMajor)special+=15;
-  if(jp==="n2"){
-    if(checked("japanUniversity")||japaneseMajor)currentWarnings.push(bi("n2Overlap"));else special+=10;
-  }
-  special+=Math.max(Number($("#universityBonus").value),checked("innovativeAsiaManual")?10:0);
-  if(checked("innovationSupport"))special+=10;
-  if(checked("innovationSme")){
-    if(checked("innovationSupport"))special+=10;else currentWarnings.push(bi("innovationDependency"));
-  }
-  if(checked("localSupport"))special+=10;
-  if(checked("smeResearch"))special+=5;
-  if(checked("foreignAward"))special+=5;
-  if(checked("advancedProject"))special+=10;
-  if(checked("jicaTraining"))special+=5;
-  if(checked("jicaTraining")&&checked("japanUniversity"))currentWarnings.push(bi("jicaOverlap"));
-  if(activity!=="a"&&checked("assetManagement"))special+=10;
-  if(activity==="c"&&checked("investment"))special+=5;
-  parts.push([bi("scoreSpecial"),special]);
-  currentScore=parts.reduce((sum,p)=>sum+p[1],0);
+  if(activity==="c")parts.push([bi("scorePosition"),scoringResult.parts.position]);
+  if(activity!=="c")parts.push([bi("scoreResearch"),scoringResult.parts.research]);
+  if(activity==="b")parts.push([bi("scoreQualification"),scoringResult.parts.qualification]);
+  parts.push([bi("scoreSpecial"),scoringResult.parts.special]);
+  currentScore=scoringResult.score;
   $("#score").textContent=currentScore;
   if($("#mobileScore"))$("#mobileScore").textContent=currentScore;
   $("#meter").style.width=`${Math.min(currentScore,100)}%`;
   const status=$("#scoreStatus");
-  status.className="score-status"+(currentScore>=70?" good":"");
-  status.innerHTML=currentScore>=80?bi("path80"):currentScore>=70?bi("path70"):`<b>${70-currentScore}</b> ${bi("needPoints")} · ${bi("below70")}`;
-  const stops=[];
-  if(activity!=="a"&&income<3)stops.push(bi("incomeStop"));
-  stops.push(...currentWarnings);
+  status.className="score-status"+(scoringResult.eligible?" good":"");
+  status.innerHTML=scoringResult.route==="hsp80"?bi("path80"):scoringResult.route==="hsp70"?bi("path70"):`<b>${Math.max(0,70-currentScore)}</b> ${bi("needPoints")} · ${bi("below70")}`;
+  const stops=[...scoringResult.hardStops.map(bi),...currentWarnings];
   $("#hardStops").innerHTML=stops.map(s=>`<div>• ${s}</div>`).join("");
   $("#breakdown").innerHTML=parts.filter(p=>p[1]>0).map(p=>`<div class="breakdown-row"><span>${p[0]}</span><b>+${p[1]}</b></div>`).join("")||`<div class="breakdown-row"><span>—</span><b>0</b></div>`;
   renderDiagnosisQuestions();
@@ -229,7 +222,7 @@ function question(id,key){return `<div class="question"><span data-question-key=
 function effectiveRoute(){
   const selected=$("#routeType").value;
   if(selected!=="auto")return selected;
-  return currentScore>=80?"hsp80":currentScore>=70?"hsp70":"hspUnavailable";
+  return currentClassification.route==="hsp80"?"hsp80":currentClassification.route==="hsp70"?"hsp70":"hspUnavailable";
 }
 function generalRequirements(route){
   if(route==="spouse"||route==="child")return GENERAL.filter(k=>!["Conduct","Livelihood"].includes(k));
