@@ -1581,6 +1581,33 @@ body { background: var(--app-bg); color: var(--app-ink); font-size: 15px; }
 
 .score-card { min-width: 0; border-left: 1px solid var(--app-line); background: #fafbfb; }
 .score-sticky { position: sticky; top: 64px; max-height: none; overflow: visible; padding: 48px 42px 40px; }
+.score-dock {
+  position: fixed;
+  top: 76px;
+  right: 18px;
+  z-index: 70;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 12px;
+  width: min(330px, calc(100vw - 36px));
+  min-height: 58px;
+  padding: 9px 12px 9px 16px;
+  align-items: center;
+  border: 1px solid rgba(182,58,18,.28);
+  border-radius: 5px;
+  background: rgba(255,255,255,.97);
+  box-shadow: 0 12px 32px rgba(31,47,50,.16);
+  color: var(--app-ink);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+}
+.score-dock[hidden] { display: none; }
+.score-dock span { display: grid; min-width: 0; gap: 2px; }
+.score-dock small { color: var(--app-accent); font-size: 8px; font-weight: 850; letter-spacing: .08em; }
+.score-dock b { overflow: hidden; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.score-dock strong { color: var(--app-accent); font-size: 30px; line-height: 1; }
+.score-dock i { font-size: 18px; }
+#scoreSummary { scroll-margin-top: 76px; }
 .mobile-score-hero { display: none; }
 .score-label { margin: 0; color: var(--app-ink); font-size: 12px; font-weight: 750; }
 .score-number { align-items: flex-end; margin: 10px 0 17px; }
@@ -1694,6 +1721,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .workspace-disclosure:not([open]) > .section-head h2 { font-size: 18px; line-height: 1.15; }
   .workspace-disclosure:not([open]) > .section-head h2 .bi-vi { margin-top: 3px; font-size: 12px; line-height: 1.25; }
   .support-floating-trigger { right: 12px !important; bottom: 12px !important; width: 44px !important; height: 44px !important; padding: 0 !important; justify-content: center !important; border-radius: 50% !important; }
+  .score-dock { top: auto; right: 68px; bottom: 12px; width: calc(100vw - 80px); max-width: 310px; min-height: 52px; padding: 7px 10px 7px 13px; }
   .support-floating-trigger span { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0 0 0 0); white-space: nowrap !important; border: 0 !important; }
 }
 
