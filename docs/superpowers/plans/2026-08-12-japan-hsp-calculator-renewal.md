@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - Keep English/Vietnamese bilingual copy and all existing HSP, J-Skip, PR diagnosis, evidence, and official-source functionality.
-- Show `Rules checked · April 2026`; do not misrepresent the 1 April 2023 point table as a 2026 scoring change.
+- Show `Rules checked · August 2026`; do not misrepresent the 1 April 2023 point table as a 2026 scoring change.
 - Use the accepted desktop, mobile, and expanded-bonus concepts as visual truth.
 - No new framework, backend, analytics surface, or user-data upload.
 - Release only after tests, Browser QA, design QA, PR merge, deployment, and production verification.
@@ -53,7 +53,7 @@
 - [ ] **Step 1: Add failing structural assertions** that load `index.html` as text and require the header freshness copy, brand asset, bonus disclosure, privacy copy, directly labeled 70/80 text, and scoring script order.
 - [ ] **Step 2: Run `node --test apps/japan-pr-guide/tests/*.test.js`** and confirm the new assertions fail.
 - [ ] **Step 3: Implement the accepted HTML structure** while preserving all existing IDs required by `app.js`.
-- [ ] **Step 4: Update bilingual copy and primary-source metadata** for February-April 2026 freshness without changing the legal scoring table date.
+- [ ] **Step 4: Update bilingual copy and primary-source metadata** for source revisions through May 2026, checked August 2026, without changing the legal scoring table date.
 - [ ] **Step 5: Implement desktop and expanded-bonus CSS** from the accepted concept, using Be Vietnam Pro and Remix Icon.
 - [ ] **Step 6: Run all Node tests** and confirm zero failures.
 
