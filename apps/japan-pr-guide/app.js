@@ -233,6 +233,14 @@ function calculate(){
   parts.push([bi("scoreSpecial"),scoringResult.parts.special]);
   currentScore=scoringResult.score;
   $("#score").textContent=currentScore;
+  $("#scoreDockValue").textContent=currentScore;
+  $("#scoreDockStatus").textContent=scoringResult.hardStops.length
+    ?"Eligibility gate · Điều kiện bắt buộc"
+    :scoringResult.route==="hsp80"
+      ?"80+ · PR 1 year / 1 năm"
+      :scoringResult.route==="hsp70"
+        ?"70+ · PR 3 years / 3 năm"
+        :`${Math.max(0,70-currentScore)} to 70 · còn ${Math.max(0,70-currentScore)} điểm`;
   if($("#mobileScore"))$("#mobileScore").textContent=currentScore;
   const corePointOutputs={degree:"degreePoints",experience:"experiencePoints",age:"agePoints",income:"incomePoints",position:"positionPoints"};
   Object.entries(corePointOutputs).forEach(([part,id])=>{
@@ -445,5 +453,10 @@ document.addEventListener('click',event=>{
 });
 window.addEventListener('hashchange',()=>openDisclosureTarget());
 openDisclosureTarget();
+
+const scoreDock=$("#scoreDock");
+new IntersectionObserver(([entry])=>{
+  scoreDock.hidden=entry.isIntersecting;
+},{rootMargin:"-72px 0px 0px 0px",threshold:.2}).observe($("#score"));
 
 translate();
