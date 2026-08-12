@@ -49,6 +49,7 @@ test('design tokens and responsive calculator contract are present', () => {
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
+  assert.match(html, /redesign\.css\?v=20260812b/);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*bottom:\s*12px\s*!important/s);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*width:\s*44px\s*!important/s);
   assert.match(css, /\.support-floating-trigger span\s*\{[^}]*clip:\s*rect\(0 0 0 0\)/s);
