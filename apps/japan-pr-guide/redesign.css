@@ -1700,11 +1700,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .score-spine .meter-labels,
   .score-spine .threshold-grid { display: none; }
   .score-spine .score-number { justify-self: start; width: max-content; margin: 0; }
-  .score-spine .score-number strong { font-size: 42px; line-height: .9; }
-  .score-spine .score-number > span { padding-bottom: 1px; }
-  .score-spine .score-route { min-width: 0; width: 100%; overflow: hidden; margin: 0; padding: 5px 0 5px 12px; }
-  .score-spine .score-route b,
-  .score-spine .score-route span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .score-spine .score-number strong { font-size: 36px; line-height: 1; }
+  .score-spine .score-number > span { display: none; }
+  .score-spine .score-route { display: block; min-width: 0; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0; padding: 5px 0 5px 12px; }
+  .score-spine .score-route > b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .score-spine .score-route > span,
+  .score-spine .score-route > b > .bi-vi { display: none; }
   #coreFactors,
   .points-form .form-group,
   .points-form label { scroll-margin-top: 148px; }
