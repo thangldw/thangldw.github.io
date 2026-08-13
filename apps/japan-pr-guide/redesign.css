@@ -1521,11 +1521,13 @@ body { background: var(--app-bg); color: var(--app-ink); font-size: 15px; }
 .bonus-group > summary::-webkit-details-marker { display: none; }
 .bonus-group > summary > i { color: var(--app-muted); font-size: 20px; transition: transform .2s ease; }
 .bonus-group[open] > summary > i { transform: rotate(180deg); }
-.bonus-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 4px 0 22px; }
+.bonus-group > .bonus-groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 4px 0 22px; }
 .bonus-column { min-width: 0; padding: 16px; border: 1px solid var(--app-line); border-radius: 5px; background: var(--app-surface); }
 .bonus-column h4 { margin: 0; color: var(--app-ink); font-size: 12px; }
 .bonus-column > p { margin: 3px 0 13px; color: var(--app-muted); font-size: 9px; }
 .bonus-column .option-row { padding: 10px 0; }
+.bonus-column .option-list > label:not(.option-row) { grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 6px; align-items: start; }
+.bonus-column .option-list > label:not(.option-row) select { min-width: 0; max-width: 100%; }
 .bonus-guidance { color: var(--app-muted); font-size: 10px; line-height: 1.5; }
 
 .score-card { min-width: 0; border-left: 1px solid var(--app-line); background: #fafbfb; }
