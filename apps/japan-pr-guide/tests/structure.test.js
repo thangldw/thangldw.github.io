@@ -51,13 +51,13 @@ test('scoring module loads before the DOM integration script', () => {
   const appIndex = html.indexOf('app.js');
   assert.ok(scoringIndex > -1);
   assert.ok(appIndex > scoringIndex);
-  assert.match(html, /scoring\.js\?v=20260813b/);
-  assert.match(html, /app\.js\?v=20260813b/);
+  assert.match(html, /scoring\.js\?v=20260813c/);
+  assert.match(html, /app\.js\?v=20260813c/);
 });
 
 test('score spine assets share one cache revision', () => {
   for (const asset of ['university.css', 'redesign.css', 'scoring.js', 'app.js']) {
-    assert.match(html, new RegExp(`${asset.replace('.', '\\.')}\\?v=20260813b`));
+    assert.match(html, new RegExp(`${asset.replace('.', '\\.')}\\?v=20260813c`));
   }
 });
 
@@ -91,6 +91,13 @@ test('score spine uses bounded responsive sticky layouts without fixed overlays'
   assert.match(app, /function alignDisclosure\(disclosure\)/);
 });
 
+test('mobile score ribbon renders only the score and one clipped route line', () => {
+  assert.match(css, /@media\s*\(max-width:\s*1023px\)[\s\S]*?\.score-spine \.score-number > span\s*\{[^}]*display:\s*none/s);
+  assert.match(css, /@media\s*\(max-width:\s*1023px\)[\s\S]*?\.score-spine \.score-number strong\s*\{[^}]*font-size:\s*(?:32|33|34|35|36)px[^}]*line-height:\s*1/s);
+  assert.match(css, /@media\s*\(max-width:\s*1023px\)[\s\S]*?\.score-spine \.score-route\s*\{[^}]*overflow:\s*hidden[^}]*text-overflow:\s*ellipsis[^}]*white-space:\s*nowrap/s);
+  assert.match(css, /\.score-spine \.score-route > span,\s*\.score-spine \.score-route > b > \.bi-vi\s*\{[^}]*display:\s*none/s);
+});
+
 test('workflow edit-score links expose their own 44px hit target', () => {
   assert.match(css, /\.workflow-score-context-row\s*>\s*a\s*\{[^}]*display:\s*inline-flex[^}]*min-width:\s*44px[^}]*min-height:\s*44px[^}]*align-items:\s*center/s);
 });
@@ -109,7 +116,7 @@ test('populated university results remain in page flow without a nested vertical
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
-  assert.match(html, /redesign\.css\?v=20260813b/);
+  assert.match(html, /redesign\.css\?v=20260813c/);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*bottom:\s*12px\s*!important/s);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*width:\s*44px\s*!important/s);
   assert.match(css, /\.support-floating-trigger span\s*\{[^}]*clip:\s*rect\(0 0 0 0\)/s);
