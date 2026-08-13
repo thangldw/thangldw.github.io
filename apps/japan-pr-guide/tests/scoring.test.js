@@ -150,6 +150,17 @@ test('score classification exposes 70 and 80 point routes', () => {
   });
 });
 
+test('70-79 point routes report the exact gap to the 80-point threshold', () => {
+  assert.deepEqual(scoring.nextThresholdProgress({
+    score: 75,
+    route: 'hsp70',
+    hardStops: [],
+  }), {
+    target: 80,
+    pointsNeeded: 5,
+  });
+});
+
 test('sub-3-million remuneration is a hard stop for activities b and c', () => {
   const technical = scoring.classifyScore(85, 'b', 2.9);
   assert.equal(technical.eligible, false);
