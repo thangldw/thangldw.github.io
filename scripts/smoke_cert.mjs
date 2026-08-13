@@ -501,15 +501,16 @@ try {
         && new Set(hrefs).size === ${certificationManifest.certificationCount}
         && hrefs.every(href => expectedHrefs.includes(href))
         && style.display === 'grid'
-        && style.minHeight === '56px'
-        && style.padding === '8px 6px'
+        && style.minHeight === '44px'
+        && style.padding === '4px 6px'
         && descriptionStyle.display === 'block'
         && descriptionStyle.fontSize === '13px'
         && hskEntry?.dataset.category === 'language'
         && hskEntry?.querySelector('.hub-cert-category')?.textContent.trim() === 'Chinese language'
         && aipEntry?.dataset.category === 'ai'
-        && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}\`
+        && document.documentElement.scrollWidth <= window.innerWidth
+        && document.documentElement.scrollHeight <= window.innerHeight,
+      message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}, viewport=\${window.innerWidth}x\${window.innerHeight}, document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}\`
     };
   })()`), page.exceptions);
 
