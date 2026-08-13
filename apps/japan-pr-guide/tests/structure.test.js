@@ -46,18 +46,24 @@ test('bonus inputs use one disclosure and three semantic groups', () => {
   assert.match(html, /Qualifications &amp; achievements/);
 });
 
+test('bonus select remains inside a full-width semantic group', () => {
+  assert.match(css, /\.bonus-group\s*>\s*\.bonus-groups\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
+  assert.match(css, /\.bonus-column \.option-list\s*>\s*label:not\(\.option-row\)\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)[^}]*min-width:\s*0/s);
+  assert.match(css, /\.bonus-column \.option-list\s*>\s*label:not\(\.option-row\) select\s*\{[^}]*min-width:\s*0[^}]*max-width:\s*100%/s);
+});
+
 test('scoring module loads before the DOM integration script', () => {
   const scoringIndex = html.indexOf('scoring.js');
   const appIndex = html.indexOf('app.js');
   assert.ok(scoringIndex > -1);
   assert.ok(appIndex > scoringIndex);
-  assert.match(html, /scoring\.js\?v=20260813c/);
-  assert.match(html, /app\.js\?v=20260813c/);
+  assert.match(html, /scoring\.js\?v=20260813d/);
+  assert.match(html, /app\.js\?v=20260813d/);
 });
 
 test('score spine assets share one cache revision', () => {
   for (const asset of ['university.css', 'redesign.css', 'scoring.js', 'app.js']) {
-    assert.match(html, new RegExp(`${asset.replace('.', '\\.')}\\?v=20260813c`));
+    assert.match(html, new RegExp(`${asset.replace('.', '\\.')}\\?v=20260813d`));
   }
 });
 
@@ -116,7 +122,7 @@ test('populated university results remain in page flow without a nested vertical
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
-  assert.match(html, /redesign\.css\?v=20260813c/);
+  assert.match(html, /redesign\.css\?v=20260813d/);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*bottom:\s*12px\s*!important/s);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*width:\s*44px\s*!important/s);
   assert.match(css, /\.support-floating-trigger span\s*\{[^}]*clip:\s*rect\(0 0 0 0\)/s);
