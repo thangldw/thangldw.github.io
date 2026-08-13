@@ -15,7 +15,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="university.css"><link rel="stylesheet" href="redesign.css?v=20260812e"><link rel="stylesheet" href="/css/page-frame.css?v=20260727b"><link rel="stylesheet" href="/css/support-dialog.css?v=20260803i"><link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="university.css?v=20260813c"><link rel="stylesheet" href="redesign.css?v=20260813c"><link rel="stylesheet" href="/css/page-frame.css?v=20260727b"><link rel="stylesheet" href="/css/support-dialog.css?v=20260803i"><link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
 </head>
 <body class="site-page" data-page-kind="product" data-site-shell="none">
   <a class="skip" href="#calculator">Skip to calculator / Đi tới phần tính điểm</a>
@@ -57,7 +57,7 @@
       <div id="activityCaution" class="caution"></div>
 
         <form id="pointsForm" class="points-form">
-          <section class="form-group core-group">
+          <section id="coreFactors" class="form-group core-group">
             <div class="form-group-head"><span>02</span><div><h3 data-t="basics">Core factors</h3><p data-t="exclusive">One value from each row; points cannot be stacked within a row.</p></div></div>
             <div class="field-grid">
               <label class="core-field"><i class="ri-graduation-cap-line" aria-hidden="true"></i><span data-t="degree">Highest qualifying degree</span><select id="degree"></select><output id="degreePoints" class="field-points">0 pts</output></label>
@@ -107,31 +107,36 @@
             </div>
           </details>
         </form>
+        <section id="scoreDetails" class="score-details-panel" aria-label="Detailed score result">
+          <div id="scoreStatus" class="score-status"></div>
+          <div id="hardStops" class="hard-stops"></div>
+          <div class="evidence-readiness"><p><span>Evidence checklist</span><b id="scoreEvidenceProgress">0 of 0</b></p><div><i id="scoreEvidenceMeter"></i></div></div>
+          <details open><summary data-t="breakdown">Point breakdown</summary><div id="breakdown"></div></details>
+          <a class="primary-journey-button" href="#diagnosis"><span><b>Review PR requirements</b></span><i class="ri-arrow-right-line" aria-hidden="true"></i></a>
+          <p class="privacy-note"><i class="ri-lock-2-line" aria-hidden="true"></i><span>Your data stays in this browser.<small>Dữ liệu chỉ lưu trong trình duyệt này.</small></span></p>
+          <div class="score-trust"><i class="ri-shield-check-line" aria-hidden="true"></i><p><strong data-t="noticeTitle">Official scoring table applied.</strong><span data-t="noticeText">Logic is aligned with the ISA Excel table effective from April 1, 2023. This is planning support, not a legal decision; reconfirm the rules in force on your filing date.</span></p></div>
+          <button id="copySummary" class="secondary-button" type="button" data-t="copy">Copy summary</button>
+        </section>
         </div>
 
         <aside id="scoreSummary" class="score-card">
           <div class="score-sticky">
+            <div id="scoreSpine" class="score-spine">
             <div class="mobile-score-hero">
               <p>HIGHLY SKILLED PROFESSIONAL POINTS CALCULATOR</p>
               <h2>Calculate your HSP score</h2>
               <span>Tính điểm HSP của bạn</span>
             </div>
             <p class="score-label" data-t="estimatedScore">Estimated score</p>
-            <div class="score-number"><strong id="score" aria-live="polite">0</strong><span><b>/ 100</b><span class="bi-en">PTS</span><span class="bi-vi">ĐIỂM</span></span></div>
+            <div class="score-number"><strong id="score">0</strong><span><b>/ 100</b><span class="bi-en">PTS</span><span class="bi-vi">ĐIỂM</span></span></div>
             <p class="score-section-label"><b>Your status</b><span>Trạng thái</span></p>
             <div id="scoreQualification" class="score-qualification"><i class="ri-time-line" aria-hidden="true"></i><span><b>Complete the core factors</b><small>Hoàn tất các yếu tố cốt lõi</small></span></div>
             <div class="meter" aria-hidden="true"><i id="meter"></i><b class="mark70"></b><b class="mark80"></b></div>
             <div class="meter-labels"><span>0</span><span>70</span><span>80</span><span>100+</span></div>
             <div class="threshold-grid"><p><b>70 points</b><span>3-year PR route</span><small>Lộ trình PR 3 năm</small></p><p><b>80 points</b><span>1-year PR route</span><small>Lộ trình PR 1 năm</small></p></div>
-            <div id="scoreStatus" class="score-status"></div>
-            <div id="hardStops" class="hard-stops"></div>
-            <div id="scoreRoute" class="score-route" aria-live="polite"></div>
-            <div class="evidence-readiness"><p><span>Evidence checklist</span><b id="scoreEvidenceProgress">0 of 0</b></p><div><i id="scoreEvidenceMeter"></i></div></div>
-            <details open><summary data-t="breakdown">Point breakdown</summary><div id="breakdown"></div></details>
-            <a class="primary-journey-button" href="#diagnosis"><span><b>Review PR requirements</b></span><i class="ri-arrow-right-line" aria-hidden="true"></i></a>
-            <p class="privacy-note"><i class="ri-lock-2-line" aria-hidden="true"></i><span>Your data stays in this browser.<small>Dữ liệu chỉ lưu trong trình duyệt này.</small></span></p>
-            <div class="score-trust"><i class="ri-shield-check-line" aria-hidden="true"></i><p><strong data-t="noticeTitle">Official scoring table applied.</strong><span data-t="noticeText">Logic is aligned with the ISA Excel table effective from April 1, 2023. This is planning support, not a legal decision; reconfirm the rules in force on your filing date.</span></p></div>
-            <button id="copySummary" class="secondary-button" type="button" data-t="copy">Copy summary</button>
+            <div id="scoreRoute" class="score-route"></div>
+            <p id="scoreSpineStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+            </div>
           </div>
         </aside>
       </div>
@@ -143,6 +148,10 @@
         <p data-t="visaIntro">A score is only one part of the application. Match the activity, residence procedure and evidence to your actual situation.</p>
         <i class="ri-arrow-down-s-line disclosure-icon" aria-hidden="true"></i>
       </summary>
+      <div class="workflow-score-context-row">
+        <span data-score-context>Calculated HSP: 0 · Below 70 / Điểm HSP: 0 · Dưới 70</span>
+        <a href="#coreFactors">Edit score / Sửa điểm</a>
+      </div>
       <div class="visa-subhead"><span>01</span><div><b><span class="bi-en">Follow this sequence</span><span class="bi-vi">Thực hiện theo thứ tự</span></b></div></div>
       <div class="process-grid">
         <article class="process-card"><span>01</span><h3 data-t="visaStep1Title">Confirm the activity</h3><p data-t="visaStep1Text">Choose 1号イ, ロ or ハ from the work you will actually perform and the contract or business structure.</p></article>
@@ -190,6 +199,10 @@
         <p data-t="diagnosisIntro">Points shorten the residence-period requirement; they do not replace the conduct, livelihood, public-duty and status requirements.</p>
         <i class="ri-arrow-down-s-line disclosure-icon" aria-hidden="true"></i>
       </summary>
+      <div class="workflow-score-context-row">
+        <span data-score-context>Calculated HSP: 0 · Below 70 / Điểm HSP: 0 · Dưới 70</span>
+        <a href="#coreFactors">Edit score / Sửa điểm</a>
+      </div>
       <div class="pr-facts">
         <article><strong>4–6</strong><span data-t="prProcessing">months · official standard processing period</span></article>
         <article><strong>¥10,000</strong><span data-t="prFee">payable only when permission is granted</span></article>
@@ -227,6 +240,10 @@
         <p data-t="docsIntro">The checklist adapts to the selected PR route. Progress stays in this browser only.</p>
         <i class="ri-arrow-down-s-line disclosure-icon" aria-hidden="true"></i>
       </summary>
+      <div class="workflow-score-context-row">
+        <span data-score-context>Calculated HSP: 0 · Below 70 / Điểm HSP: 0 · Dưới 70</span>
+        <a href="#coreFactors">Edit score / Sửa điểm</a>
+      </div>
       <div class="document-toolbar"><div id="documentFilters"></div><output id="documentProgress">0 / 0</output><button id="resetDocuments" type="button" data-t="reset">Reset</button></div>
       <div id="documentList" class="document-list"></div>
     </details>
@@ -248,15 +265,9 @@
     </details>
   </main>
 
-  <a id="scoreDock" class="score-dock" href="#scoreSummary" aria-label="Return to live estimated score" hidden>
-    <span><small>LIVE SCORE · ĐIỂM LIVE</small><b id="scoreDockStatus">70-point target · Mục tiêu 70 điểm</b></span>
-    <strong id="scoreDockValue" aria-live="polite">0</strong>
-    <i class="ri-arrow-up-line" aria-hidden="true"></i>
-  </a>
-
   <script src="/js/site-shell.js?v=20260727b"></script>
   <script src="/js/support-dialog.js?v=20260803e"></script>
-  <script src="universities.js"></script><script src="scoring.js?v=20260812c"></script><script src="app.js?v=20260812e"></script>
+  <script src="universities.js"></script><script src="scoring.js?v=20260813c"></script><script src="app.js?v=20260813c"></script>
   <script defer src="/js/analytics.js"></script>
 </body>
 </html>
