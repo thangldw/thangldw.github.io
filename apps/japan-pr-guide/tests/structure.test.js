@@ -51,8 +51,14 @@ test('scoring module loads before the DOM integration script', () => {
   const appIndex = html.indexOf('app.js');
   assert.ok(scoringIndex > -1);
   assert.ok(appIndex > scoringIndex);
-  assert.match(html, /scoring\.js\?v=20260812c/);
-  assert.match(html, /app\.js\?v=20260813a/);
+  assert.match(html, /scoring\.js\?v=20260813b/);
+  assert.match(html, /app\.js\?v=20260813b/);
+});
+
+test('score spine assets share one cache revision', () => {
+  for (const asset of ['university.css', 'redesign.css', 'scoring.js', 'app.js']) {
+    assert.match(html, new RegExp(`${asset.replace('.', '\\.')}\\?v=20260813b`));
+  }
 });
 
 test('JICA bonus discloses the Japanese-university exclusion at the input', () => {
@@ -103,7 +109,7 @@ test('populated university results remain in page flow without a nested vertical
 });
 
 test('mobile support affordance cannot cover the primary PR action', () => {
-  assert.match(html, /redesign\.css\?v=20260813a/);
+  assert.match(html, /redesign\.css\?v=20260813b/);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*bottom:\s*12px\s*!important/s);
   assert.match(css, /\.support-floating-trigger\s*\{[^}]*width:\s*44px\s*!important/s);
   assert.match(css, /\.support-floating-trigger span\s*\{[^}]*clip:\s*rect\(0 0 0 0\)/s);
