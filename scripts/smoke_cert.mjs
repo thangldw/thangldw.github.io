@@ -771,10 +771,22 @@ try {
     const confidenceButtons = [...document.querySelectorAll('.confidence-capture button')];
     const preSubmitText = document.body.innerText;
     document.querySelector('.answer input')?.click();
-    confidenceButtons.at(-1)?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
-    document.querySelector('.primary-action')?.click();
-    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    [...document.querySelectorAll('.confidence-capture button')].at(-1)?.click();
+    for (let attempt = 0; attempt < 20 && document.querySelector('.primary-action')?.disabled; attempt += 1) {
+      await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    }
+    const submitButton = document.querySelector('.primary-action');
+    const submitState = {
+      disabled: submitButton?.disabled,
+      label: submitButton?.textContent.trim(),
+      selected: document.querySelectorAll('.answer.selected').length,
+      confidence: document.querySelectorAll('.confidence-capture button[aria-pressed="true"]').length
+    };
+    submitButton?.click();
+    for (let attempt = 0; attempt < 40 && !document.querySelector('.learning-details'); attempt += 1) {
+      await new Promise(resolveWait => setTimeout(resolveWait, 25));
+    }
     const learningDetails = document.querySelector('.learning-details');
     const learningControls = document.querySelector('.learning-controls');
     const disclosuresClosed = learningDetails?.open === false && learningControls?.open === false;
@@ -797,7 +809,7 @@ try {
         && text.includes('Correct answer and explanation')
         && text.includes('Memory cue')
         && ratingText.some(label => label.toLowerCase().includes('again') && label.includes('10 min')),
-      message: \`start=\${Boolean(startButton)}, conceptFirst=\${Boolean(conceptFirst)}/\${Boolean(detailBeforeMap)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, disclosuresClosed=\${disclosuresClosed}, ratings=\${ratingText.join('|')}\`
+      message: \`start=\${Boolean(startButton)}, conceptFirst=\${Boolean(conceptFirst)}/\${Boolean(detailBeforeMap)}, confidence=\${confidenceCapture}, hint=\${opened}/\${collapsed}/\${reopened}, style=\${mutedWhenClosed}/\${clearWhenOpened}, submit=\${JSON.stringify(submitState)}, disclosuresClosed=\${disclosuresClosed}, ratings=\${ratingText.join('|')}\`
     };
   })()`), page.exceptions);
 
