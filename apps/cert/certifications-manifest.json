@@ -192,7 +192,7 @@
       "issuer": "Anthropic",
       "syllabusVersion": "CCAR-F-2026",
       "href": "/apps/cert/ccar-f/",
-      "availableQuestionCount": 222,
+      "availableQuestionCount": 220,
       "exam": {
         "durationMinutes": 120,
         "questionCount": 60,
