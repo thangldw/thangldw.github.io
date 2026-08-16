@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "certificationCount": 22,
+  "certificationCount": 23,
   "certifications": [
     {
       "id": "g",
@@ -396,6 +396,24 @@
         "questionCount": 70,
         "format": "Paper-based or internet-based; written exam plus separately bound speaking test",
         "structure": "Listening 30 + Reading 30 + Writing 10; July 2026 syllabus"
+      }
+    },
+    {
+      "id": "aws-dea-c01",
+      "slug": "aws-dea-c01",
+      "displayOrder": 23,
+      "accent": "#ff9900",
+      "shortName": "AWS DEA-C01",
+      "name": "AWS Certified Data Engineer – Associate",
+      "issuer": "Amazon Web Services",
+      "syllabusVersion": "DEA-C01-2026-08",
+      "href": "/apps/cert/aws-dea-c01/",
+      "availableQuestionCount": 232,
+      "exam": {
+        "durationMinutes": 130,
+        "questionCount": 65,
+        "format": "Multiple choice and multiple response; 50 scored and 15 unscored questions",
+        "structure": "DEA-C01 · 4 content domains"
       }
     }
   ]
