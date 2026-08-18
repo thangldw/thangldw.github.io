@@ -35,6 +35,22 @@
       "featuredOrder": 0
     },
     {
+      "id": "neon-glider",
+      "title": "Neon Glider",
+      "description": "A lightweight Three.js endless runner through a neon tunnel. Dodge obstacles, collect energy, build a multiplier, and chase a longer run.",
+      "featuredDescription": "A fast neon tunnel run built with Three.js, energy pickups, obstacles, and persistent high scores.",
+      "href": "https://thangldw.github.io/neon-glider/",
+      "ariaLabel": "Play Neon Glider",
+      "icon": "fa-paper-plane",
+      "accent": "violet",
+      "status": "Live",
+      "tags": ["Endless runner", "Three.js", "WebGL", "Browser game"],
+      "category": "games",
+      "categoryLabel": "Endless runner",
+      "cta": "Play Neon Glider",
+      "featured": false
+    },
+    {
       "id": "diskora",
       "title": "Diskora",
       "description": "Diskora 1.2 is a native macOS storage assistant with direct restore from Undo Center, explainable cleanup confidence, phased SHA-256 duplicate detection, clustered similar-photo review, evidence-based app artifacts, official developer cleanup, and scan-only scheduling.",
