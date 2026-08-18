@@ -30,17 +30,18 @@ export function createMiniTestQuestions({ items = [], count = 5, mode = "jp-to-v
       && String(item.context || "").replace(new RegExp(escapeRegExp(item.term), "gu"), "").trim().length > 0
     )
   ));
-  if (pool.length < 4) return [];
+  const choicesUseJapanese = mode === "vi-to-jp" || mode === "context";
+  const choiceLabel = (item) => choicesUseJapanese ? item.term : item.meaning;
+  if (new Set(pool.map(choiceLabel)).size < 4) return [];
 
   return shuffled(pool, random)
     .slice(0, Math.min(Math.max(1, Number(count) || 5), pool.length))
     .map((item, questionIndex) => {
-      const choicesUseJapanese = mode === "vi-to-jp" || mode === "context";
-      const answerLabel = choicesUseJapanese ? item.term : item.meaning;
+      const answerLabel = choiceLabel(item);
       const distractorLabels = shuffled(
         [...new Set(pool.filter((candidate) => candidate !== item).map((candidate) => (
-          choicesUseJapanese ? candidate.term : candidate.meaning
-        )))],
+          choiceLabel(candidate)
+        )))].filter((label) => label !== answerLabel),
         random,
       ).slice(0, 3);
       const choices = shuffled([answerLabel, ...distractorLabels], random).map((label, choiceIndex) => ({
