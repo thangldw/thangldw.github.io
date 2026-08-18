@@ -650,6 +650,30 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.evaluate(`document.querySelector('.workspace-navigation__more > button')?.click()`);
+  await page.waitUntil('document.querySelector(".workspace-navigation__more > .workspace-navigation__more-menu")');
+  assertResult('Desktop More menu stays compact and omits redundant local-data status', await page.evaluate(`(() => {
+    const menu = document.querySelector('.workspace-navigation__more > .workspace-navigation__more-menu');
+    const rect = menu?.getBoundingClientRect();
+    const items = [...(menu?.querySelectorAll('[role="menuitem"]') || [])]
+      .map(item => item.getBoundingClientRect());
+    const vertical = items.every((item, index) => index === 0 || item.top >= items[index - 1].bottom);
+    return {
+      ok: rect?.width >= 210
+        && rect.width <= 300
+        && rect.left >= 0
+        && rect.right <= window.innerWidth
+        && vertical
+        && !document.body.innerText.includes('Local data'),
+      message: 'menu=' + Math.round(rect?.width || 0) + 'x' + Math.round(rect?.height || 0)
+        + ', left=' + Math.round(rect?.left || 0)
+        + ', right=' + Math.round(rect?.right || 0) + '/' + window.innerWidth
+        + ', vertical=' + vertical
+        + ', localData=' + document.body.innerText.includes('Local data')
+    };
+  })()`), page.exceptions);
+  await page.evaluate(`document.querySelector('.workspace-navigation__more > button')?.click()`);
+
   await page.evaluate(`([...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Practice'))?.click()`);
   await page.waitUntil('document.body.innerText.includes("Your review queue")');
   assertResult('G gated Practice workspace', await page.evaluate(`(() => {
