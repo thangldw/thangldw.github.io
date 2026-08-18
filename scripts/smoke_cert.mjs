@@ -717,10 +717,10 @@ try {
   await page.waitUntil('document.querySelectorAll(".language-activity__action[href]").length === 13', 30000);
   assertResult('JLPT native practice hub', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('.language-activity__action[href]').length === 13
-      && [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 41 listening items'))
+      && [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 42 listening items'))
       && document.body.innerText.includes('JLPT N1 Practice Hub'),
     message: 'modules=' + document.querySelectorAll('.language-activity__action[href]').length
-      + ', listening=' + [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 41 listening items'))
+      + ', listening=' + [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 42 listening items'))
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/n1-modules/n1-reading-library/index.html`, 1280);
