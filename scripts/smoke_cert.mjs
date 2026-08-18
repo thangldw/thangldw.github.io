@@ -634,7 +634,7 @@ try {
     return {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'en'
-        && primaryLabels === 'Today|Practice|Exam|Progress'
+        && primaryLabels === 'Today|Practice|Exam|Progress|Study by Domain|Knowledge Graph|Terms & Notes|Settings'
         && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/apps/cert/'
         && !document.querySelector('.certification-switcher, .certification-switcher__dot')
         && Boolean(document.querySelector('.today-primary-action'))
@@ -650,29 +650,14 @@ try {
     };
   })()`), page.exceptions);
 
-  await page.evaluate(`document.querySelector('.workspace-navigation__more > button')?.click()`);
-  await page.waitUntil('document.querySelector(".workspace-navigation__more > .workspace-navigation__more-menu")');
-  assertResult('Desktop More menu stays compact and omits redundant local-data status', await page.evaluate(`(() => {
-    const menu = document.querySelector('.workspace-navigation__more > .workspace-navigation__more-menu');
-    const rect = menu?.getBoundingClientRect();
-    const items = [...(menu?.querySelectorAll('[role="menuitem"]') || [])]
-      .map(item => item.getBoundingClientRect());
-    const vertical = items.every((item, index) => index === 0 || item.top >= items[index - 1].bottom);
-    return {
-      ok: rect?.width >= 210
-        && rect.width <= 300
-        && rect.left >= 0
-        && rect.right <= window.innerWidth
-        && vertical
-        && !document.body.innerText.includes('Local data'),
-      message: 'menu=' + Math.round(rect?.width || 0) + 'x' + Math.round(rect?.height || 0)
-        + ', left=' + Math.round(rect?.left || 0)
-        + ', right=' + Math.round(rect?.right || 0) + '/' + window.innerWidth
-        + ', vertical=' + vertical
-        + ', localData=' + document.body.innerText.includes('Local data')
-    };
-  })()`), page.exceptions);
-  await page.evaluate(`document.querySelector('.workspace-navigation__more > button')?.click()`);
+  assertResult('Desktop navigation exposes each unique destination directly', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('.workspace-navigation__primary-item').length === 8
+      && !document.querySelector('.workspace-navigation__more')
+      && !document.body.innerText.includes('Local data'),
+    message: 'items=' + document.querySelectorAll('.workspace-navigation__primary-item').length
+      + ', more=' + Boolean(document.querySelector('.workspace-navigation__more'))
+      + ', localData=' + document.body.innerText.includes('Local data')
+  }))()`), page.exceptions);
 
   await page.evaluate(`([...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Practice'))?.click()`);
   await page.waitUntil('document.body.innerText.includes("Your review queue")');
@@ -717,9 +702,7 @@ try {
       + ', table=' + document.querySelector('.progress-domain table caption')?.textContent.trim()
   }))()`), page.exceptions);
 
-  await page.evaluate(`document.querySelector('.workspace-navigation__more > button')?.click()`);
-  await page.waitUntil('document.querySelector(".workspace-navigation__more-menu")');
-  await page.evaluate(`([...document.querySelectorAll('[role="menuitem"]')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph'))?.click()`);
+  await page.evaluate(`([...document.querySelectorAll('.workspace-navigation__primary-item')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph'))?.click()`);
   await page.waitUntil('document.querySelector(".knowledge-graph-view")', 30000);
   await page.evaluate(`([...document.querySelectorAll('.knowledge-controls button')].find(candidate => candidate.textContent.trim() === 'Exam Map'))?.click()`);
   await page.waitUntil('document.querySelector(".cert-overview")');
@@ -795,7 +778,7 @@ try {
     const support = document.querySelector('.support-floating-trigger');
     return {
       ok: getComputedStyle(mobileNav).display !== 'none'
-        && mobileNav.querySelectorAll('button').length === 5
+        && mobileNav.querySelectorAll('button').length === 8
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'display=' + getComputedStyle(mobileNav).display
         + ', buttons=' + mobileNav.querySelectorAll('button').length
@@ -803,12 +786,10 @@ try {
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
-  await page.evaluate(`document.querySelector('[aria-label="Open mobile more navigation"]')?.click()`);
-  await page.waitUntil('document.querySelector(".mobile-primary-nav__more-menu")');
   assertResult('G mobile secondary navigation', await page.evaluate(`(() => ({
-    ok: [...document.querySelectorAll('.mobile-primary-nav__more-menu [role="menuitem"]')]
+    ok: [...document.querySelectorAll('.mobile-primary-nav__item')]
       .map(item => item.textContent.trim()).includes('Knowledge Graph'),
-    message: [...document.querySelectorAll('.mobile-primary-nav__more-menu [role="menuitem"]')]
+    message: [...document.querySelectorAll('.mobile-primary-nav__item')]
       .map(item => item.textContent.trim()).join('|')
   }))()`), page.exceptions);
 
