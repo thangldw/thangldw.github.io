@@ -209,3 +209,68 @@ mark{background:#fff176;padding:0 2px;border-radius:3px}
 .card.set-card{border-top-color:#1565c0}
 
 @media(max-width:520px){.tab-search{align-items:stretch}.tab-search input{max-width:none}.pat-row{grid-template-columns:1fr}}
+
+/* Vocabulary mini test */
+.mini-test-launch-row{display:flex;justify-content:flex-end;width:min(100%,1120px);margin:0 auto;padding:10px 12px 0}
+.mini-test-launch,.mini-test-primary,.mini-test-secondary,.mini-test-close{min-height:42px;border:1px solid #a72f50;border-radius:8px;padding:8px 16px;background:#fff;color:#9f2949;font:700 13px var(--font-sans,var(--portfolio-font-sans));cursor:pointer}
+.mini-test-launch,.mini-test-primary{background:#a72f50;color:#fff}
+.mini-test-launch:hover,.mini-test-primary:hover{background:#8f213f;border-color:#8f213f}
+.mini-test-primary:hover,.mini-test-launch:hover{color:#fff!important}
+.mini-test-secondary:hover,.mini-test-close:hover{background:#fff1f4}
+:is(.mini-test-launch,.mini-test-primary,.mini-test-secondary,.mini-test-close,.mini-test-choice,.mini-test-review button):focus-visible{outline:3px solid rgba(167,47,80,.3);outline-offset:2px}
+.mini-test-drawer{position:fixed;top:0;right:0;z-index:1200;display:flex;flex-direction:column;width:min(440px,100%);height:100dvh;border-left:1px solid #d9d5cd;background:var(--portfolio-surface,#fff);color:var(--portfolio-ink,#172238);box-shadow:-8px 0 24px rgba(23,34,56,.1)}
+.mini-test-drawer__header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:24px 22px 18px;border-bottom:1px solid #e1ddd5;background:var(--portfolio-surface,#fff)}
+.mini-test-drawer__eyebrow{margin:0 0 4px;color:#a72f50;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.mini-test-drawer h2{margin:0;color:var(--portfolio-ink,#172238);font-size:20px;line-height:1.3}
+.mini-test-drawer__meta{margin:5px 0 0;color:var(--portfolio-body,#687287);font-size:13px}
+.mini-test-close{min-height:38px;padding:6px 12px;border-color:#c7c2b9;color:#4f596b;font-weight:600}
+.mini-test-drawer__body{display:flex;flex:1;flex-direction:column;overflow-y:auto;padding:22px;overscroll-behavior:contain}
+.mini-test-setup{display:grid;gap:20px}
+.mini-test-setup fieldset{display:grid;gap:8px;border:0}
+.mini-test-setup legend{margin-bottom:8px;font-size:14px;font-weight:800;color:var(--portfolio-ink,#172238)}
+.mini-test-setup label{display:flex;align-items:center;gap:10px;min-height:48px;padding:10px 12px;border:1px solid #ddd8cf;border-radius:9px;background:var(--portfolio-surface,#fff);cursor:pointer}
+.mini-test-setup label:has(input:checked){border-color:#a72f50;background:#fff4f6;color:#8f213f;font-weight:700}
+.mini-test-setup input{accent-color:#a72f50}
+.mini-test-setup__note,.mini-test-keyboard-hint{margin:0;color:var(--portfolio-body,#687287);font-size:13px;line-height:1.6}
+.mini-test-error{padding:10px 12px;border-left:3px solid #c23b4d;background:#fff1f2;color:#9f2638;font-size:13px;line-height:1.5}
+.mini-test-progress-row{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:14px;margin-bottom:24px}
+.mini-test-progress-row strong{font-size:15px;white-space:nowrap}
+.mini-test-progress-row progress{width:100%;height:7px;border:0;border-radius:99px;overflow:hidden;accent-color:#ad3657}
+.mini-test-progress-row progress::-webkit-progress-bar{background:#e8e4dd}
+.mini-test-progress-row progress::-webkit-progress-value{background:#ad3657;border-radius:99px}
+.mini-test-question{min-height:106px;margin:0 0 18px;padding:22px 18px;border:1px solid #d8d1c6;border-radius:9px;background:var(--portfolio-surface,#fff);color:var(--portfolio-ink,#172238);font:600 20px/1.8 system-ui,sans-serif}
+.mini-test-choices{display:grid;gap:9px}
+.mini-test-choice{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;width:100%;min-height:66px;padding:9px 12px;border:1px solid #d8d4cc;border-radius:9px;background:var(--portfolio-surface,#fff);color:var(--portfolio-ink,#172238);text-align:left;cursor:pointer}
+.mini-test-choice:not(:disabled):hover{border-color:#ad3657;background:#fff9fa}
+.mini-test-choice__letter{display:grid;place-items:center;width:38px;height:38px;border:1px solid #ded9d1;border-radius:7px;background:#faf9f7;font-size:16px;font-weight:800}
+.mini-test-choice__label{font:600 17px/1.5 system-ui,sans-serif}
+.mini-test-choice__state{font-size:12px;font-weight:800}
+.mini-test-choice.is-correct{border-color:#358744;background:#f1faf2;color:#246a31}
+.mini-test-choice.is-wrong{border-color:#c83a4c;background:#fff3f4;color:#a62c3c}
+.mini-test-keyboard-hint{margin-top:14px}
+.mini-test-feedback{margin-top:18px;padding:16px;border:1px solid #d9d5cd;border-radius:9px;font-size:14px;line-height:1.6}
+.mini-test-feedback p{margin:5px 0 0}
+.mini-test-feedback.is-correct{border-color:#81b78a;background:#f1faf2;color:#246a31}
+.mini-test-feedback.is-wrong{border-color:#efadb5;background:#fff3f4;color:#9f2638}
+.mini-test-feedback b[lang="ja"]{color:#27833b;font-size:16px}
+.mini-test-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;padding-top:20px}
+.mini-test-actions--result{margin-top:auto}
+.mini-test-result{padding:20px;border-top:3px solid #a72f50;background:#fff8f9}
+.mini-test-result__label{margin:0;color:#687287;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.mini-test-result__score{margin:5px 0;color:#172238;font-size:38px;font-weight:800;line-height:1.1}
+.mini-test-result p:last-child{margin:8px 0 0}
+.mini-test-review{margin-top:24px}
+.mini-test-review h3{margin:0 0 10px;font-size:15px}
+.mini-test-review ul{display:grid;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid #e1ddd5}
+.mini-test-review li{border-bottom:1px solid #e1ddd5}
+.mini-test-review button{display:grid;grid-template-columns:minmax(120px,.8fr) 1.2fr;gap:14px;width:100%;padding:13px 2px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.mini-test-review button b{color:#4a148c;font:700 16px system-ui,sans-serif}
+.mini-test-review button span{color:#b45309;font-size:13px}
+.mini-test-result__perfect{padding:14px 2px;color:#246a31}
+
+@media (max-width:720px){
+  .mini-test-drawer{width:100%;border-left:0;box-shadow:none}
+  .mini-test-drawer__header,.mini-test-drawer__body{padding-inline:16px}
+  .mini-test-question{font-size:18px}
+  .mini-test-actions{grid-template-columns:1fr 1fr}
+}

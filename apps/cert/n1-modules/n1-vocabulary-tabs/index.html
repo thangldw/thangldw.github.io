@@ -38,6 +38,9 @@
   <button id="tab-ct" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-ct" tabindex="-1" data-tab="ct">Cơ thể</button>
   <button id="tab-pre" type="button" role="tab" class="mtab" aria-selected="false" aria-controls="pn-pre" tabindex="-1" data-tab="pre">Tiền tố・接頭辞</button>
 </div>
+<div class="mini-test-launch-row">
+  <button type="button" class="mini-test-launch" data-mini-test-launch>Mini test</button>
+</div>
 <div class="stabs" id="stc" role="group" aria-label="Lọc theo từ loại">
   <button type="button" class="stab on" aria-pressed="true" data-pos="" data-list="c">すべて</button>
   <button type="button" class="stab v" aria-pressed="false" data-pos="動詞" data-list="c">動詞</button>
@@ -76,6 +79,7 @@
   <span id="atxt">Đang tra từ đồng nghĩa...</span>
   <div class="api-pw"><div class="api-pf progress-zero" id="afill"></div></div>
 </div>
+<div id="mini-test-root"></div>
 <script src="data.js?v=20260722a"></script>
 <script>
 
@@ -528,6 +532,7 @@ function init(){
 }
 init();
 </script>
+<script type="module" src="mini-test.js?v=20260818a"></script>
 </main>
 </body>
 </html>
