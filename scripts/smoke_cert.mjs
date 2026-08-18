@@ -584,6 +584,168 @@ try {
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
+    await page.waitUntil('document.querySelector(".experience-shell .today-screen")');
+    const result = await page.evaluate(`(() => ({
+      theme: document.documentElement.dataset.theme,
+      locked: document.documentElement.dataset.themeLocked,
+      toggleCount: document.querySelectorAll("#themeToggle, .hub-theme-toggle").length,
+      storedTheme: localStorage.getItem("theme"),
+      hasSwitcher: Boolean(document.querySelector(".certification-switcher, .certification-switcher__dot"))
+    }))()`);
+    childThemeChecks.push({ slug, ...result, exceptions: [...page.exceptions] });
+  }
+  assertResult('Child certifications honor the stored theme in the new workspace', {
+    ok: childThemeChecks.every(check =>
+      check.theme === 'dark'
+      && check.locked === undefined
+      && check.toggleCount === 0
+      && check.storedTheme === 'dark'
+      && check.hasSwitcher === false
+      && check.exceptions.length === 0
+    ),
+    message: JSON.stringify(childThemeChecks)
+  }, []);
+
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3'); localStorage.setItem('theme', 'light')`);
+  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.waitUntil('document.querySelector(".today-screen")');
+  assertResult('G evidence-first Today workspace', await page.evaluate(`(() => {
+    const text = document.body.innerText;
+    const primaryLabels = [...document.querySelectorAll('.workspace-navigation__primary-item span')]
+      .map(item => item.textContent.trim()).join('|');
+    return {
+      ok: document.title === 'G検定'
+        && document.documentElement.lang === 'en'
+        && primaryLabels === 'Today|Practice|Exam|Progress'
+        && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/apps/cert/'
+        && !document.querySelector('.certification-switcher, .certification-switcher__dot')
+        && Boolean(document.querySelector('.today-primary-action'))
+        && Boolean(document.querySelector('.today-evidence'))
+        && text.includes('Your highest-value')
+        && text.includes('All progress stays in this browser.')
+        && document.documentElement.scrollWidth <= window.innerWidth,
+      message: 'title=' + document.title
+        + ', nav=' + primaryLabels
+        + ', primary=' + Boolean(document.querySelector('.today-primary-action'))
+        + ', evidence=' + Boolean(document.querySelector('.today-evidence'))
+        + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
+    };
+  })()`), page.exceptions);
+
+  await page.evaluate(`([...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Practice'))?.click()`);
+  await page.waitUntil('document.body.innerText.includes("Your review queue")');
+  assertResult('G gated Practice workspace', await page.evaluate(`(() => {
+    const text = document.body.innerText;
+    const fullMock = [...document.querySelectorAll('article')]
+      .find(article => article.innerText.includes('Full exam simulation'));
+    return {
+      ok: document.querySelector('.workspace-navigation__primary-item[aria-current="page"]')?.textContent.trim() === 'Practice'
+        && text.includes('Your review queue')
+        && text.includes('Full mock locked')
+        && fullMock?.querySelector('button')?.disabled === true,
+      message: 'active=' + document.querySelector('.workspace-navigation__primary-item[aria-current="page"]')?.textContent.trim()
+        + ', queue=' + text.includes('Your review queue')
+        + ', locked=' + text.includes('Full mock locked')
+    };
+  })()`), page.exceptions);
+
+  await page.evaluate(`([...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam'))?.click()`);
+  await page.waitUntil('document.querySelector(".exam-campaign")');
+  assertResult('G exam campaign gates', await page.evaluate(`(() => {
+    const phases = [...document.querySelectorAll('.campaign-phases strong')].map(item => item.textContent.trim());
+    const fullMock = [...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Start full mock');
+    const timedSection = [...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Start timed section');
+    return {
+      ok: phases.join('|') === 'Foundation|Integration|Simulation|Taper'
+        && fullMock?.disabled === true
+        && timedSection?.disabled === false,
+      message: 'phases=' + phases.join('|')
+        + ', fullMock=' + fullMock?.disabled
+        + ', timed=' + timedSection?.disabled
+    };
+  })()`), page.exceptions);
+
+  await page.evaluate(`([...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Progress'))?.click()`);
+  await page.waitUntil('document.querySelector(".progress-experience")');
+  assertResult('G evidence Progress workspace', await page.evaluate(`(() => ({
+    ok: Boolean(document.querySelector('[aria-label="Domain evidence chart"]'))
+      && document.querySelector('.progress-domain table caption')?.textContent.trim() === 'Domain evidence details'
+      && document.body.innerText.includes('Evidence, not activity'),
+    message: 'chart=' + Boolean(document.querySelector('[aria-label="Domain evidence chart"]'))
+      + ', table=' + document.querySelector('.progress-domain table caption')?.textContent.trim()
+  }))()`), page.exceptions);
+
+  await page.evaluate(`document.querySelector('.workspace-navigation__more > button')?.click()`);
+  await page.waitUntil('document.querySelector(".workspace-navigation__more-menu")');
+  await page.evaluate(`([...document.querySelectorAll('[role="menuitem"]')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph'))?.click()`);
+  await page.waitUntil('document.querySelector(".knowledge-graph-view")', 30000);
+  await page.evaluate(`([...document.querySelectorAll('.knowledge-controls button')].find(candidate => candidate.textContent.trim() === 'Exam Map'))?.click()`);
+  await page.waitUntil('document.querySelector(".cert-overview")');
+  assertResult('G exam map overview', await page.evaluate(`(() => ({
+    ok: Boolean(document.querySelector('.cert-overview__core'))
+      && document.querySelectorAll('.cert-overview__domain').length > 0
+      && document.body.innerText.includes('Reading path'),
+    message: 'domains=' + document.querySelectorAll('.cert-overview__domain').length
+  }))()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
+  await page.waitUntil('document.querySelector(".language-practice-hub")');
+  assertResult('JLPT native practice hub', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('.language-activity__action[href]').length === 13
+      && [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 41 listening items'))
+      && document.body.innerText.includes('JLPT N1 Practice Hub'),
+    message: 'modules=' + document.querySelectorAll('.language-activity__action[href]').length
+      + ', listening=' + [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 41 listening items'))
+  }))()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/fe/?view=practice`, 1280);
+  await page.waitUntil('document.querySelector(".specialist-practice")');
+  assertResult('FE specialist practice workspace', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('.specialist-practice__tool').length > 0
+      && Boolean(document.querySelector('.specialist-practice__panel--workpad'))
+      && document.body.innerText.includes('Learner-only'),
+    message: 'tools=' + document.querySelectorAll('.specialist-practice__tool').length
+      + ', workpad=' + Boolean(document.querySelector('.specialist-practice__panel--workpad'))
+  }))()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/ccar-f/?view=practice`, 1280);
+  await page.waitUntil('document.querySelectorAll(".scenario-practice__groups button").length === 5');
+  assertResult('CCAR scenario practice gate', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('.scenario-practice__groups button').length === 5
+      && document.querySelector('.scenario-practice__simulation')?.dataset.locked === 'true'
+      && document.body.innerText.toLowerCase().includes('official simulation'),
+    message: 'groups=' + document.querySelectorAll('.scenario-practice__groups button').length
+      + ', locked=' + document.querySelector('.scenario-practice__simulation')?.dataset.locked
+  }))()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/g/`, 390, 844);
+  await page.waitUntil('document.querySelector(".today-screen")');
+  assertResult('G mobile evidence workspace', await page.evaluate(`(() => {
+    const mobileNav = document.querySelector('.mobile-primary-nav');
+    const support = document.querySelector('.support-floating-trigger');
+    return {
+      ok: getComputedStyle(mobileNav).display !== 'none'
+        && mobileNav.querySelectorAll('button').length === 5
+        && document.documentElement.scrollWidth <= window.innerWidth,
+      message: 'display=' + getComputedStyle(mobileNav).display
+        + ', buttons=' + mobileNav.querySelectorAll('button').length
+        + ', support=' + getComputedStyle(support).display
+        + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
+    };
+  })()`), page.exceptions);
+  await page.evaluate(`document.querySelector('[aria-label="Open mobile more navigation"]')?.click()`);
+  await page.waitUntil('document.querySelector(".mobile-primary-nav__more-menu")');
+  assertResult('G mobile secondary navigation', await page.evaluate(`(() => ({
+    ok: [...document.querySelectorAll('.mobile-primary-nav__more-menu [role="menuitem"]')]
+      .map(item => item.textContent.trim()).includes('Knowledge Graph'),
+    message: [...document.querySelectorAll('.mobile-primary-nav__more-menu [role="menuitem"]')]
+      .map(item => item.textContent.trim()).join('|')
+  }))()`), page.exceptions);
+
+  if (process.env.LEGACY_CERT_SMOKE === '1') {
+  const childThemeChecks = [];
+  for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
+    await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
     await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
     const result = await page.evaluate(`(async () => {
       await new Promise(resolveWait => setTimeout(resolveWait, 100));
@@ -974,6 +1136,8 @@ try {
     message: 'grid=' + getComputedStyle(document.querySelector('.app-shell')).gridTemplateColumns
       + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
   }))()`), page.exceptions);
+
+  }
 
   page.close();
   console.log('CERT smoke tests passed.');
