@@ -707,7 +707,7 @@ try {
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
-  await page.waitUntil('document.querySelector(".language-practice-hub")');
+  await page.waitUntil('document.querySelectorAll(".language-activity__action[href]").length === 13', 30000);
   assertResult('JLPT native practice hub', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('.language-activity__action[href]').length === 13
       && [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 41 listening items'))
@@ -726,6 +726,22 @@ try {
       + ', cards=' + document.querySelectorAll('.n1-reading-passage-card').length
   }))()`), page.exceptions);
 
+  await page.evaluate(`([...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Luyện bài này'))?.click()`);
+  await page.waitUntil('document.querySelector(".focus-sprint .rich-question-content__passage")');
+  await page.evaluate(`([...document.querySelectorAll('button')].find(button => button.textContent.includes('Reveal Vietnamese translation')))?.click()`);
+  await page.waitUntil('document.querySelector(".rich-question-content__passage [lang=vi]")');
+  assertResult('JLPT reading practice reveals the translated passage', await page.evaluate(`(() => {
+    const passage = document.querySelector('.rich-question-content__passage');
+    const translation = passage?.querySelector('.rich-question-content__translation[lang="vi"]');
+    return {
+      ok: Boolean(translation)
+        && translation.textContent.includes('Bản dịch tiếng Việt')
+        && translation.textContent.length > 500,
+      message: 'translation=' + Boolean(translation)
+        + ', length=' + (translation?.textContent.length || 0)
+    };
+  })()`), page.exceptions);
+
   await page.navigate(`${origin}/apps/cert/fe/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".specialist-practice")');
   assertResult('FE specialist practice workspace', await page.evaluate(`(() => ({
@@ -738,6 +754,8 @@ try {
 
   await page.navigate(`${origin}/apps/cert/ccar-f/?view=practice`, 1280);
   await page.waitUntil('document.querySelectorAll(".scenario-practice__groups button").length === 5');
+  await new Promise(resolveWait => setTimeout(resolveWait, 500));
+  await page.waitUntil('document.querySelectorAll(".scenario-practice__groups button").length === 5 && document.querySelector(".scenario-practice__simulation")');
   assertResult('CCAR scenario practice gate', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('.scenario-practice__groups button').length === 5
       && document.querySelector('.scenario-practice__simulation')?.dataset.locked === 'true'
