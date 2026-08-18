@@ -25,7 +25,10 @@ function escapeRegExp(value) {
 
 export function createMiniTestQuestions({ items = [], count = 5, mode = "jp-to-vi", random = Math.random } = {}) {
   const pool = uniqueVocabulary(items).filter((item) => (
-    mode !== "context" || String(item.context || "").includes(item.term)
+    mode !== "context" || (
+      String(item.context || "").includes(item.term)
+      && String(item.context || "").replace(new RegExp(escapeRegExp(item.term), "gu"), "").trim().length > 0
+    )
   ));
   if (pool.length < 4) return [];
 
