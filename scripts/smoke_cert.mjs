@@ -199,6 +199,24 @@ try {
     })()`), page.exceptions);
   }
 
+  await page.navigate(`${origin}/404.html`, 1280);
+  assertResult('404 recovery actions render as buttons', await page.evaluate(`(() => {
+    const home = document.querySelector('.content-actions a[href="/"]');
+    const apps = document.querySelector('.content-actions a[href="/apps/"]');
+    const homeStyle = home ? getComputedStyle(home) : null;
+    const appsStyle = apps ? getComputedStyle(apps) : null;
+    return {
+      ok: ['flex', 'inline-flex'].includes(homeStyle?.display)
+        && ['flex', 'inline-flex'].includes(appsStyle?.display)
+        && parseFloat(homeStyle.minHeight) >= 40
+        && parseFloat(appsStyle.minHeight) >= 40
+        && parseFloat(homeStyle.paddingLeft) >= 12
+        && parseFloat(appsStyle.paddingLeft) >= 12,
+      message: 'home=' + homeStyle?.display + '/' + homeStyle?.minHeight + '/' + homeStyle?.paddingLeft
+        + ', apps=' + appsStyle?.display + '/' + appsStyle?.minHeight + '/' + appsStyle?.paddingLeft
+    };
+  })()`), page.exceptions);
+
   const pageBackgroundChecks = [
     ['/', 'Homepage'],
     ['/apps/', 'Apps catalog']
@@ -696,6 +714,16 @@ try {
       && document.body.innerText.includes('JLPT N1 Practice Hub'),
     message: 'modules=' + document.querySelectorAll('.language-activity__action[href]').length
       + ', listening=' + [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 41 listening items'))
+  }))()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/n1-modules/n1-reading-library/index.html`, 1280);
+  await page.waitUntil('document.querySelector(".n1-reading-library-view")', 30000);
+  assertResult('JLPT reading library legacy URL opens native view', await page.evaluate(`(() => ({
+    ok: window.location.pathname === '/apps/cert/n1-modules/n1-reading-library/index.html'
+      && document.body.innerText.includes('257 bài đọc')
+      && document.body.innerText.includes('Luyện bài này'),
+    message: 'url=' + window.location.href
+      + ', cards=' + document.querySelectorAll('.n1-reading-passage-card').length
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/fe/?view=practice`, 1280);

@@ -50,6 +50,22 @@
   margin-top: 22px;
 }
 
+.not-found-page .content-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.not-found-page .content-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  text-decoration: none;
+}
+
 .not-found-page .dad-reassurance {
   max-width: 570px;
   margin: 24px 0 0;
