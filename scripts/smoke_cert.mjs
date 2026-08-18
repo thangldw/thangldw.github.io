@@ -246,7 +246,7 @@ try {
   ];
   for (const [desktopWidth, desktopHeight] of appsDesktopViewports) {
     await page.navigate(`${origin}/apps/`, desktopWidth, desktopHeight);
-    await page.waitUntil('document.querySelectorAll(".project-row").length === 9');
+    await page.waitUntil('document.querySelectorAll(".project-row").length === 10');
     assertResult(`Apps catalog fits ${desktopWidth}x${desktopHeight}`, await page.evaluate(`(() => {
       const scroller = document.querySelector('.project-table-scroll');
       const visibleRows = document.querySelectorAll('.project-row:not([hidden])');
@@ -254,7 +254,7 @@ try {
         ok: document.documentElement.scrollHeight <= window.innerHeight
           && document.documentElement.scrollWidth <= window.innerWidth
           && scroller.scrollHeight <= scroller.clientHeight
-          && visibleRows.length === 9,
+          && visibleRows.length === 10,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
           + ', scroller=' + scroller.clientWidth + 'x' + scroller.clientHeight
@@ -310,6 +310,22 @@ try {
         && card.textContent.includes('MIT License')
         && card?.querySelector('.project-action')?.getAttribute('aria-label') === 'Open KakeFlow',
       message: 'kakeflow=' + card?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
+  assertResult('Neon Glider appears in the Games catalog', await page.evaluate(`(() => {
+    const gamesFilter = document.querySelector('[data-filter="games"]');
+    gamesFilter?.click();
+    const visibleRows = [...document.querySelectorAll('.project-row:not([hidden])')];
+    const game = visibleRows.find(candidate =>
+      candidate.querySelector('.project-name strong')?.textContent.trim() === 'Neon Glider'
+    );
+    return {
+      ok: game?.dataset.category === 'games'
+        && game?.querySelector('a')?.href === 'https://thangldw.github.io/neon-glider/'
+        && game?.querySelector('.project-status')?.textContent.trim() === 'Live'
+        && game?.querySelector('.project-action')?.getAttribute('aria-label') === 'Play Neon Glider',
+      message: 'visible=' + visibleRows.length + ', neonGlider=' + game?.textContent.trim()
     };
   })()`), page.exceptions);
 
