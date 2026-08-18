@@ -380,6 +380,17 @@ try {
     };
   })()`), page.exceptions);
 
+  assertResult('Neon Glider appears in home side projects', await page.evaluate(`(() => {
+    const project = [...document.querySelectorAll('#projectRail .resume-project')]
+      .find(candidate => candidate.querySelector('h3')?.textContent.trim() === 'Neon Glider');
+    return {
+      ok: project?.href === 'https://thangldw.github.io/neon-glider/'
+        && project.textContent.includes('Three.js')
+        && project.textContent.includes('persistent high scores'),
+      message: 'neonGlider=' + project?.textContent.trim()
+    };
+  })()`), page.exceptions);
+
   assertResult('Support dialog uses explicit external and local payment destinations', await page.evaluate(`(async () => {
     const trigger = document.querySelector('.support-floating-trigger');
     const dialog = document.querySelector('#supportDialog');
