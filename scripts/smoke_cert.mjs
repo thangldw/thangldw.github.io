@@ -634,7 +634,7 @@ try {
     return {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'en'
-        && primaryLabels === 'Today|Practice|Exam|Progress|Study by Domain|Knowledge Graph|Terms & Notes|Settings'
+        && primaryLabels === 'Today|Learn|Practice|Exam|Progress'
         && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/apps/cert/'
         && !document.querySelector('.certification-switcher, .certification-switcher__dot')
         && Boolean(document.querySelector('.today-primary-action'))
@@ -651,7 +651,7 @@ try {
   })()`), page.exceptions);
 
   assertResult('Desktop navigation exposes each unique destination directly', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('.workspace-navigation__primary-item').length === 8
+    ok: document.querySelectorAll('.workspace-navigation__primary-item').length === 5
       && !document.querySelector('.workspace-navigation__more')
       && !document.body.innerText.includes('Local data'),
     message: 'items=' + document.querySelectorAll('.workspace-navigation__primary-item').length
@@ -702,7 +702,9 @@ try {
       + ', table=' + document.querySelector('.progress-domain table caption')?.textContent.trim()
   }))()`), page.exceptions);
 
-  await page.evaluate(`([...document.querySelectorAll('.workspace-navigation__primary-item')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph'))?.click()`);
+  await page.evaluate(`([...document.querySelectorAll('.workspace-navigation__primary-item')].find(candidate => candidate.textContent.trim() === 'Learn'))?.click()`);
+  await page.waitUntil('document.querySelector(".learn-experience")', 30000);
+  await page.evaluate(`([...document.querySelectorAll('.learn-experience__tabs button')].find(candidate => candidate.textContent.trim() === 'Knowledge map'))?.click()`);
   await page.waitUntil('document.querySelector(".knowledge-graph-view")', 30000);
   await page.evaluate(`([...document.querySelectorAll('.knowledge-controls button')].find(candidate => candidate.textContent.trim() === 'Exam Map'))?.click()`);
   await page.waitUntil('document.querySelector(".cert-overview")');
@@ -778,7 +780,7 @@ try {
     const support = document.querySelector('.support-floating-trigger');
     return {
       ok: getComputedStyle(mobileNav).display !== 'none'
-        && mobileNav.querySelectorAll('button').length === 8
+        && mobileNav.querySelectorAll('button').length === 5
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'display=' + getComputedStyle(mobileNav).display
         + ', buttons=' + mobileNav.querySelectorAll('button').length
@@ -786,9 +788,9 @@ try {
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
-  assertResult('G mobile secondary navigation', await page.evaluate(`(() => ({
+  assertResult('G mobile learning navigation', await page.evaluate(`(() => ({
     ok: [...document.querySelectorAll('.mobile-primary-nav__item')]
-      .map(item => item.textContent.trim()).includes('Knowledge Graph'),
+      .map(item => item.textContent.trim()).includes('Learn'),
     message: [...document.querySelectorAll('.mobile-primary-nav__item')]
       .map(item => item.textContent.trim()).join('|')
   }))()`), page.exceptions);
