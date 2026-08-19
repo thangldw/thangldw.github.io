@@ -716,13 +716,28 @@ try {
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
-  await page.waitUntil('document.querySelectorAll(".language-activity__action[href]").length === 13', 30000);
+  await page.waitUntil('document.querySelectorAll(".language-activity__action[href]").length === 12', 30000);
   assertResult('JLPT native practice hub', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('.language-activity__action[href]').length === 13
+    ok: document.querySelectorAll('.language-activity__action[href]').length === 12
+      && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Open in workspace')
       && [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 42 listening items'))
       && document.body.innerText.includes('JLPT N1 Practice Hub'),
     message: 'modules=' + document.querySelectorAll('.language-activity__action[href]').length
       + ', listening=' + [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 42 listening items'))
+  }))()`), page.exceptions);
+
+  await page.evaluate(`([...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Open in workspace'))?.click()`);
+  await page.waitUntil('document.querySelector(".jlpt-vocabulary-workspace") && document.body.innerText.includes("1.685 từ")', 30000);
+  assertResult('JLPT vocabulary stays inside the unified Practice workspace', await page.evaluate(`(() => ({
+    ok: window.location.pathname === '/apps/cert/jlpt/'
+      && Boolean(document.querySelector('.workspace-navigation__primary-item[aria-current="page"]'))
+      && Boolean(document.querySelector('.jlpt-vocabulary-workspace'))
+      && document.querySelectorAll('.jlpt-vocabulary-tabs button').length === 7
+      && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Mini test')
+      && !document.querySelector('a[href*="n1-vocabulary-tabs/index.html"]'),
+    message: 'url=' + window.location.href
+      + ', tabs=' + document.querySelectorAll('.jlpt-vocabulary-tabs button').length
+      + ', cards=' + document.querySelectorAll('.jlpt-vocabulary-card').length
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/n1-modules/n1-reading-library/index.html`, 1280);
