@@ -732,7 +732,10 @@ try {
     ok: window.location.pathname === '/apps/cert/jlpt/'
       && Boolean(document.querySelector('.workspace-navigation__primary-item[aria-current="page"]'))
       && Boolean(document.querySelector('.jlpt-vocabulary-workspace'))
+      && !document.querySelector('.language-practice-hero')
+      && !document.querySelector('.jlpt-vocabulary-workspace__header')
       && document.querySelectorAll('.jlpt-vocabulary-tabs button').length === 7
+      && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Ôn lại 0')
       && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Mini test')
       && !document.querySelector('a[href*="n1-vocabulary-tabs/index.html"]'),
     message: 'url=' + window.location.href
