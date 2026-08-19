@@ -734,6 +734,7 @@ try {
       && Boolean(document.querySelector('.jlpt-vocabulary-workspace'))
       && !document.querySelector('.language-practice-hero')
       && !document.querySelector('.jlpt-vocabulary-workspace__header')
+      && Boolean(document.querySelector('button[aria-label="Quay lại tổng quan Practice"]'))
       && document.querySelectorAll('.jlpt-vocabulary-tabs button').length === 7
       && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Ôn lại 0')
       && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Mini test')
