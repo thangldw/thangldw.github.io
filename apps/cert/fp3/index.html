@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self' data:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; frame-src 'none'; form-action 'self'; upgrade-insecure-requests"
+    />
+    <meta
       name="description"
       content="Local-first study, practice, review, and exam preparation across 23 certifications."
     />
@@ -18,23 +22,16 @@
     <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <title>3級FP</title>
-    <script>
-      try {
-        document.documentElement.dataset.theme =
-          localStorage.getItem("theme") === "dark" ? "dark" : "light";
-      } catch {
-        document.documentElement.dataset.theme = "light";
-      }
-    </script>
+    <script src="/apps/cert/theme-init.js"></script>
     <script defer src="/js/analytics.js"></script>
     <link rel="stylesheet" href="/css/icons.css?v=20260714" />
     <link rel="stylesheet" href="/css/support-dialog.css?v=20260803h" />
     <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2" />
     <script src="/js/site-shell.js?v=20260727b"></script>
     <script defer src="/js/support-dialog.js?v=20260803e"></script>
-    <script type="module" crossorigin src="/apps/cert/assets/index-D0ksFjGY.js"></script>
-    <link rel="stylesheet" crossorigin href="/apps/cert/assets/index-C1X3Om0o.css">
-  <link rel="preload" href="/apps/cert/protected-data/p-a6f5dd95c0c4967d39130c08.cbk" as="fetch" crossorigin="anonymous">
+    <script type="module" crossorigin src="/apps/cert/assets/index-Dsqj0hyK.js"></script>
+    <link rel="stylesheet" crossorigin href="/apps/cert/assets/index-WGSPQpOx.css">
+  <link rel="preload" href="/apps/cert/protected-data/p-e55f9d2e173bc16b74f90aa1.cbk" as="fetch" crossorigin="anonymous">
 </head>
   <body data-page-kind="exam-shell">
     <div id="root"></div>
