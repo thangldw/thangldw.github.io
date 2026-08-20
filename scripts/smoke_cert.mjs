@@ -331,15 +331,13 @@ try {
     };
   })()`), page.exceptions);
 
-  assertResult('Neon Glider appears in the Games catalog', await page.evaluate(`(() => {
-    const gamesFilter = document.querySelector('[data-filter="games"]');
-    gamesFilter?.click();
+  assertResult('Neon Glider appears in the apps catalog', await page.evaluate(`(() => {
     const visibleRows = [...document.querySelectorAll('.project-row:not([hidden])')];
     const game = visibleRows.find(candidate =>
       candidate.querySelector('.project-name strong')?.textContent.trim() === 'Neon Glider'
     );
     return {
-      ok: game?.dataset.category === 'games'
+      ok: visibleRows.length === 10
         && game?.querySelector('a')?.href === 'https://thangldw.github.io/neon-glider/'
         && game?.querySelector('.project-status')?.textContent.trim() === 'Live'
         && game?.querySelector('.project-action')?.getAttribute('aria-label') === 'Play Neon Glider',

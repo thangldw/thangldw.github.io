@@ -17,6 +17,7 @@ from audit_ui_standards import audit_site
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
 ANALYTICS_SCRIPT = "/js/analytics.js"
+APP_CATALOG_PAGE = ROOT / "apps/index.html"
 SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20260803font2"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
 SITE_FONT_LICENSE = Path("assets/fonts/Inter-LICENSE.txt")
@@ -46,6 +47,7 @@ class PageParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.ids: list[str] = []
+        self.classes: Counter[str] = Counter()
         self.references: list[str] = []
         self.canonicals: list[str] = []
         self.refreshes: list[str] = []
@@ -54,6 +56,7 @@ class PageParser(HTMLParser):
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = {key.lower(): value or "" for key, value in attrs}
+        self.classes.update(values.get("class", "").split())
         if values.get("id"):
             self.ids.append(values["id"])
         for key in ("href", "src"):
@@ -248,6 +251,13 @@ def main() -> int:
             errors.append(f"{page.relative_to(ROOT)}: HTML parse failed: {exc}")
             continue
         parsed_pages[page] = parser
+
+        if page == APP_CATALOG_PAGE:
+            for removed_class in ("catalog-tools", "catalog-toolbar"):
+                if parser.classes[removed_class]:
+                    errors.append(
+                        f"apps/index.html: removed catalog control .{removed_class} must not be rendered"
+                    )
 
         duplicates = sorted(key for key, count in Counter(parser.ids).items() if count > 1)
         if duplicates:
