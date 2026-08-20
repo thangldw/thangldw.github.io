@@ -17,7 +17,12 @@ from audit_ui_standards import audit_site
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
 ANALYTICS_SCRIPT = "/js/analytics.js"
-EMAIL_COMPOSE_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=thangldw@gmail.com"
+EMAIL_COMPOSE_URL = (
+    "https://mail.google.com/mail/?view=cm&fs=1&to=thangldw@gmail.com"
+    "&su=Work%20%26%20Collaboration%20Inquiry"
+    "&body=Hi%20Thang%2C%0A%0AI%27d%20like%20to%20connect%20about%20a%20"
+    "potential%20opportunity%20or%20collaboration."
+)
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20260803font2"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
