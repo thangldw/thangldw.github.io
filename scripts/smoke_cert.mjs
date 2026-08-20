@@ -627,12 +627,14 @@ try {
   await page.waitUntil('document.querySelector(".today-screen")');
   assertResult('G evidence-first Today workspace', await page.evaluate(`(() => {
     const text = document.body.innerText;
-    const primaryLabels = [...document.querySelectorAll('.workspace-navigation__primary-item span')]
+    const primaryLabels = [...document.querySelectorAll('.workspace-navigation__primary > button span')]
       .map(item => item.textContent.trim()).join('|');
+    const disclaimerLink = document.querySelector('.workspace-navigation__primary > a.workspace-navigation__disclaimer');
     return {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'ja'
         && primaryLabels === 'Today|Learn|Practice|Exam|Progress'
+        && disclaimerLink?.getAttribute('href') === '/apps/cert/disclaimer/'
         && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/apps/cert/'
         && !document.querySelector('.certification-switcher, .certification-switcher__dot')
         && Boolean(document.querySelector('.today-primary-action'))
@@ -642,6 +644,7 @@ try {
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'title=' + document.title
         + ', nav=' + primaryLabels
+        + ', disclaimer=' + disclaimerLink?.getAttribute('href')
         + ', primary=' + Boolean(document.querySelector('.today-primary-action'))
         + ', evidence=' + Boolean(document.querySelector('.today-evidence'))
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
@@ -649,10 +652,12 @@ try {
   })()`), page.exceptions);
 
   assertResult('Desktop navigation exposes each unique destination directly', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('.workspace-navigation__primary-item').length === 5
+    ok: document.querySelectorAll('.workspace-navigation__primary > button.workspace-navigation__primary-item').length === 5
+      && document.querySelector('.workspace-navigation__primary > a.workspace-navigation__disclaimer')?.getAttribute('href') === '/apps/cert/disclaimer/'
       && !document.querySelector('.workspace-navigation__more')
       && !document.body.innerText.includes('Local data'),
-    message: 'items=' + document.querySelectorAll('.workspace-navigation__primary-item').length
+    message: 'items=' + document.querySelectorAll('.workspace-navigation__primary > button.workspace-navigation__primary-item').length
+      + ', disclaimer=' + document.querySelector('.workspace-navigation__primary > a.workspace-navigation__disclaimer')?.getAttribute('href')
       + ', more=' + Boolean(document.querySelector('.workspace-navigation__more'))
       + ', localData=' + document.body.innerText.includes('Local data')
   }))()`), page.exceptions);
@@ -799,12 +804,15 @@ try {
   assertResult('G mobile evidence workspace', await page.evaluate(`(() => {
     const mobileNav = document.querySelector('.mobile-primary-nav');
     const support = document.querySelector('.support-floating-trigger');
+    const disclaimerLink = mobileNav.querySelector('a.mobile-primary-nav__disclaimer[aria-label="Read full disclaimer"]');
     return {
       ok: getComputedStyle(mobileNav).display !== 'none'
         && mobileNav.querySelectorAll('button').length === 5
+        && disclaimerLink?.getAttribute('href') === '/apps/cert/disclaimer/'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'display=' + getComputedStyle(mobileNav).display
         + ', buttons=' + mobileNav.querySelectorAll('button').length
+        + ', disclaimer=' + disclaimerLink?.getAttribute('href')
         + ', support=' + getComputedStyle(support).display
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
