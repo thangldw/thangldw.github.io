@@ -17,6 +17,7 @@ from audit_ui_standards import audit_site
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
 ANALYTICS_SCRIPT = "/js/analytics.js"
+EMAIL_COMPOSE_URL = "https://mail.google.com/mail/?view=cm&fs=1&to=thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20260803font2"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
@@ -302,6 +303,10 @@ def main() -> int:
             errors.append(
                 f"{page.relative_to(ROOT)}: legacy redirect pages are not allowed"
             )
+
+    home_references = parsed_pages.get(ROOT / "index.html", PageParser()).references
+    if EMAIL_COMPOSE_URL not in home_references:
+        errors.append("index.html: Email must open the Gmail Web compose screen")
 
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
