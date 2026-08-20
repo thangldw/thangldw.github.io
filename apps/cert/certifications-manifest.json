@@ -196,7 +196,7 @@
       "exam": {
         "durationMinutes": 120,
         "questionCount": 60,
-        "format": "Scenario-based multiple choice, one best answer",
+        "format": "Scenario-based multiple-choice and multiple-response; each item states the number of selections required",
         "structure": "Five architecture domains; four scenarios selected from six"
       }
     },
