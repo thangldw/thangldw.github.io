@@ -631,7 +631,7 @@ try {
       .map(item => item.textContent.trim()).join('|');
     return {
       ok: document.title === 'G検定'
-        && document.documentElement.lang === 'en'
+        && document.documentElement.lang === 'ja'
         && primaryLabels === 'Today|Learn|Practice|Exam|Progress'
         && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/apps/cert/'
         && !document.querySelector('.certification-switcher, .certification-switcher__dot')
