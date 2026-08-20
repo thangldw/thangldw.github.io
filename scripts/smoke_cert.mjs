@@ -660,19 +660,18 @@ try {
   }))()`), page.exceptions);
 
   await page.evaluate(`([...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Practice'))?.click()`);
-  await page.waitUntil('document.body.innerText.includes("Your review queue")');
-  assertResult('G gated Practice workspace', await page.evaluate(`(() => {
+  await page.waitUntil('document.querySelector(".practice-program")');
+  assertResult('G unified Practice Program', await page.evaluate(`(() => {
     const text = document.body.innerText;
-    const fullMock = [...document.querySelectorAll('article')]
-      .find(article => article.innerText.includes('Full exam simulation'));
     return {
       ok: document.querySelector('.workspace-navigation__primary-item[aria-current="page"]')?.textContent.trim() === 'Practice'
-        && text.includes('Your review queue')
-        && text.includes('Full mock locked')
-        && fullMock?.querySelector('button')?.disabled === true,
+        && text.includes('G検定 Practice Program')
+        && Boolean(document.querySelector('[aria-label="Practice tracks"]'))
+        && document.querySelectorAll('.practice-program__modules li').length > 0,
       message: 'active=' + document.querySelector('.workspace-navigation__primary-item[aria-current="page"]')?.textContent.trim()
-        + ', queue=' + text.includes('Your review queue')
-        + ', locked=' + text.includes('Full mock locked')
+        + ', program=' + text.includes('G検定 Practice Program')
+        + ', tracks=' + Boolean(document.querySelector('[aria-label="Practice tracks"]'))
+        + ', modules=' + document.querySelectorAll('.practice-program__modules li').length
     };
   })()`), page.exceptions);
 
@@ -716,17 +715,17 @@ try {
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
-  await page.waitUntil('document.querySelectorAll(".language-activity__action[href]").length === 12', 30000);
-  assertResult('JLPT native practice hub', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('.language-activity__action[href]').length === 12
-      && [...document.querySelectorAll('button')].some(button => button.textContent.trim() === 'Open in workspace')
-      && [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 42 listening items'))
-      && document.body.innerText.includes('JLPT N1 Practice Hub'),
-    message: 'modules=' + document.querySelectorAll('.language-activity__action[href]').length
-      + ', listening=' + [...document.querySelectorAll('button')].some(button => button.textContent.includes('Start 42 listening items'))
+  await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 4', 30000);
+  assertResult('JLPT unified Practice Program', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 4
+      && document.querySelectorAll('.practice-program__modules li').length === 6
+      && Boolean(document.querySelector('[data-module-action="jlpt:module:n1-vocabulary-tabs"]'))
+      && document.body.innerText.includes('JLPT N1 Practice Program'),
+    message: 'tracks=' + document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length
+      + ', modules=' + document.querySelectorAll('.practice-program__modules li').length
   }))()`), page.exceptions);
 
-  await page.evaluate(`([...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Open in workspace'))?.click()`);
+  await page.evaluate(`document.querySelector('[data-module-action="jlpt:module:n1-vocabulary-tabs"]')?.click()`);
   await page.waitUntil('document.querySelector(".jlpt-vocabulary-workspace") && document.body.innerText.includes("1.685 từ")', 30000);
   assertResult('JLPT vocabulary stays inside the unified Practice workspace', await page.evaluate(`(() => ({
     ok: window.location.pathname === '/apps/cert/jlpt/'
@@ -771,25 +770,27 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/fe/?view=practice`, 1280);
-  await page.waitUntil('document.querySelector(".specialist-practice")');
-  assertResult('FE specialist practice workspace', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('.specialist-practice__tool').length > 0
-      && Boolean(document.querySelector('.specialist-practice__panel--workpad'))
-      && document.body.innerText.includes('Learner-only'),
-    message: 'tools=' + document.querySelectorAll('.specialist-practice__tool').length
-      + ', workpad=' + Boolean(document.querySelector('.specialist-practice__panel--workpad'))
+  await page.waitUntil('document.querySelector(".practice-program")');
+  assertResult('FE specialist Practice Program', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length > 0
+      && document.querySelectorAll('.practice-program__modules li').length > 0
+      && document.querySelector('.practice-program')?.getAttribute('aria-label')?.endsWith('Practice Program'),
+    message: 'tracks=' + document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length
+      + ', modules=' + document.querySelectorAll('.practice-program__modules li').length
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/ccar-f/?view=practice`, 1280);
-  await page.waitUntil('document.querySelectorAll(".scenario-practice__groups button").length === 5');
-  await new Promise(resolveWait => setTimeout(resolveWait, 500));
-  await page.waitUntil('document.querySelectorAll(".scenario-practice__groups button").length === 5 && document.querySelector(".scenario-practice__simulation")');
-  assertResult('CCAR scenario practice gate', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('.scenario-practice__groups button').length === 5
-      && document.querySelector('.scenario-practice__simulation')?.dataset.locked === 'true'
-      && document.body.innerText.toLowerCase().includes('official simulation'),
-    message: 'groups=' + document.querySelectorAll('.scenario-practice__groups button').length
-      + ', locked=' + document.querySelector('.scenario-practice__simulation')?.dataset.locked
+  await page.waitUntil('document.querySelector(".practice-program")');
+  await page.evaluate(`([...document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]')].find(tab => tab.textContent.trim() === 'Official simulation'))?.click()`);
+  await page.waitUntil('document.querySelector(".practice-program__modules button[disabled]")');
+  assertResult('CCAR scenario Practice Program gate', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 6
+      && document.querySelector('[aria-label="Practice tracks"] [aria-selected="true"]')?.textContent.trim() === 'Official simulation'
+      && Boolean(document.querySelector('.practice-program__modules button[disabled]'))
+      && document.body.innerText.includes('Unavailable'),
+    message: 'tracks=' + document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length
+      + ', active=' + document.querySelector('[aria-label="Practice tracks"] [aria-selected="true"]')?.textContent.trim()
+      + ', locked=' + Boolean(document.querySelector('.practice-program__modules button[disabled]'))
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/g/`, 390, 844);
@@ -930,20 +931,17 @@ try {
     };
   })()`), page.exceptions);
 
-  assertResult('G unified review queue', await page.evaluate(`(async () => {
+  assertResult('G marked-question return to Practice Program', await page.evaluate(`(async () => {
     document.querySelector('.secondary-action')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 25));
     [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Smart Study')?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const text = document.body.innerText;
-    const queueButton = [...document.querySelectorAll('button')]
-      .find(candidate => candidate.textContent.trim() === 'Start review queue');
     return {
-      ok: text.includes('Your review queue')
-        && text.includes('New questions stay out')
-        && Boolean(queueButton)
-        && !queueButton.disabled,
-      message: \`queue=\${Boolean(queueButton)}, disabled=\${queueButton?.disabled}, text=\${text.slice(0, 180)}\`
+      ok: text.includes('G検定 Practice Program')
+        && Boolean(document.querySelector('.practice-program'))
+        && document.querySelector('.workspace-navigation__primary-item[aria-current="page"]')?.textContent.trim() === 'Practice',
+      message: \`program=\${Boolean(document.querySelector('.practice-program'))}, text=\${text.slice(0, 180)}\`
     };
   })()`), page.exceptions);
 
