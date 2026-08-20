@@ -701,16 +701,19 @@ try {
 
   await page.evaluate(`([...document.querySelectorAll('.workspace-navigation__primary-item')].find(candidate => candidate.textContent.trim() === 'Learn'))?.click()`);
   await page.waitUntil('document.querySelector(".learn-experience")', 30000);
-  await page.evaluate(`([...document.querySelectorAll('.learn-experience__tabs button')].find(candidate => candidate.textContent.trim() === 'Knowledge map'))?.click()`);
-  await page.waitUntil('document.querySelector(".knowledge-graph-view")', 30000);
-  await page.evaluate(`([...document.querySelectorAll('.knowledge-controls button')].find(candidate => candidate.textContent.trim() === 'Exam Map'))?.click()`);
-  await page.waitUntil('document.querySelector(".cert-overview")');
-  assertResult('G exam map overview', await page.evaluate(`(() => ({
-    ok: Boolean(document.querySelector('.cert-overview__core'))
-      && document.querySelectorAll('.cert-overview__domain').length > 0
-      && document.body.innerText.includes('Reading path'),
-    message: 'domains=' + document.querySelectorAll('.cert-overview__domain').length
-  }))()`), page.exceptions);
+  assertResult('G Learn overview without Knowledge Map UI', await page.evaluate(`(() => {
+    const tabs = [...document.querySelectorAll('.learn-experience__tabs button')].map(button => button.textContent.trim());
+    return {
+      ok: tabs.join('|') === 'Overview|Terms & notes'
+        && document.querySelector('.learn-experience__tabs button[aria-current="page"]')?.textContent.trim() === 'Overview'
+        && document.querySelectorAll('.cert-learning-map__grid article').length > 0
+        && !document.querySelector('.knowledge-graph-view')
+        && ![...document.querySelectorAll('button')].some(button => /knowledge map|exam map/i.test(button.textContent)),
+      message: 'tabs=' + tabs.join('|')
+        + ', areas=' + document.querySelectorAll('.cert-learning-map__grid article').length
+        + ', graph=' + Boolean(document.querySelector('.knowledge-graph-view'))
+    };
+  })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 4', 30000);
@@ -768,7 +771,7 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/fe/?view=practice`, 1280);
-  await page.waitUntil('document.querySelector(".practice-program")');
+  await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length > 0 && document.querySelectorAll(".practice-program__modules li").length > 0', 30000);
   assertResult('FE specialist Practice Program', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length > 0
       && document.querySelectorAll('.practice-program__modules li').length > 0
@@ -778,7 +781,7 @@ try {
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/ccar-f/?view=practice`, 1280);
-  await page.waitUntil('document.querySelector(".practice-program")');
+  await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 6', 30000);
   await page.evaluate(`([...document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]')].find(tab => tab.textContent.trim() === 'Official simulation'))?.click()`);
   await page.waitUntil('document.querySelector(".practice-program__modules button[disabled]")');
   assertResult('CCAR scenario Practice Program gate', await page.evaluate(`(() => ({
@@ -844,31 +847,32 @@ try {
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('PMP complete July 2026 bank and learning metadata', await page.evaluate(`(async () => {
     const dashboardText = document.body.innerText;
-    const termsButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Terms & Notes');
+    const learnButton = [...document.querySelectorAll('.workspace-navigation__primary-item')].find(candidate => candidate.textContent.trim() === 'Learn');
+    learnButton?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const overviewTabs = [...document.querySelectorAll('.learn-experience__tabs button')].map(button => button.textContent.trim());
+    const overviewAreas = document.querySelectorAll('.cert-learning-map__grid article').length;
+    const termsButton = [...document.querySelectorAll('.learn-experience__tabs button')].find(candidate => candidate.textContent.trim() === 'Terms & notes');
     termsButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const termsText = document.body.innerText;
     const noteCount = document.querySelectorAll('.reference-notes details').length;
-    const graphButton = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Knowledge Graph');
-    graphButton?.click();
-    await new Promise(resolveWait => setTimeout(resolveWait, 50));
-    const focusByDefault = document.querySelector('.graph-mode-switch button[aria-pressed="true"]')?.textContent.trim() === 'Focus'
-      && Boolean(document.querySelector('.focus-study-detail'));
-    [...document.querySelectorAll('.graph-mode-switch button')].find(candidate => candidate.textContent.trim() === 'Overview')?.click();
-    await new Promise(resolveWait => setTimeout(resolveWait, 50));
     return {
       ok: dashboardText.includes('0 / 180 answered')
         && !dashboardText.includes('Preview question bank')
+        && overviewTabs.join('|') === 'Overview|Terms & notes'
+        && overviewAreas > 0
         && termsText.includes('64 terms')
         && noteCount === 3
-        && focusByDefault
-        && Boolean(document.querySelector('.knowledge-universe-stage')),
+        && !document.querySelector('.knowledge-graph-view')
+        && !document.querySelector('.knowledge-universe-stage'),
       message: 'dashboard180=' + dashboardText.includes('0 / 180 answered')
         + ', preview=' + dashboardText.includes('Preview question bank')
+        + ', tabs=' + overviewTabs.join('|')
+        + ', areas=' + overviewAreas
         + ', terms64=' + termsText.includes('64 terms')
         + ', notes=' + noteCount
-        + ', focus=' + focusByDefault
-        + ', graph=' + Boolean(document.querySelector('.knowledge-universe-stage'))
+        + ', graph=' + Boolean(document.querySelector('.knowledge-graph-view'))
     };
   })()`), page.exceptions);
 
