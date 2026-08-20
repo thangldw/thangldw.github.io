@@ -824,6 +824,14 @@ try {
       .map(item => item.textContent.trim()).join('|')
   }))()`), page.exceptions);
 
+  await page.evaluate(`([...document.querySelectorAll('.mobile-primary-nav__item')]
+    .find(item => item.textContent.trim() === 'Progress'))?.click()`);
+  await page.waitUntil('document.querySelector(".progress-experience")');
+  assertResult('G mobile Progress stays within the viewport', await page.evaluate(`(() => ({
+    ok: document.documentElement.scrollWidth <= window.innerWidth,
+    message: 'scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
+  }))()`), page.exceptions);
+
   if (process.env.LEGACY_CERT_SMOKE === '1') {
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
