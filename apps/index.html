@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
   <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
   <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
-  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260809-font3">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260820a">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
@@ -38,26 +38,6 @@
 
     <section id="catalog" aria-labelledby="catalogTitle">
       <h2 id="catalogTitle" hidden>Project catalog</h2>
-      <div class="catalog-tools">
-        <div class="catalog-toolbar">
-          <label class="catalog-search" for="projectSearch">
-            <span hidden>Search projects</span>
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            <input id="projectSearch" type="search" autocomplete="off" placeholder="Search projects, tags, or descriptions…">
-            <span class="search-key" aria-hidden="true">/</span>
-          </label>
-          <div class="catalog-filters" id="catalogFilters" aria-label="Filter projects by category">
-            <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
-            <button class="filter-button" type="button" data-filter="data-ai" aria-pressed="false">Data &amp; AI</button>
-            <button class="filter-button" type="button" data-filter="developer-tools" aria-pressed="false">Developer tools</button>
-            <button class="filter-button" type="button" data-filter="personal-finance" aria-pressed="false">Personal finance</button>
-            <button class="filter-button" type="button" data-filter="games" aria-pressed="false">Games</button>
-            <button class="filter-button" type="button" data-filter="certification-study" aria-pressed="false">Certification Study</button>
-          </div>
-          <output class="catalog-count" id="catalogCount" aria-live="polite">A–Z · 0 entries</output>
-        </div>
-      </div>
-
       <section class="project-library" aria-labelledby="projectLibraryHeading">
         <h2 id="projectLibraryHeading" hidden>Project library, sorted alphabetically</h2>
         <div class="project-table-scroll" tabindex="0" aria-label="Project library table. Sorted by project name from A to Z.">
@@ -89,7 +69,6 @@
       try {
         await window.portfolioProjectsReady;
       } catch (error) {
-        document.getElementById('catalogCount').textContent = 'Catalog unavailable';
         document.getElementById('catalogEmpty').hidden = false;
         return;
       }
@@ -99,10 +78,6 @@
         });
       }
 
-      function normalize(value) {
-        return String(value || '').toLocaleLowerCase().normalize('NFKD');
-      }
-
       var projects = (window.portfolioProjects || [])
         .concat(window.portfolioLearningCollections || [])
         .sort(function (left, right) {
@@ -110,11 +85,7 @@
         });
 
       var projectIndex = document.getElementById('projectIndex');
-      var searchInput = document.getElementById('projectSearch');
-      var countOutput = document.getElementById('catalogCount');
       var emptyState = document.getElementById('catalogEmpty');
-      var filterButtons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
-      var activeFilter = 'all';
 
       function categoryLabel(category) {
         return {
@@ -136,8 +107,7 @@
         var tags = (project.tags || []).slice(0, 3).map(function (tag) {
           return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
         }).join('');
-        var searchText = [project.title, project.description, (project.tags || []).join(' '), project.category, project.categoryLabel].join(' ');
-        return '<tr class="project-row" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-category="' + escapeHtml(project.category || 'developer-tools') + '" data-search="' + escapeHtml(normalize(searchText)) + '">' +
+        return '<tr class="project-row" data-accent="' + escapeHtml(project.accent || 'indigo') + '">' +
           '<td><a class="project-name" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '"><span class="project-icon"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i></span><strong>' + escapeHtml(project.title) + '</strong></a></td>' +
           '<td><span class="project-category">' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span></td>' +
           '<td><p class="project-description">' + escapeHtml(project.description) + '</p></td>' +
@@ -148,43 +118,7 @@
       }
 
       projectIndex.innerHTML = projects.map(renderRow).join('');
-      var rows = Array.prototype.slice.call(projectIndex.querySelectorAll('.project-row'));
-
-      function applyFilters() {
-        var query = normalize(searchInput.value.trim());
-        var visibleCount = 0;
-        rows.forEach(function (row) {
-          var categoryMatch = activeFilter === 'all' || row.dataset.category === activeFilter;
-          var queryMatch = !query || row.dataset.search.indexOf(query) !== -1;
-          var visible = categoryMatch && queryMatch;
-          row.hidden = !visible;
-          if (visible) visibleCount += 1;
-        });
-        countOutput.textContent = 'A–Z · ' + visibleCount + (visibleCount === 1 ? ' entry' : ' entries');
-        emptyState.hidden = visibleCount !== 0;
-      }
-
-      filterButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-          activeFilter = button.dataset.filter;
-          filterButtons.forEach(function (candidate) {
-            candidate.setAttribute('aria-pressed', String(candidate === button));
-          });
-          applyFilters();
-        });
-      });
-      searchInput.addEventListener('input', applyFilters);
-      document.addEventListener('keydown', function (event) {
-        if (event.key === '/' && document.activeElement !== searchInput && !/input|textarea|select/i.test(document.activeElement.tagName)) {
-          event.preventDefault();
-          searchInput.focus();
-        }
-        if (event.key === 'Escape' && document.activeElement === searchInput && searchInput.value) {
-          searchInput.value = '';
-          applyFilters();
-        }
-      });
-      applyFilters();
+      emptyState.hidden = projects.length !== 0;
 
     })();
   </script>
