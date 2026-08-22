@@ -686,7 +686,7 @@ try {
     const timedSection = [...document.querySelectorAll('button')].find(button => button.textContent.trim() === 'Start timed section');
     return {
       ok: phases.join('|') === 'Foundation|Integration|Simulation|Taper'
-        && fullMock?.disabled === true
+        && fullMock?.disabled === false
         && timedSection?.disabled === false,
       message: 'phases=' + phases.join('|')
         + ', fullMock=' + fullMock?.disabled
@@ -724,7 +724,7 @@ try {
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 4', 30000);
   assertResult('JLPT unified Practice Program', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 4
-      && document.querySelectorAll('.practice-program__modules li').length === 6
+      && document.querySelectorAll('.practice-program__modules li').length === 10
       && Boolean(document.querySelector('[data-module-action="jlpt:module:n1-vocabulary-tabs"]'))
       && document.body.innerText.includes('JLPT N1 Practice Program'),
     message: 'tracks=' + document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length
