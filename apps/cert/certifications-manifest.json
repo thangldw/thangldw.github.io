@@ -48,12 +48,12 @@
       "issuer": "日本漢字能力検定協会",
       "syllabusVersion": "2026",
       "href": "/apps/cert/bjt/",
-      "availableQuestionCount": 2351,
+      "availableQuestionCount": 728,
       "exam": {
-        "durationMinutes": 120,
-        "questionCount": 80,
-        "format": "CBT方式・スコア 0–800",
-        "structure": "聴解・聴読解・読解"
+        "durationMinutes": 30,
+        "questionCount": 30,
+        "format": "Reading Practice; not an exam simulator",
+        "structure": "30 Reading questions sampled from 728 pinned Reading items"
       }
     },
     {
@@ -102,12 +102,12 @@
       "issuer": "国際交流基金・日本国際教育支援協会",
       "syllabusVersion": "N1",
       "href": "/apps/cert/jlpt/",
-      "availableQuestionCount": 967,
+      "availableQuestionCount": 925,
       "exam": {
-        "durationMinutes": 165,
-        "questionCount": 110,
-        "format": "年2回・マークシート",
-        "structure": "言語知識・読解＋聴解"
+        "durationMinutes": 110,
+        "questionCount": 53,
+        "format": "Reconstructed section rehearsal",
+        "structure": "言語知識・読解"
       }
     },
     {
@@ -388,14 +388,14 @@
       "shortName": "HSK 3.0 · Level 3",
       "name": "HSK 3.0（三级）",
       "issuer": "Chinese Testing International (CTI)",
-      "syllabusVersion": "HSK-3.0-2026-07",
+      "syllabusVersion": "HSK-3.0-TRIAL-2026-09",
       "href": "/apps/cert/hsk-3-0/",
-      "availableQuestionCount": 60,
+      "availableQuestionCount": 30,
       "exam": {
-        "durationMinutes": 83,
-        "questionCount": 70,
-        "format": "Paper-based or internet-based; written exam plus separately bound speaking test",
-        "structure": "Listening 30 + Reading 30 + Writing 10; July 2026 syllabus"
+        "durationMinutes": 30,
+        "questionCount": 30,
+        "format": "Vocabulary active recall and Reading preview; not an exam simulator",
+        "structure": "Three Reading previews: sentence matching, cloze, and short passages"
       }
     },
     {
