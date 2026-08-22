@@ -138,7 +138,7 @@
       "issuer": "PMI",
       "syllabusVersion": "PMP-ECO-2026-07",
       "href": "/apps/cert/pmp/",
-      "availableQuestionCount": 180,
+      "availableQuestionCount": 1663,
       "exam": {
         "durationMinutes": 240,
         "questionCount": 180,
