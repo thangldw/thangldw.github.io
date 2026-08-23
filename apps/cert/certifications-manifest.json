@@ -390,12 +390,12 @@
       "issuer": "Chinese Testing International (CTI)",
       "syllabusVersion": "HSK-3.0-TRIAL-2026-09",
       "href": "/apps/cert/hsk-3-0/",
-      "availableQuestionCount": 30,
+      "availableQuestionCount": 0,
       "exam": {
-        "durationMinutes": 30,
-        "questionCount": 30,
-        "format": "Vocabulary active recall, Grammar syllabus reference, and Reading preview; not an exam simulator",
-        "structure": "Three Reading previews: sentence matching, cloze, and short passages"
+        "durationMinutes": 0,
+        "questionCount": 0,
+        "format": "Vocabulary active recall and Grammar syllabus reference only; not an exam simulator",
+        "structure": "No Reading, Listening, or Exam session is published"
       }
     },
     {
