@@ -808,17 +808,15 @@ try {
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/ccar-f/?view=practice`, 1280);
-  await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 6', 30000);
-  await page.evaluate(`([...document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]')].find(tab => tab.textContent.trim() === 'Official simulation'))?.click()`);
-  await page.waitUntil('document.querySelector(".practice-program__modules button[disabled]")');
-  assertResult('CCAR scenario Practice Program gate', await page.evaluate(`(() => ({
-    ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 6
-      && document.querySelector('[aria-label="Practice tracks"] [aria-selected="true"]')?.textContent.trim() === 'Official simulation'
-      && Boolean(document.querySelector('.practice-program__modules button[disabled]'))
-      && document.body.innerText.includes('Unavailable'),
+  await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 5', 30000);
+  assertResult('CCAR domain Practice Program', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 5
+      && ![...document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]')]
+        .some(tab => tab.textContent.trim() === 'Official simulation')
+      && document.querySelectorAll('.practice-program__modules li').length > 0,
     message: 'tracks=' + document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length
       + ', active=' + document.querySelector('[aria-label="Practice tracks"] [aria-selected="true"]')?.textContent.trim()
-      + ', locked=' + Boolean(document.querySelector('.practice-program__modules button[disabled]'))
+      + ', modules=' + document.querySelectorAll('.practice-program__modules li').length
   }))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/g/`, 390, 844);
