@@ -84,12 +84,12 @@
       "issuer": "IPA",
       "syllabusVersion": "2026",
       "href": "/apps/cert/ap/",
-      "availableQuestionCount": 935,
+      "availableQuestionCount": 934,
       "exam": {
-        "durationMinutes": 300,
-        "questionCount": 91,
-        "format": "2026年度 CBT方式・科目A＋科目B",
-        "structure": "Applied Information Technology Engineer Examination"
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A Practice; not an exam simulator",
+        "structure": "Subject A archive drill"
       }
     },
     {
@@ -116,16 +116,16 @@
       "displayOrder": 7,
       "accent": "#246a98",
       "shortName": "TOEIC",
-      "name": "TOEIC Listening & Reading Test",
+      "name": "TOEIC Reading Practice",
       "issuer": "IIBC",
       "syllabusVersion": "2026",
       "href": "/apps/cert/toeic/",
-      "availableQuestionCount": 346,
+      "availableQuestionCount": 305,
       "exam": {
-        "durationMinutes": 120,
-        "questionCount": 200,
-        "format": "マークシート・スコア 10–990",
-        "structure": "Listening 100問＋Reading 100問"
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Reading Parts 5–7 Practice; not an exam simulator",
+        "structure": "Part 5, Part 6, and Part 7"
       }
     },
     {
@@ -212,10 +212,10 @@
       "href": "/apps/cert/fp2/",
       "availableQuestionCount": 859,
       "exam": {
-        "durationMinutes": 210,
-        "questionCount": 100,
-        "format": "CBT方式・通年受検",
-        "structure": "学科＋実技（資産設計提案業務）"
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "FP2 Academic Practice; not an exam simulator",
+        "structure": "Academic selectable questions"
       }
     },
     {
@@ -266,10 +266,10 @@
       "href": "/apps/cert/nw/",
       "availableQuestionCount": 155,
       "exam": {
-        "durationMinutes": 300,
-        "questionCount": 58,
-        "format": "CBT方式。科目Aは四肢択一、科目Bは記述式",
-        "structure": "科目A-1 30問、A-2 25問、B-1 3問中2問、B-2 2問中1問"
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A-2 Practice; not an exam simulator",
+        "structure": "Subject A-2 selectable practice"
       }
     },
     {
@@ -284,10 +284,10 @@
       "href": "/apps/cert/sc/",
       "availableQuestionCount": 190,
       "exam": {
-        "durationMinutes": 240,
-        "questionCount": 57,
-        "format": "CBT方式。科目Aは四肢択一、科目Bは記述式",
-        "structure": "科目A-1 30問、A-2 25問、科目B 4問中2問"
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A-2 Practice; not an exam simulator",
+        "structure": "Subject A-2 selectable practice"
       }
     },
     {
@@ -302,10 +302,10 @@
       "href": "/apps/cert/db/",
       "availableQuestionCount": 156,
       "exam": {
-        "durationMinutes": 300,
-        "questionCount": 58,
-        "format": "CBT方式。科目Aは四肢択一、科目B-1・B-2は記述式",
-        "structure": "科目A-1 30問、A-2 25問、B-1 3問中2問、B-2 2問中1問"
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A-2 Practice; not an exam simulator",
+        "structure": "Subject A-2 selectable practice"
       }
     },
     {
