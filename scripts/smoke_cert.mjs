@@ -711,12 +711,34 @@ try {
     return {
       ok: tabs.join('|') === 'Overview|Terms & notes'
         && document.querySelector('.learn-experience__tabs button[aria-current="page"]')?.textContent.trim() === 'Overview'
-        && document.querySelectorAll('.cert-learning-map__grid article').length > 0
+        && document.querySelectorAll('.cert-learning-map__grid button').length > 0
         && !document.querySelector('.knowledge-graph-view')
         && ![...document.querySelectorAll('button')].some(button => /knowledge map|exam map/i.test(button.textContent)),
       message: 'tabs=' + tabs.join('|')
-        + ', areas=' + document.querySelectorAll('.cert-learning-map__grid article').length
+        + ', areas=' + document.querySelectorAll('.cert-learning-map__grid button').length
         + ', graph=' + Boolean(document.querySelector('.knowledge-graph-view'))
+    };
+  })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/cert/pmp/?view=learn`, 1280);
+  await page.waitUntil('document.querySelectorAll(".cert-learning-map__grid button").length === 3', 30000);
+  assertResult('PMP Learn study areas start the selected domain', await page.evaluate(`(async () => {
+    const controls = [...document.querySelectorAll('.cert-learning-map__grid button')];
+    const process = controls.find(button => button.getAttribute('aria-label') === 'Start Process 41% practice');
+    process?.click();
+    for (let attempt = 0; attempt < 120 && !document.querySelector('.focus-sprint'); attempt += 1) {
+      await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    }
+    const text = document.body.innerText;
+    return {
+      ok: controls.length === 3
+        && Boolean(process)
+        && document.querySelector('.focus-sprint h1')?.textContent.trim() === 'Process'
+        && text.includes('Item 1 / 20'),
+      message: 'areas=' + controls.length
+        + ', process=' + Boolean(process)
+        + ', heading=' + document.querySelector('.focus-sprint h1')?.textContent.trim()
+        + ', item=' + text.includes('Item 1 / 20')
     };
   })()`), page.exceptions);
 
@@ -867,7 +889,7 @@ try {
     learnButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
     const overviewTabs = [...document.querySelectorAll('.learn-experience__tabs button')].map(button => button.textContent.trim());
-    const overviewAreas = document.querySelectorAll('.cert-learning-map__grid article').length;
+    const overviewAreas = document.querySelectorAll('.cert-learning-map__grid button').length;
     const termsButton = [...document.querySelectorAll('.learn-experience__tabs button')].find(candidate => candidate.textContent.trim() === 'Terms & notes');
     termsButton?.click();
     await new Promise(resolveWait => setTimeout(resolveWait, 50));
