@@ -1,0 +1,36 @@
+{
+  "id": "/apps/cert/",
+  "name": "Certification Library",
+  "short_name": "Cert Library",
+  "description": "Local-first certification study, practice, review, and exam preparation.",
+  "lang": "en",
+  "start_url": "/apps/cert/",
+  "scope": "/apps/cert/",
+  "display": "standalone",
+  "background_color": "#fbfcfe",
+  "theme_color": "#1d211e",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/apps/cert/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/cert/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apps/cert/pwa/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
