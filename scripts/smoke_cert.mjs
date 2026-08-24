@@ -775,7 +775,7 @@ try {
   await page.waitUntil('document.querySelector(".n1-reading-library-view")', 30000);
   assertResult('JLPT reading library legacy URL opens native view', await page.evaluate(`(() => ({
     ok: window.location.pathname === '/apps/cert/n1-modules/n1-reading-library/index.html'
-      && document.body.innerText.includes('257 bài đọc')
+      && document.body.innerText.includes('256 bài đọc')
       && document.body.innerText.includes('Luyện bài này'),
     message: 'url=' + window.location.href
       + ', cards=' + document.querySelectorAll('.n1-reading-passage-card').length
