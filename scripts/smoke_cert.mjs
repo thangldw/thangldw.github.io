@@ -537,6 +537,15 @@ try {
     const descriptionStyle = getComputedStyle(entries[0].querySelector('.hub-cert-description'));
     const hskEntry = entries.find(entry => entry.getAttribute('href') === '/apps/cert/hsk-3-0/');
     const aipEntry = entries.find(entry => entry.getAttribute('href') === '/apps/cert/aws-aip-c01/');
+    const onboarding = document.querySelector('.learner-onboarding');
+    const onboardingRect = onboarding?.getBoundingClientRect();
+    const catalogRect = document.querySelector('.hub-certifications')?.getBoundingClientRect();
+    const onboardingDoesNotOverlapCatalog = !onboardingRect || !catalogRect
+      || onboardingRect.bottom <= catalogRect.top + 1;
+    const verticalLayoutIsValid = onboarding
+      ? getComputedStyle(document.body).overflowY === 'auto'
+        && document.documentElement.scrollHeight >= window.innerHeight
+      : document.documentElement.scrollHeight <= window.innerHeight;
     return {
       ok: document.title === 'Certification Library'
         && document.documentElement.dataset.theme === 'light'
@@ -553,7 +562,8 @@ try {
         && hskEntry?.querySelector('.hub-cert-category')?.textContent.trim() === 'Chinese language'
         && aipEntry?.dataset.category === 'ai'
         && document.documentElement.scrollWidth <= window.innerWidth
-        && document.documentElement.scrollHeight <= window.innerHeight,
+        && onboardingDoesNotOverlapCatalog
+        && verticalLayoutIsValid,
       message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}, viewport=\${window.innerWidth}x\${window.innerHeight}, document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}\`
     };
   })()`), page.exceptions);
