@@ -178,6 +178,7 @@ try {
   for (const [fontPath, fontLabel] of sharedFontPaths) {
     await page.navigate(`${origin}${fontPath}`, 1280);
     await page.evaluate('document.fonts.ready');
+    await page.waitUntil(`document.fonts.check('16px Inter')`);
     assertResult(fontLabel, await page.evaluate(`(() => {
       const actual = getComputedStyle(document.body).fontFamily;
       const control = document.querySelector('button, input, select, textarea');
@@ -639,7 +640,8 @@ try {
         && !document.querySelector('.certification-switcher, .certification-switcher__dot')
         && Boolean(document.querySelector('.today-primary-action'))
         && Boolean(document.querySelector('.today-evidence'))
-        && text.includes('Your highest-value')
+        && Boolean(document.querySelector('#today-heading')?.textContent.trim())
+        && Boolean(document.querySelector('.today-goal-details'))
         && text.includes('All progress stays in this browser.')
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'title=' + document.title
@@ -647,6 +649,7 @@ try {
         + ', disclaimer=' + disclaimerLink?.getAttribute('href')
         + ', primary=' + Boolean(document.querySelector('.today-primary-action'))
         + ', evidence=' + Boolean(document.querySelector('.today-evidence'))
+        + ', goal=' + document.querySelector('#today-heading')?.textContent.trim()
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
