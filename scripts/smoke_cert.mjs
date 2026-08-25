@@ -605,9 +605,9 @@ try {
     const bodyBackground = getComputedStyle(document.body).backgroundColor;
     const hubBackground = getComputedStyle(document.querySelector('.certification-hub')).backgroundColor;
     return {
-      ok: htmlBackground === 'rgb(251, 250, 247)'
-        && bodyBackground === 'rgb(251, 250, 247)'
-        && hubBackground === 'rgb(251, 250, 247)'
+      ok: htmlBackground === 'rgb(251, 252, 254)'
+        && bodyBackground === 'rgb(251, 252, 254)'
+        && hubBackground === 'rgb(251, 252, 254)'
         && document.querySelectorAll('.hub-cert-tile').length === 23
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'html=' + htmlBackground
@@ -700,9 +700,14 @@ try {
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   await page.send('Page.addScriptToEvaluateOnNewDocument', { source: `
     window.__loadingWorkspaceSeen = false;
+    window.__darkWorkspaceFallbackSeen = false;
     const watchLoadingWorkspace = () => {
       const check = () => {
         if (document.body?.innerText.includes('Loading workspace')) window.__loadingWorkspaceSeen = true;
+        const fallbackSidebar = document.querySelector('.workspace-shell-fallback .sidebar');
+        if (fallbackSidebar && getComputedStyle(fallbackSidebar).backgroundColor === 'rgb(13, 34, 56)') {
+          window.__darkWorkspaceFallbackSeen = true;
+        }
       };
       check();
       new MutationObserver(check).observe(document.documentElement, { childList: true, subtree: true, characterData: true });
@@ -714,11 +719,13 @@ try {
   await page.evaluate(`document.querySelector('[data-certification-id="ccar-f"]')?.click()`);
   await page.waitUntil('location.pathname.endsWith("/apps/cert/ccar-f/") && document.querySelector(".today-screen")', 2000);
   const warmedNavigationElapsedMs = Date.now() - warmedNavigationStartedAt;
-  assertResult('Warmed certification navigation skips the workspace placeholder', await page.evaluate(`(() => ({
+  assertResult('Certification navigation skips transient loading and dark fallback', await page.evaluate(`(() => ({
     ok: window.__loadingWorkspaceSeen === false
+      && window.__darkWorkspaceFallbackSeen === false
       && !document.body.innerText.includes('Loading workspace')
       && Boolean(document.querySelector('.today-screen')),
     message: 'placeholder=' + window.__loadingWorkspaceSeen
+      + ', darkFallback=' + window.__darkWorkspaceFallbackSeen
       + ', elapsed=${warmedNavigationElapsedMs}ms'
   }))()`), page.exceptions);
 
