@@ -242,19 +242,34 @@ try {
     }))()`), page.exceptions);
   }
 
+  await page.evaluate(`localStorage.setItem("theme", "light")`);
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelector(".project-row")');
-  assertResult('Apps catalog responsive project index', await page.evaluate(`(() => {
-    const table = document.querySelector('.project-table');
-    const scroller = document.querySelector('.project-table-scroll');
-    const row = document.querySelector('.project-row');
-    const style = getComputedStyle(table);
+  await page.waitUntil('document.querySelector("#projectIndex")?.children.length === 10');
+  assertResult('Apps catalog matches the certification gallery system', await page.evaluate(`(() => {
+    const cards = [...document.querySelectorAll('.project-card')];
+    const firstRowTop = cards[0]?.getBoundingClientRect().top;
+    const firstRow = cards.filter(card => Math.abs(card.getBoundingClientRect().top - firstRowTop) < 2);
+    const firstCardStyle = cards[0] ? getComputedStyle(cards[0]) : null;
+    const titles = cards.map(card => card.querySelector('.project-title')?.textContent.trim());
     return {
-      ok: style.minWidth === '0px'
-        && getComputedStyle(row).display === 'grid'
-        && scroller.scrollWidth <= scroller.clientWidth
+      ok: document.querySelector('.apps-brand')?.textContent.trim() === 'APP LIBRARY'
+        && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
+        && document.querySelector('.apps-hero > .eyebrow')?.textContent.trim() === 'BROWSE THE WORK'
+        && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
+        && document.querySelector('.apps-project-heading span')?.textContent.trim() === '10 projects'
+        && cards.length === 10
+        && titles.join('|') === 'Awesome Maintainer Defense|BizRoll|Certification Library|Changeora|Diskora|Japan PR Guide|KakeFlow|Neon Glider|Proofline|RAGOps'
+        && firstRow.length === 5
+        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 5
+        && firstCardStyle?.borderTopWidth === '4px'
+        && firstCardStyle?.borderRadius === '8px'
+        && firstCardStyle?.backgroundColor === 'rgb(255, 255, 255)'
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: \`minWidth=\${style.minWidth}, row=\${getComputedStyle(row).display}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}\`
+      message: 'brand=' + document.querySelector('.apps-brand')?.textContent.trim()
+        + ', cards=' + cards.length
+        + ', firstRow=' + firstRow.length
+        + ', order=' + titles.join('|')
+        + ', card=' + firstCardStyle?.borderTopWidth + '/' + firstCardStyle?.borderRadius + '/' + firstCardStyle?.backgroundColor
     };
   })()`), page.exceptions);
 
@@ -265,55 +280,64 @@ try {
   ];
   for (const [desktopWidth, desktopHeight] of appsDesktopViewports) {
     await page.navigate(`${origin}/apps/`, desktopWidth, desktopHeight);
-    await page.waitUntil('document.querySelectorAll(".project-row").length === 10');
+    await page.waitUntil('document.querySelectorAll(".project-card").length === 10');
     assertResult(`Apps catalog fits ${desktopWidth}x${desktopHeight}`, await page.evaluate(`(() => {
-      const scroller = document.querySelector('.project-table-scroll');
-      const visibleRows = document.querySelectorAll('.project-row:not([hidden])');
+      const cards = [...document.querySelectorAll('.project-card')];
+      const grid = document.querySelector('.apps-project-grid');
+      const main = document.querySelector('.apps-main');
+      const hero = document.querySelector('.apps-hero');
+      const firstRowTop = cards[0]?.getBoundingClientRect().top;
+      const firstRow = cards.filter(card => Math.abs(card.getBoundingClientRect().top - firstRowTop) < 2);
       return {
         ok: document.documentElement.scrollHeight <= window.innerHeight
           && document.documentElement.scrollWidth <= window.innerWidth
-          && scroller.scrollHeight <= scroller.clientHeight
-          && visibleRows.length === 10,
+          && grid.scrollWidth <= grid.clientWidth
+          && cards.length === 10
+          && firstRow.length === 5,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
-          + ', scroller=' + scroller.clientWidth + 'x' + scroller.clientHeight
-          + '/' + scroller.scrollWidth + 'x' + scroller.scrollHeight
-          + ', rows=' + visibleRows.length
+          + ', grid=' + grid.clientWidth + '/' + grid.scrollWidth
+          + ', heights=' + main?.getBoundingClientRect().height + '/' + hero?.getBoundingClientRect().height + '/' + grid?.getBoundingClientRect().height
+          + ', cards=' + cards.length
+          + ', firstRow=' + firstRow.length
       };
     })()`), page.exceptions);
   }
 
   await page.navigate(`${origin}/apps/`, 390, 844);
-  await page.waitUntil('document.querySelector(".project-row")');
-  assertResult('Apps catalog mobile rows', await page.evaluate(`(() => {
-    const scroller = document.querySelector('.project-table-scroll');
-    const row = document.querySelector('.project-row');
-    const description = row?.querySelector('.project-description');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 10');
+  assertResult('Apps catalog mobile cards', await page.evaluate(`(() => {
+    const cards = [...document.querySelectorAll('.project-card')];
+    const grid = document.querySelector('.apps-project-grid');
+    const firstRowTop = cards[0]?.getBoundingClientRect().top;
+    const firstRow = cards.filter(card => Math.abs(card.getBoundingClientRect().top - firstRowTop) < 2);
+    const theme = document.querySelector('.site-theme-toggle')?.getBoundingClientRect();
     return {
       ok: document.documentElement.scrollHeight > window.innerHeight
         && document.documentElement.scrollWidth <= window.innerWidth
-        && scroller.scrollWidth <= scroller.clientWidth
-        && getComputedStyle(row).display === 'grid'
-        && getComputedStyle(description).display !== 'none'
-        && description.scrollWidth <= description.clientWidth,
-      message: \`document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}/\${window.innerWidth}x\${window.innerHeight}, scroller=\${scroller.clientWidth}/\${scroller.scrollWidth}, row=\${getComputedStyle(row).display}, description=\${description?.clientWidth}/\${description?.scrollWidth}\`
+        && grid.scrollWidth <= grid.clientWidth
+        && cards.length === 10
+        && firstRow.length === 2
+        && theme?.width === 44
+        && theme?.height === 44,
+      message: \`document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}/\${window.innerWidth}x\${window.innerHeight}, grid=\${grid.clientWidth}/\${grid.scrollWidth}, cards=\${cards.length}, firstRow=\${firstRow.length}, theme=\${theme?.width}x\${theme?.height}\`
     };
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelector(".project-row")');
+  await page.waitUntil('document.querySelector(".project-card")');
 
   assertResult('Toolbox releases in the apps catalog', await page.evaluate(`(() => {
-    const rows = [...document.querySelectorAll('.project-row')];
-    const byTitle = title => rows.find(row => row.querySelector('.project-name strong')?.textContent.trim() === title);
+    const cards = [...document.querySelectorAll('.project-card')];
+    const byTitle = title => cards.find(card => card.querySelector('.project-title')?.textContent.trim() === title);
     const diskora = byTitle('Diskora');
     const changeora = byTitle('Changeora');
     const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v1.3.0';
     return {
       ok: diskora?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
         && changeora?.querySelector('.project-status')?.textContent.trim() === 'v1.3.0'
-        && diskora?.querySelector('a')?.href === releaseUrl
-        && changeora?.querySelector('a')?.href === releaseUrl
+        && diskora?.href === releaseUrl
+        && changeora?.href === releaseUrl
         && diskora.textContent.includes('Undo Center')
         && changeora.textContent.includes('FSEvents'),
       message: 'diskora=' + diskora?.textContent.trim() + ', changeora=' + changeora?.textContent.trim()
@@ -321,35 +345,35 @@ try {
   })()`), page.exceptions);
 
   assertResult('KakeFlow landing page in the apps catalog', await page.evaluate(`(() => {
-    const card = [...document.querySelectorAll('.project-row')]
-      .find(candidate => candidate.querySelector('.project-name strong')?.textContent.trim() === 'KakeFlow');
+    const card = [...document.querySelectorAll('.project-card')]
+      .find(candidate => candidate.querySelector('.project-title')?.textContent.trim() === 'KakeFlow');
     return {
-      ok: card?.querySelector('a')?.href === 'https://thangldw.github.io/kakeflow/'
+      ok: card?.href === 'https://thangldw.github.io/kakeflow/'
         && card?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
         && card.textContent.includes('MIT License')
-        && card?.querySelector('.project-action')?.getAttribute('aria-label') === 'Open KakeFlow',
+        && card?.getAttribute('aria-label') === 'Open KakeFlow',
       message: 'kakeflow=' + card?.textContent.trim()
     };
   })()`), page.exceptions);
 
   assertResult('Neon Glider appears in the apps catalog', await page.evaluate(`(() => {
-    const visibleRows = [...document.querySelectorAll('.project-row:not([hidden])')];
-    const game = visibleRows.find(candidate =>
-      candidate.querySelector('.project-name strong')?.textContent.trim() === 'Neon Glider'
+    const visibleCards = [...document.querySelectorAll('.project-card')];
+    const game = visibleCards.find(candidate =>
+      candidate.querySelector('.project-title')?.textContent.trim() === 'Neon Glider'
     );
     return {
-      ok: visibleRows.length === 10
-        && game?.querySelector('a')?.href === 'https://thangldw.github.io/neon-glider/'
+      ok: visibleCards.length === 10
+        && game?.href === 'https://thangldw.github.io/neon-glider/'
         && game?.querySelector('.project-status')?.textContent.trim() === 'Live'
-        && game?.querySelector('.project-action')?.getAttribute('aria-label') === 'Play Neon Glider',
-      message: 'visible=' + visibleRows.length + ', neonGlider=' + game?.textContent.trim()
+        && game?.getAttribute('aria-label') === 'Play Neon Glider',
+      message: 'visible=' + visibleCards.length + ', neonGlider=' + game?.textContent.trim()
     };
   })()`), page.exceptions);
 
   assertResult('Certification manifest updates portfolio catalogs', await page.evaluate(`(() => {
     const manifest = window.portfolioCertificationManifest;
-    const card = [...document.querySelectorAll('.project-row')]
-      .find(candidate => candidate.querySelector('.project-name strong')?.textContent.trim() === 'Certification Library');
+    const card = [...document.querySelectorAll('.project-card')]
+      .find(candidate => candidate.querySelector('.project-title')?.textContent.trim() === 'Certification Library');
     return {
       ok: manifest?.schemaVersion === '1.0'
         && manifest.certificationCount === manifest.certifications.length
