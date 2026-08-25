@@ -522,64 +522,115 @@ try {
     })()`), page.exceptions);
   }
 
-  await page.evaluate(`localStorage.removeItem("theme")`);
+  await page.evaluate(`
+    localStorage.removeItem("theme");
+    localStorage.removeItem("certification-library:learner-preferences:v1");
+    localStorage.setItem("thangldw:apps:certification-library:state:v3", JSON.stringify({
+      unfinishedSessions: { g: { questionIds: ["g-smoke-resume"] } }
+    }));
+  `);
   await page.navigate(`${origin}/apps/cert/`, 1280);
-  await page.waitUntil('document.querySelector(".hub-hero")');
-  assertResult('Certification header-only overview', await page.evaluate(`(() => {
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
+  await page.waitUntil(`performance.getEntriesByType('resource').some(entry => entry.name.includes('/assets/ExperienceWorkspace-'))`);
+  const protectedResourcesBeforeFocus = await page.evaluate(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length`);
+  for (let tabIndex = 0; tabIndex < 4; tabIndex += 1) {
+    await page.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+    await page.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
+  }
+  await page.waitUntil(`document.activeElement?.dataset.certificationId === 'ccar-f'`);
+  await page.waitUntil(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length > ${protectedResourcesBeforeFocus}`);
+  const protectedResourcesAfterFocus = await page.evaluate(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length`);
+  const awsCardPoint = await page.evaluate(`(() => {
+    const rect = document.querySelector('[data-certification-id="aws"]')?.getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  })()`);
+  await page.send('Input.dispatchMouseEvent', { type: 'mouseMoved', ...awsCardPoint });
+  await page.waitUntil(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length > ${protectedResourcesAfterFocus}`);
+  assertResult('Certification grouped gallery runtime', await page.evaluate(`(() => {
     const hero = document.querySelector('.hub-hero');
     const text = document.body.innerText;
+    const groups = [...document.querySelectorAll('.hub-certification-group')];
+    const technologyCards = [...groups[1].querySelectorAll('.hub-cert-tile')];
+    const firstTechnologyRowTop = technologyCards[0].getBoundingClientRect().top;
+    const firstTechnologyRow = technologyCards.filter(card => Math.abs(card.getBoundingClientRect().top - firstTechnologyRowTop) < 2);
+    const gCard = document.querySelector('[data-certification-id="g"]');
+    const sampleCard = document.querySelector('.hub-cert-tile');
     return {
       ok: document.title === 'Certification Library'
         && document.documentElement.dataset.theme === 'light'
+        && document.documentElement.lang === 'en'
         && document.querySelector('.hub-theme-toggle')?.getAttribute('aria-label') === 'Switch to dark theme'
         && Boolean(hero)
-        && text.includes('Study only what you need right now.')
-        && document.querySelectorAll('.hub-certifications').length === 0
+        && text.includes('Build your next capability.')
+        && document.querySelectorAll('.hub-certifications').length === 1
+        && document.querySelectorAll('.hub-cert-tile').length === 23
+        && groups.map(group => Number(group.dataset.certificationCount)).join('|') === '3|9|11'
+        && firstTechnologyRow.length === 8
+        && new Set(firstTechnologyRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 8
+        && gCard?.classList.contains('is-continuing')
+        && gCard?.querySelector('.hub-cert-continue-tag')?.textContent.trim() === 'Continue'
+        && gCard?.querySelector('.hub-cert-open-action')?.textContent.trim() === 'Open'
+        && gCard?.querySelector('.hub-cert-continue-action')?.textContent.trim() === 'continue saved session'
+        && !gCard?.hasAttribute('aria-label')
+        && !gCard?.hasAttribute('lang')
+        && gCard?.querySelector('.hub-cert-code')?.getAttribute('lang') === 'ja'
+        && getComputedStyle(sampleCard).minHeight === '108px'
+        && getComputedStyle(sampleCard.querySelector('.hub-cert-code')).fontSize === '18px'
+        && getComputedStyle(sampleCard.querySelector('.hub-cert-name')).fontSize === '13.2px'
+        && getComputedStyle(sampleCard.querySelector('.hub-cert-issuer')).fontSize === '10.8px'
         && document.querySelectorAll('input[aria-label="Search certifications"]').length === 0
         && document.querySelectorAll('select[aria-label^="Filter by"]').length === 0
         && document.querySelectorAll('.hub-result-count').length === 0
         && document.querySelectorAll('.hub-cert-list-item').length === 0
         && document.querySelectorAll('.learner-onboarding').length === 0
-        && document.documentElement.scrollWidth <= window.innerWidth
-        && document.documentElement.scrollHeight <= window.innerHeight,
+        && performance.getEntriesByType('resource').some(entry => entry.name.includes('/assets/ExperienceWorkspace-'))
+        && performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length > ${protectedResourcesAfterFocus}
+        && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'title=' + document.title
         + ', theme=' + document.documentElement.dataset.theme
         + ', hero=' + Boolean(hero)
-        + ', catalog=' + document.querySelectorAll('.hub-certifications').length
+        + ', groups=' + groups.map(group => group.dataset.certificationCount).join('|')
+        + ', tiles=' + document.querySelectorAll('.hub-cert-tile').length
+        + ', firstTechnologyRow=' + firstTechnologyRow.length
         + ', search=' + document.querySelectorAll('input[aria-label="Search certifications"]').length
         + ', filters=' + document.querySelectorAll('select[aria-label^="Filter by"]').length
-        + ', entries=' + document.querySelectorAll('.hub-cert-list-item').length
-        + ', document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
-        + '/' + window.innerWidth + 'x' + window.innerHeight
+        + ', document=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/`, 390, 844);
-  await page.waitUntil('document.querySelector(".hub-hero")');
-  assertResult('Certification overview fits mobile', await page.evaluate(`(() => {
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
+  assertResult('Certification gallery fits mobile', await page.evaluate(`(() => {
     const hero = document.querySelector('.hub-hero')?.getBoundingClientRect();
     const actions = document.querySelector('.hub-header-actions')?.getBoundingClientRect();
+    const technologyCards = [...document.querySelectorAll('.hub-certification-group')][1].querySelectorAll('.hub-cert-tile');
+    const card = document.querySelector('.hub-cert-tile')?.getBoundingClientRect();
+    const theme = document.querySelector('.hub-theme-toggle')?.getBoundingClientRect();
     return {
       ok: Boolean(hero)
         && hero.left >= 0
         && hero.right <= window.innerWidth
         && actions.left >= 0
         && actions.right <= window.innerWidth
-        && document.querySelectorAll('.hub-certifications, .hub-cert-list-item').length === 0
+        && document.querySelectorAll('.hub-cert-tile').length === 23
+        && new Set([...technologyCards].slice(0, 2).map(item => Math.round(item.getBoundingClientRect().left))).size === 2
+        && card.height >= 108
+        && theme.width === 44
+        && theme.height === 44
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'hero=' + hero?.left + '/' + hero?.right
         + ', actions=' + actions?.left + '/' + actions?.right
-        + ', catalog=' + document.querySelectorAll('.hub-certifications, .hub-cert-list-item').length
+        + ', cards=' + document.querySelectorAll('.hub-cert-tile').length
+        + ', card=' + card?.width + 'x' + card?.height
+        + ', theme=' + theme?.width + 'x' + theme?.height
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
   await page.navigate(`${origin}/apps/cert/`, 2048);
-  await page.waitUntil(
-    'document.documentElement.dataset.theme === "dark" && document.querySelector(".hub-hero")'
-  );
-  assertResult('Certification overview dark canvas fills wide viewports', await page.evaluate(`(() => {
+  await page.waitUntil('document.documentElement.dataset.theme === "dark" && document.querySelectorAll(".hub-cert-tile").length === 23');
+  assertResult('Certification gallery dark canvas fills wide viewports', await page.evaluate(`(() => {
     const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
     const bodyBackground = getComputedStyle(document.body).backgroundColor;
     const hubBackground = getComputedStyle(document.querySelector('.certification-hub')).backgroundColor;
@@ -587,7 +638,7 @@ try {
       ok: htmlBackground === 'rgb(17, 19, 15)'
         && bodyBackground === 'rgb(17, 19, 15)'
         && hubBackground === 'rgb(17, 19, 15)'
-        && document.querySelectorAll('.hub-certifications, .hub-cert-list-item').length === 0
+        && document.querySelectorAll('.hub-cert-tile').length === 23
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'html=' + htmlBackground
         + ', body=' + bodyBackground
@@ -596,6 +647,63 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.evaluate(`
+    localStorage.setItem("theme", "light");
+    localStorage.setItem("certification-library:learner-preferences:v1", JSON.stringify({
+      schemaVersion: 1, completed: false, examDate: "", interfaceLanguage: "vi",
+      primaryCertification: "g", weeklyMinutes: 300
+    }));
+  `);
+  await page.navigate(`${origin}/apps/cert/`, 1280);
+  await page.waitUntil('document.documentElement.lang === "vi" && document.querySelectorAll(".hub-cert-tile").length === 23');
+  assertResult('Certification gallery localizes the complete Vietnamese interface', await page.evaluate(`(() => {
+    const gCard = document.querySelector('[data-certification-id="g"]');
+    return {
+      ok: document.querySelector('.hub-brand')?.textContent.trim() === 'Thư viện chứng chỉ'
+        && document.querySelector('.hub-disclaimer-link')?.textContent.trim() === 'Đọc tuyên bố miễn trừ'
+        && document.querySelector('#hub-title')?.textContent.trim() === 'Xây dựng năng lực tiếp theo.'
+        && [...document.querySelectorAll('.hub-certification-group h2')].map(item => item.textContent.trim()).join('|') === 'AI & Kiến trúc|Công nghệ|Kinh doanh, Tài chính & Ngôn ngữ'
+        && gCard?.querySelector('.hub-cert-continue-tag')?.textContent.trim() === 'Tiếp tục'
+        && gCard?.querySelector('.hub-cert-open-action')?.textContent.trim() === 'Mở'
+        && gCard?.querySelector('.hub-cert-continue-action')?.textContent.trim() === 'tiếp tục phiên đã lưu'
+        && gCard?.querySelector('.hub-cert-code')?.getAttribute('lang') === 'ja',
+      message: 'lang=' + document.documentElement.lang
+        + ', title=' + document.querySelector('#hub-title')?.textContent.trim()
+        + ', groups=' + [...document.querySelectorAll('.hub-certification-group h2')].map(item => item.textContent.trim()).join('|')
+    };
+  })()`), page.exceptions);
+
+  await page.evaluate(`
+    localStorage.removeItem("certification-library:learner-preferences:v1");
+    localStorage.setItem("theme", "light");
+  `);
+  await page.navigate(`${origin}/apps/cert/`, 1280);
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
+  await page.send('Page.addScriptToEvaluateOnNewDocument', { source: `
+    window.__loadingWorkspaceSeen = false;
+    const watchLoadingWorkspace = () => {
+      const check = () => {
+        if (document.body?.innerText.includes('Loading workspace')) window.__loadingWorkspaceSeen = true;
+      };
+      check();
+      new MutationObserver(check).observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+    };
+    if (document.documentElement) watchLoadingWorkspace();
+    else addEventListener('DOMContentLoaded', watchLoadingWorkspace, { once: true });
+  ` });
+  const warmedNavigationStartedAt = Date.now();
+  await page.evaluate(`document.querySelector('[data-certification-id="ccar-f"]')?.click()`);
+  await page.waitUntil('location.pathname.endsWith("/apps/cert/ccar-f/") && document.querySelector(".today-screen")', 2000);
+  const warmedNavigationElapsedMs = Date.now() - warmedNavigationStartedAt;
+  assertResult('Warmed certification navigation skips the workspace placeholder', await page.evaluate(`(() => ({
+    ok: window.__loadingWorkspaceSeen === false
+      && !document.body.innerText.includes('Loading workspace')
+      && Boolean(document.querySelector('.today-screen')),
+    message: 'placeholder=' + window.__loadingWorkspaceSeen
+      + ', elapsed=${warmedNavigationElapsedMs}ms'
+  }))()`), page.exceptions);
+
+  await page.evaluate(`localStorage.setItem("theme", "dark")`);
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
@@ -1247,6 +1355,51 @@ try {
   }))()`), page.exceptions);
 
   }
+
+  await page.evaluate(`localStorage.removeItem("certification-library:learner-preferences:v1"); localStorage.setItem("theme", "light")`);
+  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23 && navigator.serviceWorker?.ready');
+  await page.evaluate(`navigator.serviceWorker.ready.then(() => true)`);
+  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.waitUntil('navigator.serviceWorker?.controller && document.querySelectorAll(".hub-cert-tile").length === 23');
+  assertResult('Certification PWA installs and controls the gallery', await page.evaluate(`(async () => {
+    const registration = await navigator.serviceWorker.ready;
+    const manifest = await fetch(document.querySelector('link[rel="manifest"]').href).then(response => response.json());
+    const cacheNames = await caches.keys();
+    return {
+      ok: registration.scope.endsWith('/apps/cert/')
+        && registration.active?.scriptURL.includes('/apps/cert/service-worker.js')
+        && Boolean(navigator.serviceWorker.controller)
+        && manifest.scope === '/apps/cert/'
+        && manifest.start_url === '/apps/cert/'
+        && cacheNames.some(name => name.startsWith('cert-shell-'))
+        && cacheNames.includes('cert-runtime-v1'),
+      message: 'scope=' + registration.scope
+        + ', script=' + registration.active?.scriptURL
+        + ', controller=' + Boolean(navigator.serviceWorker.controller)
+        + ', manifest=' + manifest.scope + '/' + manifest.start_url
+        + ', caches=' + cacheNames.join('|')
+    };
+  })()`), page.exceptions);
+
+  await page.send('Network.enable');
+  await page.send('Network.emulateNetworkConditions', {
+    offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0
+  });
+  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
+  assertResult('Certification PWA reopens the gallery offline', await page.evaluate(`(() => ({
+    ok: Boolean(navigator.serviceWorker.controller)
+      && document.querySelectorAll('.hub-certification-group').length === 3
+      && document.querySelectorAll('.hub-cert-tile').length === 23
+      && document.documentElement.scrollWidth <= window.innerWidth,
+    message: 'controller=' + Boolean(navigator.serviceWorker.controller)
+      + ', groups=' + document.querySelectorAll('.hub-certification-group').length
+      + ', cards=' + document.querySelectorAll('.hub-cert-tile').length
+  }))()`), page.exceptions);
+  await page.send('Network.emulateNetworkConditions', {
+    offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1
+  });
 
   page.close();
   console.log('CERT smoke tests passed.');
