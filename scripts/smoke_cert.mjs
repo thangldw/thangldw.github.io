@@ -524,65 +524,52 @@ try {
 
   await page.evaluate(`localStorage.removeItem("theme")`);
   await page.navigate(`${origin}/apps/cert/`, 1280);
-  await page.waitUntil(
-    `document.querySelectorAll(".hub-cert-list-item").length === ${certificationManifest.certificationCount}`
-  );
-  assertResult('Certification library', await page.evaluate(`(() => {
-    const entries = [...document.querySelectorAll('.hub-cert-list-item')];
-    const hrefs = entries.map(entry => entry.getAttribute('href'));
-    const expectedHrefs = ${JSON.stringify(
-      certificationManifest.certifications.map(certification => certification.href)
-    )};
-    const style = getComputedStyle(entries[0]);
-    const descriptionStyle = getComputedStyle(entries[0].querySelector('.hub-cert-description'));
-    const hskEntry = entries.find(entry => entry.getAttribute('href') === '/apps/cert/hsk-3-0/');
-    const aipEntry = entries.find(entry => entry.getAttribute('href') === '/apps/cert/aws-aip-c01/');
-    const onboarding = document.querySelector('.learner-onboarding');
-    const onboardingRect = onboarding?.getBoundingClientRect();
-    const catalogRect = document.querySelector('.hub-certifications')?.getBoundingClientRect();
-    const onboardingDoesNotOverlapCatalog = !onboardingRect || !catalogRect
-      || onboardingRect.bottom <= catalogRect.top + 1;
-    const verticalLayoutIsValid = onboarding
-      ? getComputedStyle(document.body).overflowY === 'auto'
-        && document.documentElement.scrollHeight >= window.innerHeight
-      : document.documentElement.scrollHeight <= window.innerHeight;
+  await page.waitUntil('document.querySelector(".hub-hero")');
+  assertResult('Certification header-only overview', await page.evaluate(`(() => {
+    const hero = document.querySelector('.hub-hero');
+    const text = document.body.innerText;
     return {
       ok: document.title === 'Certification Library'
         && document.documentElement.dataset.theme === 'light'
         && document.querySelector('.hub-theme-toggle')?.getAttribute('aria-label') === 'Switch to dark theme'
-        && entries.length === ${certificationManifest.certificationCount}
-        && new Set(hrefs).size === ${certificationManifest.certificationCount}
-        && hrefs.every(href => expectedHrefs.includes(href))
-        && style.display === 'grid'
-        && style.minHeight === '44px'
-        && style.padding === '4px 6px'
-        && descriptionStyle.display === 'block'
-        && descriptionStyle.fontSize === '13px'
-        && hskEntry?.dataset.category === 'language'
-        && hskEntry?.querySelector('.hub-cert-category')?.textContent.trim() === 'Chinese language'
-        && aipEntry?.dataset.category === 'ai'
+        && Boolean(hero)
+        && text.includes('Study only what you need right now.')
+        && document.querySelectorAll('.hub-certifications').length === 0
+        && document.querySelectorAll('input[aria-label="Search certifications"]').length === 0
+        && document.querySelectorAll('select[aria-label^="Filter by"]').length === 0
+        && document.querySelectorAll('.hub-result-count').length === 0
+        && document.querySelectorAll('.hub-cert-list-item').length === 0
+        && document.querySelectorAll('.learner-onboarding').length === 0
         && document.documentElement.scrollWidth <= window.innerWidth
-        && onboardingDoesNotOverlapCatalog
-        && verticalLayoutIsValid,
-      message: \`title=\${document.title}, theme=\${document.documentElement.dataset.theme}, entries=\${entries.length}, unique=\${new Set(hrefs).size}, display=\${style.display}, minHeight=\${style.minHeight}, description=\${descriptionStyle.display}, viewport=\${window.innerWidth}x\${window.innerHeight}, document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}\`
+        && document.documentElement.scrollHeight <= window.innerHeight,
+      message: 'title=' + document.title
+        + ', theme=' + document.documentElement.dataset.theme
+        + ', hero=' + Boolean(hero)
+        + ', catalog=' + document.querySelectorAll('.hub-certifications').length
+        + ', search=' + document.querySelectorAll('input[aria-label="Search certifications"]').length
+        + ', filters=' + document.querySelectorAll('select[aria-label^="Filter by"]').length
+        + ', entries=' + document.querySelectorAll('.hub-cert-list-item').length
+        + ', document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
+        + '/' + window.innerWidth + 'x' + window.innerHeight
     };
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/`, 390);
-  await page.waitUntil(
-    `document.querySelectorAll(".hub-cert-list-item").length === ${certificationManifest.certificationCount}`
-  );
-  assertResult('Certification library mobile rows', await page.evaluate(`(() => {
-    const entry = document.querySelector('.hub-cert-list-item');
-    const description = entry?.querySelector('.hub-cert-description');
-    const style = entry && getComputedStyle(entry);
+  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.waitUntil('document.querySelector(".hub-hero")');
+  assertResult('Certification overview fits mobile', await page.evaluate(`(() => {
+    const hero = document.querySelector('.hub-hero')?.getBoundingClientRect();
+    const actions = document.querySelector('.hub-header-actions')?.getBoundingClientRect();
     return {
-      ok: style?.display === 'grid'
-        && style?.minHeight === '96px'
-        && getComputedStyle(description).display === 'block'
+      ok: Boolean(hero)
+        && hero.left >= 0
+        && hero.right <= window.innerWidth
+        && actions.left >= 0
+        && actions.right <= window.innerWidth
+        && document.querySelectorAll('.hub-certifications, .hub-cert-list-item').length === 0
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: 'display=' + style?.display
-        + ', minHeight=' + style?.minHeight
+      message: 'hero=' + hero?.left + '/' + hero?.right
+        + ', actions=' + actions?.left + '/' + actions?.right
+        + ', catalog=' + document.querySelectorAll('.hub-certifications, .hub-cert-list-item').length
         + ', scroll=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
@@ -590,9 +577,9 @@ try {
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
   await page.navigate(`${origin}/apps/cert/`, 2048);
   await page.waitUntil(
-    `document.documentElement.dataset.theme === "dark" && document.querySelectorAll(".hub-cert-list-item").length === ${certificationManifest.certificationCount}`
+    'document.documentElement.dataset.theme === "dark" && document.querySelector(".hub-hero")'
   );
-  assertResult('Certification library dark canvas fills wide viewports', await page.evaluate(`(() => {
+  assertResult('Certification overview dark canvas fills wide viewports', await page.evaluate(`(() => {
     const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
     const bodyBackground = getComputedStyle(document.body).backgroundColor;
     const hubBackground = getComputedStyle(document.querySelector('.certification-hub')).backgroundColor;
@@ -600,6 +587,7 @@ try {
       ok: htmlBackground === 'rgb(17, 19, 15)'
         && bodyBackground === 'rgb(17, 19, 15)'
         && hubBackground === 'rgb(17, 19, 15)'
+        && document.querySelectorAll('.hub-certifications, .hub-cert-list-item').length === 0
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'html=' + htmlBackground
         + ', body=' + bodyBackground
