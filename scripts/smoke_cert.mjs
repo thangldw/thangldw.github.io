@@ -598,6 +598,25 @@ try {
     };
   })()`), page.exceptions);
 
+  await page.navigate(`${origin}/apps/cert/`, 1910, 930);
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
+  assertResult('Certification gallery light canvas fills wide viewports', await page.evaluate(`(() => {
+    const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
+    const bodyBackground = getComputedStyle(document.body).backgroundColor;
+    const hubBackground = getComputedStyle(document.querySelector('.certification-hub')).backgroundColor;
+    return {
+      ok: htmlBackground === 'rgb(251, 250, 247)'
+        && bodyBackground === 'rgb(251, 250, 247)'
+        && hubBackground === 'rgb(251, 250, 247)'
+        && document.querySelectorAll('.hub-cert-tile').length === 23
+        && document.documentElement.scrollWidth <= window.innerWidth,
+      message: 'html=' + htmlBackground
+        + ', body=' + bodyBackground
+        + ', hub=' + hubBackground
+        + ', viewport=' + window.innerWidth
+    };
+  })()`), page.exceptions);
+
   await page.navigate(`${origin}/apps/cert/`, 390, 844);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification gallery fits mobile', await page.evaluate(`(() => {
