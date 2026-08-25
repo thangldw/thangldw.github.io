@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
   <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
   <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
-  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260820a">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260826a">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
@@ -28,37 +28,30 @@
 <body class="site-page portfolio-catalog" data-page-kind="product" data-site-shell="none">
   <a class="skip-link" href="#catalog">Skip to projects</a>
 
-  <main class="catalog-wrap apps-main" id="main">
-    <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
-    <section class="apps-intro" aria-labelledby="appsTitle">
-      <span class="eyebrow">Side projects</span>
+  <main class="apps-hub apps-main" id="main">
+    <header class="apps-topbar">
+      <span class="apps-brand">APP LIBRARY</span>
+      <div class="apps-header-actions">
+        <a class="apps-home-link" href="/">Back to portfolio</a>
+        <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <section class="apps-hero" aria-labelledby="appsTitle">
+      <span class="eyebrow">BROWSE THE WORK</span>
       <h1 id="appsTitle">Ideas shaped into <em>working systems.</em></h1>
       <p class="lead">Production-oriented projects that solve real problems, ship useful tools, and turn continued learning into practical systems.</p>
     </section>
 
-    <section id="catalog" aria-labelledby="catalogTitle">
-      <h2 id="catalogTitle" hidden>Project catalog</h2>
-      <section class="project-library" aria-labelledby="projectLibraryHeading">
-        <h2 id="projectLibraryHeading" hidden>Project library, sorted alphabetically</h2>
-        <div class="project-table-scroll" tabindex="0" aria-label="Project library table. Sorted by project name from A to Z.">
-          <table class="project-table">
-            <thead>
-              <tr>
-                <th scope="col">Project</th>
-                <th scope="col">Category</th>
-                <th scope="col">Description</th>
-                <th scope="col">Tags</th>
-                <th scope="col">Version</th>
-                <th scope="col"><span class="sr-only">Actions</span></th>
-              </tr>
-            </thead>
-            <tbody id="projectIndex"></tbody>
-          </table>
-        </div>
-      </section>
+    <section class="apps-projects" id="catalog" aria-labelledby="projectLibraryHeading">
+      <div class="apps-project-heading">
+        <h2 id="projectLibraryHeading">Project library</h2>
+        <span id="projectCount" aria-live="polite">Loading projects</span>
+      </div>
+      <div class="apps-project-grid" id="projectIndex" aria-label="Project library, sorted by project name from A to Z"></div>
       <div class="catalog-empty" id="catalogEmpty" hidden>
-        <h2>No matching projects</h2>
-        <p>Try a broader search or choose another category.</p>
+        <h2>Projects are unavailable</h2>
+        <p>Please try again shortly.</p>
       </div>
     </section>
   </main>
@@ -85,6 +78,7 @@
         });
 
       var projectIndex = document.getElementById('projectIndex');
+      var projectCount = document.getElementById('projectCount');
       var emptyState = document.getElementById('catalogEmpty');
 
       function categoryLabel(category) {
@@ -103,21 +97,20 @@
         return '';
       }
 
-      function renderRow(project) {
+      function renderCard(project) {
         var tags = (project.tags || []).slice(0, 3).map(function (tag) {
           return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
         }).join('');
-        return '<tr class="project-row" data-accent="' + escapeHtml(project.accent || 'indigo') + '">' +
-          '<td><a class="project-name" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '"><span class="project-icon"><i class="fa-solid ' + escapeHtml(project.icon) + '" aria-hidden="true"></i></span><strong>' + escapeHtml(project.title) + '</strong></a></td>' +
-          '<td><span class="project-category">' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span></td>' +
-          '<td><p class="project-description">' + escapeHtml(project.description) + '</p></td>' +
-          '<td><div class="project-tags">' + tags + '</div></td>' +
-          '<td><span class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</span></td>' +
-          '<td><a class="project-action" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.cta || ('Open ' + project.title)) + '"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></td>' +
-          '</tr>';
+        return '<a class="project-card" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-project-id="' + escapeHtml(project.id) + '" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.cta || project.ariaLabel || ('Open ' + project.title)) + '">' +
+          '<span class="project-card-top"><span class="project-title-row"><strong class="project-title">' + escapeHtml(project.title) + '</strong><span class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</span></span><i class="project-arrow fa-solid fa-arrow-right" aria-hidden="true"></i></span>' +
+          '<span class="project-category">' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span>' +
+          '<span class="project-description">' + escapeHtml(project.description) + '</span>' +
+          '<span class="project-tags" aria-label="Project tags">' + tags + '</span>' +
+          '</a>';
       }
 
-      projectIndex.innerHTML = projects.map(renderRow).join('');
+      projectIndex.innerHTML = projects.map(renderCard).join('');
+      projectCount.textContent = projects.length + (projects.length === 1 ? ' project' : ' projects');
       emptyState.hidden = projects.length !== 0;
 
     })();
