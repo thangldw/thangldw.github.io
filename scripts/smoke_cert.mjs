@@ -533,11 +533,11 @@ try {
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   await page.waitUntil(`performance.getEntriesByType('resource').some(entry => entry.name.includes('/assets/ExperienceWorkspace-'))`);
   const protectedResourcesBeforeFocus = await page.evaluate(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length`);
-  for (let tabIndex = 0; tabIndex < 4; tabIndex += 1) {
+  for (let tabIndex = 0; tabIndex < 3; tabIndex += 1) {
     await page.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
     await page.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
   }
-  await page.waitUntil(`document.activeElement?.dataset.certificationId === 'ccar-f'`);
+  await page.waitUntil(`document.activeElement?.dataset.certificationId === 'aws-aip-c01'`);
   await page.waitUntil(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length > ${protectedResourcesBeforeFocus}`);
   const protectedResourcesAfterFocus = await page.evaluate(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length`);
   const awsCardPoint = await page.evaluate(`(() => {
@@ -550,9 +550,10 @@ try {
     const hero = document.querySelector('.hub-hero');
     const text = document.body.innerText;
     const groups = [...document.querySelectorAll('.hub-certification-group')];
-    const technologyCards = [...groups[1].querySelectorAll('.hub-cert-tile')];
-    const firstTechnologyRowTop = technologyCards[0].getBoundingClientRect().top;
-    const firstTechnologyRow = technologyCards.filter(card => Math.abs(card.getBoundingClientRect().top - firstTechnologyRowTop) < 2);
+    const cardsByGroup = groups.map(group => [...group.querySelectorAll('.hub-cert-tile')]);
+    const cardIdsByGroup = cardsByGroup.map(cards => cards.map(card => card.dataset.certificationId).join(','));
+    const firstItRowTop = cardsByGroup[1][0].getBoundingClientRect().top;
+    const firstItRow = cardsByGroup[1].filter(card => Math.abs(card.getBoundingClientRect().top - firstItRowTop) < 2);
     const gCard = document.querySelector('[data-certification-id="g"]');
     const sampleCard = document.querySelector('.hub-cert-tile');
     return {
@@ -564,9 +565,10 @@ try {
         && text.includes('Build your next capability.')
         && document.querySelectorAll('.hub-certifications').length === 1
         && document.querySelectorAll('.hub-cert-tile').length === 23
-        && groups.map(group => Number(group.dataset.certificationCount)).join('|') === '3|9|11'
-        && firstTechnologyRow.length === 8
-        && new Set(firstTechnologyRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 8
+        && groups.map(group => Number(group.dataset.certificationCount)).join('|') === '6|6|7|4'
+        && cardIdsByGroup.join('|') === 'aws-aip-c01,aws-dea-c01,aws,ccar-f,gh-300,g|ap,db,fe,nw,sc,sg|fp2,fp3,pmp,boki1,boki2,boki3,tokei-2|bjt,hsk-3-0,jlpt,toeic'
+        && firstItRow.length === 6
+        && new Set(firstItRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 6
         && gCard?.classList.contains('is-continuing')
         && gCard?.querySelector('.hub-cert-continue-tag')?.textContent.trim() === 'Continue'
         && gCard?.querySelector('.hub-cert-open-action')?.textContent.trim() === 'Open'
@@ -591,7 +593,8 @@ try {
         + ', hero=' + Boolean(hero)
         + ', groups=' + groups.map(group => group.dataset.certificationCount).join('|')
         + ', tiles=' + document.querySelectorAll('.hub-cert-tile').length
-        + ', firstTechnologyRow=' + firstTechnologyRow.length
+        + ', order=' + cardIdsByGroup.join('|')
+        + ', firstItRow=' + firstItRow.length
         + ', search=' + document.querySelectorAll('input[aria-label="Search certifications"]').length
         + ', filters=' + document.querySelectorAll('select[aria-label^="Filter by"]').length
         + ', document=' + document.documentElement.scrollWidth + '/' + window.innerWidth
@@ -622,7 +625,7 @@ try {
   assertResult('Certification gallery fits mobile', await page.evaluate(`(() => {
     const hero = document.querySelector('.hub-hero')?.getBoundingClientRect();
     const actions = document.querySelector('.hub-header-actions')?.getBoundingClientRect();
-    const technologyCards = [...document.querySelectorAll('.hub-certification-group')][1].querySelectorAll('.hub-cert-tile');
+    const itCards = [...document.querySelectorAll('.hub-certification-group')][1].querySelectorAll('.hub-cert-tile');
     const card = document.querySelector('.hub-cert-tile')?.getBoundingClientRect();
     const theme = document.querySelector('.hub-theme-toggle')?.getBoundingClientRect();
     return {
@@ -632,7 +635,7 @@ try {
         && actions.left >= 0
         && actions.right <= window.innerWidth
         && document.querySelectorAll('.hub-cert-tile').length === 23
-        && new Set([...technologyCards].slice(0, 2).map(item => Math.round(item.getBoundingClientRect().left))).size === 2
+        && new Set([...itCards].slice(0, 2).map(item => Math.round(item.getBoundingClientRect().left))).size === 2
         && card.height >= 108
         && theme.width === 44
         && theme.height === 44
@@ -681,7 +684,7 @@ try {
       ok: document.querySelector('.hub-brand')?.textContent.trim() === 'Thư viện chứng chỉ'
         && document.querySelector('.hub-disclaimer-link')?.textContent.trim() === 'Đọc tuyên bố miễn trừ'
         && document.querySelector('#hub-title')?.textContent.trim() === 'Xây dựng năng lực tiếp theo.'
-        && [...document.querySelectorAll('.hub-certification-group h2')].map(item => item.textContent.trim()).join('|') === 'AI & Kiến trúc|Công nghệ|Kinh doanh, Tài chính & Ngôn ngữ'
+        && [...document.querySelectorAll('.hub-certification-group h2')].map(item => item.textContent.trim()).join('|') === 'AI, Đám mây & Dữ liệu|Kỹ thuật CNTT & Bảo mật|Kinh doanh, Tài chính & Phân tích|Ngôn ngữ'
         && gCard?.querySelector('.hub-cert-continue-tag')?.textContent.trim() === 'Tiếp tục'
         && gCard?.querySelector('.hub-cert-open-action')?.textContent.trim() === 'Mở'
         && gCard?.querySelector('.hub-cert-continue-action')?.textContent.trim() === 'tiếp tục phiên đã lưu'
@@ -1416,7 +1419,7 @@ try {
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification PWA reopens the gallery offline', await page.evaluate(`(() => ({
     ok: Boolean(navigator.serviceWorker.controller)
-      && document.querySelectorAll('.hub-certification-group').length === 3
+      && document.querySelectorAll('.hub-certification-group').length === 4
       && document.querySelectorAll('.hub-cert-tile').length === 23
       && document.documentElement.scrollWidth <= window.innerWidth,
     message: 'controller=' + Boolean(navigator.serviceWorker.controller)
