@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Certification Library case study — Thang Luu</title>
+  <meta name="description" content="How Certification Library compiles private study sources into quality-gated public practice applications without publishing protected question-bank content.">
+  <link rel="canonical" href="https://thangldw.github.io/case-studies/certification-library/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Certification Library case study — Thang Luu">
+  <meta property="og:description" content="A fail-closed publication pipeline for quality-gated certification practice applications and local learning state.">
+  <meta property="og:url" content="https://thangldw.github.io/case-studies/certification-library/">
+  <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
+  <link rel="stylesheet" href="/css/case-study.css?v=20260828a">
+  <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
+  <script src="/js/site-shell.js?v=20260727b"></script>
+  <script defer src="/js/analytics.js"></script>
+</head>
+<body class="site-page case-study-page">
+  <a class="skip-link" href="#caseStudy">Skip to case study</a>
+  <header class="site-header case-study-header">
+    <div class="site-shell-inner">
+      <a class="site-brand" href="/" aria-label="Back to Thang Luu portfolio"><span class="site-brand-mark" aria-hidden="true">TL</span><span>Thang Luu</span></a>
+      <div class="case-study-header-actions"><a class="case-study-back" href="/">Portfolio</a><button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button></div>
+    </div>
+  </header>
+  <main class="case-study-main" id="caseStudy">
+    <section class="case-study-hero" aria-labelledby="caseTitle">
+      <div>
+        <p class="case-study-eyebrow">Flagship case study · Data product engineering</p>
+        <h1 id="caseTitle">Certification Library</h1>
+        <p class="case-study-deck">A fail-closed content pipeline that validates heterogeneous study sources, compiles a bounded public application, and keeps learner state local.</p>
+        <div class="case-study-actions"><a href="/apps/cert/">Open library</a><a href="/apps/cert/certifications-manifest.json">Public manifest</a></div>
+      </div>
+      <aside class="case-study-summary" aria-label="Certification Library evidence summary">
+        <h2>Evidence summary</h2>
+        <dl class="case-study-meta"><div><dt>Public scope</dt><dd>23 certification programs</dd></div><div><dt>Fresh quality gate</dt><dd>Passed under Node.js 22</dd></div><div><dt>Evidence as of</dt><dd>28 August 2026</dd></div></dl>
+        <div class="case-study-evidence"><span class="case-study-label">Private source</span><span class="case-study-label">Sanitized aggregates</span><span class="case-study-label">Public artifact</span><span class="case-study-label is-missing">No adoption evidence</span></div>
+      </aside>
+    </section>
+    <article class="case-study-body">
+      <section class="case-study-section" id="production-problem">
+        <p class="case-study-kicker">01 · Production problem</p>
+        <h2>A large question collection is not trustworthy learning software.</h2>
+        <p>Certification sources arrive with different schemas, provenance, languages, media and exam rules. A permissive build can publish malformed records, contradictory metadata, weak translations or accidental duplicates while still producing a working page.</p>
+        <p>Certification Library treats publication as a data-product decision: sources must pass structural, semantic, provenance and route-level checks before the public application is compiled. The public site demonstrates the pipeline and product surface; it does not establish exam outcomes or user adoption.</p>
+      </section>
+      <section class="case-study-section" id="architecture-tradeoffs">
+        <p class="case-study-kicker">02 · Architecture and trade-offs</p>
+        <h2>Compile a narrow public artifact from a stricter private source.</h2>
+        <ol><li>Manifests and line-oriented source records enter schema, semantic, provenance and duplicate gates.</li><li>A deterministic compiler emits only validated programs, routes and allowlisted public metadata.</li><li>Practice content is split into protected static packs and hydrated only when required by the selected route.</li><li>Notes, progress and study history stay in the browser rather than a hosted learner database.</li></ol>
+        <p>This boundary makes the public artifact fast, account-free and independently deployable while keeping the authoring corpus private. Static content hardening only raises extraction cost; it is not server-side authorization or digital-rights management.</p>
+      </section>
+      <section class="case-study-section" id="benchmark-failure">
+        <p class="case-study-kicker">03 · Benchmark or failure case</p>
+        <h2>The release gate validates the source and the public artifact as separate scopes.</h2>
+        <p>A fresh local quality gate on 28 August 2026 validated <strong>13,761 source records</strong> across <strong>23 certification programs</strong>. Its content audit inspected <strong>13,753 records</strong> with <strong>0 findings</strong>, and the near-duplicate audit found <strong>0 pairs</strong> at a <strong>0.85</strong> threshold.</p>
+        <p>The production build then published <strong>12,085 practice records</strong>, <strong>1,073 protected media assets</strong> and <strong>23 canonical routes</strong> in <strong>7.816 seconds</strong>.</p>
+        <div class="case-study-callout"><p><strong>Evidence type:</strong> freshly reproduced local quality-gate aggregates plus a public manifest. The source and audit scopes are intentionally reported separately; these figures are not learner, pass-rate or production-traffic metrics.</p></div>
+      </section>
+      <section class="case-study-section" id="demo-under-five">
+        <p class="case-study-kicker">04 · Reproduce in under five minutes</p>
+        <h2>Inspect the public boundary without an account or private data.</h2>
+        <ol><li>Open the <a href="/apps/cert/">Certification Library</a> and select a program from the searchable gallery.</li><li>Open its practice view, answer one item and inspect the study feedback.</li><li>Reload the route and confirm that local progress remains available in the same browser.</li><li>Open the <a href="/apps/cert/certifications-manifest.json">public manifest</a> to verify the program count and allowlisted metadata.</li></ol>
+        <p>Expected result: the selected program renders without sign-in, interaction state remains local, and the manifest exposes catalog metadata without exposing the authoring corpus.</p>
+      </section>
+      <section class="case-study-section" id="ownership-leadership">
+        <p class="case-study-kicker">05 · What I designed and led</p>
+        <h2>I designed the data contracts, fail-closed compiler and privacy boundary.</h2>
+        <p>I own the normalized source model, certification-specific validation, semantic and provenance gates, duplicate checks, compiler, protected-artifact boundary, route generation, lazy hydration, local learning-state contract and release qualification.</p>
+        <p>This is evidence of personal architecture and product ownership. It is not evidence that I managed an instructional team or that the library is an accredited learning provider.</p>
+      </section>
+      <section class="case-study-section" id="limitations-evidence">
+        <p class="case-study-kicker">06 · Limitations and missing evidence</p>
+        <h2>Build integrity does not prove learning effectiveness.</h2>
+        <ul><li>The authoring source is private, so public reviewers can inspect the deployed boundary and aggregate evidence but not independently audit the full corpus.</li><li>Static protection is extraction-cost hardening, not server-side access control.</li><li>Question counts do not establish syllabus completeness, exam readiness or pass-rate improvement.</li><li>No consented learner study, adoption, retention or outcome evidence is published.</li><li>Local browser state provides no account sync, organization administration or multi-device continuity.</li></ul>
+      </section>
+    </article>
+    <nav class="case-study-siblings" aria-label="Other flagship case studies"><a href="/case-studies/ragops/">RAGOps</a><a href="/case-studies/proofline/">Proofline</a><a href="/case-studies/kakeflow/">KakeFlow</a></nav>
+  </main>
+  <footer class="site-foot"><div class="site-shell-inner">Evidence over claims · <span>Thang Luu</span></div></footer>
+</body>
+</html>
