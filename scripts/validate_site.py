@@ -24,6 +24,28 @@ EMAIL_COMPOSE_URL = (
     "potential%20opportunity%20or%20collaboration."
 )
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
+EXPECTED_PROJECT_VERSIONS = {
+    "ragops": "v2.0.2",
+    "proofline": "v2.0.2",
+    "kakeflow": "v1.2.1",
+    "maintainer-defense": "v1.1.1",
+    "toolbox": "v2.0.0",
+}
+RETIRED_PROJECT_IDS = {"diskora", "changeora"}
+CASE_STUDY_ROUTES = {
+    "ragops": "/case-studies/ragops/",
+    "proofline": "/case-studies/proofline/",
+    "kakeflow": "/case-studies/kakeflow/",
+    "certification-study": "/case-studies/certification-library/",
+}
+CASE_STUDY_SECTION_IDS = {
+    "production-problem",
+    "architecture-tradeoffs",
+    "benchmark-failure",
+    "demo-under-five",
+    "ownership-leadership",
+    "limitations-evidence",
+}
 SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20260803font2"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
 SITE_FONT_LICENSE = Path("assets/fonts/Inter-LICENSE.txt")
@@ -43,9 +65,11 @@ ALLOWED_MARKDOWN = {
     Path("docs/superpowers/plans/2026-08-11-apps-viewport-background.md"),
     Path("docs/superpowers/plans/2026-08-12-japan-hsp-calculator-renewal.md"),
     Path("docs/superpowers/plans/2026-08-13-japan-hsp-score-spine.md"),
+    Path("docs/superpowers/plans/2026-08-28-portfolio-flagship-case-studies.md"),
     Path("docs/superpowers/specs/2026-08-11-apps-viewport-background-design.md"),
     Path("docs/superpowers/specs/2026-08-12-japan-hsp-calculator-renewal-design.md"),
     Path("docs/superpowers/specs/2026-08-13-japan-hsp-score-spine-design.md"),
+    Path("docs/superpowers/specs/2026-08-28-portfolio-flagship-case-studies-design.md"),
 }
 
 
@@ -114,6 +138,7 @@ def main() -> int:
         catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
         projects = catalog.get("projects")
         learning_collections = catalog.get("learningCollections")
+        language_collection = catalog.get("languageCollection")
         if catalog.get("schemaVersion") != 1:
             errors.append("js/projects-data.json: unsupported schemaVersion")
         if not isinstance(projects, list) or not isinstance(learning_collections, list):
@@ -138,6 +163,21 @@ def main() -> int:
                     errors.append(f"js/projects-data.json: entry {index} tags must be an array")
                 if isinstance(project.get("id"), str):
                     identifiers.append(project["id"])
+                case_study_href = project.get("caseStudyHref")
+                if case_study_href is not None:
+                    if not isinstance(case_study_href, str) or not case_study_href.startswith(
+                        "/case-studies/"
+                    ):
+                        errors.append(
+                            f"js/projects-data.json: entry {index} has invalid caseStudyHref"
+                        )
+                    else:
+                        target = local_target(catalog_path, case_study_href)
+                        if target is None or not target.is_file():
+                            errors.append(
+                                "js/projects-data.json: broken caseStudyHref "
+                                f"{case_study_href}"
+                            )
             duplicates = sorted(
                 identifier for identifier, count in Counter(identifiers).items() if count > 1
             )
@@ -145,6 +185,51 @@ def main() -> int:
                 errors.append(
                     f"js/projects-data.json: duplicate ids: {', '.join(duplicates)}"
                 )
+            project_by_id = {
+                project.get("id"): project
+                for project in projects
+                if isinstance(project, dict) and isinstance(project.get("id"), str)
+            }
+            for project_id, expected_version in EXPECTED_PROJECT_VERSIONS.items():
+                project = project_by_id.get(project_id)
+                if not isinstance(project, dict):
+                    errors.append(f"js/projects-data.json: missing {project_id} project")
+                elif project.get("status") != expected_version:
+                    errors.append(
+                        "js/projects-data.json: "
+                        f"{project_id} status must be {expected_version}"
+                    )
+            for retired_id in sorted(RETIRED_PROJECT_IDS & project_by_id.keys()):
+                errors.append(
+                    f"js/projects-data.json: retired project {retired_id} must be removed"
+                )
+            if sum(project_id == "toolbox" for project_id in project_by_id) != 1:
+                errors.append("js/projects-data.json: Toolbox must appear exactly once")
+            for project_id, expected_href in CASE_STUDY_ROUTES.items():
+                if project_id == "certification-study":
+                    continue
+                project = project_by_id.get(project_id)
+                if not isinstance(project, dict) or project.get("caseStudyHref") != expected_href:
+                    errors.append(
+                        "js/projects-data.json: "
+                        f"{project_id} caseStudyHref must be {expected_href}"
+                    )
+            if not isinstance(language_collection, dict):
+                errors.append("js/projects-data.json: missing languageCollection")
+            elif language_collection.get("caseStudyHref") != CASE_STUDY_ROUTES[
+                "certification-study"
+            ]:
+                errors.append(
+                    "js/projects-data.json: Certification Library caseStudyHref must be "
+                    f"{CASE_STUDY_ROUTES['certification-study']}"
+                )
+            else:
+                target = local_target(catalog_path, language_collection["caseStudyHref"])
+                if target is None or not target.is_file():
+                    errors.append(
+                        "js/projects-data.json: broken Certification Library "
+                        f"caseStudyHref {language_collection['caseStudyHref']}"
+                    )
             kakeflow = next(
                 (project for project in projects if project.get("id") == "kakeflow"),
                 None,
@@ -309,6 +394,38 @@ def main() -> int:
                 f"{page.relative_to(ROOT)}: legacy redirect pages are not allowed"
             )
 
+    for route in CASE_STUDY_ROUTES.values():
+        page_file = ROOT / route.lstrip("/") / "index.html"
+        parser = parsed_pages.get(page_file)
+        if parser is None:
+            errors.append(f"{page_file.relative_to(ROOT)}: required case study is missing")
+            continue
+        missing_sections = sorted(CASE_STUDY_SECTION_IDS - set(parser.ids))
+        if missing_sections:
+            errors.append(
+                f"{page_file.relative_to(ROOT)}: missing case-study sections: "
+                + ", ".join(missing_sections)
+            )
+
+    certification_case_study = (
+        ROOT / "case-studies/certification-library/index.html"
+    )
+    if certification_case_study.is_file():
+        certification_case_text = certification_case_study.read_text(encoding="utf-8").lower()
+        forbidden_certification_text = {
+            "github.com/thangldw/cert",
+            "protected-data/",
+            "question-media/",
+            "data/certifications/",
+            '"correctanswer"',
+        }
+        for forbidden in sorted(forbidden_certification_text):
+            if forbidden in certification_case_text:
+                errors.append(
+                    "case-studies/certification-library/index.html: "
+                    f"forbidden private-content reference {forbidden}"
+                )
+
     home_references = parsed_pages.get(ROOT / "index.html", PageParser()).references
     if EMAIL_COMPOSE_URL not in home_references:
         errors.append("index.html: Email must open the Gmail Web compose screen")
@@ -316,6 +433,11 @@ def main() -> int:
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", namespace)}
+
+    for route in CASE_STUDY_ROUTES.values():
+        expected_url = SITE_URL + route
+        if expected_url not in sitemap_urls:
+            errors.append(f"sitemap.xml: missing case-study URL {expected_url}")
 
     required_og = {"og:type", "og:title", "og:description", "og:url"}
     for absolute in sorted(sitemap_urls):
