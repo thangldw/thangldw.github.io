@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RAGOps case study — Thang Luu</title>
+  <meta name="description" content="How RAGOps turns recorded RAG and agent regressions into deterministic release decisions with portable, auditable evidence.">
+  <link rel="canonical" href="https://thangldw.github.io/case-studies/ragops/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="RAGOps case study — Thang Luu">
+  <meta property="og:description" content="Deterministic release gates and portable evidence for recorded RAG and agent regressions.">
+  <meta property="og:url" content="https://thangldw.github.io/case-studies/ragops/">
+  <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
+  <link rel="stylesheet" href="/css/case-study.css?v=20260828a">
+  <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
+  <script src="/js/site-shell.js?v=20260727b"></script>
+  <script defer src="/js/analytics.js"></script>
+</head>
+<body class="site-page case-study-page">
+  <a class="skip-link" href="#caseStudy">Skip to case study</a>
+  <header class="site-header case-study-header">
+    <div class="site-shell-inner">
+      <a class="site-brand" href="/" aria-label="Back to Thang Luu portfolio"><span class="site-brand-mark" aria-hidden="true">TL</span><span>Thang Luu</span></a>
+      <div class="case-study-header-actions"><a class="case-study-back" href="/">Portfolio</a><button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button></div>
+    </div>
+  </header>
+  <main class="case-study-main" id="caseStudy">
+    <section class="case-study-hero" aria-labelledby="caseTitle">
+      <div>
+        <p class="case-study-eyebrow">Flagship case study · AI release engineering</p>
+        <h1 id="caseTitle">RAGOps</h1>
+        <p class="case-study-deck">One deterministic decision path for comparing recorded RAG or agent traces, enforcing a versioned policy, and carrying the same evidence into CLI, CI and review.</p>
+        <div class="case-study-actions"><a href="https://github.com/thangldw/ragops">Repository</a><a href="https://github.com/thangldw/ragops/releases/tag/v2.0.2">Release v2.0.2</a></div>
+      </div>
+      <aside class="case-study-summary" aria-label="RAGOps evidence summary">
+        <h2>Evidence summary</h2>
+        <dl class="case-study-meta"><div><dt>Release</dt><dd>v2.0.2 · Python 3.11+</dd></div><div><dt>Exact head</dt><dd><code>4b59aec</code> · CI and CodeQL passed</dd></div><div><dt>Evidence as of</dt><dd>28 August 2026</dd></div></dl>
+        <div class="case-study-evidence"><span class="case-study-label">Synthetic regression</span><span class="case-study-label">Exact-head CI</span><span class="case-study-label">Public release</span><span class="case-study-label is-missing">Pilot not yet published</span></div>
+      </aside>
+    </section>
+    <article class="case-study-body">
+      <section class="case-study-section" id="production-problem">
+        <p class="case-study-kicker">01 · Production problem</p>
+        <h2>A model-quality change needs a release decision, not another dashboard.</h2>
+        <p>RAG and agent releases can improve an aggregate score while breaking a language, source type or safety slice. Teams then debate whether a candidate is safe to ship, while the benchmark, policy and final decision live in different tools.</p>
+        <p>RAGOps addresses that failure class by comparing recorded candidate traces with an accepted baseline, applying a versioned policy, and emitting one canonical <strong>PASS</strong>, <strong>WARN</strong> or <strong>BLOCK</strong> decision. The problem is production-relevant; this case study does not claim customer deployment.</p>
+      </section>
+      <section class="case-study-section" id="architecture-tradeoffs">
+        <p class="case-study-kicker">02 · Architecture and trade-offs</p>
+        <h2>Keep the decision core offline; treat integrations as adapters.</h2>
+        <ol><li>Portable scenario and trace contracts enter a dependency-free Python core.</li><li>Deterministic evaluators compute quality, safety, slice and distribution evidence.</li><li>A versioned release policy resolves findings into one canonical decision.</li><li>JSON, Markdown, HTML, JUnit, SARIF and evidence bundles render the same decision.</li></ol>
+        <p>The core does not import FastAPI, Uvicorn or vendor SDKs. API, workbench and external evaluation systems sit behind optional adapters. This makes a release result reproducible without credentials or network access, at the cost of requiring recorded traces rather than live production observation.</p>
+        <p><a href="https://github.com/thangldw/ragops/blob/main/docs/ARCHITECTURE.md">Architecture</a> · <a href="https://github.com/thangldw/ragops/blob/main/docs/CONTRACTS.md">Contracts</a> · <a href="https://github.com/thangldw/ragops/blob/main/docs/OPERATIONS.md">Operations</a></p>
+      </section>
+      <section class="case-study-section" id="benchmark-failure">
+        <p class="case-study-kicker">03 · Benchmark or failure case</p>
+        <h2>The flagship fixture fails visibly and reproducibly.</h2>
+        <p>The credential-free demo intentionally produces <strong>BLOCK</strong>: citation coverage drops from <strong>1.0 to 0.5</strong>, citation precision from <strong>1.0 to 0.5</strong>, and lexical groundedness from <strong>1.0 to 0.6</strong>. The v2.0.2 Failure Zoo also includes a synthetic retrieval-poisoning specimen that blocks unsupported citations, unsupported claims and forbidden output terms.</p>
+        <div class="case-study-callout"><p><strong>Evidence type:</strong> reproducible synthetic regression. It proves the evaluator and policy response to controlled failures; it does not prove production adoption or real-traffic performance.</p></div>
+        <p>The exact default-branch revision <code>4b59aec</code> passed public <a href="https://github.com/thangldw/ragops/actions/runs/32648673405">CI</a> and <a href="https://github.com/thangldw/ragops/actions/runs/32648673426">CodeQL</a>.</p>
+      </section>
+      <section class="case-study-section" id="demo-under-five">
+        <p class="case-study-kicker">04 · Reproduce in under five minutes</p>
+        <h2>Run the released package without credentials.</h2>
+        <pre><code>python -m pip install ragops==2.0.2
+ragops demo --profile engineer --output ./demo-output
+ragops evidence verify --bundle ./demo-output/evidence
+open ./demo-output/release-report.html</code></pre>
+        <p>Expected result: the report shows a synthetic <strong>BLOCK</strong> decision and the evidence verifier accepts the generated bundle. On Windows, use <code>Start-Process</code> for the HTML report.</p>
+      </section>
+      <section class="case-study-section" id="ownership-leadership">
+        <p class="case-study-kicker">05 · What I designed and led</p>
+        <h2>I designed the product boundary, canonical decision model and release evidence path.</h2>
+        <p>I own the versioned contracts, deterministic core, policy semantics, evidence bundles, adapter boundary, CI formats, governance and release qualification. As maintainer, I also reviewed external work for retrieval-poisoning coverage and a Phoenix adapter, requiring provenance, semantic and fail-closed error-boundary corrections before merge.</p>
+        <p>This is personal product and maintainer ownership. It is evidence of technical judgment and collaboration, not a claim that a production customer team adopted the system.</p>
+      </section>
+      <section class="case-study-section" id="limitations-evidence">
+        <p class="case-study-kicker">06 · Limitations and missing evidence</p>
+        <h2>The deterministic release path is implemented; external validity remains open.</h2>
+        <ul><li>No consented production pilot or customer adoption evidence is published.</li><li>No public non-synthetic evaluation result is published yet.</li><li>Recorded traces do not replace live observability or incident response.</li><li>Lexical groundedness is a deterministic proxy, not a semantic judge.</li><li>The repository ships no hosted MCP connector; API and workbench are local optional components.</li></ul>
+        <p><a href="https://github.com/thangldw/ragops/blob/main/docs/gtm/production-pilot.md">The production-pilot runbook</a> defines what new evidence must contain before those claims can change.</p>
+      </section>
+    </article>
+    <nav class="case-study-siblings" aria-label="Other flagship case studies"><a href="/case-studies/proofline/">Proofline</a><a href="/case-studies/kakeflow/">KakeFlow</a><a href="/case-studies/certification-library/">Certification Library</a></nav>
+  </main>
+  <footer class="site-foot"><div class="site-shell-inner">Evidence over claims · <span>Thang Luu</span></div></footer>
+</body>
+</html>
