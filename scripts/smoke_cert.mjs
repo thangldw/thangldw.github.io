@@ -244,7 +244,7 @@ try {
 
   await page.evaluate(`localStorage.setItem("theme", "light")`);
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelector("#projectIndex")?.children.length === 10');
+  await page.waitUntil('document.querySelector("#projectIndex")?.children.length === 9');
   assertResult('Apps catalog matches the certification gallery system', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const firstRowTop = cards[0]?.getBoundingClientRect().top;
@@ -256,9 +256,9 @@ try {
         && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
         && document.querySelector('.apps-hero > .eyebrow')?.textContent.trim() === 'BROWSE THE WORK'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
-        && document.querySelector('.apps-project-heading span')?.textContent.trim() === '10 projects'
-        && cards.length === 10
-        && titles.join('|') === 'Awesome Maintainer Defense|BizRoll|Certification Library|Changeora|Diskora|Japan PR Guide|KakeFlow|Neon Glider|Proofline|RAGOps'
+        && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
+        && cards.length === 9
+        && titles.join('|') === 'Awesome Maintainer Defense|BizRoll|Certification Library|Japan PR Guide|KakeFlow|Neon Glider|Proofline|RAGOps|Toolbox'
         && firstRow.length === 5
         && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 5
         && firstCardStyle?.borderTopWidth === '4px'
@@ -280,7 +280,7 @@ try {
   ];
   for (const [desktopWidth, desktopHeight] of appsDesktopViewports) {
     await page.navigate(`${origin}/apps/`, desktopWidth, desktopHeight);
-    await page.waitUntil('document.querySelectorAll(".project-card").length === 10');
+    await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
     assertResult(`Apps catalog fits ${desktopWidth}x${desktopHeight}`, await page.evaluate(`(() => {
       const cards = [...document.querySelectorAll('.project-card')];
       const grid = document.querySelector('.apps-project-grid');
@@ -292,7 +292,7 @@ try {
         ok: document.documentElement.scrollHeight <= window.innerHeight
           && document.documentElement.scrollWidth <= window.innerWidth
           && grid.scrollWidth <= grid.clientWidth
-          && cards.length === 10
+          && cards.length === 9
           && firstRow.length === 5,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
@@ -305,7 +305,7 @@ try {
   }
 
   await page.navigate(`${origin}/apps/`, 390, 844);
-  await page.waitUntil('document.querySelectorAll(".project-card").length === 10');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
   assertResult('Apps catalog mobile cards', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const grid = document.querySelector('.apps-project-grid');
@@ -316,7 +316,7 @@ try {
       ok: document.documentElement.scrollHeight > window.innerHeight
         && document.documentElement.scrollWidth <= window.innerWidth
         && grid.scrollWidth <= grid.clientWidth
-        && cards.length === 10
+        && cards.length === 9
         && firstRow.length === 2
         && theme?.width === 44
         && theme?.height === 44,
@@ -330,17 +330,15 @@ try {
   assertResult('Toolbox releases in the apps catalog', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const byTitle = title => cards.find(card => card.querySelector('.project-title')?.textContent.trim() === title);
-    const diskora = byTitle('Diskora');
-    const changeora = byTitle('Changeora');
-    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v1.3.0';
+    const toolbox = byTitle('Toolbox');
+    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v2.0.0';
     return {
-      ok: diskora?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
-        && changeora?.querySelector('.project-status')?.textContent.trim() === 'v1.3.0'
-        && diskora?.href === releaseUrl
-        && changeora?.href === releaseUrl
-        && diskora.textContent.includes('Undo Center')
-        && changeora.textContent.includes('FSEvents'),
-      message: 'diskora=' + diskora?.textContent.trim() + ', changeora=' + changeora?.textContent.trim()
+      ok: toolbox?.querySelector('.project-status')?.textContent.trim() === 'v2.0.0'
+        && toolbox?.href === releaseUrl
+        && toolbox.textContent.includes('recovering reviewed cleanups')
+        && byTitle('Diskora') === undefined
+        && byTitle('Changeora') === undefined,
+      message: 'toolbox=' + toolbox?.textContent.trim()
     };
   })()`), page.exceptions);
 
@@ -349,7 +347,7 @@ try {
       .find(candidate => candidate.querySelector('.project-title')?.textContent.trim() === 'KakeFlow');
     return {
       ok: card?.href === 'https://thangldw.github.io/kakeflow/'
-        && card?.querySelector('.project-status')?.textContent.trim() === 'v1.2.0'
+        && card?.querySelector('.project-status')?.textContent.trim() === 'v1.2.1'
         && card.textContent.includes('MIT License')
         && card?.getAttribute('aria-label') === 'Open KakeFlow',
       message: 'kakeflow=' + card?.textContent.trim()
@@ -362,7 +360,7 @@ try {
       candidate.querySelector('.project-title')?.textContent.trim() === 'Neon Glider'
     );
     return {
-      ok: visibleCards.length === 10
+      ok: visibleCards.length === 9
         && game?.href === 'https://thangldw.github.io/neon-glider/'
         && game?.querySelector('.project-status')?.textContent.trim() === 'Live'
         && game?.getAttribute('aria-label') === 'Play Neon Glider',
@@ -399,15 +397,14 @@ try {
   assertResult('Toolbox releases in home side projects', await page.evaluate(`(() => {
     const projects = [...document.querySelectorAll('#projectRail .resume-project')];
     const byTitle = title => projects.find(project => project.querySelector('h3')?.textContent.trim() === title);
-    const diskora = byTitle('Diskora');
-    const changeora = byTitle('Changeora');
-    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v1.3.0';
+    const toolbox = byTitle('Toolbox');
+    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v2.0.0';
     return {
-      ok: diskora?.href === releaseUrl
-        && changeora?.href === releaseUrl
-        && diskora.textContent.includes('Undo Center')
-        && changeora.textContent.includes('FSEvents'),
-      message: 'diskora=' + diskora?.textContent.trim() + ', changeora=' + changeora?.textContent.trim()
+      ok: toolbox?.href === releaseUrl
+        && toolbox.textContent.includes('filesystem change evidence')
+        && byTitle('Diskora') === undefined
+        && byTitle('Changeora') === undefined,
+      message: 'toolbox=' + toolbox?.textContent.trim()
     };
   })()`), page.exceptions);
 
@@ -415,12 +412,96 @@ try {
     const project = [...document.querySelectorAll('#projectRail .resume-project')]
       .find(candidate => candidate.querySelector('h3')?.textContent.trim() === 'KakeFlow');
     return {
-      ok: project?.href === 'https://thangldw.github.io/kakeflow/'
+      ok: project?.href === ${JSON.stringify(`${origin}/case-studies/kakeflow/`)}
         && project.textContent.includes('Open-source local-first household finance'),
       message: 'kakeflow=' + project?.textContent.trim()
     };
   })()`), page.exceptions);
 
+  assertResult('Homepage flagship cards route to case studies', await page.evaluate(`(() => {
+    const projects = [...document.querySelectorAll('#projectRail .resume-project')];
+    const byTitle = title => projects.find(project => project.querySelector('h3')?.textContent.trim() === title);
+    const language = document.querySelector('#projectRail .language-project');
+    return {
+      ok: byTitle('RAGOps')?.href === ${JSON.stringify(`${origin}/case-studies/ragops/`)}
+        && byTitle('Proofline')?.href === ${JSON.stringify(`${origin}/case-studies/proofline/`)}
+        && byTitle('KakeFlow')?.href === ${JSON.stringify(`${origin}/case-studies/kakeflow/`)}
+        && language?.href === ${JSON.stringify(`${origin}/case-studies/certification-library/`)},
+      message: 'ragops=' + byTitle('RAGOps')?.href
+        + ', proofline=' + byTitle('Proofline')?.href
+        + ', kakeflow=' + byTitle('KakeFlow')?.href
+        + ', certification=' + language?.href
+    };
+  })()`), page.exceptions);
+
+  await page.navigate(`${origin}/apps/`, 1280);
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
+  assertResult('Apps catalog keeps direct flagship destinations', await page.evaluate(`(() => {
+    const cards = [...document.querySelectorAll('.project-card')];
+    const byTitle = title => cards.find(card => card.querySelector('.project-title')?.textContent.trim() === title);
+    return {
+      ok: byTitle('RAGOps')?.href === 'https://github.com/thangldw/ragops'
+        && byTitle('Proofline')?.href === 'https://github.com/thangldw/proofline'
+        && byTitle('KakeFlow')?.href === 'https://thangldw.github.io/kakeflow/'
+        && byTitle('Certification Library')?.href === ${JSON.stringify(`${origin}/apps/cert/`)},
+      message: 'ragops=' + byTitle('RAGOps')?.href
+        + ', proofline=' + byTitle('Proofline')?.href
+        + ', kakeflow=' + byTitle('KakeFlow')?.href
+        + ', certification=' + byTitle('Certification Library')?.href
+    };
+  })()`), page.exceptions);
+
+  const caseStudyRoutes = [
+    ['/case-studies/ragops/', 'RAGOps'],
+    ['/case-studies/proofline/', 'Proofline'],
+    ['/case-studies/kakeflow/', 'KakeFlow'],
+    ['/case-studies/certification-library/', 'Certification Library']
+  ];
+  const requiredCaseSections = [
+    'production-problem',
+    'architecture-tradeoffs',
+    'benchmark-failure',
+    'demo-under-five',
+    'ownership-leadership',
+    'limitations-evidence'
+  ];
+  for (const [casePath, caseTitle] of caseStudyRoutes) {
+    for (const [caseWidth, caseHeight] of [[1280, 900], [390, 844]]) {
+      await page.evaluate(`localStorage.setItem("theme", "light")`);
+      await page.navigate(`${origin}${casePath}`, caseWidth, caseHeight);
+      assertResult(`${caseTitle} case study ${caseWidth}px`, await page.evaluate(`(() => {
+        const sectionIds = ${JSON.stringify(requiredCaseSections)};
+        const codeBlocks = [...document.querySelectorAll('pre')];
+        const primaryLink = document.querySelector('.case-study-actions a');
+        primaryLink?.focus();
+        const focusStyle = primaryLink ? getComputedStyle(primaryLink) : null;
+        return {
+          ok: document.querySelector('h1')?.textContent.trim() === ${JSON.stringify(caseTitle)}
+            && sectionIds.every(id => document.getElementById(id)?.getBoundingClientRect().height > 0)
+            && document.querySelectorAll('.case-study-siblings a').length === 3
+            && document.documentElement.scrollWidth <= window.innerWidth
+            && codeBlocks.every(block => block.scrollWidth >= block.clientWidth)
+            && document.activeElement === primaryLink
+            && parseFloat(focusStyle?.outlineWidth) >= 2,
+          message: 'title=' + document.querySelector('h1')?.textContent.trim()
+            + ', sections=' + sectionIds.filter(id => document.getElementById(id)?.getBoundingClientRect().height > 0).length
+            + ', width=' + document.documentElement.scrollWidth + '/' + window.innerWidth
+            + ', focus=' + focusStyle?.outlineWidth
+        };
+      })()`), page.exceptions);
+    }
+    await page.evaluate(`document.querySelector('#themeToggle')?.click()`);
+    assertResult(`${caseTitle} dark theme`, await page.evaluate(`(() => ({
+      ok: document.documentElement.dataset.theme === 'dark'
+        && getComputedStyle(document.body).backgroundColor === 'rgb(17, 19, 15)',
+      message: 'theme=' + document.documentElement.dataset.theme
+        + ', background=' + getComputedStyle(document.body).backgroundColor
+    }))()`), page.exceptions);
+  }
+
+  await page.evaluate(`localStorage.setItem("theme", "light")`);
+  await page.navigate(`${origin}/`, 1280);
+  await page.waitUntil('document.querySelector("#projectRail .resume-project")');
   assertResult('Neon Glider appears in home side projects', await page.evaluate(`(() => {
     const project = [...document.querySelectorAll('#projectRail .resume-project')]
       .find(candidate => candidate.querySelector('h3')?.textContent.trim() === 'Neon Glider');

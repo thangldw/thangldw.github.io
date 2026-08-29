@@ -25,12 +25,12 @@
       });
     var cards = projects.map(function (project) {
       if (project.isLanguageCollection) {
-        return '<a class="resume-project language-project" href="' + escapeHtml(project.href) + '">' +
+        return '<a class="resume-project language-project" href="' + escapeHtml(project.caseStudyHref || project.href) + '">' +
           '<span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>' + escapeHtml(project.label) + '</span>' +
           '<h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.description) + '</p>' +
           '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
       }
-      return '<a class="resume-project" href="' + escapeHtml(project.href) + '">' +
+      return '<a class="resume-project" href="' + escapeHtml(project.caseStudyHref || project.href) + '">' +
         '<h3>' + escapeHtml(project.title) + '</h3>' +
         '<p>' + escapeHtml(project.featuredDescription || project.description) + '</p>' +
         '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
@@ -60,7 +60,8 @@
       title: 'RAGOps',
       description: 'Evaluate RAG and agent releases against an accepted baseline, detect regressions, and preserve the evidence behind a decision.',
       purpose: 'Turn an ambiguous AI request into a defensible release decision with explicit trade-offs and open questions.',
-      href: 'https://github.com/thangldw/ragops'
+      href: '/case-studies/ragops/',
+      action: 'Read case study'
     }
   };
 
@@ -77,7 +78,7 @@
     panel.innerHTML =
       '<div class="spotlight-icon" aria-hidden="true"><i class="fa-solid ' + demo.icon + '"></i></div>' +
       '<div class="spotlight-copy"><h2>' + demo.title + '</h2><p>' + demo.description + '</p>' +
-      '<a href="' + demo.href + '">Open demo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>' +
+      '<a href="' + demo.href + '">' + demo.action + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>' +
       '<div class="spotlight-purpose"><h3>Purpose</h3><p>' + demo.purpose + '</p></div>';
   }
 

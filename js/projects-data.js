@@ -14,6 +14,9 @@
     if (!Array.isArray(project.tags)) {
       throw new TypeError('Project ' + project.id + ' must provide a tags array.');
     }
+    if (project.caseStudyHref !== undefined && (typeof project.caseStudyHref !== 'string' || !project.caseStudyHref.startsWith('/case-studies/'))) {
+      throw new TypeError('Project ' + project.id + ' has an invalid caseStudyHref.');
+    }
     return project;
   }
 
@@ -68,6 +71,10 @@
 
       var projects = catalog.projects.map(requireProject);
       var learningCollections = catalog.learningCollections.map(requireProject);
+      if (catalog.languageCollection && catalog.languageCollection.caseStudyHref !== undefined &&
+          (typeof catalog.languageCollection.caseStudyHref !== 'string' || !catalog.languageCollection.caseStudyHref.startsWith('/case-studies/'))) {
+        throw new TypeError('Certification Library has an invalid caseStudyHref.');
+      }
       var identifiers = projects.concat(learningCollections).map(function (project) { return project.id; });
       if (new Set(identifiers).size !== identifiers.length) {
         throw new TypeError('Project catalog IDs must be unique.');
