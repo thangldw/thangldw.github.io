@@ -21,7 +21,12 @@
       .filter(function (project) { return project.featured; })
       .concat(collection || [])
       .sort(function (left, right) {
-        return left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
+        var orderDelta = (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
+          (right.featuredOrder ?? Number.MAX_SAFE_INTEGER);
+        return orderDelta || left.title.localeCompare(right.title, 'en', {
+          numeric: true,
+          sensitivity: 'base'
+        });
       });
     var cards = projects.map(function (project) {
       if (project.isLanguageCollection) {
