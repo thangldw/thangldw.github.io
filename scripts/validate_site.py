@@ -31,6 +31,14 @@ EXPECTED_PROJECT_VERSIONS = {
     "maintainer-defense": "v1.1.1",
     "toolbox": "v2.0.0",
 }
+EXPECTED_HOMEPAGE_FEATURED_ORDER = {
+    "ragops": 0,
+    "proofline": 1,
+    "kakeflow": 2,
+    "toolbox": 4,
+    "maintainer-defense": 5,
+}
+EXPECTED_LANGUAGE_COLLECTION_ORDER = 3
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}
 CASE_STUDY_ROUTES = {
     "ragops": "/case-studies/ragops/",
@@ -199,6 +207,19 @@ def main() -> int:
                         "js/projects-data.json: "
                         f"{project_id} status must be {expected_version}"
                     )
+            featured_projects = {
+                project.get("id"): project.get("featuredOrder")
+                for project in projects
+                if isinstance(project, dict) and project.get("featured") is True
+            }
+            if featured_projects != EXPECTED_HOMEPAGE_FEATURED_ORDER:
+                errors.append(
+                    "js/projects-data.json: homepage featured projects must be "
+                    + ", ".join(
+                        f"{project_id}:{order}"
+                        for project_id, order in EXPECTED_HOMEPAGE_FEATURED_ORDER.items()
+                    )
+                )
             for retired_id in sorted(RETIRED_PROJECT_IDS & project_by_id.keys()):
                 errors.append(
                     f"js/projects-data.json: retired project {retired_id} must be removed"
@@ -222,6 +243,11 @@ def main() -> int:
                 errors.append(
                     "js/projects-data.json: Certification Library caseStudyHref must be "
                     f"{CASE_STUDY_ROUTES['certification-study']}"
+                )
+            elif language_collection.get("featuredOrder") != EXPECTED_LANGUAGE_COLLECTION_ORDER:
+                errors.append(
+                    "js/projects-data.json: Certification Library featuredOrder must be "
+                    f"{EXPECTED_LANGUAGE_COLLECTION_ORDER}"
                 )
             else:
                 target = local_target(catalog_path, language_collection["caseStudyHref"])

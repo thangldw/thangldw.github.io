@@ -31,8 +31,7 @@
       "category": "games",
       "categoryLabel": "Strategy game",
       "cta": "Open BizRoll",
-      "featured": true,
-      "featuredOrder": 0
+      "featured": false
     },
     {
       "id": "neon-glider",
@@ -48,7 +47,7 @@
       "category": "games",
       "categoryLabel": "Endless runner",
       "cta": "Play Neon Glider",
-      "featured": true
+      "featured": false
     },
     {
       "id": "toolbox",
@@ -65,7 +64,7 @@
       "categoryLabel": "macOS utility",
       "cta": "Download Toolbox",
       "featured": true,
-      "featuredOrder": 1
+      "featuredOrder": 4
     },
     {
       "id": "ragops",
@@ -83,7 +82,7 @@
       "categoryLabel": "AI evaluation",
       "cta": "Open on GitHub",
       "featured": true,
-      "featuredOrder": 3
+      "featuredOrder": 0
     },
     {
       "id": "maintainer-defense",
@@ -100,7 +99,7 @@
       "categoryLabel": "OSS security",
       "cta": "Open on GitHub",
       "featured": true,
-      "featuredOrder": 4
+      "featuredOrder": 5
     },
     {
       "id": "proofline",
@@ -118,7 +117,7 @@
       "categoryLabel": "Engineering memory",
       "cta": "Open on GitHub",
       "featured": true,
-      "featuredOrder": 5
+      "featuredOrder": 1
     },
     {
       "id": "kakeflow",
@@ -136,7 +135,7 @@
       "categoryLabel": "Household finance",
       "cta": "Open KakeFlow",
       "featured": true,
-      "featuredOrder": 7
+      "featuredOrder": 2
     }
   ],
   "languageCollection": {
@@ -144,6 +143,7 @@
     "description": "Focused dashboards, exam practice, notes, and local learning history for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.",
     "href": "/apps/cert/",
     "caseStudyHref": "/case-studies/certification-library/",
+    "featuredOrder": 3,
     "label": "9 certification programs"
   },
   "learningCollections": [

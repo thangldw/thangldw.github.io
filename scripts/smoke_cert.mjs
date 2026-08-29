@@ -502,14 +502,14 @@ try {
   await page.evaluate(`localStorage.setItem("theme", "light")`);
   await page.navigate(`${origin}/`, 1280);
   await page.waitUntil('document.querySelector("#projectRail .resume-project")');
-  assertResult('Neon Glider appears in home side projects', await page.evaluate(`(() => {
-    const project = [...document.querySelectorAll('#projectRail .resume-project')]
-      .find(candidate => candidate.querySelector('h3')?.textContent.trim() === 'Neon Glider');
+  assertResult('Homepage prioritizes Principal Data and AI evidence', await page.evaluate(`(() => {
+    const projects = [...document.querySelectorAll('#projectRail .resume-project')];
+    const titles = projects.map(project => project.querySelector('h3')?.textContent.trim());
     return {
-      ok: project?.href === 'https://thangldw.github.io/neon-glider/'
-        && project.textContent.includes('Three.js')
-        && project.textContent.includes('persistent high scores'),
-      message: 'neonGlider=' + project?.textContent.trim()
+      ok: titles.join('|') === 'RAGOps|Proofline|KakeFlow|Certification Library|Toolbox|Awesome Maintainer Defense'
+        && !titles.includes('BizRoll')
+        && !titles.includes('Neon Glider'),
+      message: 'titles=' + titles.join('|')
     };
   })()`), page.exceptions);
 
