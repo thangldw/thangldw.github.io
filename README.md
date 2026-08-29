@@ -47,6 +47,7 @@ flowchart LR
 | `/apps/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` source repository |
 | `/apps/cert/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
+| `/case-studies/{flagship}/` | Recruiter-facing evidence for four flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
 Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
@@ -69,6 +70,7 @@ thangldw.github.io/
 │   ├── index.html
 │   ├── japan-pr-guide/
 │   └── cert/                  # Generated artifact; do not hand-edit
+├── case-studies/              # Four static flagship evidence narratives
 ├── assets/                    # Social images and local fonts
 │   └── fonts/licenses/        # Upstream font notices and provenance
 ├── css/                       # Tokens, shared shell, and route styles
@@ -188,6 +190,7 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 | `/apps/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
 | `/apps/cert/` | Certification Library đã build | Repo private `thangldw/cert` |
 | Certification manifest | Metadata và count công khai | Local production build của repo cert |
+| `/case-studies/{flagship}/` | Bằng chứng recruiter-facing cho bốn flagship | Semantic HTML theo route và CSS dùng chung |
 | `/404.html` | Fallback của GitHub Pages | Source repository |
 
 Mọi route trong sitemap phải có canonical, description, Open Graph và social image hợp lệ khi cần.
@@ -264,6 +267,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | `/apps/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
 | `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` repo |
 | Certification manifest | Public metadata と count | Cert local production build |
+| `/case-studies/{flagship}/` | 4 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
 Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
