@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const CHROME = process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const PYTHON = process.env.PYTHON_BIN || '/usr/bin/python3';
 
 function freePort() {
   return new Promise((resolvePort, reject) => {
@@ -131,7 +132,7 @@ function assertResult(name, result, exceptions) {
 const serverPort = await freePort();
 const debugPort = await freePort();
 const profile = await mkdtemp(resolve(tmpdir(), 'thangldw-cert-smoke-'));
-const server = spawn('python3', ['-m', 'http.server', String(serverPort), '--bind', '127.0.0.1'], {
+const server = spawn(PYTHON, ['-m', 'http.server', String(serverPort), '--bind', '127.0.0.1'], {
   cwd: ROOT,
   stdio: 'ignore'
 });
