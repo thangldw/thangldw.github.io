@@ -671,7 +671,8 @@ try {
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   await page.waitUntil(`performance.getEntriesByType('resource').some(entry => entry.name.includes('/assets/ExperienceWorkspace-'))`);
   const protectedResourcesBeforeFocus = await page.evaluate(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length`);
-  for (let tabIndex = 0; tabIndex < 3; tabIndex += 1) {
+  for (let tabIndex = 0; tabIndex < 18; tabIndex += 1) {
+    if (await page.evaluate(`document.activeElement?.dataset.certificationId === 'aws-aip-c01'`)) break;
     await page.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
     await page.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 });
   }
