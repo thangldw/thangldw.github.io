@@ -947,6 +947,24 @@ try {
     message: JSON.stringify(childThemeChecks)
   }, []);
 
+  const rapidSurfaceChecks = [];
+  for (const { slug } of certificationManifest.certifications) {
+    await page.navigate(`${origin}/apps/cert/${slug}/?view=learn`, 1280);
+    await page.waitUntil('document.querySelector(".rapid-review") && document.querySelector(".study-area-search input")', 30000);
+    rapidSurfaceChecks.push({ slug, ...await page.evaluate(`(() => ({
+      hasAction: Boolean(document.querySelector('.rapid-review__start')),
+      areas: document.querySelectorAll('.cert-learning-map__grid button').length,
+      overflow: document.documentElement.scrollWidth > innerWidth,
+      sourceRestricted: document.querySelector('.learn-scope-details summary')?.textContent,
+      background: getComputedStyle(document.querySelector('.rapid-review__start')).backgroundColor,
+      foreground: getComputedStyle(document.querySelector('.rapid-review__start')).color
+    }))()`), exceptions: [...page.exceptions] });
+  }
+  assertResult('All 23 certifications expose scoped rapid review or native-module study', {
+    ok: rapidSurfaceChecks.every(row => row.hasAction && row.areas > 0 && !row.overflow && row.sourceRestricted && !row.exceptions.length),
+    message: JSON.stringify(rapidSurfaceChecks)
+  }, []);
+
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3'); localStorage.setItem('theme', 'light')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".today-screen")');
@@ -1045,6 +1063,46 @@ try {
         + ', areas=' + document.querySelectorAll('.cert-learning-map__grid button').length
         + ', graph=' + Boolean(document.querySelector('.knowledge-graph-view'))
     };
+  })()`), page.exceptions);
+
+  await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
+  await page.navigate(`${origin}/apps/cert/g/?view=learn`, 390);
+  await page.waitUntil('document.querySelector(".rapid-review__controls select")');
+  assertResult('G rapid review controls, topic search and mobile layout', await page.evaluate(`(async () => {
+    const size = [...document.querySelectorAll('.rapid-review fieldset button')].find(button => button.textContent.trim() === '20 items');
+    size?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const selected = size?.getAttribute('aria-pressed') === 'true';
+    const twenty = document.querySelector('.rapid-review__summary')?.textContent.trim().startsWith('20 items');
+    const input = document.querySelector('.study-area-search input');
+    const setInput = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+    setInput.call(input, 'LLM'); input.dispatchEvent(new Event('input', { bubbles: true }));
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const filtered = document.querySelectorAll('.cert-learning-map__grid button').length === 1;
+    const select = document.querySelector('.rapid-review__controls select');
+    select.value = 'mistakes'; select.dispatchEvent(new Event('change', { bubbles: true }));
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    const empty = document.querySelector('.rapid-review__start')?.disabled && document.querySelector('.rapid-review__empty');
+    select.value = 'balanced'; select.dispatchEvent(new Event('change', { bubbles: true }));
+    setInput.call(input, ''); input.dispatchEvent(new Event('input', { bubbles: true }));
+    const ten = [...document.querySelectorAll('.rapid-review fieldset button')].find(button => button.textContent.trim() === '10 items'); ten?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    return { ok: selected && twenty && filtered && Boolean(empty)
+      && document.querySelectorAll('.cert-learning-map__grid button').length === 15
+      && document.documentElement.scrollWidth <= innerWidth
+      && [...document.querySelectorAll('.rapid-review button')].every(button => button.getBoundingClientRect().height >= 44),
+      message: 'size=' + selected + ', twenty=' + twenty + ', filtered=' + filtered + ', empty=' + Boolean(empty) + ', viewport=' + innerWidth };
+  })()`), page.exceptions);
+  await page.evaluate(`document.querySelector('.rapid-review__start')?.click()`);
+  await page.waitUntil('document.querySelector(".focus-sprint") && document.querySelector(".focus-sprint__answers input")', 30000);
+  assertResult('G rapid review starts the requested bounded queue and preserves it in Learn', await page.evaluate(`(async () => {
+    const ten = document.querySelector('.focus-sprint')?.innerText.includes('Item 1 / 10');
+    const question = document.querySelector('#focus-question-heading')?.textContent.trim();
+    ([...document.querySelectorAll('.workspace-navigation__primary-item')].find(button => button.textContent.trim() === 'Learn'))?.click();
+    await new Promise(resolveWait => setTimeout(resolveWait, 150));
+    const action = document.querySelector('.rapid-review__start');
+    return { ok: ten && Boolean(question) && action?.textContent.trim() === 'Continue saved session' && Boolean(document.querySelector('.rapid-review__saved')),
+      message: 'ten=' + ten + ', prompt=' + Boolean(question) + ', action=' + action?.textContent.trim() };
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/pmp/?view=learn`, 1280);
