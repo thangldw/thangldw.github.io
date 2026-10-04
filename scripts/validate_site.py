@@ -17,12 +17,7 @@ from audit_ui_standards import audit_site
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://thangldw.github.io"
 ANALYTICS_SCRIPT = "/js/analytics.js"
-EMAIL_COMPOSE_URL = (
-    "https://mail.google.com/mail/?view=cm&fs=1&to=thangldw@gmail.com"
-    "&su=Work%20%26%20Collaboration%20Inquiry"
-    "&body=Hi%20Thang%2C%0A%0AI%27d%20like%20to%20connect%20about%20a%20"
-    "potential%20opportunity%20or%20collaboration."
-)
+CONTACT_EMAIL = "thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 EXPECTED_PROJECT_VERSIONS = {
     "ragops": "v2.0.2",
@@ -381,14 +376,14 @@ def main() -> int:
             errors.append(f"{page.relative_to(ROOT)}: duplicate ids: {', '.join(duplicates)}")
 
         analytics_references = [
-            reference for reference in parser.references if reference == ANALYTICS_SCRIPT
+            reference for reference in parser.references if urlsplit(reference).path == ANALYTICS_SCRIPT
         ]
         if parser.refreshes:
             if analytics_references:
                 errors.append(
                     f"{page.relative_to(ROOT)}: redirect pages must not load analytics"
                 )
-        elif analytics_references != [ANALYTICS_SCRIPT]:
+        elif len(analytics_references) != 1:
             errors.append(
                 f"{page.relative_to(ROOT)}: expected one {ANALYTICS_SCRIPT} reference"
             )
@@ -453,8 +448,10 @@ def main() -> int:
                 )
 
     home_references = parsed_pages.get(ROOT / "index.html", PageParser()).references
-    if EMAIL_COMPOSE_URL not in home_references:
-        errors.append("index.html: Email must open the Gmail Web compose screen")
+    for contact_page in [ROOT / "index.html", *(ROOT / route.lstrip('/') / 'index.html' for route in CASE_STUDY_ROUTES.values())]:
+        references = parsed_pages.get(contact_page, PageParser()).references
+        if not any(urlsplit(reference).scheme == 'mailto' and urlsplit(reference).path == CONTACT_EMAIL for reference in references):
+            errors.append(f"{contact_page.relative_to(ROOT)}: missing portable email contact")
 
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
@@ -485,7 +482,7 @@ def main() -> int:
             errors.append(
                 f"{page_file.relative_to(ROOT)}: meta description must be 60–170 characters"
             )
-        page_required_og = required_og | ({"og:image"} if path != "/" else set())
+        page_required_og = required_og | {"og:image"}
         missing_og = sorted(page_required_og - page.meta_properties.keys())
         if missing_og:
             errors.append(f"{page_file.relative_to(ROOT)}: missing {', '.join(missing_og)}")

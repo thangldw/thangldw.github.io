@@ -1,233 +1,41 @@
 (async function () {
+  'use strict';
+  var rail = document.getElementById('projectRail');
+  var status = document.getElementById('projectLoadStatus');
+  if (!rail) return;
   try {
     await window.portfolioProjectsReady;
   } catch (error) {
+    if (status) status.textContent = 'Selected work is unavailable. Please open All projects or contact me.';
     return;
   }
+
   function escapeHtml(value) {
-    return String(value).replace(/[&<>"]/g, function (character) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[character];
+    return String(value).replace(/[&<>"']/g, function (character) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
     });
   }
 
-  function renderFeaturedProjects() {
-    var rail = document.getElementById('projectRail');
-    if (!rail) return;
-    var collection = window.portfolioLanguageCollection;
-    if (collection) {
-      collection = Object.assign({ isLanguageCollection: true }, collection);
-    }
-    var projects = (window.portfolioProjects || [])
-      .filter(function (project) { return project.featured; })
-      .concat(collection || [])
-      .sort(function (left, right) {
-        var orderDelta = (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
-          (right.featuredOrder ?? Number.MAX_SAFE_INTEGER);
-        return orderDelta || left.title.localeCompare(right.title, 'en', {
-          numeric: true,
-          sensitivity: 'base'
-        });
-      });
-    var cards = projects.map(function (project) {
-      if (project.isLanguageCollection) {
-        return '<a class="resume-project language-project" href="' + escapeHtml(project.caseStudyHref || project.href) + '">' +
-          '<span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>' + escapeHtml(project.label) + '</span>' +
-          '<h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.description) + '</p>' +
-          '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
-      }
-      return '<a class="resume-project" href="' + escapeHtml(project.caseStudyHref || project.href) + '">' +
-        '<h3>' + escapeHtml(project.title) + '</h3>' +
-        '<p>' + escapeHtml(project.featuredDescription || project.description) + '</p>' +
-        '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
+  var collection = window.portfolioLanguageCollection;
+  var projects = (window.portfolioProjects || [])
+    .filter(function (project) { return project.featured; })
+    .concat(collection ? Object.assign({ id: 'certification-study', isLanguageCollection: true }, collection) : [])
+    .sort(function (left, right) {
+      return (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (right.featuredOrder ?? Number.MAX_SAFE_INTEGER)
+        || left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
     });
-    rail.innerHTML = cards.join('');
+  rail.innerHTML = projects.map(function (project) {
+    var kind = project.isLanguageCollection ? project.label : project.categoryLabel;
+    var evidence = project.evidenceLabel;
+    return '<a class="resume-project' + (project.isLanguageCollection ? ' language-project' : '') + '" href="' + escapeHtml(project.caseStudyHref || project.href) + '" data-analytics-event="selected_work_open" data-analytics-project="' + escapeHtml(project.id) + '">' +
+      '<span class="project-kind">' + escapeHtml(kind || 'Engineering project') + '</span>' +
+      '<h3>' + escapeHtml(project.title) + '</h3>' +
+      '<p>' + escapeHtml(project.featuredDescription || project.description) + '</p>' +
+      (evidence ? '<span class="project-evidence">' + escapeHtml(evidence) + '</span>' : '') +
+      '<span class="project-read">' + (project.caseStudyHref ? 'Read case study' : 'View project') + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>';
+  }).join('');
+  if (status) {
+    status.hidden = projects.length > 0;
+    if (!projects.length) status.textContent = 'Selected work is unavailable. Please open All projects or contact me.';
   }
-
-  renderFeaturedProjects();
-
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.spotlight-tab'));
-  var panel = document.getElementById('spotlightPanel');
-  var pauseButton = document.getElementById('spotlightPause');
-  var timer = null;
-  var paused = false;
-  var projectRail = document.getElementById('projectRail');
-  var projectCards = projectRail ? Array.prototype.slice.call(projectRail.querySelectorAll('.resume-project')) : [];
-  var projectsPrev = document.getElementById('projectsPrev');
-  var projectsNext = document.getElementById('projectsNext');
-  var projectTimer = null;
-  var projectPaused = false;
-  var projectVisible = false;
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  var demos = {
-    ragops: {
-      icon: 'fa-shield-halved',
-      title: 'RAGOps',
-      description: 'Evaluate RAG and agent releases against an accepted baseline, detect regressions, and preserve the evidence behind a decision.',
-      purpose: 'Turn an ambiguous AI request into a defensible release decision with explicit trade-offs and open questions.',
-      href: '/case-studies/ragops/',
-      action: 'Read case study'
-    }
-  };
-
-  function renderSpotlight(key, focusTab) {
-    var demo = demos[key];
-    if (!demo || !panel) return;
-    tabs.forEach(function (tab) {
-      var active = tab.dataset.spotlight === key;
-      tab.classList.toggle('active', active);
-      tab.setAttribute('aria-selected', String(active));
-      tab.tabIndex = active ? 0 : -1;
-      if (active && focusTab) tab.focus();
-    });
-    panel.innerHTML =
-      '<div class="spotlight-icon" aria-hidden="true"><i class="fa-solid ' + demo.icon + '"></i></div>' +
-      '<div class="spotlight-copy"><h2>' + demo.title + '</h2><p>' + demo.description + '</p>' +
-      '<a href="' + demo.href + '">' + demo.action + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>' +
-      '<div class="spotlight-purpose"><h3>Purpose</h3><p>' + demo.purpose + '</p></div>';
-  }
-
-  function activeIndex() {
-    return Math.max(0, tabs.findIndex(function (tab) { return tab.classList.contains('active'); }));
-  }
-
-  function restartRotation() {
-    if (timer) window.clearInterval(timer);
-    if (paused || tabs.length < 2) return;
-    timer = window.setInterval(function () {
-      var next = (activeIndex() + 1) % tabs.length;
-      renderSpotlight(tabs[next].dataset.spotlight, false);
-    }, 7000);
-  }
-
-  function nearestProjectIndex() {
-    if (!projectRail || !projectCards.length) return 0;
-    var railLeft = projectRail.getBoundingClientRect().left;
-    var closest = 0;
-    var distance = Infinity;
-    projectCards.forEach(function (card, index) {
-      var nextDistance = Math.abs(card.getBoundingClientRect().left - railLeft);
-      if (nextDistance < distance) {
-        closest = index;
-        distance = nextDistance;
-      }
-    });
-    return closest;
-  }
-
-  function showProject(index) {
-    if (!projectCards.length) return;
-    var target = (index + projectCards.length) % projectCards.length;
-    projectRail.scrollTo({
-      left: projectCards[target].offsetLeft - projectRail.offsetLeft,
-      behavior: reducedMotion.matches ? 'auto' : 'smooth',
-    });
-  }
-
-  function stepProject(direction) {
-    if (!projectRail || !projectCards.length) return;
-    var maxScroll = Math.max(0, projectRail.scrollWidth - projectRail.clientWidth);
-    var edgeTolerance = 2;
-    if (direction > 0 && projectRail.scrollLeft >= maxScroll - edgeTolerance) {
-      showProject(0);
-      return;
-    }
-    if (direction < 0 && projectRail.scrollLeft <= edgeTolerance) {
-      showProject(projectCards.length - 1);
-      return;
-    }
-    showProject(nearestProjectIndex() + direction);
-  }
-
-  function stopProjectRotation() {
-    if (projectTimer) window.clearInterval(projectTimer);
-    projectTimer = null;
-  }
-
-  function restartProjectRotation() {
-    stopProjectRotation();
-    if (projectPaused || !projectVisible || reducedMotion.matches || projectCards.length < 2 || document.hidden) return;
-    projectTimer = window.setInterval(function () {
-      stepProject(1);
-    }, 3000);
-  }
-
-  function setProjectPaused(next) {
-    projectPaused = next;
-    restartProjectRotation();
-  }
-
-  tabs.forEach(function (tab, index) {
-    tab.addEventListener('click', function () {
-      renderSpotlight(tab.dataset.spotlight, false);
-      restartRotation();
-    });
-    tab.addEventListener('keydown', function (event) {
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-      event.preventDefault();
-      var direction = event.key === 'ArrowRight' ? 1 : -1;
-      var next = (index + direction + tabs.length) % tabs.length;
-      renderSpotlight(tabs[next].dataset.spotlight, true);
-      restartRotation();
-    });
-  });
-
-  if (pauseButton) {
-    pauseButton.addEventListener('click', function () {
-      paused = !paused;
-      pauseButton.setAttribute('aria-pressed', String(paused));
-      pauseButton.setAttribute('aria-label', paused ? 'Resume spotlight rotation' : 'Pause spotlight rotation');
-      pauseButton.querySelector('i').className = paused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
-      pauseButton.querySelector('span').textContent = paused ? 'Resume' : 'Pause';
-      restartRotation();
-    });
-  }
-
-  if (projectRail) {
-    projectRail.addEventListener('mouseenter', function () { setProjectPaused(true); });
-    projectRail.addEventListener('mouseleave', function () { setProjectPaused(false); });
-    projectRail.addEventListener('focusin', function () { setProjectPaused(true); });
-    projectRail.addEventListener('focusout', function (event) {
-      if (!projectRail.contains(event.relatedTarget)) setProjectPaused(false);
-    });
-    projectRail.addEventListener('pointerdown', function () { setProjectPaused(true); });
-    projectRail.addEventListener('keydown', function (event) {
-      if (event.target !== projectRail || (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')) return;
-      event.preventDefault();
-      stepProject(event.key === 'ArrowRight' ? 1 : -1);
-    });
-  }
-
-  window.addEventListener('pointerup', function () {
-    if (projectRail && !projectRail.matches(':hover') && !projectRail.contains(document.activeElement)) setProjectPaused(false);
-  });
-
-  if (projectRail && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      projectVisible = entries[0].isIntersecting;
-      restartProjectRotation();
-    }, { threshold: 0.5 }).observe(projectRail);
-  } else {
-    projectVisible = Boolean(projectRail);
-  }
-
-  if (projectsPrev) {
-    projectsPrev.addEventListener('click', function () {
-      stepProject(-1);
-      restartProjectRotation();
-    });
-  }
-
-  if (projectsNext) {
-    projectsNext.addEventListener('click', function () {
-      stepProject(1);
-      restartProjectRotation();
-    });
-  }
-
-  reducedMotion.addEventListener('change', restartProjectRotation);
-  document.addEventListener('visibilitychange', restartProjectRotation);
-
-  restartRotation();
-  restartProjectRotation();
 })();
