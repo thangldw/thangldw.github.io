@@ -246,7 +246,7 @@ try {
   await page.evaluate(`localStorage.setItem("theme", "light")`);
   await page.navigate(`${origin}/apps/`, 1280);
   await page.waitUntil('document.querySelectorAll("#projectIndex .project-card").length === 9');
-  assertResult('Apps catalog matches the certification gallery system', await page.evaluate(`(() => {
+  assertResult('Apps catalog uses readable rows and light typography', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const firstRowTop = cards[0]?.getBoundingClientRect().top;
     const firstRow = cards.filter(card => Math.abs(card.getBoundingClientRect().top - firstRowTop) < 2);
@@ -255,16 +255,18 @@ try {
     return {
       ok: document.querySelector('.apps-brand')?.textContent.trim() === 'APP LIBRARY'
         && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
-        && document.querySelector('.apps-hero > .eyebrow')?.textContent.trim() === 'BROWSE THE WORK'
+        && document.querySelector('.apps-hero > .eyebrow')?.textContent.trim() === 'MADE BY THANG LUU'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
         && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
         && cards.length === 9
+        && getComputedStyle(document.querySelector('.project-title')).fontWeight === '500'
+        && getComputedStyle(document.querySelector('.project-description')).fontWeight === '400'
         && titles.join('|') === 'RAGOps|Proofline|Awesome Maintainer Defense|KakeFlow|Toolbox|Japan PR Guide|Certification Library|BizRoll|Neon Glider'
-        && firstRow.length === 2
-        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 2
-        && firstCardStyle?.borderTopWidth === '1px'
-        && firstCardStyle?.borderRadius === '8px'
-        && firstCardStyle?.backgroundColor === 'rgb(255, 255, 255)'
+        && firstRow.length === 1
+        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 1
+        && firstCardStyle?.borderTopWidth === '0px'
+        && firstCardStyle?.borderRadius === '0px'
+        && firstCardStyle?.backgroundColor === 'rgba(0, 0, 0, 0)'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'brand=' + document.querySelector('.apps-brand')?.textContent.trim()
         + ', cards=' + cards.length
@@ -295,7 +297,7 @@ try {
           && cards.every(card => getComputedStyle(card.querySelector(".project-description")).webkitLineClamp === "none")
           && grid.scrollWidth <= grid.clientWidth
           && cards.length === 9
-          && firstRow.length === 2,
+          && firstRow.length === 1,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
           + ', grid=' + grid.clientWidth + '/' + grid.scrollWidth
@@ -328,6 +330,37 @@ try {
 
   await page.navigate(`${origin}/apps/`, 1280);
   await page.waitUntil('document.querySelector(".project-card")');
+  await page.evaluate('document.querySelector("[data-group=learning]").click()');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 1');
+  assertResult('Apps category filter selects the learning library', await page.evaluate(`(() => ({
+    ok: document.querySelector('.project-title')?.textContent === 'Certification Library'
+      && document.querySelector('[data-group=learning]').getAttribute('aria-pressed') === 'true',
+    message: document.querySelector('#projectCount')?.textContent
+  }))()`), page.exceptions);
+  await page.evaluate(`(() => {
+    document.querySelector('[data-group=all]').click();
+    const input = document.querySelector('#projectSearch');
+    input.value = 'macOS'; input.dispatchEvent(new Event('input', { bubbles: true }));
+  })()`);
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 2');
+  assertResult('Apps search finds tools by purpose', await page.evaluate(`(() => ({
+    ok: [...document.querySelectorAll('.project-title')].map(node => node.textContent).join('|') === 'KakeFlow|Toolbox',
+    message: document.querySelector('#projectCount')?.textContent
+  }))()`), page.exceptions);
+  await page.evaluate(`(() => {
+    const input = document.querySelector('#projectSearch');
+    input.value = 'unmatched-project'; input.dispatchEvent(new Event('input', { bubbles: true }));
+  })()`);
+  await page.waitUntil('document.querySelector("#resetCatalog")');
+  await page.evaluate('document.querySelector("#resetCatalog").click()');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
+  assertResult('Apps empty-state reset restores the catalog', await page.evaluate(`(() => ({
+    ok: document.querySelector('#catalogEmpty').hidden
+      && document.activeElement.id === 'projectSearch'
+      && document.querySelector('[data-group=all]').getAttribute('aria-pressed') === 'true',
+    message: document.querySelector('#projectCount')?.textContent
+  }))()`), page.exceptions);
+
 
   assertResult('Toolbox releases in the apps catalog', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
@@ -518,30 +551,16 @@ try {
   for (const mobileWidth of [320, 390, 768]) {
     await page.navigate(`${origin}/`, mobileWidth, 844);
     await page.waitUntil('document.querySelector("#projectRail .resume-project")');
-    assertResult(`Homepage exposes work and contact at ${mobileWidth}px`, await page.evaluate(`(() => {
-      const rail = document.querySelector('#projectRail');
-      const first = rail?.querySelector('.resume-project');
-      const support = document.querySelector('.support-floating-trigger');
-      const theme = document.querySelector('#themeToggle');
-      const email = document.querySelector('.resume-contact a');
-      const projects = [...rail.querySelectorAll('.resume-project')];
-      return {
-        ok: document.documentElement.scrollWidth <= innerWidth
-          && rail.scrollWidth <= rail.clientWidth
-          && first.getBoundingClientRect().top < innerHeight * 2
-          && getComputedStyle(rail).display === 'grid'
-          && !document.querySelector('#projectsNext')
-          && getComputedStyle(support).position === 'static'
-          && support.parentElement.id === 'supportSlot'
-          && theme.getBoundingClientRect().width >= 44
-          && email.href.startsWith('mailto:thangldw@gmail.com')
-          && projects.every(project => project.querySelector('.project-kind').getBoundingClientRect().bottom <= project.querySelector('h3').getBoundingClientRect().top),
-        message: 'firstProject=' + first.getBoundingClientRect().top
-          + ', viewport=' + innerWidth + 'x' + innerHeight
-          + ', rail=' + rail.clientWidth + '/' + rail.scrollWidth
-          + ', support=' + getComputedStyle(support).position
-      };
-    })()`), page.exceptions);
+    assertResult(`Homepage preserves the complete one-page profile at ${mobileWidth}px`, await page.evaluate(`(() => ({
+      ok: document.documentElement.scrollWidth <= innerWidth
+        && document.querySelectorAll('.profile-section').length === 3
+        && document.querySelectorAll('.method-grid article').length === 4
+        && document.querySelectorAll('#projectRail .resume-project').length === 6
+        && Boolean(document.querySelector('.resume-about'))
+        && Boolean(document.querySelector('#projectsNext'))
+        && document.querySelector('.profile-connect a').href.startsWith('mailto:thangldw@gmail.com'),
+      message: 'document=' + document.documentElement.scrollWidth + '/' + innerWidth
+    }))()`), page.exceptions);
   }
   await page.navigate(`${origin}/`, 1280);
   await page.waitUntil('document.querySelector("#projectRail .resume-project")');

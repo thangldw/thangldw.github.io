@@ -21,7 +21,8 @@
       "categoryLabel": "Japan immigration",
       "cta": "Open guide",
       "featured": false,
-      "catalogGroup": "utilities"
+      "catalogGroup": "utilities",
+      "catalogDescription": "Calculate HSP points and explore permanent-residence routes in Japan, in English or Vietnamese."
     },
     {
       "id": "bizroll",
@@ -43,7 +44,8 @@
       "categoryLabel": "Strategy game",
       "cta": "Open BizRoll",
       "featured": false,
-      "catalogGroup": "experiments"
+      "catalogGroup": "experiments",
+      "catalogDescription": "Play an economic strategy board game with friends or AI opponents, auctions, and shifting markets."
     },
     {
       "id": "neon-glider",
@@ -65,7 +67,8 @@
       "categoryLabel": "Endless runner",
       "cta": "Play Neon Glider",
       "featured": false,
-      "catalogGroup": "experiments"
+      "catalogGroup": "experiments",
+      "catalogDescription": "Dodge obstacles and collect energy in a fast neon tunnel run built with Three.js."
     },
     {
       "id": "toolbox",
@@ -113,7 +116,8 @@
       "featured": true,
       "featuredOrder": 0,
       "catalogGroup": "engineering",
-      "evidenceLabel": "Released software · synthetic regression evidence"
+      "evidenceLabel": "Released software · synthetic regression evidence",
+      "catalogDescription": "Compare RAG and agent releases, catch regressions, and inspect the evidence behind a release decision."
     },
     {
       "id": "maintainer-defense",
@@ -136,7 +140,8 @@
       "cta": "Open on GitHub",
       "featured": true,
       "featuredOrder": 5,
-      "catalogGroup": "engineering"
+      "catalogGroup": "engineering",
+      "catalogDescription": "Review repository security, GitHub Actions, and moderation risks with an offline, reversible auditor."
     },
     {
       "id": "proofline",
@@ -161,7 +166,8 @@
       "featured": true,
       "featuredOrder": 1,
       "catalogGroup": "engineering",
-      "evidenceLabel": "Released software · synthetic regression evidence"
+      "evidenceLabel": "Released software · synthetic regression evidence",
+      "catalogDescription": "Recover why a system was built a certain way, with answers linked to exact source lines."
     },
     {
       "id": "kakeflow",
@@ -186,7 +192,8 @@
       "featured": true,
       "featuredOrder": 2,
       "catalogGroup": "utilities",
-      "evidenceLabel": "Released product · synthetic workflow evidence"
+      "evidenceLabel": "Released product · synthetic workflow evidence",
+      "catalogDescription": "Bring household finances into a local macOS ledger, with reconciliation and source evidence."
     }
   ],
   "languageCollection": {

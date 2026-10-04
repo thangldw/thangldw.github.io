@@ -125,7 +125,7 @@ Edit only `js/projects-data.json`.
 4. Run validation and browser smoke tests.
 5. Commit and push.
 
-Home renders a static grid of selected work; the full catalog groups Engineering, Utilities, Learning, and Experiments via `catalogGroup`. Email contacts use `mailto:` and a copy control; the optional home support button sits in the footer. Shared click events record only fixed project IDs and page locations.
+Home preserves the complete one-page profile, working approach, languages, contact links, and selected-project carousel. The full catalog uses readable rows, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 

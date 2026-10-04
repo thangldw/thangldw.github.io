@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
   <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
   <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
-  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261004a">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261005a">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
@@ -38,19 +38,30 @@
     </header>
 
     <section class="apps-hero" aria-labelledby="appsTitle">
-      <span class="eyebrow">BROWSE THE WORK</span>
-      <h1 id="appsTitle">Ideas shaped into <em>working systems.</em></h1>
-      <p class="lead">Explore AI and evidence engineering first, then practical utilities, learning tools, and browser experiments.</p>
+      <span class="eyebrow">MADE BY THANG LUU</span>
+      <h1 id="appsTitle">Tools for work, learning<br>and a little play.</h1>
+      <p class="lead">Small tools and independent projects. Find something useful, explore how it works, or try it out.</p>
     </section>
 
-    <nav class="apps-group-nav" aria-label="Browse project groups">
-      <a href="#engineering">Engineering</a><a href="#utilities">Utilities</a><a href="#learning">Learning</a><a href="#experiments">Experiments</a>
-    </nav>
+    <section class="apps-browse" aria-label="Find a project">
+      <label class="apps-search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span class="sr-only">Search apps and projects</span>
+        <input id="projectSearch" type="search" placeholder="Find an app, topic, or tool…" disabled>
+      </label>
+      <nav class="apps-group-nav" aria-label="Browse project groups">
+        <button type="button" data-group="all" aria-pressed="true" disabled>All</button>
+        <button type="button" data-group="engineering" aria-pressed="false" disabled>Engineering</button>
+        <button type="button" data-group="utilities" aria-pressed="false" disabled>Utilities</button>
+        <button type="button" data-group="learning" aria-pressed="false" disabled>Learning</button>
+        <button type="button" data-group="experiments" aria-pressed="false" disabled>Experiments</button>
+      </nav>
+    </section>
 
     <section class="apps-projects" id="catalog" aria-labelledby="projectLibraryHeading">
       <div class="apps-project-heading">
-        <h2 id="projectLibraryHeading">Project library</h2>
-        <span id="projectCount" aria-live="polite">Loading projects</span>
+        <h2 class="sr-only" id="projectLibraryHeading">Project library</h2>
+        <span id="projectCount" role="status" aria-live="polite">Loading projects</span>
       </div>
       <div class="apps-project-grid" id="projectIndex" aria-label="Project library grouped by purpose, with engineering projects first"></div>
       <div class="catalog-empty" id="catalogEmpty" hidden>
@@ -61,75 +72,6 @@
   </main>
 
   <script src="/js/projects-data.js?v=json-v2"></script>
-  <script>
-    (async function () {
-      try {
-        await window.portfolioProjectsReady;
-      } catch (error) {
-        document.getElementById('catalogEmpty').hidden = false;
-        return;
-      }
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>"']/g, function (character) {
-          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
-        });
-      }
-
-      var groups = [
-        { id: 'engineering', title: 'Engineering', description: 'AI evaluation, evidence provenance, and maintainer security.' },
-        { id: 'utilities', title: 'Utilities', description: 'Practical tools for finance, macOS, and Japan planning.' },
-        { id: 'learning', title: 'Learning', description: 'Exam practice and local study tools.' },
-        { id: 'experiments', title: 'Experiments', description: 'Games and interactive browser projects.' }
-      ];
-      var projects = (window.portfolioProjects || [])
-        .concat(window.portfolioLearningCollections || []);
-      projects.sort(function (left, right) {
-        return (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (right.featuredOrder ?? Number.MAX_SAFE_INTEGER)
-          || left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
-      });
-
-      var projectIndex = document.getElementById('projectIndex');
-      var projectCount = document.getElementById('projectCount');
-      var emptyState = document.getElementById('catalogEmpty');
-
-      function categoryLabel(category) {
-        return {
-          'data-ai': 'Data & AI',
-          'developer-tools': 'Developer tools',
-          'personal-finance': 'Personal finance',
-          'games': 'Games',
-          'certification-study': 'Certification study'
-        }[category] || 'Project';
-      }
-
-      function statusClass(project) {
-        if (project.statusClass === 'private') return ' is-private';
-        if (project.status === 'Collection') return ' is-collection';
-        return '';
-      }
-
-      function renderCard(project) {
-        var tags = (project.tags || []).slice(0, 3).map(function (tag) {
-          return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
-        }).join('');
-        return '<a class="project-card" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-project-id="' + escapeHtml(project.id) + '" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '">' +
-          '<span class="project-card-top"><span class="project-title-row"><strong class="project-title">' + escapeHtml(project.title) + '</strong><span class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</span></span><i class="project-arrow fa-solid fa-arrow-right" aria-hidden="true"></i></span>' +
-          '<span class="project-category">' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span>' +
-          '<span class="project-description">' + escapeHtml(project.description) + '</span>' +
-          '<span class="project-tags" aria-label="Project tags">' + tags + '</span>' +
-          '<span class="project-destination">' + escapeHtml(project.cta) + '</span>' +
-          '</a>';
-      }
-
-      projectIndex.innerHTML = groups.map(function (group) {
-        var members = projects.filter(function (project) { return project.catalogGroup === group.id; });
-        if (!members.length) return '';
-        return '<div class="catalog-group-heading" id="' + escapeHtml(group.id) + '"><h3>' + escapeHtml(group.title) + '</h3><p>' + escapeHtml(group.description) + '</p></div>' + members.map(renderCard).join('');
-      }).join('');
-      projectCount.textContent = projects.length + (projects.length === 1 ? ' project' : ' projects');
-      emptyState.hidden = projects.length !== 0;
-
-    })();
-  </script>
+  <script src="/js/apps-catalog.js?v=20261005a"></script>
 </body>
 </html>
