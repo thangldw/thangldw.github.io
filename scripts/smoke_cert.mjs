@@ -152,7 +152,7 @@ try {
     waitFor(`http://127.0.0.1:${serverPort}/`),
     waitFor(`http://127.0.0.1:${debugPort}/json/version`)
   ]);
-  const origin = `http://127.0.0.1:${serverPort}`;
+  const origin = process.env.SITE_ORIGIN || `http://127.0.0.1:${serverPort}`;
   const certificationManifest = await fetch(
     `${origin}/apps/cert/certifications-manifest.json`,
     { cache: 'no-store' }
@@ -245,7 +245,7 @@ try {
 
   await page.evaluate(`localStorage.setItem("theme", "light")`);
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelector("#projectIndex")?.children.length === 9');
+  await page.waitUntil('document.querySelectorAll("#projectIndex .project-card").length === 9');
   assertResult('Apps catalog matches the certification gallery system', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const firstRowTop = cards[0]?.getBoundingClientRect().top;
@@ -259,10 +259,10 @@ try {
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
         && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
         && cards.length === 9
-        && titles.join('|') === 'Awesome Maintainer Defense|BizRoll|Certification Library|Japan PR Guide|KakeFlow|Neon Glider|Proofline|RAGOps|Toolbox'
-        && firstRow.length === 5
-        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 5
-        && firstCardStyle?.borderTopWidth === '4px'
+        && titles.join('|') === 'RAGOps|Proofline|Awesome Maintainer Defense|KakeFlow|Toolbox|Japan PR Guide|Certification Library|BizRoll|Neon Glider'
+        && firstRow.length === 2
+        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 2
+        && firstCardStyle?.borderTopWidth === '1px'
         && firstCardStyle?.borderRadius === '8px'
         && firstCardStyle?.backgroundColor === 'rgb(255, 255, 255)'
         && document.documentElement.scrollWidth <= window.innerWidth,
@@ -290,11 +290,12 @@ try {
       const firstRowTop = cards[0]?.getBoundingClientRect().top;
       const firstRow = cards.filter(card => Math.abs(card.getBoundingClientRect().top - firstRowTop) < 2);
       return {
-        ok: document.documentElement.scrollHeight <= window.innerHeight
-          && document.documentElement.scrollWidth <= window.innerWidth
+        ok: document.documentElement.scrollWidth <= window.innerWidth
+          && document.querySelectorAll(".catalog-group-heading").length === 4
+          && cards.every(card => getComputedStyle(card.querySelector(".project-description")).webkitLineClamp === "none")
           && grid.scrollWidth <= grid.clientWidth
           && cards.length === 9
-          && firstRow.length === 5,
+          && firstRow.length === 2,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
           + ', grid=' + grid.clientWidth + '/' + grid.scrollWidth
@@ -318,7 +319,7 @@ try {
         && document.documentElement.scrollWidth <= window.innerWidth
         && grid.scrollWidth <= grid.clientWidth
         && cards.length === 9
-        && firstRow.length === 2
+        && firstRow.length === 1
         && theme?.width === 44
         && theme?.height === 44,
       message: \`document=\${document.documentElement.scrollWidth}x\${document.documentElement.scrollHeight}/\${window.innerWidth}x\${window.innerHeight}, grid=\${grid.clientWidth}/\${grid.scrollWidth}, cards=\${cards.length}, firstRow=\${firstRow.length}, theme=\${theme?.width}x\${theme?.height}\`
@@ -350,7 +351,7 @@ try {
       ok: card?.href === 'https://thangldw.github.io/kakeflow/'
         && card?.querySelector('.project-status')?.textContent.trim() === 'v1.2.1'
         && card.textContent.includes('MIT License')
-        && card?.getAttribute('aria-label') === 'Open KakeFlow',
+        && card?.getAttribute('aria-label') === 'Open the KakeFlow website',
       message: 'kakeflow=' + card?.textContent.trim()
     };
   })()`), page.exceptions);
@@ -514,6 +515,37 @@ try {
     };
   })()`), page.exceptions);
 
+  for (const mobileWidth of [320, 390, 768]) {
+    await page.navigate(`${origin}/`, mobileWidth, 844);
+    await page.waitUntil('document.querySelector("#projectRail .resume-project")');
+    assertResult(`Homepage exposes work and contact at ${mobileWidth}px`, await page.evaluate(`(() => {
+      const rail = document.querySelector('#projectRail');
+      const first = rail?.querySelector('.resume-project');
+      const support = document.querySelector('.support-floating-trigger');
+      const theme = document.querySelector('#themeToggle');
+      const email = document.querySelector('.resume-contact a');
+      const projects = [...rail.querySelectorAll('.resume-project')];
+      return {
+        ok: document.documentElement.scrollWidth <= innerWidth
+          && rail.scrollWidth <= rail.clientWidth
+          && first.getBoundingClientRect().top < innerHeight * 2
+          && getComputedStyle(rail).display === 'grid'
+          && !document.querySelector('#projectsNext')
+          && getComputedStyle(support).position === 'static'
+          && support.parentElement.id === 'supportSlot'
+          && theme.getBoundingClientRect().width >= 44
+          && email.href.startsWith('mailto:thangldw@gmail.com')
+          && projects.every(project => project.querySelector('.project-kind').getBoundingClientRect().bottom <= project.querySelector('h3').getBoundingClientRect().top),
+        message: 'firstProject=' + first.getBoundingClientRect().top
+          + ', viewport=' + innerWidth + 'x' + innerHeight
+          + ', rail=' + rail.clientWidth + '/' + rail.scrollWidth
+          + ', support=' + getComputedStyle(support).position
+      };
+    })()`), page.exceptions);
+  }
+  await page.navigate(`${origin}/`, 1280);
+  await page.waitUntil('document.querySelector("#projectRail .resume-project")');
+
   assertResult('Support dialog uses explicit external and local payment destinations', await page.evaluate(`(async () => {
     const trigger = document.querySelector('.support-floating-trigger');
     const dialog = document.querySelector('#supportDialog');
@@ -673,8 +705,8 @@ try {
         && document.querySelectorAll('.hub-cert-tile').length === 23
         && groups.map(group => Number(group.dataset.certificationCount)).join('|') === '6|6|7|4'
         && cardIdsByGroup.join('|') === 'aws-aip-c01,aws-dea-c01,aws,ccar-f,gh-300,g|ap,db,fe,nw,sc,sg|fp2,fp3,pmp,boki1,boki2,boki3,tokei-2|bjt,hsk-3-0,jlpt,toeic'
-        && firstItRow.length === 6
-        && new Set(firstItRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 6
+        && firstItRow.length === 3
+        && new Set(firstItRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 3
         && gCard?.classList.contains('is-continuing')
         && gCard?.querySelector('.hub-cert-continue-tag')?.textContent.trim() === 'Continue'
         && gCard?.querySelector('.hub-cert-open-action')?.textContent.trim() === 'Open'
@@ -682,13 +714,13 @@ try {
         && !gCard?.hasAttribute('aria-label')
         && !gCard?.hasAttribute('lang')
         && gCard?.querySelector('.hub-cert-code')?.getAttribute('lang') === 'ja'
-        && getComputedStyle(sampleCard).minHeight === '108px'
-        && getComputedStyle(sampleCard.querySelector('.hub-cert-code')).fontSize === '18px'
-        && getComputedStyle(sampleCard.querySelector('.hub-cert-name')).fontSize === '13.2px'
-        && getComputedStyle(sampleCard.querySelector('.hub-cert-issuer')).fontSize === '10.8px'
-        && document.querySelectorAll('input[aria-label="Search certifications"]').length === 0
+        && getComputedStyle(sampleCard).minHeight === '172px'
+        && getComputedStyle(sampleCard.querySelector('.hub-cert-code')).fontSize === '21px'
+        && getComputedStyle(sampleCard.querySelector('.hub-cert-name')).fontSize === '14px'
+        && getComputedStyle(sampleCard.querySelector('.hub-cert-issuer')).fontSize === '12px'
+        && document.querySelectorAll('.hub-search-control input[type="search"]').length === 1
         && document.querySelectorAll('select[aria-label^="Filter by"]').length === 0
-        && document.querySelectorAll('.hub-result-count').length === 0
+        && document.querySelectorAll('.hub-result-count[role="status"]').length === 1
         && document.querySelectorAll('.hub-cert-list-item').length === 0
         && document.querySelectorAll('.learner-onboarding').length === 0
         && performance.getEntriesByType('resource').some(entry => entry.name.includes('/assets/ExperienceWorkspace-'))
@@ -706,6 +738,37 @@ try {
         + ', document=' + document.documentElement.scrollWidth + '/' + window.innerWidth
     };
   })()`), page.exceptions);
+
+  await page.evaluate(`(() => {
+    const input = document.querySelector('.hub-search-control input');
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, 'AWS');
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  })()`);
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 3');
+  assertResult('Certification search narrows the catalog', await page.evaluate(`(() => ({
+    ok: [...document.querySelectorAll('.hub-cert-tile')].every(card => card.dataset.certificationId.startsWith('aws'))
+      && document.querySelector('.hub-result-count')?.textContent.includes('3'),
+    message: document.querySelector('.hub-result-count')?.textContent
+  }))()`), page.exceptions);
+  await page.evaluate(`(() => {
+    const input = document.querySelector('.hub-search-control input');
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, 'unmatched-program');
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  })()`);
+  await page.waitUntil('document.querySelector(".hub-empty button")');
+  await page.evaluate('document.querySelector(".hub-empty button").click()');
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
+  await page.evaluate('document.querySelector(".hub-domain-nav button:last-child").click()');
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 4');
+  assertResult('Certification category filter and direct study links', await page.evaluate(`(() => ({
+    ok: document.querySelectorAll('.hub-certification-group').length === 1
+      && document.querySelector('.hub-domain-nav button:last-child').getAttribute('aria-pressed') === 'true'
+      && document.querySelectorAll('.hub-program-actions a[href$="?view=learn"]').length === 4
+      && document.querySelectorAll('.hub-program-actions a[href$="?view=practice"]').length === 4,
+    message: 'tiles=' + document.querySelectorAll('.hub-cert-tile').length
+  }))()`), page.exceptions);
+  await page.evaluate('document.querySelector(".hub-domain-nav button").click()');
+  await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
 
   await page.navigate(`${origin}/apps/cert/`, 1910, 930);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
@@ -741,8 +804,8 @@ try {
         && actions.left >= 0
         && actions.right <= window.innerWidth
         && document.querySelectorAll('.hub-cert-tile').length === 23
-        && new Set([...itCards].slice(0, 2).map(item => Math.round(item.getBoundingClientRect().left))).size === 2
-        && card.height >= 108
+        && new Set([...itCards].slice(0, 2).map(item => Math.round(item.getBoundingClientRect().left))).size === 1
+        && card.height >= 140
         && theme.width === 44
         && theme.height === 44
         && document.documentElement.scrollWidth <= window.innerWidth,

@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
   <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
   <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
-  <link rel="stylesheet" href="/css/apps-catalog.css?v=20260826a">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261004a">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
@@ -40,15 +40,19 @@
     <section class="apps-hero" aria-labelledby="appsTitle">
       <span class="eyebrow">BROWSE THE WORK</span>
       <h1 id="appsTitle">Ideas shaped into <em>working systems.</em></h1>
-      <p class="lead">Production-oriented projects that solve real problems, ship useful tools, and turn continued learning into practical systems.</p>
+      <p class="lead">Explore AI and evidence engineering first, then practical utilities, learning tools, and browser experiments.</p>
     </section>
+
+    <nav class="apps-group-nav" aria-label="Browse project groups">
+      <a href="#engineering">Engineering</a><a href="#utilities">Utilities</a><a href="#learning">Learning</a><a href="#experiments">Experiments</a>
+    </nav>
 
     <section class="apps-projects" id="catalog" aria-labelledby="projectLibraryHeading">
       <div class="apps-project-heading">
         <h2 id="projectLibraryHeading">Project library</h2>
         <span id="projectCount" aria-live="polite">Loading projects</span>
       </div>
-      <div class="apps-project-grid" id="projectIndex" aria-label="Project library, sorted by project name from A to Z"></div>
+      <div class="apps-project-grid" id="projectIndex" aria-label="Project library grouped by purpose, with engineering projects first"></div>
       <div class="catalog-empty" id="catalogEmpty" hidden>
         <h2>Projects are unavailable</h2>
         <p>Please try again shortly.</p>
@@ -56,7 +60,7 @@
     </section>
   </main>
 
-  <script src="/js/projects-data.js?v=json-v1"></script>
+  <script src="/js/projects-data.js?v=json-v2"></script>
   <script>
     (async function () {
       try {
@@ -71,11 +75,18 @@
         });
       }
 
+      var groups = [
+        { id: 'engineering', title: 'Engineering', description: 'AI evaluation, evidence provenance, and maintainer security.' },
+        { id: 'utilities', title: 'Utilities', description: 'Practical tools for finance, macOS, and Japan planning.' },
+        { id: 'learning', title: 'Learning', description: 'Exam practice and local study tools.' },
+        { id: 'experiments', title: 'Experiments', description: 'Games and interactive browser projects.' }
+      ];
       var projects = (window.portfolioProjects || [])
-        .concat(window.portfolioLearningCollections || [])
-        .sort(function (left, right) {
-          return left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
-        });
+        .concat(window.portfolioLearningCollections || []);
+      projects.sort(function (left, right) {
+        return (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (right.featuredOrder ?? Number.MAX_SAFE_INTEGER)
+          || left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
+      });
 
       var projectIndex = document.getElementById('projectIndex');
       var projectCount = document.getElementById('projectCount');
@@ -101,15 +112,20 @@
         var tags = (project.tags || []).slice(0, 3).map(function (tag) {
           return '<span class="project-tag">' + escapeHtml(tag) + '</span>';
         }).join('');
-        return '<a class="project-card" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-project-id="' + escapeHtml(project.id) + '" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.cta || project.ariaLabel || ('Open ' + project.title)) + '">' +
+        return '<a class="project-card" data-accent="' + escapeHtml(project.accent || 'indigo') + '" data-project-id="' + escapeHtml(project.id) + '" href="' + escapeHtml(project.href) + '" aria-label="' + escapeHtml(project.ariaLabel || ('Open ' + project.title)) + '">' +
           '<span class="project-card-top"><span class="project-title-row"><strong class="project-title">' + escapeHtml(project.title) + '</strong><span class="project-status' + statusClass(project) + '">' + escapeHtml(project.status) + '</span></span><i class="project-arrow fa-solid fa-arrow-right" aria-hidden="true"></i></span>' +
           '<span class="project-category">' + escapeHtml(project.categoryLabel || categoryLabel(project.category)) + '</span>' +
           '<span class="project-description">' + escapeHtml(project.description) + '</span>' +
           '<span class="project-tags" aria-label="Project tags">' + tags + '</span>' +
+          '<span class="project-destination">' + escapeHtml(project.cta) + '</span>' +
           '</a>';
       }
 
-      projectIndex.innerHTML = projects.map(renderCard).join('');
+      projectIndex.innerHTML = groups.map(function (group) {
+        var members = projects.filter(function (project) { return project.catalogGroup === group.id; });
+        if (!members.length) return '';
+        return '<div class="catalog-group-heading" id="' + escapeHtml(group.id) + '"><h3>' + escapeHtml(group.title) + '</h3><p>' + escapeHtml(group.description) + '</p></div>' + members.map(renderCard).join('');
+      }).join('');
       projectCount.textContent = projects.length + (projects.length === 1 ? ' project' : ' projects');
       emptyState.hidden = projects.length !== 0;
 

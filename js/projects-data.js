@@ -50,7 +50,7 @@
     catalog.learningCollections = catalog.learningCollections.map(function (collection) {
       if (collection.id !== 'certification-study') return collection;
       return Object.assign({}, collection, {
-        description: 'One focused study space for ' + namesLabel + '.',
+        description: countLabel + ' with exam practice, notes, and learning history stored in your browser.',
         tags: [manifest.certificationCount + ' certifications', 'Exam practice', 'Local-first']
       });
     });

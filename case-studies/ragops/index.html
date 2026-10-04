@@ -16,10 +16,11 @@
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
-  <link rel="stylesheet" href="/css/case-study.css?v=20260828a">
+  <link rel="stylesheet" href="/css/case-study.css?v=20261004a">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
-  <script defer src="/js/analytics.js"></script>
+  <script defer src="/js/analytics.js?v=20261004a"></script>
+  <script defer src="/js/contact.js?v=20261004a"></script>
 </head>
 <body class="site-page case-study-page">
   <a class="skip-link" href="#caseStudy">Skip to case study</a>
@@ -43,12 +44,17 @@
         <div class="case-study-evidence"><span class="case-study-label">Synthetic regression</span><span class="case-study-label">Exact-head CI</span><span class="case-study-label">Public release</span><span class="case-study-label is-missing">Pilot not yet published</span></div>
       </aside>
     </section>
+    <section class="case-study-brief" aria-labelledby="briefTitle">
+      <h2 id="briefTitle">Recorded traces → release decision</h2>
+      <dl><div><dt>What it does</dt><dd>A candidate regression becomes a canonical PASS, WARN, or BLOCK decision.</dd></div><div><dt>Design choice</dt><dd>Offline deterministic core; optional integrations stay behind adapters.</dd></div><div><dt>Evidence boundary</dt><dd>Synthetic failures and verifiable evidence bundles; no published production pilot.</dd></div></dl>
+      <nav aria-label="Case study sections"><a href="#architecture-tradeoffs">Architecture</a><a href="#demo-under-five">Reproduce the demo</a><a href="#limitations-evidence">Limitations</a></nav>
+    </section>
     <article class="case-study-body">
       <section class="case-study-section" id="production-problem">
         <p class="case-study-kicker">01 · Production problem</p>
         <h2>A model-quality change needs a release decision, not another dashboard.</h2>
         <p>RAG and agent releases can improve an aggregate score while breaking a language, source type or safety slice. Teams then debate whether a candidate is safe to ship, while the benchmark, policy and final decision live in different tools.</p>
-        <p>RAGOps addresses that failure class by comparing recorded candidate traces with an accepted baseline, applying a versioned policy, and emitting one canonical <strong>PASS</strong>, <strong>WARN</strong> or <strong>BLOCK</strong> decision. The problem is production-relevant; this case study does not claim customer deployment.</p>
+        <p>RAGOps addresses that failure class by comparing recorded candidate traces with an accepted baseline, applying a versioned policy, and emitting one canonical <strong>PASS</strong>, <strong>WARN</strong> or <strong>BLOCK</strong> decision.</p>
       </section>
       <section class="case-study-section" id="architecture-tradeoffs">
         <p class="case-study-kicker">02 · Architecture and trade-offs</p>
@@ -61,6 +67,7 @@
         <p class="case-study-kicker">03 · Benchmark or failure case</p>
         <h2>The flagship fixture fails visibly and reproducibly.</h2>
         <p>The credential-free demo intentionally produces <strong>BLOCK</strong>: citation coverage drops from <strong>1.0 to 0.5</strong>, citation precision from <strong>1.0 to 0.5</strong>, and lexical groundedness from <strong>1.0 to 0.6</strong>. The v2.0.2 Failure Zoo also includes a synthetic retrieval-poisoning specimen that blocks unsupported citations, unsupported claims and forbidden output terms.</p>
+        <figure class="case-study-demo"><a href="/assets/case-studies/ragops-demo.jpg" aria-label="Open full-size RAGOps demo report"><img src="/assets/case-studies/ragops-demo.jpg" width="1200" height="1059" loading="lazy" alt="RAGOps demo report: citation coverage and precision fall from 1 to 0.5; groundedness falls to 0.6; four gates fail."></a><figcaption>Synthetic regression report from RAGOps v2.0.2. The report shows FAIL; the canonical release decision is BLOCK. Screenshot reproduced on 4 October 2026; the generated fixture uses a fixed timestamp.</figcaption></figure>
         <div class="case-study-callout"><p><strong>Evidence type:</strong> reproducible synthetic regression. It proves the evaluator and policy response to controlled failures; it does not prove production adoption or real-traffic performance.</p></div>
         <p>The exact default-branch revision <code>4b59aec</code> passed public <a href="https://github.com/thangldw/ragops/actions/runs/32648673405">CI</a> and <a href="https://github.com/thangldw/ragops/actions/runs/32648673426">CodeQL</a>.</p>
       </section>
@@ -77,7 +84,7 @@ open ./demo-output/release-report.html</code></pre>
         <p class="case-study-kicker">05 · What I designed and led</p>
         <h2>I designed the product boundary, canonical decision model and release evidence path.</h2>
         <p>I own the versioned contracts, deterministic core, policy semantics, evidence bundles, adapter boundary, CI formats, governance and release qualification. As maintainer, I also reviewed external work for retrieval-poisoning coverage and a Phoenix adapter, requiring provenance, semantic and fail-closed error-boundary corrections before merge.</p>
-        <p>This is personal product and maintainer ownership. It is evidence of technical judgment and collaboration, not a claim that a production customer team adopted the system.</p>
+
       </section>
       <section class="case-study-section" id="limitations-evidence">
         <p class="case-study-kicker">06 · Limitations and missing evidence</p>
@@ -86,6 +93,13 @@ open ./demo-output/release-report.html</code></pre>
         <p><a href="https://github.com/thangldw/ragops/blob/main/docs/gtm/production-pilot.md">The production-pilot runbook</a> defines what new evidence must contain before those claims can change.</p>
       </section>
     </article>
+    <section class="case-study-contact" aria-labelledby="caseContactTitle">
+      <p class="case-study-kicker">Work &amp; collaboration</p>
+      <h2 id="caseContactTitle">Working through a similar engineering problem?</h2>
+      <p>Contact me about technical delivery, architecture, or collaboration related to RAGOps.</p>
+      <div class="case-study-actions"><a href="mailto:thangldw@gmail.com?subject=RAGOps%20collaboration" data-analytics-event="case_study_contact_click" data-analytics-project="ragops">thangldw@gmail.com</a><button type="button" class="copy-email" data-copy-email="thangldw@gmail.com">Copy email</button></div>
+      <p class="copy-status" role="status" aria-live="polite"></p>
+    </section>
     <nav class="case-study-siblings" aria-label="Other flagship case studies"><a href="/case-studies/proofline/">Proofline</a><a href="/case-studies/kakeflow/">KakeFlow</a><a href="/case-studies/certification-library/">Certification Library</a></nav>
   </main>
   <footer class="site-foot"><div class="site-shell-inner">Evidence over claims · <span>Thang Luu</span></div></footer>

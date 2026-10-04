@@ -76,7 +76,13 @@
     trigger.innerHTML = '<i class="fa-solid fa-wallet" aria-hidden="true"></i><span>Support my work</span>';
 
     document.body.insertAdjacentHTML("beforeend", dialogMarkup());
-    document.body.appendChild(trigger);
+    var slot = document.getElementById('supportSlot');
+    if (slot) {
+      trigger.classList.add('support-inline-trigger');
+      slot.appendChild(trigger);
+    } else {
+      document.body.appendChild(trigger);
+    }
 
     var dialog = document.getElementById("supportDialog");
     var closeButton = document.getElementById("supportClose");

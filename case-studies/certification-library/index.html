@@ -16,10 +16,11 @@
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
-  <link rel="stylesheet" href="/css/case-study.css?v=20260828a">
+  <link rel="stylesheet" href="/css/case-study.css?v=20261004a">
   <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
   <script src="/js/site-shell.js?v=20260727b"></script>
-  <script defer src="/js/analytics.js"></script>
+  <script defer src="/js/analytics.js?v=20261004a"></script>
+  <script defer src="/js/contact.js?v=20261004a"></script>
 </head>
 <body class="site-page case-study-page">
   <a class="skip-link" href="#caseStudy">Skip to case study</a>
@@ -43,12 +44,17 @@
         <div class="case-study-evidence"><span class="case-study-label">Private source</span><span class="case-study-label">Sanitized aggregates</span><span class="case-study-label">Public artifact</span><span class="case-study-label is-missing">No adoption evidence</span></div>
       </aside>
     </section>
+    <section class="case-study-brief" aria-labelledby="briefTitle">
+      <h2 id="briefTitle">Validated sources → bounded public app</h2>
+      <dl><div><dt>What it does</dt><dd>A fail-closed compiler publishes validated study content and keeps learning state local.</dd></div><div><dt>Design choice</dt><dd>Private authoring source; public manifest and generated application.</dd></div><div><dt>Evidence boundary</dt><dd>Local quality-gate aggregates and public artifact; no learner-outcome study.</dd></div></dl>
+      <nav aria-label="Case study sections"><a href="#architecture-tradeoffs">Architecture</a><a href="#demo-under-five">Reproduce the demo</a><a href="#limitations-evidence">Limitations</a></nav>
+    </section>
     <article class="case-study-body">
       <section class="case-study-section" id="production-problem">
         <p class="case-study-kicker">01 · Production problem</p>
         <h2>A large question collection is not trustworthy learning software.</h2>
         <p>Certification sources arrive with different schemas, provenance, languages, media and exam rules. A permissive build can publish malformed records, contradictory metadata, weak translations or accidental duplicates while still producing a working page.</p>
-        <p>Certification Library treats publication as a data-product decision: sources must pass structural, semantic, provenance and route-level checks before the public application is compiled. The public site demonstrates the pipeline and product surface; it does not establish exam outcomes or user adoption.</p>
+        <p>Certification Library treats publication as a data-product decision: sources must pass structural, semantic, provenance and route-level checks before the public application is compiled.</p>
       </section>
       <section class="case-study-section" id="architecture-tradeoffs">
         <p class="case-study-kicker">02 · Architecture and trade-offs</p>
@@ -73,7 +79,7 @@
         <p class="case-study-kicker">05 · What I designed and led</p>
         <h2>I designed the data contracts, fail-closed compiler and privacy boundary.</h2>
         <p>I own the normalized source model, certification-specific validation, semantic and provenance gates, duplicate checks, compiler, protected-artifact boundary, route generation, lazy hydration, local learning-state contract and release qualification.</p>
-        <p>This is evidence of personal architecture and product ownership. It is not evidence that I managed an instructional team or that the library is an accredited learning provider.</p>
+
       </section>
       <section class="case-study-section" id="limitations-evidence">
         <p class="case-study-kicker">06 · Limitations and missing evidence</p>
@@ -81,6 +87,13 @@
         <ul><li>The authoring source is private, so public reviewers can inspect the deployed boundary and aggregate evidence but not independently audit the full corpus.</li><li>Static protection is extraction-cost hardening, not server-side access control.</li><li>Question counts do not establish syllabus completeness, exam readiness or pass-rate improvement.</li><li>No consented learner study, adoption, retention or outcome evidence is published.</li><li>Local browser state provides no account sync, organization administration or multi-device continuity.</li></ul>
       </section>
     </article>
+    <section class="case-study-contact" aria-labelledby="caseContactTitle">
+      <p class="case-study-kicker">Work &amp; collaboration</p>
+      <h2 id="caseContactTitle">Working through a similar engineering problem?</h2>
+      <p>Contact me about technical delivery, architecture, or collaboration related to Certification Library.</p>
+      <div class="case-study-actions"><a href="mailto:thangldw@gmail.com?subject=Certification%20Library%20collaboration" data-analytics-event="case_study_contact_click" data-analytics-project="certification-library">thangldw@gmail.com</a><button type="button" class="copy-email" data-copy-email="thangldw@gmail.com">Copy email</button></div>
+      <p class="copy-status" role="status" aria-live="polite"></p>
+    </section>
     <nav class="case-study-siblings" aria-label="Other flagship case studies"><a href="/case-studies/ragops/">RAGOps</a><a href="/case-studies/proofline/">Proofline</a><a href="/case-studies/kakeflow/">KakeFlow</a></nav>
   </main>
   <footer class="site-foot"><div class="site-shell-inner">Evidence over claims · <span>Thang Luu</span></div></footer>

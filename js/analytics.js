@@ -13,4 +13,13 @@
   tracker.dataset.websiteId = WEBSITE_ID;
   tracker.dataset.domains = PRODUCTION_HOST;
   document.head.appendChild(tracker);
+
+  document.addEventListener('click', function (event) {
+    var control = event.target.closest('[data-analytics-event]');
+    if (!control || !window.umami || typeof window.umami.track !== 'function') return;
+    var data = {};
+    if (control.dataset.analyticsProject) data.project = control.dataset.analyticsProject;
+    if (control.dataset.analyticsLocation) data.location = control.dataset.analyticsLocation;
+    window.umami.track(control.dataset.analyticsEvent, data);
+  });
 })();

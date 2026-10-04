@@ -11,11 +11,17 @@
       "icon": "fa-file-lines",
       "accent": "rust",
       "status": "Live",
-      "tags": ["Japan immigration", "HSP points", "PR checklist", "English · Vietnamese"],
+      "tags": [
+        "Japan immigration",
+        "HSP points",
+        "PR checklist",
+        "English · Vietnamese"
+      ],
       "category": "developer-tools",
       "categoryLabel": "Japan immigration",
       "cta": "Open guide",
-      "featured": false
+      "featured": false,
+      "catalogGroup": "utilities"
     },
     {
       "id": "bizroll",
@@ -27,11 +33,17 @@
       "icon": "fa-cubes-stacked",
       "accent": "rose",
       "status": "Live",
-      "tags": ["Board game", "Multiplayer", "AI opponents", "Market simulation"],
+      "tags": [
+        "Board game",
+        "Multiplayer",
+        "AI opponents",
+        "Market simulation"
+      ],
       "category": "games",
       "categoryLabel": "Strategy game",
       "cta": "Open BizRoll",
-      "featured": false
+      "featured": false,
+      "catalogGroup": "experiments"
     },
     {
       "id": "neon-glider",
@@ -43,11 +55,17 @@
       "icon": "fa-paper-plane",
       "accent": "violet",
       "status": "Live",
-      "tags": ["Endless runner", "Three.js", "WebGL", "Browser game"],
+      "tags": [
+        "Endless runner",
+        "Three.js",
+        "WebGL",
+        "Browser game"
+      ],
       "category": "games",
       "categoryLabel": "Endless runner",
       "cta": "Play Neon Glider",
-      "featured": false
+      "featured": false,
+      "catalogGroup": "experiments"
     },
     {
       "id": "toolbox",
@@ -59,12 +77,18 @@
       "icon": "fa-cubes-stacked",
       "accent": "blue",
       "status": "v2.0.0",
-      "tags": ["macOS", "Review-first", "Recoverable cleanup", "Local-first"],
+      "tags": [
+        "macOS",
+        "Review-first",
+        "Recoverable cleanup",
+        "Local-first"
+      ],
       "category": "developer-tools",
       "categoryLabel": "macOS utility",
       "cta": "Download Toolbox",
       "featured": true,
-      "featuredOrder": 4
+      "featuredOrder": 4,
+      "catalogGroup": "utilities"
     },
     {
       "id": "ragops",
@@ -77,12 +101,19 @@
       "icon": "fa-shield-halved",
       "accent": "green",
       "status": "v2.0.2",
-      "tags": ["AI evaluation", "Red team", "FastAPI", "CI/CD"],
+      "tags": [
+        "AI evaluation",
+        "Red team",
+        "FastAPI",
+        "CI/CD"
+      ],
       "category": "data-ai",
       "categoryLabel": "AI evaluation",
       "cta": "Open on GitHub",
       "featured": true,
-      "featuredOrder": 0
+      "featuredOrder": 0,
+      "catalogGroup": "engineering",
+      "evidenceLabel": "Released software · synthetic regression evidence"
     },
     {
       "id": "maintainer-defense",
@@ -94,12 +125,18 @@
       "icon": "fa-shield-halved",
       "accent": "rust",
       "status": "v1.1.1",
-      "tags": ["OSS security", "Offline auditor", "Supply chain", "Python"],
+      "tags": [
+        "OSS security",
+        "Offline auditor",
+        "Supply chain",
+        "Python"
+      ],
       "category": "developer-tools",
       "categoryLabel": "OSS security",
       "cta": "Open on GitHub",
       "featured": true,
-      "featuredOrder": 5
+      "featuredOrder": 5,
+      "catalogGroup": "engineering"
     },
     {
       "id": "proofline",
@@ -112,12 +149,19 @@
       "icon": "fa-link",
       "accent": "indigo",
       "status": "v2.0.2",
-      "tags": ["Local-first", "Provenance", "Exact citations", "SQLite FTS5"],
+      "tags": [
+        "Local-first",
+        "Provenance",
+        "Exact citations",
+        "SQLite FTS5"
+      ],
       "category": "developer-tools",
       "categoryLabel": "Engineering memory",
       "cta": "Open on GitHub",
       "featured": true,
-      "featuredOrder": 1
+      "featuredOrder": 1,
+      "catalogGroup": "engineering",
+      "evidenceLabel": "Released software · synthetic regression evidence"
     },
     {
       "id": "kakeflow",
@@ -130,12 +174,19 @@
       "icon": "fa-wallet",
       "accent": "ochre",
       "status": "v1.2.1",
-      "tags": ["Household finance", "Local-first", "MIT License", "Tauri · React"],
+      "tags": [
+        "Household finance",
+        "Local-first",
+        "MIT License",
+        "Tauri · React"
+      ],
       "category": "personal-finance",
       "categoryLabel": "Household finance",
       "cta": "Open KakeFlow",
       "featured": true,
-      "featuredOrder": 2
+      "featuredOrder": 2,
+      "catalogGroup": "utilities",
+      "evidenceLabel": "Released product · synthetic workflow evidence"
     }
   ],
   "languageCollection": {
@@ -144,7 +195,9 @@
     "href": "/apps/cert/",
     "caseStudyHref": "/case-studies/certification-library/",
     "featuredOrder": 3,
-    "label": "9 certification programs"
+    "label": "9 certification programs",
+    "evidenceLabel": "Public application · local quality-gate evidence",
+    "featuredDescription": "A validated content pipeline with exam practice, notes, and learning history stored locally."
   },
   "learningCollections": [
     {
@@ -156,10 +209,15 @@
       "icon": "fa-graduation-cap",
       "accent": "rust",
       "status": "Collection",
-      "tags": ["9 certifications", "Exam practice", "Local-first"],
+      "tags": [
+        "9 certifications",
+        "Exam practice",
+        "Local-first"
+      ],
       "category": "certification-study",
       "categoryLabel": "Exam preparation",
-      "cta": "Open library"
+      "cta": "Open library",
+      "catalogGroup": "learning"
     }
   ]
 }

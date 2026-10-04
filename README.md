@@ -42,8 +42,8 @@ flowchart LR
 
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Portfolio profile and featured side projects | Root HTML plus shared project catalog |
-| `/apps/` | Searchable and filterable application catalog | `js/projects-data.json` |
+| `/` | Portfolio profile and selected engineering work | Root HTML plus shared project catalog |
+| `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
 | `/apps/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` source repository |
 | `/apps/cert/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
@@ -124,6 +124,8 @@ Edit only `js/projects-data.json`.
 3. Set `featured: true` and `featuredOrder` to show a project on the home page.
 4. Run validation and browser smoke tests.
 5. Commit and push.
+
+Home renders a static grid of selected work; the full catalog groups Engineering, Utilities, Learning, and Experiments via `catalogGroup`. Email contacts use `mailto:` and a copy control; the optional home support button sits in the footer. Shared click events record only fixed project IDs and page locations.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
