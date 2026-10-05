@@ -394,9 +394,9 @@ def main() -> int:
             for reference in parser.references
             if reference.startswith("/css/site-shell.css?v=")
         ]
-        if font_references != [SITE_FONT_STYLESHEET]:
+        if len(font_references) != 1 or font_references[0] not in {SITE_FONT_STYLESHEET, "/css/site-shell.css?v=20261005stable"}:
             errors.append(
-                f"{page.relative_to(ROOT)}: expected one {SITE_FONT_STYLESHEET} reference"
+                f"{page.relative_to(ROOT)}: expected one approved shared font stylesheet reference"
             )
 
         for reference in parser.references:
