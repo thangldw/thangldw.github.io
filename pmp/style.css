@@ -8,3 +8,5 @@
 .domain-guide{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}.guide-body,.legacy-memo{white-space:pre-line}.guide-body{font-size:14px;line-height:1.7}#guide-query{width:100%;margin:12px 0}#guide-terms details{padding:12px 0;border-bottom:1px solid var(--line)}.learn-progress>a{display:block;margin-top:8px}@media(max-width:900px){.domain-guide{grid-template-columns:1fr}}
 
 @media(max-width:650px){#nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}#nav a{text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center;font-size:12px}#article details{scroll-margin-top:180px}}
+
+.owner-brand{font-family:monospace;font-size:18px;font-weight:700;color:var(--ink);white-space:nowrap}header .brand{white-space:nowrap}@media(max-width:600px){header{gap:12px;padding:0 14px}.owner-brand{font-size:15px}header .brand{font-size:18px}}

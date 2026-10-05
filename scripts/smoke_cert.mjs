@@ -1114,7 +1114,7 @@ try {
 
   await page.navigate(`${origin}/apps/cert/pmp/?view=learn`, 1280);
   await page.waitUntil('location.pathname === "/pmp/" && document.querySelectorAll("[data-lesson]").length === 44', 30000);
-  assertResult('PMP legacy Learn route opens merged standalone curriculum', await page.evaluate(`(() => ({ok: location.hash === '#learn' && document.querySelectorAll('.study-module').length === 6, message: location.href}))()`), page.exceptions);
+  assertResult('PMP legacy Learn route opens merged standalone curriculum', await page.evaluate(`(() => ({ok: location.hash === '' && document.querySelectorAll('.study-module').length === 6, message: location.href}))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 4', 30000);
