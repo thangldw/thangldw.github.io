@@ -260,8 +260,8 @@ try {
         && getComputedStyle(document.querySelector('.project-title')).fontWeight === '600'
         && getComputedStyle(document.querySelector('.project-description')).fontWeight === '400'
         && titles.join('|') === 'RAGOps|Proofline|Awesome Maintainer Defense|KakeFlow|Toolbox|Japan PR Guide|Certification Library|BizRoll|Neon Glider'
-        && firstRow.length === 2
-        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 2
+        && firstRow.length === 3
+        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 3
         && firstCardStyle?.borderTopWidth === '1px'
         && firstCardStyle?.borderRadius === '16px'
         && (firstCardStyle?.backgroundImage !== 'none' || firstCardStyle?.backgroundColor !== 'rgba(0, 0, 0, 0)')
@@ -295,7 +295,7 @@ try {
           && cards.every(card => getComputedStyle(card.querySelector(".project-description")).webkitLineClamp === "none")
           && grid.scrollWidth <= grid.clientWidth
           && cards.length === 9
-          && firstRow.length === 2,
+          && firstRow.length === 3,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
           + ', grid=' + grid.clientWidth + '/' + grid.scrollWidth
@@ -364,7 +364,7 @@ try {
     const cards = [...document.querySelectorAll('.project-card')];
     const byTitle = title => cards.find(card => card.querySelector('.project-title')?.textContent.trim() === title);
     const toolbox = byTitle('Toolbox');
-    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v2.0.0';
+    const releaseUrl = 'https://thangldw.github.io/toolbox/';
     return {
       ok: toolbox?.querySelector('.project-status')?.textContent.trim() === 'v2.0.0'
         && toolbox?.href === releaseUrl
@@ -431,7 +431,7 @@ try {
     const projects = [...document.querySelectorAll('#projectRail .resume-project')];
     const byTitle = title => projects.find(project => project.querySelector('h3')?.textContent.trim() === title);
     const toolbox = byTitle('Toolbox');
-    const releaseUrl = 'https://github.com/thangldw/toolbox/releases/tag/v2.0.0';
+    const releaseUrl = 'https://thangldw.github.io/toolbox/';
     return {
       ok: toolbox?.href === releaseUrl
         && toolbox.textContent.includes('filesystem change evidence')
