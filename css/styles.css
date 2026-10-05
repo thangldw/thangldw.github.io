@@ -198,3 +198,7 @@ header{position:relative;top:auto;z-index:1}
   .resume-home .resume-profile>h1{font-size:42px}.resume-home .resume-content{padding-inline:24px}.resume-home .about-intro>h2{font-size:clamp(30px,9.2vw,36px);line-height:1.08}.resume-home .about-principles{grid-template-columns:1fr;gap:14px}.resume-home .about-principles p{padding-bottom:14px;border-bottom:1px solid var(--border)}.resume-home .about-principles p:last-child{padding-bottom:0;border-bottom:0}.resume-home .projects-heading{align-items:flex-start;gap:16px}.resume-home .projects-heading a{white-space:nowrap}.resume-home .resume-project{flex-basis:86%}
 }
 @media(prefers-reduced-motion:reduce){.resume-home .project-rail{scroll-behavior:auto}.resume-home .resume-project,.resume-home .project-nav button,.resume-home .resume-project>i{transition:none}}
+
+/* Reserve the asynchronously populated project rail before first paint. */
+.resume-home .project-rail { min-height:210px; }
+.resume-home .resume-project .project-kind { position:static; }
