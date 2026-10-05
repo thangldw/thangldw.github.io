@@ -921,7 +921,7 @@ try {
 
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
   const childThemeChecks = [];
-  for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
+  for (const slug of certificationManifest.certifications.filter(certification => certification.id !== "pmp").map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
     await page.waitUntil('document.querySelector(".experience-shell .today-screen")');
     const result = await page.evaluate(`(() => ({
@@ -946,7 +946,7 @@ try {
   }, []);
 
   const rapidSurfaceChecks = [];
-  for (const { slug } of certificationManifest.certifications) {
+  for (const { slug } of certificationManifest.certifications.filter(certification => certification.id !== "pmp")) {
     await page.navigate(`${origin}/apps/cert/${slug}/?view=learn`, 1280);
     await page.waitUntil('document.querySelector(".rapid-review") && document.querySelector(".study-area-search input")', 30000);
     rapidSurfaceChecks.push({ slug, ...await page.evaluate(`(() => ({
@@ -1104,26 +1104,8 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/pmp/?view=learn`, 1280);
-  await page.waitUntil('document.querySelectorAll(".cert-learning-map__grid button").length === 3', 30000);
-  assertResult('PMP Learn study areas start the selected domain', await page.evaluate(`(async () => {
-    const controls = [...document.querySelectorAll('.cert-learning-map__grid button')];
-    const process = controls.find(button => button.getAttribute('aria-label') === 'Start Process 41% practice');
-    process?.click();
-    for (let attempt = 0; attempt < 120 && !document.querySelector('.focus-sprint'); attempt += 1) {
-      await new Promise(resolveWait => setTimeout(resolveWait, 50));
-    }
-    const text = document.body.innerText;
-    return {
-      ok: controls.length === 3
-        && Boolean(process)
-        && document.querySelector('.focus-sprint h1')?.textContent.trim() === 'Process'
-        && text.includes('Item 1 / 20'),
-      message: 'areas=' + controls.length
-        + ', process=' + Boolean(process)
-        + ', heading=' + document.querySelector('.focus-sprint h1')?.textContent.trim()
-        + ', item=' + text.includes('Item 1 / 20')
-    };
-  })()`), page.exceptions);
+  await page.waitUntil('location.pathname === "/pmp/" && document.querySelectorAll("[data-lesson]").length === 44', 30000);
+  assertResult('PMP legacy Learn route opens merged standalone curriculum', await page.evaluate(`(() => ({ok: location.hash === '#learn' && document.querySelectorAll('.study-module').length === 6, message: location.href}))()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 4', 30000);
@@ -1237,7 +1219,7 @@ try {
 
   if (process.env.LEGACY_CERT_SMOKE === '1') {
   const childThemeChecks = [];
-  for (const slug of certificationManifest.certifications.map(certification => certification.slug)) {
+  for (const slug of certificationManifest.certifications.filter(certification => certification.id !== "pmp").map(certification => certification.slug)) {
     await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
     await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
     const result = await page.evaluate(`(async () => {
@@ -1262,38 +1244,11 @@ try {
     message: JSON.stringify(childThemeChecks)
   }, []);
 
-  await page.navigate(origin + '/apps/cert/pmp/', 1280);
-  await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
-  assertResult('PMP complete July 2026 bank and learning metadata', await page.evaluate(`(async () => {
-    const dashboardText = document.body.innerText;
-    const learnButton = [...document.querySelectorAll('.workspace-navigation__primary-item')].find(candidate => candidate.textContent.trim() === 'Learn');
-    learnButton?.click();
-    await new Promise(resolveWait => setTimeout(resolveWait, 50));
-    const overviewTabs = [...document.querySelectorAll('.learn-experience__tabs button')].map(button => button.textContent.trim());
-    const overviewAreas = document.querySelectorAll('.cert-learning-map__grid button').length;
-    const termsButton = [...document.querySelectorAll('.learn-experience__tabs button')].find(candidate => candidate.textContent.trim() === 'Terms & notes');
-    termsButton?.click();
-    await new Promise(resolveWait => setTimeout(resolveWait, 50));
-    const termsText = document.body.innerText;
-    const noteCount = document.querySelectorAll('.reference-notes details').length;
-    return {
-      ok: dashboardText.includes('0 / 180 answered')
-        && !dashboardText.includes('Preview question bank')
-        && overviewTabs.join('|') === 'Overview|Terms & notes'
-        && overviewAreas > 0
-        && termsText.includes('64 terms')
-        && noteCount === 3
-        && !document.querySelector('.knowledge-graph-view')
-        && !document.querySelector('.knowledge-universe-stage'),
-      message: 'dashboard180=' + dashboardText.includes('0 / 180 answered')
-        + ', preview=' + dashboardText.includes('Preview question bank')
-        + ', tabs=' + overviewTabs.join('|')
-        + ', areas=' + overviewAreas
-        + ', terms64=' + termsText.includes('64 terms')
-        + ', notes=' + noteCount
-        + ', graph=' + Boolean(document.querySelector('.knowledge-graph-view'))
-    };
-  })()`), page.exceptions);
+  await page.navigate(origin + '/apps/cert/pmp/?view=learn', 1280);
+  await page.waitUntil('location.pathname === "/pmp/" && document.querySelectorAll("[data-lesson]").length === 44');
+  await page.evaluate(`location.hash='guide'`);
+  await page.waitUntil('document.querySelectorAll("[data-domain-guide]").length === 3');
+  assertResult('PMP merged domain notes and64 terms reachable at canonical route', await page.evaluate(`(() => ({ok:location.pathname === '/pmp/' && document.querySelectorAll('[data-domain-guide]').length === 3 && document.body.innerText.includes('64 thuật ngữ') && !document.querySelector('.knowledge-graph-view'),message:location.href}))()`), page.exceptions);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
   await page.navigate(`${origin}/apps/cert/g/`, 1280);
