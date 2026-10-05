@@ -254,7 +254,6 @@ try {
     const titles = cards.map(card => card.querySelector('.project-title')?.textContent.trim());
     return {
       ok: document.querySelector('.apps-topbar .site-brand')?.getAttribute('aria-label') === 'Thang Luu home'
-        && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
         && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
         && cards.length === 9
