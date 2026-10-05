@@ -172,7 +172,7 @@ try {
     ['/', 'Homepage font'],
     ['/404.html', '404 font'],
     ['/apps/', 'Apps catalog font'],
-    ['/apps/japan-pr-guide/', 'Japan PR Guide font'],
+    ['/japan-pr-guide/', 'Japan PR Guide font'],
     ['/apps/cert/', 'Certification library font'],
     ['/apps/cert/g/', 'Certification child font']
   ];
@@ -620,7 +620,7 @@ try {
 
   const sharedSupportPaths = [
     ['/apps/', 'Apps catalog'],
-    ['/apps/japan-pr-guide/', 'Japan PR Guide'],
+    ['/japan-pr-guide/', 'Japan PR Guide'],
     ['/apps/cert/', 'Certification library support'],
     ['/apps/cert/g/', 'Certification child support']
   ];
@@ -640,7 +640,7 @@ try {
       const qr = dialog?.querySelector('.support-bank img');
       const triggerRect = trigger?.getBoundingClientRect();
       const isAppsCatalog = window.location.pathname === '/apps/';
-      const isJapanGuide = window.location.pathname === '/apps/japan-pr-guide/';
+      const isJapanGuide = window.location.pathname === '/japan-pr-guide/';
       const result = {
         ok: (isAppsCatalog
           ? triggerRect?.width === 0 && triggerRect?.height === 0

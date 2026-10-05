@@ -2,7 +2,7 @@
 
 Recovered from the approved 2026-08-18 prototype. Before modification, the build reproduced production JS `index-DXYY2OyG.js` and CSS `index-D5wwRGgE.css` byte for byte.
 
-The source is under `_sources`, excluded by GitHub Pages/Jekyll. Generated public assets live in `apps/japan-pr-guide`.
+The source is under `_sources`, excluded by GitHub Pages/Jekyll. Generated public assets live in `japan-pr-guide`.
 
 ```sh
 npm ci

@@ -89,7 +89,7 @@ Expected: domain and interaction suites pass.
 
 **Interfaces:**
 - Consumes: integrated React application.
-- Produces: verified static build for `/apps/japan-pr-guide/`.
+- Produces: verified static build for `/japan-pr-guide/`.
 
 - [x] **Step 1: Run packaging gates**
 

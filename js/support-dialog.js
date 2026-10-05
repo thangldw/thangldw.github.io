@@ -10,7 +10,7 @@
     var path = normalizedPath();
     return path === "/"
       || path === "/apps/"
-      || path === "/apps/japan-pr-guide/"
+      || path === "/japan-pr-guide/"
       || path === "/apps/cert/"
       || path.indexOf("/apps/cert/") === 0;
   }
@@ -87,7 +87,7 @@
     var dialog = document.getElementById("supportDialog");
     var closeButton = document.getElementById("supportClose");
     if (!dialog || typeof dialog.showModal !== "function") return;
-    if (normalizedPath() === "/apps/japan-pr-guide/") {
+    if (normalizedPath() === "/japan-pr-guide/") {
       dialog.classList.add("support-dialog--japan");
     }
 

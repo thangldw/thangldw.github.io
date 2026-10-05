@@ -396,7 +396,7 @@ def main() -> int:
             for reference in parser.references
             if reference.startswith("/css/site-shell.css?v=")
         ]
-        if len(font_references) != 1 or font_references[0] not in {SITE_FONT_STYLESHEET, "/css/site-shell.css?v=20261005stable"}:
+        if not parser.refreshes and (len(font_references) != 1 or font_references[0] not in {SITE_FONT_STYLESHEET, "/css/site-shell.css?v=20261005stable"}):
             errors.append(
                 f"{page.relative_to(ROOT)}: expected one approved shared font stylesheet reference"
             )
@@ -416,9 +416,10 @@ def main() -> int:
 
     for page, parser in parsed_pages.items():
         if parser.refreshes:
-            errors.append(
-                f"{page.relative_to(ROOT)}: legacy redirect pages are not allowed"
-            )
+            if page.relative_to(ROOT).as_posix() != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
+                errors.append(f"{page.relative_to(ROOT)}: unapproved redirect")
+            elif 'location.replace("/japan-pr-guide/" + location.search + location.hash)' not in page.read_text():
+                errors.append(f"{page.relative_to(ROOT)}: redirect must preserve query and hash")
 
     for route in CASE_STUDY_ROUTES.values():
         page_file = ROOT / route.lstrip("/") / "index.html"
@@ -512,7 +513,7 @@ def main() -> int:
 
     print(
         f"Validated {len(pages)} HTML pages, {len(sitemap_urls)} sitemap URLs "
-        "with social metadata, no legacy redirects, and all local references."
+        "with social metadata, approved route redirects, and all local references."
     )
     return 0
 

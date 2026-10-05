@@ -7,7 +7,7 @@
 | Upstream | <https://github.com/google/fonts/tree/main/ofl/bevietnampro> |
 | Original project | <https://github.com/bettergui/BeVietnamPro> |
 | License | SIL Open Font License 1.1 |
-| Local use | Self-hosted by `apps/japan-pr-guide/fonts.css` |
+| Local use | Self-hosted by `japan-pr-guide/fonts.css` |
 | Retrieval date | Unknown; files predate this provenance record |
 
 The local files are unmodified static font binaries as far as this repository's

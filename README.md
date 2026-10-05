@@ -44,7 +44,7 @@ flowchart LR
 | --- | --- | --- |
 | `/` | Portfolio profile and selected engineering work | Root HTML plus shared project catalog |
 | `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
-| `/apps/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
+| `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` source repository |
 | `/apps/cert/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
 | `/case-studies/{flagship}/` | Recruiter-facing evidence for four flagship projects | Route-local semantic HTML and shared case-study styles |
@@ -68,8 +68,9 @@ thangldw.github.io/
 ├── 404.html
 ├── apps/
 │   ├── index.html
-│   ├── japan-pr-guide/
+│   ├── japan-pr-guide/       # Redirect to /japan-pr-guide/
 │   └── cert/                  # Generated artifact; do not hand-edit
+├── japan-pr-guide/           # Generated Japan PR Guide app
 ├── case-studies/              # Four static flagship evidence narratives
 ├── assets/                    # Social images and local fonts
 │   └── fonts/licenses/        # Upstream font notices and provenance
@@ -189,7 +190,7 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 | --- | --- | --- |
 | `/` | Portfolio và Side Projects tiêu biểu | Root HTML và catalog project dùng chung |
 | `/apps/` | Danh mục ứng dụng có search/filter | `js/projects-data.json` |
-| `/apps/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
+| `/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
 | `/apps/cert/` | Certification Library đã build | Repo private `thangldw/cert` |
 | Certification manifest | Metadata và count công khai | Local production build của repo cert |
 | `/case-studies/{flagship}/` | Bằng chứng recruiter-facing cho bốn flagship | Semantic HTML theo route và CSS dùng chung |
@@ -266,7 +267,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | --- | --- | --- |
 | `/` | Portfolio と featured project | Root HTML と shared project catalog |
 | `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
-| `/apps/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
+| `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
 | `/apps/cert/` | Generated Certification Library | Private `thangldw/cert` repo |
 | Certification manifest | Public metadata と count | Cert local production build |
 | `/case-studies/{flagship}/` | 4 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
