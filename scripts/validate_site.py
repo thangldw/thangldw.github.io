@@ -125,7 +125,7 @@ def local_target(page: Path, reference: str) -> Path | None:
 
 def main() -> int:
     errors: list[str] = audit_site()
-    pages = sorted(ROOT.rglob("*.html"))
+    pages = sorted(path for path in ROOT.rglob("*.html") if "_sources" not in path.relative_to(ROOT).parts)
     parsed_pages: dict[Path, PageParser] = {}
 
     for required_font_file in (SITE_FONT_ASSET, SITE_FONT_LICENSE):
@@ -341,7 +341,7 @@ def main() -> int:
     markdown_files = {
         path.relative_to(ROOT)
         for path in ROOT.rglob("*.md")
-        if ".git" not in path.parts
+        if ".git" not in path.parts and "_sources" not in path.relative_to(ROOT).parts
     }
     for stale_markdown in sorted(markdown_files - ALLOWED_MARKDOWN):
         errors.append(
@@ -404,6 +404,8 @@ def main() -> int:
                 errors.append(f"{page.relative_to(ROOT)}: broken reference {reference}")
 
     for path in sorted((*ROOT.rglob("*.html"), *ROOT.rglob("*.css"), *ROOT.rglob("*.js"))):
+        if "_sources" in path.relative_to(ROOT).parts:
+            continue  # Jekyll excludes build sources; validate generated public assets instead.
         content = path.read_text(encoding="utf-8")
         for label, pattern in EXTERNAL_FONT_PATTERNS.items():
             if pattern in content:

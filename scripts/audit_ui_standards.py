@@ -416,6 +416,8 @@ def audit_site() -> list[str]:
                     )
 
     for path in sorted((*ROOT.rglob("*.html"), *ROOT.rglob("*.css"))):
+        if "_sources" in path.relative_to(ROOT).parts:
+            continue  # Jekyll excludes build sources; audit their generated app instead.
         source = path.read_text(encoding="utf-8").lower()
         for color, guidance in DEPRECATED_COLORS.items():
             if color in source:
