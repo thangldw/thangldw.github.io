@@ -253,7 +253,7 @@ try {
     const firstCardStyle = cards[0] ? getComputedStyle(cards[0]) : null;
     const titles = cards.map(card => card.querySelector('.project-title')?.textContent.trim());
     return {
-      ok: document.querySelector('.apps-brand')?.textContent.trim() === 'Thang Luu · Apps'
+      ok: document.querySelector('.apps-topbar .site-brand')?.getAttribute('aria-label') === 'Thang Luu home'
         && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
         && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
@@ -267,7 +267,7 @@ try {
         && firstCardStyle?.borderRadius === '16px'
         && (firstCardStyle?.backgroundImage !== 'none' || firstCardStyle?.backgroundColor !== 'rgba(0, 0, 0, 0)')
         && document.documentElement.scrollWidth <= window.innerWidth,
-      message: 'brand=' + document.querySelector('.apps-brand')?.textContent.trim()
+      message: 'brand=' + document.querySelector('.apps-topbar .site-brand')?.textContent.trim()
         + ', cards=' + cards.length
         + ', firstRow=' + firstRow.length
         + ', order=' + titles.join('|')

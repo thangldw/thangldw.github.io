@@ -127,3 +127,7 @@ body.portfolio-catalog .apps-hub { width:min(1152px,calc(100% - 48px)); }
 .project-card:hover { border-color:var(--project-accent); }
 @media(max-width:960px) { .project-card[data-project-id="ragops"], .project-card[data-project-id="neon-glider"] { grid-column:span 1; } }
 @media(max-width:700px) { .apps-hero { padding-top:36px; } .project-card { padding:18px; } }
+
+.apps-topbar .site-brand { min-height:44px; gap:9px; font-size:22px; line-height:1; }
+.apps-topbar .site-brand-mark { width:36px; height:36px; font-size:14px; }
+@media(max-width:700px) { .apps-topbar .site-brand { gap:7px; font-size:20px; } .apps-topbar .site-brand-mark { width:32px; height:32px; font-size:13px; } }
