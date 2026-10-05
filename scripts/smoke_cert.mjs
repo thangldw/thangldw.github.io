@@ -473,8 +473,8 @@ try {
     const cards = [...document.querySelectorAll('.project-card')];
     const byTitle = title => cards.find(card => card.querySelector('.project-title')?.textContent.trim() === title);
     return {
-      ok: byTitle('RAGOps')?.href === origin + '/apps/ragops/'
-        && byTitle('Proofline')?.href === origin + '/apps/proofline/'
+      ok: byTitle('RAGOps')?.href === origin + '/ragops/'
+        && byTitle('Proofline')?.href === origin + '/proofline/'
         && byTitle('KakeFlow')?.href === 'https://thangldw.github.io/kakeflow/'
         && byTitle('Certification Library')?.href === ${JSON.stringify(`${origin}/apps/cert/`)},
       message: 'ragops=' + byTitle('RAGOps')?.href
