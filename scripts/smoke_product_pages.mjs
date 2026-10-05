@@ -151,9 +151,9 @@ try {
  await Promise.all([waitFor(`http://127.0.0.1:${serverPort}/`),waitFor(`http://127.0.0.1:${debugPort}/json/version`)]);
  const origin=process.env.SITE_ORIGIN || `http://127.0.0.1:${serverPort}`;
  const page=await openPage(debugPort);
- for(const route of ['ragops','proofline','maintainer-defense']) {
+ for(const route of ['ragops','proofline','awesome-maintainer-defense']) {
   for(const width of [320,390,768,1280]) {
-   await page.navigate(`${origin}/apps/${route}/`,width,900);
+   await page.navigate(`${origin}/${route}/`,width,900);
    await page.evaluate('document.fonts.ready');
    const result=await page.evaluate(`(() => ({ok:document.documentElement.scrollWidth<=innerWidth && document.querySelectorAll('.feature-grid article').length===3 && [...document.images].every(i=>i.complete&&i.naturalWidth>0) && document.querySelector('h1').textContent.length>0,message:'width='+innerWidth+', scroll='+document.documentElement.scrollWidth}))()`);
    assertResult(route+' '+width,result,page.exceptions);
