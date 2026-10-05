@@ -7,12 +7,7 @@
   }
 
   function shouldShowSupport() {
-    var path = normalizedPath();
-    return path === "/"
-      || path === "/apps/"
-      || path === "/japan-pr-guide/"
-      || path === "/cert/"
-      || path.indexOf("/cert/") === 0;
+    return true;
   }
 
   function dialogMarkup() {
@@ -66,7 +61,7 @@
   }
 
   function initializeSupport() {
-    if (!shouldShowSupport() || document.getElementById("supportDialog")) return;
+    if (!shouldShowSupport() || document.getElementById("supportDialog") || document.querySelector("[data-support-open], .support-work")) return;
 
     var trigger = document.createElement("button");
     trigger.type = "button";
@@ -80,11 +75,35 @@
     if (slot) {
       trigger.classList.add('support-inline-trigger');
       slot.appendChild(trigger);
+      var hostSelector = slot.getAttribute('data-support-host');
+      if (hostSelector) {
+        function placeSupport() {
+          var host = document.querySelector(hostSelector);
+          slot.hidden = !host;
+          if (host && slot.parentElement !== host) host.appendChild(slot);
+        }
+        placeSupport();
+        new MutationObserver(placeSupport).observe(document.body, { childList: true, subtree: true });
+      }
+
     } else {
       document.body.appendChild(trigger);
     }
 
     var dialog = document.getElementById("supportDialog");
+    // Restricted study pages use links instead of third-party forms or images.
+    if (document.getElementById('supportSlot') && document.querySelector('meta[http-equiv="Content-Security-Policy"]')) {
+      var form = dialog.querySelector('.sponsor-form');
+      if (form) {
+        var sponsor = document.createElement('a');
+        sponsor.className = 'support-primary'; sponsor.href = 'https://github.com/sponsors/thangldw';
+        sponsor.target = '_blank'; sponsor.rel = 'noopener noreferrer'; sponsor.textContent = 'Continue on GitHub';
+        form.replaceWith(sponsor);
+      }
+      var kofi = dialog.querySelector('.support-kofi-button');
+      if (kofi) kofi.textContent = 'Support on Ko-fi';
+    }
+
     var closeButton = document.getElementById("supportClose");
     if (!dialog || typeof dialog.showModal !== "function") return;
     if (normalizedPath() === "/japan-pr-guide/") {
