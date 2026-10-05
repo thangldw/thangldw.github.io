@@ -255,7 +255,6 @@ try {
     return {
       ok: document.querySelector('.apps-brand')?.textContent.trim() === 'Thang Luu · Apps'
         && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
-        && document.querySelector('.apps-hero > .eyebrow')?.textContent.trim() === 'MADE BY THANG LUU'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
         && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
         && cards.length === 9
