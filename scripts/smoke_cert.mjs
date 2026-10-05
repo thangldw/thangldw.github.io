@@ -253,7 +253,7 @@ try {
     const firstCardStyle = cards[0] ? getComputedStyle(cards[0]) : null;
     const titles = cards.map(card => card.querySelector('.project-title')?.textContent.trim());
     return {
-      ok: document.querySelector('.apps-brand')?.textContent.trim() === 'APP LIBRARY'
+      ok: document.querySelector('.apps-brand')?.textContent.trim() === 'Thang Luu · Apps'
         && document.querySelector('.apps-home-link')?.getAttribute('href') === '/'
         && document.querySelector('.apps-hero > .eyebrow')?.textContent.trim() === 'MADE BY THANG LUU'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
@@ -262,11 +262,11 @@ try {
         && getComputedStyle(document.querySelector('.project-title')).fontWeight === '600'
         && getComputedStyle(document.querySelector('.project-description')).fontWeight === '400'
         && titles.join('|') === 'RAGOps|Proofline|Awesome Maintainer Defense|KakeFlow|Toolbox|Japan PR Guide|Certification Library|BizRoll|Neon Glider'
-        && firstRow.length === 3
-        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 3
+        && firstRow.length === 2
+        && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 2
         && firstCardStyle?.borderTopWidth === '1px'
-        && firstCardStyle?.borderRadius === '9px'
-        && firstCardStyle?.backgroundColor !== 'rgba(0, 0, 0, 0)'
+        && firstCardStyle?.borderRadius === '16px'
+        && (firstCardStyle?.backgroundImage !== 'none' || firstCardStyle?.backgroundColor !== 'rgba(0, 0, 0, 0)')
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'brand=' + document.querySelector('.apps-brand')?.textContent.trim()
         + ', cards=' + cards.length
@@ -297,7 +297,7 @@ try {
           && cards.every(card => getComputedStyle(card.querySelector(".project-description")).webkitLineClamp === "none")
           && grid.scrollWidth <= grid.clientWidth
           && cards.length === 9
-          && firstRow.length === 3,
+          && firstRow.length === 2,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
           + ', grid=' + grid.clientWidth + '/' + grid.scrollWidth

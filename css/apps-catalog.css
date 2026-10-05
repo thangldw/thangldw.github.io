@@ -105,3 +105,25 @@ html[data-theme="dark"] .portfolio-catalog { --apps-canvas: var(--color-canvas);
 .project-destination { display:flex; justify-content:space-between; min-height:32px; margin-top:auto; padding-top:10px; border-top:1px solid var(--apps-border); font-size:11px; }
 @media (min-width:701px) and (max-width:960px) { .catalog-group { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (max-width:700px) { .catalog-group { grid-template-columns:minmax(0,1fr); } .project-card { min-height:0; margin:0; padding:16px; } }
+/* Bento composition inspired by the supplied reference. */
+body.portfolio-catalog .apps-hub { width:min(1152px,calc(100% - 48px)); }
+.apps-brand { color:var(--apps-ink); font-size:18px; font-weight:600; letter-spacing:-.02em; }
+.apps-hero { text-align:center; padding:56px 0 24px; }
+.apps-hero h1 { max-width:760px; margin:14px auto; font-weight:600; }
+.apps-hero .lead { margin-inline:auto; }
+.apps-search { margin-inline:auto; border-radius:12px; }
+.apps-group-nav { justify-content:center; margin-top:24px; }
+.apps-group-nav button { border-radius:999px; border-color:var(--apps-border); background:var(--apps-surface); }
+.apps-project-grid { gap:24px; }
+.catalog-group-heading { padding-bottom:14px; }
+.project-card { position:relative; border-radius:16px; padding:22px; gap:12px; min-height:220px; }
+.project-card[data-project-id="ragops"], .project-card[data-project-id="neon-glider"] { grid-column:span 2; background:linear-gradient(115deg,var(--apps-surface) 65%,color-mix(in srgb,var(--project-accent) 8%,var(--apps-surface))); }
+.project-icon { color:var(--project-accent); }
+.project-card-top { gap:8px; }
+.project-title { font-size:18px; }
+.project-status { border:1px solid var(--apps-border); border-radius:5px; padding:2px 6px; font-family:var(--font-mono); font-size:10px; }
+.project-description { max-width:560px; font-size:13px; }
+.project-destination { color:var(--project-accent); }
+.project-card:hover { border-color:var(--project-accent); }
+@media(max-width:960px) { .project-card[data-project-id="ragops"], .project-card[data-project-id="neon-glider"] { grid-column:span 1; } }
+@media(max-width:700px) { .apps-hero { padding-top:36px; } .project-card { padding:18px; } }
