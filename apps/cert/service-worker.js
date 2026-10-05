@@ -1,5 +1,5 @@
 const APP_BASE = "/apps/cert/";
-const SHELL_CACHE = "cert-shell-8ac1d654dd9fdb4f";
+const SHELL_CACHE = "cert-shell-fontstable-20261005";
 const RUNTIME_CACHE = "cert-runtime-v1";
 const PRECACHE_URLS = [
   "/apps/cert/assets/AppShell-Bl3dNDla.css",

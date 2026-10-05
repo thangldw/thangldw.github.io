@@ -49,7 +49,7 @@ CASE_STUDY_SECTION_IDS = {
     "ownership-leadership",
     "limitations-evidence",
 }
-SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20260803font2"
+SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20261005stable"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
 SITE_FONT_LICENSE = Path("assets/fonts/Inter-LICENSE.txt")
 EXTERNAL_FONT_PATTERNS = {
