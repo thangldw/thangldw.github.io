@@ -1,0 +1,1 @@
+const view=new URLSearchParams(location.search).get('view');const hash=location.hash||({learn:'#learn',practice:'#practice',exam:'#exam',progress:'#stats'}[view]||'');location.replace('/pmp/'+location.search+hash);

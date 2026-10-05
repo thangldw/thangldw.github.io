@@ -41,6 +41,7 @@ class CdpPage {
     this.sequence = 0;
     this.pending = new Map();
     this.exceptions = [];
+    this.documentLoader = null;
     socket.addEventListener('message', event => {
       const message = JSON.parse(event.data);
       if (message.id && this.pending.has(message.id)) {
@@ -48,6 +49,8 @@ class CdpPage {
         this.pending.delete(message.id);
         if (message.error) rejectCall(new Error(message.error.message));
         else resolveCall(message.result);
+      } else if (message.method === 'Page.frameNavigated' && !message.params.frame.parentId) {
+        this.documentLoader = message.params.frame.loaderId;
       } else if (message.method === 'Runtime.exceptionThrown') {
         this.exceptions.push(message.params.exceptionDetails.text);
       }
@@ -90,7 +93,13 @@ class CdpPage {
       deviceScaleFactor: 1,
       mobile: false
     });
+    const previousLoader = this.documentLoader;
     await this.send('Page.navigate', { url });
+    const started = Date.now();
+    while (this.documentLoader === previousLoader) {
+      if (Date.now() - started > 12000) throw new Error(`Navigation did not commit: ${url}`);
+      await new Promise(resolveWait => setTimeout(resolveWait, 50));
+    }
     await this.waitUntil('document.readyState === "complete"');
   }
 

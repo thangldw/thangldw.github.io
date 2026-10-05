@@ -1,0 +1,4 @@
+const CACHE='pmp-studio-api-a3dd9f74718f9aa833abac65';const FILES=['./','./index.html','./style.css','./app.js','./core.js','./public.js','./manifest.webmanifest','./icon.svg','/css/site-shell.css?v=20261005stable','/assets/fonts/InterVariable.woff2'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('pmp-studio-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{let url=new URL(e.request.url);url.hash='';let allowed=FILES.map(f=>new URL(f,self.registration.scope).href);if(e.request.method==='GET'&&allowed.includes(url.href))e.respondWith(fetch(e.request).then(r=>{if(r.ok)caches.open(CACHE).then(c=>c.put(e.request,r.clone()));return r}).catch(()=>caches.match(e.request))) });
