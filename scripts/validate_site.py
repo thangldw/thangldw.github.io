@@ -378,10 +378,11 @@ def main() -> int:
         analytics_references = [
             reference for reference in parser.references if urlsplit(reference).path == ANALYTICS_SCRIPT
         ]
-        if parser.refreshes:
+        # The owner-held PMP app intentionally has no analytics or remote tracking.
+        if parser.refreshes or page.relative_to(ROOT).as_posix() == "apps/pmp/index.html":
             if analytics_references:
                 errors.append(
-                    f"{page.relative_to(ROOT)}: redirect pages must not load analytics"
+                    f"{page.relative_to(ROOT)}: redirect pages and the private PMP study app must not load analytics"
                 )
         elif len(analytics_references) != 1:
             errors.append(
