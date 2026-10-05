@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "projects": [
+    {
+      "id": "japan-pr-guide",
+      "title": "Japan PR Guide",
+      "description": "A bilingual English–Vietnamese HSP points calculator, permanent-residence route diagnosis, university bonus lookup, and route-specific evidence checklist for Japan.",
+      "featuredDescription": "Bilingual HSP scoring and permanent-residence planning for Japan.",
+      "href": "/apps/japan-pr-guide/",
+      "ariaLabel": "Open the Japan PR Guide",
+      "icon": "fa-file-lines",
+      "accent": "rust",
+      "status": "Live",
+      "tags": [
+        "Japan immigration",
+        "HSP points",
+        "PR checklist",
+        "English · Vietnamese"
+      ],
+      "category": "developer-tools",
+      "categoryLabel": "Japan immigration",
+      "cta": "Open guide",
+      "featured": false,
+      "catalogGroup": "utilities",
+      "catalogDescription": "Calculate HSP points and explore permanent-residence routes in Japan, in English or Vietnamese."
+    },
+    {
+      "id": "bizroll",
+      "title": "BizRoll",
+      "description": "A 2–4 player economic strategy board game with multiplayer rooms, AI opponents, auctions, market cycles, secret objectives, and Black Swan events.",
+      "featuredDescription": "A multiplayer economic strategy game shaped by auctions, AI opponents, market cycles, and Black Swan events.",
+      "href": "https://thangldw.github.io/bizroll/",
+      "ariaLabel": "Open BizRoll",
+      "icon": "fa-cubes-stacked",
+      "accent": "rose",
+      "status": "Live",
+      "tags": [
+        "Board game",
+        "Multiplayer",
+        "AI opponents",
+        "Market simulation"
+      ],
+      "category": "games",
+      "categoryLabel": "Strategy game",
+      "cta": "Open BizRoll",
+      "featured": false,
+      "catalogGroup": "experiments",
+      "catalogDescription": "Play an economic strategy board game with friends or AI opponents, auctions, and shifting markets."
+    },
+    {
+      "id": "neon-glider",
+      "title": "Neon Glider",
+      "description": "A lightweight Three.js endless runner through a neon tunnel. Dodge obstacles, collect energy, build a multiplier, and chase a longer run.",
+      "featuredDescription": "A fast neon tunnel run built with Three.js, energy pickups, obstacles, and persistent high scores.",
+      "href": "https://thangldw.github.io/neon-glider/",
+      "ariaLabel": "Play Neon Glider",
+      "icon": "fa-paper-plane",
+      "accent": "violet",
+      "status": "Live",
+      "tags": [
+        "Endless runner",
+        "Three.js",
+        "WebGL",
+        "Browser game"
+      ],
+      "category": "games",
+      "categoryLabel": "Endless runner",
+      "cta": "Play Neon Glider",
+      "featured": false,
+      "catalogGroup": "experiments",
+      "catalogDescription": "Dodge obstacles and collect energy in a fast neon tunnel run built with Three.js."
+    },
+    {
+      "id": "toolbox",
+      "title": "Toolbox",
+      "description": "A free, local-first macOS app for reclaiming disk space, understanding filesystem changes, and recovering reviewed cleanups from Trash.",
+      "featuredDescription": "One review-first macOS app for disk cleanup, filesystem change evidence, and recoverable actions.",
+      "href": "https://github.com/thangldw/toolbox/releases/tag/v2.0.0",
+      "ariaLabel": "Download Toolbox v2.0.0 for macOS from GitHub Releases",
+      "icon": "fa-cubes-stacked",
+      "accent": "blue",
+      "status": "v2.0.0",
+      "tags": [
+        "macOS",
+        "Review-first",
+        "Recoverable cleanup",
+        "Local-first"
+      ],
+      "category": "developer-tools",
+      "categoryLabel": "macOS utility",
+      "cta": "Download Toolbox",
+      "featured": true,
+      "featuredOrder": 4,
+      "catalogGroup": "utilities",
+      "catalogDescription": "Reclaim disk space and inspect filesystem changes, with review before cleanup and recovering reviewed cleanups from Trash."
+    },
+    {
+      "id": "ragops",
+      "title": "RAGOps",
+      "description": "An evaluation and release-gate platform for production RAG and agent systems. Compare a candidate against an accepted baseline, detect quality and safety regressions, and produce auditable reports.",
+      "featuredDescription": "Evaluation and release gates for production RAG and agent systems.",
+      "href": "https://github.com/thangldw/ragops",
+      "caseStudyHref": "/case-studies/ragops/",
+      "ariaLabel": "Open RAGOps on GitHub",
+      "icon": "fa-shield-halved",
+      "accent": "green",
+      "status": "v2.0.2",
+      "tags": [
+        "AI evaluation",
+        "Red team",
+        "FastAPI",
+        "CI/CD"
+      ],
+      "category": "data-ai",
+      "categoryLabel": "AI evaluation",
+      "cta": "Open on GitHub",
+      "featured": true,
+      "featuredOrder": 0,
+      "catalogGroup": "engineering",
+      "evidenceLabel": "Released software · synthetic regression evidence",
+      "catalogDescription": "Compare RAG and agent releases, catch regressions, and inspect the evidence behind a release decision."
+    },
+    {
+      "id": "maintainer-defense",
+      "title": "Awesome Maintainer Defense",
+      "description": "A read-only, reversible defense system for open-source maintainers. Audit repository governance, GitHub Actions, and moderation risk offline, then review generated patches and deployable defense profiles.",
+      "featuredDescription": "Offline, reversible security audits and defense profiles for open-source maintainers.",
+      "href": "https://github.com/thangldw/awesome-maintainer-defense",
+      "ariaLabel": "Open Awesome Maintainer Defense on GitHub",
+      "icon": "fa-shield-halved",
+      "accent": "rust",
+      "status": "v1.1.1",
+      "tags": [
+        "OSS security",
+        "Offline auditor",
+        "Supply chain",
+        "Python"
+      ],
+      "category": "developer-tools",
+      "categoryLabel": "OSS security",
+      "cta": "Open on GitHub",
+      "featured": true,
+      "featuredOrder": 5,
+      "catalogGroup": "engineering",
+      "catalogDescription": "Review repository security, GitHub Actions, and moderation risks with an offline, reversible auditor."
+    },
+    {
+      "id": "proofline",
+      "title": "Proofline",
+      "description": "Local-first engineering decision memory for recovering why systems were built a certain way. It preserves immutable source versions and keeps every grounded answer traceable to exact source lines.",
+      "featuredDescription": "Traceable decision memory with immutable sources and exact citations.",
+      "href": "https://github.com/thangldw/proofline",
+      "caseStudyHref": "/case-studies/proofline/",
+      "ariaLabel": "Open Proofline on GitHub",
+      "icon": "fa-link",
+      "accent": "indigo",
+      "status": "v2.0.2",
+      "tags": [
+        "Local-first",
+        "Provenance",
+        "Exact citations",
+        "SQLite FTS5"
+      ],
+      "category": "developer-tools",
+      "categoryLabel": "Engineering memory",
+      "cta": "Open on GitHub",
+      "featured": true,
+      "featuredOrder": 1,
+      "catalogGroup": "engineering",
+      "evidenceLabel": "Released software · synthetic regression evidence",
+      "catalogDescription": "Recover why a system was built a certain way, with answers linked to exact source lines."
+    },
+    {
+      "id": "kakeflow",
+      "title": "KakeFlow",
+      "description": "An open-source, MIT-licensed local-first household finance app for macOS. It turns bank, card, wallet, receipt, spreadsheet, PDF, and securities data into a reviewable ledger with source evidence and reconciliation.",
+      "featuredDescription": "Open-source local-first household finance for macOS, with reviewable reconciliation and source evidence.",
+      "href": "https://thangldw.github.io/kakeflow/",
+      "caseStudyHref": "/case-studies/kakeflow/",
+      "ariaLabel": "Open the KakeFlow website",
+      "icon": "fa-wallet",
+      "accent": "ochre",
+      "status": "v1.2.1",
+      "tags": [
+        "Household finance",
+        "Local-first",
+        "MIT License",
+        "Tauri · React"
+      ],
+      "category": "personal-finance",
+      "categoryLabel": "Household finance",
+      "cta": "Open KakeFlow",
+      "featured": true,
+      "featuredOrder": 2,
+      "catalogGroup": "utilities",
+      "evidenceLabel": "Released product · synthetic workflow evidence",
+      "catalogDescription": "Bring household finances into a local macOS ledger, with reconciliation and source evidence."
+    }
+  ],
+  "languageCollection": {
+    "title": "Certification Library",
+    "description": "Focused dashboards, exam practice, notes, and local learning history for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.",
+    "href": "/apps/cert/",
+    "caseStudyHref": "/case-studies/certification-library/",
+    "featuredOrder": 3,
+    "label": "9 certification programs",
+    "evidenceLabel": "Public application · local quality-gate evidence",
+    "featuredDescription": "A validated content pipeline with exam practice, notes, and learning history stored locally."
+  },
+  "learningCollections": [
+    {
+      "id": "certification-study",
+      "title": "Certification Library",
+      "description": "One focused study space for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.",
+      "href": "/apps/cert/",
+      "ariaLabel": "Open the Certification Library",
+      "icon": "fa-graduation-cap",
+      "accent": "rust",
+      "status": "Collection",
+      "tags": [
+        "9 certifications",
+        "Exam practice",
+        "Local-first"
+      ],
+      "category": "certification-study",
+      "categoryLabel": "Exam preparation",
+      "cta": "Open library",
+      "catalogGroup": "learning"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Apps — Thang Luu</title>
+  <meta name="description" content="Independent engineering systems, games, and learning programs by Thang Luu, shared for feedback, collaboration, and continued learning.">
+  <link rel="canonical" href="https://thangldw.github.io/apps/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Apps — Thang Luu">
+  <meta property="og:description" content="Practical engineering systems, games, and learning programs, shared for feedback, collaboration, and continued learning.">
+  <meta property="og:url" content="https://thangldw.github.io/apps/">
+  <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css?v=20260725f">
+  <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
+  <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261005c">
+  <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i">
+  <link rel="stylesheet" href="/css/site-shell.css?v=20260803font2">
+  <script src="/js/site-shell.js?v=20260727b"></script>
+  <script defer src="/js/support-dialog.js?v=20260803e"></script>
+  <script defer src="/js/analytics.js"></script>
+</head>
+<body class="site-page portfolio-catalog" data-page-kind="product" data-site-shell="none">
+  <a class="skip-link" href="#catalog">Skip to projects</a>
+
+  <main class="apps-hub apps-main" id="main">
+    <header class="apps-topbar">
+      <span class="apps-brand">APP LIBRARY</span>
+      <div class="apps-header-actions">
+        <a class="apps-home-link" href="/">Back to portfolio</a>
+        <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <section class="apps-hero" aria-labelledby="appsTitle">
+      <span class="eyebrow">MADE BY THANG LUU</span>
+      <h1 id="appsTitle">Tools for work, learning<br>and a little play.</h1>
+      <p class="lead">Small tools and independent projects. Find something useful, explore how it works, or try it out.</p>
+    </section>
+
+    <section class="apps-browse" aria-label="Find a project">
+      <label class="apps-search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span class="sr-only">Search apps and projects</span>
+        <input id="projectSearch" type="search" placeholder="Find an app, topic, or tool…" disabled>
+      </label>
+      <nav class="apps-group-nav" aria-label="Browse project groups">
+        <button type="button" data-group="all" aria-pressed="true" disabled>All</button>
+        <button type="button" data-group="engineering" aria-pressed="false" disabled>Engineering</button>
+        <button type="button" data-group="utilities" aria-pressed="false" disabled>Utilities</button>
+        <button type="button" data-group="learning" aria-pressed="false" disabled>Learning</button>
+        <button type="button" data-group="experiments" aria-pressed="false" disabled>Experiments</button>
+      </nav>
+    </section>
+
+    <section class="apps-projects" id="catalog" aria-labelledby="projectLibraryHeading">
+      <div class="apps-project-heading">
+        <h2 class="sr-only" id="projectLibraryHeading">Project library</h2>
+        <span id="projectCount" role="status" aria-live="polite">Loading projects</span>
+      </div>
+      <div class="apps-project-grid" id="projectIndex" aria-label="Project library grouped by purpose, with engineering projects first"></div>
+      <div class="catalog-empty" id="catalogEmpty" hidden>
+        <h2>Projects are unavailable</h2>
+        <p>Please try again shortly.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/projects-data.js?v=json-v2"></script>
+  <script src="/js/apps-catalog.js?v=20261005b"></script>
+</body>
+</html>

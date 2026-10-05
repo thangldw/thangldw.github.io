@@ -1,0 +1,940 @@
+/* Portfolio app design system
+   Visual source: the Home resume — neutral canvas, semantic accents,
+   restrained borders, softly rounded controls, and local system fonts. */
+
+:root {
+  --portfolio-bg: var(--color-canvas, #fbfaf6);
+  --portfolio-surface: var(--color-surface, #fbfaf6);
+  --portfolio-surface-raised: var(--color-surface-raised, #ffffff);
+  --portfolio-surface-2: var(--color-surface-subtle, #e9e6dd);
+  --portfolio-ink: var(--color-text, #1d211e);
+  --portfolio-body: var(--color-text-body, #505750);
+  --portfolio-muted: var(--color-text-muted, #697169);
+  --portfolio-border: var(--color-border, #d9d5cb);
+  --portfolio-border-strong: var(--color-border-strong, #bbb8ad);
+  --portfolio-accent: var(--color-accent, #a83a00);
+  --portfolio-accent-ink: var(--color-on-accent, #ffffff);
+  --portfolio-accent-soft: var(--color-accent-soft, #fff2e8);
+  --portfolio-brand: var(--color-brand, #4a5aad);
+  --portfolio-brand-soft: var(--color-brand-soft, #eef0ff);
+  --portfolio-orange: var(--color-accent, #a83a00);
+  --portfolio-orange-soft: var(--color-accent-soft, #fff2e8);
+  --portfolio-success: var(--color-success, #237447);
+  --portfolio-success-soft: var(--color-success-soft, #eaf6ef);
+  --portfolio-danger: var(--color-danger, #b44545);
+  --portfolio-danger-soft: var(--color-danger-soft, #fff0f0);
+  --portfolio-warning: var(--color-warning, #9a5b00);
+  --portfolio-warning-soft: var(--color-warning-soft, #fffbeb);
+  --portfolio-info: var(--color-info, #236aa8);
+  --portfolio-info-soft: var(--color-info-soft, #eef6ff);
+  --portfolio-radius: 8px;
+  --portfolio-content: 1328px;
+  --portfolio-font-sans: var(--font-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
+  --portfolio-font-jp-sans: var(--font-jp-sans, "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif);
+  --portfolio-font-serif: var(--font-serif, ui-serif, Georgia, "Times New Roman", serif);
+  --portfolio-font-jp-serif: var(--font-jp-serif, "Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif);
+  --portfolio-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+body.portfolio-app,
+body.portfolio-catalog {
+  margin: 0;
+  background: var(--portfolio-bg) !important;
+  color: var(--portfolio-ink) !important;
+  font-family: var(--font-sans, var(--portfolio-font-sans)) !important;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.portfolio-app *,
+body.portfolio-catalog * {
+  box-sizing: border-box;
+}
+
+body.portfolio-app :where(h1, h2, h3, h4, button, input, select, textarea),
+body.portfolio-catalog :where(h1, h2, h3, h4, button, input, select, textarea) {
+  font-family: var(--font-sans, var(--portfolio-font-sans));
+}
+
+body.portfolio-app :where([lang="ja"]),
+body.portfolio-catalog :where([lang="ja"]) {
+  font-family: var(--font-jp-sans, var(--portfolio-font-jp-sans));
+}
+
+body.portfolio-app :where(.font-mono, code, kbd, pre),
+body.portfolio-catalog :where(.font-mono, code, kbd, pre) {
+  font-family: var(--font-mono, var(--portfolio-font-mono)) !important;
+}
+
+body.portfolio-app :where(a, button, input, select, textarea):focus-visible,
+body.portfolio-catalog :where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--portfolio-accent) !important;
+  outline-offset: 3px;
+}
+
+body.portfolio-app > :where(main, .container, .main, .wrap, .cnt) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body.portfolio-app > :where(main, .container, .main, .wrap, .cnt):first-of-type {
+  padding-top: 40px;
+}
+
+/* Semantic wrapper for legacy single-file apps. Their original layout lives in
+   nested containers, so the landmark must not become a second layout shell. */
+body.portfolio-app > main.semantic-main {
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+body.portfolio-app .semantic-main :where(.brand, .header-title) {
+  margin-block: 0;
+}
+
+body[data-language-app="n1-reading-75"] h1.brand {
+  color: var(--ink-soft) !important;
+  font-size: 13px !important;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: .12em !important;
+}
+
+body.portfolio-app :where(h1, h2, h3, h4) {
+  color: var(--portfolio-ink) !important;
+  letter-spacing: -0.025em;
+}
+
+body.portfolio-app :where(p, .lead, .sub, .muted, .header-sub, .hdr-sub) {
+  color: var(--portfolio-body);
+}
+
+body.portfolio-app :where(.eyebrow, .section-label, .filter-label, .mode-label, .cnt-lbl, .qlbl, .label) {
+  color: var(--portfolio-accent) !important;
+  font-family: var(--font-mono, var(--portfolio-font-mono)) !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.portfolio-app :where(input, select, textarea) {
+  border: 1px solid var(--portfolio-border-strong) !important;
+  border-radius: 8px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body.portfolio-app :where(button, .btn, label.btn) {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  letter-spacing: 0 !important;
+}
+
+body.portfolio-app :where(.skip-link),
+body.portfolio-catalog :where(.skip-link) {
+  border-radius: 8px !important;
+}
+
+/* Shared button language. */
+body.portfolio-app :is(
+  .btn, .hbtn, .mbtn, .filter-btn, .load-more, .mtab, .stab, .ptab, .tab,
+  .bstart, .bnext, .pbtn, .back-btn, .modal-btn, .done-btn, .next-btn,
+  .prev-btn, .review-btn, .restart-btn, .clear-btn, .back-top-btn, .toggle-btn,
+  .set-btn, .choice-btn, .navbtn, .jumpBtn, .jump-btn, .nav-btn, .shuffle-btn,
+  .btn-nav, .btn-know, .btn-unknow, .speakBtn, .speak-btn, .spk, .spk-btn
+) {
+  min-height: 40px;
+  border: 1px solid var(--portfolio-border-strong) !important;
+  border-radius: 8px !important;
+  background: var(--portfolio-surface-raised) !important;
+  color: var(--portfolio-body) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+body.portfolio-app :is(
+  .btn-primary, .primary, .next-btn, .bstart, .bnext, .done-btn, .restart-btn
+) {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent-ink) !important;
+}
+
+body.portfolio-app :is(
+  .pbtn.on, .filter-btn.active, .mtab.on, .stab.on, .ptab.on,
+  .tab.active, .tab.is-active, .ybtn.on
+) {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-app :is(
+  .btn, .hbtn, .mbtn, .filter-btn, .load-more, .mtab, .stab, .ptab, .tab,
+  .bstart, .bnext, .pbtn, .back-btn, .modal-btn, .done-btn, .next-btn,
+  .prev-btn, .review-btn, .restart-btn, .clear-btn, .back-top-btn, .toggle-btn,
+  .set-btn, .choice-btn, .navbtn, .jumpBtn, .jump-btn, .nav-btn, .shuffle-btn,
+  .btn-nav, .btn-know, .btn-unknow
+):hover {
+  border-color: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent) !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+body.portfolio-app :is(.btn-primary, .primary, .next-btn, .bstart, .bnext, .done-btn, .restart-btn):hover {
+  color: var(--portfolio-accent-ink) !important;
+  filter: brightness(1.06) !important;
+}
+
+body.portfolio-app :is(
+  .pbtn.on, .filter-btn.active, .mtab.on, .stab.on, .ptab.on,
+  .tab.active, .tab.is-active, .ybtn.on
+):hover {
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-app :is(.btn-primary, .primary) kbd {
+  border-color: color-mix(in srgb, var(--portfolio-accent-ink) 35%, transparent);
+  background: color-mix(in srgb, var(--portfolio-accent-ink) 12%, transparent);
+  color: inherit;
+}
+
+/* Canonical shell for ordinary content and utility pages.
+   Product landing pages and solution case studies may use a purpose-built
+   composition, but should still consume the shared semantic tokens. */
+body.content-page > .content-shell {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+  padding: 0 0 64px;
+}
+
+body.content-page .content-hero {
+  padding: 48px 0 32px;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+body.content-page .content-eyebrow {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--portfolio-accent);
+  font: 650 11px/1.4 var(--font-mono, var(--portfolio-font-mono));
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+body.content-page .content-hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(38px, 5vw, 60px) !important;
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -.045em;
+}
+
+body.content-page .content-lead {
+  max-width: 760px;
+  margin: 16px 0 0;
+  color: var(--portfolio-body);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+body.content-page .content-section {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+body.content-page .content-section > :first-child {
+  margin-top: 0;
+}
+
+body.content-page .content-section > :last-child {
+  margin-bottom: 0;
+}
+
+body.content-page .content-section h2 {
+  margin: 0 0 14px;
+  font-size: clamp(24px, 3vw, 32px) !important;
+}
+
+body.content-page .content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+body.content-page .content-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--portfolio-border);
+  border-radius: var(--portfolio-radius);
+  background: var(--portfolio-surface-raised);
+}
+
+body.content-page .content-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px !important;
+}
+
+body.content-page .content-card p {
+  margin: 0;
+  color: var(--portfolio-body);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+body.content-page .content-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+body.content-page .content-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 16px;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  body.content-page > .content-shell {
+    width: calc(100% - 32px);
+    padding-bottom: 48px;
+  }
+
+  body.content-page .content-hero {
+    padding: 32px 0 24px;
+  }
+
+  body.content-page .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Shared Language app frame. */
+body[data-app-kind="language"] {
+  --c1: var(--portfolio-accent);
+  --c2: var(--portfolio-orange);
+  --accent: var(--portfolio-accent);
+  --bg: var(--portfolio-bg);
+  --surface: var(--portfolio-surface);
+  --text: var(--portfolio-ink);
+  --muted: var(--portfolio-muted);
+  --border: var(--portfolio-border);
+}
+
+body[data-app-kind="language"] > :where(main, .container, .main, .wrap, .cnt) {
+  padding-bottom: 48px;
+}
+
+body[data-app-kind="language"] :is(.header, .hdr, .intro) {
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--portfolio-border) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.intro, .header, .hdr, .container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  text-align: left !important;
+}
+
+body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1):not(.exam-title) {
+  margin-top: 0;
+  font-size: clamp(28px, 3vw, 40px) !important;
+  font-weight: 600 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body[data-app-kind="language"] :is(.container > h1, .main > h1, .wrap > h1, .cnt > h1) {
+  margin-bottom: 22px !important;
+  padding: 0 0 18px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--portfolio-border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.container > h1, .main > h1, .wrap > h1, .cnt > h1) span {
+  color: var(--portfolio-accent) !important;
+  font-weight: 500;
+}
+
+body[data-app-kind="language"] :is(.filter-bar, .ctrl, .tabs, .mtabs, .stabs, .ptab-bar, .modes, .topbar, .toolbar, .year-bar, .period-bar, .catalog-controls) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.badge, .ptag, .rtag, .etag, .hbadge, .n1b, .qbadge, .wbadge, .set-tag, .grammarTag, .pair-badge, .syn-badge, .trap-tag) {
+  border: 1px solid var(--portfolio-border-strong) !important;
+  border-radius: 3px !important;
+  background: transparent !important;
+  color: var(--portfolio-muted) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.active, .on, .pri, .primary) > :is(.badge, .ptag, .rtag),
+body[data-app-kind="language"] :is(.badge-blue, .active-orange) {
+  border-color: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-app-kind="language"] :is(.opt, .choice, .m4o, .sopt) {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: 10px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-ink) !important;
+  box-shadow: none !important;
+}
+
+body[data-app-kind="language"] :is(.opt, .choice, .m4o, .sopt):hover {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent-soft) !important;
+}
+
+body[data-app-kind="language"] :is(.correct, .ok, .good) {
+  border-color: var(--portfolio-success) !important;
+  background: var(--portfolio-success-soft) !important;
+  color: var(--portfolio-success) !important;
+}
+
+body[data-app-kind="language"] :is(.wrong, .ng, .bad) {
+  border-color: var(--portfolio-danger) !important;
+  background: var(--portfolio-danger-soft) !important;
+  color: var(--portfolio-danger) !important;
+}
+
+/* Dense language reference collections. */
+body[data-language-app="n1-kanji-analysis"] .container,
+body[data-language-app="n1-vocabulary-tabs"] .container,
+body[data-language-app="n1-vocabulary-exams"] .container,
+body[data-language-app="n1-vocabulary-paraphrase"] .container {
+  max-width: var(--portfolio-content) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.vocab-card, .card-detail),
+body[data-language-app="n1-vocabulary-tabs"] :is(.wcard, .ptu-card, .pre, .detail),
+body[data-language-app="n1-vocabulary-exams"] :is(.card, .qcard, .ra-card),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.card, .qcard) {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .vocab-card,
+body[data-language-app="n1-vocabulary-tabs"] .wcard,
+body[data-language-app="n1-vocabulary-exams"] .card,
+body[data-language-app="n1-vocabulary-paraphrase"] .card {
+  overflow: hidden;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.card-round, .section-label),
+body[data-language-app="n1-vocabulary-tabs"] :is(.sec-t, .cnt-lbl, .dtg-h, .pre-h),
+body[data-language-app="n1-vocabulary-exams"] :is(.cnt-lbl, .wr-lbl, .ra-header),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.cnt, .rtag) {
+  color: var(--portfolio-accent) !important;
+  font-family: var(--font-mono, var(--portfolio-font-mono)) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-kanji,
+body[data-language-app="n1-vocabulary-tabs"] :is(.wk, .key, .n1-star),
+body[data-language-app="n1-vocabulary-exams"] :is(.wk, .qwd, .ra-word),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.wk, .qwd) {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.colloc-section, .syn-section, .wrong-section, .confuse-box),
+body[data-language-app="n1-vocabulary-tabs"] :is(.syi, .co-wrap, .ex-block, .dtg-b, .pre-b, .ptu-col),
+body[data-language-app="n1-vocabulary-exams"] :is(.syi, .co-wrap, .ex-block, .hint-box, .qvi-box),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.syi, .exp, .res) {
+  border-color: var(--portfolio-border) !important;
+  border-radius: 3px !important;
+  background: var(--portfolio-surface-2) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] :is(.vi-row, .syi, .co-item, .ex-block, .dtg-b, .pre-b, .pre-pb, .ptu-col),
+body[data-language-app="n1-vocabulary-exams"] :is(.vi-row, .syi, .co-item, .ex-block, .hint-box, .qvi-box, .wrongs-sec),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.vi, .syi, .exp, .res) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-body) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syn-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 6px;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi {
+  min-width: 0;
+  gap: 2px;
+  padding: 8px 10px;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi.pri,
+body[data-language-app="n1-vocabulary-exams"] .syi.pri,
+body[data-language-app="n1-vocabulary-paraphrase"] .syi.pri {
+  border: 1px solid color-mix(in srgb, var(--portfolio-accent) 38%, var(--portfolio-border)) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi.pri .sw,
+body[data-language-app="n1-vocabulary-exams"] .syi.pri .sw,
+body[data-language-app="n1-vocabulary-paraphrase"] .syi.pri .sw {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] .syi.pri :is(.sh, .sm),
+body[data-language-app="n1-vocabulary-exams"] .syi.pri :is(.sh, .sm),
+body[data-language-app="n1-vocabulary-paraphrase"] .syi.pri :is(.sh, .sm) {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] :is(.m1, .m2, .m3, .m4, .rd, .gr, .adv, .adj),
+body[data-language-app="n1-vocabulary-exams"] :is(.m1, .m2, .m3, .m4, .rd, .gr, .adv, .adj),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.m1, .m2, .m3, .m4) {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-header,
+body[data-language-app="n1-vocabulary-tabs"] :is(.hdr-row, .wrow),
+body[data-language-app="n1-vocabulary-exams"] :is(.h-row, .wrow),
+body[data-language-app="n1-vocabulary-paraphrase"] .wrow {
+  border-bottom-color: var(--portfolio-border) !important;
+}
+
+/* Quiz, flashcard, ordering and reading surfaces. */
+body[data-language-app="n1-kanji-collocations"] .main,
+body[data-language-app="n1-vocabulary-context"] .container,
+body[data-language-app="n1-grammar-flashcards"] .wrap,
+body[data-language-app="n1-grammar-exams"] .cnt,
+body[data-language-app="n1-grammar-sentence-order"] .container,
+body[data-language-app="n1-grammar-sentence-order-drill"] .wrap,
+body[data-language-app="n1-reading-75"] .wrap,
+body[data-language-app="n1-reading-mondai9"] .container {
+  max-width: 960px !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-kanji-collocations"] > .header {
+  padding-top: 32px;
+}
+
+body[data-language-app="n1-kanji-collocations"] .header-title {
+  color: var(--portfolio-ink) !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.04em;
+}
+
+body[data-language-app="n1-kanji-collocations"] .legend {
+  justify-content: flex-start !important;
+  color: var(--portfolio-muted) !important;
+}
+
+body[data-language-app="n1-reading-75"] > .topbar,
+body[data-language-app="n1-reading-75"] > .progress-wrap {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.stats, .q-card, .set-examples, .modal-box),
+body[data-language-app="n1-vocabulary-context"] :is(.wcard, .qcard, .scorebox),
+body[data-language-app="n1-grammar-flashcards"] :is(.card, .done-screen),
+body[data-language-app="n1-grammar-exams"] :is(.card, .study-card, .wrong-card, .traps-box),
+body[data-language-app="n1-grammar-sentence-order"] :is(.card, .set-grid, .result),
+body[data-language-app="n1-grammar-sentence-order-drill"] :is(.card, .feedback, .explain),
+body[data-language-app="n1-reading-75"] :is(.card, .chain-box, .summary),
+body[data-language-app="n1-reading-mondai9"] :is(.card, .question-block, .explain-box, .vocab-box) {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stats {
+  gap: 0 !important;
+  overflow: hidden;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat {
+  border-right: 1px solid var(--portfolio-border);
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat:last-child {
+  border-right: 0;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card {
+  border-top: 3px solid var(--portfolio-orange) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card-area,
+body[data-language-app="n1-grammar-flashcards"] #reviewControls,
+body[data-language-app="n1-grammar-flashcards"] .controls {
+  width: min(100%, 720px);
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .btn-know {
+  border-color: var(--portfolio-success) !important;
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .btn-unknow {
+  border-color: var(--portfolio-danger) !important;
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .set-grid {
+  gap: 0 !important;
+  overflow: hidden;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .set-btn {
+  border-width: 0 1px 1px 0 !important;
+  border-radius: 0 !important;
+}
+
+body[data-language-app="n1-reading-75"] .topbar,
+body[data-language-app="n1-reading-mondai9"] .toolbar {
+  border: 1px solid var(--portfolio-border) !important;
+  border-radius: var(--portfolio-radius) !important;
+  background: var(--portfolio-surface-2) !important;
+}
+
+body[data-language-app="n1-reading-75"] .note,
+body[data-language-app="n1-reading-mondai9"] .app-note {
+  border-left: 3px solid var(--portfolio-orange) !important;
+  border-radius: 0 !important;
+  background: var(--portfolio-orange-soft) !important;
+  color: var(--portfolio-body) !important;
+}
+
+/* Theme-safe overrides for legacy app surfaces that used fixed light colors. */
+body[data-language-app="n1-vocabulary-context"] .sent,
+body[data-language-app="n1-vocabulary-context"] .optwrap,
+body[data-language-app="n1-vocabulary-context"] .pb,
+body[data-language-app="n1-vocabulary-paraphrase"] .synb,
+body[data-language-app="n1-reading-75"] .passage,
+body[data-language-app="n1-grammar-exams"] :is(.tts-bar, .prog-bar),
+body[data-language-app="n1-grammar-sentence-order-drill"] :is(.nav.secondary, .period),
+body[data-language-app="n1-reading-mondai9"] .underline-q,
+body[data-language-app="n1-kanji-collocations"] :is(.legend, .progress-bar) {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-vocabulary-context"] .sent,
+body[data-language-app="n1-reading-75"] .passage {
+  border-left-color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] .synb,
+body[data-language-app="n1-reading-mondai9"] .underline-q,
+body[data-language-app="n1-kanji-collocations"] :is(.q-meaning, .colloc-chip) {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 35%, var(--portfolio-border)) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] #appHeader {
+  border-color: var(--portfolio-border) !important;
+  background: var(--portfolio-bg) !important;
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-reading-75"] :is(.brand, .jump-label, .progress-label, .bai-date, .source),
+body[data-language-app="n1-grammar-exams"] .tts-label,
+body[data-language-app="n1-vocabulary-paraphrase"] .mng {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] .synb-lbl,
+body[data-language-app="n1-vocabulary-paraphrase"] .synl,
+body[data-language-app="n1-vocabulary-context"] :is(.blank, .scorebox),
+body[data-language-app="n1-kanji-analysis"] .card-reading,
+body[data-language-app="n1-reading-mondai9"] :is(.bai-title, .v-title) {
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] .co-lbl {
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] .wh,
+body[data-language-app="n1-grammar-exams"] .tag-num,
+body[data-language-app="n1-kanji-analysis"] .card-round {
+  border-color: color-mix(in srgb, var(--portfolio-accent) 35%, var(--portfolio-border)) !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.tag-yr, .opt-num) {
+  background: var(--portfolio-surface-2) !important;
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.jp, .jp-s),
+body[data-language-app="n1-reading-mondai9"] .q-text,
+body[data-language-app="n1-kanji-analysis"] .card-example {
+  color: var(--portfolio-ink) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-example {
+  border-left-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-surface-2) !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .hl-connective.show {
+  color: #3a2c20 !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] :is(.layer-hint, .answer-legend, .passage .note, .subtitle) {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .answer-legend > span > span {
+  color: #3a2c20 !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .q-num {
+  background: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent-ink) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-example strong {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .q-context {
+  border-color: color-mix(in srgb, var(--portfolio-orange) 38%, var(--portfolio-border)) !important;
+  background: var(--portfolio-orange-soft) !important;
+  color: var(--portfolio-orange) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .q-context b {
+  color: inherit !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat-val.red {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .stat-val.green,
+body[data-app-route="pipeline"] .stat.ok .v {
+  color: var(--portfolio-success) !important;
+}
+
+body[data-app-route="pipeline"] :is(.cov-row.lag .meta, .stat.warn .v) {
+  color: var(--portfolio-orange) !important;
+}
+
+body[data-app-route="pipeline"] .stat.bad .v {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.cnt-info, .prog-info, .tag-prog) {
+  color: var(--portfolio-muted) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-info [style*="#16a34a"] {
+  color: var(--portfolio-success) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-info [style*="#ef4444"] {
+  color: var(--portfolio-danger) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] .clls {
+  color: var(--portfolio-body) !important;
+}
+
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.wrow, .qwd) button {
+  color: var(--portfolio-accent) !important;
+}
+
+/* Apps catalog: retain its information architecture, align the visual rhythm. */
+body.portfolio-catalog .apps-intro .eyebrow,
+body.portfolio-catalog .apps-intro h1 em,
+body.portfolio-catalog .apps-cat-head .cat-jp,
+body.portfolio-catalog .app-card .ac-open {
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-catalog .apps-intro {
+  padding: 34px 0 36px;
+  border-bottom: 1px solid var(--portfolio-border);
+}
+
+body.portfolio-catalog .catalog-controls {
+  border-top: 0 !important;
+}
+
+body.portfolio-catalog .filter {
+  border-color: var(--portfolio-border-strong) !important;
+  border-radius: 8px !important;
+  background: var(--portfolio-surface) !important;
+  color: var(--portfolio-body) !important;
+}
+
+body.portfolio-catalog .filter.active {
+  border-color: var(--portfolio-accent) !important;
+  background: var(--portfolio-accent) !important;
+  color: var(--portfolio-accent-ink) !important;
+}
+
+body.portfolio-catalog .app-card {
+  background: transparent !important;
+  border-color: var(--portfolio-border) !important;
+}
+
+body.portfolio-catalog .app-card:hover {
+  background: var(--portfolio-surface) !important;
+  border-color: var(--portfolio-border-strong) !important;
+}
+
+body.portfolio-catalog .app-card .ac-icon {
+  border: 1px solid var(--portfolio-border);
+  border-radius: 8px !important;
+  background: var(--portfolio-accent-soft) !important;
+  color: var(--portfolio-accent) !important;
+}
+
+body.portfolio-catalog .apps-cat[data-category="language"] .app-card .ac-icon {
+  background: var(--portfolio-orange-soft) !important;
+  color: var(--portfolio-orange) !important;
+}
+
+body.portfolio-catalog .app-card .ac-status,
+body.portfolio-catalog .app-card .ac-tag {
+  border-radius: 3px !important;
+}
+
+@media (max-width: 960px) {
+  body.portfolio-app .tw-header .tw-wrap {
+    width: calc(100% - 64px);
+  }
+
+  body.portfolio-app > :where(main, .container, .main, .wrap, .cnt) {
+    width: calc(100% - 64px);
+  }
+
+  body[data-language-app="n1-kanji-collocations"] > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 64px);
+  }
+
+  body[data-app-route="pipeline"] .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-app-route="pipeline"] .stat:nth-child(3n) {
+    border-right: 1px solid var(--portfolio-border) !important;
+  }
+
+  body[data-app-route="pipeline"] .stat:nth-child(2n) {
+    border-right: 0 !important;
+  }
+}
+
+@media (max-width: 680px) {
+  body.portfolio-app .tw-header .tw-wrap {
+    width: calc(100% - 32px);
+  }
+
+  body.portfolio-app > :where(main, .container, .main, .wrap, .cnt) {
+    width: calc(100% - 32px);
+  }
+
+  body[data-language-app="n1-kanji-collocations"] > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 32px);
+  }
+
+  body.portfolio-app > :where(main, .container, .main, .wrap, .cnt):first-of-type {
+    padding-top: 28px;
+  }
+
+  body[data-app-kind="language"] :is(.header h1, .hdr h1, .intro h1, .container > h1, .main > h1, .wrap > h1, .cnt > h1):not(.exam-title) {
+    font-size: 30px !important;
+  }
+}
+
+/* Bridge the original direct-child layout contract after legacy pages gain a
+   semantic main landmark. This preserves their rendered geometry exactly. */
+body.portfolio-app > main.semantic-main {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.portfolio-app > main.semantic-main > :where(.container, .main, .wrap, .cnt) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-app-kind="language"] > main.semantic-main > :where(.container, .main, .wrap, .cnt) {
+  padding-bottom: 48px;
+}
+
+body[data-language-app="n1-kanji-collocations"] > main.semantic-main > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+body[data-language-app="n1-reading-75"] > main.semantic-main > :is(.topbar, .progress-wrap) {
+  width: min(var(--portfolio-content), calc(100% - 112px));
+  margin-inline: auto;
+}
+
+body[data-language-app="n1-kanji-collocations"] > main.semantic-main > .header {
+  padding-top: 32px;
+}
+
+body[data-app-kind="language"][data-language-app="n1-kanji-collocations"] .semantic-main .header h1.header-title {
+  color: var(--portfolio-ink) !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+  line-height: 1.55 !important;
+  letter-spacing: -0.04em !important;
+}
+
+@media (max-width: 960px) {
+  body.portfolio-app > main.semantic-main > :where(.container, .main, .wrap, .cnt),
+  body[data-language-app="n1-kanji-collocations"] > main.semantic-main > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > main.semantic-main > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 680px) {
+  body.portfolio-app > main.semantic-main > :where(.container, .main, .wrap, .cnt),
+  body[data-language-app="n1-kanji-collocations"] > main.semantic-main > :is(.header, .legend, .modes, .stats, .progress-wrap, .footer-icons),
+  body[data-language-app="n1-reading-75"] > main.semantic-main > :is(.topbar, .progress-wrap) {
+    width: calc(100% - 32px);
+  }
+}

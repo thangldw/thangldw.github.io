@@ -1,0 +1,1162 @@
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/InterVariable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --n1-font-ui: "Inter", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --n1-canvas: #fbfaf6;
+  --n1-surface: #ffffff;
+  --n1-surface-muted: #f5f3ed;
+  --n1-line: #d8d4ca;
+  --n1-line-soft: #e6e2d9;
+  --n1-ink: #17243a;
+  --n1-muted: #6f746f;
+  --n1-accent: #a04458;
+  --n1-accent-soft: #f5e9ec;
+  --n1-action: #a04458;
+  --n1-action-hover: #843649;
+  --n1-action-soft: #f5e9ec;
+  --n1-highlight: #8a633c;
+  --n1-highlight-soft: #faf3e8;
+  --n1-good: #28785a;
+  --n1-good-soft: #eaf4ee;
+  --n1-bad: #a43c3c;
+  --n1-bad-soft: #f8eaea;
+
+  /* Normalize the legacy token names used across the twelve modules. */
+  --bg: var(--n1-canvas) !important;
+  --paper: var(--n1-canvas) !important;
+  --paper-2: var(--n1-surface-muted) !important;
+  --cream: var(--n1-canvas) !important;
+  --card: var(--n1-surface) !important;
+  --surface: var(--n1-surface) !important;
+  --surface-2: var(--n1-surface-muted) !important;
+  --surface2: var(--n1-surface-muted) !important;
+  --text: var(--n1-ink) !important;
+  --ink: var(--n1-ink) !important;
+  --text-dim: var(--n1-muted) !important;
+  --text-muted: var(--n1-muted) !important;
+  --muted: var(--n1-muted) !important;
+  --border: var(--n1-line) !important;
+  --line: var(--n1-line) !important;
+  --accent: var(--n1-accent) !important;
+  --accent-soft: var(--n1-accent-soft) !important;
+  --accent2: var(--n1-accent) !important;
+  --accent-dim: color-mix(in srgb, var(--n1-accent) 9%, transparent) !important;
+  --accent-border: color-mix(in srgb, var(--n1-accent) 28%, var(--n1-line)) !important;
+  --amber: var(--n1-accent) !important;
+  --blue: var(--n1-accent) !important;
+  --purple: var(--n1-accent) !important;
+  --teal: var(--n1-accent) !important;
+  --indigo: var(--n1-accent) !important;
+  --orange: var(--n1-highlight) !important;
+  --pink: var(--n1-accent) !important;
+  --terracotta: var(--n1-accent) !important;
+  --terracotta-dark: var(--n1-action-hover) !important;
+  --cream2: var(--n1-surface-muted) !important;
+  --bg-blue: var(--n1-accent-soft) !important;
+  --bg-purple: var(--n1-accent-soft) !important;
+  --bg-teal: var(--n1-accent-soft) !important;
+  --bg-orange: var(--n1-highlight-soft) !important;
+  --orange-dim: var(--n1-highlight-soft) !important;
+  --orange-border: color-mix(in srgb, var(--n1-highlight) 28%, var(--n1-line)) !important;
+  --good: var(--n1-good) !important;
+  --good-bg: var(--n1-good-soft) !important;
+  --bad: var(--n1-bad) !important;
+  --bad-bg: var(--n1-bad-soft) !important;
+  --font-ui: var(--n1-font-ui) !important;
+  --font-sans: var(--n1-font-ui) !important;
+  --font-display: var(--n1-font-ui) !important;
+  --portfolio-font-sans: var(--n1-font-ui) !important;
+  --portfolio-bg: var(--n1-canvas) !important;
+  --portfolio-surface: var(--n1-surface) !important;
+  --portfolio-surface-2: var(--n1-surface-muted) !important;
+  --portfolio-ink: var(--n1-ink) !important;
+  --portfolio-body: var(--n1-muted) !important;
+  --portfolio-border: var(--n1-line) !important;
+  --portfolio-accent: var(--n1-accent) !important;
+  --portfolio-accent-soft: var(--n1-accent-soft) !important;
+  --portfolio-danger: var(--n1-bad) !important;
+  --shadow: 0 1px 2px rgba(23, 36, 58, 0.04) !important;
+}
+
+html {
+  min-height: 0 !important;
+  background: var(--n1-canvas) !important;
+  color-scheme: light;
+}
+
+body.language-app {
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 0 28px !important;
+  background: var(--n1-canvas) !important;
+  color: var(--n1-ink) !important;
+  font-family: var(--n1-font-ui) !important;
+  font-size: 14px !important;
+  font-synthesis: none;
+  line-height: 1.55 !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.language-app,
+body.language-app *,
+body.language-app *::before,
+body.language-app *::after {
+  box-sizing: border-box;
+}
+
+body.language-app,
+body.language-app button,
+body.language-app input,
+body.language-app select,
+body.language-app textarea {
+  font-family: var(--n1-font-ui) !important;
+}
+
+body.language-app h1,
+body.language-app h2,
+body.language-app h3,
+body.language-app h4,
+body.language-app p {
+  color: inherit;
+}
+
+body.language-app h1,
+body.language-app h2,
+body.language-app h3 {
+  letter-spacing: -0.025em !important;
+}
+
+body.language-app .semantic-main,
+body.language-app .app-main {
+  min-height: 0 !important;
+  background: transparent !important;
+}
+
+body.language-app .container,
+body.language-app .wrap,
+body.language-app .main {
+  width: min(100%, 1120px) !important;
+  max-width: 1120px !important;
+  margin-inline: auto !important;
+}
+
+/* The parent JLPT view owns the module title. Remove duplicate legacy branding. */
+body[data-language-app="n1-vocabulary-tabs"] > main > .hdr,
+body[data-language-app="n1-vocabulary-exams"] > main > header.header,
+body[data-language-app="n1-vocabulary-paraphrase"] > main > .header,
+body[data-language-app="n1-vocabulary-context"] .container > h1,
+body[data-language-app="n1-grammar-flashcards"] .intro,
+body[data-language-app="n1-grammar-sentence-order"] .intro,
+body[data-language-app="n1-grammar-sentence-order-drill"] .wrap > h1,
+body[data-language-app="n1-grammar-sentence-order-drill"] .wrap > .sub,
+body[data-language-app="n1-kanji-analysis"] #appHeader > h1,
+body[data-language-app="n1-kanji-collocations"] .header-title,
+body[data-language-app="n1-reading-75"] .topbar .brand {
+  display: none !important;
+}
+
+/* Toolbars and tab rails share the JLPT shell's quiet editorial treatment. */
+body.language-app :is(
+  .mtabs,
+  .stabs,
+  .tabs-shell,
+  .tabs,
+  .filter-bar,
+  .period-bar,
+  .year-bar,
+  .toolbar,
+  .modes,
+  .legend,
+  .ctrl,
+  .study-toolbar,
+  .topbar,
+  #appHeader
+) {
+  border-color: var(--n1-line) !important;
+  background: var(--n1-surface) !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(.mtabs, .tabs-shell, .tabs) {
+  border-bottom: 1px solid var(--n1-line) !important;
+}
+
+body.language-app :is(.mtabs, .tabs, .stabs, .filter-bar, .period-bar, .year-bar, .modes) {
+  overflow-x: visible !important;
+  flex-wrap: wrap !important;
+  scrollbar-color: #c7c2b8 transparent;
+  scrollbar-width: thin;
+}
+
+body.language-app :is(
+  .mtab,
+  .tab,
+  .exam-tab,
+  .stab,
+  .filter-btn,
+  .pbtn,
+  .ybtn,
+  .mbtn,
+  .filter-pill
+) {
+  min-height: 38px !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--n1-muted) !important;
+  font-size: 12px !important;
+  font-weight: 550 !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(
+  .mtab.on,
+  .tab.on,
+  .tab.active,
+  .exam-tab.is-selected,
+  .stab.on,
+  .filter-btn.active,
+  .pbtn.active,
+  .ybtn.active,
+  .mbtn.active,
+  .filter-pill.on,
+  [aria-selected="true"],
+  [aria-pressed="true"]
+) {
+  border-bottom: 2px solid var(--n1-accent) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(button, input, select, textarea) {
+  border-color: #c9c5bb !important;
+  border-radius: 6px !important;
+  outline: 0;
+  box-shadow: none !important;
+}
+
+body.language-app :is(input, select, textarea) {
+  min-height: 40px;
+  background: var(--n1-surface) !important;
+  color: var(--n1-ink) !important;
+  font-size: 13px !important;
+}
+
+body.language-app input:is([type="checkbox"], [type="radio"]) {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border-radius: 3px !important;
+  accent-color: var(--n1-accent);
+}
+
+body.language-app :is(input, select, textarea):focus {
+  border-color: var(--n1-action) !important;
+  outline: 3px solid color-mix(in srgb, var(--n1-action) 18%, transparent) !important;
+  outline-offset: 0;
+}
+
+body.language-app button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--n1-action) 22%, transparent) !important;
+  outline-offset: 2px !important;
+}
+
+body.language-app :is(
+  .bstart,
+  .bnext,
+  .next-btn,
+  .nav:not(.secondary),
+  .navbtn.primary,
+  .modal-btn.primary,
+  .jump-btn,
+  .restart-btn,
+  .br
+) {
+  border: 1px solid var(--n1-action) !important;
+  border-radius: 6px !important;
+  background: var(--n1-action) !important;
+  color: #fff !important;
+  font-weight: 650 !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(
+  .shuffle-btn,
+  .hbtn,
+  .prev-btn,
+  .nav.secondary,
+  .navbtn:not(.primary),
+  .toggle-btn,
+  .load-more,
+  .speech-control,
+  .spk,
+  .spk-btn,
+  .speak-btn,
+  .done-btn
+) {
+  border: 1px solid #c9c5bb !important;
+  border-radius: 6px !important;
+  background: var(--n1-surface) !important;
+  color: var(--n1-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(button, .card, .opt, .ob, .choice-btn) {
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease !important;
+}
+
+body.language-app button:hover:not(:disabled) {
+  border-color: var(--n1-accent) !important;
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(
+  .bstart,
+  .bnext,
+  .next-btn,
+  .nav:not(.secondary),
+  .navbtn.primary,
+  .modal-btn.primary,
+  .jump-btn,
+  .restart-btn,
+  .br
+):hover:not(:disabled) {
+  border-color: var(--n1-action-hover) !important;
+  background: var(--n1-action-hover) !important;
+  color: #fff !important;
+}
+
+body.language-app :is(
+  .card,
+  .qcard,
+  .qsetup,
+  .res,
+  .question-card,
+  .passage-card,
+  .answer-card,
+  .modal-box,
+  .summary,
+  .sheet,
+  .panel
+) {
+  border: 1px solid var(--n1-line) !important;
+  border-radius: 8px !important;
+  background: var(--n1-surface) !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(.grid, .vocab-grid) {
+  gap: 12px !important;
+}
+
+body.language-app :is(
+  .note,
+  .app-note,
+  .hint-box,
+  .grammarTag,
+  .kw-box,
+  .traps-box,
+  .q-context
+) {
+  border-color: color-mix(in srgb, var(--n1-accent) 22%, var(--n1-line)) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(
+  .synb,
+  .syi,
+  .esyi,
+  .ex-block,
+  .exp,
+  .detail,
+  .m4o
+) {
+  border-color: color-mix(in srgb, var(--n1-action) 18%, var(--n1-line)) !important;
+  background: var(--n1-action-soft) !important;
+  color: var(--n1-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app :is(.syi.pri, .esyi.pri) {
+  border-color: var(--n1-action) !important;
+  background: var(--n1-action) !important;
+  color: #fff !important;
+}
+
+body.language-app :is(.co-item, .co-list, .vi-row, .set-tag) {
+  border-color: var(--n1-line) !important;
+  background: var(--n1-surface-muted) !important;
+  color: var(--n1-ink) !important;
+  box-shadow: none !important;
+}
+
+body.language-app .api-bar {
+  border-top: 1px solid var(--n1-line) !important;
+  background: color-mix(in srgb, var(--n1-surface) 94%, transparent) !important;
+  color: var(--n1-muted) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(10px);
+}
+
+body.language-app .api-bar :is(.api-pw, .spin) {
+  border-color: var(--n1-line) !important;
+}
+
+body.language-app .api-bar :is(.api-pf, .spin) {
+  color: var(--n1-action) !important;
+}
+
+body.language-app :is(.progress-bar, .progress-track, .bar, .pbw) {
+  overflow: hidden;
+  border-radius: 999px !important;
+  background: #e6e2d9 !important;
+}
+
+body.language-app :is(.progress-fill, .bar-fill, .pb) {
+  border-radius: 999px !important;
+  background: var(--n1-action) !important;
+}
+
+/* Learning content uses the JLPT accent; semantic green/red remain reserved
+   for answer feedback and saved correctness states. */
+body.language-app :is(
+  .wk,
+  .wh,
+  .qk,
+  .qh,
+  .ul,
+  .synb-l,
+  .co-l,
+  .dtg-h .dp,
+  .dtg-h .dc,
+  .dtg-kn,
+  .explain-label,
+  .eh,
+  .card-reading,
+  .section-label:not(.wrong-label),
+  .q-meaning,
+  .set-examples-title
+) {
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(
+  .vi,
+  .vi-b,
+  .ex-vi,
+  .explain-vi,
+  .cvi,
+  .dtg-vi,
+  .vn
+) {
+  border-color: var(--n1-line-soft) !important;
+  background: var(--n1-highlight-soft) !important;
+  color: #725332 !important;
+}
+
+body.language-app :is(.n1b, .keyb, .refbdg, .ebdg, .qbadge) {
+  border-color: color-mix(in srgb, var(--n1-accent) 26%, var(--n1-line)) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(.syi.pri, .esyi.pri, .colloc-chip) {
+  border-color: var(--n1-accent) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(.syi.pri .sw, .syi.pri .sh, .esyi.pri) {
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(.co-item.n1, .co-item.key, .ex-block, .card-example) {
+  border-left-color: var(--n1-accent) !important;
+}
+
+body.language-app :is(.co-item.key .cjp, .ex-block strong, .card-example strong) {
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .vocab-card,
+body[data-language-app="n1-kanji-analysis"] .vocab-card:nth-child(n) {
+  border: 1px solid var(--n1-line) !important;
+  border-top: 3px solid var(--n1-accent) !important;
+  background: var(--n1-surface) !important;
+  box-shadow: none !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .vocab-card:hover,
+body[data-language-app="n1-kanji-analysis"] .vocab-card.expanded {
+  border-color: color-mix(in srgb, var(--n1-accent) 55%, var(--n1-line)) !important;
+  box-shadow: 0 8px 24px rgba(23, 36, 58, 0.07) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.card-kanji, .card-reading, .td-hv, .td-on, .td-kun) {
+  color: var(--n1-accent) !important;
+  text-shadow: none !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .card-round,
+body[data-language-app="n1-kanji-analysis"] .parts-table th {
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] :is(.colloc-item, .syn-chip) {
+  border-color: var(--n1-line) !important;
+  background: var(--n1-surface-muted) !important;
+  color: var(--n1-ink) !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] .confuse-box {
+  border-color: color-mix(in srgb, var(--n1-highlight) 30%, var(--n1-line)) !important;
+  background: var(--n1-highlight-soft) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.badge-blue, .badge-orange, .set-tag, .q-context) {
+  border-color: color-mix(in srgb, var(--n1-accent) 28%, var(--n1-line)) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.dot-blue, .dot-orange) {
+  background: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.q-meaning, .colloc-chip) {
+  border: 1px solid color-mix(in srgb, var(--n1-accent) 22%, var(--n1-line)) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] :is(.set-examples, .legend) {
+  border-color: var(--n1-line) !important;
+  background: var(--n1-surface-muted) !important;
+}
+
+body[data-language-app="n1-vocabulary-tabs"] :is(
+  .stab.v.on,
+  .stab.n.on,
+  .stab.adj.on,
+  .stab.adv.on,
+  .ptab.on
+),
+body[data-language-app="n1-vocabulary-paraphrase"] :is(.tab.active, .bstart, .pb, .qbadge),
+body[data-language-app="n1-vocabulary-exams"] :is(.tab.on, .bstart, .bnext, .br) {
+  border-color: var(--n1-accent) !important;
+  background: var(--n1-accent) !important;
+  color: #fff !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] :is(.ra-card, .ra-card-mon2, .ra-card-mon4, .ra-example) {
+  border-left-color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] :is(.ra-header, .ra-section-title, .ra-example-label, .ra-repeat-badge, .ra-reading) {
+  border-color: color-mix(in srgb, var(--n1-accent) 24%, var(--n1-line)) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-vocabulary-exams"] :is(.ra-kanji, .ra-arrow) {
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-reading-75"] :is(.note, .passage, .chain-box, .full-explain .jp),
+body[data-language-app="n1-reading-mondai9"] :is(.thinking-box, .explain-box, .translation-box) {
+  border-color: var(--n1-line) !important;
+  background: var(--n1-surface-muted) !important;
+  color: var(--n1-ink) !important;
+}
+
+body[data-language-app="n1-reading-75"] mark.anchor-kanji,
+body[data-language-app="n1-reading-mondai9"] :is(.anchor.show, .hl-connective.show) {
+  background: #f3dfad !important;
+  color: #60491f !important;
+}
+
+body[data-language-app="n1-reading-mondai9"] .anchor.show-pick,
+body[data-language-app="n1-reading-mondai9"] .truebait.show {
+  border-color: var(--n1-accent) !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body.language-app :is(.ok, .correct, .good) {
+  border-color: color-mix(in srgb, var(--n1-good) 38%, var(--n1-line)) !important;
+  background-color: var(--n1-good-soft) !important;
+  color: var(--n1-good) !important;
+}
+
+body.language-app :is(.ng, .wrong, .bad) {
+  border-color: color-mix(in srgb, var(--n1-bad) 38%, var(--n1-line)) !important;
+  background-color: var(--n1-bad-soft) !important;
+  color: var(--n1-bad) !important;
+}
+
+body.language-app :is(.badge, .hbadge, .ptag, .qbadge, .rtag, .tag, .grammarTag) {
+  border: 1px solid var(--n1-line) !important;
+  border-radius: 999px !important;
+  background: var(--n1-surface-muted) !important;
+  color: var(--n1-muted) !important;
+  box-shadow: none !important;
+}
+
+body.language-app .site-foot,
+body.language-app footer {
+  display: none !important;
+}
+
+/* Module-specific alignment after removing duplicate branding. */
+body[data-language-app="n1-vocabulary-tabs"] .mtabs,
+body[data-language-app="n1-vocabulary-tabs"] .stabs,
+body[data-language-app="n1-vocabulary-tabs"] .ctrl,
+body[data-language-app="n1-vocabulary-exams"] .tabs-shell,
+body[data-language-app="n1-vocabulary-exams"] .container,
+body[data-language-app="n1-vocabulary-paraphrase"] .tabs,
+body[data-language-app="n1-vocabulary-paraphrase"] .container,
+body[data-language-app="n1-grammar-exams"] .hdr,
+body[data-language-app="n1-grammar-exams"] .period-bar,
+body[data-language-app="n1-grammar-exams"] .year-bar,
+body[data-language-app="n1-grammar-exams"] .cnt {
+  width: min(100%, 1120px) !important;
+  max-width: 1120px !important;
+  margin-inline: auto !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .hdr-top {
+  display: none !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] #appHeader {
+  width: min(100%, 1120px) !important;
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  padding: 14px 16px !important;
+  border: 0 !important;
+}
+
+body[data-language-app="n1-kanji-analysis"] #appHeader input {
+  width: min(100%, 520px) !important;
+  margin-inline: auto !important;
+}
+
+body[data-language-app="n1-kanji-collocations"] .header,
+body[data-language-app="n1-kanji-collocations"] .legend,
+body[data-language-app="n1-kanji-collocations"] .modes,
+body[data-language-app="n1-kanji-collocations"] .stats,
+body[data-language-app="n1-kanji-collocations"] .progress-wrap {
+  width: min(100%, 960px) !important;
+  max-width: 960px !important;
+  margin-inline: auto !important;
+}
+
+body[data-language-app="n1-reading-75"] .topbar,
+body[data-language-app="n1-reading-75"] .topbar-inner {
+  position: static !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Focused study layouts ---------------------------------------------------
+   The legacy tools were designed as standalone pages. Inside the JLPT shell,
+   each activity now gets a reading width suited to the task instead of one
+   universal 1120px canvas. */
+
+body[data-language-app="n1-grammar-flashcards"] .wrap {
+  width: min(100%, 760px) !important;
+  max-width: 760px !important;
+  padding: 22px 20px 42px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .topbar {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+  padding: 12px !important;
+  border: 1px solid var(--n1-line) !important;
+  border-radius: 10px !important;
+  background: var(--n1-surface-muted) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .topbar :is(select, button) {
+  min-height: 42px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .progress-wrap {
+  margin: 0 2px 14px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .progress-bar {
+  height: 7px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .stats {
+  margin-top: 8px !important;
+  color: var(--n1-muted) !important;
+  font-size: 12px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card-area {
+  margin-bottom: 12px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card {
+  min-height: 360px !important;
+  border-radius: 12px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .face {
+  padding: 30px 34px !important;
+  border: 1px solid #cec9be !important;
+  border-radius: 12px !important;
+  background: var(--n1-surface) !important;
+  box-shadow: 0 8px 28px rgba(23, 36, 58, 0.06) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .front::before {
+  content: "MẪU NGỮ PHÁP";
+  position: absolute;
+  top: 28px;
+  color: var(--n1-accent);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .front .idx {
+  top: 18px !important;
+  left: 20px !important;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--n1-surface-muted);
+  color: var(--n1-muted) !important;
+  font-size: 11px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .front .pattern {
+  max-width: 560px;
+  font-size: clamp(25px, 4vw, 34px) !important;
+  font-weight: 650 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.02em;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .front .hint {
+  margin-top: 18px !important;
+  color: var(--n1-muted) !important;
+  font-size: 13px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .back .pattern-sm {
+  color: var(--n1-accent) !important;
+  font-size: 17px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .card.flipped .back {
+  position: relative !important;
+  inset: auto !important;
+  min-height: 360px;
+  overflow: visible !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .back .meaning {
+  font-size: 15px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .back .ex,
+body[data-language-app="n1-grammar-flashcards"] .back .note {
+  border: 1px solid var(--n1-line-soft) !important;
+  background: var(--n1-surface-muted) !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .row2 {
+  margin-top: 0 !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .row2 button {
+  min-height: 46px !important;
+  font-size: 13px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .controls {
+  margin-top: 10px !important;
+}
+
+body[data-language-app="n1-grammar-flashcards"] .controls button {
+  min-width: 112px;
+  min-height: 40px;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .container {
+  width: min(100%, 900px) !important;
+  max-width: 900px !important;
+  padding: 18px 20px 44px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .back-link {
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 36px;
+  margin: 0 0 14px !important;
+  padding: 0 10px;
+  border: 1px solid var(--n1-line);
+  border-radius: 6px;
+  background: var(--n1-surface);
+  color: var(--n1-ink) !important;
+  font-weight: 600;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .qhead {
+  margin-bottom: 9px !important;
+  font-family: var(--n1-font-ui) !important;
+  font-size: 12px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .bar {
+  height: 7px !important;
+  margin-bottom: 16px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .card {
+  padding: 26px !important;
+  border-radius: 12px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .qnum {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--n1-action-soft);
+  color: var(--n1-action) !important;
+  font-family: var(--n1-font-ui) !important;
+  font-size: 10px !important;
+  font-weight: 750;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .sentence {
+  margin: 16px 0 22px !important;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--n1-line-soft);
+  font-size: 19px !important;
+  line-height: 2.05 !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .choices {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .choice-btn {
+  min-height: 52px;
+  padding: 10px 14px !important;
+  border-color: var(--n1-line) !important;
+  border-radius: 8px !important;
+  background: var(--n1-surface) !important;
+  font-size: 16px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .choice-btn:hover:not(:disabled) {
+  background: var(--n1-action-soft) !important;
+  border-color: color-mix(in srgb, var(--n1-action) 42%, var(--n1-line)) !important;
+  color: var(--n1-ink) !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .explain {
+  margin: 22px -26px -26px !important;
+  padding: 20px 26px 24px;
+  border-top: 1px solid var(--n1-line);
+  border-radius: 0 0 12px 12px;
+  background: var(--n1-surface-muted);
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .badge {
+  padding: 5px 10px !important;
+  font-family: var(--n1-font-ui) !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .full {
+  margin: 12px 0 6px !important;
+  padding: 12px 14px !important;
+  border: 1px solid var(--n1-line-soft);
+  background: var(--n1-surface) !important;
+  font-size: 16px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .vi {
+  margin: 0 !important;
+  padding: 9px 2px 14px;
+  color: var(--n1-ink) !important;
+  font-size: 13px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .steps {
+  display: grid;
+  gap: 6px;
+  padding-top: 14px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .step {
+  margin: 0 !important;
+  color: var(--n1-muted) !important;
+  font-size: 13px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .step b {
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .navrow {
+  margin: 18px -26px -26px !important;
+  padding: 16px 26px;
+  border-top: 1px solid var(--n1-line-soft);
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .explain.show + .navrow {
+  margin-top: 0 !important;
+  background: var(--n1-surface-muted);
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .navbtn {
+  min-height: 42px;
+}
+
+body[data-language-app="n1-grammar-exams"] .hdr,
+body[data-language-app="n1-grammar-exams"] .period-bar,
+body[data-language-app="n1-grammar-exams"] .year-bar,
+body[data-language-app="n1-grammar-exams"] .cnt {
+  width: min(100%, 920px) !important;
+  max-width: 920px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .hdr {
+  margin-top: 18px !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 1px solid var(--n1-line) !important;
+  border-radius: 10px 10px 0 0;
+}
+
+body[data-language-app="n1-grammar-exams"] .tabs {
+  border: 0 !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .tab {
+  min-height: 46px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .period-bar,
+body[data-language-app="n1-grammar-exams"] .year-bar {
+  position: static !important;
+  padding: 9px 12px !important;
+  gap: 6px !important;
+  border-inline: 1px solid var(--n1-line) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .year-bar {
+  border-bottom: 1px solid var(--n1-line) !important;
+  border-radius: 0 0 10px 10px;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.pbtn, .ybtn) {
+  min-height: 34px !important;
+  padding: 5px 11px !important;
+  border: 1px solid transparent !important;
+  border-radius: 999px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] :is(.pbtn.on, .ybtn.on) {
+  border-color: color-mix(in srgb, var(--n1-accent) 30%, var(--n1-line)) !important;
+  border-bottom-width: 1px !important;
+  background: var(--n1-accent-soft) !important;
+  color: var(--n1-accent) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .cnt {
+  padding: 18px 0 48px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-info {
+  color: var(--n1-muted) !important;
+  font-size: 12px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-bar {
+  height: 7px !important;
+  margin-bottom: 16px !important;
+  background: var(--n1-line-soft) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .prog-fill {
+  height: 100% !important;
+  background: var(--n1-action) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .tts-bar {
+  padding: 10px 12px !important;
+  border: 1px solid var(--n1-line) !important;
+  border-radius: 8px !important;
+  background: var(--n1-action-soft) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .speak-actions {
+  gap: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .card {
+  padding: 24px !important;
+  border-radius: 12px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .jp-s {
+  margin: 14px 0 20px !important;
+  font-size: 17px !important;
+  line-height: 1.9 !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .opts {
+  gap: 9px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .opt {
+  min-height: 52px;
+  padding: 10px 14px !important;
+  border: 1px solid var(--n1-line) !important;
+  border-radius: 8px !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .opt:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--n1-action) 38%, var(--n1-line)) !important;
+  background: var(--n1-action-soft) !important;
+  color: var(--n1-ink) !important;
+}
+
+body[data-language-app="n1-grammar-exams"] .btn-row :is(button) {
+  min-height: 44px;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .resume {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center !important;
+  gap: 10px 16px !important;
+  padding: 10px 12px !important;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .resume-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: max-content;
+}
+
+body[data-language-app="n1-grammar-sentence-order"] .resume-actions .btn-txt {
+  min-height: 38px;
+  margin-left: 0 !important;
+  padding: 0 8px !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  body[data-language-app="n1-grammar-flashcards"] .wrap,
+  body[data-language-app="n1-grammar-sentence-order"] .container,
+  body[data-language-app="n1-grammar-exams"] .cnt {
+    padding-inline: 12px !important;
+  }
+
+  body[data-language-app="n1-grammar-flashcards"] .topbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body[data-language-app="n1-grammar-flashcards"] .topbar select {
+    grid-column: 1 / -1;
+  }
+
+  body[data-language-app="n1-grammar-flashcards"] .card {
+    min-height: 390px !important;
+  }
+
+  body[data-language-app="n1-grammar-flashcards"] .face {
+    padding: 26px 20px !important;
+  }
+
+  body[data-language-app="n1-grammar-sentence-order"] .choices {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-language-app="n1-grammar-sentence-order"] .card {
+    padding: 18px !important;
+  }
+
+  body[data-language-app="n1-grammar-sentence-order"] .resume {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-language-app="n1-grammar-sentence-order"] .resume-actions {
+    justify-content: stretch;
+  }
+
+  body[data-language-app="n1-grammar-sentence-order"] .resume-actions .navbtn {
+    flex: 1;
+  }
+
+  body[data-language-app="n1-grammar-sentence-order"] .explain,
+  body[data-language-app="n1-grammar-sentence-order"] .navrow {
+    margin-inline: -18px !important;
+    padding-inline: 18px !important;
+  }
+
+  body[data-language-app="n1-grammar-exams"] .hdr,
+  body[data-language-app="n1-grammar-exams"] .period-bar,
+  body[data-language-app="n1-grammar-exams"] .year-bar {
+    width: calc(100% - 24px) !important;
+  }
+
+  body[data-language-app="n1-grammar-exams"] .card {
+    padding: 18px 14px !important;
+  }
+}
+
+body[data-language-app="n1-reading-75"] .topbar-inner {
+  width: min(100%, 1120px) !important;
+  max-width: 1120px !important;
+  margin-inline: auto !important;
+  padding: 14px 18px !important;
+}
+
+@media (max-width: 720px) {
+  body.language-app {
+    font-size: 13px !important;
+  }
+
+  body.language-app .container,
+  body.language-app .wrap,
+  body.language-app .main {
+    padding-inline: 12px !important;
+  }
+
+  body.language-app :is(.mtabs, .tabs, .stabs, .filter-bar, .period-bar, .year-bar, .modes) {
+    overflow-x: visible !important;
+    flex-wrap: wrap !important;
+  }
+
+  body.language-app :is(.card, .qcard, .qsetup, .question-card, .passage-card) {
+    border-radius: 7px !important;
+  }
+}
