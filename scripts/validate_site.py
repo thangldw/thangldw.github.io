@@ -32,6 +32,8 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "kakeflow": 2,
     "toolbox": 4,
     "maintainer-defense": 5,
+    "igo": 6,
+    "pmp-studio": 7,
 }
 EXPECTED_LANGUAGE_COLLECTION_ORDER = 3
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}

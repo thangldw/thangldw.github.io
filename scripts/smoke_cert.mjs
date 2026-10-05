@@ -245,7 +245,7 @@ try {
 
   await page.evaluate(`localStorage.setItem("theme", "light")`);
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelectorAll("#projectIndex .project-card").length === 9');
+  await page.waitUntil('document.querySelectorAll("#projectIndex .project-card").length === 11');
   assertResult('Apps catalog uses readable rows and light typography', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const firstRowTop = cards[0]?.getBoundingClientRect().top;
@@ -255,11 +255,11 @@ try {
     return {
       ok: document.querySelector('.apps-topbar .site-brand')?.getAttribute('aria-label') === 'Thang Luu home'
         && document.querySelector('.apps-project-heading h2')?.textContent.trim() === 'Project library'
-        && document.querySelector('.apps-project-heading span')?.textContent.trim() === '9 projects'
-        && cards.length === 9
+        && document.querySelector('.apps-project-heading span')?.textContent.trim() === '11 projects'
+        && cards.length === 11
         && getComputedStyle(document.querySelector('.project-title')).fontWeight === '600'
         && getComputedStyle(document.querySelector('.project-description')).fontWeight === '400'
-        && titles.join('|') === 'RAGOps|Proofline|Awesome Maintainer Defense|KakeFlow|Toolbox|Japan PR Guide|Certification Library|BizRoll|Neon Glider'
+        && titles.join('|') === 'RAGOps|Proofline|Awesome Maintainer Defense|KakeFlow|Toolbox|Japan PR Guide|Igo|PMP Studio|Certification Library|BizRoll|Neon Glider'
         && firstRow.length === 3
         && new Set(firstRow.map(card => Math.round(card.getBoundingClientRect().left))).size === 3
         && firstCardStyle?.borderTopWidth === '1px'
@@ -281,7 +281,7 @@ try {
   ];
   for (const [desktopWidth, desktopHeight] of appsDesktopViewports) {
     await page.navigate(`${origin}/apps/`, desktopWidth, desktopHeight);
-    await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
+    await page.waitUntil('document.querySelectorAll(".project-card").length === 11');
     assertResult(`Apps catalog fits ${desktopWidth}x${desktopHeight}`, await page.evaluate(`(() => {
       const cards = [...document.querySelectorAll('.project-card')];
       const grid = document.querySelector('.apps-project-grid');
@@ -294,7 +294,7 @@ try {
           && document.querySelectorAll(".catalog-group-heading").length === 4
           && cards.every(card => getComputedStyle(card.querySelector(".project-description")).webkitLineClamp === "none")
           && grid.scrollWidth <= grid.clientWidth
-          && cards.length === 9
+          && cards.length === 11
           && firstRow.length === 3,
         message: 'document=' + document.documentElement.scrollWidth + 'x' + document.documentElement.scrollHeight
           + ', viewport=' + window.innerWidth + 'x' + window.innerHeight
@@ -307,7 +307,7 @@ try {
   }
 
   await page.navigate(`${origin}/apps/`, 390, 844);
-  await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 11');
   assertResult('Apps catalog mobile cards', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const grid = document.querySelector('.apps-project-grid');
@@ -318,7 +318,7 @@ try {
       ok: document.documentElement.scrollHeight > window.innerHeight
         && document.documentElement.scrollWidth <= window.innerWidth
         && grid.scrollWidth <= grid.clientWidth
-        && cards.length === 9
+        && cards.length === 11
         && firstRow.length === 1
         && theme?.width === 44
         && theme?.height === 44,
@@ -329,9 +329,9 @@ try {
   await page.navigate(`${origin}/apps/`, 1280);
   await page.waitUntil('document.querySelector(".project-card")');
   await page.evaluate('document.querySelector("[data-group=learning]").click()');
-  await page.waitUntil('document.querySelectorAll(".project-card").length === 1');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 3');
   assertResult('Apps category filter selects the learning library', await page.evaluate(`(() => ({
-    ok: document.querySelector('.project-title')?.textContent === 'Certification Library'
+    ok: [...document.querySelectorAll('.project-title')].map(x => x.textContent).join('|') === 'Igo|PMP Studio|Certification Library'
       && document.querySelector('[data-group=learning]').getAttribute('aria-pressed') === 'true',
     message: document.querySelector('#projectCount')?.textContent
   }))()`), page.exceptions);
@@ -351,7 +351,7 @@ try {
   })()`);
   await page.waitUntil('document.querySelector("#resetCatalog")');
   await page.evaluate('document.querySelector("#resetCatalog").click()');
-  await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 11');
   assertResult('Apps empty-state reset restores the catalog', await page.evaluate(`(() => ({
     ok: document.querySelector('#catalogEmpty').hidden
       && document.activeElement.id === 'projectSearch'
@@ -393,7 +393,7 @@ try {
       candidate.querySelector('.project-title')?.textContent.trim() === 'Neon Glider'
     );
     return {
-      ok: visibleCards.length === 9
+      ok: visibleCards.length === 11
         && game?.href === 'https://thangldw.github.io/neon-glider/'
         && game?.querySelector('.project-status')?.textContent.trim() === 'Live'
         && game?.getAttribute('aria-label') === 'Play Neon Glider',
@@ -468,13 +468,13 @@ try {
   })()`), page.exceptions);
 
   await page.navigate(`${origin}/apps/`, 1280);
-  await page.waitUntil('document.querySelectorAll(".project-card").length === 9');
+  await page.waitUntil('document.querySelectorAll(".project-card").length === 11');
   assertResult('Apps catalog keeps direct flagship destinations', await page.evaluate(`(() => {
     const cards = [...document.querySelectorAll('.project-card')];
     const byTitle = title => cards.find(card => card.querySelector('.project-title')?.textContent.trim() === title);
     return {
-      ok: byTitle('RAGOps')?.href === 'https://github.com/thangldw/ragops'
-        && byTitle('Proofline')?.href === 'https://github.com/thangldw/proofline'
+      ok: byTitle('RAGOps')?.href === origin + '/apps/ragops/'
+        && byTitle('Proofline')?.href === origin + '/apps/proofline/'
         && byTitle('KakeFlow')?.href === 'https://thangldw.github.io/kakeflow/'
         && byTitle('Certification Library')?.href === ${JSON.stringify(`${origin}/apps/cert/`)},
       message: 'ragops=' + byTitle('RAGOps')?.href
@@ -539,7 +539,7 @@ try {
     const projects = [...document.querySelectorAll('#projectRail .resume-project')];
     const titles = projects.map(project => project.querySelector('h3')?.textContent.trim());
     return {
-      ok: titles.join('|') === 'RAGOps|Proofline|KakeFlow|Certification Library|Toolbox|Awesome Maintainer Defense'
+      ok: titles.join('|') === 'RAGOps|Proofline|KakeFlow|Certification Library|Toolbox|Awesome Maintainer Defense|Igo|PMP Studio'
         && !titles.includes('BizRoll')
         && !titles.includes('Neon Glider'),
       message: 'titles=' + titles.join('|')
@@ -553,7 +553,7 @@ try {
       ok: document.documentElement.scrollWidth <= innerWidth
         && document.querySelectorAll('.profile-section').length === 3
         && document.querySelectorAll('.method-grid article').length === 4
-        && document.querySelectorAll('#projectRail .resume-project').length === 6
+        && document.querySelectorAll('#projectRail .resume-project').length === 8
         && Boolean(document.querySelector('.resume-about'))
         && Boolean(document.querySelector('#projectsNext'))
         && document.querySelector('.profile-connect a').href.startsWith('mailto:thangldw@gmail.com'),
