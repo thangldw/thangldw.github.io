@@ -15,7 +15,7 @@ for page in root.rglob('*.html'):
     if text != page.read_text():
         page.write_text(text)
         changed.append(str(page.relative_to(root)))
-for base in ('apps/cert/assets', 'japan-pr-guide/assets'):
+for base in ('cert/assets', 'japan-pr-guide/assets'):
     for css in (root / base).glob('*.css'):
         text = css.read_text()
         updated = text.replace('font-display:swap', 'font-display:optional')

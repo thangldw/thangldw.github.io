@@ -138,7 +138,8 @@ function assertResult(name, result, exceptions) {
   console.log(`✓ ${name}`);
 }
 
-const serverPort = await freePort();
+// The PMP content API permits this local preview origin.
+const serverPort = Number(process.env.SMOKE_PORT || 8796);
 const debugPort = await freePort();
 const profile = await mkdtemp(resolve(tmpdir(), 'thangldw-cert-smoke-'));
 const server = spawn(PYTHON, ['-m', 'http.server', String(serverPort), '--bind', '127.0.0.1'], {
@@ -163,7 +164,7 @@ try {
   ]);
   const origin = process.env.SITE_ORIGIN || `http://127.0.0.1:${serverPort}`;
   const certificationManifest = await fetch(
-    `${origin}/apps/cert/certifications-manifest.json`,
+    `${origin}/cert/certifications-manifest.json`,
     { cache: 'no-store' }
   ).then(response => response.json());
   if (
@@ -182,8 +183,8 @@ try {
     ['/404.html', '404 font'],
     ['/apps/', 'Apps catalog font'],
     ['/japan-pr-guide/', 'Japan PR Guide font'],
-    ['/apps/cert/', 'Certification library font'],
-    ['/apps/cert/g/', 'Certification child font']
+    ['/cert/', 'Certification library font'],
+    ['/cert/g/', 'Certification child font']
   ];
   for (const [fontPath, fontLabel] of sharedFontPaths) {
     await page.navigate(`${origin}${fontPath}`, 1280);
@@ -485,7 +486,7 @@ try {
       ok: byTitle('RAGOps')?.href === origin + '/ragops/'
         && byTitle('Proofline')?.href === origin + '/proofline/'
         && byTitle('KakeFlow')?.href === 'https://thangldw.github.io/kakeflow/'
-        && byTitle('Certification Library')?.href === ${JSON.stringify(`${origin}/apps/cert/`)},
+        && byTitle('Certification Library')?.href === ${JSON.stringify(`${origin}/cert/`)},
       message: 'ragops=' + byTitle('RAGOps')?.href
         + ', proofline=' + byTitle('Proofline')?.href
         + ', kakeflow=' + byTitle('KakeFlow')?.href
@@ -630,8 +631,8 @@ try {
   const sharedSupportPaths = [
     ['/apps/', 'Apps catalog'],
     ['/japan-pr-guide/', 'Japan PR Guide'],
-    ['/apps/cert/', 'Certification library support'],
-    ['/apps/cert/g/', 'Certification child support']
+    ['/cert/', 'Certification library support'],
+    ['/cert/g/', 'Certification child support']
   ];
   for (const [supportPath, supportLabel] of sharedSupportPaths) {
     await page.navigate(`${origin}${supportPath}`, 1280);
@@ -693,7 +694,7 @@ try {
       unfinishedSessions: { g: { questionIds: ["g-smoke-resume"] } }
     }));
   `);
-  await page.navigate(`${origin}/apps/cert/`, 1280);
+  await page.navigate(`${origin}/cert/`, 1280);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   await page.waitUntil(`performance.getEntriesByType('resource').some(entry => entry.name.includes('/assets/ExperienceWorkspace-'))`);
   const protectedResourcesBeforeFocus = await page.evaluate(`performance.getEntriesByType('resource').filter(entry => entry.name.includes('/protected-data/')).length`);
@@ -797,7 +798,7 @@ try {
   await page.evaluate('document.querySelector(".hub-domain-nav button").click()');
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
 
-  await page.navigate(`${origin}/apps/cert/`, 1910, 930);
+  await page.navigate(`${origin}/cert/`, 1910, 930);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification gallery light canvas fills wide viewports', await page.evaluate(`(() => {
     const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
@@ -816,7 +817,7 @@ try {
     };
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.navigate(`${origin}/cert/`, 390, 844);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification gallery fits mobile', await page.evaluate(`(() => {
     const hero = document.querySelector('.hub-hero')?.getBoundingClientRect();
@@ -846,7 +847,7 @@ try {
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
-  await page.navigate(`${origin}/apps/cert/`, 2048);
+  await page.navigate(`${origin}/cert/`, 2048);
   await page.waitUntil('document.documentElement.dataset.theme === "dark" && document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification gallery dark canvas fills wide viewports', await page.evaluate(`(() => {
     const htmlBackground = getComputedStyle(document.documentElement).backgroundColor;
@@ -872,7 +873,7 @@ try {
       primaryCertification: "g", weeklyMinutes: 300
     }));
   `);
-  await page.navigate(`${origin}/apps/cert/`, 1280);
+  await page.navigate(`${origin}/cert/`, 1280);
   await page.waitUntil('document.documentElement.lang === "vi" && document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification gallery localizes the complete Vietnamese interface', await page.evaluate(`(() => {
     const gCard = document.querySelector('[data-certification-id="g"]');
@@ -895,7 +896,7 @@ try {
     localStorage.removeItem("certification-library:learner-preferences:v1");
     localStorage.setItem("theme", "light");
   `);
-  await page.navigate(`${origin}/apps/cert/`, 1280);
+  await page.navigate(`${origin}/cert/`, 1280);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   await page.send('Page.addScriptToEvaluateOnNewDocument', { source: `
     window.__loadingWorkspaceSeen = false;
@@ -916,7 +917,7 @@ try {
   ` });
   const warmedNavigationStartedAt = Date.now();
   await page.evaluate(`document.querySelector('[data-certification-id="ccar-f"]')?.click()`);
-  await page.waitUntil('location.pathname.endsWith("/apps/cert/ccar-f/") && document.querySelector(".today-screen")', 2000);
+  await page.waitUntil('location.pathname.endsWith("/cert/ccar-f/") && document.querySelector(".today-screen")', 2000);
   const warmedNavigationElapsedMs = Date.now() - warmedNavigationStartedAt;
   assertResult('Certification navigation skips transient loading and dark fallback', await page.evaluate(`(() => ({
     ok: window.__loadingWorkspaceSeen === false
@@ -931,7 +932,7 @@ try {
   await page.evaluate(`localStorage.setItem("theme", "dark")`);
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.filter(certification => certification.id !== "pmp").map(certification => certification.slug)) {
-    await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
+    await page.navigate(`${origin}/cert/${slug}/`, 1280);
     await page.waitUntil('document.querySelector(".experience-shell .today-screen")');
     const result = await page.evaluate(`(() => ({
       theme: document.documentElement.dataset.theme,
@@ -956,7 +957,7 @@ try {
 
   const rapidSurfaceChecks = [];
   for (const { slug } of certificationManifest.certifications.filter(certification => certification.id !== "pmp")) {
-    await page.navigate(`${origin}/apps/cert/${slug}/?view=learn`, 1280);
+    await page.navigate(`${origin}/cert/${slug}/?view=learn`, 1280);
     await page.waitUntil('document.querySelector(".rapid-review") && document.querySelector(".study-area-search input")', 30000);
     rapidSurfaceChecks.push({ slug, ...await page.evaluate(`(() => ({
       hasAction: Boolean(document.querySelector('.rapid-review__start')),
@@ -973,7 +974,7 @@ try {
   }, []);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3'); localStorage.setItem('theme', 'light')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.navigate(`${origin}/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".today-screen")');
   assertResult('G evidence-first Today workspace', await page.evaluate(`(() => {
     const text = document.body.innerText;
@@ -984,8 +985,8 @@ try {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'ja'
         && primaryLabels === 'Today|Learn|Practice|Exam|Progress'
-        && disclaimerLink?.getAttribute('href') === '/apps/cert/disclaimer/'
-        && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/apps/cert/'
+        && disclaimerLink?.getAttribute('href') === '/cert/disclaimer/'
+        && document.querySelector('.workspace-navigation__brand')?.getAttribute('href') === '/cert/'
         && !document.querySelector('.certification-switcher, .certification-switcher__dot')
         && Boolean(document.querySelector('.today-primary-action'))
         && Boolean(document.querySelector('.today-evidence'))
@@ -1005,7 +1006,7 @@ try {
 
   assertResult('Desktop navigation exposes each unique destination directly', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('.workspace-navigation__primary > button.workspace-navigation__primary-item').length === 5
-      && document.querySelector('.workspace-navigation__primary > a.workspace-navigation__disclaimer')?.getAttribute('href') === '/apps/cert/disclaimer/'
+      && document.querySelector('.workspace-navigation__primary > a.workspace-navigation__disclaimer')?.getAttribute('href') === '/cert/disclaimer/'
       && !document.querySelector('.workspace-navigation__more')
       && !document.body.innerText.includes('Local data'),
     message: 'items=' + document.querySelectorAll('.workspace-navigation__primary > button.workspace-navigation__primary-item').length
@@ -1073,7 +1074,7 @@ try {
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/?view=learn`, 390);
+  await page.navigate(`${origin}/cert/g/?view=learn`, 390);
   await page.waitUntil('document.querySelector(".rapid-review__controls select")');
   assertResult('G rapid review controls, topic search and mobile layout', await page.evaluate(`(async () => {
     const size = [...document.querySelectorAll('.rapid-review fieldset button')].find(button => button.textContent.trim() === '20 items');
@@ -1112,11 +1113,11 @@ try {
       message: 'ten=' + ten + ', prompt=' + Boolean(question) + ', action=' + action?.textContent.trim() };
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/pmp/?view=learn`, 1280);
+  await page.navigate(`${origin}/cert/pmp/?view=learn`, 1280);
   await page.waitUntil('location.pathname === "/pmp/" && document.querySelectorAll("[data-lesson]").length === 44', 30000);
   assertResult('PMP legacy Learn route opens merged standalone curriculum', await page.evaluate(`(() => ({ok: location.hash === '' && document.querySelectorAll('.study-module').length === 6, message: location.href}))()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/jlpt/?view=practice`, 1280);
+  await page.navigate(`${origin}/cert/jlpt/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 4', 30000);
   assertResult('JLPT unified Practice Program', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 4
@@ -1130,7 +1131,7 @@ try {
   await page.evaluate(`document.querySelector('[data-module-action="jlpt:module:n1-vocabulary-tabs"]')?.click()`);
   await page.waitUntil('document.querySelector(".jlpt-vocabulary-workspace") && document.body.innerText.includes("1.685 từ")', 30000);
   assertResult('JLPT vocabulary stays inside the unified Practice workspace', await page.evaluate(`(() => ({
-    ok: window.location.pathname === '/apps/cert/jlpt/'
+    ok: window.location.pathname === '/cert/jlpt/'
       && Boolean(document.querySelector('.workspace-navigation__primary-item[aria-current="page"]'))
       && Boolean(document.querySelector('.jlpt-vocabulary-workspace'))
       && !document.querySelector('.language-practice-hero')
@@ -1145,10 +1146,10 @@ try {
       + ', cards=' + document.querySelectorAll('.jlpt-vocabulary-card').length
   }))()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/n1-modules/n1-reading-library/index.html`, 1280);
+  await page.navigate(`${origin}/cert/n1-modules/n1-reading-library/index.html`, 1280);
   await page.waitUntil('document.querySelector(".n1-reading-library-view")', 30000);
   assertResult('JLPT reading library legacy URL opens native view', await page.evaluate(`(() => ({
-    ok: window.location.pathname === '/apps/cert/n1-modules/n1-reading-library/index.html'
+    ok: window.location.pathname === '/cert/n1-modules/n1-reading-library/index.html'
       && document.body.innerText.includes('256 bài đọc')
       && document.body.innerText.includes('Luyện bài này'),
     message: 'url=' + window.location.href
@@ -1171,7 +1172,7 @@ try {
     };
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/fe/?view=practice`, 1280);
+  await page.navigate(`${origin}/cert/fe/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length > 0 && document.querySelectorAll(".practice-program__modules li").length > 0', 30000);
   assertResult('FE specialist Practice Program', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length > 0
@@ -1181,7 +1182,7 @@ try {
       + ', modules=' + document.querySelectorAll('.practice-program__modules li').length
   }))()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/ccar-f/?view=practice`, 1280);
+  await page.navigate(`${origin}/cert/ccar-f/?view=practice`, 1280);
   await page.waitUntil('document.querySelector(".practice-program") && document.querySelectorAll("[aria-label=\\"Practice tracks\\"] [role=\\"tab\\"]").length === 5', 30000);
   assertResult('CCAR domain Practice Program', await page.evaluate(`(() => ({
     ok: document.querySelectorAll('[aria-label="Practice tracks"] [role="tab"]').length === 5
@@ -1193,7 +1194,7 @@ try {
       + ', modules=' + document.querySelectorAll('.practice-program__modules li').length
   }))()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/g/`, 390, 844);
+  await page.navigate(`${origin}/cert/g/`, 390, 844);
   await page.waitUntil('document.querySelector(".today-screen")');
   assertResult('G mobile evidence workspace', await page.evaluate(`(() => {
     const mobileNav = document.querySelector('.mobile-primary-nav');
@@ -1202,7 +1203,7 @@ try {
     return {
       ok: getComputedStyle(mobileNav).display !== 'none'
         && mobileNav.querySelectorAll('button').length === 5
-        && disclaimerLink?.getAttribute('href') === '/apps/cert/disclaimer/'
+        && disclaimerLink?.getAttribute('href') === '/cert/disclaimer/'
         && document.documentElement.scrollWidth <= window.innerWidth,
       message: 'display=' + getComputedStyle(mobileNav).display
         + ', buttons=' + mobileNav.querySelectorAll('button').length
@@ -1229,7 +1230,7 @@ try {
   if (process.env.LEGACY_CERT_SMOKE === '1') {
   const childThemeChecks = [];
   for (const slug of certificationManifest.certifications.filter(certification => certification.id !== "pmp").map(certification => certification.slug)) {
-    await page.navigate(`${origin}/apps/cert/${slug}/`, 1280);
+    await page.navigate(`${origin}/cert/${slug}/`, 1280);
     await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
     const result = await page.evaluate(`(async () => {
       await new Promise(resolveWait => setTimeout(resolveWait, 100));
@@ -1253,19 +1254,19 @@ try {
     message: JSON.stringify(childThemeChecks)
   }, []);
 
-  await page.navigate(origin + '/apps/cert/pmp/?view=learn', 1280);
+  await page.navigate(origin + '/cert/pmp/?view=learn', 1280);
   await page.waitUntil('location.pathname === "/pmp/" && document.querySelectorAll("[data-lesson]").length === 44');
   await page.evaluate(`location.hash='guide'`);
   await page.waitUntil('document.querySelectorAll("[data-domain-guide]").length === 3');
   assertResult('PMP merged domain notes and64 terms reachable at canonical route', await page.evaluate(`(() => ({ok:location.pathname === '/pmp/' && document.querySelectorAll('[data-domain-guide]').length === 3 && document.body.innerText.includes('64 thuật ngữ') && !document.querySelector('.knowledge-graph-view'),message:location.href}))()`), page.exceptions);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.navigate(`${origin}/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
     const bankResources = performance.getEntriesByType('resource')
-      .filter(entry => entry.name.includes('/apps/cert/protected-data/'));
+      .filter(entry => entry.name.includes('/cert/protected-data/'));
     return {
       ok: document.title === 'G検定'
         && document.documentElement.lang === 'en'
@@ -1331,7 +1332,7 @@ try {
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.navigate(`${origin}/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
 
   assertResult('G key-term active recall', await page.evaluate(`(async () => {
@@ -1383,7 +1384,7 @@ try {
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.navigate(`${origin}/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
 
   assertResult('G self-study confidence capture', await page.evaluate(`(async () => {
@@ -1458,7 +1459,7 @@ try {
   })()`), page.exceptions);
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 1280);
+  await page.navigate(`${origin}/cert/g/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G Exam Mode', await page.evaluate(`(async () => {
     const button = [...document.querySelectorAll('button')].find(candidate => candidate.textContent.trim() === 'Exam Mode');
@@ -1496,7 +1497,7 @@ try {
 
   for (const width of [700, 641]) {
     await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-    await page.navigate(`${origin}/apps/cert/g/`, width);
+    await page.navigate(`${origin}/cert/g/`, width);
     await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
     assertResult(`G compact ledger layout at ${width}px`, await page.evaluate(`(async () => {
       const columns = element => getComputedStyle(element).gridTemplateColumns.split(' ').filter(Boolean).length;
@@ -1518,7 +1519,7 @@ try {
   }
 
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 390);
+  await page.navigate(`${origin}/cert/g/`, 390);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('G mobile layout', await page.evaluate(`(() => ({
     ok: document.documentElement.scrollWidth <= window.innerWidth,
@@ -1541,7 +1542,7 @@ try {
     };
   })()`), page.exceptions);
   await page.evaluate(`localStorage.removeItem('thangldw:apps:certification-library:state:v3')`);
-  await page.navigate(`${origin}/apps/cert/g/`, 390);
+  await page.navigate(`${origin}/cert/g/`, 390);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('Shared support mobile layout', await page.evaluate(`(async () => {
     const trigger = document.querySelector('.support-floating-trigger');
@@ -1562,7 +1563,7 @@ try {
     return result;
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/aws/`, 1280);
+  await page.navigate(`${origin}/cert/aws/`, 1280);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('AWS certification dashboard', await page.evaluate(`(() => {
     const text = document.body.innerText;
@@ -1582,7 +1583,7 @@ try {
     };
   })()`), page.exceptions);
 
-  await page.navigate(`${origin}/apps/cert/aws/`, 390);
+  await page.navigate(`${origin}/cert/aws/`, 390);
   await page.waitUntil('document.querySelector(".dashboard-evidence-grid")');
   assertResult('AWS certification dashboard mobile layout', await page.evaluate(`(() => ({
     ok: getComputedStyle(document.querySelector('.app-shell')).gridTemplateColumns.startsWith('78px ')
@@ -1595,21 +1596,21 @@ try {
   }
 
   await page.evaluate(`localStorage.removeItem("certification-library:learner-preferences:v1"); localStorage.setItem("theme", "light")`);
-  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.navigate(`${origin}/cert/`, 390, 844);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23 && navigator.serviceWorker?.ready');
   await page.evaluate(`navigator.serviceWorker.ready.then(() => true)`);
-  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.navigate(`${origin}/cert/`, 390, 844);
   await page.waitUntil('navigator.serviceWorker?.controller && document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification PWA installs and controls the gallery', await page.evaluate(`(async () => {
     const registration = await navigator.serviceWorker.ready;
     const manifest = await fetch(document.querySelector('link[rel="manifest"]').href).then(response => response.json());
     const cacheNames = await caches.keys();
     return {
-      ok: registration.scope.endsWith('/apps/cert/')
-        && registration.active?.scriptURL.includes('/apps/cert/service-worker.js')
+      ok: registration.scope.endsWith('/cert/')
+        && registration.active?.scriptURL.includes('/cert/service-worker.js')
         && Boolean(navigator.serviceWorker.controller)
-        && manifest.scope === '/apps/cert/'
-        && manifest.start_url === '/apps/cert/'
+        && manifest.scope === '/cert/'
+        && manifest.start_url === '/cert/'
         && cacheNames.some(name => name.startsWith('cert-shell-'))
         && cacheNames.includes('cert-runtime-v1'),
       message: 'scope=' + registration.scope
@@ -1624,7 +1625,7 @@ try {
   await page.send('Network.emulateNetworkConditions', {
     offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0
   });
-  await page.navigate(`${origin}/apps/cert/`, 390, 844);
+  await page.navigate(`${origin}/cert/`, 390, 844);
   await page.waitUntil('document.querySelectorAll(".hub-cert-tile").length === 23');
   assertResult('Certification PWA reopens the gallery offline', await page.evaluate(`(() => ({
     ok: Boolean(navigator.serviceWorker.controller)

@@ -11,8 +11,8 @@
     return path === "/"
       || path === "/apps/"
       || path === "/japan-pr-guide/"
-      || path === "/apps/cert/"
-      || path.indexOf("/apps/cert/") === 0;
+      || path === "/cert/"
+      || path.indexOf("/cert/") === 0;
   }
 
   function dialogMarkup() {

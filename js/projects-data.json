@@ -248,7 +248,7 @@
   "languageCollection": {
     "title": "Certification Library",
     "description": "Focused dashboards, exam practice, notes, and local learning history for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.",
-    "href": "/apps/cert/",
+    "href": "/cert/",
     "caseStudyHref": "/case-studies/certification-library/",
     "featuredOrder": 3,
     "label": "9 certification programs",
@@ -260,7 +260,7 @@
       "id": "certification-study",
       "title": "Certification Library",
       "description": "One focused study space for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.",
-      "href": "/apps/cert/",
+      "href": "/cert/",
       "ariaLabel": "Open the Certification Library",
       "icon": "fa-graduation-cap",
       "accent": "rust",

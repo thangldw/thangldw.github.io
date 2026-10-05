@@ -270,7 +270,7 @@ def main() -> int:
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"js/projects-data.json: cannot load catalog: {exc}")
 
-    certification_manifest_path = ROOT / "apps/cert/certifications-manifest.json"
+    certification_manifest_path = ROOT / "cert/certifications-manifest.json"
     try:
         certification_manifest = json.loads(
             certification_manifest_path.read_text(encoding="utf-8")
@@ -278,15 +278,15 @@ def main() -> int:
         certifications = certification_manifest.get("certifications")
         if certification_manifest.get("schemaVersion") != "1.0":
             errors.append(
-                "apps/cert/certifications-manifest.json: unsupported schemaVersion"
+                "cert/certifications-manifest.json: unsupported schemaVersion"
             )
         if not isinstance(certifications, list):
             errors.append(
-                "apps/cert/certifications-manifest.json: certifications must be an array"
+                "cert/certifications-manifest.json: certifications must be an array"
             )
         elif certification_manifest.get("certificationCount") != len(certifications):
             errors.append(
-                "apps/cert/certifications-manifest.json: certificationCount mismatch"
+                "cert/certifications-manifest.json: certificationCount mismatch"
             )
         else:
             allowed_fields = {
@@ -300,20 +300,20 @@ def main() -> int:
             for index, certification in enumerate(certifications):
                 if not isinstance(certification, dict):
                     errors.append(
-                        f"apps/cert/certifications-manifest.json: entry {index} must be an object"
+                        f"cert/certifications-manifest.json: entry {index} must be an object"
                     )
                     continue
                 unexpected = sorted(certification.keys() - allowed_fields)
                 missing = sorted(allowed_fields - certification.keys())
                 if unexpected or missing:
                     errors.append(
-                        "apps/cert/certifications-manifest.json: "
+                        "cert/certifications-manifest.json: "
                         f"entry {index} fields differ; missing={missing}, unexpected={unexpected}"
                     )
                 exam = certification.get("exam")
                 if not isinstance(exam, dict) or set(exam.keys()) != allowed_exam_fields:
                     errors.append(
-                        f"apps/cert/certifications-manifest.json: entry {index} has invalid exam metadata"
+                        f"cert/certifications-manifest.json: entry {index} has invalid exam metadata"
                     )
                 identifier = certification.get("id")
                 if isinstance(identifier, str):
@@ -323,7 +323,7 @@ def main() -> int:
                     target = local_target(certification_manifest_path, href)
                     if target is not None and not target.exists():
                         errors.append(
-                            f"apps/cert/certifications-manifest.json: broken href {href}"
+                            f"cert/certifications-manifest.json: broken href {href}"
                         )
             duplicate_manifest_ids = sorted(
                 identifier
@@ -332,12 +332,12 @@ def main() -> int:
             )
             if duplicate_manifest_ids:
                 errors.append(
-                    "apps/cert/certifications-manifest.json: duplicate ids: "
+                    "cert/certifications-manifest.json: duplicate ids: "
                     + ", ".join(duplicate_manifest_ids)
                 )
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(
-            f"apps/cert/certifications-manifest.json: cannot load manifest: {exc}"
+            f"cert/certifications-manifest.json: cannot load manifest: {exc}"
         )
 
     markdown_files = {
@@ -381,7 +381,7 @@ def main() -> int:
             reference for reference in parser.references if urlsplit(reference).path == ANALYTICS_SCRIPT
         ]
         # The owner-held PMP app intentionally has no analytics or remote tracking.
-        if parser.refreshes or page.relative_to(ROOT).as_posix() in {"pmp/index.html", "apps/pmp/index.html", "apps/cert/pmp/index.html"}:
+        if parser.refreshes or page.relative_to(ROOT).as_posix() in {"pmp/index.html", "apps/pmp/index.html", "cert/pmp/index.html"}:
             if analytics_references:
                 errors.append(
                     f"{page.relative_to(ROOT)}: redirect pages and the PMP study app must not load analytics"
@@ -416,7 +416,17 @@ def main() -> int:
 
     for page, parser in parsed_pages.items():
         if parser.refreshes:
-            if page.relative_to(ROOT).as_posix() != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
+            relative = page.relative_to(ROOT).as_posix()
+            if relative.startswith("apps/cert/"):
+                suffix = relative[len("apps/cert/"):].removesuffix("index.html")
+                target = "/pmp/" if suffix == "pmp/" else "/cert/" + suffix
+                if parser.refreshes != [f"0;url={target}"] or not (ROOT / target.lstrip("/") / "index.html").exists():
+                    errors.append(f"{relative}: invalid certification redirect")
+                script = (ROOT / "apps/cert/redirect.js").read_text()
+                if "location.replace(target + location.search + location.hash)" not in script:
+                    errors.append(f"{relative}: redirect must preserve query and hash")
+                continue
+            if relative != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
                 errors.append(f"{page.relative_to(ROOT)}: unapproved redirect")
             elif 'location.replace("/japan-pr-guide/" + location.search + location.hash)' not in page.read_text():
                 errors.append(f"{page.relative_to(ROOT)}: redirect must preserve query and hash")

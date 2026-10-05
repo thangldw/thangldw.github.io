@@ -59,7 +59,7 @@
   }
 
   var catalogRequest = fetchJson('/js/projects-data.json');
-  var certificationRequest = fetchJson('/apps/cert/certifications-manifest.json')
+  var certificationRequest = fetchJson('/cert/certifications-manifest.json')
     .catch(function () { return null; });
 
   global.portfolioProjectsReady = Promise.all([catalogRequest, certificationRequest])
