@@ -1,21 +1,21 @@
 const APP_BASE = "/apps/cert/";
-const SHELL_CACHE = "cert-shell-8da1de5f1740cdf2";
+const SHELL_CACHE = "cert-shell-6fbbf42aa895e667";
 const RUNTIME_CACHE = "cert-runtime-v1";
 const PRECACHE_URLS = [
   "/apps/cert/assets/AppShell-Bl3dNDla.css",
-  "/apps/cert/assets/AppShell-D09OYh0q.js",
-  "/apps/cert/assets/CertificationViews-Cw_GNCvW.js",
+  "/apps/cert/assets/AppShell-cQwGqmRz.js",
+  "/apps/cert/assets/CertificationViews-Dx7sbyM2.js",
   "/apps/cert/assets/CertificationViews-rutjcLFs.css",
   "/apps/cert/assets/ExperienceWorkspace-CJID56wP.css",
-  "/apps/cert/assets/ExperienceWorkspace-EKdavAWt.js",
-  "/apps/cert/assets/FlowCanvas-B6VKLKNY.js",
+  "/apps/cert/assets/ExperienceWorkspace-CtHUxotC.js",
   "/apps/cert/assets/FlowCanvas-DLioOiRN.css",
+  "/apps/cert/assets/FlowCanvas-eD15TXRu.js",
   "/apps/cert/assets/fonts/InterVariable.woff2",
-  "/apps/cert/assets/index-CbieJkDy.css",
-  "/apps/cert/assets/index-D2_Eb0g0.js",
-  "/apps/cert/assets/jlpt-strict-resume-DTlErbjY.js",
+  "/apps/cert/assets/index-B7RnieWL.css",
+  "/apps/cert/assets/index-fQad_z6G.js",
+  "/apps/cert/assets/jlpt-strict-resume-44ROLQKl.js",
   "/apps/cert/assets/jsx-runtime-Cltr0gcK.js",
-  "/apps/cert/assets/question-response-CctZGeQP.js",
+  "/apps/cert/assets/question-response-g64Hn_pN.js",
   "/apps/cert/index.html",
   "/apps/cert/manifest.webmanifest",
   "/apps/cert/pwa/icon-192.png",
