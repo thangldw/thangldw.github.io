@@ -22,9 +22,9 @@ export const incomeOptions = [
 ];
 
 const degreeOptions = {
-  a: [["none", "No qualifying degree / Không"], ["bachelor", "Bachelor's / Cử nhân"], ["master", "Master's / Thạc sĩ"], ["doctor", "Doctorate / Tiến sĩ"]],
-  b: [["none", "No qualifying degree / Không"], ["bachelor", "Bachelor's / Cử nhân"], ["master", "Master's / Thạc sĩ"], ["doctor", "Doctorate / Tiến sĩ"], ["mbaMot", "MBA / MOT"]],
-  c: [["none", "No qualifying degree / Không"], ["bachelor", "Bachelor's / Cử nhân"], ["master", "Master's / Thạc sĩ"], ["doctor", "Doctorate / Tiến sĩ"], ["mbaMot", "MBA / MOT"]],
+  a: [["none", "No qualifying degree / Không"], ["bachelor", "Bachelor's / Cử nhân"], ["master", "Master's / Thạc sĩ"], ["doctor", "Doctorate (non-professional) / Tiến sĩ nghiên cứu"]],
+  b: [["none", "No qualifying degree / Không"], ["bachelor", "Bachelor's / Cử nhân"], ["master", "Master's / Thạc sĩ"], ["doctor", "Doctorate (non-professional) / Tiến sĩ nghiên cứu"], ["mbaMot", "MBA / MOT"]],
+  c: [["none", "No qualifying degree / Không"], ["bachelor", "Bachelor's / Cử nhân"], ["master", "Master's / Thạc sĩ"], ["doctor", "Doctorate (non-professional) / Tiến sĩ nghiên cứu"], ["mbaMot", "MBA / MOT"]],
 };
 
 export const initialFactors = {
@@ -54,7 +54,7 @@ export const initialFactors = {
 };
 
 const sharedDefinitions = [
-  { group: "Core", id: "degree", label: "Highest qualifying degree", vi: "Bằng cấp cao nhất đủ điều kiện", kind: "select", max: { a: 30, b: 25, c: 25 }, options: degreeOptions, pointsKey: "degree", proof: "Degree certificate", note: "Must be obtained by the reference date." },
+  { group: "Core", id: "degree", label: "Highest qualifying degree", vi: "Bằng cấp cao nhất đủ điều kiện", kind: "select", max: { a: 30, b: 30, c: 25 }, options: degreeOptions, pointsKey: "degree", proof: "Degree certificate", note: "Must be obtained by the reference date." },
   { group: "Core", id: "experience", label: "Relevant professional experience", vi: "Kinh nghiệm nghề nghiệp liên quan", kind: "number", min: 0, max: { a: 15, b: 20, c: 25 }, pointsKey: "experience", proof: "Employment records", note: "Count only experience accumulated by each date." },
   { group: "Core", id: "age", label: "Age at assessment date", historicalLabel: "Age at reference date", vi: "Tuổi tại ngày tham chiếu", kind: "number", min: 18, max: 15, pointsKey: "age", proof: "Passport / date of birth", activities: ["a", "b"], note: "Use age on each specific reference date." },
   { group: "Core", id: "position", label: "Corporate position", vi: "Chức vụ doanh nghiệp", kind: "select", max: 10, options: [[0, "Other / none"], [5, "Director / executive officer"], [10, "Representative director / equivalent"]], pointsKey: "position", proof: "Corporate registry / appointment", activities: ["c"], note: "Position must apply at the reference date." },

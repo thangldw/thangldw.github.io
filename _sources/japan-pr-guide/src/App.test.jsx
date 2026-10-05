@@ -148,4 +148,16 @@ describe("Japan PR Guide route-specific assessment", () => {
     expect(screen.getByRole("heading", { name: /Consular visa fees/ })).toBeVisible();
     expect(screen.getByRole("link", { name: /MOFA · Announcement/ })).toHaveAttribute("href", "https://www.mofa.go.jp/j_info/visit/visa/procedure/pagewe_000001_00391.html");
   });
+  it("awards the official technical doctorate points at both assessment dates", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.selectOptions(screen.getByLabelText("Highest qualifying degree"), "doctor");
+    expect(screen.getByText("85", { selector: "[data-live-score]" })).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Review score claims" }));
+    await user.click(screen.getByRole("button", { name: "Continue to historical score" }));
+    expect(screen.getByText("85", { selector: "[data-current-total]" })).toBeVisible();
+    expect(screen.getByText("80", { selector: "[data-historical-total]" })).toBeVisible();
+    expect(screen.getByText("5 Oct 2025", { selector: "[data-historical-date]" })).toBeVisible();
+  });
+
 });

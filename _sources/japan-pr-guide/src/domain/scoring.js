@@ -2,7 +2,7 @@ export function degreePoints(activity, degree) {
   if (degree === "none") return 0;
   if (degree === "bachelor") return 10;
   if (degree === "mbaMot") return activity === "a" ? 20 : 25;
-  if (degree === "doctor") return activity === "a" ? 30 : 20;
+  if (degree === "doctor") return activity === "c" ? 20 : 30;
   if (degree === "master") return 20;
   return Number(degree || 0);
 }

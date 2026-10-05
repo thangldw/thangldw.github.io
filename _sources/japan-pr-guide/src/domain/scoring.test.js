@@ -15,7 +15,8 @@ import {
 describe("MOJ HSP scoring parity", () => {
   test("raw degree and experience inputs map by activity", () => {
     expect(degreePoints("a", "doctor")).toBe(30);
-    expect(degreePoints("b", "doctor")).toBe(20);
+    expect(degreePoints("b", "doctor")).toBe(30);
+    expect(degreePoints("c", "doctor")).toBe(20);
     expect(degreePoints("c", "master")).toBe(20);
     expect(degreePoints("b", "mbaMot")).toBe(25);
     expect(experiencePoints("a", 7)).toBe(15);

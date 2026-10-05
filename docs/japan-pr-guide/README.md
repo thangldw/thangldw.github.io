@@ -24,3 +24,5 @@ Editable source: `_sources/japan-pr-guide/`. Run `npm ci && npm run release:page
 The five-step flow remains. Filing date drives policy labels, fee and historical checkpoint. Default date is today's Japan date; review date remains fixed. Leap-day checkpoints are clamped. The initial profile is labelled as an example, no evidence is pre-confirmed, and changing date clears confirmations. Endpoint scores do not prove continuous points throughout the new qualifying period.
 
 No invented household-income amount, language equivalence, automatic absence rejection, or traffic-ticket PR exclusion becomes an eligibility gate.
+
+Direct visual inspection of ISA English points PDF also identified and corrected a legacy calculator error: non-professional doctorates award 30 points in both academic and technical activities; business remains 20. The technical maximum is now 30. A UI regression covers the 85-point technical profile and its 80-point one-year historical checkpoint.
