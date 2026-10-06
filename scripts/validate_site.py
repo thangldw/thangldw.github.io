@@ -432,6 +432,13 @@ def main() -> int:
                 if "location.replace(target + location.search + location.hash)" not in script:
                     errors.append(f"{relative}: redirect must preserve query and hash")
                 continue
+            if relative == "cert/jlpt/index.html" or relative.startswith("cert/n1-modules/"):
+                refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
+                destination = refresh.removeprefix("0;url=")
+                parsed = urlsplit(destination)
+                if parsed.path != "/jlpt/" or parsed.scheme or parsed.netloc or not (ROOT / "jlpt/index.html").is_file():
+                    errors.append(f"{relative}: invalid standalone JLPT redirect")
+                continue
             if relative != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
                 errors.append(f"{page.relative_to(ROOT)}: unapproved redirect")
             elif 'location.replace("/japan-pr-guide/" + location.search + location.hash)' not in page.read_text():

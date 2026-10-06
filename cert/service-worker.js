@@ -1,21 +1,20 @@
 const APP_BASE = "/cert/";
-const SHELL_CACHE = "cert-shell-6a855568f65650ab";
-const RUNTIME_CACHE = "cert-runtime-v1";
+const SHELL_CACHE = "cert-shell-86d3299fdfb84a89";
 const PRECACHE_URLS = [
+  "/cert/assets/AppShell-BUj1M_CT.js",
   "/cert/assets/AppShell-Bl3dNDla.css",
-  "/cert/assets/AppShell-BqiT6WXs.js",
-  "/cert/assets/CertificationViews-CVboFl2w.js",
+  "/cert/assets/CertificationViews-DNxq1Y7c.js",
   "/cert/assets/CertificationViews-rutjcLFs.css",
+  "/cert/assets/ExperienceWorkspace-BIbrl32V.js",
   "/cert/assets/ExperienceWorkspace-CJID56wP.css",
-  "/cert/assets/ExperienceWorkspace-CrmPzSGF.js",
+  "/cert/assets/FlowCanvas-BDRRzUXO.js",
   "/cert/assets/FlowCanvas-DLioOiRN.css",
-  "/cert/assets/FlowCanvas-DYa9TvwU.js",
   "/cert/assets/fonts/InterVariable.woff2",
-  "/cert/assets/index-DHurm7EY.js",
+  "/cert/assets/index-C94JFm8m.js",
   "/cert/assets/index-GonsR_LT.css",
-  "/cert/assets/jlpt-strict-resume-BVVLu0hm.js",
+  "/cert/assets/jlpt-strict-resume-Dhqc1a53.js",
   "/cert/assets/jsx-runtime-Cltr0gcK.js",
-  "/cert/assets/question-response-BOZ16YE5.js",
+  "/cert/assets/question-response-gDXPaVdh.js",
   "/cert/index.html",
   "/cert/manifest.webmanifest",
   "/cert/pwa/icon-192.png",
@@ -24,88 +23,12 @@ const PRECACHE_URLS = [
   "/cert/theme-init.js"
 ];
 const SHELL_URLS = new Set(PRECACHE_URLS);
-
-function cacheable(response) {
-  return response.ok && response.type !== "opaque";
-}
-
-function isAnalyticsRequest(url) {
-  return url.pathname === "/js/analytics.js" || url.pathname.startsWith("/analytics/");
-}
-
-async function fromShell(request) {
-  const cache = await caches.open(SHELL_CACHE);
-  return (await cache.match(request, { ignoreSearch: true })) || fetch(request);
-}
-
-async function networkFirstNavigation(request) {
-  try {
-    return await fetch(request);
-  } catch {
-    return caches.match(`${APP_BASE}index.html`);
-  }
-}
-
-async function cacheFirstRuntime(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request, { ignoreSearch: false });
-  if (cached) return cached;
-  const response = await fetch(request);
-  if (response.ok && response.type !== "opaque") await cache.put(request, response.clone());
-  return response;
-}
-
-async function networkFirstRuntime(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  try {
-    const response = await fetch(request);
-    if (cacheable(response)) await cache.put(request, response.clone());
-    return response;
-  } catch (error) {
-    const cached = await cache.match(request, { ignoreSearch: false });
-    if (cached) return cached;
-    throw error;
-  }
-}
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(SHELL_CACHE).then((cache) => cache.addAll(PRECACHE_URLS)));
-});
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then((names) => Promise.all(names
-        .filter((name) => name.startsWith("cert-shell-") && name !== SHELL_CACHE)
-        .map((name) => caches.delete(name))))
-      .then(() => self.clients.claim()),
-  );
-});
-
-self.addEventListener("fetch", (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-  if (request.method !== "GET" || url.origin !== self.location.origin || isAnalyticsRequest(url)) return;
-
-  if (request.mode === "navigate" && url.pathname.startsWith(APP_BASE)) {
-    event.respondWith(networkFirstNavigation(request));
-    return;
-  }
-
-  if (SHELL_URLS.has(url.pathname)) {
-    event.respondWith(fromShell(request));
-    return;
-  }
-
-  const protectedPack = url.pathname.startsWith(`${APP_BASE}protected-data/`) && url.pathname.endsWith(".cbk");
-  const questionMedia = url.pathname.startsWith(`${APP_BASE}question-media/`);
-  if (protectedPack || questionMedia) {
-    event.respondWith(cacheFirstRuntime(request));
-    return;
-  }
-
-  const sharedSiteAsset = url.pathname.startsWith("/css/") || url.pathname.startsWith("/js/");
-  if (url.pathname.startsWith(APP_BASE) || sharedSiteAsset) {
-    event.respondWith(networkFirstRuntime(request));
-  }
+self.addEventListener("install",event=>{event.waitUntil(caches.open(SHELL_CACHE).then(cache=>cache.addAll(PRECACHE_URLS)));});
+self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(names=>Promise.all(names.filter(name=>name.startsWith('cert-')&&name!==SHELL_CACHE).map(name=>caches.delete(name)))).then(()=>self.clients.claim()));});
+self.addEventListener("fetch",event=>{
+ const request=event.request,url=new URL(request.url);
+ if(request.method!=="GET"||url.origin!==self.location.origin)return;
+ if(url.pathname.startsWith(APP_BASE+'protected-data/')||url.pathname.startsWith(APP_BASE+'question-media/'))return;
+ if(SHELL_URLS.has(url.pathname)){event.respondWith(caches.open(SHELL_CACHE).then(async cache=>(await cache.match(request,{ignoreSearch:true}))||fetch(request)));return;}
+ if(request.mode==='navigate'&&url.pathname.startsWith(APP_BASE))event.respondWith(fetch(request).catch(()=>caches.match(APP_BASE+'index.html')));
 });

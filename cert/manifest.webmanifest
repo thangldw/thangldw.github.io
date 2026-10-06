@@ -2,7 +2,7 @@
   "id": "/cert/",
   "name": "Certification Library",
   "short_name": "Cert Library",
-  "description": "Local-first certification study, practice, review, and exam preparation.",
+  "description": "Certification practice with online content and locally saved progress.",
   "lang": "en",
   "start_url": "/cert/",
   "scope": "/cert/",
