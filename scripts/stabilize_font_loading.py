@@ -9,7 +9,7 @@ for page in root.rglob('*.html'):
     text = page.read_text()
     if 'site-shell.css' not in text:
         continue
-    text = re.sub(r'site-shell\.css\?v=[\w-]+', 'site-shell.css?v=20261005stable', text)
+    text = re.sub(r'site-shell\.css\?v=[\w-]+', 'site-shell.css?v=20261007brandstates', text)
     if 'as="font"' not in text:
         text = text.replace('</head>', '  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>\n</head>')
     if text != page.read_text():

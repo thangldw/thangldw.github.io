@@ -10,6 +10,8 @@
 }
 
 :root {
+  --site-brand-ink: var(--color-text, #1d211e);
+  --site-brand-accent: var(--color-accent, #a83a00);
   --site-font-ui: "Inter", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-ui: var(--site-font-ui);
   --font-sans: var(--site-font-ui);
@@ -86,7 +88,7 @@ textarea {
   align-items: center;
   gap: 10px;
   min-height: 38px;
-  color: var(--color-text);
+  color: var(--site-brand-ink);
   font-family: var(--font-ui);
   font-size: 22px;
   font-weight: 700;
@@ -100,31 +102,37 @@ textarea {
   width: 38px;
   height: 38px;
   flex: 0 0 auto;
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--site-brand-accent);
   border-radius: 12px 4px;
-  color: var(--color-accent);
+  color: var(--site-brand-accent);
   font: 650 15px/1 var(--font-mono);
   letter-spacing: -.08em;
   transition: border-color .2s, color .2s, transform .2s;
 }
 
 .site-brand-dot {
-  color: var(--color-accent);
+  color: var(--site-brand-accent);
 }
 
-.site-brand:hover {
-  color: var(--color-text);
+.site-brand:any-link,
+.site-brand:any-link:is(:hover, :focus, :active),
+.site-brand:any-link span {
+  text-decoration: none;
 }
 
-.site-brand:hover .site-brand-mark {
-  border-color: color-mix(in srgb, var(--color-accent) 72%, white);
-  color: color-mix(in srgb, var(--color-accent) 72%, white);
+.site-brand:any-link:is(:hover, :focus, :active) {
+  color: var(--site-brand-ink);
+}
+
+.site-brand:any-link:hover .site-brand-mark {
+  border-color: color-mix(in srgb, var(--site-brand-accent) 72%, white);
+  color: color-mix(in srgb, var(--site-brand-accent) 72%, white);
   transform: translateY(-1px);
 }
 
 .site-brand:focus-visible {
   border-radius: 8px;
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--site-brand-accent);
   outline-offset: 4px;
 }
 
@@ -214,4 +222,9 @@ textarea {
   .site-theme-toggle {
     transition: none;
   }
+}
+
+:root[data-theme="dark"] {
+  --site-brand-ink: var(--color-text, #f1efe8);
+  --site-brand-accent: var(--color-accent, #ff9a5d);
 }
