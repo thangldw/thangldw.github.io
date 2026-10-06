@@ -604,3 +604,16 @@ body.support-dialog-open {
     backdrop-filter: none;
   }
 }
+
+/* Isolate shared support controls from each app's header, section and button rules. */
+.support-dialog .support-dialog-heading{min-height:0;max-width:none;margin:0;border:0;gap:normal;align-items:normal;justify-content:normal;flex-wrap:nowrap;letter-spacing:normal}
+.support-dialog .support-international{padding:0;margin:0;scroll-margin:0}
+.support-dialog .support-github,.support-dialog .support-kofi,.support-dialog .support-bank{margin:0}
+.support-dialog .support-dialog-close{min-height:28px;max-height:28px;letter-spacing:normal}
+.support-dialog .support-primary{min-height:0;letter-spacing:normal;text-decoration:none}
+.support-dialog .support-primary:hover{border-color:var(--support-accent);color:var(--support-accent-ink);text-decoration:none}
+.support-dialog .support-kofi-button:hover{text-decoration:none}
+
+.support-dialog{font-size:16px;line-height:1.5}
+
+.support-floating-trigger svg,.support-primary svg{width:12px;height:12px;flex:none}
