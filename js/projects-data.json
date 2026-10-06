@@ -279,7 +279,7 @@
       "id": "jlpt-n1-skills",
       "title": "JLPT N1",
       "description": "Practise one N1 skill at a time, with short sessions, source explanations, recall cards and due-item review.",
-      "href": "/jlpt/",
+      "href": "/jlpt-n1/",
       "ariaLabel": "Open JLPT N1 skill practice",
       "icon": "fa-language",
       "accent": "indigo",

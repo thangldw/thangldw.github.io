@@ -387,7 +387,7 @@ def main() -> int:
             reference for reference in parser.references if urlsplit(reference).path == ANALYTICS_SCRIPT
         ]
         # The owner-held PMP app intentionally has no analytics or remote tracking.
-        if parser.refreshes or page.relative_to(ROOT).as_posix() in {"pmp/index.html", "jlpt/index.html", "apps/pmp/index.html", "cert/pmp/index.html"}:
+        if parser.refreshes or page.relative_to(ROOT).as_posix() in {"pmp/index.html", "jlpt-n1/index.html", "apps/pmp/index.html", "cert/pmp/index.html"}:
             if analytics_references:
                 errors.append(
                     f"{page.relative_to(ROOT)}: redirect pages and standalone study apps must not load analytics"
@@ -432,11 +432,15 @@ def main() -> int:
                 if "location.replace(target + location.search + location.hash)" not in script:
                     errors.append(f"{relative}: redirect must preserve query and hash")
                 continue
+            if relative == "jlpt/index.html":
+                if 'location.replace("/jlpt-n1/"+location.search+location.hash)' not in page.read_text() or not (ROOT / "jlpt-n1/index.html").is_file():
+                    errors.append(f"{relative}: invalid JLPT compatibility redirect")
+                continue
             if relative == "cert/jlpt/index.html" or relative.startswith("cert/n1-modules/"):
                 refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
                 destination = refresh.removeprefix("0;url=")
                 parsed = urlsplit(destination)
-                if parsed.path != "/jlpt/" or parsed.scheme or parsed.netloc or not (ROOT / "jlpt/index.html").is_file():
+                if parsed.path != "/jlpt-n1/" or parsed.scheme or parsed.netloc or not (ROOT / "jlpt-n1/index.html").is_file():
                     errors.append(f"{relative}: invalid standalone JLPT redirect")
                 continue
             if relative != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
