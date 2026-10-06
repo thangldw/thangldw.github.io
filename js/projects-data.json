@@ -259,20 +259,39 @@
     {
       "id": "certification-study",
       "title": "Certification Library",
-      "description": "One focused study space for G検定, 3級FP, BJT, SG, AP, JLPT N1, TOEIC, PMP, and AWS SAA.",
+      "description": "Study by skill or domain across 23 certification libraries, with controlled online content and locally saved progress.",
       "href": "/cert/",
       "ariaLabel": "Open the Certification Library",
       "icon": "fa-graduation-cap",
       "accent": "rust",
       "status": "Collection",
       "tags": [
-        "9 certifications",
-        "Exam practice",
-        "Local-first"
+        "23 certifications",
+        "Skill practice",
+        "Local progress"
       ],
       "category": "certification-study",
       "categoryLabel": "Exam preparation",
       "cta": "Open library",
+      "catalogGroup": "learning"
+    },
+    {
+      "id": "jlpt-n1-skills",
+      "title": "JLPT N1",
+      "description": "Practise one N1 skill at a time, with short sessions, source explanations, recall cards and due-item review.",
+      "href": "/jlpt/",
+      "ariaLabel": "Open JLPT N1 skill practice",
+      "icon": "fa-language",
+      "accent": "indigo",
+      "status": "Live",
+      "tags": [
+        "N1 skills",
+        "Short sessions",
+        "Spaced review"
+      ],
+      "category": "certification-study",
+      "categoryLabel": "Japanese exam preparation",
+      "cta": "Practise N1",
       "catalogGroup": "learning"
     }
   ]
