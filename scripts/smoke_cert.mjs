@@ -141,7 +141,9 @@ try{
  const layout=await page.evaluate(`({ok:document.documentElement.scrollWidth<=innerWidth, cards:document.querySelectorAll('.skill').length})`);assertResult(`JLPT skill layout ${width}`,layout,page.exceptions);
  await page.send('Page.captureScreenshot',{format:'png'}).then(r=>writeFile(`/tmp/jlpt-skills-${width}.png`,Buffer.from(r.data,'base64')));
  await page.evaluate("document.querySelector('[data-skill=\"grammar-choice\"]').click();document.getElementById('count').value='5';document.getElementById('mode').value='scored';document.getElementById('start').click()");await page.waitUntil("document.querySelector('[data-choice]')");
- await page.evaluate("document.querySelector('[data-choice]').click();document.getElementById('check').click()");await page.waitUntil("document.querySelector('.feedback')&&document.getElementById('next')");
+ await page.evaluate("document.querySelector('input[name=confidence][value=unsure]').click();document.querySelector('[data-choice]').click()");
+ assertResult(`Visible confidence choices persist ${width}`,await page.evaluate("({ok:document.querySelectorAll('input[name=confidence]').length===2&&!document.querySelector('select#confidence')&&document.querySelector('input[name=confidence]:checked').value==='unsure'&&document.documentElement.scrollWidth<=innerWidth})"),page.exceptions);
+ await page.evaluate("document.getElementById('check').click()");await page.waitUntil("document.querySelector('.feedback')&&document.getElementById('next')");
  assertResult(`JLPT response feedback ${width}`,await page.evaluate("({ok:document.querySelectorAll('.choice.correct').length===1&&!!document.querySelector('.feedback').innerText.trim()})"),page.exceptions);
  await page.send('Page.captureScreenshot',{format:'png'}).then(r=>writeFile(`/tmp/jlpt-feedback-${width}.png`,Buffer.from(r.data,'base64')));
  await page.evaluate("document.getElementById('note').value='My recall note';document.getElementById('note').dispatchEvent(new Event('input'));document.getElementById('next').click()");await page.waitUntil("document.querySelector('[data-choice]')&&!document.querySelector('.feedback')");
