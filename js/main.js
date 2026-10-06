@@ -30,12 +30,12 @@
       });
     var cards = projects.map(function (project) {
       if (project.isLanguageCollection) {
-        return '<a class="resume-project language-project" href="' + escapeHtml(project.caseStudyHref || project.href) + '">' +
+        return '<a class="resume-project language-project" href="' + escapeHtml(project.href) + '">' +
           '<span class="project-kind"><i class="fa-solid fa-book-open" aria-hidden="true"></i>' + escapeHtml(project.label) + '</span>' +
           '<h3>' + escapeHtml(project.title) + '</h3><p>' + escapeHtml(project.description) + '</p>' +
           '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
       }
-      return '<a class="resume-project" href="' + escapeHtml(project.caseStudyHref || project.href) + '">' +
+      return '<a class="resume-project" href="' + escapeHtml(project.href) + '">' +
         '<span class="project-kind">' + escapeHtml(project.categoryLabel || 'Side project') + '</span>' +
         '<h3>' + escapeHtml(project.title) + '</h3>' +
         '<p>' + escapeHtml(project.featuredDescription || project.description) + '</p>' +
