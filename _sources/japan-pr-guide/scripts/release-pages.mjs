@@ -15,7 +15,7 @@ for (const name of readdirSync(path.join(target, "assets"))) {
   writeFileSync(css, readFileSync(css, "utf8").replaceAll("font-display:swap", "font-display:optional"));
 }
 const index = path.join(target, "index.html");
-const shell = `    <link rel="stylesheet" href="/css/icons.css?v=20260714" />\n    <link rel="stylesheet" href="/css/support-dialog.css?v=20260803i" />\n    <script defer src="/js/support-dialog.js?v=20261005route"></script>\n`;
+const shell = `    <link rel="stylesheet" href="/css/icons.css?v=20260714" />\n    <link rel="stylesheet" href="/css/support-dialog.css?v=20261007sharedsupport" />\n    <script defer src="/js/support-dialog.js?v=20261007sharedsupport"></script>\n`;
 writeFileSync(index, readFileSync(index, "utf8").replace("  </head>", `${shell}  </head>`));
 console.log(`Generated Pages app: ${target}`);
 
