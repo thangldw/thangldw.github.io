@@ -14,6 +14,8 @@ flowchart LR
     CS["Private cert source<br/>+ question banks"]:::orange --> CB["Local production<br/>build"]:::blue
     CB --> CA["/cert/<br/>generated app"]:::cyan
     CB --> CM
+    CB --> API["Cloudflare content API<br/>private banks / controlled delivery"]:::orange
+    API --> CA
     H --> GP["GitHub Pages"]:::yellow
     A --> GP
     CA --> GP
@@ -30,7 +32,7 @@ flowchart LR
 
 ### Purpose and operating model
 
-`thangldw.github.io` is a static personal portfolio and application host. It has no application server, database, package-manager build step, or persistent backend. GitHub Pages serves committed HTML, CSS, JavaScript, JSON, fonts, images, and generated application artifacts.
+`thangldw.github.io` is a static personal portfolio and application host. GitHub Pages hosts the static shell; controlled certification content is supplied by external Cloudflare APIs. Root-site maintenance does not require a package-manager build, while generated apps are built in their source repositories. GitHub Pages serves committed HTML, CSS, JavaScript, JSON, fonts, images, and generated application artifacts.
 
 - Production: [https://thangldw.github.io/](https://thangldw.github.io/)
 - Default branch: `master`
@@ -46,6 +48,8 @@ flowchart LR
 | `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/cert/` | Generated Certification Library | Private `thangldw/cert` source repository |
+| `/jlpt-n1/`, `/pmp/` | Independent N1 skill practice and PMP study | Private cert source and controlled APIs |
+| `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/toolbox/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/cert/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
 | `/case-studies/{flagship}/` | Recruiter-facing evidence for four flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |
@@ -58,7 +62,7 @@ Every sitemap route must have canonical metadata, a meaningful description, requ
 
 The loader also reads `/cert/certifications-manifest.json`. It derives the certification count, names, labels, and collection tags at runtime. Adding a certification therefore does not require manually editing the home page or application catalog.
 
-The public certification manifest is an explicit metadata allowlist. It contains identity, issuer, routes, syllabus and public exam information, but not prompts, choices, answer keys, explanations, domains, glossary content, or learner data. Question banks remain inside the compiled React bundle.
+The public certification manifest is an explicit metadata allowlist. It contains identity, issuer, routes, syllabus and public exam information, but not prompts, choices, answer keys, explanations, domains, glossary content, or learner data. Question banks and JLPT corpora remain in private compilation inputs and Cloudflare storage. Pages ships application shells, not banks or browser decryption keys. Anonymous sessions, quotas, issuance checks and server-side grading bound delivery; visible content remains copyable.
 
 ### Repository layout
 
@@ -107,6 +111,8 @@ Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
 node scripts/smoke_cert.mjs
+node scripts/smoke_brand.mjs
+node scripts/smoke_product_pages.mjs
 ```
 
 | Gate | Coverage |
@@ -127,13 +133,13 @@ Edit only `js/projects-data.json`.
 4. Run validation and browser smoke tests.
 5. Commit and push.
 
-Home preserves the complete one-page profile, working approach, languages, contact links, and selected-project carousel. The full catalog uses readable rows, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
+Home preserves the complete one-page profile, working approach, languages, contact links, and selected-project carousel. The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
 ### Support dialog and asset provenance
 
-The portfolio home includes an optional Support dialog. GitHub Sponsors opens an external confirmation flow, Ko-fi is embedded with an explicit external fallback, and Vietnamese bank support uses the local `assets/support-vietqr-mb.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
+The portfolio home includes an optional Support dialog. GitHub Sponsors opens an external confirmation flow, Ko-fi opens an external support link, and Vietnamese bank support uses the local `assets/support-vietqr-mb.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
 
 Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. `scripts/validate_site.py` permits only these durable license documents plus the root README; temporary Markdown reports and QA screenshots must stay outside the repository.
 
@@ -143,7 +149,7 @@ The private `thangldw/cert` repository owns certification manifests, question ba
 
 1. In the source repository, run `npm ci`, data validation, tests, and `npm run build`.
 2. Inspect `dist/client/certifications-manifest.json` and confirm it contains metadata only.
-3. Synchronize the complete `dist/client/` output to `cert/`.
+3. Use the source release helper to synchronize `dist/client/` to `/cert/`, the standalone N1 shell to `/jlpt-n1/`, and legacy redirects. PMP has its own `/pmp/` build/release helper. Deploy the content API before publishing shells when content changes.
 4. Preserve required site integration layers such as analytics and shared styling when the release process applies them.
 5. Run all website quality gates.
 6. Push the source repository before the generated website artifact.
@@ -166,7 +172,7 @@ Do not silently replace generated assets in an unrelated commit. If production i
 - Never commit secrets, credentials, private datasets, learner backups, or machine-specific paths.
 - Keep fonts and production assets local; external font dependencies are rejected.
 - Validate all JSON before rendering and escape catalog text inserted into HTML.
-- Treat certification bundle minification as deterrence, not enforceable access control.
+- Keep question banks out of Pages; controlled content requires network access. Browser-visible material remains copyable.
 - Certification learner data remains in browser storage; the website does not collect or synchronize it.
 - Analytics must not run on redirect pages and must appear exactly once elsewhere.
 
@@ -178,7 +184,7 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 
 ### Mục đích và mô hình vận hành
 
-`thangldw.github.io` là portfolio và host ứng dụng tĩnh. Website không có application server, database, backend lưu trữ hoặc bước build bằng package manager. GitHub Pages phục vụ trực tiếp HTML, CSS, JavaScript, JSON, font, ảnh và artifact ứng dụng đã sinh.
+`thangldw.github.io` là portfolio và host ứng dụng tĩnh. Pages host shell tĩnh; nội dung chứng chỉ được API Cloudflare bên ngoài cấp có kiểm soát. Root website không cần bước build bằng package manager; app đã sinh được build tại repo source riêng. GitHub Pages phục vụ trực tiếp HTML, CSS, JavaScript, JSON, font, ảnh và artifact ứng dụng đã sinh.
 
 - Production: [https://thangldw.github.io/](https://thangldw.github.io/)
 - Default branch: `master`
@@ -193,6 +199,7 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 | `/apps/` | Danh mục ứng dụng có search/filter | `js/projects-data.json` |
 | `/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
 | `/cert/` | Certification Library đã build | Repo private `thangldw/cert` |
+| `/jlpt-n1/`, `/pmp/` | Luyện N1 theo kỹ năng và PMP độc lập | Source cert private và API có kiểm soát |
 | Certification manifest | Metadata và count công khai | Local production build của repo cert |
 | `/case-studies/{flagship}/` | Bằng chứng recruiter-facing cho bốn flagship | Semantic HTML theo route và CSS dùng chung |
 | `/404.html` | Fallback của GitHub Pages | Source repository |
@@ -205,7 +212,7 @@ Mọi route trong sitemap phải có canonical, description, Open Graph và soci
 
 Loader đồng thời đọc public certification manifest để tự tính số lượng, tên, label và tag của collection. Vì vậy thêm chứng chỉ không cần sửa thủ công trang chủ hoặc application catalog.
 
-Manifest chứng chỉ chỉ dùng allowlist metadata công khai: định danh, issuer, route, syllabus và thông tin kỳ thi. Nó không chứa prompt, choice, đáp án, giải thích, domain, glossary hoặc dữ liệu người học. Question bank vẫn ở trong React bundle.
+Manifest chứng chỉ chỉ dùng allowlist metadata công khai: định danh, issuer, route, syllabus và thông tin kỳ thi. Nó không chứa prompt, choice, đáp án, giải thích, domain, glossary hoặc dữ liệu người học. Question bank và corpus JLPT nằm trong nguồn build private và storage Cloudflare. Pages chỉ chứa shell, không chứa bank hoặc khóa giải mã trình duyệt. Session ẩn danh, quota, kiểm tra issuance và chấm phía server kiểm soát cấp nội dung; nội dung đã hiển thị vẫn có thể sao chép.
 
 ### Cấu trúc và phát triển local
 
@@ -227,7 +234,7 @@ Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo
 
 ### Support và nguồn gốc asset
 
-Trang chủ có dialog Support tùy chọn. GitHub Sponsors mở luồng xác nhận bên ngoài, Ko-fi được nhúng kèm link mở ngoài dự phòng, và chuyển khoản Việt Nam dùng ảnh local `assets/support-vietqr-mb.jpg`. Website tĩnh không thu thập thông tin thanh toán. Phải xác minh người nhận QR trước mỗi release thay đổi ảnh. Hồ sơ nguồn và license font tự host nằm trong `assets/fonts/licenses/`; report Markdown và ảnh QA tạm không được commit.
+Trang chủ có dialog Support tùy chọn. GitHub Sponsors mở luồng xác nhận bên ngoài, Ko-fi dùng liên kết hỗ trợ bên ngoài, và chuyển khoản Việt Nam dùng ảnh local `assets/support-vietqr-mb.jpg`. Website tĩnh không thu thập thông tin thanh toán. Phải xác minh người nhận QR trước mỗi release thay đổi ảnh. Hồ sơ nguồn và license font tự host nằm trong `assets/fonts/licenses/`; report Markdown và ảnh QA tạm không được commit.
 
 ### Publish Certification Library
 
@@ -235,7 +242,7 @@ Repo private `thangldw/cert` quản lý dữ liệu, question bank, application 
 
 1. Chạy `npm ci`, validation, test và production build.
 2. Kiểm tra public manifest chỉ có metadata.
-3. Đồng bộ toàn bộ `dist/client/` sang `cert/`.
+3. Dùng release helper đồng bộ `dist/client/` sang `/cert/`, shell N1 sang `/jlpt-n1/` và redirect cũ. PMP có helper build/release riêng tại `/pmp/`. Deploy content API trước shell khi nội dung thay đổi.
 4. Giữ các integration layer cần thiết của website.
 5. Chạy toàn bộ quality gate của website.
 6. Push source repo trước generated artifact.
@@ -247,7 +254,7 @@ Build local tự tạo route và manifest; không cần GitHub Actions. Tuy nhi�
 
 Luôn bắt đầu từ working tree sạch, kiểm tra generated diff, chạy test, commit tập trung, push `master`, chờ Pages deploy và xác minh HTML/JSON/UI production. Nếu lỗi, revert commit tập trung hoặc tạo corrective commit; không force-push.
 
-Không commit secret, credential, private dataset, learner backup hoặc đường dẫn máy. Font và asset phải local. JSON phải được validate và text phải escape trước khi chèn HTML. Minification chỉ là deterrence. Dữ liệu học nằm trong browser storage và không được website đồng bộ.
+Không commit secret, credential, private dataset, learner backup hoặc đường dẫn máy. Font và asset phải local. JSON phải được validate và text phải escape trước khi chèn HTML. Bank không được deploy lên Pages; API cần kết nối mạng và nội dung đã hiển thị vẫn có thể sao chép. Dữ liệu học nằm trong browser storage và không được website đồng bộ.
 
 Thay đổi cần tập trung theo route, accessible, responsive và test được. Route mới phải cập nhật sitemap, canonical, Open Graph, social image, analytics, validation và smoke test.
 
@@ -255,7 +262,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 
 ### Purpose と operating model
 
-`thangldw.github.io` は static portfolio と application host です。Application server、database、persistent backend、package-manager build step はありません。GitHub Pages が committed HTML、CSS、JavaScript、JSON、font、image、generated artifact を配信します。
+`thangldw.github.io` は static portfolio と application host です。Pages は static shell を host し、証明書学習 content は外部 Cloudflare API が制御して配信します。Root site 自体は package-manager build 不要ですが、generated app は各 source repo で build します。GitHub Pages が committed HTML、CSS、JavaScript、JSON、font、image、generated artifact を配信します。
 
 - Production: [https://thangldw.github.io/](https://thangldw.github.io/)
 - Default branch: `master`
@@ -270,6 +277,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
 | `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
 | `/cert/` | Generated Certification Library | Private `thangldw/cert` repo |
+| `/jlpt-n1/`, `/pmp/` | 独立した N1 skill practice と PMP study | Private cert source と controlled API |
 | Certification manifest | Public metadata と count | Cert local production build |
 | `/case-studies/{flagship}/` | 4 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
 | `/404.html` | GitHub Pages fallback | Repository source |
@@ -282,7 +290,7 @@ Sitemap route には canonical、description、Open Graph、必要な social ima
 
 Loader は public certification manifest も読み、certification count、name、label、tag を自動生成します。Certification 追加時に home page や application catalog を手動編集する必要はありません。
 
-Certification manifest は identity、issuer、route、syllabus、public exam metadata の allowlist だけです。Prompt、choice、answer、explanation、domain、glossary、learner data を含まず、question bank は React bundle 内に保持します。
+Certification manifest は identity、issuer、route、syllabus、public exam metadata の allowlist だけです。Prompt、choice、answer、explanation、domain、glossary、learner data を含まず、question bank と JLPT corpus は private build input と Cloudflare storage に保持します。Pages は shell のみを配信し、bank や browser decryption key を含めません。Anonymous session、quota、issuance check、server-side grading で配信を制御しますが、表示済み content はコピー可能です。
 
 ### Local development と quality gate
 
@@ -301,14 +309,14 @@ JSON runtime loading のため file を直接開かず HTTP server を使いま�
 
 Project metadata は `js/projects-data.json` だけで編集します。Stable unique ID、required field、安全な URL、`featured`/`featuredOrder` を設定し、test 後に push します。JSON content update のたびに HTML cache key を変える必要はありません。
 
-Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して `dist/client/` 全体を `cert/` に同期します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
+Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して source release helper で `/cert/`、`/jlpt-n1/` と legacy redirect を同期します。PMP は `/pmp/` 専用 helper を使用します。Content 変更時は shell 公開前に API を deploy します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
 
-Home の optional Support dialog は external GitHub Sponsors flow、external fallback 付き embedded Ko-fi、local VietQR asset を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
+Home の optional Support dialog は external GitHub Sponsors flow、external Ko-fi support link、local VietQR asset を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
 
 ### Deployment、security、contribution
 
 Clean working tree、generated diff review、全 test、focused commit、`master` push、Pages completion、production HTML/JSON/UI verification の順で進めます。障害時は focused revert または corrective commit を使い、force-push を避けます。
 
-Secret、credential、private dataset、learner backup、machine-specific path を commit しません。Font/asset は local に置き、JSON を validate し、HTML 挿入前に text を escape します。Minification は deterrence であり access control ではありません。Learner data は browser storage 内に留まります。
+Secret、credential、private dataset、learner backup、machine-specific path を commit しません。Font/asset は local に置き、JSON を validate し、HTML 挿入前に text を escape します。Bank は Pages に配置しません。API content は network 接続を必要とし、表示済み content のコピーを防止する保証はありません。Learner data は browser storage 内に留まります。
 
 変更は route-focused、accessible、responsive、independently verifiable にします。新 route では sitemap、canonical、Open Graph、social image、analytics、validation、smoke test を更新します。
