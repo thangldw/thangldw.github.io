@@ -447,6 +447,11 @@ def main() -> int:
                 if parser.refreshes != [f"0;url=/{slug}/"] or not (ROOT / f"{slug}/index.html").is_file() or f'location.replace("/{slug}/" + location.search + location.hash)' not in script:
                     errors.append(f"{relative}: invalid {slug} compatibility redirect")
                 continue
+            if relative == "cert/g/index.html":
+                script = (ROOT / "cert/g/redirect.js").read_text()
+                if parser.refreshes != ["0;url=/g-kentei/"] or not (ROOT / "g-kentei/index.html").is_file() or 'location.replace("/g-kentei/" + location.search + location.hash)' not in script:
+                    errors.append(f"{relative}: invalid G検定 compatibility redirect")
+                continue
             if relative == "cert/jlpt/index.html" or relative.startswith("cert/n1-modules/"):
                 refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
                 destination = refresh.removeprefix("0;url=")
