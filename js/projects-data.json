@@ -333,6 +333,29 @@
       "featured": true,
       "featuredOrder": 11,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "fp3",
+      "title": "3級FP",
+      "description": "Study FP3 academic and practical topics with 1,232 questions in 66 focused groups, short mixed sessions, mock exams and locally saved progress.",
+      "featuredDescription": "FP3 academic and practical study in 66 focused groups, with short sessions, mock exams and locally saved progress.",
+      "catalogDescription": "Practise 1,232 FP3 questions in 66 groups, review terms, take mock exams and track your progress.",
+      "href": "/fp3/",
+      "ariaLabel": "Open 3級FP practice",
+      "icon": "fa-graduation-cap",
+      "accent": "rust",
+      "status": "Live",
+      "tags": [
+        "Financial planning",
+        "Academic & practical",
+        "Local progress"
+      ],
+      "category": "certification-study",
+      "categoryLabel": "Financial planning preparation",
+      "cta": "Practise 3級FP",
+      "featured": true,
+      "featuredOrder": 12,
+      "catalogGroup": "learning"
     }
   ],
   "languageCollection": {

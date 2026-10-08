@@ -36,6 +36,7 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "pmp-studio": 7,
     "bjt": 8,
     "jlpt-n1-skills": 9,
+    "fp3": 12,
     "g-kentei": 11,
     "ap": 10,
 }
@@ -440,10 +441,11 @@ def main() -> int:
                 if 'location.replace("/jlpt-n1/"+location.search+location.hash)' not in page.read_text() or not (ROOT / "jlpt-n1/index.html").is_file():
                     errors.append(f"{relative}: invalid JLPT compatibility redirect")
                 continue
-            if relative == "cert/bjt/index.html":
-                script = (ROOT / "cert/bjt/redirect.js").read_text()
-                if parser.refreshes != ["0;url=/bjt/"] or not (ROOT / "bjt/index.html").is_file() or 'location.replace("/bjt/" + location.search + location.hash)' not in script:
-                    errors.append(f"{relative}: invalid BJT compatibility redirect")
+            if relative in {"cert/bjt/index.html", "cert/fp3/index.html"}:
+                slug = relative.split("/")[1]
+                script = (ROOT / f"cert/{slug}/redirect.js").read_text()
+                if parser.refreshes != [f"0;url=/{slug}/"] or not (ROOT / f"{slug}/index.html").is_file() or f'location.replace("/{slug}/" + location.search + location.hash)' not in script:
+                    errors.append(f"{relative}: invalid {slug} compatibility redirect")
                 continue
             if relative == "cert/jlpt/index.html" or relative.startswith("cert/n1-modules/"):
                 refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
