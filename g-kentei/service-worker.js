@@ -1,20 +1,20 @@
 const APP_BASE = "/g-kentei/";
-const SHELL_CACHE = "g-kentei-shell-9948a91d1160ccb0";
+const SHELL_CACHE = "g-kentei-shell-75fe655e1b9382b4";
 const PRECACHE_URLS = [
   "/cert/assets/AppShell-Bl3dNDla.css",
-  "/cert/assets/AppShell-CPcybjTY.js",
-  "/cert/assets/CertificationViews-BZfe_P7z.js",
+  "/cert/assets/AppShell-CuYhuwS6.js",
+  "/cert/assets/CertificationViews-Bys_oNti.js",
   "/cert/assets/CertificationViews-rutjcLFs.css",
   "/cert/assets/ExperienceWorkspace-BYcUrSIc.css",
-  "/cert/assets/ExperienceWorkspace-mY3J07a4.js",
-  "/cert/assets/FlowCanvas-BUtjT2Kg.js",
+  "/cert/assets/ExperienceWorkspace-DRv2Q6mx.js",
+  "/cert/assets/FlowCanvas-CxOm_SdA.js",
   "/cert/assets/FlowCanvas-DLioOiRN.css",
   "/cert/assets/fonts/InterVariable.woff2",
-  "/cert/assets/index-B2TmSPQL.js",
+  "/cert/assets/index-BSHggw4x.js",
   "/cert/assets/index-GonsR_LT.css",
-  "/cert/assets/jlpt-strict-resume-BNmJDd5j.js",
+  "/cert/assets/jlpt-strict-resume-BBgH8j39.js",
   "/cert/assets/jsx-runtime-Cltr0gcK.js",
-  "/cert/assets/question-response-B_01Paca.js",
+  "/cert/assets/question-response-B685IBU5.js",
   "/cert/pwa/icon-192.png",
   "/cert/pwa/icon-512.png",
   "/cert/pwa/icon-maskable-512.png",

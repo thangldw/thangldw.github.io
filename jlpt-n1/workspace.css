@@ -80,7 +80,7 @@
 html body{font-family:var(--workspace-font-ui);font-size:15px;line-height:1.75;font-synthesis:none}
 .workspace-header .site-brand,.workspace-header .brand,.workspace-header .app-name{font-family:var(--workspace-font-ui)}
 .workspace-header .brand,.workspace-header .app-name{color:var(--ws-ink);padding-left:24px;border-left:1px solid var(--ws-line)}
-.workspace-header .other-certifications{color:var(--color-text,#1d211e)}
+.workspace-header .other-certifications{color:var(--ws-ink)}
 .workspace-header .other-certifications:hover{color:var(--ws-accent)}
 .workspace-header .workspace-disclaimer{color:#9b4219}
 :root[data-theme=dark] .workspace-header .workspace-disclaimer{color:var(--ws-accent)}
