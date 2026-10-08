@@ -35,6 +35,7 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "igo": 6,
     "pmp-studio": 7,
     "bjt": 8,
+    "jlpt-n1-skills": 9,
 }
 EXPECTED_LANGUAGE_COLLECTION_ORDER = 3
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}

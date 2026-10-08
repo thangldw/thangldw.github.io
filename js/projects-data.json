@@ -266,6 +266,28 @@
       "featured": true,
       "featuredOrder": 8,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "jlpt-n1-skills",
+      "title": "JLPT N1",
+      "description": "Practise one N1 skill at a time, with short sessions, source explanations, recall cards and due-item review.",
+      "href": "/jlpt-n1/",
+      "ariaLabel": "Open JLPT N1 skill practice",
+      "icon": "fa-language",
+      "accent": "indigo",
+      "status": "Live",
+      "tags": [
+        "N1 skills",
+        "Short sessions",
+        "Spaced review"
+      ],
+      "category": "certification-study",
+      "categoryLabel": "Japanese exam preparation",
+      "cta": "Practise N1",
+      "catalogGroup": "learning",
+      "featured": true,
+      "featuredOrder": 9,
+      "featuredDescription": "Japanese N1 practice by skill, with short sessions, source explanations, recall cards and due-item review."
     }
   ],
   "languageCollection": {
@@ -296,25 +318,6 @@
       "category": "certification-study",
       "categoryLabel": "Exam preparation",
       "cta": "Open library",
-      "catalogGroup": "learning"
-    },
-    {
-      "id": "jlpt-n1-skills",
-      "title": "JLPT N1",
-      "description": "Practise one N1 skill at a time, with short sessions, source explanations, recall cards and due-item review.",
-      "href": "/jlpt-n1/",
-      "ariaLabel": "Open JLPT N1 skill practice",
-      "icon": "fa-language",
-      "accent": "indigo",
-      "status": "Live",
-      "tags": [
-        "N1 skills",
-        "Short sessions",
-        "Spaced review"
-      ],
-      "category": "certification-study",
-      "categoryLabel": "Japanese exam preparation",
-      "cta": "Practise N1",
       "catalogGroup": "learning"
     }
   ]
