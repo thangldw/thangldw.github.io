@@ -11,7 +11,7 @@
       "name": "G検定（ジェネラリスト検定）",
       "issuer": "JDLA",
       "syllabusVersion": "2024-v1.4",
-      "href": "/cert/g/",
+      "href": "/g-kentei/",
       "availableQuestionCount": 1086,
       "exam": {
         "durationMinutes": 100,
