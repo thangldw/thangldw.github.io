@@ -74,6 +74,15 @@ function validateProgress(p) {
 		if (!ids(x.ids) || !x.ids.length || new Set(x.ids).size !== x.ids.length || !integer(x.index) || x.index >= x.ids.length || !object(x.responses) || Object.values(x.responses).some((v) => !ids(v)) || !ids(x.flags) || !["practice", "exam"].includes(x.mode) || !Number.isFinite(x.started) || x.mode === "exam" && !Number.isFinite(x.deadline)) throw Error("Phiên học không hợp lệ");
 	}
 	if (s.reviews !== void 0 && (!object(s.reviews) || Object.values(s.reviews).some((r) => !object(r) || !integer(r.level) || r.level > 3 || !Number.isFinite(r.due)))) throw Error("Lịch ôn không hợp lệ");
+	if (s.questionProgress !== void 0 && (!object(s.questionProgress) || Object.keys(s.questionProgress).length > 2e4 || Object.values(s.questionProgress).some((r) => !object(r) || !integer(r.attempts) || !integer(r.correct) || r.correct > r.attempts || typeof r.firstCorrect !== "boolean" || typeof r.lastCorrect !== "boolean" || !integer(r.streak) || !Number.isFinite(r.due) || typeof r.sessionId !== "string" || r.sessionId.length > 240 || Object.keys(r).some((k) => ![
+		"attempts",
+		"correct",
+		"firstCorrect",
+		"lastCorrect",
+		"streak",
+		"due",
+		"sessionId"
+	].includes(k))))) throw Error("Tiến độ câu hỏi không hợp lệ");
 	if (s.certImported !== void 0 && (!object(s.certImported) || !Number.isFinite(s.certImported.date) || !ids(s.certImported.answeredIds) || !ids(s.certImported.wrongIds) || !ids(s.certImported.dueIds) || typeof s.certImported.memo !== "string" || typeof s.certImported.examDate !== "string" || typeof s.certImported.hasUnfinished !== "boolean")) throw Error("Tiến độ cert không hợp lệ");
 	return s;
 }
@@ -164,6 +173,7 @@ function normalizeStudyProgress(state, bank) {
 	}
 	s.notes = notes;
 	if (s.reviews) s.reviews = Object.fromEntries(Object.entries(s.reviews).map(([id, r]) => [resolve(id), r]));
+	if (s.questionProgress) s.questionProgress = Object.fromEntries(Object.entries(s.questionProgress).map(([id, r]) => [bank.aliases?.[resolve(id)]?.id || resolve(id), r]));
 	for (const h of s.history) {
 		h.answeredIds = h.answeredIds.map(resolve);
 		h.wrongIds = h.wrongIds.map(resolve);

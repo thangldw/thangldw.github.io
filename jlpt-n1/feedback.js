@@ -1,7 +1,7 @@
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const text = value => String(value ?? '').replace(/<br\s*\/?\s*>/gi, '\n').replace(/<[^>]*>/g, '');
 const labels = {explanation:'Giải thích',vietnamese:'Tiếng Việt',japanese:'日本語',meaning:'Nghĩa',reading:'Cách đọc',word:'Từ',full:'Câu hoàn chỉnh',grammar:'Ngữ pháp',order:'Thứ tự',steps:'Cách ghép câu',anchor:'Bằng chứng trong bài',traps:'Bẫy lựa chọn',translation:'Bản dịch',vocabulary:'Từ trong bài',thinking:'Mạch suy luận',synonyms:'Từ gần nghĩa',collocations:'Kết hợp từ',distractors:'Phân biệt đáp án sai',examples:'Ví dụ',reason:'Lý do',notes:'Ghi chú',confusions:'Dễ nhầm',parts:'Cấu tạo chữ',sourceFields:'Cách đọc · nghĩa · ví dụ',vi:'Tiếng Việt',vn:'Tiếng Việt',jp:'日本語',h:'Cách đọc',r:'Cách đọc',k:'Từ',m:'Nghĩa',co:'Kết hợp từ',sy:'Từ gần nghĩa',s:'Ví dụ',ex:'Ví dụ',p:'Từ loại',opts:'Lựa chọn',term:'Từ',mean:'Nghĩa',set:'Kết hợp từ',setv:'Nghĩa kết hợp từ',j:'日本語',v:'Tiếng Việt',choices:'Đối chiếu các từ',correctOrder:'Thứ tự đúng',kanji:'Chữ',on:'Âm on',kun:'Âm kun',hanviet:'Hán Việt',wrong_explained:'Phân biệt cách đọc'};
-const metadata = new Set(['id','src','pri','examEligible','n','n1','source','round','years']);
+const metadata = new Set(['id','src','pri','examEligible','n','n1','source','round','years','sec']);
 function present(value) {
   if (value == null || value === '') return false;
   if (Array.isArray(value)) return value.some(present);
@@ -46,6 +46,7 @@ function sections(items, source) {
 }
 export function renderExplanation(value, {source='',word='',answer=''}={}) {
   if (value?.materials) return value.materials.map((material,index)=>index===0?renderExplanation(material.content,{source:material.source||source,word,answer}):present(material.content)?`<details class="study-detail"><summary>Ví dụ và cách dùng bổ sung ${index}</summary>${renderExplanation(material.content,{source:material.source||source})}</details>`:'').join('');
+  if (!present(value) && word && !answer) return '<p class="study-text">Chưa có giải thích bổ sung cho mục này.</p>';
   if (!present(value)) return answer?`<div class="study-head"><span class="small">Đáp án</span><p class="study-word" lang="ja">${escape(answer)}</p></div>`:'';
   if (typeof value !== 'object' || Array.isArray(value)) return `${answer?`<div class="study-head"><span class="small">Đáp án</span><p class="study-word" lang="ja">${escape(answer)}</p></div>`:''}${content(value,source)}`;
   const item=lexical(value,source),readingKey=first(value,source==='n1-grammar-exams'?['reading','h']:['reading','h','r']),meaningKey=first(value,['meaning','m','vi','vn','mean']);
