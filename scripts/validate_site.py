@@ -34,6 +34,7 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "maintainer-defense": 5,
     "igo": 6,
     "pmp-studio": 7,
+    "bjt": 8,
 }
 EXPECTED_LANGUAGE_COLLECTION_ORDER = 3
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}

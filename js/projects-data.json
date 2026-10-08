@@ -243,6 +243,29 @@
       "featured": true,
       "featuredOrder": 7,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "bjt",
+      "title": "BJT",
+      "description": "Practise business Japanese reading with 728 questions in 59 focused groups, short mixed sessions, and locally saved progress.",
+      "featuredDescription": "Business Japanese reading practice in 59 focused groups, with short sessions and locally saved progress.",
+      "catalogDescription": "Practise 728 business Japanese reading questions in 59 groups, resume saved sessions, and track your progress.",
+      "href": "/bjt/",
+      "ariaLabel": "Open BJT practice",
+      "icon": "fa-language",
+      "accent": "rust",
+      "status": "Live",
+      "tags": [
+        "Business Japanese",
+        "Reading practice",
+        "Local progress"
+      ],
+      "category": "certification-study",
+      "categoryLabel": "Business Japanese preparation",
+      "cta": "Practise BJT",
+      "featured": true,
+      "featuredOrder": 8,
+      "catalogGroup": "learning"
     }
   ],
   "languageCollection": {
