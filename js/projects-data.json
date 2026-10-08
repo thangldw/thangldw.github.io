@@ -311,6 +311,28 @@
       "featured": true,
       "featuredOrder": 10,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "g-kentei",
+      "title": "G検定",
+      "description": "Study AI and deep learning through focused question groups, syllabus terms, mock exams and locally saved progress.",
+      "featuredDescription": "AI and deep learning preparation with focused question groups, syllabus terms, mock exams and local progress.",
+      "href": "/cert/g/",
+      "ariaLabel": "Open G検定 practice",
+      "icon": "fa-graduation-cap",
+      "accent": "rust",
+      "status": "Live",
+      "tags": [
+        "AI & deep learning",
+        "Question groups",
+        "Local progress"
+      ],
+      "category": "certification-study",
+      "categoryLabel": "AI certification preparation",
+      "cta": "Practise G検定",
+      "featured": true,
+      "featuredOrder": 11,
+      "catalogGroup": "learning"
     }
   ],
   "languageCollection": {
