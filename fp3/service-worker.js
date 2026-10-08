@@ -1,20 +1,20 @@
 const APP_BASE = "/fp3/";
-const SHELL_CACHE = "fp3-shell-985b1724439cc9c5";
+const SHELL_CACHE = "fp3-shell-c37d88d5ff7fab8c";
 const PRECACHE_URLS = [
   "/cert/assets/AppShell-Bl3dNDla.css",
-  "/cert/assets/AppShell-COcgIJrl.js",
-  "/cert/assets/CertificationViews-C34H10bD.js",
+  "/cert/assets/AppShell-nRzgN7na.js",
+  "/cert/assets/CertificationViews-BFniVjbG.js",
   "/cert/assets/CertificationViews-rutjcLFs.css",
-  "/cert/assets/ExperienceWorkspace-BX7pC8bE.js",
   "/cert/assets/ExperienceWorkspace-BYcUrSIc.css",
-  "/cert/assets/FlowCanvas-BPrGEvfI.js",
+  "/cert/assets/ExperienceWorkspace-DD2_eQvo.js",
+  "/cert/assets/FlowCanvas-D8tUDmhN.js",
   "/cert/assets/FlowCanvas-DLioOiRN.css",
   "/cert/assets/fonts/InterVariable.woff2",
-  "/cert/assets/index-BthjZ89N.js",
+  "/cert/assets/index-DPM209-O.js",
   "/cert/assets/index-GonsR_LT.css",
-  "/cert/assets/jlpt-strict-resume-DI8hUU1m.js",
+  "/cert/assets/jlpt-strict-resume-DK-5wD9w.js",
   "/cert/assets/jsx-runtime-Cltr0gcK.js",
-  "/cert/assets/question-response-DUQb9Gow.js",
+  "/cert/assets/question-response-BcDAiSTA.js",
   "/cert/pwa/icon-192.png",
   "/cert/pwa/icon-512.png",
   "/cert/pwa/icon-maskable-512.png",

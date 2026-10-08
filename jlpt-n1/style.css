@@ -10,3 +10,5 @@ nav .site-theme-toggle{min-height:34px;flex-grow:0;flex-shrink:0}
 .feedback.recall{background:var(--surface);border-color:var(--rule)}
 
 body{background:var(--ws-canvas);color:var(--ws-ink)}.workspace-main .skill{background:var(--ws-paper);border-color:var(--ws-line);border-radius:14px;min-height:230px}.skill h2{font-size:17px}.skill progress{margin:0 0 8px;accent-color:var(--ws-accent)}.history-row{display:flex;gap:12px;flex-wrap:wrap;padding:14px 0;border-bottom:1px solid var(--ws-line);font-size:13px}.history-row span{color:var(--ws-muted)}.workspace-header nav{width:auto}.workspace-main .hero{background:#fff6ed}@media(max-width:700px){.workspace-main .grid{grid-template-columns:1fr}.workspace-header{gap:12px}.workspace-header .app-name{padding-left:12px}.workspace-header .workspace-tools{flex-shrink:0}}
+
+.question-target{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.2em}
