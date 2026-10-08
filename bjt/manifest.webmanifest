@@ -1,0 +1,36 @@
+{
+  "id": "/bjt/",
+  "name": "BJT · Business Japanese",
+  "short_name": "BJT",
+  "description": "Certification practice with online content and locally saved progress.",
+  "lang": "en",
+  "start_url": "/bjt/",
+  "scope": "/bjt/",
+  "display": "standalone",
+  "background_color": "#fbfcfe",
+  "theme_color": "#1d211e",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/cert/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/cert/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/cert/pwa/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

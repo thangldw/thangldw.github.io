@@ -47,7 +47,7 @@
       "name": "BJTビジネス日本語能力テスト",
       "issuer": "日本漢字能力検定協会",
       "syllabusVersion": "2026",
-      "href": "/cert/bjt/",
+      "href": "/bjt/",
       "availableQuestionCount": 728,
       "exam": {
         "durationMinutes": 30,
