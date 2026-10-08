@@ -38,8 +38,7 @@
     await window.portfolioProjectsReady;
     projects = (window.portfolioProjects || []).concat(window.portfolioLearningCollections || []);
     projects.sort(function (left, right) {
-      return (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) - (right.featuredOrder ?? Number.MAX_SAFE_INTEGER)
-        || left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
+      return left.title.localeCompare(right.title, 'en', { numeric: true, sensitivity: 'base' });
     });
   } catch (error) {
     count.textContent = 'Projects unavailable';

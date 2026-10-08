@@ -21,9 +21,7 @@
       .filter(function (project) { return project.featured; })
       .concat(collection || [])
       .sort(function (left, right) {
-        var orderDelta = (left.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
-          (right.featuredOrder ?? Number.MAX_SAFE_INTEGER);
-        return orderDelta || left.title.localeCompare(right.title, 'en', {
+        return left.title.localeCompare(right.title, 'en', {
           numeric: true,
           sensitivity: 'base'
         });
