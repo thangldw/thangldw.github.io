@@ -30,12 +30,12 @@
       "issuer": "日本FP協会",
       "syllabusVersion": "2026",
       "href": "/fp3/",
-      "availableQuestionCount": 1232,
+      "availableQuestionCount": 1252,
       "exam": {
         "durationMinutes": 150,
         "questionCount": 80,
         "format": "CBT方式・通年受検",
-        "structure": "学科＋実技（資産設計提案業務）"
+        "structure": "学科60問・90分（36/60以上）と実技20問・60分（60/100以上）は別試験。80問・150分は合計値であり、共通タイマーの試験ではありません。"
       }
     },
     {
