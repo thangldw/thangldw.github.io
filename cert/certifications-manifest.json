@@ -84,11 +84,11 @@
       "issuer": "IPA",
       "syllabusVersion": "2026",
       "href": "/cert/ap/",
-      "availableQuestionCount": 934,
+      "availableQuestionCount": 869,
       "exam": {
         "durationMinutes": 20,
         "questionCount": 20,
-        "format": "Subject A Practice; not an exam simulator",
+        "format": "Subject A practice / Subject B written self-check; not an exam simulator",
         "structure": "Subject A archive drill"
       }
     },
