@@ -292,9 +292,9 @@
     {
       "id": "ap",
       "title": "AP",
-      "description": "Practise for the Applied Information Technology Engineer Examination (応用情報技術者試験) with Subject A questions and locally saved progress.",
-      "featuredDescription": "Applied Information Technology Engineer study with Subject A practice and locally saved progress.",
-      "catalogDescription": "Practise AP Subject A questions and track your learning progress locally.",
+      "description": "Study AP with official Subject A questions, supplemental drills and one Subject B written case for self-check, with locally saved progress.",
+      "featuredDescription": "AP study with official Subject A practice and one Subject B written case for self-check.",
+      "catalogDescription": "Practise official AP Subject A questions and one Subject B written case with local progress.",
       "href": "/cert/ap/",
       "ariaLabel": "Open AP practice",
       "icon": "fa-graduation-cap",
@@ -303,6 +303,7 @@
       "tags": [
         "Applied IT",
         "Subject A practice",
+        "Subject B self-check",
         "Local progress"
       ],
       "category": "certification-study",
