@@ -145,3 +145,18 @@ dialog:not(.support-dialog) button{font:500 14px/1.35 var(--workspace-font-ui);m
 dialog:not(.support-dialog) .row{gap:12px}
 
 .workspace-main .row+p,.workspace-main button+p,.workspace-main .setup+p{margin-top:16px}
+
+/* Start/review choices share geometry across standalone and React workspaces. */
+.journey-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin:16px 0 24px}
+.journey-grid .journey-card{margin:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0}
+.journey-card h3,.journey-card p{margin:0}.journey-card a,.journey-card button{min-height:44px;display:inline-flex;align-items:center}.journey-card a{margin-top:auto}
+.journey-search{display:flex;align-items:center;gap:8px}.journey-search input{min-width:0;flex:1}.journey-search button{flex:none}
+.workspace-main button:not(:disabled),.workspace-main summary{cursor:pointer}.workspace-main button:focus-visible,.workspace-main a:focus-visible,.workspace-main [tabindex="-1"]:focus{outline:2px solid var(--ws-accent);outline-offset:4px}
+.workspace-main button:disabled{cursor:default;opacity:.55}.workspace-main textarea{resize:none;min-height:120px}
+@media(max-width:700px){.support-floating-trigger{display:none!important}.journey-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.workspace-main *{scroll-behavior:auto!important;transition:none!important}}
+
+.resize-none{resize:none}
+
+html{scrollbar-width:auto;scrollbar-color:var(--ws-muted) var(--ws-canvas)}
+@media(forced-colors:active){html{scrollbar-color:auto}}
