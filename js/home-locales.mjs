@@ -1,0 +1,111 @@
+export const locales = {
+ en: {
+  catalogFailed: 'The project list could not be loaded. Reload this page to try again.', languageName: 'English', languageSwitch: 'Display language', skip: 'Skip to content', home: 'Thang Luu home', dark: 'Switch to dark theme', light: 'Switch to light theme',
+  motto: ['Crafted with care', 'stay steadfast, stay free'], what: 'What I do', languages: 'Languages', work: 'Work with me',
+  roles: [['Forward Deployed Engineer','Ship tools that solve real problems in real environments.'],['Data & AI Engineer','Turn data into insights and systems teams can act on.'],['Technical Lead','Lead by example. Build with clarity. Unlock team impact.']],
+  invitation: 'AI, data engineering, and outsourced technical delivery through independent FDE engagements.', discuss: 'Discuss a project', support: 'Support my work', about: 'About',
+  headline: ['I help teams turn complex, ambiguous ', 'problems', ' into reliable systems.'],
+  bio: ['I’m Thang Luu, a data-driven problem solver working at the intersection of engineering and business. Over the past 10+ years, I’ve grown from statistical analysis into data engineering and technical delivery, and I now lead front-line technical delivery at a global IT consulting firm.', 'I do my best work when the goal is still taking shape, the data is fragmented, and a team needs a practical path forward. I still consider myself a learner in this field—the people I build with continue to teach me the most.'],
+  sectors: 'Experience across sectors', sectorText: 'Retail, real estate, fintech, healthcare, and research.', contribution: 'End-to-end contribution', contributionText: 'Discovery, architecture, pipelines, models, delivery leadership, and stakeholder alignment.', how: 'How I work',
+  process: [['Understand','Embed with your team. Clarify the problem, data, and outcomes that matter.'],['Build','Design, integrate, and ship reliable systems with evaluation and observability.'],['Enable','Document decisions and transfer knowledge so your team can own what we ship.'],['Improve','Use feedback and operational signals to measure outcomes and refine the system.']],
+  projects: 'Side projects', all: 'View all projects', view: 'View project', previous: 'Show previous project', next: 'Show next project', carousel: 'Side projects carousel', count: (first,last,total) => `${first}–${last} of ${total} projects`,
+  contactTitle: 'Let’s discuss your project', contactBody: 'AI, data engineering, or technical delivery. Share the problem, scope, and timeline you have in mind.', close: 'Close contact dialog', copy: 'Copy email', gmail: 'Compose in Gmail', emailApp: 'Open email app', copied: 'Email copied.', copyFailed: 'Select and copy the email address above.', subject: 'AI, Data & FDE engagement',
+  groups: {'Tools':'Tools','Games':'Games','Data & AI':'Data & AI','Learning':'Learning'}
+ },
+ vi: {
+  catalogFailed: 'Không tải được danh sách dự án. Hãy tải lại trang để thử lại.', languageName: 'Tiếng Việt', languageSwitch: 'Ngôn ngữ hiển thị', skip: 'Đến nội dung chính', home: 'Trang chủ Thang Luu', dark: 'Chuyển sang giao diện tối', light: 'Chuyển sang giao diện sáng',
+  motto: ['Làm việc bằng sự tận tâm', 'vững vàng, tự do'], what: 'Công việc của tôi', languages: 'Ngôn ngữ', work: 'Hợp tác cùng tôi',
+  roles: [['Forward Deployed Engineer','Xây dựng công cụ giải quyết vấn đề thực tế trong môi trường thực tế.'],['Kỹ sư Data & AI','Biến dữ liệu thành hiểu biết và hệ thống giúp đội ngũ hành động.'],['Technical Lead','Dẫn dắt bằng hành động. Làm rõ hướng đi, giúp đội ngũ tạo tác động.']],
+  invitation: 'Nhận dự án FDE độc lập về AI, kỹ thuật dữ liệu và triển khai kỹ thuật thuê ngoài.', discuss: 'Trao đổi về dự án', support: 'Ủng hộ công việc của tôi', about: 'Giới thiệu',
+  headline: ['Tôi giúp đội ngũ biến những ', 'vấn đề phức tạp, chưa rõ ràng', ' thành hệ thống đáng tin cậy.'],
+  bio: ['Tôi là Thang Luu, giải quyết vấn đề dựa trên dữ liệu, kết nối kỹ thuật với kinh doanh. Trong hơn 10 năm qua, tôi phát triển từ phân tích thống kê sang kỹ thuật dữ liệu và triển khai kỹ thuật. Hiện tôi dẫn dắt hoạt động triển khai kỹ thuật trực tiếp tại một công ty tư vấn CNTT toàn cầu.', 'Tôi làm việc hiệu quả nhất khi mục tiêu còn đang định hình, dữ liệu phân tán và đội ngũ cần một hướng đi khả thi. Tôi vẫn xem mình là người đang học hỏi trong lĩnh vực này — những người cùng tôi xây dựng hệ thống luôn là người dạy tôi nhiều nhất.'],
+  sectors: 'Kinh nghiệm đa lĩnh vực', sectorText: 'Bán lẻ, bất động sản, fintech, y tế và nghiên cứu.', contribution: 'Đóng góp xuyên suốt', contributionText: 'Khảo sát, kiến trúc, pipeline, mô hình, dẫn dắt triển khai và thống nhất với các bên liên quan.', how: 'Cách tôi làm việc',
+  process: [['Thấu hiểu','Làm việc cùng đội ngũ. Làm rõ vấn đề, dữ liệu và kết quả cần đạt.'],['Xây dựng','Thiết kế, tích hợp và triển khai hệ thống tin cậy, có đánh giá và khả năng quan sát.'],['Chuyển giao','Ghi lại quyết định, chia sẻ kiến thức để đội ngũ tự vận hành hệ thống.'],['Cải tiến','Đo lường kết quả và cải tiến hệ thống qua phản hồi và tín hiệu vận hành.']],
+  projects: 'Dự án cá nhân', all: 'Xem tất cả dự án', view: 'Xem dự án', previous: 'Xem dự án trước', next: 'Xem dự án tiếp theo', carousel: 'Danh sách dự án cá nhân', count: (first,last,total) => `${first}–${last} / ${total} dự án`,
+  contactTitle: 'Cùng trao đổi về dự án', contactBody: 'AI, kỹ thuật dữ liệu hoặc triển khai kỹ thuật. Hãy chia sẻ vấn đề, phạm vi và thời gian dự kiến.', close: 'Đóng hộp liên hệ', copy: 'Sao chép email', gmail: 'Soạn thư trong Gmail', emailApp: 'Mở ứng dụng email', copied: 'Đã sao chép email.', copyFailed: 'Hãy chọn và sao chép địa chỉ email phía trên.', subject: 'Trao đổi dự án AI, Data & FDE',
+  groups: {'Tools':'Công cụ','Games':'Trò chơi','Data & AI':'Data & AI','Learning':'Học tập'}
+ },
+ ja: {
+  catalogFailed: 'プロジェクト一覧を読み込めませんでした。ページを再読み込みしてください。', languageName: '日本語', languageSwitch: '表示言語', skip: '本文へ移動', home: 'Thang Luuのホーム', dark: 'ダークモードに切り替え', light: 'ライトモードに切り替え',
+  motto: ['丁寧につくる', '信念を持ち、自由である'], what: '専門分野', languages: '対応言語', work: 'ご相談・協業',
+  roles: [['Forward Deployed Engineer','現場の課題を解決する、実用的なツールを届けます。'],['データ・AIエンジニア','データを洞察と仕組みに変え、チームの行動につなげます。'],['テクニカルリード','自ら実践し、方向性を明確にして、チームの成果を支えます。']],
+  invitation: '独立したFDEとして、AI・データエンジニアリング・技術開発の受託に対応します。', discuss: 'プロジェクトを相談する', support: '活動を支援する', about: '自己紹介',
+  headline: ['複雑で曖昧な', '課題', 'を、信頼できるシステムへ。チームとともに形にします。'],
+  bio: ['Thang Luuです。エンジニアリングとビジネスの接点で、データをもとに課題を解決しています。10年以上にわたり、統計分析からデータエンジニアリング、技術開発・導入へと経験を広げてきました。現在はグローバルITコンサルティング企業で、顧客現場の技術導入をリードしています。', '目標がまだ定まらず、データが分散し、チームが実行可能な道筋を必要としている場面で力を発揮します。今も学び続ける立場だと考えており、ともに開発する方々から最も多くを学んでいます。'],
+  sectors: '業界横断の経験', sectorText: '小売、不動産、フィンテック、医療、研究。', contribution: '一貫した支援', contributionText: '課題探索、設計、パイプライン、モデル、開発推進、関係者との合意形成。', how: '仕事の進め方',
+  process: [['理解する','チームに入り、課題・データ・目指す成果を明確にします。'],['構築する','評価と可観測性を備えた、信頼できるシステムを設計・統合・提供します。'],['引き継ぐ','意思決定を記録し、知識を共有して、チームの自律的な運用を支えます。'],['改善する','フィードバックと運用データから成果を測り、システムを改善します。']],
+  projects: '個人プロジェクト', all: 'すべてのプロジェクト', view: 'プロジェクトを見る', previous: '前のプロジェクト', next: '次のプロジェクト', carousel: '個人プロジェクト一覧', count: (first,last,total) => `${total}件中 ${first}〜${last}件を表示`,
+  contactTitle: 'プロジェクトのご相談', contactBody: 'AI、データエンジニアリング、技術開発について、課題・範囲・ご希望の時期をお聞かせください。', close: '連絡先を閉じる', copy: 'メールアドレスをコピー', gmail: 'Gmailで作成', emailApp: 'メールアプリを開く', copied: 'メールアドレスをコピーしました。', copyFailed: '上のメールアドレスを選択してコピーしてください。', subject: 'AI・データ・FDEプロジェクトのご相談',
+  groups: {'Tools':'ツール','Games':'ゲーム','Data & AI':'データ・AI','Learning':'学習'}
+ },
+ zh: {
+  catalogFailed: '项目列表加载失败，请刷新页面重试。', languageName: '中文', languageSwitch: '显示语言', skip: '跳转到正文', home: 'Thang Luu 首页', dark: '切换为深色模式', light: '切换为浅色模式',
+  motto: ['用心构建', '坚定前行，保持自由'], what: '专业领域', languages: '工作语言', work: '与我合作',
+  roles: [['Forward Deployed Engineer','深入实际场景，构建解决真实问题的工具。'],['数据与 AI 工程师','将数据转化为洞察和系统，支持团队采取行动。'],['技术负责人','以身作则，明确方向，帮助团队创造价值。']],
+  invitation: '以独立 FDE 的方式，承接 AI、数据工程及技术开发外包项目。', discuss: '讨论项目', support: '支持我的工作', about: '关于我',
+  headline: ['帮助团队将复杂、模糊的', '问题', '转化为可靠的系统。'],
+  bio: ['我是 Thang Luu，致力于在工程与业务的交汇处，以数据为依据解决问题。在过去十多年里，我的工作从统计分析拓展到数据工程与技术交付。目前，我在一家全球 IT 咨询公司负责一线技术交付。', '当目标尚在形成、数据分散、团队需要切实可行的方向时，我最能发挥作用。我始终认为自己仍在学习，与我一起构建系统的人不断给予我最宝贵的启发。'],
+  sectors: '跨行业经验', sectorText: '零售、房地产、金融科技、医疗及研究。', contribution: '端到端贡献', contributionText: '需求探索、架构、数据管道、模型、交付领导及利益相关方协调。', how: '工作方式',
+  process: [['理解','深入团队，明确问题、数据以及真正重要的成果。'],['构建','设计、集成并交付可靠的系统，配备评估与可观测能力。'],['赋能','记录决策、传递知识，让团队能够自主维护所交付的系统。'],['改进','通过反馈与运行数据衡量成果，持续改进系统。']],
+  projects: '个人项目', all: '查看所有项目', view: '查看项目', previous: '上一个项目', next: '下一个项目', carousel: '个人项目轮播', count: (first,last,total) => `共 ${total} 个项目，当前为 ${first}–${last}`,
+  contactTitle: '一起讨论您的项目', contactBody: 'AI、数据工程或技术交付。欢迎分享您希望解决的问题、项目范围和时间安排。', close: '关闭联系方式', copy: '复制邮箱', gmail: '在 Gmail 中写信', emailApp: '打开邮件应用', copied: '邮箱已复制。', copyFailed: '请选择并复制上方的邮箱地址。', subject: 'AI、数据与 FDE 项目合作',
+  groups: {'Tools':'工具','Games':'游戏','Data & AI':'数据与 AI','Learning':'学习'}
+ }
+};
+
+export const projectTranslations = {
+ vi: {
+  'japan-pr-guide': 'Hướng dẫn song ngữ về thường trú Nhật Bản, điểm HSP và hồ sơ chứng minh.',
+  bizroll: 'Trò chơi chiến thuật kinh tế với phòng chơi nhiều người, đối thủ AI và chu kỳ thị trường.',
+  'neon-glider': 'Trò chơi chạy vô tận bằng Three.js, né chướng ngại và thu thập năng lượng.',
+  toolbox: 'Ứng dụng macOS dọn ổ đĩa, theo dõi thay đổi và khôi phục thao tác sau khi kiểm tra.',
+  ragops: 'Đánh giá và kiểm soát phát hành cho hệ thống RAG và AI agent trong production.',
+  'maintainer-defense': 'Kiểm tra bảo mật ngoại tuyến và cấu hình phòng vệ có thể hoàn tác cho dự án mã nguồn mở.',
+  proofline: 'Lưu lại quyết định kỹ thuật với nguồn bất biến và trích dẫn chính xác.',
+  kakeflow: 'Quản lý tài chính gia đình trên macOS, lưu dữ liệu cục bộ, có chứng từ và đối soát.',
+  igo: 'Học cờ vây bằng tiếng Việt qua bài học, luyện chiến thuật, chơi và xem lại SGF.',
+  'pmp-studio': 'Bài học PMP, luyện theo chủ đề, thi thử và theo dõi tiến độ với sao lưu cục bộ.',
+  bjt: 'Luyện đọc tiếng Nhật thương mại theo nhóm chủ đề, lưu tiến độ trên thiết bị.',
+  'jlpt-n1-skills': 'Luyện N1 theo kỹ năng, có giải thích, thẻ ghi nhớ và ôn tập đến hạn.',
+  ap: 'Ôn thi AP với câu hỏi chính thức môn A và tự đánh giá bài tình huống môn B.',
+  'g-kentei': 'Học AI và deep learning qua thuật ngữ, nhóm câu hỏi và đề thi thử.',
+  fp3: 'Ôn lý thuyết và thực hành FP3 qua nhóm chủ đề, phiên học ngắn và thi thử.',
+  'certification-study': 'Học theo kỹ năng hoặc lĩnh vực với các thư viện chứng chỉ, lưu lịch sử cục bộ.'
+ },
+ ja: {
+  'japan-pr-guide': '日本の永住ルート、HSPポイント、必要な証明資料を確認できる英越バイリンガルガイド。',
+  bizroll: 'マルチプレイ、AI対戦、市場サイクルを備えた経済戦略ボードゲーム。',
+  'neon-glider': '障害物を避けてエネルギーを集める、Three.js製の軽量エンドレスランナー。',
+  toolbox: '確認してから実行できるmacOS向けディスク整理・変更確認・復元ツール。',
+  ragops: '本番環境のRAG・エージェントシステム向け評価・リリース判定。',
+  'maintainer-defense': 'OSS保守者向けの、オフラインで実行できる可逆的な監査と防御設定。',
+  proofline: '変更されない原資料と正確な引用で、技術上の意思決定を追跡。',
+  kakeflow: '証憑と照合機能を備え、データをローカルに保存するmacOS向け家計管理。',
+  igo: 'レッスン、戦術練習、対局、SGF棋譜レビューで、ベトナム語で囲碁を学習。',
+  'pmp-studio': 'PMPの学習、分野別演習、模擬試験、進捗管理とローカルバックアップ。',
+  bjt: '分野別にビジネス日本語の読解を練習し、進捗を端末に保存。',
+  'jlpt-n1-skills': '技能別のN1演習、解説、記憶カード、復習スケジュール。',
+  ap: '応用情報技術者試験の科目A公式問題と科目B記述問題の自己確認。',
+  'g-kentei': 'シラバス用語、分野別問題、模擬試験でAIとディープラーニングを学習。',
+  fp3: '分野別演習、短時間学習、模擬試験で3級FPの学科・実技を学習。',
+  'certification-study': '資格ライブラリで技能・分野別に学習し、履歴を端末に保存。'
+ },
+ zh: {
+  'japan-pr-guide': '英越双语指南，涵盖日本永住途径、HSP 积分及所需证明材料。',
+  bizroll: '支持多人房间、AI 对手及市场周期的经济策略桌游。',
+  'neon-glider': '基于 Three.js 的轻量无限跑酷游戏，躲避障碍并收集能量。',
+  toolbox: 'macOS 磁盘清理工具，支持操作前审核、文件变化追踪与恢复。',
+  ragops: '面向生产环境 RAG 与智能体系统的评估与发布门禁。',
+  'maintainer-defense': '为开源维护者提供离线、可撤销的安全审计与防御配置。',
+  proofline: '通过不可变的原始资料和精确引用，追溯工程决策。',
+  kakeflow: 'macOS 家庭财务管理，数据保存在本地，支持原始凭证与对账。',
+  igo: '通过课程、战术练习、对局和 SGF 棋谱复盘，用越南语学习围棋。',
+  'pmp-studio': 'PMP 课程、主题练习、模拟考试与进度追踪，支持本地备份。',
+  bjt: '按主题练习商务日语阅读，将学习进度保存在本地。',
+  'jlpt-n1-skills': '按技能练习 N1，提供解析、记忆卡片与到期复习。',
+  ap: '使用官方科目 A 试题与科目 B 案例自测，备考应用信息技术考试。',
+  'g-kentei': '通过大纲术语、主题题组与模拟考试学习 AI 和深度学习。',
+  fp3: '通过主题题组、短时练习与模拟考试学习 FP3 理论及实务。',
+  'certification-study': '通过 认证题库按技能或领域学习，学习记录保存在本地。'
+ }
+};

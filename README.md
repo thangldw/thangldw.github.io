@@ -110,6 +110,7 @@ Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather
 ```bash
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_site.py
+node scripts/test_homepage.mjs
 node scripts/smoke_cert.mjs
 node scripts/smoke_brand.mjs
 node scripts/smoke_product_pages.mjs
@@ -129,7 +130,7 @@ Edit only `js/projects-data.json`.
 
 1. Keep IDs unique and stable.
 2. Provide all required catalog fields and a safe destination URL.
-3. Set `featured: true` and `featuredOrder` to show a project on the home page.
+3. The home page includes all projects and learning collections in title order (English collation, numeric titles first). Keep `featured` metadata for other consumers.
 4. Run validation and browser smoke tests.
 5. Commit and push.
 
@@ -320,3 +321,19 @@ Clean working tree、generated diff review、全 test、focused commit、`master
 Secret、credential、private dataset、learner backup、machine-specific path を commit しません。Font/asset は local に置き、JSON を validate し、HTML 挿入前に text を escape します。Bank は Pages に配置しません。API content は network 接続を必要とし、表示済み content のコピーを防止する保証はありません。Learner data は browser storage 内に留まります。
 
 変更は route-focused、accessible、responsive、independently verifiable にします。新 route では sitemap、canonical、Open Graph、social image、analytics、validation、smoke test を更新します。
+
+## Canonical homepage design — 2026-10-10
+
+The approved homepage is the design reference for future `/apps/` and `/cert/` updates. Those routes retain their current implementation in this release; generated `/cert/` changes must be made in its source repository.
+
+- Visual register: minimal portfolio, restrained separators, no decorative cards.
+- Light default on every homepage load; dark mode is an explicit user action. Use the shared `site-shell.js` theme control and `themechange` event.
+- Runtime token owner for the homepage: `css/homepage.css`. Light: canvas `#f7f8f4`, text `#23291f`, muted `#535e4b`, accent `#965025`, border `#d1d7c9`, controls `#e9ede3`. Dark: canvas `#11150e`, text `#e5e6df`, muted `#b9bdb5`, accent `#e69d6b`, border `#32382d`, controls `#20261c`. The canonical shell roles are mapped at the root of this page only; other route palettes are unchanged.
+- Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px for the explicit single-screen requirement, with 16px mobile prose. No clipped content or forced hidden document overflow.
+- Layout: sidebar plus fluid main column, compact spacing at short desktop heights. About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
+- Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, contact feedback, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
+- Project source: existing shared catalog and certification-manifest loader. All entries appear A–Z with circular manual navigation; no autoplay. The renderer shows three cards on desktop, two on tablet, one on mobile; arrows and keyboard navigation wrap in both directions.
+- Contact: an accessible native dialog with Copy email, Gmail compose, and portable mailto options. Email composition is user-triggered.
+- Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and the `/cert/` source. Preserve route-specific information architecture and application behavior.
+
+Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
