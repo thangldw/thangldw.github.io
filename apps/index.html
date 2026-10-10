@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/css/tokens.css?v=20261010warm">
   <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
   <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
-  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261010warm">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261010groups">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20261010warm">
   <link rel="stylesheet" href="/css/site-shell.css?v=20261010warm">
   <script src="/js/site-shell.js?v=20260727b"></script>
@@ -29,51 +29,29 @@
 <body class="site-page portfolio-catalog" data-page-kind="product" data-site-shell="none">
   <a class="skip-link" href="#catalog">Skip to projects</a>
 
-  <main class="apps-hub apps-main" id="main">
-    <header class="apps-topbar">
+  <div class="apps-preview">
+    <header class="topbar">
       <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a>
-      <div class="apps-header-actions">
+      <div class="header-actions">
+        <nav class="site-navigation" aria-label="Site navigation"><a href="/" data-copy="home">Home</a><a href="#catalog" aria-current="page">Apps</a><a href="/cert/" data-copy="cert">Cert</a></nav>
+        <div class="locale-switch" role="group" aria-label="Display language"><button type="button" data-lang="en" aria-label="English" aria-pressed="true">EN</button><button type="button" data-lang="vi" aria-label="Tiếng Việt" aria-pressed="false">VN</button><button type="button" data-lang="ja" aria-label="日本語" aria-pressed="false">JP</button><button type="button" data-lang="zh" aria-label="中文" aria-pressed="false">CN</button></div>
         <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
       </div>
     </header>
-
-    <section class="apps-hero" aria-labelledby="appsTitle">
-      <h1 id="appsTitle">Tools for work, learning<br>and a little play.</h1>
-      <p class="lead">Small tools and independent projects. Find something useful, explore how it works, or try it out.</p>
-    </section>
-
-    <section class="apps-browse" aria-label="Find a project">
-      <label class="apps-search">
-        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-        <span class="sr-only">Search apps and projects</span>
-        <input id="projectSearch" type="search" placeholder="Find an app, topic, or tool…" disabled>
-      </label>
-      <nav class="apps-group-nav" aria-label="Browse project groups">
-        <button type="button" data-group="all" aria-pressed="true" disabled>All</button>
-        <button type="button" data-group="engineering" aria-pressed="false" disabled>Engineering</button>
-        <button type="button" data-group="utilities" aria-pressed="false" disabled>Utilities</button>
-        <button type="button" data-group="learning" aria-pressed="false" disabled>Learning</button>
-        <button type="button" data-group="experiments" aria-pressed="false" disabled>Experiments</button>
-      </nav>
-    </section>
-
-    <section class="apps-projects" id="catalog" aria-labelledby="projectLibraryHeading">
-      <div class="apps-project-heading">
-        <h2 class="sr-only" id="projectLibraryHeading">Project library</h2>
-        <span id="projectCount" role="status" aria-live="polite">Loading projects</span>
-      </div>
-      <div class="apps-project-grid" id="projectIndex" aria-label="Project library grouped by purpose, with engineering projects first"></div>
-      <div class="catalog-empty" id="catalogEmpty" hidden>
-        <h2>Projects are unavailable</h2>
-        <p>Please try again shortly.</p>
-      </div>
-    </section>
-    <footer class="apps-support" aria-label="Support independent projects">
-      <div id="supportSlot"></div>
-    </footer>
-  </main>
+    <main id="main">
+      <section class="intro" aria-labelledby="apps-title">
+        <div><h1 id="apps-title">Apps</h1><p data-copy="intro">Tools for work, learning and a little play.</p></div>
+        <div class="browse">
+          <label class="search-field"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="sr-only" data-copy="searchLabel">Search apps and projects</span><input id="projectSearch" type="search" placeholder="Find an app, topic, or tool…" disabled></label>
+          <nav class="apps-group-nav" aria-label="Browse project groups"><button class="ui-button" type="button" data-group="all" aria-pressed="true" disabled>All</button><button class="ui-button" type="button" data-group="engineering" aria-pressed="false" disabled>Engineering</button><button class="ui-button" type="button" data-group="utilities" aria-pressed="false" disabled>Utilities</button><button class="ui-button" type="button" data-group="learning" aria-pressed="false" disabled>Learning</button><button class="ui-button" type="button" data-group="experiments" aria-pressed="false" disabled>Experiments</button></nav>
+        </div>
+      </section>
+      <p class="sr-only" id="projectCount" role="status" aria-live="polite">Loading projects…</p>
+      <section class="library" id="catalog" aria-label="Project library" tabindex="-1"><p class="catalog-state">Loading projects…</p></section>
+    </main>
+  </div>
 
   <script src="/js/projects-data.js?v=json-v2"></script>
-  <script src="/js/apps-catalog.js?v=20261008az"></script>
+  <script type="module" src="/js/apps-catalog.js?v=20261010groups"></script>
 </body>
 </html>
