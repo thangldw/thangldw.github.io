@@ -22,7 +22,6 @@ function syncLanguage(){
  document.querySelectorAll('[data-copy]').forEach(el=>el.textContent=c[el.dataset.copy]);
  document.querySelector('.skip-link').textContent=h.skip;
  document.querySelector('.site-brand').setAttribute('aria-label',h.home);
- document.querySelector('.site-navigation').setAttribute('aria-label',c.home);
  document.querySelector('.locale-switch').setAttribute('aria-label',h.languageSwitch);
  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
  document.querySelector('.apps-group-nav').setAttribute('aria-label',c.browse);
