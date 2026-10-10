@@ -12,6 +12,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 from audit_ui_standards import audit_site
+from validate_design_system import audit_design_system
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -56,7 +57,7 @@ CASE_STUDY_SECTION_IDS = {
     "ownership-leadership",
     "limitations-evidence",
 }
-SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20261007brandstates"
+SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20261010standard"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
 SITE_FONT_LICENSE = Path("assets/fonts/Inter-LICENSE.txt")
 EXTERNAL_FONT_PATTERNS = {
@@ -66,6 +67,7 @@ EXTERNAL_FONT_PATTERNS = {
 }
 ALLOWED_MARKDOWN = {
     Path("README.md"),
+    Path("DESIGN.md"),
     Path("assets/fonts/licenses/be-vietnam-pro/SOURCE.md"),
     Path("assets/fonts/licenses/font-awesome-6.4.2/SOURCE.md"),
     Path("docs/japan-pr-guide/DESIGN_CONTRACT.md"),
@@ -131,7 +133,7 @@ def local_target(page: Path, reference: str) -> Path | None:
 
 
 def main() -> int:
-    errors: list[str] = audit_site()
+    errors: list[str] = audit_site() + audit_design_system()
     pages = sorted(path for path in ROOT.rglob("*.html") if "_sources" not in path.relative_to(ROOT).parts)
     parsed_pages: dict[Path, PageParser] = {}
 
@@ -140,7 +142,7 @@ def main() -> int:
             errors.append(f"{required_font_file}: required self-hosted Inter file is missing")
 
     site_shell = (ROOT / "css/site-shell.css").read_text(encoding="utf-8")
-    if '@font-face' not in site_shell or '--site-font-ui: "Inter"' not in site_shell:
+    if '@font-face' not in site_shell or '--site-font-ui: var(--font-family-ui)' not in site_shell or '--font-family-ui: "Inter"' not in (ROOT / 'css/tokens.css').read_text(encoding='utf-8'):
         errors.append("css/site-shell.css: Inter must remain the canonical site UI font")
 
     catalog_path = ROOT / "js/projects-data.json"

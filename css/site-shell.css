@@ -1,3 +1,5 @@
+@import url("/css/tokens.css?v=20261010standard");
+
 /* Canonical site chrome. Public content pages use the shared header/footer;
    the portfolio resume reuses its brand and theme controls inside main. */
 
@@ -10,9 +12,9 @@
 }
 
 :root {
-  --site-brand-ink: var(--color-text, #1d211e);
-  --site-brand-accent: var(--color-accent, #a83a00);
-  --site-font-ui: "Inter", "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", Meiryo, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --site-brand-ink: var(--color-text);
+  --site-brand-accent: var(--color-accent);
+  --site-font-ui: var(--font-family-ui);
   --font-ui: var(--site-font-ui);
   --font-sans: var(--site-font-ui);
   --font-display: var(--site-font-ui);
@@ -86,27 +88,27 @@ textarea {
 .site-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-height: 38px;
+  gap: var(--logo-gap);
+  min-height: var(--logo-mark-size);
   color: var(--site-brand-ink);
   font-family: var(--font-ui);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -.04em;
+  font-size: var(--logo-text-size);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-heading);
   text-decoration: none;
 }
 
 .site-brand-mark {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: var(--logo-mark-size);
+  height: var(--logo-mark-size);
   flex: 0 0 auto;
-  border: 2px solid var(--site-brand-accent);
-  border-radius: 12px 4px;
+  border: var(--logo-border-width) solid var(--site-brand-accent);
+  border-radius: var(--logo-radius);
   color: var(--site-brand-accent);
-  font: 650 15px/1 var(--font-mono);
-  letter-spacing: -.08em;
+  font: var(--weight-logo-mark) var(--logo-mark-text)/1 var(--font-mono);
+  letter-spacing: var(--tracking-logo-mark);
   transition: border-color .2s, color .2s, transform .2s;
 }
 
@@ -228,3 +230,81 @@ textarea {
   --site-brand-ink: var(--color-text, #f1efe8);
   --site-brand-accent: var(--color-accent, #ff9a5d);
 }
+
+/* Canonical recipes. Route CSS owns placement, not component appearance. */
+html:root { background: var(--color-canvas); scrollbar-color: var(--color-scrollbar) var(--color-canvas); }
+.site-brand, .app-owner-brand.site-brand {
+ gap: var(--logo-gap); min-height: var(--logo-mark-size); color: var(--site-brand-ink);
+ font-family: var(--font-ui); font-size: var(--logo-text-size); font-weight: var(--weight-bold);
+ letter-spacing: var(--tracking-heading); text-decoration: none;
+}
+.site-brand .site-brand-mark, .app-owner-brand .site-brand-mark {
+ width: var(--logo-mark-size); height: var(--logo-mark-size); padding: 0;
+ border-width: var(--logo-border-width); border-radius: var(--logo-radius);
+ font-family: var(--font-mono); font-size: var(--logo-mark-text); line-height: 1;
+}
+:is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button) {
+ font-family: var(--font-ui); color: var(--color-text); background: var(--color-control);
+ border: 1px solid var(--color-border); border-radius: var(--radius-control);
+ cursor: pointer; transition: background-color .15s, border-color .15s, color .15s;
+}
+:is(.ui-button,.contact-actions button){font-size:var(--text-body-sm);padding:var(--space-10) var(--space-14);min-height:var(--control-size)}
+:is(.ui-icon-button,.site-theme-toggle,.carousel-controls button){display:grid;place-items:center;width:var(--control-size);height:var(--control-size);min-width:var(--control-size);padding:0;border-radius:50%}
+:is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):hover:not(:disabled){border-color:var(--color-accent);background:var(--color-control-hover);color:var(--color-accent)}
+:is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):active:not(:disabled){background:var(--color-control-active)}
+:is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
+:is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):disabled{opacity:var(--disabled-opacity);cursor:default}
+.locale-switch button{background:transparent;font-size:var(--text-caption);border-color:transparent}
+.locale-switch button[aria-pressed=true]{background:var(--color-control);border-color:var(--color-border);color:var(--color-text)}
+@media(max-width:720px){
+ .site-brand, .app-owner-brand.site-brand{min-height:var(--logo-mark-size-mobile)}
+ .site-brand .site-brand-mark,.app-owner-brand .site-brand-mark{width:var(--logo-mark-size-mobile);height:var(--logo-mark-size-mobile);font-size:var(--logo-mark-text-mobile)}
+ :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button){min-height:var(--control-size-touch)}
+ :is(.ui-icon-button,.site-theme-toggle,.carousel-controls button){width:var(--control-size-touch);height:var(--control-size-touch);min-width:var(--control-size-touch)}
+}
+@media(prefers-reduced-motion:reduce){.site-brand-mark,.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button{transition:none;transform:none}}
+
+/* Compatibility adapter: the generated cert bundle owns behavior and layout. */
+html:has(.certification-hub){
+ --canvas:var(--color-canvas);--surface:var(--color-surface);--surface-strong:var(--color-surface-raised);--ink:var(--color-text);--muted:var(--color-text-body);--line:var(--color-border);--line-soft:var(--color-border);--teal:var(--color-accent);--teal-soft:var(--color-accent-soft);
+}
+html:root[data-theme] .certification-hub{
+ --hub-canvas:var(--color-canvas);--hub-surface:var(--color-surface-raised);--hub-ink:var(--color-text);--hub-body:var(--color-text-body);--hub-strong:var(--color-text-strong);--hub-muted:var(--color-text-muted);--hub-border:var(--color-border);--hub-border-strong:var(--color-border-strong);
+ font-family:var(--font-ui);background:var(--color-canvas);color:var(--color-text);
+}
+html:root[data-theme] .certification-hub .hub-hero .lead{font-size:var(--text-body);line-height:var(--leading-prose);color:var(--color-text-body)}
+html:root[data-theme] .certification-hub .hub-cert-card{border-color:var(--color-border);background:var(--color-surface-raised)}
+html:root[data-theme] .certification-hub .hub-cert-card h3{font-size:var(--text-body-md);color:var(--color-text);font-weight:var(--weight-semibold)}
+html:root[data-theme] .certification-hub .hub-cert-card>p{font-size:var(--text-caption);color:var(--color-text-body)}
+
+:root:lang(ja){--font-family-ui:var(--font-jp-sans)}
+:root:lang(zh){--font-family-ui:var(--font-cn-sans)}
+
+.locale-switch button{min-width:var(--space-40);min-height:var(--space-32)}
+.ui-link-button{display:block;border:0;padding:0;background:transparent;color:var(--color-text);font:inherit;font-size:var(--text-body);text-decoration:underline;text-underline-offset:var(--space-4)}
+.ui-link-button:hover{color:var(--color-accent)}
+.ui-link-button:focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
+.ui-link-button:active{color:var(--color-text-strong)}
+.ui-link-button:disabled{opacity:var(--disabled-opacity);cursor:default}
+@media(max-width:720px){.locale-switch button{min-height:var(--control-size-touch)}}
+
+html,body{scrollbar-width:auto;scrollbar-color:var(--color-scrollbar) var(--color-canvas)}
+::-webkit-scrollbar{width:var(--space-10)}
+::-webkit-scrollbar-thumb{background:var(--color-scrollbar);border-radius:var(--radius-small)}
+::-webkit-scrollbar-track{background:var(--color-canvas)}
+::-webkit-scrollbar-thumb:hover{background:var(--color-text-body)}
+@media(forced-colors:active){html:root{scrollbar-color:auto}.locale-switch button[aria-pressed=true]{outline:var(--focus-width) solid Highlight}}
+/* Cert owns its theme behavior; this adapter supplies the same icon-control recipe. */
+html:root .certification-hub .hub-theme-toggle{display:grid;place-items:center;width:var(--control-size);height:var(--control-size);padding:0;border:1px solid var(--color-border);border-radius:50%;background:var(--color-control);color:var(--color-text);cursor:pointer}
+html:root .certification-hub .hub-theme-toggle:hover{border-color:var(--color-accent);background:var(--color-control-hover);color:var(--color-accent)}
+html:root .certification-hub .hub-theme-toggle:active{background:var(--color-control-active)}
+html:root .certification-hub .hub-theme-toggle:focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
+html:root .certification-hub .hub-theme-toggle:disabled{opacity:var(--disabled-opacity);cursor:default}
+@media(max-width:720px){html:root .certification-hub .hub-theme-toggle{width:var(--control-size-touch);height:var(--control-size-touch)}}
+
+/* Group-navigation states share the selected/control contract. */
+.apps-group-nav button[aria-pressed="true"] { border-color: var(--apps-accent); background: var(--color-accent-soft); color: var(--apps-accent); font-weight:var(--weight-semibold); }
+.apps-group-nav button:hover { background: color-mix(in srgb, var(--apps-muted) 6%, var(--apps-canvas)); }
+.apps-group-nav button:disabled { opacity: .6; cursor: default; }
+.apps-group-nav button:focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
+.apps-group-nav button:active:not(:disabled){background:var(--color-control-active)}

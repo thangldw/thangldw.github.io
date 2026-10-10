@@ -1,13 +1,13 @@
 /* Shared product branding; keep the logo independent of product link states. */
 @font-face{font-family:Inter;src:url('/assets/fonts/InterVariable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:optional}
 .app-owner-group{display:flex;align-items:center;gap:20px;min-width:0}
-.app-owner-brand.site-brand{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;min-height:38px;color:var(--site-brand-ink,var(--color-text,var(--hub-ink,#1d211e)));font:700 24px/1 Inter,system-ui,sans-serif;letter-spacing:-.05em;text-decoration:none}
-.app-owner-brand .site-brand-mark{display:grid;place-items:center;width:38px;height:38px;flex:0 0 auto;border:2px solid var(--site-brand-accent,var(--color-accent,#a83a00));border-radius:12px 4px;color:var(--site-brand-accent,var(--color-accent,#a83a00));font:650 15px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:-.08em}
+.app-owner-brand.site-brand{display:inline-flex;align-items:center;gap:var(--logo-gap);flex-shrink:0;min-height:var(--logo-mark-size);color:var(--site-brand-ink,var(--color-text,var(--hub-ink,#1d211e)));font:var(--weight-bold) var(--logo-text-size)/1 var(--font-ui);letter-spacing:-.05em;text-decoration:none}
+.app-owner-brand .site-brand-mark{display:grid;place-items:center;width:var(--logo-mark-size);height:var(--logo-mark-size);flex:0 0 auto;border:var(--logo-border-width) solid var(--site-brand-accent,var(--color-accent,#a83a00));border-radius:var(--logo-radius);color:var(--site-brand-accent,var(--color-accent,#a83a00));font:var(--weight-logo-mark) var(--logo-mark-text)/1 var(--font-mono);letter-spacing:-.08em}
 .app-owner-brand .site-brand-dot{color:var(--site-brand-accent,var(--color-accent,#a83a00))}
 .app-owner-brand.site-brand:hover,.app-owner-brand.site-brand:focus,.app-owner-brand.site-brand:active{text-decoration:none;outline:none;color:var(--site-brand-ink,var(--color-text,var(--hub-ink,#1d211e)))}
 .app-owner-brand.site-brand:focus-visible .site-brand-mark{outline:2px solid var(--site-brand-accent,var(--color-accent,#a83a00));outline-offset:4px}
 .app-owner-title{border-left:1px solid var(--color-border,#d9d5cb);padding-left:20px}
 .app-explore-link{display:block;width:fit-content;margin:24px auto;padding:10px 16px;color:var(--site-brand-accent,var(--color-accent,#a83a00));font:500 13px/1.5 Inter,system-ui,sans-serif;text-decoration:none}
 .app-explore-link:hover{text-decoration:underline}
-@media(max-width:680px){.app-owner-group{gap:12px}.app-owner-brand.site-brand{gap:8px;font-size:20px}.app-owner-brand .site-brand-mark{width:32px;height:32px;border-radius:10px 4px;font-size:13px}.app-owner-title{padding-left:12px}}
+@media(max-width:680px){.app-owner-group{gap:12px}.app-owner-brand.site-brand{gap:8px;font-size:var(--logo-text-size)}.app-owner-brand .site-brand-mark{width:var(--logo-mark-size-mobile);height:var(--logo-mark-size-mobile);border-radius:var(--logo-radius);font-size:var(--logo-mark-text-mobile)}.app-owner-title{padding-left:12px}}
 @media(max-width:600px){.hub-topbar .app-owner-title{display:none}}

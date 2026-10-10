@@ -86,7 +86,8 @@ function renderLocale() {
  text('.contact h2',t.work);
  text('.contact p',t.invitation);
  text('.contact-trigger',t.discuss);
- text('.support',t.support);
+ const supportLabel = document.querySelector('.support-floating-trigger span');
+ if (supportLabel) supportLabel.textContent = t.support;
  text('.about .section-title',t.about);
  const emphasis = document.createElement('span');
  emphasis.textContent = t.headline[1];

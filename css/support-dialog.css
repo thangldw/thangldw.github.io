@@ -2,20 +2,20 @@
 
 .support-floating-trigger {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: var(--space-24);
+  bottom: var(--space-24);
   z-index: 900;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 38px;
-  padding: 9px 13px;
-  border: 1px solid var(--support-border, #d8d2c7);
-  border-radius: 7px;
-  background: var(--support-accent, #b83a06);
-  color: #fff;
+  gap: var(--space-8);
+  min-height: var(--control-size-touch);
+  padding: var(--space-12) var(--space-16);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-support);
+  color: var(--color-on-support);
   box-shadow: 0 12px 30px rgba(20, 22, 18, .16);
-  font: 650 11px/1.2 var(--font-ui, Inter, system-ui, sans-serif);
+  font: var(--weight-semibold) var(--text-body-sm)/var(--leading-tight) var(--font-ui, Inter, system-ui, sans-serif);
   letter-spacing: .01em;
   cursor: pointer;
 }
@@ -25,22 +25,22 @@
 }
 
 .support-floating-trigger:focus-visible {
-  outline: 2px solid var(--support-accent, #b83a06);
+  outline: 2px solid var(--color-support);
   outline-offset: 3px;
 }
 
 .support-dialog {
-  --support-bg: #fbfaf7;
-  --support-surface: #f6f4ef;
-  --support-raised: #fff;
-  --support-ink: #1d201c;
-  --support-body: #5e645d;
-  --support-muted: #7d837b;
-  --support-border: #d8d2c7;
-  --support-border-strong: #b9b2a6;
-  --support-chip: #ece9e2;
-  --support-accent: #b83a06;
-  --support-accent-ink: #fff;
+  --support-bg: var(--color-canvas);
+  --support-surface: var(--color-surface-subtle);
+  --support-raised: var(--color-surface-raised);
+  --support-ink: var(--color-text);
+  --support-body: var(--color-text-body);
+  --support-muted: var(--color-text-muted);
+  --support-border: var(--color-border);
+  --support-border-strong: var(--color-border-strong);
+  --support-chip: var(--color-control);
+  --support-accent: var(--color-accent);
+  --support-accent-ink: var(--color-on-accent);
   width: min(590px, calc(100% - 40px));
   max-width: none;
   max-height: min(520px, calc(100dvh - 40px));
@@ -56,17 +56,17 @@
 }
 
 :root[data-theme="dark"] .support-dialog {
-  --support-bg: #1c1f1a;
-  --support-surface: #171a16;
-  --support-raised: #20231e;
-  --support-ink: #f4f1ea;
-  --support-body: #b1b6ae;
-  --support-muted: #8e958b;
-  --support-border: #353a32;
-  --support-border-strong: #4a5146;
-  --support-chip: #242820;
-  --support-accent: #ff9c65;
-  --support-accent-ink: #171a16;
+  --support-bg: var(--color-canvas);
+  --support-surface: var(--color-surface-subtle);
+  --support-raised: var(--color-surface-raised);
+  --support-ink: var(--color-text);
+  --support-body: var(--color-text-body);
+  --support-muted: var(--color-text-muted);
+  --support-border: var(--color-border);
+  --support-border-strong: var(--color-border-strong);
+  --support-chip: var(--color-control);
+  --support-accent: var(--color-accent);
+  --support-accent-ink: var(--color-on-accent);
   box-shadow: 0 24px 80px rgba(0, 0, 0, .52);
 }
 
@@ -617,3 +617,6 @@ body.support-dialog-open {
 .support-dialog{font-size:16px;line-height:1.5}
 
 .support-floating-trigger svg,.support-primary svg{width:12px;height:12px;flex:none}
+
+.support-floating-trigger:active{filter:brightness(.94)}
+.support-floating-trigger:disabled{opacity:var(--disabled-opacity);cursor:default}

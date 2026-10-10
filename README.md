@@ -109,6 +109,7 @@ Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather
 
 ```bash
 python3 scripts/audit_ui_standards.py
+python3 scripts/validate_design_system.py
 python3 scripts/validate_site.py
 node scripts/test_homepage.mjs
 node scripts/smoke_cert.mjs
@@ -328,7 +329,7 @@ The approved homepage is the design reference for future `/apps/` and `/cert/` u
 
 - Visual register: minimal portfolio, restrained separators, no decorative cards.
 - Light default on every homepage load; dark mode is an explicit user action. Use the shared `site-shell.js` theme control and `themechange` event.
-- Runtime token owner for the homepage: `css/homepage.css`. Light: canvas `#f7f8f4`, text `#23291f`, muted `#535e4b`, accent `#965025`, border `#d1d7c9`, controls `#e9ede3`. Dark: canvas `#11150e`, text `#e5e6df`, muted `#b9bdb5`, accent `#e69d6b`, border `#32382d`, controls `#20261c`. The canonical shell roles are mapped at the root of this page only; other route palettes are unchanged.
+- Canonical runtime token owner: `css/tokens.css`; shared recipes: `css/site-shell.css`; full contract: [DESIGN.md](DESIGN.md). Light: canvas `#f7f8f4`, text `#23291f`, muted `#535e4b`, accent `#965025`, border `#d1d7c9`, controls `#e9ede3`. Dark: canvas `#11150e`, text `#e5e6df`, muted `#b9bdb5`, accent `#e69d6b`, border `#32382d`, controls `#20261c`. Home and Apps consume the same tokens; generated Cert receives shared shell and catalog aliases through the existing integration stylesheet.
 - Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px for the explicit single-screen requirement, with 16px mobile prose. No clipped content or forced hidden document overflow.
 - Layout: sidebar plus fluid main column, compact spacing at short desktop heights. About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, contact feedback, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
@@ -337,3 +338,5 @@ The approved homepage is the design reference for future `/apps/` and `/cert/` u
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and the `/cert/` source. Preserve route-specific information architecture and application behavior.
 
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
+
+Technical standardization is enforced by `scripts/validate_design_system.py`, also invoked by the site validator. It checks light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
