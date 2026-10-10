@@ -1,20 +1,20 @@
 const APP_BASE = "/fe/";
-const SHELL_CACHE = "fe-shell-c6870865af56f913";
+const SHELL_CACHE = "fe-shell-8667099582cf4d50";
 const PRECACHE_URLS = [
   "/assets/learning/assets/AppShell-Bl3dNDla.css",
-  "/assets/learning/assets/AppShell-C-2OlFec.js",
-  "/assets/learning/assets/CertificationViews-X9BvsNJC.js",
+  "/assets/learning/assets/AppShell-Cs8Wfm9M.js",
+  "/assets/learning/assets/CertificationViews-JVbEtMja.js",
   "/assets/learning/assets/CertificationViews-rutjcLFs.css",
-  "/assets/learning/assets/ExperienceWorkspace-KP1sbg-Z.js",
+  "/assets/learning/assets/ExperienceWorkspace-BhFtx0TR.js",
   "/assets/learning/assets/ExperienceWorkspace-yCiFdpId.css",
-  "/assets/learning/assets/FlowCanvas-CddnKGtz.js",
   "/assets/learning/assets/FlowCanvas-DLioOiRN.css",
+  "/assets/learning/assets/FlowCanvas-SJrdExKY.js",
   "/assets/learning/assets/fonts/InterVariable.woff2",
+  "/assets/learning/assets/index-B1Ad7ELl.js",
   "/assets/learning/assets/index-BQu2Pz9L.css",
-  "/assets/learning/assets/index-_U2FV28T.js",
-  "/assets/learning/assets/jlpt-strict-resume-CImrp3fS.js",
+  "/assets/learning/assets/jlpt-strict-resume-DhiSPGXH.js",
   "/assets/learning/assets/jsx-runtime-Cltr0gcK.js",
-  "/assets/learning/assets/question-response-CenXL3-_.js",
+  "/assets/learning/assets/question-response-BQBjYSd9.js",
   "/assets/learning/pwa/icon-192.png",
   "/assets/learning/pwa/icon-512.png",
   "/assets/learning/pwa/icon-maskable-512.png",
