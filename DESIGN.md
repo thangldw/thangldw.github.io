@@ -1,7 +1,7 @@
 ---
 version: alpha
 colors:
-  canvas: "#f7f8f4"
+  canvas: "#f6f5f1"
   text: "#23291f"
   muted: "#535e4b"
   accent: "#965025"

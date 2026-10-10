@@ -1,8 +1,8 @@
 html:root {
   /* Canonical color contract. Component and product styles should alias these
      roles instead of redefining raw light/dark palettes. */
-  --color-canvas: #f7f8f4;
-  --color-surface: #f7f8f4;
+  --color-canvas: #f6f5f1;
+  --color-surface: #f6f5f1;
   --color-surface-raised: #ffffff;
   --color-surface-subtle: #e9ede3;
   --color-text: #23291f;
