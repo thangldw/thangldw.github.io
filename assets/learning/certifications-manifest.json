@@ -1,0 +1,420 @@
+{
+  "schemaVersion": "1.0",
+  "certificationCount": 23,
+  "certifications": [
+    {
+      "id": "g",
+      "slug": "g",
+      "displayOrder": 1,
+      "accent": "#a83a00",
+      "shortName": "G検定",
+      "name": "G検定（ジェネラリスト検定）",
+      "issuer": "JDLA",
+      "syllabusVersion": "2024-v1.4",
+      "href": "/g-kentei/",
+      "availableQuestionCount": 1086,
+      "exam": {
+        "durationMinutes": 100,
+        "questionCount": 145,
+        "format": "オンライン試験・知識問題（多肢選択式）",
+        "structure": "G検定シラバス2024 v1.4対応・学習用11分野"
+      }
+    },
+    {
+      "id": "fp3",
+      "slug": "fp3",
+      "displayOrder": 2,
+      "accent": "#b06f24",
+      "shortName": "3級FP",
+      "name": "3級ファイナンシャル・プランニング技能検定",
+      "issuer": "日本FP協会",
+      "syllabusVersion": "2026",
+      "href": "/fp3/",
+      "availableQuestionCount": 1252,
+      "exam": {
+        "durationMinutes": 150,
+        "questionCount": 80,
+        "format": "CBT方式・通年受検",
+        "structure": "学科60問・90分（36/60以上）と実技20問・60分（60/100以上）は別試験。80問・150分は合計値であり、共通タイマーの試験ではありません。"
+      }
+    },
+    {
+      "id": "bjt",
+      "slug": "bjt",
+      "displayOrder": 3,
+      "accent": "#7956a8",
+      "shortName": "BJT",
+      "name": "BJTビジネス日本語能力テスト",
+      "issuer": "日本漢字能力検定協会",
+      "syllabusVersion": "2026",
+      "href": "/bjt/",
+      "availableQuestionCount": 728,
+      "exam": {
+        "durationMinutes": 30,
+        "questionCount": 30,
+        "format": "Reading Practice; not an exam simulator",
+        "structure": "30 Reading questions sampled from 728 pinned Reading items"
+      }
+    },
+    {
+      "id": "sg",
+      "slug": "sg",
+      "displayOrder": 4,
+      "accent": "#236aa8",
+      "shortName": "SG",
+      "name": "情報セキュリティマネジメント試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/sg/",
+      "availableQuestionCount": 831,
+      "exam": {
+        "durationMinutes": 120,
+        "questionCount": 60,
+        "format": "CBT方式・IRT評価",
+        "structure": "科目A＋科目B"
+      }
+    },
+    {
+      "id": "ap",
+      "slug": "ap",
+      "displayOrder": 5,
+      "accent": "#35745a",
+      "shortName": "AP",
+      "name": "応用情報技術者試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/ap/",
+      "availableQuestionCount": 869,
+      "exam": {
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A practice / Subject B written self-check; not an exam simulator",
+        "structure": "Subject A archive drill"
+      }
+    },
+    {
+      "id": "jlpt",
+      "slug": "jlpt",
+      "displayOrder": 6,
+      "accent": "#a04458",
+      "shortName": "JLPT N1",
+      "name": "日本語能力試験 N1",
+      "issuer": "国際交流基金・日本国際教育支援協会",
+      "syllabusVersion": "N1",
+      "href": "/jlpt-n1/",
+      "availableQuestionCount": 907,
+      "exam": {
+        "durationMinutes": 110,
+        "questionCount": 53,
+        "format": "Reconstructed section rehearsal",
+        "structure": "言語知識・読解"
+      }
+    },
+    {
+      "id": "toeic",
+      "slug": "toeic",
+      "displayOrder": 7,
+      "accent": "#246a98",
+      "shortName": "TOEIC",
+      "name": "TOEIC Reading Practice",
+      "issuer": "IIBC",
+      "syllabusVersion": "2026",
+      "href": "/toeic/",
+      "availableQuestionCount": 305,
+      "exam": {
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Reading Parts 5–7 Practice; not an exam simulator",
+        "structure": "Part 5, Part 6, and Part 7"
+      }
+    },
+    {
+      "id": "pmp",
+      "slug": "pmp",
+      "displayOrder": 8,
+      "accent": "#684fa3",
+      "shortName": "PMP",
+      "name": "Project Management Professional（PMP）",
+      "issuer": "PMI",
+      "syllabusVersion": "PMP-ECO-2026-07",
+      "href": "/pmp/",
+      "availableQuestionCount": 1710,
+      "exam": {
+        "durationMinutes": 240,
+        "questionCount": 180,
+        "format": "CBT・2回の休憩",
+        "structure": "July 2026 ECO: People 33% · Process 41% · Business Environment 26%; approximately 40% predictive and 60% adaptive/agile or hybrid"
+      }
+    },
+    {
+      "id": "aws",
+      "slug": "aws",
+      "displayOrder": 9,
+      "accent": "#9b6420",
+      "shortName": "AWS SAA",
+      "name": "AWS Certified Solutions Architect – Associate",
+      "issuer": "Amazon Web Services",
+      "syllabusVersion": "SAA-C03-2026",
+      "href": "/aws/",
+      "availableQuestionCount": 704,
+      "exam": {
+        "durationMinutes": 130,
+        "questionCount": 65,
+        "format": "複数選択・スケールドスコア",
+        "structure": "SAA-C03"
+      }
+    },
+    {
+      "id": "gh-300",
+      "slug": "gh-300",
+      "displayOrder": 10,
+      "accent": "#2f81f7",
+      "shortName": "GH-300",
+      "name": "GitHub Copilot",
+      "issuer": "Microsoft / GitHub",
+      "syllabusVersion": "GH-300-2026-08",
+      "href": "/gh-300/",
+      "availableQuestionCount": 147,
+      "exam": {
+        "durationMinutes": 100,
+        "questionCount": 54,
+        "format": "Single-choice and multiple-choice questions",
+        "structure": "GH-300 GitHub Copilot certification exam"
+      }
+    },
+    {
+      "id": "ccar-f",
+      "slug": "ccar-f",
+      "displayOrder": 11,
+      "accent": "#d97757",
+      "shortName": "CCAR-F",
+      "name": "Claude Certified Architect — Foundations",
+      "issuer": "Anthropic",
+      "syllabusVersion": "CCAR-F-2026",
+      "href": "/ccar-f/",
+      "availableQuestionCount": 696,
+      "exam": {
+        "durationMinutes": 120,
+        "questionCount": 60,
+        "format": "Scenario-based multiple-choice and multiple-response; each item states the number of selections required",
+        "structure": "Five architecture domains; four scenarios selected from six"
+      }
+    },
+    {
+      "id": "fp2",
+      "slug": "fp2",
+      "displayOrder": 12,
+      "accent": "#2563a6",
+      "shortName": "2級FP",
+      "name": "2級ファイナンシャル・プランニング技能検定",
+      "issuer": "日本FP協会",
+      "syllabusVersion": "2026",
+      "href": "/fp2/",
+      "availableQuestionCount": 859,
+      "exam": {
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "FP2 Academic Practice; not an exam simulator",
+        "structure": "Academic selectable questions"
+      }
+    },
+    {
+      "id": "fe",
+      "slug": "fe",
+      "displayOrder": 13,
+      "accent": "#2f6f8f",
+      "shortName": "FE",
+      "name": "基本情報技術者試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/fe/",
+      "availableQuestionCount": 301,
+      "exam": {
+        "durationMinutes": 190,
+        "questionCount": 80,
+        "format": "CBT方式・IRT評価",
+        "structure": "科目A 60問＋科目B 20問"
+      }
+    },
+    {
+      "id": "tokei-2",
+      "slug": "tokei-2",
+      "displayOrder": 14,
+      "accent": "#6b4f9b",
+      "shortName": "統計2級",
+      "name": "統計検定2級",
+      "issuer": "日本統計学会公式認定",
+      "syllabusVersion": "2026",
+      "href": "/tokei-2/",
+      "availableQuestionCount": 306,
+      "exam": {
+        "durationMinutes": 90,
+        "questionCount": 35,
+        "format": "CBT方式・4～5肢選択問題",
+        "structure": "35問程度。大学基礎科目レベルの統計学と問題解決力を評価"
+      }
+    },
+    {
+      "id": "nw",
+      "slug": "nw",
+      "displayOrder": 15,
+      "accent": "#006e78",
+      "shortName": "NW",
+      "name": "ネットワークスペシャリスト試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/nw/",
+      "availableQuestionCount": 155,
+      "exam": {
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A-2 Practice; not an exam simulator",
+        "structure": "Subject A-2 selectable practice"
+      }
+    },
+    {
+      "id": "sc",
+      "slug": "sc",
+      "displayOrder": 16,
+      "accent": "#8b1e3f",
+      "shortName": "SC",
+      "name": "情報処理安全確保支援士試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/sc/",
+      "availableQuestionCount": 190,
+      "exam": {
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A-2 Practice; not an exam simulator",
+        "structure": "Subject A-2 selectable practice"
+      }
+    },
+    {
+      "id": "db",
+      "slug": "db",
+      "displayOrder": 17,
+      "accent": "#315c8c",
+      "shortName": "DB",
+      "name": "データベーススペシャリスト試験",
+      "issuer": "IPA",
+      "syllabusVersion": "2026",
+      "href": "/db/",
+      "availableQuestionCount": 156,
+      "exam": {
+        "durationMinutes": 20,
+        "questionCount": 20,
+        "format": "Subject A-2 Practice; not an exam simulator",
+        "structure": "Subject A-2 selectable practice"
+      }
+    },
+    {
+      "id": "boki1",
+      "slug": "boki1",
+      "displayOrder": 18,
+      "accent": "#6f2c1f",
+      "shortName": "簿記1級",
+      "name": "日商簿記1級",
+      "issuer": "日本商工会議所",
+      "syllabusVersion": "2026",
+      "href": "/boki1/",
+      "availableQuestionCount": 113,
+      "exam": {
+        "durationMinutes": 180,
+        "questionCount": 4,
+        "format": "統一試験・記述計算式",
+        "structure": "商業簿記・会計学 90分、工業簿記・原価計算 90分"
+      }
+    },
+    {
+      "id": "boki2",
+      "slug": "boki2",
+      "displayOrder": 19,
+      "accent": "#8c4a24",
+      "shortName": "簿記2級",
+      "name": "日商簿記2級",
+      "issuer": "日本商工会議所",
+      "syllabusVersion": "2026",
+      "href": "/boki2/",
+      "availableQuestionCount": 154,
+      "exam": {
+        "durationMinutes": 90,
+        "questionCount": 5,
+        "format": "統一試験またはネット試験",
+        "structure": "商業簿記・工業簿記（原価計算を含む）、5題以内"
+      }
+    },
+    {
+      "id": "boki3",
+      "slug": "boki3",
+      "displayOrder": 20,
+      "accent": "#a66b2b",
+      "shortName": "簿記3級",
+      "name": "日商簿記3級",
+      "issuer": "日本商工会議所",
+      "syllabusVersion": "2026",
+      "href": "/boki3/",
+      "availableQuestionCount": 186,
+      "exam": {
+        "durationMinutes": 60,
+        "questionCount": 3,
+        "format": "統一試験またはネット試験",
+        "structure": "商業簿記、3題以内"
+      }
+    },
+    {
+      "id": "aws-aip-c01",
+      "slug": "aws-aip-c01",
+      "displayOrder": 21,
+      "accent": "#ff9900",
+      "shortName": "AWS AIP-C01",
+      "name": "AWS Certified Generative AI Developer – Professional",
+      "issuer": "Amazon Web Services",
+      "syllabusVersion": "AIP-C01-2026-08",
+      "href": "/aws-aip-c01/",
+      "availableQuestionCount": 150,
+      "exam": {
+        "durationMinutes": 180,
+        "questionCount": 75,
+        "format": "Multiple choice và multiple response; 65 câu chấm điểm và 10 câu không chấm điểm không được đánh dấu",
+        "structure": "AIP-C01 · 5 content domains"
+      }
+    },
+    {
+      "id": "hsk-3-0",
+      "slug": "hsk-3-0",
+      "displayOrder": 22,
+      "accent": "#d71920",
+      "shortName": "HSK 3.0 · Levels 1–9",
+      "name": "HSK 3.0（1–9级词汇）",
+      "issuer": "Chinese Testing International (CTI)",
+      "syllabusVersion": "HSK-3.0-TRIAL-2026-09",
+      "href": "/hsk-3-0/",
+      "availableQuestionCount": 0,
+      "exam": {
+        "durationMinutes": 0,
+        "questionCount": 0,
+        "format": "Vocabulary active recall and Grammar syllabus reference only; not an exam simulator",
+        "structure": "No question-based session is published"
+      }
+    },
+    {
+      "id": "aws-dea-c01",
+      "slug": "aws-dea-c01",
+      "displayOrder": 23,
+      "accent": "#ff9900",
+      "shortName": "AWS DEA-C01",
+      "name": "AWS Certified Data Engineer – Associate",
+      "issuer": "Amazon Web Services",
+      "syllabusVersion": "DEA-C01-2026-08",
+      "href": "/aws-dea-c01/",
+      "availableQuestionCount": 232,
+      "exam": {
+        "durationMinutes": 130,
+        "questionCount": 65,
+        "format": "Multiple choice and multiple response; 50 scored and 15 unscored questions",
+        "structure": "DEA-C01 · 4 content domains"
+      }
+    }
+  ]
+}

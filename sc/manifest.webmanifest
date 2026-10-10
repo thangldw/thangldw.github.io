@@ -1,0 +1,36 @@
+{
+  "id": "/sc/",
+  "name": "SC",
+  "short_name": "SC",
+  "description": "Certification practice with online content and locally saved progress.",
+  "lang": "en",
+  "start_url": "/sc/",
+  "scope": "/sc/",
+  "display": "standalone",
+  "background_color": "#fbfcfe",
+  "theme_color": "#1d211e",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/assets/learning/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/learning/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/learning/pwa/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
