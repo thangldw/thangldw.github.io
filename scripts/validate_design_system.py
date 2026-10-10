@@ -29,6 +29,14 @@ def audit_design_system():
     for name,token in [('small','--space-8'),('medium','--space-16'),('large','--space-24')]:
         expected=re.search(r'^  '+name+r': "([^"]+)"$',design,re.M)
         if not expected or expected[1]!=values.get(token): errors.append(f'DESIGN.md: spacing {name} differs from shared tokens')
+    # Every authored stylesheet inherits core values from the official owner.
+    protected = re.compile(r'--(?:color-[\w-]+|font-family-ui|text-[\w-]+|leading-[\w-]+|weight-[\w-]+|tracking-[\w-]+|space-[\w-]+|logo-[\w-]+|control-size[\w-]*|focus-[\w-]+|disabled-opacity|radius-[\w-]+)\s*:')
+    for stylesheet in (ROOT/'css').glob('*.css'):
+        if stylesheet.name == 'tokens.css':
+            continue
+        authored = re.sub(r'/\*.*?\*/', '', stylesheet.read_text(), flags=re.S)
+        for definition in protected.findall(authored):
+            errors.append(f'{stylesheet.relative_to(ROOT)}: redefines official token {definition.rstrip(": ")}')
     for file in ['css/homepage.css','css/apps-catalog.css']:
         source = (ROOT/file).read_text()
         source = re.sub(r'/\*.*?\*/','',source,flags=re.S)

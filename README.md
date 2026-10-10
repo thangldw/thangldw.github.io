@@ -340,3 +340,5 @@ The approved homepage is the design reference for future `/apps/` and `/cert/` u
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
 
 Technical standardization is enforced by `scripts/validate_design_system.py`, also invoked by the site validator. It checks light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
+
+Official CSS entry point: `css/site-shell.css` → `css/tokens.css`. Every public route inherits this foundation; page CSS owns composition. Core token redefinition anywhere in authored `css/` is rejected by the design validation gate. See [mandatory inheritance contract](DESIGN.md#mandatory-inheritance-contract).

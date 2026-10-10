@@ -244,3 +244,7 @@ html:root[data-theme="dark"] {
   --color-scrollbar: #747d6b;
   color-scheme: dark;
 }
+
+/* Language variants belong to the canonical token owner. */
+html:root:lang(ja){--font-family-ui:var(--font-jp-sans)}
+html:root:lang(zh){--font-family-ui:var(--font-cn-sans)}

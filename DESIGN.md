@@ -36,7 +36,7 @@ components:
 
 Thang Luu's homepage is the visual reference for a multilingual Data/AI/FDE portfolio and its application catalog. The interface should feel restrained, readable, and deliberate. The signature is the `t:>` mark; the content carries the identity. Avoid ornamental gradients, decorative panels, and a competing visual system per route.
 
-Ownership model B: **`css/tokens.css` is the canonical runtime source**. This document mirrors accepted values and explains their purpose. `css/site-shell.css` owns reusable logo and control recipes. `css/support-dialog.css` owns the shared support overlay. Route CSS owns composition and responsive placement, and consumes tokens rather than another palette or type scale.
+Official site design system (ownership model B): **`css/tokens.css` is the canonical runtime source**. This document mirrors accepted values and explains their purpose. `css/site-shell.css` owns reusable logo and control recipes. `css/support-dialog.css` owns the shared support overlay. Route CSS owns composition and responsive placement, and consumes tokens rather than another palette or type scale.
 
 ## Colors
 
@@ -89,3 +89,11 @@ Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_si
 - Keep names and domain identifiers intact across localization.
 - Do not copy theme palettes, logo rules, or button states into a route stylesheet.
 - Do not modify generated exam bundles or infer application state from a visual token.
+
+## Mandatory inheritance contract
+
+`css/site-shell.css` is the official public stylesheet entry point. It imports `css/tokens.css`, the sole owner of core design values. All public HTML pages load this entry point; route CSS consumes its custom properties and shared component classes through the CSS cascade. Do not copy the homepage stylesheet to create another design system, or import one route's layout into another route.
+
+Authoring order is shared foundations and components, then route composition. A route may set columns, widths, breakpoints and content placement. It must not redefine core `--color-*`, typography, spacing, logo, radius, control-size or focus tokens. A new reusable visual variant must be added to the shared owner first. Legacy aliases may reference canonical tokens, but cannot become an independent source of core values.
+
+The release validator rejects protected token definitions in every authored file under `css/`. Generated application assets retain their source ownership; migrate them in their source repository and preserve the shared integration adapter. Existing legacy route styles are compatibility debt, not an alternative approved standard; new or revised screens must use this contract.

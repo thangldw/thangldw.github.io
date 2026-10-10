@@ -1,4 +1,4 @@
-@import url("/css/tokens.css?v=20261010standard");
+@import url("/css/tokens.css?v=20261010official");
 
 /* Canonical site chrome. Public content pages use the shared header/footer;
    the portfolio resume reuses its brand and theme controls inside main. */
@@ -277,8 +277,6 @@ html:root[data-theme] .certification-hub .hub-cert-card{border-color:var(--color
 html:root[data-theme] .certification-hub .hub-cert-card h3{font-size:var(--text-body-md);color:var(--color-text);font-weight:var(--weight-semibold)}
 html:root[data-theme] .certification-hub .hub-cert-card>p{font-size:var(--text-caption);color:var(--color-text-body)}
 
-:root:lang(ja){--font-family-ui:var(--font-jp-sans)}
-:root:lang(zh){--font-family-ui:var(--font-cn-sans)}
 
 .locale-switch button{min-width:var(--space-40);min-height:var(--space-32)}
 .ui-link-button{display:block;border:0;padding:0;background:transparent;color:var(--color-text);font:inherit;font-size:var(--text-body);text-decoration:underline;text-underline-offset:var(--space-4)}
