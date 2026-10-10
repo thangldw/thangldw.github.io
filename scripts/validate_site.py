@@ -277,7 +277,9 @@ def main() -> int:
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"js/projects-data.json: cannot load catalog: {exc}")
 
-    certification_manifest_path = ROOT / "cert/certifications-manifest.json"
+    if (ROOT / "cert").exists():
+        errors.append("cert/: retired directory must not be recreated")
+    certification_manifest_path = ROOT / "assets/learning/certifications-manifest.json"
     try:
         certification_manifest = json.loads(
             certification_manifest_path.read_text(encoding="utf-8")
@@ -285,15 +287,15 @@ def main() -> int:
         certifications = certification_manifest.get("certifications")
         if certification_manifest.get("schemaVersion") != "1.0":
             errors.append(
-                "cert/certifications-manifest.json: unsupported schemaVersion"
+                "assets/learning/certifications-manifest.json: unsupported schemaVersion"
             )
         if not isinstance(certifications, list):
             errors.append(
-                "cert/certifications-manifest.json: certifications must be an array"
+                "assets/learning/certifications-manifest.json: certifications must be an array"
             )
         elif certification_manifest.get("certificationCount") != len(certifications):
             errors.append(
-                "cert/certifications-manifest.json: certificationCount mismatch"
+                "assets/learning/certifications-manifest.json: certificationCount mismatch"
             )
         else:
             allowed_fields = {
@@ -307,20 +309,20 @@ def main() -> int:
             for index, certification in enumerate(certifications):
                 if not isinstance(certification, dict):
                     errors.append(
-                        f"cert/certifications-manifest.json: entry {index} must be an object"
+                        f"assets/learning/certifications-manifest.json: entry {index} must be an object"
                     )
                     continue
                 unexpected = sorted(certification.keys() - allowed_fields)
                 missing = sorted(allowed_fields - certification.keys())
                 if unexpected or missing:
                     errors.append(
-                        "cert/certifications-manifest.json: "
+                        "assets/learning/certifications-manifest.json: "
                         f"entry {index} fields differ; missing={missing}, unexpected={unexpected}"
                     )
                 exam = certification.get("exam")
                 if not isinstance(exam, dict) or set(exam.keys()) != allowed_exam_fields:
                     errors.append(
-                        f"cert/certifications-manifest.json: entry {index} has invalid exam metadata"
+                        f"assets/learning/certifications-manifest.json: entry {index} has invalid exam metadata"
                     )
                 identifier = certification.get("id")
                 if isinstance(identifier, str):
@@ -330,7 +332,7 @@ def main() -> int:
                     target = local_target(certification_manifest_path, href)
                     if target is not None and not target.exists():
                         errors.append(
-                            f"cert/certifications-manifest.json: broken href {href}"
+                            f"assets/learning/certifications-manifest.json: broken href {href}"
                         )
             duplicate_manifest_ids = sorted(
                 identifier
@@ -339,12 +341,12 @@ def main() -> int:
             )
             if duplicate_manifest_ids:
                 errors.append(
-                    "cert/certifications-manifest.json: duplicate ids: "
+                    "assets/learning/certifications-manifest.json: duplicate ids: "
                     + ", ".join(duplicate_manifest_ids)
                 )
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(
-            f"cert/certifications-manifest.json: cannot load manifest: {exc}"
+            f"assets/learning/certifications-manifest.json: cannot load manifest: {exc}"
         )
 
     markdown_files = {
@@ -431,35 +433,19 @@ def main() -> int:
         if parser.refreshes:
             relative = page.relative_to(ROOT).as_posix()
             if relative.startswith("apps/cert/"):
-                suffix = relative[len("apps/cert/"):].removesuffix("index.html")
-                target = "/pmp/" if suffix == "pmp/" else "/cert/" + suffix
-                if parser.refreshes != [f"0;url={target}"] or not (ROOT / target.lstrip("/") / "index.html").exists():
+                refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
+                target = urlsplit(refresh.removeprefix("0;url=")).path
+                if not refresh.startswith("0;url=/") or not (ROOT / target.lstrip("/") / "index.html").is_file():
                     errors.append(f"{relative}: invalid certification redirect")
-                script = (ROOT / "apps/cert/redirect.js").read_text()
-                if "location.replace(target + location.search + location.hash)" not in script:
+                script = (ROOT / "js/learning-route-redirect.js").read_text()
+                if "target.hash = location.hash" not in script or "new URLSearchParams(location.search)" not in script:
                     errors.append(f"{relative}: redirect must preserve query and hash")
                 continue
-            if relative == "jlpt/index.html":
-                if 'location.replace("/jlpt-n1/"+location.search+location.hash)' not in page.read_text() or not (ROOT / "jlpt-n1/index.html").is_file():
-                    errors.append(f"{relative}: invalid JLPT compatibility redirect")
-                continue
-            if relative in {"cert/bjt/index.html", "cert/fp3/index.html"}:
-                slug = relative.split("/")[1]
-                script = (ROOT / f"cert/{slug}/redirect.js").read_text()
-                if parser.refreshes != [f"0;url=/{slug}/"] or not (ROOT / f"{slug}/index.html").is_file() or f'location.replace("/{slug}/" + location.search + location.hash)' not in script:
-                    errors.append(f"{relative}: invalid {slug} compatibility redirect")
-                continue
-            if relative == "cert/g/index.html":
-                script = (ROOT / "cert/g/redirect.js").read_text()
-                if parser.refreshes != ["0;url=/g-kentei/"] or not (ROOT / "g-kentei/index.html").is_file() or 'location.replace("/g-kentei/" + location.search + location.hash)' not in script:
-                    errors.append(f"{relative}: invalid G検定 compatibility redirect")
-                continue
-            if relative == "cert/jlpt/index.html" or relative.startswith("cert/n1-modules/"):
-                refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
-                destination = refresh.removeprefix("0;url=")
-                parsed = urlsplit(destination)
-                if parsed.path != "/jlpt-n1/" or parsed.scheme or parsed.netloc or not (ROOT / "jlpt-n1/index.html").is_file():
-                    errors.append(f"{relative}: invalid standalone JLPT redirect")
+            if relative in {"jlpt/index.html", "g/index.html"} or relative.startswith("n1-modules/"):
+                destination = urlsplit(parser.refreshes[0].removeprefix("0;url="))
+                expected = "/g-kentei/" if relative == "g/index.html" else "/jlpt-n1/"
+                if destination.path != expected or destination.scheme or destination.netloc or not (ROOT / expected.lstrip("/") / "index.html").is_file():
+                    errors.append(f"{relative}: invalid standalone study redirect")
                 continue
             if relative != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
                 errors.append(f"{page.relative_to(ROOT)}: unapproved redirect")

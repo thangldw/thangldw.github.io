@@ -54,12 +54,28 @@
         tags: [manifest.certificationCount + ' certifications', 'Exam practice', 'Local-first']
       });
     });
+    var knownPaths = new Set(catalog.projects.map(function (project) { return new URL(project.href, location.origin).pathname; }));
+    global.portfolioCertificationProjects = manifest.certifications.filter(function (entry) { return !knownPaths.has(entry.href); }).map(function (entry) {
+      var name = entry.shortName, count = entry.availableQuestionCount;
+      return {
+        id: 'cert-' + entry.id, title: name, href: entry.href,
+        description: 'Study ' + name + ' with ' + count.toLocaleString('en') + ' available practice questions.',
+        localizedDescriptions: {
+          vi: 'Ôn luyện ' + name + ' với ' + count.toLocaleString('vi') + ' câu hỏi hiện có.',
+          ja: name + 'を' + count.toLocaleString('ja') + '問の練習問題で学習。',
+          zh: '通过 ' + count.toLocaleString('zh') + ' 道练习题学习 ' + name + '。'
+        },
+        ariaLabel: 'Open ' + name, icon: 'fa-graduation-cap', accent: 'rust', status: 'Live',
+        tags: [entry.name, entry.issuer, entry.syllabusVersion], category: 'certification-study',
+        categoryLabel: 'Certification preparation', catalogGroup: 'learning', cta: 'Open'
+      };
+    });
     global.portfolioCertificationManifest = manifest;
     return catalog;
   }
 
   var catalogRequest = fetchJson('/js/projects-data.json');
-  var certificationRequest = fetchJson('/cert/certifications-manifest.json')
+  var certificationRequest = fetchJson('/assets/learning/certifications-manifest.json')
     .catch(function () { return null; });
 
   global.portfolioProjectsReady = Promise.all([catalogRequest, certificationRequest])

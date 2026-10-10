@@ -12,7 +12,7 @@ flowchart LR
     PL --> H["Portfolio home<br/>featured projects"]:::purple
     PL --> A["/apps/<br/>full catalog"]:::green
     CS["Private cert source<br/>+ question banks"]:::orange --> CB["Local production<br/>build"]:::blue
-    CB --> CA["/cert/<br/>generated app"]:::cyan
+    CB --> CA["/<test>/<br/>generated study shells"]:::cyan
     CB --> CM
     CB --> API["Cloudflare content API<br/>private banks / controlled delivery"]:::orange
     API --> CA
@@ -47,10 +47,10 @@ flowchart LR
 | `/` | Portfolio profile and selected engineering work | Root HTML plus shared project catalog |
 | `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
-| `/cert/` | Generated Certification Library | Private `thangldw/cert` source repository |
+| `/<test>/` | Generated certification study shells | Private `thangldw/cert` source repository |
 | `/jlpt-n1/`, `/pmp/` | Independent N1 skill practice and PMP study | Private cert source and controlled APIs |
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/toolbox/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
-| `/cert/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
+| `/assets/learning/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
 | `/case-studies/{flagship}/` | Recruiter-facing evidence for four flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
@@ -60,7 +60,7 @@ Every sitemap route must have canonical metadata, a meaningful description, requ
 
 `js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. Both the home page and `/apps/` wait for the same readiness promise before rendering.
 
-The loader also reads `/cert/certifications-manifest.json`. It derives the certification count, names, labels, and collection tags at runtime. Adding a certification therefore does not require manually editing the home page or application catalog.
+The loader also reads `/assets/learning/certifications-manifest.json`. It derives the certification count, names, labels, and collection tags at runtime. Adding a certification therefore does not require manually editing the home page or application catalog.
 
 The public certification manifest is an explicit metadata allowlist. It contains identity, issuer, routes, syllabus and public exam information, but not prompts, choices, answer keys, explanations, domains, glossary content, or learner data. Question banks and JLPT corpora remain in private compilation inputs and Cloudflare storage. Pages ships application shells, not banks or browser decryption keys. Anonymous sessions, quotas, issuance checks and server-side grading bound delivery; visible content remains copyable.
 
@@ -73,8 +73,8 @@ thangldw.github.io/
 ├── apps/
 │   ├── index.html
 │   ├── japan-pr-guide/       # Redirect to /japan-pr-guide/
-│   └── cert/                 # Legacy redirects to /cert/
-├── cert/                     # Generated artifact; do not hand-edit
+│   └── cert/                 # Legacy redirects to root study routes
+├── assets/learning/          # Generated shared study assets; do not hand-edit
 ├── japan-pr-guide/           # Generated Japan PR Guide app
 ├── case-studies/              # Four static flagship evidence narratives
 ├── assets/                    # Social images and local fonts
@@ -151,7 +151,7 @@ The private `thangldw/cert` repository owns certification manifests, question ba
 
 1. In the source repository, run `npm ci`, data validation, tests, and `npm run build`.
 2. Inspect `dist/client/certifications-manifest.json` and confirm it contains metadata only.
-3. Use the source release helper to synchronize `dist/client/` to `/cert/`, the standalone N1 shell to `/jlpt-n1/`, and legacy redirects. PMP has its own `/pmp/` build/release helper. Deploy the content API before publishing shells when content changes.
+3. Use the source release helper to synchronize `dist/client/` into `/assets/learning/` and root study routes, the standalone N1 shell to `/jlpt-n1/`, and legacy redirects. PMP has its own `/pmp/` build/release helper. Deploy the content API before publishing shells when content changes.
 4. Preserve required site integration layers such as analytics and shared styling when the release process applies them.
 5. Run all website quality gates.
 6. Push the source repository before the generated website artifact.
@@ -278,7 +278,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | `/` | Portfolio と featured project | Root HTML と shared project catalog |
 | `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
 | `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
-| `/cert/` | Generated Certification Library | Private `thangldw/cert` repo |
+| `/<test>/` | Generated certification study shells | Private `thangldw/cert` repo |
 | `/jlpt-n1/`, `/pmp/` | 独立した N1 skill practice と PMP study | Private cert source と controlled API |
 | Certification manifest | Public metadata と count | Cert local production build |
 | `/case-studies/{flagship}/` | 4 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
@@ -342,3 +342,7 @@ Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `
 Technical standardization is enforced by `scripts/validate_design_system.py`, also invoked by the site validator. It checks light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
 
 Official CSS entry point: `css/site-shell.css` → `css/tokens.css`. Every public route inherits this foundation; page CSS owns composition. Core token redefinition anywhere in authored `css/` is rejected by the design validation gate. See [mandatory inheritance contract](DESIGN.md#mandatory-inheritance-contract).
+
+### Unified learning catalog
+
+`/apps/` lists every certification from the public metadata manifest, retaining curated descriptions for existing projects and avoiding duplicate destinations. Certification tests use `/<slug>/`; the approved legacy `/cert/<slug>/` URLs are forwarded through the Pages 404 handler, while the `/cert` directory is removed. The migration keeps stable IDs, local progress and content API contracts intact. New releases must synchronize shared assets and every study shell from one source build.

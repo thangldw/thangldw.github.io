@@ -47,7 +47,7 @@ def audit_design_system():
     if '@import url("/css/tokens.css?' not in shell: errors.append('site-shell.css: canonical token integration missing')
     for recipe in ['--logo-mark-size','--logo-text-size',':hover:not(:disabled)',':active:not(:disabled)',':focus-visible',':disabled','prefers-reduced-motion','--control-size-touch']:
         if recipe not in shell: errors.append(f'site-shell.css: missing {recipe}')
-    for route in ['index.html','apps/index.html','cert/index.html']:
+    for route in ['index.html','apps/index.html','aws/index.html']:
         if '/css/site-shell.css?' not in (ROOT/route).read_text(): errors.append(f'{route}: missing shared shell integration')
     if 'class="support"' in (ROOT/'index.html').read_text(): errors.append('index.html: duplicate sidebar support link')
     return errors

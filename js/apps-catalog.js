@@ -11,10 +11,11 @@ const search=document.getElementById('projectSearch');
 const library=document.getElementById('catalog');
 const count=document.getElementById('projectCount');
 const buttons=[...document.querySelectorAll('[data-group]')];
-let lang='en', group='all', projects=[], status='loading';
+const initialGroup=new URLSearchParams(location.search).get('group');
+let lang='en', group=groups.includes(initialGroup)?initialGroup:'all', projects=[], status='loading';
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=value=>String(value).normalize('NFKC').toLocaleLowerCase().trim();
-const description=p=>projectTranslations[lang]?.[p.id]||p.catalogDescription||p.description;
+const description=p=>p.localizedDescriptions?.[lang] || projectTranslations[lang]?.[p.id]||p.catalogDescription||p.description;
 function syncThemeLabel(){document.getElementById('themeToggle').setAttribute('aria-label',document.documentElement.dataset.theme==='dark'?locales[lang].light:locales[lang].dark);}
 function syncLanguage(){
  const c=copy[lang],h=locales[lang]; document.documentElement.lang=lang;
@@ -53,5 +54,5 @@ library.addEventListener('click',e=>{
  if(e.target.closest('[data-retry]'))location.reload();
 });
 render();
-try{await window.portfolioProjectsReady;projects=[...window.portfolioProjects,...window.portfolioLearningCollections].sort((a,b)=>a.title.localeCompare(b.title,'en',{numeric:true,sensitivity:'base'}));status='ready';search.disabled=false;}catch{status='error';}
+try{await window.portfolioProjectsReady;if(!window.portfolioCertificationManifest)throw new Error('Learning catalog is unavailable');projects=[...window.portfolioProjects,...window.portfolioLearningCollections.filter(p=>p.id!=='certification-study'),...(window.portfolioCertificationProjects||[])].sort((a,b)=>a.title.localeCompare(b.title,'en',{numeric:true,sensitivity:'base'}));status='ready';search.disabled=false;}catch{status='error';}
 render();
