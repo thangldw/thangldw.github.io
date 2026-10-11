@@ -337,19 +337,19 @@ a { color: inherit; }
 .filing-date input { min-height: 42px; width: 100%; padding:var(--space-8) var(--space-12); border: 1px solid var(--color-text-body); border-radius: var(--radius-control); color: var(--ink); background: var(--color-canvas); }
 .filing-date small { color: var(--muted); font-size: var(--text-caption); line-height: 1.5; }
 .policy-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:var(--space-14); margin:var(--space-22) 0 var(--space-16); }
-.policy-summary article { padding:var(--space-16) var(--space-18); border: 1px solid var(--rule); border-radius: var(--radius-control); background: white; }
+.policy-summary article { padding:var(--space-16) var(--space-18); border: 1px solid var(--rule); border-radius: var(--radius-control); background: var(--color-surface-raised); }
 .policy-summary article > span { display: block; color: var(--muted); font-size: var(--text-caption); font-weight: var(--weight-bold); letter-spacing: .05em; }
 .policy-summary strong { display: block; margin:var(--space-9) 0 var(--space-6); font-size: var(--text-heading); color: var(--teal-dark); letter-spacing: -.035em; }
 .policy-summary p { margin:0 0 var(--space-10); font-size: var(--text-caption); line-height: 1.5; }
 .policy-summary a, .update-grid a, .filing-notes a { color: var(--teal-dark); font-size: var(--text-caption); line-height: 1.6; text-underline-offset: 3px; }
 .policy-summary a { display: inline-flex; align-items: center; gap:var(--space-4); }
-.official-updates { scroll-margin-top:var(--space-12); border: 1px solid var(--color-text-body); border-radius: var(--radius-control); background: white; }
+.official-updates { scroll-margin-top:var(--space-12); border: 1px solid var(--color-text-body); border-radius: var(--radius-control); background: var(--color-surface-raised); }
 .official-updates summary { padding:var(--space-14) var(--space-18); cursor: pointer; font-size: var(--text-caption); font-weight: var(--weight-semibold); }
 .official-updates summary span { margin-left:var(--space-10); color: var(--muted); font-size: var(--text-caption); font-weight: var(--weight-regular); }
 .official-updates summary:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
 .source-controls { display: flex; gap:var(--space-8); padding:var(--space-2) var(--space-18) var(--space-14); }
-.source-controls button { min-height: 40px; padding:var(--space-8) var(--space-16); border: 1px solid var(--rule); border-radius: var(--radius-control); background: white; color: var(--ink); cursor: pointer; font-size: var(--text-caption); }
-.source-controls button[aria-pressed="true"] { color: white; background: var(--teal-dark); border-color: var(--teal-dark); }
+.source-controls button { min-height: 40px; padding:var(--space-8) var(--space-16); border: 1px solid var(--rule); border-radius: var(--radius-control); background: var(--color-surface-raised); color: var(--ink); cursor: pointer; font-size: var(--text-caption); }
+.source-controls button[aria-pressed="true"] { color: var(--color-on-accent); background: var(--teal-dark); border-color: var(--teal-dark); }
 .update-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:var(--space-14); padding:0 var(--space-18); }
 .update-grid article { padding:var(--space-18); background: var(--canvas); border: 1px solid var(--soft-rule); border-radius: var(--radius-control); overflow-wrap: anywhere; }
 .update-meta { display: flex; flex-wrap: wrap; gap:var(--space-7) var(--space-12); font-size: var(--text-caption); color: var(--muted); }
@@ -361,7 +361,7 @@ a { color: inherit; }
 .filing-notes { max-width: 1150px; margin:var(--space-24) auto 0; padding:var(--space-20) var(--space-24); border: 1px solid var(--color-text-body); border-radius: var(--radius-control); background: var(--teal-soft); }
 .filing-notes > strong { font-size: var(--text-body); }
 .filing-notes p { margin:var(--space-9) 0; font-size: var(--text-caption); line-height: 1.7; }
-.transition-note { padding:var(--space-10); background: white; border-left: 3px solid var(--warning); }
+.transition-note { padding:var(--space-10); background: var(--color-surface-raised); border-left: 3px solid var(--warning); }
 @media (max-width: 800px) {
   .policy-overview { padding:var(--space-22) var(--space-20); }
   .policy-heading { flex-direction: column; align-items: stretch; gap:var(--space-18); }
