@@ -306,3 +306,9 @@ html:root .certification-hub .hub-theme-toggle:disabled{opacity:var(--disabled-o
 .apps-group-nav button:disabled { opacity: .6; cursor: default; }
 .apps-group-nav button:focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
 .apps-group-nav button:active:not(:disabled){background:var(--color-control-active)}
+
+/* Vietnamese headings keep text optical metrics and open spacing for diacritics. */
+:lang(vi) :is(h1,h2,h3,h4,h5,h6) {
+  font-optical-sizing: none;
+  letter-spacing: normal;
+}
