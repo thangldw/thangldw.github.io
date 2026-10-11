@@ -80,6 +80,13 @@ const iconByFactor = {
 };
 
 export function CalculatorHeader() {
+  const [themeIcon, setThemeIcon] = useState("☾");
+  const syncThemeIcon = () => setThemeIcon(document.documentElement.dataset.theme === "dark" ? "☀" : "☾");
+  useEffect(() => {
+    syncThemeIcon();
+    document.addEventListener("themechange", syncThemeIcon);
+    return () => document.removeEventListener("themechange", syncThemeIcon);
+  }, []);
   return (
     <header className="app-header">
       <div className="app-owner-group"><a className="site-brand app-owner-brand" href="/" aria-label="Trang chủ Thang Luu"><span className="site-brand-mark" aria-hidden="true">t:&gt;</span><span aria-hidden="true">thang<span className="site-brand-dot">.</span></span></a>
@@ -88,6 +95,7 @@ export function CalculatorHeader() {
       </a></div>
       <div className="header-actions">
         <a href="#official-updates">Official sources <ArrowSquareOut size={15} /></a>
+        <button id="themeToggle" className="ui-icon-button" type="button" aria-label="Switch to dark theme" onClick={syncThemeIcon}>{themeIcon}</button>
       </div>
     </header>
   );
@@ -231,14 +239,14 @@ export function ScoreInspector({ onContinue, result }) {
   return (
     <aside className="score-inspector">
       <div className="score-inspector-inner">
-        <h2>Your estimated HSP score</h2><p>Điểm HSP ước tính hiện tại</p>
+        <div className="score-summary-title"><h2>Your estimated HSP score</h2><p>Example profile · update with your own details</p></div>
         <div className="live-score"><strong data-live-score>{result.score}</strong><span> points</span></div>
         <div className="threshold-line"><span style={{ width: `${Math.min(result.score, 100)}%` }} /><i style={{ left: `${Math.min(result.score, 100)}%` }} /><b className="at-70">70</b><b className="at-80">80</b></div>
         <div className="threshold-copy"><span><strong>70 points</strong><small>3-year route</small></span><span><strong>80 points</strong><small>1-year route</small></span></div>
         <div className={`route-callout ${result.route || "none"}`}><strong>{copy.en}</strong><span>{copy.vi}</span></div>
         {result.warnings.length ? <ul className="score-warnings">{result.warnings.map((warning) => <li key={warning}>{warningCopy[warning] || "Review this scoring dependency."}</li>)}</ul> : null}
-        <p className="guidance-note"><Info size={18} />Point thresholds open a potential assessment route; they do not determine PR eligibility.</p>
-        <button className="primary-button" onClick={onContinue} type="button">Review score claims <ArrowRight size={18} /></button>
+        <div className="proof-summary"><strong>Proof review</strong><span>Not started</span><small>Review claims and prepare documents in the next step.</small></div><p className="guidance-note"><Info size={18} />Point thresholds open a potential assessment route; they do not determine PR eligibility.</p>
+        <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Review score claims <ArrowRight size={18} /></button>
       </div>
     </aside>
   );
@@ -272,7 +280,7 @@ export function ClaimsScreen({ activity, factors, onBack, onContinue, onTogglePr
           </div>
         ))}
       </section>
-      <div className="screen-actions"><button className="secondary-button" onClick={onBack} type="button"><ArrowLeft size={18} />Edit calculator</button><button className="primary-button" disabled={!result.route} onClick={onContinue} type="button">Continue to historical score <ArrowRight size={18} /></button></div>
+      <div className="screen-actions"><button className="ui-button secondary-button" onClick={onBack} type="button"><ArrowLeft size={18} />Edit calculator</button><button className="ui-button ui-button-primary primary-button" disabled={!result.route} onClick={onContinue} type="button">Continue to historical score <ArrowRight size={18} /></button></div>
     </section>
   );
 }
@@ -309,7 +317,7 @@ export function HistoricalScreen({
   reference,
 }) {
   if (!reference || !historicalResult) {
-    return <section className="historical-empty"><h1>Historical verification starts after you reach 70 points</h1><p>Return to the calculator and review the scoring items.</p><button className="primary-button" onClick={onBack} type="button">Back to score claims</button></section>;
+    return <section className="historical-empty"><h1>Historical verification starts after you reach 70 points</h1><p>Return to the calculator and review the scoring items.</p><button className="ui-button ui-button-primary primary-button" onClick={onBack} type="button">Back to score claims</button></section>;
   }
   const currentRows = pointRows(activity, currentFactors, currentResult);
   const historicalRows = pointRows(activity, historicalFactors, historicalResult);
@@ -354,7 +362,7 @@ export function HistoricalScreen({
           </div>
           <div className={meetsThreshold ? "history-result success" : "history-result warning"}><Info size={18} /><span>Your historical score is mathematically <strong>{historicalResult.score}</strong>. {meetsThreshold ? `It meets the ${reference.threshold}-point checkpoint; confirm supporting evidence next.` : `It is below the ${reference.threshold}-point checkpoint.`}</span></div>
         </section>
-        <div className="historical-rail"><RouteChecklist coverage={coverage} historicalResult={historicalResult} meetsThreshold={meetsThreshold} reference={reference} route={currentResult.route} /><button className="primary-button" onClick={onContinue} type="button">Confirm historical evidence <ArrowRight size={18} /></button><button className="secondary-button" onClick={onBack} type="button">Back to score claims</button></div>
+        <div className="historical-rail"><RouteChecklist coverage={coverage} historicalResult={historicalResult} meetsThreshold={meetsThreshold} reference={reference} route={currentResult.route} /><button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Confirm historical evidence <ArrowRight size={18} /></button><button className="ui-button secondary-button" onClick={onBack} type="button">Back to score claims</button></div>
       </div>
     </section>
   );
@@ -394,7 +402,7 @@ export function RequirementsScreen({ confirmations, onBack, onContinue, onToggle
       <div className="check-heading"><div><h1>PR requirements</h1><p>Yêu cầu vĩnh trú</p></div><div><strong>{confirmedCount} of {prRequirements.length} confirmed</strong><span>{routeCopy(result).en}</span></div></div>
       <p className="check-intro">Confirm the non-score conditions that apply to your route. This is a planning self-check, not a legal determination.</p>
       <div className="requirements-list">{prRequirements.map(([id, label, vi]) => <label key={id}><input checked={Boolean(confirmations[id])} onChange={() => onToggle(id)} type="checkbox" /><span><strong>{label}</strong><small>{vi}</small></span></label>)}</div>
-      <div className="screen-actions"><a href="https://www.moj.go.jp/isa/applications/resources/nyukan_nyukan50.html" target="_blank" rel="noreferrer">Read the MOJ PR guideline · before Apr 2027 <ArrowSquareOut size={14} /></a><button className="primary-button" onClick={onContinue} type="button">Continue to application plan <ArrowRight size={18} /></button></div>
+      <div className="screen-actions"><a href="https://www.moj.go.jp/isa/applications/resources/nyukan_nyukan50.html" target="_blank" rel="noreferrer">Read the MOJ PR guideline · before Apr 2027 <ArrowSquareOut size={14} /></a><button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Continue to application plan <ArrowRight size={18} /></button></div>
     </section>
   );
 }

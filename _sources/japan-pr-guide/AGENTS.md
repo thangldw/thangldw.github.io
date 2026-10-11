@@ -21,3 +21,6 @@ When implementing from a selected generated mock, treat that image as the source
 - Do not add unsupported legal claims. Every route label must say potential route or assessment path until PR requirements are confirmed.
 
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.
+
+## Selected 2026-10-11 preview
+The user selected displayed option 2: horizontal five-step timeline, full-width scoring table and horizontal estimated-score summary. Shared portfolio tokens supersede the old route palette. Scoring and proof semantics remain unchanged.

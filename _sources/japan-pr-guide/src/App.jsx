@@ -138,6 +138,10 @@ export function App() {
 
       {currentStep === 1 ? (
         <section className="calculator-layout workflow-content">
+          <ScoreInspector
+            onContinue={() => navigateToStep(2)}
+            result={currentResult}
+          />
           <div className="calculator-main">
             <ActivityCards selected={activity} onSelect={changeActivity} />
             <FactorTable
@@ -148,10 +152,7 @@ export function App() {
               result={currentResult}
             />
           </div>
-          <ScoreInspector
-            onContinue={() => navigateToStep(2)}
-            result={currentResult}
-          />
+
         </section>
       ) : null}
 

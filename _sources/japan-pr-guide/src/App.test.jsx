@@ -122,6 +122,7 @@ describe("Japan PR Guide route-specific assessment", () => {
   it("switches filing rules and historical dates together without changing HSP mathematics", async () => {
     const user = userEvent.setup();
     render(<App />);
+    await user.click(screen.getByText("Filing-date guidance · dated source review"));
     expect(screen.getByText("¥200,000")).toBeVisible();
     const date = screen.getByLabelText("Planned filing date");
     await user.clear(date);
