@@ -312,3 +312,14 @@ html:root .certification-hub .hub-theme-toggle:disabled{opacity:var(--disabled-o
   font-optical-sizing: none;
   letter-spacing: normal;
 }
+
+/* Reusable primary and selected button variants for product introductions. */
+.ui-button.ui-button-primary{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-on-accent)}
+.ui-button.ui-button-primary:hover:not(:disabled){background:var(--color-text-strong);border-color:var(--color-text-strong);color:var(--color-canvas)}
+.ui-button.ui-button-primary:active:not(:disabled){background:var(--color-accent);color:var(--color-on-accent)}
+.ui-button[aria-pressed="true"]{background:var(--color-accent-soft);border-color:var(--color-accent);color:var(--color-accent);font-weight:var(--weight-semibold)}
+
+/* Match the shared control recipe's specificity when reducing motion. */
+@media(prefers-reduced-motion:reduce){
+ :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button){transition:none;transform:none}
+}
