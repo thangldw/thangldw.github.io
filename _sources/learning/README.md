@@ -4,7 +4,11 @@ Production route: https://thangldw.github.io/learning/
 
 ## Build
 
-Run `npm ci`, `npm run build:pages`, `node --test tests/bank-session.test.mjs tests/session-isolation.test.mjs`, and `npm run test:sites`. Copy `dist/client/` to the repository `learning/` directory, excluding mirrored `css/`, `js/` and `assets/fonts/`. The production shell loads official root `/css/site-shell.css` and `/js/site-shell.js` directly. Route CSS owns content layout only. Local development uses `npm run dev -- --host 127.0.0.1 --port 8797 --strictPort`.
+Run `npm ci`, `npm run build:pages`, `node --test tests/bank-session.test.mjs tests/session-isolation.test.mjs`, and `npm run test:sites`.
+
+`dist/pages/learning/` is the introductory directory and shared app asset owner. `dist/pages/<slug>/index.html` is a fixed-certification quick-practice workspace. Keep the dedicated PMP workspace unchanged. Before the first migration of a root certification entry, preserve its old index as `<slug>/classic.html`; subsequent releases must retain that file and existing legacy assets. Deploy only generated root index files and the learning/ directory, excluding mirrored learning/css/, learning/js/ and learning/assets/fonts/.
+
+Production loads official root `/css/site-shell.css` and `/js/site-shell.js`. Route CSS owns content layout and extends the canonical Vietnamese optical-metrics rule. Local development uses `npm run dev -- --host 127.0.0.1 --port 8797 --strictPort`.
 
 ## Scope and boundaries
 

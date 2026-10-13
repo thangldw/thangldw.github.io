@@ -78,7 +78,7 @@ Object.assign(jlpt, {
  takeaway:['必ずしも〜ない: một nhận định không đúng trong mọi trường hợp.','全く〜ない: phủ định hoàn toàn trong ngữ cảnh đang nói.','Đọc cả câu trước khi xác định điều gì bị phủ định.'],
  prerequisite:'Dạng phủ định cơ bản, ngữ cảnh và các từ như 全部・いつも.',
  scopeRows:[['Phạm vi phủ định','Điều gì bị phủ định?','Không phải tất cả ≠ không có gì','Có bài học'],['Ý định người nói','Khẳng định và ngoại lệ','Giới hạn ≠ bác bỏ toàn bộ','Chỉ có đề mục'],['Liên kết câu','Tương phản và lý do','Đọc vượt ra ngoài một từ khóa','Chỉ có đề mục']],
- recallTitle:'Nhớ ý nghĩa, không chỉ nhớ mẫu câu.',recallPrompt:'Giải thích sự khác biệt giữa 「全部が正しいわけではない」 và 「全部が間違っている」. Sau đó viết một câu tiếng Nhật với 必ずしも〜ない và giải thích ý bạn muốn diễn đạt.',
+ recallTitle:'Nhớ ý nghĩa, không chỉ nhớ mẫu câu.',recallPrompt:'Giải thích sự khác biệt giữa 「全部が正しいわけではない」 và 「全部が間違っている」. Sau đó thử nghĩ một câu tiếng Nhật với 必ずしも〜ない và ý bạn muốn diễn đạt.',
  hint:'Phủ định “tất cả đều đúng” vẫn cho phép một phần đúng. Không thể suy ra tất cả đều sai. Mở gợi ý sẽ đánh dấu phần nhớ lại là có hỗ trợ.',
  applyTitle:'Đọc đúng ý nghĩa muốn diễn đạt.',scope:'Một bài về phạm vi phủ định · ngữ pháp và đoạn đọc ngắn',retry:'Ôn lại phạm vi phủ định. Chú ý 全部 và ý giới hạn của 必ずしも trước khi thử lại.',
 });

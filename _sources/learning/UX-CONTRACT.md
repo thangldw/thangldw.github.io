@@ -6,7 +6,7 @@ Authoritative context: current cert AGENTS.md, UX-CONTRACT.md, source storage.js
 |---|---|---|---|---|
 | Select/Listbox | Native labeled select | Course profile registry | Switch course without replacing saved sessions | Browser switch and isolated-storage tests |
 | Navigation | App shared dispatcher | Selected mockup and requested flow | Prototype destinations only | Browser flow |
-| Form | Recall form | Self-assessment contract | Native labeled textarea, noValidate | Empty draft + feedback |
+| Form | Recall form | Self-assessment contract | Optional disclosed textarea, noValidate | Empty optional draft + feedback |
 | Session recovery | Mirrored cert storage.js | Existing read/write health handling | Namespaced adapter, prototype property only | Reload/resume |
 | Feedback | Shared feedback region | Separate recall and practice | Reference answer/self-rating; authored MCQ scoring | Browser wrong/right |
 | Dialog | Native HTML dialog | Preserve unfinished session | Cancel/Escape + explicit replace | Browser cancel |
@@ -24,3 +24,11 @@ JLPT study groups are not official test-section weights. Japanese prompts, choic
 The new Luyện câu hỏi destination consumes the existing jlpt-app/api.js client mirrored in src/bank-api/api.js. Its production Worker already allows local origins on8797. No new allowed origin, proxy, keys, published prompt packs or answer prefetch. Use the existing createPracticePlan owner for random mixed bounded sessions. Index metadata is held in memory; prompts are requested one at a time. /feedback performs canonical server scoring and returns feedback only after the user requests a check. Custom response UI adapts canonical QuestionResponse labels into Vietnamese without changing scoring semantics.
 
 Persist only queue IDs, cursor, learner responses, result labels and completion state under a dedicated bank namespace via canonical storage.js. Never persist protected prompts, answers, explanations, references, session token or media URL. Resume reissues prompts; feedback is fetched again only upon explicit check. Changing bank certification preserves its saved session. A new session is offered only after completion. Empty banks cannot start; PMP stays in its dedicated workspace. Unsupported source modes link to the original workspace and can be skipped without a result. Self-check results do not count as objective correct/wrong. No simulated full-exam or pass claims.
+
+## Study modes
+
+Default destination is Luyện đề nhanh (existing bank planner and server grading). Học để nhớ owns Understand → optional written Recall → Apply → Review. Blank recall may reveal reference guidance; self-rating remains separate from objective scoring. Source written exam questions remain required according to their own response contract. Existing drafts and session namespaces are preserved.
+
+## Independent certification workspaces
+
+Learning is a directory. Native links open /<catalog slug>/ in this preview; the certification is fixed by the URL and its header. No certification dropdown. Default workspace view is quick practice. Guided lessons exist only for AWS and JLPT; other certificates show explicit unavailable lesson states. Persisted bank sessions stay isolated by canonical cert ID. Existing production certification routes are not changed by the preview.

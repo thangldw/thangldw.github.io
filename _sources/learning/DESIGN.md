@@ -54,3 +54,11 @@ The interface is Vietnamese only; there is no UI language selector. Header brand
 ## Connected practice
 
 Luyện câu hỏi reuses the shared Button, canonical native select and shell controls. It is a focused reader/scoring surface: no mascot overlays, corpus graphics or invented progress metrics. The header names Ngân hàng câu hỏi rather than showing a competing lesson selector. Choose the certification once in the practice setup. The controlled catalog is metadata-only; question text remains in its original language and support is optional.
+
+## Study mode navigation
+
+Luyện đề nhanh is the default and first destination. Học để nhớ groups guided learning, recall and apply. Recall writing is an optional disclosure; mental recall can reveal guidance with no input. Shared palette, typography, logo and Button owner remain unchanged.
+
+## Independent certification workspaces
+
+Learning is a directory. Native links open /<catalog slug>/ in this preview; the certification is fixed by the URL and its header. No certification dropdown. Default workspace view is quick practice. Guided lessons exist only for AWS and JLPT; other certificates show explicit unavailable lesson states. Persisted bank sessions stay isolated by canonical cert ID. Existing production certification routes are not changed by the preview.
