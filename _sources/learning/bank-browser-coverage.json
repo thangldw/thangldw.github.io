@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-13",
+  "scope": "Local preview; five-question browser session per remaining bank",
+  "results": [
+    {
+      "id": "g",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "fp3",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "bjt",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "sg",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "toeic",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "gh-300",
+      "questions": 5,
+      "multiple": 1,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "ccar-f",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "fp2",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "fe",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "tokei-2",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "nw",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "sc",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "db",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "boki1",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "boki2",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "boki3",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "aws-aip-c01",
+      "questions": 5,
+      "multiple": 3,
+      "feedback": 5,
+      "completed": true
+    },
+    {
+      "id": "aws-dea-c01",
+      "questions": 5,
+      "multiple": 0,
+      "feedback": 5,
+      "completed": true
+    }
+  ],
+  "regression": {
+    "scoredResponseLockedAfterResume": true,
+    "scoredResponseLockedAfterReload": true,
+    "nextUnansweredEditable": true,
+    "retainedSelection": true
+  },
+  "mobile": {
+    "width": 390,
+    "overflow": false
+  },
+  "emptyHSKDisabled": true,
+  "pmpDedicated": true
+}

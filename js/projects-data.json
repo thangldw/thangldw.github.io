@@ -357,6 +357,32 @@
       "featured": true,
       "featuredOrder": 12,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "learning",
+      "title": "Learning",
+      "description": "A Vietnamese study workspace with guided AWS and Japanese lessons, certification question practice, explanations and browser-saved progress.",
+      "catalogDescription": "Guided lessons and certification practice with a robot study companion.",
+      "localizedDescriptions": {
+        "vi": "Không gian học cùng robot: bài học ngắn, luyện câu hỏi chứng chỉ, lời giải và tiến độ lưu trong trình duyệt.",
+        "ja": "ロボットと学ぶベトナム語の学習スペース。短いレッスン、資格問題の練習、解説、学習進捗。",
+        "zh": "越南语学习空间，包含机器人学习伙伴、短课程、认证练习题、解析和浏览器保存的学习进度。"
+      },
+      "href": "/learning/",
+      "ariaLabel": "Open Learning",
+      "icon": "fa-book-open",
+      "accent": "green",
+      "status": "Live",
+      "tags": [
+        "Certification practice",
+        "Vietnamese",
+        "Study companion"
+      ],
+      "category": "learning",
+      "categoryLabel": "Certification learning",
+      "cta": "Open Learning",
+      "featured": false,
+      "catalogGroup": "learning"
     }
   ],
   "languageCollection": {
