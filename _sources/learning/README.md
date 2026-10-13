@@ -17,3 +17,9 @@ Vietnamese navigation and guidance; source-language questions remain unchanged. 
 Only question IDs, learner responses, position and result labels are persisted. Protected prompts, answer keys, explanations, rubric and tokens remain in memory. Canonical planning/storage/scoring owners are reused; no source-bank or API changes. Existing certification routes remain available.
 
 18 additional five-question browser sessions completed (90 sampled questions), plus prior AWS/JLPT/AP checks. See bank-browser-coverage.json. Numeric/ordered/matching formats lack live source records and are not claimed verified. Theme control is bound by the canonical site-shell MutationObserver; the static auditor incorrectly flags its lack of inline onClick. Runtime theme verification is required on release.
+
+## Practice insights
+
+Today, Overview and Progress consume the same controlled index metadata and namespaced learner practice progress. History stores only the latest result, attempt count and session identity per stable question ID. Feedback reload does not add attempts; new queues preserve recorded history. Legacy migration recovers only the queue still stored, without inventing earlier attempts. Guided lesson demonstration results are excluded.
+
+Index metadata is shared in bounded memory for five minutes, including in-flight requests; failed loads are evicted. Protected prompts, feedback and tokens are never persisted in that cache or learner storage. PMP remains in its dedicated workspace; HSK shows an empty-bank state.

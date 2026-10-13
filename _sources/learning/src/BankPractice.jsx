@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {ArrowRight,BookOpen,Info,CheckCircle} from '@phosphor-icons/react';
 import catalog from './bank-api/catalog.json';
 import {content} from './bank-api/api.js';
+import {loadBankIndex} from './bank-api/index.js';
 import {Button} from './Button.jsx';
 import {createPracticePlan} from './engine/exam-session.js';
 import {parseRichBlocks} from './engine/question-content.js';
@@ -14,23 +15,24 @@ const label=c=>typeof c==='string'?c:c?.text||c?.label||'';
 function markedText(value,term){if(!term||value.split(term).length!==2)return value;const [before,after]=value.split(term);return <>{before}<u className="question-target">{term}</u>{after}</>}
 
 function RichText({value,lang,underlineTerm}){return <div lang={lang}>{parseRichBlocks(value).map((block,i)=>block.type==='table'?<div className="comparison-wrap" key={i}><table><thead><tr>{block.headers.map((h,j)=><th key={j}>{h}</th>)}</tr></thead><tbody>{block.rows.map((row,j)=><tr key={j}>{row.map((c,k)=><td key={k}>{c}</td>)}</tr>)}</tbody></table></div>:<p key={i} className={lang?.startsWith('ja')?'japanese-text':undefined}>{markedText(block.text,underlineTerm)}</p>)}</div>}
-export function BankPractice({certId}){
+export function BankPractice({certId,initialSection='',resumeOnOpen=false,newSessionOnOpen=false}){
  if(!['http://localhost:8797','http://127.0.0.1:8797','https://thangldw.github.io'].includes(window.location.origin))return <section className="study-page"><h1>Luyện đề nhanh</h1><p>Mở bản đã kết nối ngân hàng câu hỏi để bắt đầu luyện và xem lời giải.</p><a className="ui-button" href="http://localhost:8797/">Mở bản đã kết nối</a></section>;
- return <BankSession key={certId} certId={certId}/>;
+ return <BankSession key={certId} certId={certId} initialSection={initialSection} resumeOnOpen={resumeOnOpen} newSessionOnOpen={newSessionOnOpen}/>;
 }
-function BankSession({certId}){
- const [initial]=useState(()=>readBankSession(certId));const [session,setSession]=useState(initial.session),[saved,setSaved]=useState(initial.available);
- const [index,setIndex]=useState(null),[section,setSection]=useState(''),[size,setSize]=useState('5'),[question,setQuestion]=useState(null),[feedback,setFeedback]=useState(null),[busy,setBusy]=useState(''),[error,setError]=useState('');
- const feedbackRef=useRef(null),alive=useRef(true);const meta=catalog.certifications.find(c=>c.id===certId);
- useEffect(()=>{alive.current=true;let current=true;setBusy('index');content('/index',{certId}).then(d=>{if(current)setIndex(d)}).catch(e=>{if(current)setError(e.message)}).finally(()=>{if(current)setBusy('')});return()=>{current=false;alive.current=false}},[certId]);
+function BankSession({certId,initialSection,resumeOnOpen,newSessionOnOpen}){
+ const [initial]=useState(()=>{const saved=readBankSession(certId);return newSessionOnOpen&&saved.session.finished?{...saved,session:empty()}:saved});const [session,setSession]=useState(initial.session),[saved,setSaved]=useState(initial.available);
+ const [index,setIndex]=useState(null),[section,setSection]=useState(initialSection),[size,setSize]=useState('5'),[question,setQuestion]=useState(null),[feedback,setFeedback]=useState(null),[busy,setBusy]=useState(''),[error,setError]=useState('');
+ const feedbackRef=useRef(null),alive=useRef(true),resumeRequested=useRef(false);const meta=catalog.certifications.find(c=>c.id===certId);
+ useEffect(()=>{alive.current=true;let current=true;setBusy('index');loadBankIndex(certId).then(d=>{if(current)setIndex(d)}).catch(e=>{if(current)setError(e.message)}).finally(()=>{if(current)setBusy('')});return()=>{current=false;alive.current=false}},[certId]);
  useEffect(()=>{const r=writeBankSession(certId,session);setSaved(r.ok)},[session,certId]);
+ useEffect(()=>{if(index&&resumeOnOpen&&!resumeRequested.current&&session.ids.length&&!session.finished){resumeRequested.current=true;fetchPrompt(session.ids,session.position)}},[index,resumeOnOpen]);
  function update(p){setSession(s=>({...s,...p}))}
  async function fetchPrompt(ids,position){setBusy('prompt');setError('');try{const records=await content('/prompts',{certId,ids:[ids[position]]});if(!alive.current)return false;if(!records?.[0])throw Error('Không tìm thấy câu hỏi.');setQuestion(records[0]);setFeedback(null);return true}catch(e){if(alive.current)setError(e.message);return false}finally{if(alive.current)setBusy('')}}
  async function start(){
   const scoped=(index?.questions||[]).filter(q=>!section||(q.sectionId||q.section)===section);
   const plan=createPracticePlan({id:certId,questions:scoped},{},{strategy:'mixed',questionCount:Number(size),sessionMode:'study'});
   if(!plan.questionIds.length){setError('Chưa có câu hỏi trong phạm vi này.');return}
-  if(await fetchPrompt(plan.questionIds,0))setSession({...empty(),ids:plan.questionIds});
+  if(await fetchPrompt(plan.questionIds,0))setSession({...empty(),ids:plan.questionIds,sessionId:crypto.randomUUID()});
  }
  async function resume(){await fetchPrompt(session.ids,session.position)}
  async function check(){

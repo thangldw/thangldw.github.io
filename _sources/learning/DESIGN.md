@@ -57,8 +57,16 @@ Luyện câu hỏi reuses the shared Button, canonical native select and shell c
 
 ## Study mode navigation
 
-Luyện đề nhanh is the default and first destination. Học để nhớ groups guided learning, recall and apply. Recall writing is an optional disclosure; mental recall can reveal guidance with no input. Shared palette, typography, logo and Button owner remain unchanged.
+Luyện đề nhanh is the default destination. Học để nhớ groups guided learning, recall and apply. Recall writing is an optional disclosure; mental recall can reveal guidance with no input. Shared palette, typography, logo and Button owner remain unchanged.
 
 ## Independent certification workspaces
 
 Learning is a directory. Native links open /<catalog slug>/ in this preview; the certification is fixed by the URL and its header. No certification dropdown. Default workspace view is quick practice. Guided lessons exist only for AWS and JLPT; other certificates show explicit unavailable lesson states. Persisted bank sessions stay isolated by canonical cert ID. Existing production certification routes are not changed by the preview.
+
+Navigation order: Hôm nay → Tổng quan → Học để nhớ → Luyện đề nhanh → Kiểm tra tiến độ. Default view remains quick practice; menu order is independent of the initial destination.
+
+## Source-backed practice insights
+
+All certification workspaces share LearningNavigation and BankInsights. Today derives next actions from the saved bank queue; Overview and Progress use controlled API index metadata joined by stable question ID to local practice result metadata. Bank session storage owns an additive practiceProgress projection (latest result, attempt count, last session identity); reloading feedback is idempotent and queue reset preserves history. Legacy results backfill only the queue still stored, with no invented timestamps or prior attempts. Written self-check remains separate from objective results. Guided lesson demo state never contributes to practice statistics. API prompts, explanations, keys and tokens remain excluded from persistence.
+
+Bank index metadata is shared only in bounded memory for five minutes, including in-flight deduplication; errors are evicted and are retryable. This avoids quota-consuming requests on each navigation and does not cache protected prompts or feedback. Today starts a new setup only for an already completed queue; history persists. Empty banks cannot start.
