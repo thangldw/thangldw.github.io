@@ -14,7 +14,7 @@ The website has one durable catalog source, `js/projects-data.json`, loaded by b
 - Proofline is shown as `v0.14.17` instead of `v2.0.2`.
 - KakeFlow is shown as `v1.2.0` instead of `v1.2.1`.
 - Awesome Maintainer Defense is shown as `v1.0` instead of `v1.1.1`.
-- Diskora and Changeora remain separate entries even though Toolbox `v2.0.0` is now the maintained product.
+- Diskora and Changeora remain separate entries even though Macinity `v2.0.0` is now the maintained product.
 
 The site has no case-study route. Homepage cards and catalog cards both currently resolve through the same `href`, so changing that field to a case-study URL would remove the direct product destination from `/apps/`.
 
@@ -53,9 +53,9 @@ Update the existing catalog as follows:
 | Proofline | `v2.0.2` | `https://github.com/thangldw/proofline` |
 | KakeFlow | `v1.2.1` | `https://thangldw.github.io/kakeflow/` |
 | Awesome Maintainer Defense | `v1.1.1` | `https://github.com/thangldw/awesome-maintainer-defense` |
-| Toolbox | `v2.0.0` | `https://github.com/thangldw/toolbox/releases/tag/v2.0.0` |
+| Macinity | `v2.0.0` | `https://github.com/thangldw/macinity/releases/tag/v2.0.0` |
 
-Remove the separate Diskora and Changeora catalog entries and replace them with one Toolbox entry. This changes only portfolio presentation; it does not remove historical repositories, releases, or files.
+Remove the separate Diskora and Changeora catalog entries and replace them with one Macinity entry. This changes only portfolio presentation; it does not remove historical repositories, releases, or files.
 
 ## Case-study information architecture
 
@@ -143,7 +143,7 @@ Extend the existing static validator and browser smoke coverage rather than addi
 Static validation must prove:
 
 - the catalog contains the corrected project set and versions;
-- Diskora and Changeora are absent and Toolbox is present once;
+- Diskora and Changeora are absent and Macinity is present once;
 - every `caseStudyHref` resolves locally;
 - every case study has one canonical URL, valid description, required Open Graph fields, one analytics reference, and no broken local references;
 - every case study contains the six required section identifiers;
@@ -172,14 +172,14 @@ After merge, wait for GitHub Pages to build the exact commit, allow CDN propagat
 - Recording or publishing the RagOps and Proofline demo videos.
 - Selecting or running a public non-synthetic evaluation dataset.
 - Claiming a consented production pilot.
-- Modifying the RAGOps, Proofline, KakeFlow, Toolbox, Awesome Maintainer Defense, or Certification Library source repositories.
+- Modifying the RAGOps, Proofline, KakeFlow, Macinity, Awesome Maintainer Defense, or Certification Library source repositories.
 - Editing generated files under `apps/cert/`.
 - Adding a CMS, templating engine, package build, backend, contact form, analytics provider, or new project.
 
 ## Acceptance criteria
 
 - Homepage clicks for the four flagships open their case studies; `/apps/` retains direct project destinations.
-- Catalog versions match the selected released versions and Toolbox replaces Diskora and Changeora.
+- Catalog versions match the selected released versions and Macinity replaces Diskora and Changeora.
 - Each case study answers all six recruiter questions in English and exposes its evidence type and limitations within two minutes of reading.
 - The Certification Library case study is useful without exposing protected content or implying server-side access control.
 - Static audits, site validation, and certification browser smoke pass from a clean checkout.

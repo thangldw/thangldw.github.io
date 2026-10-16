@@ -1,6 +1,6 @@
 # Portfolio Flagship Case Studies Implementation Plan
 
-**Goal:** Correct stale portfolio versions, replace Diskora and Changeora with Toolbox, and publish four evidence-grounded flagship case studies without changing the site's dependency-light GitHub Pages architecture.
+**Goal:** Correct stale portfolio versions, replace Diskora and Changeora with Macinity, and publish four evidence-grounded flagship case studies without changing the site's dependency-light GitHub Pages architecture.
 
 **Architecture:** Keep `js/projects-data.json` as the durable project catalog. Add optional `caseStudyHref` routing for homepage cards while `/apps/` retains direct product links. Publish four static English pages that share one stylesheet and are validated by the existing static and browser gates.
 
@@ -25,8 +25,8 @@
 - Modify: `scripts/validate_site.py`
 
 **Contracts:**
-- Catalog versions: RAGOps `v2.0.2`, Proofline `v2.0.2`, KakeFlow `v1.2.1`, Awesome Maintainer Defense `v1.1.1`, Toolbox `v2.0.0`.
-- Catalog composition: exactly one Toolbox entry; no Diskora or Changeora entries.
+- Catalog versions: RAGOps `v2.0.2`, Proofline `v2.0.2`, KakeFlow `v1.2.1`, Awesome Maintainer Defense `v1.1.1`, Macinity `v2.0.0`.
+- Catalog composition: exactly one Macinity entry; no Diskora or Changeora entries.
 - Case-study routes: four local `caseStudyHref` values that resolve to HTML pages.
 - Page structure: six stable section IDs per route.
 - Privacy: Certification Library case study contains no private repository URL or protected-content field names.
@@ -52,7 +52,7 @@
 - Spotlight destination: `/case-studies/ragops/` with action label `Read case study`.
 
 - [ ] Update the selected released versions and current project descriptions.
-- [ ] Remove `diskora` and `changeora`; add one `toolbox` entry linking to `v2.0.0`.
+- [ ] Remove `diskora` and `changeora`; add one `macinity` entry linking to `v2.0.0`.
 - [ ] Add case-study links to RAGOps, Proofline, KakeFlow, and the Certification Library language collection.
 - [ ] Preserve the loader's existing required fields and accept `caseStudyHref` only as an optional string.
 - [ ] Change homepage card construction to use the case-study fallback expression.
@@ -152,7 +152,7 @@ git commit -m "test: cover flagship recruiter paths"
 - [ ] Wait for required CI at the exact PR head; resolve only in-scope failures.
 - [ ] Merge after green CI, then wait for GitHub Pages to report `built` for the exact merged SHA.
 - [ ] Allow CDN propagation and production-smoke:
-  - homepage metadata and Toolbox replacement;
+  - homepage metadata and Macinity replacement;
   - each case-study canonical route;
   - homepage case-study routing;
   - `/apps/` direct product routing;

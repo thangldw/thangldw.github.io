@@ -25,13 +25,13 @@ EXPECTED_PROJECT_VERSIONS = {
     "proofline": "v2.0.2",
     "kakeflow": "v1.2.1",
     "maintainer-defense": "v1.1.1",
-    "toolbox": "v2.0.0",
+    "macinity": "v3.1.0",
 }
 EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "ragops": 0,
     "proofline": 1,
     "kakeflow": 2,
-    "toolbox": 4,
+    "macinity": 4,
     "maintainer-defense": 5,
     "igo": 6,
     "pmp-studio": 7,
@@ -228,8 +228,8 @@ def main() -> int:
                 errors.append(
                     f"js/projects-data.json: retired project {retired_id} must be removed"
                 )
-            if sum(project_id == "toolbox" for project_id in project_by_id) != 1:
-                errors.append("js/projects-data.json: Toolbox must appear exactly once")
+            if sum(project_id == "macinity" for project_id in project_by_id) != 1:
+                errors.append("js/projects-data.json: Macinity must appear exactly once")
             for project_id, expected_href in CASE_STUDY_ROUTES.items():
                 if project_id == "certification-study":
                     continue
@@ -432,11 +432,6 @@ def main() -> int:
     for page, parser in parsed_pages.items():
         if parser.refreshes:
             relative = page.relative_to(ROOT).as_posix()
-            if relative in {"toolbox/index.html", "toolbox/guide.html", "toolbox/privacy.html"}:
-                suffix = "" if relative.endswith("index.html") else relative.split("/")[-1]
-                if parser.refreshes != ["0; url=/macinity/" + suffix]:
-                    errors.append(f"{relative}: invalid Macinity compatibility redirect")
-                continue
             if relative.startswith("apps/cert/"):
                 refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
                 target = urlsplit(refresh.removeprefix("0;url=")).path
