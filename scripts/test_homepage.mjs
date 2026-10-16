@@ -6,7 +6,8 @@ const catalog=JSON.parse(await readFile(new URL('../js/projects-data.json',impor
 const projects=sortProjects(catalog.projects.concat(catalog.learningCollections));
 assert.equal(new Set(projects.map(project=>project.id)).size,projects.length);
 assert.equal(projects[0].title,'3級FP');
-assert.equal(projects.at(-1).title,'Toolbox');
+assert.equal(projects.find(p=>p.id==='toolbox').title,'Macinity');
+assert.equal(projects.find(p=>p.id==='toolbox').status,'v3.1.0');
 assert.equal(projects.findIndex(project=>project.title==='AP') < projects.findIndex(project=>project.title==='Awesome Maintainer Defense'),true);
 for(const count of [1,2,3]) {
  let start=0;

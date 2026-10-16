@@ -72,27 +72,27 @@
     },
     {
       "id": "toolbox",
-      "title": "Toolbox",
-      "description": "A free, local-first macOS app for reclaiming disk space, understanding filesystem changes, and recovering reviewed cleanups from Trash.",
-      "featuredDescription": "One review-first macOS app for disk cleanup, filesystem change evidence, and recoverable actions.",
+      "title": "Macinity",
+      "description": "A native macOS workspace for monitoring, hardware sensors, files, applications, Wi-Fi/LAN and reviewed utility actions.",
+      "featuredDescription": "Your Mac. Everything connected: monitoring, diagnostics and everyday utilities.",
       "href": "https://thangldw.github.io/toolbox/",
-      "ariaLabel": "Open the Toolbox website",
+      "ariaLabel": "Open the Macinity website",
       "icon": "fa-cubes-stacked",
       "accent": "blue",
-      "status": "v2.0.0",
+      "status": "v3.1.0",
       "tags": [
         "macOS",
-        "Review-first",
-        "Recoverable cleanup",
+        "Monitoring",
+        "Utilities",
         "Local-first"
       ],
       "category": "developer-tools",
       "categoryLabel": "macOS utility",
-      "cta": "Explore Toolbox",
+      "cta": "Explore Macinity",
       "featured": true,
       "featuredOrder": 4,
       "catalogGroup": "utilities",
-      "catalogDescription": "Reclaim disk space and inspect filesystem changes, with review before cleanup and recovering reviewed cleanups from Trash."
+      "catalogDescription": "Monitor your Mac, inspect hardware and networks, manage files and packages, and preview Work Profiles in one local-first workspace."
     },
     {
       "id": "ragops",
