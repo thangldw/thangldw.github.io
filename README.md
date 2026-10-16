@@ -49,7 +49,7 @@ flowchart LR
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/<test>/` | Generated certification study shells | Private `thangldw/cert` source repository |
 | `/jlpt-n1/`, `/pmp/` | Independent N1 skill practice and PMP study | Private cert source and controlled APIs |
-| `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/toolbox/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
+| `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/assets/learning/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
 | `/case-studies/{flagship}/` | Recruiter-facing evidence for four flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |

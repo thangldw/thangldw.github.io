@@ -432,6 +432,11 @@ def main() -> int:
     for page, parser in parsed_pages.items():
         if parser.refreshes:
             relative = page.relative_to(ROOT).as_posix()
+            if relative in {"toolbox/index.html", "toolbox/guide.html", "toolbox/privacy.html"}:
+                suffix = "" if relative.endswith("index.html") else relative.split("/")[-1]
+                if parser.refreshes != ["0; url=/macinity/" + suffix]:
+                    errors.append(f"{relative}: invalid Macinity compatibility redirect")
+                continue
             if relative.startswith("apps/cert/"):
                 refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
                 target = urlsplit(refresh.removeprefix("0;url=")).path
