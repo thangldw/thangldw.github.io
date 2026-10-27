@@ -1,0 +1,46 @@
+{
+  "source_commit": "29ef246681d118ea6b3d07cb4b1ef89a0257da73",
+  "workflow": "name: CI\non: [pull_request]\npermissions: write-all\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0\n        with:\n          persist-credentials: false\n      - run: python -m unittest\n",
+  "report": {
+    "schema_version": 1,
+    "tool": {
+      "name": "maintainer-defense",
+      "version": "1.1.1"
+    },
+    "target": "maintainer-defense-example",
+    "summary": {
+      "total": 1,
+      "by_severity": {
+        "critical": 0,
+        "high": 1,
+        "medium": 0,
+        "low": 0,
+        "note": 0
+      }
+    },
+    "findings": [
+      {
+        "rule_id": "MD-WF-002",
+        "severity": "high",
+        "confidence": "high",
+        "location": {
+          "path": ".github/workflows/ci.yml",
+          "line": 3,
+          "column": 14
+        },
+        "message": "Workflow grants write-all token permissions.",
+        "threat_scenario": "Any compromised Action or command in this permission scope can modify repository content and other sensitive resources.",
+        "recommendation": "Replace write-all with an empty default and grant only the exact job-level write permissions required.",
+        "fingerprint": "3d08dd85699088ff9efb916b",
+        "fix": {
+          "available": true,
+          "safety": "review-required",
+          "patch": "--- a/.github/workflows/ci.yml\n+++ b/.github/workflows/ci.yml\n@@ -1,6 +1,6 @@\n name: CI\n on: [pull_request]\n-permissions: write-all\n+permissions: {}\n jobs:\n   test:\n     runs-on: ubuntu-latest\n"
+        }
+      }
+    ]
+  },
+  "patch": "--- a/.github/workflows/ci.yml\n+++ b/.github/workflows/ci.yml\n@@ -1,6 +1,6 @@\n name: CI\n on: [pull_request]\n-permissions: write-all\n+permissions: {}\n jobs:\n   test:\n     runs-on: ubuntu-latest\n",
+  "human": "1 finding · 1 high\n\nHIGH     MD-WF-002 .github/workflows/ci.yml:3:14\n  Evidence: Workflow grants write-all token permissions.\n  Risk: Any compromised Action or command in this permission scope can modify repository content and other sensitive resources.\n  Safe remediation: Replace write-all with an empty default and grant only the exact job-level write permissions required.\n  Rule: https://github.com/thangldw/awesome-maintainer-defense/blob/v1.1.1/docs/AUDITOR_RULES.md#md-wf-002\n  Patch: available (review-required)\n\n",
+  "release_verified": "v1.1.1"
+}

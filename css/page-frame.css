@@ -1,0 +1,37 @@
+/* Match top-level app content to the home page's visible content frame. */
+:root {
+  --page-frame-max-width: 1488px;
+  --page-frame-gutter: 72px;
+}
+
+body.portfolio-catalog .catalog-wrap,
+body.site-page[data-page-kind="product"] > main.shell {
+  width: min(
+    var(--page-frame-max-width),
+    calc(100% - (2 * var(--page-frame-gutter)))
+  );
+  margin-inline: auto;
+}
+
+body[data-page-kind="exam-shell"] .certification-hub {
+  padding-inline: max(
+    var(--page-frame-gutter),
+    calc((100vw - var(--page-frame-max-width)) / 2)
+  );
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --page-frame-gutter: 50px;
+  }
+
+  body[data-page-kind="exam-shell"] .hub-hero p {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 780px) {
+  :root {
+    --page-frame-gutter: 40px;
+  }
+}
