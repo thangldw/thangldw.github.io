@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Japan PR Guide — HSP-to-PR workflow</title>
+  <style>
+    :root {
+      --paper: #fbfcfd;
+      --paper-2: #f2f5f8;
+      --ink: #101b3a;
+      --muted: #647087;
+      --soft: #758197;
+      --rule: #d9dfe7;
+      --accent: #e42b10;
+      --accent-tint: #fff0ed;
+      --teal: #006b68;
+      --teal-tint: #e9f5f4;
+      --link: #0755b6;
+      --link-tint: #edf4ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 56px;
+    }
+
+    h1 {
+      margin: 0;
+      font: 400 clamp(36px, 5vw, 60px)/1 "Iowan Old Style", Georgia, serif;
+      letter-spacing: -0.02em;
+    }
+
+    .lede {
+      max-width: 760px;
+      margin: 14px 0 32px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    figure {
+      margin: 0;
+      overflow-x: auto;
+      border-block: 1px solid var(--rule);
+      background: #fff;
+    }
+
+    svg {
+      display: block;
+      min-width: 728px;
+      width: 100%;
+      height: auto;
+    }
+
+    .lane-fill { fill: var(--paper); }
+    .lane-alt { fill: var(--paper-2); }
+    .lane-rule { stroke: var(--rule); stroke-width: 1; }
+    .lane-label { font: 600 11px "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; fill: var(--soft); }
+    .lane-key { font: 600 10px "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; fill: var(--soft); }
+    .step-label { font: 600 10px "SFMono-Regular", Consolas, monospace; letter-spacing: .07em; fill: var(--soft); }
+    .step-number { font: 600 11px "SFMono-Regular", Consolas, monospace; fill: var(--soft); }
+    .node-title { font: 600 12px Inter, "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+    .node-copy { font: 400 10px Inter, "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+    .chip { font: 600 9px "SFMono-Regular", Consolas, monospace; letter-spacing: .05em; }
+    .legend { font: 500 10px Inter, "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+    .connector { fill: none; stroke: var(--muted); stroke-width: 1.5; marker-end: url(#arrow); }
+    .connector-focal-in { fill: none; stroke: var(--link); stroke-width: 2; marker-end: url(#arrow-link); }
+    .connector-focal-out { fill: none; stroke: var(--accent); stroke-width: 2; marker-end: url(#arrow-accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>From HSP score to a filing plan</h1>
+    <p class="lede">The product keeps score calculation, proof coverage, and route eligibility separate. Historical recalculation is the decision point: it applies the same MOJ engine to the route-specific checkpoint date.</p>
+
+    <figure aria-label="Japan PR Guide workflow diagram">
+      <svg viewBox="0 0 728 436" role="img" aria-labelledby="japan-pr-guide-flow-title japan-pr-guide-flow-desc">
+        <title id="japan-pr-guide-flow-title">Japan PR Guide HSP-to-PR workflow</title>
+        <desc id="japan-pr-guide-flow-desc">A five-step process across HSP score, evidence, permanent-residence checks, and filing, with historical score verification emphasized as the route decision point.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0L8 4L0 8Z" fill="#647087"/>
+          </marker>
+          <marker id="arrow-accent" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0L8 4L0 8Z" fill="#e42b10"/>
+          </marker>
+          <marker id="arrow-link" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0L8 4L0 8Z" fill="#0755b6"/>
+          </marker>
+          <marker id="arrow-sm" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M0 0L8 4L0 8Z" fill="#647087"/>
+          </marker>
+        </defs>
+
+        <rect width="728" height="436" fill="#ffffff"/>
+        <rect x="0" y="36" width="728" height="80" class="lane-fill"/>
+        <rect x="0" y="116" width="728" height="80" class="lane-alt"/>
+        <rect x="0" y="196" width="728" height="80" class="lane-fill"/>
+        <rect x="0" y="276" width="728" height="80" class="lane-alt"/>
+
+        <path d="M140 36V356M0 36H728M0 116H728M0 196H728M0 276H728M0 356H728" class="lane-rule" fill="none"/>
+
+        <text x="16" y="72" class="lane-label">HSP SCORE</text>
+        <text x="16" y="88" class="lane-key">KEY · HSP</text>
+        <text x="16" y="152" class="lane-label">EVIDENCE</text>
+        <text x="16" y="168" class="lane-key">KEY · DOC</text>
+        <text x="16" y="232" class="lane-label">PR CHECK</text>
+        <text x="16" y="248" class="lane-key">KEY · PR</text>
+        <text x="16" y="312" class="lane-label">FILING</text>
+        <text x="16" y="328" class="lane-key">KEY · APP</text>
+
+        <g aria-hidden="true">
+          <text x="198" y="14" text-anchor="middle" class="step-number">01</text>
+          <text x="198" y="29" text-anchor="middle" class="step-label">CALCULATE</text>
+          <text x="310" y="14" text-anchor="middle" class="step-number">02</text>
+          <text x="310" y="29" text-anchor="middle" class="step-label">CLAIMS</text>
+          <rect x="390" y="4" width="64" height="28" rx="4" fill="#fff0ed"/>
+          <text x="422" y="15" text-anchor="middle" class="step-number" fill="#e42b10">03</text>
+          <text x="422" y="29" text-anchor="middle" class="step-label" fill="#e42b10">HISTORY</text>
+          <text x="534" y="14" text-anchor="middle" class="step-number">04</text>
+          <text x="534" y="29" text-anchor="middle" class="step-label">PR CHECK</text>
+          <text x="646" y="14" text-anchor="middle" class="step-number">05</text>
+          <text x="646" y="29" text-anchor="middle" class="step-label">PLAN</text>
+        </g>
+
+        <path d="M248 76H302Q310 76 310 84V124" class="connector"/>
+        <path d="M360 156H414Q422 156 422 148V108" class="connector-focal-in"/>
+        <path d="M472 76H526Q534 76 534 84V204" class="connector-focal-out"/>
+        <path d="M584 236H638Q646 236 646 244V284" class="connector"/>
+
+        <g>
+          <rect x="148" y="44" width="100" height="64" rx="6" fill="#ffffff" stroke="#9aa5b5"/>
+          <text x="160" y="66" class="node-title">HSP calculator</text>
+          <text x="160" y="83" class="node-copy">Estimate score today</text>
+          <rect x="160" y="90" width="30" height="12" rx="3" fill="#e9f5f4"/>
+          <text x="175" y="99" text-anchor="middle" class="chip" fill="#006b68">TB</text>
+        </g>
+
+        <g>
+          <rect x="260" y="124" width="100" height="64" rx="6" fill="#ffffff" stroke="#9aa5b5"/>
+          <text x="272" y="146" class="node-title">Claim review</text>
+          <text x="272" y="163" class="node-copy">Link proof to claims</text>
+          <rect x="272" y="170" width="30" height="12" rx="3" fill="#e9f5f4"/>
+          <text x="287" y="179" text-anchor="middle" class="chip" fill="#006b68">TB</text>
+          <rect x="306" y="170" width="30" height="12" rx="3" fill="#edf4ff"/>
+          <text x="321" y="179" text-anchor="middle" class="chip" fill="#0755b6">FL</text>
+        </g>
+
+        <g>
+          <rect x="372" y="44" width="100" height="64" rx="6" fill="#fff0ed" stroke="#e42b10" stroke-width="2"/>
+          <text x="384" y="66" class="node-title">Historical score</text>
+          <text x="384" y="83" class="node-copy">Verify 1 / 3-year date</text>
+          <rect x="384" y="90" width="30" height="12" rx="3" fill="#edf4ff"/>
+          <text x="399" y="99" text-anchor="middle" class="chip" fill="#0755b6">FL</text>
+          <rect x="418" y="90" width="30" height="12" rx="3" fill="#e9f5f4"/>
+          <text x="433" y="99" text-anchor="middle" class="chip" fill="#006b68">TB</text>
+        </g>
+
+        <g>
+          <rect x="484" y="204" width="100" height="64" rx="6" fill="#ffffff" stroke="#9aa5b5"/>
+          <text x="496" y="226" class="node-title">PR requirements</text>
+          <text x="496" y="243" class="node-copy">Confirm non-score rules</text>
+          <rect x="496" y="250" width="30" height="12" rx="3" fill="#e9f5f4"/>
+          <text x="511" y="259" text-anchor="middle" class="chip" fill="#006b68">TB</text>
+          <rect x="530" y="250" width="30" height="12" rx="3" fill="#fff0ed"/>
+          <text x="545" y="259" text-anchor="middle" class="chip" fill="#e42b10">LS</text>
+        </g>
+
+        <g>
+          <rect x="596" y="284" width="100" height="64" rx="6" fill="#ffffff" stroke="#9aa5b5"/>
+          <text x="608" y="306" class="node-title">Application plan</text>
+          <text x="608" y="323" class="node-copy">Prepare filing tasks</text>
+          <rect x="608" y="330" width="30" height="12" rx="3" fill="#fff0ed"/>
+          <text x="623" y="339" text-anchor="middle" class="chip" fill="#e42b10">LS</text>
+        </g>
+
+        <g transform="translate(16 380)">
+          <text x="0" y="0" class="lane-key">FLOW KEYS</text>
+          <rect x="0" y="16" width="28" height="14" rx="3" fill="#e9f5f4"/>
+          <text x="14" y="26" text-anchor="middle" class="chip" fill="#006b68">TB</text>
+          <text x="36" y="27" class="legend">table / structured inputs</text>
+          <rect x="190" y="16" width="28" height="14" rx="3" fill="#edf4ff"/>
+          <text x="204" y="26" text-anchor="middle" class="chip" fill="#0755b6">FL</text>
+          <text x="226" y="27" class="legend">route decision flow</text>
+          <rect x="374" y="16" width="28" height="14" rx="3" fill="#fff0ed"/>
+          <text x="388" y="26" text-anchor="middle" class="chip" fill="#e42b10">LS</text>
+          <text x="410" y="27" class="legend">legal-status checklist</text>
+          <path d="M572 23H608" class="connector-focal-out"/>
+          <text x="616" y="27" class="legend">critical transition</text>
+        </g>
+      </svg>
+    </figure>
+  </main>
+</body>
+</html>

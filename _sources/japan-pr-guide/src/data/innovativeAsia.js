@@ -1,0 +1,86 @@
+export const INNOVATIVE_ASIA_SOURCE = {
+  reviewed: "05 October 2026",
+  url: "https://www.moj.go.jp/isa/content/930001659.pdf",
+};
+
+const entries = [
+  ["National University of Singapore", "Singapore"],
+  ["Nanyang Technological University", "Singapore"],
+  ["Universiti Brunei Darussalam", "Brunei"],
+  ["Universiti Teknologi Brunei", "Brunei"],
+  ["Asian Institute of Technology", "Thailand"],
+  ["Ateneo de Manila University", "Philippines"],
+  ["Bangladesh University of Engineering & Technology (BUET)", "Bangladesh"],
+  ["Bogor Agricultural University", "Indonesia"],
+  ["Burapha University", "Thailand"],
+  ["Chiang Mai University", "Thailand"],
+  ["Chulalongkorn University", "Thailand"],
+  ["De La Salle University", "Philippines"],
+  ["Hanoi University of Industry", "Vietnam"],
+  ["Hanoi University of Science and Technology", "Vietnam"],
+  ["Ho Chi Minh City University of Technology", "Vietnam"],
+  ["Indian Institute of Information Technology, Design and Manufacturing Jabalpur (IIITDM-J)", "India"],
+  ["Indian Institute of Technology Bombay", "India"],
+  ["Indian Institute of Technology Delhi", "India"],
+  ["Indian Institute of Technology Guwahati", "India"],
+  ["Indian Institute of Technology Hyderabad", "India"],
+  ["Indian Institute of Technology Kanpur", "India"],
+  ["Indian Institute of Technology Kharagpur", "India"],
+  ["Indian Institute of Technology Madras", "India"],
+  ["Indian Institute of Technology Roorkee", "India"],
+  ["Industrial University of Ho Chi Minh City", "Vietnam"],
+  ["Institut Teknologi Bandung", "Indonesia"],
+  ["Institut Teknologi Sepuluh Nopember", "Indonesia"],
+  ["Institute of Technology of Cambodia (ITC)", "Cambodia"],
+  ["Kasetsart University", "Thailand"],
+  ["Khon Kaen University", "Thailand"],
+  ["King Mongkut's Institute of Technology Ladkrabang", "Thailand"],
+  ["King Mongkut's University of Technology Thonburi", "Thailand"],
+  ["Mahidol University", "Thailand"],
+  ["Management and Science University (MSU)", "Malaysia"],
+  ["Mandalay Technological University", "Myanmar"],
+  ["Mindanao State University-Iligan Institute of Technology", "Philippines"],
+  ["NED University of Engineering and Technology, Karachi", "Pakistan"],
+  ["National University of Laos", "Laos"],
+  ["National University of Sciences and Technology (NUST) Islamabad", "Pakistan"],
+  ["Prince of Songkla University", "Thailand"],
+  ["Royal University of Phnom Penh", "Cambodia"],
+  ["Thai-Nichi Institute of Technology", "Thailand"],
+  ["Sirindhorn International Institute of Technology, Thammasat University", "Thailand"],
+  ["Universitas Darma Persada", "Indonesia"],
+  ["Universitas Gadjah Mada", "Indonesia"],
+  ["Universitas Hasanuddin", "Indonesia"],
+  ["Universitas Indonesia", "Indonesia"],
+  ["Universiti Kebangsaan Malaysia / The National University of Malaysia (UKM)", "Malaysia"],
+  ["Universiti Malaya (UM)", "Malaysia"],
+  ["Universiti Malaysia Sabah (UMS)", "Malaysia"],
+  ["Universiti Putra Malaysia", "Malaysia"],
+  ["Universiti Sains Malaysia (USM)", "Malaysia"],
+  ["Universiti Teknologi MARA (UiTM)", "Malaysia"],
+  ["Universiti Teknologi Malaysia (UTM)", "Malaysia"],
+  ["Universiti Teknologi Petronas", "Malaysia"],
+  ["Universiti Tun Hussein Onn Malaysia (UTHM)", "Malaysia"],
+  ["University of Colombo", "Sri Lanka"],
+  ["University of Dhaka", "Bangladesh"],
+  ["University of Engineering and Technology (UET) Lahore", "Pakistan"],
+  ["University of Peradeniya", "Sri Lanka"],
+  ["University of Yangon", "Myanmar"],
+  ["University of the Philippines - Diliman", "Philippines"],
+  ["Vietnam-Japan University", "Vietnam"],
+  ["Yangon Technological University", "Myanmar"],
+];
+
+export const innovativeAsiaUniversities = entries.map(([name, country]) => ({
+  categories: ["asia"],
+  country,
+  jp: "",
+  name,
+}));
+
+export function searchInnovativeAsiaUniversities(query, limit = 8) {
+  const normalized = String(query || "").trim().toLocaleLowerCase();
+  if (!normalized) return [];
+  return innovativeAsiaUniversities
+    .filter(({ name, jp, country }) => `${name} ${jp} ${country}`.toLocaleLowerCase().includes(normalized))
+    .slice(0, limit);
+}
