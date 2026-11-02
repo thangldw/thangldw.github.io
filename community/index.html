@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Contributing to the Community — Thang Luu</title>
@@ -7,46 +7,312 @@
 <link rel="canonical" href="https://thangldw.github.io/community/">
 <meta property="og:type" content="website"><meta property="og:title" content="Contributing to the Community — Thang Luu"><meta property="og:description" content="Engineering beyond my own repositories: upstream code, collaboration and shared learning."><meta property="og:url" content="https://thangldw.github.io/community/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
 <meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg">
-<link rel="stylesheet" href="/css/icons.css?v=20260714"><link rel="stylesheet" href="/css/tokens.css?v=20261010warm"><link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
-<script src="/js/site-shell.js?v=20260727b"></script><script defer src="/js/analytics.js"></script>
-<style>
-:root{color-scheme:light dark}*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--color-bg,#f7f7f5);color:var(--color-text,#172b4d);line-height:1.65}a{color:inherit}a:hover{text-decoration-thickness:2px}.wrap{max-width:1440px;margin:auto;padding:var(--space-20) var(--space-64) var(--space-64)}.community-header{border-bottom:1px solid var(--color-border)}.community-header .site-shell-inner{max-width:1440px;padding-inline:var(--space-64)}.community-header .header-actions{display:flex;align-items:center;gap:14px}.community-header .back{font-size:.9rem;text-decoration:none}.community-footer .site-shell-inner{max-width:1440px}.community-footer a{color:inherit}.hero{padding:84px 0 58px;max-width:850px}.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:.75rem;font-weight:700;opacity:.65}.hero h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.055em;line-height:1.08;margin:18px 0}.lead{font-size:1.23rem;max-width:720px;opacity:.82}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 64px}.metric{border:1px solid #9ca3af55;border-radius:14px;padding:22px}.metric strong{font-size:2rem;display:block}.metric span{font-size:.85rem;opacity:.7}.section{padding:32px 0 44px;border-top:1px solid #9ca3af55}.section h2{font-size:1.75rem;letter-spacing:-.03em;margin:0 0 8px}.muted{opacity:.72}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}.card{border:1px solid #9ca3af55;border-radius:16px;padding:22px;background:color-mix(in srgb,currentColor 3%,transparent)}.card h3{margin:6px 0;font-size:1.08rem}.card p{margin:8px 0}.tag{font-size:.72rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase;opacity:.65}.card a{font-weight:650}.note{border-left:3px solid currentColor;padding-left:18px;margin:24px 0;opacity:.8}.community-footer{border-top:1px solid var(--color-border)}@media(max-width:1100px){.wrap{padding-inline:var(--space-32)}.community-header .site-shell-inner{padding-inline:var(--space-32)}}@media(max-width:760px){.wrap{padding:var(--space-16) var(--space-20) 100px}.community-header .site-shell-inner{padding-inline:var(--space-20)}}@media(max-width:680px){.community-header .site-shell-inner{padding-inline:var(--space-20)}.metrics,.grid{grid-template-columns:1fr}.hero{padding:55px 0 30px}.wrap{padding-inline:var(--space-20)}}
-</style></head>
-<body class="site-page" data-page-kind="product" data-site-shell="none"><a class="skip-link" href="#main">Skip to content</a><header class="site-header community-header"><div class="site-shell-inner"><a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a><div class="header-actions"><a class="back" href="/">Portfolio</a><button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button></div></div></header><div class="wrap">
-<main id="main"><section class="hero"><p class="eyebrow">Open source · Community · Engineering</p><h1>Contributing to the Community</h1><p class="lead">Engineering beyond my own repositories. Giving back to the open-source community through code, technical collaboration, and knowledge sharing.</p><p class="muted">This page includes only contributions accepted upstream: direct merges and maintainer-confirmed integrations with preserved authorship. Every claim links to public evidence.</p></section>
-<div class="metrics"><div class="metric"><strong>11</strong><span>Directly merged pull requests</span></div><div class="metric"><strong>3</strong><span>Additional PRs integrated with authorship preserved</span></div><div class="metric"><strong>5</strong><span>Upstream repositories with accepted contributions</span></div></div>
-<section class="section"><h2>Merged upstream</h2><p class="muted">Changes accepted directly into <a href="https://github.com/morluto/rea">morluto/rea</a>.</p><div class="grid">
-<article class="card"><span class="tag">WASM · Tooling</span><h3><a href="https://github.com/morluto/rea/pull/1533">#1533 — Inspect local WASM artifacts</a></h3><p>Added WABT-backed, target-free WebAssembly inspection with reproducible artifact and executable evidence shared across CLI and MCP. Reused a mature toolchain rather than introducing a new parser.</p></article>
-<article class="card"><span class="tag">WASM · Interface correctness</span><h3><a href="https://github.com/morluto/rea/pull/2464">#2464 — Compare WASM interfaces</a></h3><p>Introduced typed import/export comparison so meaningful interface changes can be distinguished from binary encoding differences.</p></article>
-<article class="card"><span class="tag">PE · Binary forensics</span><h3><a href="https://github.com/morluto/rea/pull/1482">#1482 — Inspect PE resources</a></h3><p>Made resource identities, file ranges and hashes inspectable while preserving uncertainty and rejecting malformed mappings.</p></article>
-<article class="card"><span class="tag">Mobile · False-positive reduction</span><h3><a href="https://github.com/morluto/rea/pull/1506">#1506 — Bound framework conventions</a></h3><p>Replaced misleading substring heuristics with bounded path and filename matching for Android and Apple artifacts.</p></article>
-<article class="card"><span class="tag">Artifacts · Evidence integrity</span><h3><a href="https://github.com/morluto/rea/pull/2214">#2214 — Compare inventories using declared coverage</a></h3><p>Eliminated false unknown classifications by separating structured coverage facts from diagnostic prose.</p></article>
-</div></section>
-<section class="section"><h2>More directly merged contributions</h2><p class="muted">Additional merged pull requests recovered through historical date-scoped GitHub searches. These extend the accepted contribution record beyond REA.</p><div class="grid">
-<article class="card"><span class="tag">Chemprop · Machine learning</span><h3><a href="https://github.com/chemprop/chemprop/pull/1379">#1379 — Dynamic graph sizes in exported models</a></h3><p>Fixed message-passing export behavior where Python graph length was specialized to the sample atom count, causing exported models to fail for molecules with different graph sizes. Maintainers requested test changes and subsequently approved the contribution.</p></article>
-<article class="card"><span class="tag">xDSL · Compiler infrastructure</span><h3><a href="https://github.com/xdslproject/xdsl/pull/6252">#6252 — Enable Ruff RUF033 in CI</a></h3><p>Removed redundant dataclass post-init defaults in the HW dialect while preserving existing construction behavior. Reviewed and merged as part of lint-rule adoption.</p></article>
-<article class="card"><span class="tag">OpenMed · Vietnamese privacy</span><h3><a href="https://github.com/maziyarpanahi/openmed/pull/1601">#1601 — Vietnamese PII language pack</a></h3><p>Added offline recognition of Vietnamese identity documents, phone numbers, dates and addresses, with context-gated national identifiers and synthetic validation fixtures.</p></article>
-<article class="card"><span class="tag">OpenMed · Hungarian privacy</span><h3><a href="https://github.com/maziyarpanahi/openmed/pull/1593">#1593 — Hungarian TAJ language pack</a></h3><p>Introduced checksum-aware TAJ identifier detection, locale-sensitive patterns and synthetic surrogates, with deterministic privacy tests.</p></article>
-<article class="card"><span class="tag">Sony NMOS · Media transport</span><h3><a href="https://github.com/sony/nmos-cpp/pull/502">#502 — SMPTE 2022-7 temporal redundancy</a></h3><p>Added structured SDP support for temporal redundancy, explicit SSRC identities, parsing/generation round trips and malformed-input coverage.</p></article>
-<article class="card"><span class="tag">Hatena · Developer workflows</span><h3><a href="https://github.com/hatena/hatenablog-workflows/pull/193">#193 — Run workflows from a subdirectory</a></h3><p>Made blogsync workflows resolve their working directory from the tracked configuration, supporting subdirectory layouts without changing caller inputs.</p></article>
-</div></section><section class="section"><h2>Integrated through upstream work</h2><p class="muted">These original PRs were closed without a direct merge, but maintainers explicitly confirmed integration and preserved contributor authorship.</p><div class="grid">
-<article class="card"><span class="tag">REA · Coauthor credit</span><h3><a href="https://github.com/morluto/rea/pull/2256">#2256 — NIBArchive resource-key joins</a></h3><p>Maintainer confirmed that producer-boundary normalization, shared field contract and CLI/MCP coverage were folded into <a href="https://github.com/morluto/rea/pull/2248">#2248</a> with coauthor credit. Closed as duplicate, not rejected.</p></article>
-<article class="card"><span class="tag">Diagram Design · Release 2.6.0</span><h3><a href="https://github.com/cathrynlavery/diagram-design/pull/101">#101 — Quantitative polar charts</a></h3><p>Three accessible chart variants, geometry verification and documentation were included in merged maintainer integration <a href="https://github.com/cathrynlavery/diagram-design/pull/134">#134</a>, with Git authorship retained.</p></article>
-<article class="card"><span class="tag">Diagram Design · Documentation correctness</span><h3><a href="https://github.com/cathrynlavery/diagram-design/pull/105">#105 — Correct effective-width checklist</a></h3><p>Corrected a diagram sizing invariant and added regression checks. Maintainer confirmed inclusion in merged <a href="https://github.com/cathrynlavery/diagram-design/pull/134">#134</a> with authorship preserved.</p></article>
-</div></section>
-<section class="section" id="engineering-decisions"><h2>Engineering decisions and trade-offs</h2><p class="muted">Selected examples explain why a particular implementation boundary was chosen. These are technical rationales grounded in the linked PR descriptions, not claims about personal motivation.</p><div class="grid">
-<article class="card"><span class="tag">REA #2214 · Data contracts</span><h3>Make coverage a typed fact, not a diagnostic string</h3><p><strong>Problem:</strong> complete identical inventories were incorrectly reported as unknown. <strong>Decision:</strong> declare traversal scope and completeness at the producer, then compare structured coverage independently of notice text. <strong>Why:</strong> display messages can change without changing evidence semantics; consumer-side string heuristics are fragile. <strong>Trade-off:</strong> a slightly richer evidence contract in exchange for deterministic comparisons and fewer false unknowns. <a href="https://github.com/morluto/rea/pull/2214">Evidence: PR #2214</a>.</p></article>
-<article class="card"><span class="tag">REA #1533 · Build versus reuse</span><h3>Use WABT rather than invent a WASM parser</h3><p><strong>Problem:</strong> saved WASM artifacts could not be inspected without an active target. <strong>Decision:</strong> admit an explicitly selected local artifact and pinned WABT tools behind a narrow adapter; preserve digests and CLI/MCP parity. <strong>Why:</strong> reuse a maintained decoder while constraining the trust boundary and provenance. <strong>Trade-off:</strong> a caller-supplied external toolchain instead of a new in-process parser. <a href="https://github.com/morluto/rea/pull/1533">Evidence: PR #1533</a>.</p></article>
-<article class="card"><span class="tag">REA #2464 · Semantic comparison</span><h3>Compare typed interfaces, not byte-level differences</h3><p><strong>Problem:</strong> changes in binary hashes or WAT type indices do not necessarily imply changed imports or exports. <strong>Decision:</strong> resolve typed interface facts once in the producer and compare retained Evidence without reparsing display text. <strong>Why:</strong> the comparison should answer API compatibility questions rather than file-identity questions. <strong>Trade-off:</strong> duplicate names or incomplete inventories remain unknown rather than forcing a misleading verdict. <a href="https://github.com/morluto/rea/pull/2464">Evidence: PR #2464</a>.</p></article>
-<article class="card"><span class="tag">Chemprop #1379 · Dynamic shapes</span><h3>Prevent export-time graph-size specialization</h3><p><strong>Problem:</strong> Python <code>len(bmg.V)</code> became specialized to the example molecule during <code>torch.export</code>, breaking inference on different graph sizes. <strong>Decision:</strong> correct message-passing allocation to respect dynamic graph dimensions rather than freezing sample-derived length. <strong>Why:</strong> an exported model must preserve the intended variable-size molecular graph contract. <strong>Trade-off:</strong> focus on the dynamic graph-size defect, with regression coverage, rather than redesigning message passing. <a href="https://github.com/chemprop/chemprop/pull/1379">Evidence: PR #1379</a>.</p></article>
-<article class="card"><span class="tag">REA #1506 · Heuristics</span><h3>Prefer bounded conventions over substring inference</h3><p><strong>Problem:</strong> unrelated filenames were misclassified as Unity or Flutter, and generic Apple paths implied unsupported language/runtime conclusions. <strong>Decision:</strong> match known complete library filenames and framework path segments. <strong>Why:</strong> weak substring matches turn naming coincidences into false evidence. <strong>Trade-off:</strong> narrower detection may yield fewer hints but substantially more defensible ones, without schema changes. <a href="https://github.com/morluto/rea/pull/1506">Evidence: PR #1506</a>.</p></article>
-<article class="card"><span class="tag">Sony NMOS #502 · Standards</span><h3>Represent temporal redundancy explicitly</h3><p><strong>Problem:</strong> existing SDP handling did not fully express the SMPTE 2022-7 temporal redundancy form. <strong>Decision:</strong> retain SSRC-level identity, CNAME, delay and MID in structured parameters, with round-trip and invalid-input tests. <strong>Why:</strong> protocol conversions must preserve semantics and reject transport layouts that cannot be represented faithfully. <strong>Trade-off:</strong> constrain the supported topology rather than silently coercing incompatible forms. <a href="https://github.com/sony/nmos-cpp/pull/502">Evidence: PR #502</a>.</p></article>
-<article class="card"><span class="tag">OpenMed #1601 · Privacy correctness</span><h3>Use context-gated deterministic identifiers</h3><p><strong>Problem:</strong> Vietnamese identifiers and contact formats were missing from offline PII recognition. <strong>Decision:</strong> add locale-specific patterns and require context for CCCD/CMND candidates that lack a public checksum. <strong>Why:</strong> treating every matching digit sequence as a national ID creates avoidable false positives. <strong>Trade-off:</strong> context gating can miss isolated identifiers; synthetic golden cases make this limitation testable. <a href="https://github.com/maziyarpanahi/openmed/pull/1601">Evidence: PR #1601</a>.</p></article>
-<article class="card"><span class="tag">Diagram Design #101 · Visual correctness</span><h3>Specify a quantitative visual contract</h3><p><strong>Problem:</strong> adding a polar example alone would not guarantee faithful quantitative encoding. <strong>Decision:</strong> define angle/radius semantics, zero baseline, accessible variants and adversarial geometry checks. <strong>Why:</strong> visualizations should be validated against measurable semantics, not appearance alone. <strong>Trade-off:</strong> intentionally restrict the supported variants to keep verification tractable. Integrated through <a href="https://github.com/cathrynlavery/diagram-design/pull/134">maintainer PR #134</a>; original <a href="https://github.com/cathrynlavery/diagram-design/pull/101">#101</a>.</p></article>
-</div></section><section class="section" id="remaining-decisions"><h2>Engineering rationale for the remaining accepted work</h2><p class="muted">The following six cases complete the per-contribution analysis of the 11 verified direct merges and three maintainer-confirmed integrations. Decisions are reconstructed from public PR records, not presented as private intent.</p><div class="grid"><article class="card"><span class="tag">REA #1482 · PE resources</span><h3>Expose exact resource identities without decoding payloads</h3><p><strong>Problem:</strong> PE analysts previously had to walk resource directory structures manually. <strong>Decision:</strong> Add a bounded PE32/PE32+ inspector preserving numeric versus named identifiers, language, directory and payload ranges, SHA-256 and icon group relationships. <strong>Why / trade-off:</strong> Keeping payload formats opaque avoids a broad decoder surface; malformed ranges or exhausted budgets fail rather than returning partial success. <strong>Value:</strong> Inspectable forensic evidence with explicit file offsets and identity. <a href="https://github.com/morluto/rea/pull/1482">PR evidence</a>.</p></article>
-<article class="card"><span class="tag">xDSL #6252 · CI correctness</span><h3>Enable a lint rule without changing runtime semantics</h3><p><strong>Problem:</strong> The HW dialect had redundant __post_init__ defaults duplicated from InitVar fields. <strong>Decision:</strong> Remove only redundant defaults and enable Ruff RUF033, backed by functional tests. <strong>Why / trade-off:</strong> A narrowly scoped lint adoption avoids behavioral refactoring and retains dataclass construction compatibility. <strong>Value:</strong> Cleaner enforceable CI convention with minimal regression risk. <a href="https://github.com/xdslproject/xdsl/pull/6252">PR evidence</a>.</p></article>
-<article class="card"><span class="tag">OpenMed #1593 · National-ID validation</span><h3>Validate Hungarian TAJ with a real checksum</h3><p><strong>Problem:</strong> A language pack needs to distinguish plausible nine-digit sequences from structurally valid national identifiers. <strong>Decision:</strong> Use the documented alternating 3/7 checksum, locale-specific formats, synthetic surrogates and offline golden tests. <strong>Why / trade-off:</strong> Checksum validation is stricter than regex-only detection; synthetic fixtures avoid using real personal data. Pattern-based coverage remains locale-bounded. <strong>Value:</strong> Deterministic TAJ detection and anonymization support. <a href="https://github.com/maziyarpanahi/openmed/pull/1593">PR evidence</a>.</p></article>
-<article class="card"><span class="tag">Hatena #193 · Workflow portability</span><h3>Resolve working directories without new caller configuration</h3><p><strong>Problem:</strong> Blog workflows assumed the configuration lived at the repository root. <strong>Decision:</strong> Find the single tracked blogsync.yaml, use its parent directory consistently for draft processing, change detection and uploads. <strong>Why / trade-off:</strong> Automatically resolving a unique tracked config avoids new workflow inputs; missing or ambiguous configuration fails explicitly. <strong>Value:</strong> Supports subdirectory layouts while preserving existing caller contracts. <a href="https://github.com/hatena/hatenablog-workflows/pull/193">PR evidence</a>.</p></article>
-<article class="card"><span class="tag">REA #2256 · Integrated via #2248</span><h3>Normalize at the producer, not in each consumer</h3><p><strong>Problem:</strong> Decoded NIBArchive objects lost recognized keys needed for asset catalog joins. <strong>Decision:</strong> Expose the recognized scalar keys at the NIBArchive producer while retaining original nested values and decode budgets. <strong>Why / trade-off:</strong> One semantic owner prevents divergent CLI/MCP interpretations; only allowlisted keys participate to avoid false resource matches. <strong>Value:</strong> Maintainer confirmed the approach was integrated into #2248 with coauthor credit. <a href="https://github.com/morluto/rea/pull/2256">PR evidence</a>.</p></article>
-<article class="card"><span class="tag">Diagram Design #105 · Integrated via #134</span><h3>Turn documentation arithmetic into a tested invariant</h3><p><strong>Problem:</strong> A reproducibility checklist incorrectly gave effective width 972 instead of 964 pixels and duplicated an item number. <strong>Decision:</strong> Correct the width formula and checklist numbering; add documentation synchronization regression checks. <strong>Why / trade-off:</strong> The geometry formula affects real layout output, so testing the documented invariant is more durable than a text-only correction. <strong>Value:</strong> Maintainer confirmed inclusion in merged #134 with preserved authorship. <a href="https://github.com/cathrynlavery/diagram-design/pull/105">PR evidence</a>.</p></article></div></section><section class="section"><h2>How I contribute</h2><p>My focus is on making existing systems more trustworthy: preserve information at its source, validate contracts at boundaries, reduce false confidence, and add targeted regression evidence. I favor small, reviewable extensions over parallel infrastructure and avoid claiming certainty where evidence is incomplete.</p><p class="note">Evidence policy: “merged” means GitHub records a direct merge; “integrated” requires maintainer confirmation; acknowledgment alone does not qualify. Counts reflect 11 verified direct merges across five external repositories plus three original PRs with maintainer-confirmed integration and preserved authorship. This is not a complete lifetime GitHub contribution total; direct commits, reviews, discussions and additional historical activity have not been exhaustively audited.</p></section></main>
-</div><footer class="site-foot community-footer"><div class="site-shell-inner"><span>thang.</span> · <a href="/">Portfolio</a> · <a href="/apps/">Apps</a> · <a href="https://github.com/thangldw">GitHub</a><p>Community contributions are collaborative work. Credit belongs to upstream maintainers and fellow contributors.</p></div></footer></body></html>
+<link rel="stylesheet" href="/css/community.css?v=20261103">
+<link rel="stylesheet" href="/css/support-dialog.css?v=20261010warm">
+<link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
+<script src="/js/site-shell.js?v=20260727b"></script>
+<script defer src="/js/support-dialog.js?v=20261010warm"></script>
+<script defer src="/js/analytics.js"></script>
+<script type="module" src="./community.mjs"></script>
+</head>
+<body class="site-page" data-page-kind="product">
+<a class="skip-link" href="#main" data-copy="skip">Skip to content</a>
+<header class="site-header"><div class="site-shell-inner">
+  <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a>
+  <div class="controls">
+    <div class="locale-switch" role="group" aria-label="Display language">
+      <button type="button" data-lang="en" aria-label="English" aria-pressed="true">EN</button>
+      <button type="button" data-lang="vi" aria-label="Tiếng Việt" aria-pressed="false">VN</button>
+      <button type="button" data-lang="ja" aria-label="日本語" aria-pressed="false">JP</button>
+      <button type="button" data-lang="zh" aria-label="中文" aria-pressed="false">CN</button>
+    </div>
+    <button type="button" id="themeToggle" class="ui-icon-button" aria-label="Switch to dark theme">☾</button>
+  </div>
+</div></header>
+<main id="main">
+<section class="hero"><div class="hero-copy">
+  <p class="eyebrow" data-copy="eyebrow">Open source · Community · Engineering</p>
+  <h1><span data-copy="title">Contributing to</span><br><em data-copy="accent">the Community</em></h1>
+  <p class="lead" data-copy="lead">Code and engineering decisions I contributed to open-source projects, from WebAssembly inspection to machine learning and privacy tools.</p>
+  <div class="actions">
+    <a class="ui-button ui-button-primary" href="#merged" data-copy="browse">Browse contributions</a>
+    <a class="ui-button" href="#engineering-decisions" data-copy="notes">Engineering notes</a>
+    <a href="https://github.com/thangldw"><span data-copy="github">GitHub profile</span> <span aria-hidden="true">→</span></a>
+  </div>
+  <p class="caption" data-copy="scope">Each entry links to a merged pull request or to a maintainer’s confirmation of integration.</p>
+  <dl class="metrics">
+    <div><dt data-copy="direct">Directly merged PRs</dt><dd>11</dd></div>
+    <div><dt data-copy="credited">PRs integrated with credit</dt><dd>3</dd></div>
+    <div><dt data-copy="repoCount">Upstream repositories</dt><dd>7</dd></div>
+  </dl>
+</div>
+<figure class="record" aria-labelledby="record-title">
+  <figcaption id="record-title" data-copy="recordTitle">Contributions by repository</figcaption>
+  <div class="record-frame"><table aria-labelledby="record-title">
+    <thead><tr><th scope="col" data-copy="repo">Repository</th><th scope="col" data-copy="mergedCol">Merged</th><th scope="col" data-copy="integratedCol">Integrated</th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><a href="https://github.com/morluto/rea">REA</a></th><td>5</td><td>1</td></tr>
+      <tr><th scope="row"><a href="https://github.com/chemprop/chemprop">Chemprop</a></th><td>1</td><td>0</td></tr>
+      <tr><th scope="row"><a href="https://github.com/xdslproject/xdsl">xDSL</a></th><td>1</td><td>0</td></tr>
+      <tr><th scope="row"><a href="https://github.com/maziyarpanahi/openmed">OpenMed</a></th><td>2</td><td>0</td></tr>
+      <tr><th scope="row"><a href="https://github.com/sony/nmos-cpp">Sony NMOS</a></th><td>1</td><td>0</td></tr>
+      <tr><th scope="row"><a href="https://github.com/hatena/hatenablog-workflows">Hatena Blog</a></th><td>1</td><td>0</td></tr>
+      <tr><th scope="row"><a href="https://github.com/cathrynlavery/diagram-design">Diagram Design</a></th><td>0</td><td>2</td></tr>
+    </tbody>
+  </table></div>
+</figure></section>
+<section class="section" id="merged">
+  <h2 data-copy="mergedTitle">Merged upstream</h2>
+  <p data-copy="mergedIntro">Direct merges in morluto/rea, a project for reverse engineering.</p>
+  <div class="grid">
+    <article id="pr-1533">
+      <span data-copy="pr1533Tag" class="tag">WASM · Tooling</span>
+      <h3><a href="https://github.com/morluto/rea/pull/1533">#1533 · <span data-copy="pr1533Title">Inspect local WASM artifacts</span></a></h3>
+      <p data-copy="pr1533Body">Added WABT-backed, target-free WebAssembly inspection with reproducible artifact and executable evidence shared across CLI and MCP. Reused a mature toolchain rather than introducing a new parser.</p>
+    </article>
+    <article id="pr-2464">
+      <span data-copy="pr2464Tag" class="tag">WASM · Interface correctness</span>
+      <h3><a href="https://github.com/morluto/rea/pull/2464">#2464 · <span data-copy="pr2464Title">Compare WASM interfaces</span></a></h3>
+      <p data-copy="pr2464Body">Introduced typed import/export comparison so meaningful interface changes can be distinguished from binary encoding differences.</p>
+    </article>
+    <article id="pr-1482">
+      <span data-copy="pr1482Tag" class="tag">PE · Binary forensics</span>
+      <h3><a href="https://github.com/morluto/rea/pull/1482">#1482 · <span data-copy="pr1482Title">Inspect PE resources</span></a></h3>
+      <p data-copy="pr1482Body">Made resource identities, file ranges and hashes inspectable while preserving uncertainty and rejecting malformed mappings.</p>
+    </article>
+    <article id="pr-1506">
+      <span data-copy="pr1506Tag" class="tag">Mobile · False-positive reduction</span>
+      <h3><a href="https://github.com/morluto/rea/pull/1506">#1506 · <span data-copy="pr1506Title">Bound framework conventions</span></a></h3>
+      <p data-copy="pr1506Body">Replaced misleading substring heuristics with bounded path and filename matching for Android and Apple artifacts.</p>
+    </article>
+    <article id="pr-2214">
+      <span data-copy="pr2214Tag" class="tag">Artifacts · Evidence integrity</span>
+      <h3><a href="https://github.com/morluto/rea/pull/2214">#2214 · <span data-copy="pr2214Title">Compare inventories using declared coverage</span></a></h3>
+      <p data-copy="pr2214Body">Eliminated false unknown classifications by separating structured coverage facts from diagnostic prose.</p>
+    </article>
+  </div>
+</section>
+<section class="section" id="other">
+  <h2 data-copy="otherTitle">Other direct merges</h2>
+  <p data-copy="otherIntro">Accepted changes in machine learning, compilers, privacy, media transport and developer tools.</p>
+  <div class="grid">
+    <article id="pr-1379">
+      <span data-copy="pr1379Tag" class="tag">Chemprop · Machine learning</span>
+      <h3><a href="https://github.com/chemprop/chemprop/pull/1379">#1379 · <span data-copy="pr1379Title">Dynamic graph sizes in exported models</span></a></h3>
+      <p data-copy="pr1379Body">Fixed message-passing export behavior where Python graph length was specialized to the sample atom count, causing exported models to fail for molecules with different graph sizes. Maintainers requested test changes and subsequently approved the contribution.</p>
+    </article>
+    <article id="pr-6252">
+      <span data-copy="pr6252Tag" class="tag">xDSL · Compiler infrastructure</span>
+      <h3><a href="https://github.com/xdslproject/xdsl/pull/6252">#6252 · <span data-copy="pr6252Title">Enable Ruff RUF033 in CI</span></a></h3>
+      <p data-copy="pr6252Body">Removed redundant dataclass post-init defaults in the HW dialect while preserving existing construction behavior. Reviewed and merged as part of lint-rule adoption.</p>
+    </article>
+    <article id="pr-1601">
+      <span data-copy="pr1601Tag" class="tag">OpenMed · Vietnamese privacy</span>
+      <h3><a href="https://github.com/maziyarpanahi/openmed/pull/1601">#1601 · <span data-copy="pr1601Title">Vietnamese PII language pack</span></a></h3>
+      <p data-copy="pr1601Body">Added offline recognition of Vietnamese identity documents, phone numbers, dates and addresses, with context-gated national identifiers and synthetic validation fixtures.</p>
+    </article>
+    <article id="pr-1593">
+      <span data-copy="pr1593Tag" class="tag">OpenMed · Hungarian privacy</span>
+      <h3><a href="https://github.com/maziyarpanahi/openmed/pull/1593">#1593 · <span data-copy="pr1593Title">Hungarian TAJ language pack</span></a></h3>
+      <p data-copy="pr1593Body">Introduced checksum-aware TAJ identifier detection, locale-sensitive patterns and synthetic surrogates, with deterministic privacy tests.</p>
+    </article>
+    <article id="pr-502">
+      <span data-copy="pr502Tag" class="tag">Sony NMOS · Media transport</span>
+      <h3><a href="https://github.com/sony/nmos-cpp/pull/502">#502 · <span data-copy="pr502Title">SMPTE 2022-7 temporal redundancy</span></a></h3>
+      <p data-copy="pr502Body">Added structured SDP support for temporal redundancy, explicit SSRC identities, parsing/generation round trips and malformed-input coverage.</p>
+    </article>
+    <article id="pr-193">
+      <span data-copy="pr193Tag" class="tag">Hatena · Developer workflows</span>
+      <h3><a href="https://github.com/hatena/hatenablog-workflows/pull/193">#193 · <span data-copy="pr193Title">Run workflows from a subdirectory</span></a></h3>
+      <p data-copy="pr193Body">Made blogsync workflows resolve their working directory from the tracked configuration, supporting subdirectory layouts without changing caller inputs.</p>
+    </article>
+  </div>
+</section>
+<section class="section" id="integrated">
+  <h2 data-copy="integratedTitle">Integrated through upstream work</h2>
+  <p data-copy="integratedIntro">Maintainers integrated these changes through other pull requests and preserved authorship.</p>
+  <div class="grid">
+    <article id="pr-2256">
+      <span data-copy="pr2256Tag" class="tag">REA · Coauthor credit</span>
+      <h3><a href="https://github.com/morluto/rea/pull/2256">#2256 · <span data-copy="pr2256Title">NIBArchive resource-key joins</span></a></h3>
+      <p data-copy="pr2256Body">Maintainer confirmed that producer-boundary normalization, shared field contract and CLI/MCP coverage were folded into #2248 with coauthor credit. Closed as duplicate, not rejected.</p>
+      <a href="https://github.com/morluto/rea/pull/2248"><span data-copy="integrationPR">Integration PR</span> #2248 →</a>
+    </article>
+    <article id="pr-101">
+      <span data-copy="pr101Tag" class="tag">Diagram Design · Release 2.6.0</span>
+      <h3><a href="https://github.com/cathrynlavery/diagram-design/pull/101">#101 · <span data-copy="pr101Title">Quantitative polar charts</span></a></h3>
+      <p data-copy="pr101Body">Three accessible chart variants, geometry verification and documentation were included in merged maintainer integration #134, with Git authorship retained.</p>
+      <a href="https://github.com/cathrynlavery/diagram-design/pull/134"><span data-copy="integrationPR">Integration PR</span> #134 →</a>
+    </article>
+    <article id="pr-105">
+      <span data-copy="pr105Tag" class="tag">Diagram Design · Documentation correctness</span>
+      <h3><a href="https://github.com/cathrynlavery/diagram-design/pull/105">#105 · <span data-copy="pr105Title">Correct effective-width checklist</span></a></h3>
+      <p data-copy="pr105Body">Corrected a diagram sizing invariant and added regression checks. Maintainer confirmed inclusion in merged #134 with authorship preserved.</p>
+      <a href="https://github.com/cathrynlavery/diagram-design/pull/134"><span data-copy="integrationPR">Integration PR</span> #134 →</a>
+    </article>
+  </div>
+</section>
+<section class="section" id="engineering-decisions">
+  <h2 data-copy="decisionsTitle">Engineering decisions and trade-offs</h2>
+  <p data-copy="decisionsIntro">Open a case to read the problem, the implementation choice and its limits. Each note is based on the public PR record.</p>
+  <div class="decisions">
+    <details>
+      <summary><span data-copy="pr2214NoteTag" class="tag">REA #2214 · Data contracts</span> <span data-copy="pr2214NoteTitle">Make coverage a typed fact, not a diagnostic string</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr2214Problem">complete identical inventories were incorrectly reported as unknown.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr2214Decision">declare traversal scope and completeness at the producer, then compare structured coverage independently of notice text.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr2214Why">display messages can change without changing evidence semantics; consumer-side string heuristics are fragile.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr2214Tradeoff">a slightly richer evidence contract in exchange for deterministic comparisons and fewer false unknowns.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2214">#2214</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr1533NoteTag" class="tag">REA #1533 · Build versus reuse</span> <span data-copy="pr1533NoteTitle">Use WABT rather than invent a WASM parser</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1533Problem">saved WASM artifacts could not be inspected without an active target.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1533Decision">admit an explicitly selected local artifact and pinned WABT tools behind a narrow adapter; preserve digests and CLI/MCP parity.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1533Why">reuse a maintained decoder while constraining the trust boundary and provenance.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1533Tradeoff">a caller-supplied external toolchain instead of a new in-process parser.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1533">#1533</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr2464NoteTag" class="tag">REA #2464 · Semantic comparison</span> <span data-copy="pr2464NoteTitle">Compare typed interfaces, not byte-level differences</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr2464Problem">changes in binary hashes or WAT type indices do not necessarily imply changed imports or exports.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr2464Decision">resolve typed interface facts once in the producer and compare retained Evidence without reparsing display text.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr2464Why">the comparison should answer API compatibility questions rather than file-identity questions.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr2464Tradeoff">duplicate names or incomplete inventories remain unknown rather than forcing a misleading verdict.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2464">#2464</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr1379NoteTag" class="tag">Chemprop #1379 · Dynamic shapes</span> <span data-copy="pr1379NoteTitle">Prevent export-time graph-size specialization</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1379Problem">Python len(bmg.V) became specialized to the example molecule during torch.export, breaking inference on different graph sizes.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1379Decision">correct message-passing allocation to respect dynamic graph dimensions rather than freezing sample-derived length.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1379Why">an exported model must preserve the intended variable-size molecular graph contract.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1379Tradeoff">focus on the dynamic graph-size defect, with regression coverage, rather than redesigning message passing.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/chemprop/chemprop/pull/1379">#1379</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr1506NoteTag" class="tag">REA #1506 · Heuristics</span> <span data-copy="pr1506NoteTitle">Prefer bounded conventions over substring inference</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1506Problem">unrelated filenames were misclassified as Unity or Flutter, and generic Apple paths implied unsupported language/runtime conclusions.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1506Decision">match known complete library filenames and framework path segments.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1506Why">weak substring matches turn naming coincidences into false evidence.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1506Tradeoff">narrower detection may yield fewer hints but substantially more defensible ones, without schema changes.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1506">#1506</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr502NoteTag" class="tag">Sony NMOS #502 · Standards</span> <span data-copy="pr502NoteTitle">Represent temporal redundancy explicitly</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr502Problem">existing SDP handling did not fully express the SMPTE 2022-7 temporal redundancy form.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr502Decision">retain SSRC-level identity, CNAME, delay and MID in structured parameters, with round-trip and invalid-input tests.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr502Why">protocol conversions must preserve semantics and reject transport layouts that cannot be represented faithfully.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr502Tradeoff">constrain the supported topology rather than silently coercing incompatible forms.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/sony/nmos-cpp/pull/502">#502</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr1601NoteTag" class="tag">OpenMed #1601 · Privacy correctness</span> <span data-copy="pr1601NoteTitle">Use context-gated deterministic identifiers</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1601Problem">Vietnamese identifiers and contact formats were missing from offline PII recognition.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1601Decision">add locale-specific patterns and require context for CCCD/CMND candidates that lack a public checksum.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1601Why">treating every matching digit sequence as a national ID creates avoidable false positives.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1601Tradeoff">context gating can miss isolated identifiers; synthetic golden cases make this limitation testable.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/maziyarpanahi/openmed/pull/1601">#1601</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr101NoteTag" class="tag">Diagram Design #101 · Visual correctness</span> <span data-copy="pr101NoteTitle">Specify a quantitative visual contract</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr101Problem">adding a polar example alone would not guarantee faithful quantitative encoding.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr101Decision">define angle/radius semantics, zero baseline, accessible variants and adversarial geometry checks.</span></p>
+        <p><strong data-copy="why">Why:</strong> <span data-copy="pr101Why">visualizations should be validated against measurable semantics, not appearance alone.</span></p>
+        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr101Tradeoff">intentionally restrict the supported variants to keep verification tractable.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/cathrynlavery/diagram-design/pull/134">#134</a> · <a href="https://github.com/cathrynlavery/diagram-design/pull/101">#101</a></p>
+      </div>
+    </details>
+  </div>
+</section>
+<section class="section" id="remaining-decisions">
+  <h2 data-copy="moreNotesTitle">More engineering decisions</h2>
+  <p data-copy="moreNotesIntro">Six more cases cover binary inspection, CI, identifier validation, workflow portability and documentation.</p>
+  <div class="decisions">
+    <details>
+      <summary><span data-copy="pr1482NoteTag" class="tag">REA #1482 · PE resources</span> <span data-copy="pr1482NoteTitle">Expose exact resource identities without decoding payloads</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1482Problem">PE analysts previously had to walk resource directory structures manually.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1482Decision">Add a bounded PE32/PE32+ inspector preserving numeric versus named identifiers, language, directory and payload ranges, SHA-256 and icon group relationships.</span></p>
+        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr1482WhyTradeoff">Keeping payload formats opaque avoids a broad decoder surface; malformed ranges or exhausted budgets fail rather than returning partial success.</span></p>
+        <p><strong data-copy="value">Value:</strong> <span data-copy="pr1482Value">Inspectable forensic evidence with explicit file offsets and identity.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1482">#1482</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr6252NoteTag" class="tag">xDSL #6252 · CI correctness</span> <span data-copy="pr6252NoteTitle">Enable a lint rule without changing runtime semantics</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr6252Problem">The HW dialect had redundant __post_init__ defaults duplicated from InitVar fields.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr6252Decision">Remove only redundant defaults and enable Ruff RUF033, backed by functional tests.</span></p>
+        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr6252WhyTradeoff">A narrowly scoped lint adoption avoids behavioral refactoring and retains dataclass construction compatibility.</span></p>
+        <p><strong data-copy="value">Value:</strong> <span data-copy="pr6252Value">Cleaner enforceable CI convention with minimal regression risk.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/xdslproject/xdsl/pull/6252">#6252</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr1593NoteTag" class="tag">OpenMed #1593 · National-ID validation</span> <span data-copy="pr1593NoteTitle">Validate Hungarian TAJ with a real checksum</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1593Problem">A language pack needs to distinguish plausible nine-digit sequences from structurally valid national identifiers.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1593Decision">Use the documented alternating 3/7 checksum, locale-specific formats, synthetic surrogates and offline golden tests.</span></p>
+        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr1593WhyTradeoff">Checksum validation is stricter than regex-only detection; synthetic fixtures avoid using real personal data. Pattern-based coverage remains locale-bounded.</span></p>
+        <p><strong data-copy="value">Value:</strong> <span data-copy="pr1593Value">Deterministic TAJ detection and anonymization support.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/maziyarpanahi/openmed/pull/1593">#1593</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr193NoteTag" class="tag">Hatena #193 · Workflow portability</span> <span data-copy="pr193NoteTitle">Resolve working directories without new caller configuration</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr193Problem">Blog workflows assumed the configuration lived at the repository root.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr193Decision">Find the single tracked blogsync.yaml, use its parent directory consistently for draft processing, change detection and uploads.</span></p>
+        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr193WhyTradeoff">Automatically resolving a unique tracked config avoids new workflow inputs; missing or ambiguous configuration fails explicitly.</span></p>
+        <p><strong data-copy="value">Value:</strong> <span data-copy="pr193Value">Supports subdirectory layouts while preserving existing caller contracts.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/hatena/hatenablog-workflows/pull/193">#193</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr2256NoteTag" class="tag">REA #2256 · Integrated via #2248</span> <span data-copy="pr2256NoteTitle">Normalize at the producer, not in each consumer</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr2256Problem">Decoded NIBArchive objects lost recognized keys needed for asset catalog joins.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr2256Decision">Expose the recognized scalar keys at the NIBArchive producer while retaining original nested values and decode budgets.</span></p>
+        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr2256WhyTradeoff">One semantic owner prevents divergent CLI/MCP interpretations; only allowlisted keys participate to avoid false resource matches.</span></p>
+        <p><strong data-copy="value">Value:</strong> <span data-copy="pr2256Value">Maintainer confirmed the approach was integrated into #2248 with coauthor credit.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2256">#2256</a></p>
+      </div>
+    </details>
+    <details>
+      <summary><span data-copy="pr105NoteTag" class="tag">Diagram Design #105 · Integrated via #134</span> <span data-copy="pr105NoteTitle">Turn documentation arithmetic into a tested invariant</span></summary>
+      <div class="decision-content">
+        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr105Problem">A reproducibility checklist incorrectly gave effective width 972 instead of 964 pixels and duplicated an item number.</span></p>
+        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr105Decision">Correct the width formula and checklist numbering; add documentation synchronization regression checks.</span></p>
+        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr105WhyTradeoff">The geometry formula affects real layout output, so testing the documented invariant is more durable than a text-only correction.</span></p>
+        <p><strong data-copy="value">Value:</strong> <span data-copy="pr105Value">Maintainer confirmed inclusion in merged #134 with preserved authorship.</span></p>
+        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/cathrynlavery/diagram-design/pull/105">#105</a></p>
+      </div>
+    </details>
+  </div>
+</section>
+<section class="section" id="approach">
+  <h2 data-copy="approach">How I contribute</h2>
+  <p data-copy="approachText">I work on the reliability of existing systems. I preserve information at its source, validate it at system boundaries, and add regression tests where a claim can be checked. I keep changes small enough to review and document the limits of the evidence.</p>
+  <p class="caption" data-copy="policy">These figures cover the PRs listed here. A direct merge is recorded by GitHub. Integration requires confirmation from a maintainer and preserved authorship. Acknowledgments, direct commits, reviews and discussions are outside this count.</p>
+</section>
+</main>
+<footer class="site-foot community-footer"><div class="site-shell-inner credit">
+  <p data-copy="thanks">Credit belongs to the upstream maintainers and fellow contributors.</p>
+  <nav aria-label="Resources"><a href="/" data-copy="portfolio">Portfolio</a><a href="/apps/" data-copy="apps">Apps</a><a href="https://github.com/thangldw">GitHub</a><span id="supportSlot"></span></nav>
+</div></footer>
+</body>
+</html>
