@@ -7,15 +7,16 @@
 <link rel="canonical" href="https://thangldw.github.io/community/">
 <meta property="og:type" content="website"><meta property="og:title" content="Contributing to the Community — Thang Luu"><meta property="og:description" content="Engineering beyond my own repositories: upstream code, collaboration and shared learning."><meta property="og:url" content="https://thangldw.github.io/community/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
 <meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg">
-<link rel="stylesheet" href="/css/community.css?v=20261103b">
+<link rel="stylesheet" href="/css/community.css?v=20261103-compact">
 <link rel="stylesheet" href="/css/support-dialog.css?v=20261010warm">
+<link rel="stylesheet" href="/css/compact-footer.css?v=20261103">
 <link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
 <script src="/js/site-shell.js?v=20260727b"></script>
 <script defer src="/js/support-dialog.js?v=20261010warm"></script>
 <script defer src="/js/analytics.js"></script>
-<script type="module" src="./community.mjs"></script>
+<script type="module" src="./community.mjs?v=20261103-compact"></script>
 </head>
-<body class="site-page" data-page-kind="product">
+<body class="site-page" data-page-kind="product" data-support-shared>
 <a class="skip-link" href="#main" data-copy="skip">Skip to content</a>
 <header class="site-header"><div class="site-shell-inner">
   <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a>
@@ -504,11 +505,17 @@
   <h2 data-copy="approach">How I contribute</h2>
   <p data-copy="approachText">I work on the reliability of existing systems. I preserve information at its source, validate it at system boundaries, and add regression tests where a claim can be checked. I keep changes small enough to review and document the limits of the evidence.</p>
   <p class="caption" data-copy="policy">These figures cover the PRs listed here. A direct merge is recorded by GitHub. Integration requires confirmation from a maintainer and preserved authorship. Acknowledgments, direct commits, reviews and discussions are outside this count.</p>
+  <p class="caption" data-copy="thanks">Credit belongs to the upstream maintainers and fellow contributors.</p>
 </section>
 </main>
-<footer class="site-foot community-footer"><div class="site-shell-inner credit">
-  <p data-copy="thanks">Credit belongs to the upstream maintainers and fellow contributors.</p>
-  <nav aria-label="Resources"><a href="/" data-copy="portfolio">Portfolio</a><a href="/apps/" data-copy="apps">Apps</a><a href="https://github.com/thangldw">GitHub</a><span id="supportSlot"></span></nav>
-</div></footer>
+<footer class="site-foot compact-footer" id="footer">
+  <p class="footer-id"><strong data-copy="footerName">Community</strong> <a href="/">© 2026 thang.</a></p>
+  <nav aria-label="Resources">
+    <a href="#merged" data-copy="footerContributions">Contributions</a>
+    <a href="/apps/" data-copy="apps">Apps</a>
+    <a href="https://github.com/thangldw">GitHub</a>
+    <span id="supportSlot"><button type="button" data-support-open data-copy="footerSupport">Support</button></span>
+  </nav>
+</footer>
 </body>
 </html>

@@ -1,0 +1,62 @@
+/* Opt-in footer shared by the portfolio and its product sites. */
+.site-page > .compact-footer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-24);
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding: var(--space-8) var(--space-56);
+  border-top: 1px solid var(--color-section-divider);
+  background: var(--color-canvas);
+  color: var(--color-neutral-control-text);
+  font: var(--weight-regular) var(--text-body-sm)/var(--leading-body) var(--font-ui);
+  text-align: start;
+}
+.compact-footer .footer-id, .compact-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-16);
+  margin: 0;
+  color: inherit;
+}
+.compact-footer .footer-id { gap: var(--space-8); }
+.compact-footer .footer-id strong { color: var(--color-text); font-weight: var(--weight-semibold); }
+.compact-footer #supportSlot { color: inherit; }
+.compact-footer a, .compact-footer button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-size-touch);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+.compact-footer :is(a, button):is(:hover, :focus-visible) {
+  color: var(--color-neutral-control-ink);
+  text-decoration: underline;
+}
+.compact-footer :is(a, button):focus-visible {
+  outline: var(--focus-width) solid currentColor;
+  outline-offset: var(--focus-offset);
+}
+/* The shared dialog sets aria-controls when it binds the trigger. */
+.compact-footer [data-support-open]:not([aria-controls]) { display: none; }
+@media (max-width: 1100px) {
+  .site-page > .compact-footer { padding-inline: var(--space-32); }
+}
+@media (max-width: 600px) {
+  .site-page > .compact-footer { padding-inline: var(--space-16); }
+  .compact-footer nav { flex-basis: 100%; gap: 0 var(--space-12); }
+}
+@media (max-width: 360px) {
+  .compact-footer nav { column-gap: var(--space-8); }
+}
