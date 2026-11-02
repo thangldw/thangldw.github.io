@@ -484,15 +484,13 @@ def main() -> int:
                     f"forbidden private-content reference {forbidden}"
                 )
 
-    home_references = parsed_pages.get(ROOT / "index.html", PageParser()).references
-    if "/contact/" not in home_references:
-        errors.append("index.html: missing project contact link")
     contact_landing = ROOT / "contact/index.html"
-    contact_links = [urlsplit(ref) for ref in parsed_pages.get(contact_landing, PageParser()).references]
-    if not any(link.scheme == 'https' and link.netloc == 'mail.google.com' and link.path == '/mail/'
-               and parse_qs(link.query).get('view') == ['cm']
-               and parse_qs(link.query).get('to') == [CONTACT_EMAIL] for link in contact_links):
-        errors.append("contact/index.html: missing Gmail web compose link for the portfolio owner")
+    for page in (ROOT / "index.html", contact_landing):
+        contact_links = (urlsplit(ref) for ref in parsed_pages.get(page, PageParser()).references)
+        if not any(link.scheme == 'https' and link.netloc == 'mail.google.com' and link.path == '/mail/'
+                   and parse_qs(link.query).get('view') == ['cm']
+                   and parse_qs(link.query).get('to') == [CONTACT_EMAIL] for link in contact_links):
+            errors.append(f"{page.relative_to(ROOT)}: missing Gmail web compose link for the portfolio owner")
     for contact_page in [contact_landing, *(ROOT / route.lstrip('/') / 'index.html' for route in CASE_STUDY_ROUTES.values())]:
         references = parsed_pages.get(contact_page, PageParser()).references
         if not any(urlsplit(reference).scheme == 'mailto' and urlsplit(reference).path == CONTACT_EMAIL for reference in references):

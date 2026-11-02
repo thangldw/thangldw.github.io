@@ -334,7 +334,7 @@ The approved homepage is the design reference for future `/apps/` and `/cert/` u
 - Layout: sidebar plus fluid main column, compact spacing at short desktop heights. About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
 - Project source: existing shared catalog and certification-manifest loader. All entries appear A–Z with circular manual navigation; no autoplay. The renderer shows three cards on desktop, two on tablet, one on mobile; arrows and keyboard navigation wrap in both directions.
-- “Discuss a project” opens the shareable `/contact/` page. Readers can compose in Gmail on the web or open their configured mail app. Both links address `thangldw@gmail.com` and work without JavaScript.
+- The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`. The shareable `/contact/` page also offers a link to the reader’s configured mail app.
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and the `/cert/` source. Preserve route-specific information architecture and application behavior.
 
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
