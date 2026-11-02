@@ -255,27 +255,36 @@ html:root { background: var(--color-canvas); scrollbar-color: var(--color-scroll
 :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
 :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):disabled{opacity:var(--disabled-opacity);cursor:default}
 .locale-switch button{background:transparent;font-size:var(--text-caption);border-color:transparent}
-.locale-switch button[aria-pressed=true]{background:var(--color-control);border-color:var(--color-border);color:var(--color-text)}
 
-html[data-theme="light"] .resume-home :is(.locale-switch button, .carousel-controls button, .site-theme-toggle) {
-  color: var(--color-text-description);
-  background-color: transparent;
+/* Standalone app headers and the classic certification shell use alternate theme controls. */
+html:root[data-theme] :is(.locale-switch button, .carousel-controls button, .lesson-pagination button,
+              .site-theme-toggle, #themeToggle, .hub-theme-toggle, .theme-button) {
+  color: var(--color-neutral-control-text);
+  background: transparent;
   border-color: transparent;
-}
-html[data-theme="light"] .resume-home .locale-switch button[aria-pressed="true"] {
-  color: var(--color-neutral-control-ink);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: var(--space-4);
-}
-html[data-theme="light"] .resume-home :is(.locale-switch button, .carousel-controls button, .site-theme-toggle):hover:not(:disabled) {
-  background-color: var(--color-neutral-control);
-}
-html[data-theme="light"] .resume-home :is(.locale-switch button, .carousel-controls button, .site-theme-toggle):active:not(:disabled) {
-  background-color: var(--color-neutral-control-hover);
-}
-html[data-theme="light"] .resume-home :is(.locale-switch button, .carousel-controls button, .site-theme-toggle):focus-visible {
-  outline-color: var(--color-neutral-control-ink);
+  box-shadow: none;
+
+  &:where(.locale-switch button)[aria-pressed="true"] {
+    color: var(--color-neutral-control-ink);
+    font-weight: var(--weight-regular);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: var(--space-4);
+  }
+  &:hover:not(:disabled) {
+    background-color: var(--color-neutral-control);
+  }
+  &:active:not(:disabled) {
+    background-color: var(--color-neutral-control-hover);
+  }
+  &:focus-visible {
+    outline: var(--focus-width) solid var(--color-neutral-control-ink);
+    outline-offset: var(--focus-offset);
+  }
+  @media (max-width: 720px) {
+    min-height: var(--control-size-touch);
+    min-width: var(--control-size-touch);
+  }
 }
 
 @media(max-width:720px){
@@ -315,10 +324,7 @@ html,body{scrollbar-width:auto;scrollbar-color:var(--color-scrollbar) var(--colo
 ::-webkit-scrollbar-thumb:hover{background:var(--color-text-body)}
 @media(forced-colors:active){html:root{scrollbar-color:auto}.locale-switch button[aria-pressed=true]{outline:var(--focus-width) solid Highlight}}
 /* Cert owns its theme behavior; this adapter supplies the same icon-control recipe. */
-html:root .certification-hub .hub-theme-toggle{display:grid;place-items:center;width:var(--control-size);height:var(--control-size);padding:0;border:1px solid var(--color-border);border-radius:50%;background:var(--color-control);color:var(--color-text);cursor:pointer}
-html:root .certification-hub .hub-theme-toggle:hover{border-color:var(--color-accent);background:var(--color-control-hover);color:var(--color-accent)}
-html:root .certification-hub .hub-theme-toggle:active{background:var(--color-control-active)}
-html:root .certification-hub .hub-theme-toggle:focus-visible{outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
+html:root .certification-hub .hub-theme-toggle{display:grid;place-items:center;width:var(--control-size);height:var(--control-size);padding:0;border-width:1px;border-radius:50%;cursor:pointer}
 html:root .certification-hub .hub-theme-toggle:disabled{opacity:var(--disabled-opacity);cursor:default}
 @media(max-width:720px){html:root .certification-hub .hub-theme-toggle{width:var(--control-size-touch);height:var(--control-size-touch)}}
 
