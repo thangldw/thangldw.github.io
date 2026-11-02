@@ -56,7 +56,7 @@ Family, size, line height, weight, and tracking are independent shared tokens. U
 
 Homepage: sidebar plus fluid main column, 1280 × 720 compact desktop target across EN/VN/JP/CN, growing frame on large screens, vertical reflow on mobile. Apps: searchable grouped catalog. Cert: its existing learning application layout.
 
-The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. A shared fixed support action occupies the bottom-right safe area; page composition must keep it clear of essential links.
+The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. Community, Macinity and KakeFlow use the opt-in `css/compact-footer.css` layout: site identity and a short navigation row, with support as an inline text action.
 
 ## Elevation & Depth
 

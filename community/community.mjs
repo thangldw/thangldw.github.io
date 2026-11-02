@@ -1,6 +1,6 @@
-import vi from './locales/vi.mjs';
-import ja from './locales/ja.mjs';
-import zh from './locales/zh.mjs';
+import vi from './locales/vi.mjs?v=20261103-compact';
+import ja from './locales/ja.mjs?v=20261103-compact';
+import zh from './locales/zh.mjs?v=20261103-compact';
 
 const messages = { en: {}, vi, ja, zh };
 const buttons = document.querySelectorAll('.locale-switch button');
@@ -31,7 +31,7 @@ for (const [key, selector, attribute] of attributes) {
 const kofi = document.querySelector('.support-kofi-button');
 if (kofi) kofi.textContent = 'Support on Ko-fi';
 const supportText = {
-  support: '.support-floating-trigger span, #supportDialogTitle',
+  support: '#supportDialogTitle',
   supportKicker: '.support-kicker',
   supportIntro: '#supportDialogIntro',
   international: '.support-international .support-option-label',
