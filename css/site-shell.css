@@ -256,6 +256,25 @@ html:root { background: var(--color-canvas); scrollbar-color: var(--color-scroll
 :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button):disabled{opacity:var(--disabled-opacity);cursor:default}
 .locale-switch button{background:transparent;font-size:var(--text-caption);border-color:transparent}
 .locale-switch button[aria-pressed=true]{background:var(--color-control);border-color:var(--color-border);color:var(--color-text)}
+
+html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button {
+  color: var(--color-neutral-control-ink);
+}
+html[data-theme="light"] .resume-home :is(.locale-switch button[aria-pressed="true"], .carousel-controls button) {
+  background-color: var(--color-neutral-control);
+  border-color: var(--color-neutral-control-border);
+}
+html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button:hover:not(:disabled) {
+  background-color: var(--color-neutral-control-hover);
+  border-color: var(--color-neutral-control-ink);
+}
+html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button:active:not(:disabled) {
+  background-color: var(--color-neutral-control-active);
+}
+html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button:focus-visible {
+  outline-color: var(--color-neutral-control-ink);
+}
+
 @media(max-width:720px){
  .site-brand, .app-owner-brand.site-brand{min-height:var(--logo-mark-size-mobile)}
  .site-brand .site-brand-mark,.app-owner-brand .site-brand-mark{width:var(--logo-mark-size-mobile);height:var(--logo-mark-size-mobile);font-size:var(--logo-mark-text-mobile)}
