@@ -60,7 +60,7 @@ The `--space-*` tokens preserve accepted spacing while removing local literals; 
 
 ## Elevation & Depth
 
-Content is flat and separated by restrained rules. Elevation is reserved for support and contact overlays. Reduced motion removes component transitions. Focus remains visible independently of elevation and color.
+Content is flat and separated by restrained rules. The floating support dialog uses elevation. Reduced motion removes component transitions. Focus remains visible independently of elevation and color.
 
 ## Shapes
 
