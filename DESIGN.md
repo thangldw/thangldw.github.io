@@ -78,6 +78,8 @@ Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `-
 
 The logo never adopts link underline or changes its geometry on hover. Controls have hover, pressed, focus-visible and disabled recipes; keyboard/ARIA semantics remain the responsibility of runtime behavior. Touch controls are at least 44px high. Navigation links retain link semantics.
 
+Across the shared shell, language selectors, theme toggles, carousel arrows and lesson pagination use neutral text on a transparent background in both themes. The selected language has a 1px underline. Hover and press add a neutral fill, and keyboard focus shows an outline.
+
 The generated Cert bundle is not hand-edited. Its learning/assessment internals can be migrated in the source repository later without introducing another token source. This release establishes shared foundation and shell consistency, rather than changing exam workflows.
 
 Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_site.py` before release. The design gate checks token/document drift, route literal debt, integration, shared recipes, and contrast. Verify rendered Home/Apps/Cert in both themes and mobile as well.
