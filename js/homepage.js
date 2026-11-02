@@ -5,11 +5,9 @@ const root = document.documentElement;
 const page = document.querySelector('.page');
 const rail = document.getElementById('project-rail');
 const status = document.querySelector('.carousel-status');
-const dialog = document.querySelector('.contact-dialog');
 const themeButton = document.getElementById('themeToggle');
 const localeButtons = [...document.querySelectorAll('.locale-switch button')];
 const [previousButton, nextButton] = document.querySelectorAll('.carousel-controls button');
-const copyButton = document.querySelector('.contact-actions button');
 let locale = 'en';
 let start = 0;
 let count = 3;
@@ -21,7 +19,6 @@ const fallbackProjects = [...rail.querySelectorAll('article')].map(article => ({
  description: article.querySelector('.project-description').textContent,
  catalogGroup: article.querySelector('.project-category').textContent === 'Learning' ? 'learning' : 'utilities'
 }));
-let copyStatus = '';
 let catalogFailed = false;
 const text = (selector, value) => { document.querySelector(selector).textContent = value; };
 
@@ -85,7 +82,7 @@ function renderLocale() {
  sections[1].querySelector('h2').textContent=t.languages;
  text('.contact h2',t.work);
  text('.contact p',t.invitation);
- text('.contact-trigger',t.discuss);
+ text('.project-contact-link',t.discuss);
  const supportLabel = document.querySelector('.support-floating-trigger span');
  if (supportLabel) supportLabel.textContent = t.support;
  text('.about .section-title',t.about);
@@ -108,18 +105,6 @@ function renderLocale() {
  previousButton.setAttribute('aria-label',t.previous);
  nextButton.setAttribute('aria-label',t.next);
  rail.setAttribute('aria-label',t.carousel);
- text('#contact-title',t.contactTitle);
- text('.contact-dialog>p',t.contactBody);
- document.querySelector('.dialog-close').setAttribute('aria-label',t.close);
- text('.contact-actions button',t.copy);
- const links = document.querySelectorAll('.contact-actions a');
- links[0].textContent=t.gmail;
- links[0].href=`https://mail.google.com/mail/?view=cm&fs=1&to=thangldw%40gmail.com&su=${encodeURIComponent(t.subject)}`;
- links[1].textContent=t.emailApp;
- const mailto=`mailto:thangldw@gmail.com?subject=${encodeURIComponent(t.subject)}`;
- document.querySelector('.email-address').href=mailto;
- links[1].href=mailto;
- text('.copy-status',copyStatus ? t[copyStatus] : '');
  renderProjects();
  syncTheme();
 }
@@ -134,13 +119,6 @@ nextButton.addEventListener('click',()=>move(1));
 rail.addEventListener('keydown',event=>{
  if (event.target!==rail || event.isComposing) return;
  if (event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); move(event.key==='ArrowRight'?1:-1); }
-});
-document.querySelector('.contact-trigger').addEventListener('click',()=>{copyStatus='';text('.copy-status','');dialog.showModal();});
-document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-copyButton.addEventListener('click',async()=>{
- try { await navigator.clipboard.writeText('thangldw@gmail.com'); copyStatus='copied'; }
- catch { copyStatus='copyFailed'; }
- text('.copy-status',locales[locale][copyStatus]);
 });
 document.addEventListener('themechange',syncTheme);
 new ResizeObserver(()=>{
