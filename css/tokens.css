@@ -11,6 +11,7 @@ html:root {
   --color-text-strong: #23291f;
   --color-text-muted: #535e4b;
   --color-border: #d1d7c9;
+  --color-section-divider: #d5d5d5;
   --color-border-strong: #bbb8ad;
   --color-accent: #965025;
   --color-on-accent: #ffffff;
@@ -223,6 +224,7 @@ html:root[data-theme="dark"] {
   --color-text-strong: #e5e6df;
   --color-text-muted: #b9bdb5;
   --color-border: #32382d;
+  --color-section-divider: var(--color-border);
   --color-border-strong: #52584d;
   --color-accent: #e69d6b;
   --color-on-accent: #11150e;
