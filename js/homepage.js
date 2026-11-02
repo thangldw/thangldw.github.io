@@ -82,7 +82,9 @@ function renderLocale() {
  sections[1].querySelector('h2').textContent=t.languages;
  text('.contact h2',t.work);
  text('.contact p',t.invitation);
- text('.project-contact-link',t.discuss);
+ const contactLink = document.querySelector('.project-contact-link');
+ contactLink.textContent = t.discuss;
+ contactLink.href = locale === 'en' ? '/contact/' : '/contact/?lang=' + locale;
  const supportLabel = document.querySelector('.support-floating-trigger span');
  if (supportLabel) supportLabel.textContent = t.support;
  text('.about .section-title',t.about);
