@@ -288,6 +288,11 @@ html:root[data-theme] :is(.locale-switch button, .carousel-controls button, .les
 }
 
 @media(max-width:720px){
+ .site-page .site-header:has(> .site-shell-inner .locale-switch){height:auto}
+ .site-header .site-shell-inner:has(.locale-switch){
+   height:auto; min-height:var(--space-64); padding-block:var(--space-8);
+   flex-wrap:wrap; gap:var(--space-4) var(--space-12);
+ }
  .site-brand, .app-owner-brand.site-brand{min-height:var(--logo-mark-size-mobile)}
  .site-brand .site-brand-mark,.app-owner-brand .site-brand-mark{width:var(--logo-mark-size-mobile);height:var(--logo-mark-size-mobile);font-size:var(--logo-mark-text-mobile)}
  :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button){min-height:var(--control-size-touch)}
