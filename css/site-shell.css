@@ -257,18 +257,33 @@ html:root { background: var(--color-canvas); scrollbar-color: var(--color-scroll
 .locale-switch button{background:transparent;font-size:var(--text-caption);border-color:transparent}
 .locale-switch button[aria-pressed=true]{background:var(--color-control);border-color:var(--color-border);color:var(--color-text)}
 
-html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button {
-  color: var(--color-neutral-control-ink);
+html[data-theme="light"] .resume-home .locale-switch button {
+  color: var(--color-text-description);
+  background-color: transparent;
+  border-color: transparent;
 }
-html[data-theme="light"] .resume-home :is(.locale-switch button[aria-pressed="true"], .carousel-controls button) {
+html[data-theme="light"] .resume-home .locale-switch button[aria-pressed="true"] {
+  color: var(--color-neutral-control-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--space-4);
+}
+html[data-theme="light"] .resume-home .locale-switch button:hover:not(:disabled) {
+  background-color: var(--color-neutral-control);
+}
+html[data-theme="light"] .resume-home .locale-switch button:active:not(:disabled) {
+  background-color: var(--color-neutral-control-hover);
+}
+html[data-theme="light"] .resume-home .carousel-controls button {
+  color: var(--color-neutral-control-ink);
   background-color: var(--color-neutral-control);
   border-color: var(--color-neutral-control-border);
 }
-html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button:hover:not(:disabled) {
+html[data-theme="light"] .resume-home .carousel-controls button:hover:not(:disabled) {
   background-color: var(--color-neutral-control-hover);
   border-color: var(--color-neutral-control-ink);
 }
-html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button:active:not(:disabled) {
+html[data-theme="light"] .resume-home .carousel-controls button:active:not(:disabled) {
   background-color: var(--color-neutral-control-active);
 }
 html[data-theme="light"] .resume-home :is(.locale-switch, .carousel-controls) button:focus-visible {
