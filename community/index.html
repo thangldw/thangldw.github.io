@@ -7,7 +7,7 @@
 <link rel="canonical" href="https://thangldw.github.io/community/">
 <meta property="og:type" content="website"><meta property="og:title" content="Contributing to the Community — Thang Luu"><meta property="og:description" content="Engineering beyond my own repositories: upstream code, collaboration and shared learning."><meta property="og:url" content="https://thangldw.github.io/community/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
 <meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg">
-<link rel="stylesheet" href="/css/community.css?v=20261103">
+<link rel="stylesheet" href="/css/community.css?v=20261103b">
 <link rel="stylesheet" href="/css/support-dialog.css?v=20261010warm">
 <link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
 <script src="/js/site-shell.js?v=20260727b"></script>
@@ -159,81 +159,193 @@
     <details>
       <summary><span data-copy="pr2214NoteTag" class="tag">REA #2214 · Data contracts</span> <span data-copy="pr2214NoteTitle">Make coverage a typed fact, not a diagnostic string</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr2214Problem">complete identical inventories were incorrectly reported as unknown.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr2214Decision">declare traversal scope and completeness at the producer, then compare structured coverage independently of notice text.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr2214Why">display messages can change without changing evidence semantics; consumer-side string heuristics are fragile.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr2214Tradeoff">a slightly richer evidence contract in exchange for deterministic comparisons and fewer false unknowns.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2214">#2214</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr2214Problem">Complete identical inventories were incorrectly reported as unknown.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr2214Decision">Declare traversal scope and completeness at the producer, then compare structured coverage independently of notice text.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr2214Why">Display messages can change without changing evidence semantics; consumer-side string heuristics are fragile.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr2214Tradeoff">A slightly richer evidence contract in exchange for deterministic comparisons and fewer false unknowns.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2214">#2214</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr1533NoteTag" class="tag">REA #1533 · Build versus reuse</span> <span data-copy="pr1533NoteTitle">Use WABT rather than invent a WASM parser</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1533Problem">saved WASM artifacts could not be inspected without an active target.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1533Decision">admit an explicitly selected local artifact and pinned WABT tools behind a narrow adapter; preserve digests and CLI/MCP parity.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1533Why">reuse a maintained decoder while constraining the trust boundary and provenance.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1533Tradeoff">a caller-supplied external toolchain instead of a new in-process parser.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1533">#1533</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr1533Problem">Saved WASM artifacts could not be inspected without an active target.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr1533Decision">Admit an explicitly selected local artifact and pinned WABT tools behind a narrow adapter; preserve digests and CLI/MCP parity.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr1533Why">Reuse a maintained decoder while constraining the trust boundary and provenance.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr1533Tradeoff">A caller-supplied external toolchain instead of a new in-process parser.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1533">#1533</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr2464NoteTag" class="tag">REA #2464 · Semantic comparison</span> <span data-copy="pr2464NoteTitle">Compare typed interfaces, not byte-level differences</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr2464Problem">changes in binary hashes or WAT type indices do not necessarily imply changed imports or exports.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr2464Decision">resolve typed interface facts once in the producer and compare retained Evidence without reparsing display text.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr2464Why">the comparison should answer API compatibility questions rather than file-identity questions.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr2464Tradeoff">duplicate names or incomplete inventories remain unknown rather than forcing a misleading verdict.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2464">#2464</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr2464Problem">Changes in binary hashes or WAT type indices do not necessarily imply changed imports or exports.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr2464Decision">Resolve typed interface facts once in the producer and compare retained Evidence without reparsing display text.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr2464Why">The comparison should answer API compatibility questions rather than file-identity questions.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr2464Tradeoff">Duplicate names or incomplete inventories remain unknown rather than forcing a misleading verdict.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2464">#2464</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr1379NoteTag" class="tag">Chemprop #1379 · Dynamic shapes</span> <span data-copy="pr1379NoteTitle">Prevent export-time graph-size specialization</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1379Problem">Python len(bmg.V) became specialized to the example molecule during torch.export, breaking inference on different graph sizes.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1379Decision">correct message-passing allocation to respect dynamic graph dimensions rather than freezing sample-derived length.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1379Why">an exported model must preserve the intended variable-size molecular graph contract.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1379Tradeoff">focus on the dynamic graph-size defect, with regression coverage, rather than redesigning message passing.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/chemprop/chemprop/pull/1379">#1379</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr1379Problem">Python len(bmg.V) became specialized to the example molecule during torch.export, breaking inference on different graph sizes.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr1379Decision">Correct message-passing allocation to respect dynamic graph dimensions rather than freezing sample-derived length.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr1379Why">An exported model must preserve the intended variable-size molecular graph contract.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr1379Tradeoff">Focus on the dynamic graph-size defect, with regression coverage, rather than redesigning message passing.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/chemprop/chemprop/pull/1379">#1379</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr1506NoteTag" class="tag">REA #1506 · Heuristics</span> <span data-copy="pr1506NoteTitle">Prefer bounded conventions over substring inference</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1506Problem">unrelated filenames were misclassified as Unity or Flutter, and generic Apple paths implied unsupported language/runtime conclusions.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1506Decision">match known complete library filenames and framework path segments.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1506Why">weak substring matches turn naming coincidences into false evidence.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1506Tradeoff">narrower detection may yield fewer hints but substantially more defensible ones, without schema changes.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1506">#1506</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr1506Problem">Unrelated filenames were misclassified as Unity or Flutter, and generic Apple paths implied unsupported language/runtime conclusions.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr1506Decision">Match known complete library filenames and framework path segments.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr1506Why">Weak substring matches turn naming coincidences into false evidence.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr1506Tradeoff">Narrower detection may yield fewer hints but substantially more defensible ones, without schema changes.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1506">#1506</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr502NoteTag" class="tag">Sony NMOS #502 · Standards</span> <span data-copy="pr502NoteTitle">Represent temporal redundancy explicitly</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr502Problem">existing SDP handling did not fully express the SMPTE 2022-7 temporal redundancy form.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr502Decision">retain SSRC-level identity, CNAME, delay and MID in structured parameters, with round-trip and invalid-input tests.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr502Why">protocol conversions must preserve semantics and reject transport layouts that cannot be represented faithfully.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr502Tradeoff">constrain the supported topology rather than silently coercing incompatible forms.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/sony/nmos-cpp/pull/502">#502</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr502Problem">Existing SDP handling did not fully express the SMPTE 2022-7 temporal redundancy form.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr502Decision">Retain SSRC-level identity, CNAME, delay and MID in structured parameters, with round-trip and invalid-input tests.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr502Why">Protocol conversions must preserve semantics and reject transport layouts that cannot be represented faithfully.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr502Tradeoff">Constrain the supported topology rather than silently coercing incompatible forms.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/sony/nmos-cpp/pull/502">#502</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr1601NoteTag" class="tag">OpenMed #1601 · Privacy correctness</span> <span data-copy="pr1601NoteTitle">Use context-gated deterministic identifiers</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1601Problem">Vietnamese identifiers and contact formats were missing from offline PII recognition.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1601Decision">add locale-specific patterns and require context for CCCD/CMND candidates that lack a public checksum.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr1601Why">treating every matching digit sequence as a national ID creates avoidable false positives.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr1601Tradeoff">context gating can miss isolated identifiers; synthetic golden cases make this limitation testable.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/maziyarpanahi/openmed/pull/1601">#1601</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr1601Problem">Vietnamese identifiers and contact formats were missing from offline PII recognition.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr1601Decision">Add locale-specific patterns and require context for CCCD/CMND candidates that lack a public checksum.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr1601Why">Treating every matching digit sequence as a national ID creates avoidable false positives.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr1601Tradeoff">Context gating can miss isolated identifiers; synthetic golden cases make this limitation testable.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/maziyarpanahi/openmed/pull/1601">#1601</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr101NoteTag" class="tag">Diagram Design #101 · Visual correctness</span> <span data-copy="pr101NoteTitle">Specify a quantitative visual contract</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr101Problem">adding a polar example alone would not guarantee faithful quantitative encoding.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr101Decision">define angle/radius semantics, zero baseline, accessible variants and adversarial geometry checks.</span></p>
-        <p><strong data-copy="why">Why:</strong> <span data-copy="pr101Why">visualizations should be validated against measurable semantics, not appearance alone.</span></p>
-        <p><strong data-copy="tradeoff">Trade-off:</strong> <span data-copy="pr101Tradeoff">intentionally restrict the supported variants to keep verification tractable.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/cathrynlavery/diagram-design/pull/134">#134</a> · <a href="https://github.com/cathrynlavery/diagram-design/pull/101">#101</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr101Problem">Adding a polar example alone would not guarantee faithful quantitative encoding.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr101Decision">Define angle/radius semantics, zero baseline, accessible variants and adversarial geometry checks.</dd>
+          </div>
+          <div>
+            <dt data-copy="why">Why</dt>
+            <dd data-copy="pr101Why">Visualizations should be validated against measurable semantics, not appearance alone.</dd>
+          </div>
+          <div>
+            <dt data-copy="tradeoff">Trade-off</dt>
+            <dd data-copy="pr101Tradeoff">Intentionally restrict the supported variants to keep verification tractable.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/cathrynlavery/diagram-design/pull/134">#134</a> · <a href="https://github.com/cathrynlavery/diagram-design/pull/101">#101</a></p>
       </div>
     </details>
   </div>
@@ -245,61 +357,145 @@
     <details>
       <summary><span data-copy="pr1482NoteTag" class="tag">REA #1482 · PE resources</span> <span data-copy="pr1482NoteTitle">Expose exact resource identities without decoding payloads</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1482Problem">PE analysts previously had to walk resource directory structures manually.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1482Decision">Add a bounded PE32/PE32+ inspector preserving numeric versus named identifiers, language, directory and payload ranges, SHA-256 and icon group relationships.</span></p>
-        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr1482WhyTradeoff">Keeping payload formats opaque avoids a broad decoder surface; malformed ranges or exhausted budgets fail rather than returning partial success.</span></p>
-        <p><strong data-copy="value">Value:</strong> <span data-copy="pr1482Value">Inspectable forensic evidence with explicit file offsets and identity.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1482">#1482</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr1482Problem">PE analysts previously had to walk resource directory structures manually.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr1482Decision">Add a bounded PE32/PE32+ inspector preserving numeric versus named identifiers, language, directory and payload ranges, SHA-256 and icon group relationships.</dd>
+          </div>
+          <div>
+            <dt data-copy="whyTradeoff">Why / trade-off</dt>
+            <dd data-copy="pr1482WhyTradeoff">Keeping payload formats opaque avoids a broad decoder surface; malformed ranges or exhausted budgets fail rather than returning partial success.</dd>
+          </div>
+          <div>
+            <dt data-copy="value">Value</dt>
+            <dd data-copy="pr1482Value">Inspectable forensic evidence with explicit file offsets and identity.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/1482">#1482</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr6252NoteTag" class="tag">xDSL #6252 · CI correctness</span> <span data-copy="pr6252NoteTitle">Enable a lint rule without changing runtime semantics</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr6252Problem">The HW dialect had redundant __post_init__ defaults duplicated from InitVar fields.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr6252Decision">Remove only redundant defaults and enable Ruff RUF033, backed by functional tests.</span></p>
-        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr6252WhyTradeoff">A narrowly scoped lint adoption avoids behavioral refactoring and retains dataclass construction compatibility.</span></p>
-        <p><strong data-copy="value">Value:</strong> <span data-copy="pr6252Value">Cleaner enforceable CI convention with minimal regression risk.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/xdslproject/xdsl/pull/6252">#6252</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr6252Problem">The HW dialect had redundant __post_init__ defaults duplicated from InitVar fields.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr6252Decision">Remove only redundant defaults and enable Ruff RUF033, backed by functional tests.</dd>
+          </div>
+          <div>
+            <dt data-copy="whyTradeoff">Why / trade-off</dt>
+            <dd data-copy="pr6252WhyTradeoff">A narrowly scoped lint adoption avoids behavioral refactoring and retains dataclass construction compatibility.</dd>
+          </div>
+          <div>
+            <dt data-copy="value">Value</dt>
+            <dd data-copy="pr6252Value">Cleaner enforceable CI convention with minimal regression risk.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/xdslproject/xdsl/pull/6252">#6252</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr1593NoteTag" class="tag">OpenMed #1593 · National-ID validation</span> <span data-copy="pr1593NoteTitle">Validate Hungarian TAJ with a real checksum</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr1593Problem">A language pack needs to distinguish plausible nine-digit sequences from structurally valid national identifiers.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr1593Decision">Use the documented alternating 3/7 checksum, locale-specific formats, synthetic surrogates and offline golden tests.</span></p>
-        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr1593WhyTradeoff">Checksum validation is stricter than regex-only detection; synthetic fixtures avoid using real personal data. Pattern-based coverage remains locale-bounded.</span></p>
-        <p><strong data-copy="value">Value:</strong> <span data-copy="pr1593Value">Deterministic TAJ detection and anonymization support.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/maziyarpanahi/openmed/pull/1593">#1593</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr1593Problem">A language pack needs to distinguish plausible nine-digit sequences from structurally valid national identifiers.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr1593Decision">Use the documented alternating 3/7 checksum, locale-specific formats, synthetic surrogates and offline golden tests.</dd>
+          </div>
+          <div>
+            <dt data-copy="whyTradeoff">Why / trade-off</dt>
+            <dd data-copy="pr1593WhyTradeoff">Checksum validation is stricter than regex-only detection; synthetic fixtures avoid using real personal data. Pattern-based coverage remains locale-bounded.</dd>
+          </div>
+          <div>
+            <dt data-copy="value">Value</dt>
+            <dd data-copy="pr1593Value">Deterministic TAJ detection and anonymization support.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/maziyarpanahi/openmed/pull/1593">#1593</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr193NoteTag" class="tag">Hatena #193 · Workflow portability</span> <span data-copy="pr193NoteTitle">Resolve working directories without new caller configuration</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr193Problem">Blog workflows assumed the configuration lived at the repository root.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr193Decision">Find the single tracked blogsync.yaml, use its parent directory consistently for draft processing, change detection and uploads.</span></p>
-        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr193WhyTradeoff">Automatically resolving a unique tracked config avoids new workflow inputs; missing or ambiguous configuration fails explicitly.</span></p>
-        <p><strong data-copy="value">Value:</strong> <span data-copy="pr193Value">Supports subdirectory layouts while preserving existing caller contracts.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/hatena/hatenablog-workflows/pull/193">#193</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr193Problem">Blog workflows assumed the configuration lived at the repository root.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr193Decision">Find the single tracked blogsync.yaml, use its parent directory consistently for draft processing, change detection and uploads.</dd>
+          </div>
+          <div>
+            <dt data-copy="whyTradeoff">Why / trade-off</dt>
+            <dd data-copy="pr193WhyTradeoff">Automatically resolving a unique tracked config avoids new workflow inputs; missing or ambiguous configuration fails explicitly.</dd>
+          </div>
+          <div>
+            <dt data-copy="value">Value</dt>
+            <dd data-copy="pr193Value">Supports subdirectory layouts while preserving existing caller contracts.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/hatena/hatenablog-workflows/pull/193">#193</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr2256NoteTag" class="tag">REA #2256 · Integrated via #2248</span> <span data-copy="pr2256NoteTitle">Normalize at the producer, not in each consumer</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr2256Problem">Decoded NIBArchive objects lost recognized keys needed for asset catalog joins.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr2256Decision">Expose the recognized scalar keys at the NIBArchive producer while retaining original nested values and decode budgets.</span></p>
-        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr2256WhyTradeoff">One semantic owner prevents divergent CLI/MCP interpretations; only allowlisted keys participate to avoid false resource matches.</span></p>
-        <p><strong data-copy="value">Value:</strong> <span data-copy="pr2256Value">Maintainer confirmed the approach was integrated into #2248 with coauthor credit.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2256">#2256</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr2256Problem">Decoded NIBArchive objects lost recognized keys needed for asset catalog joins.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr2256Decision">Expose the recognized scalar keys at the NIBArchive producer while retaining original nested values and decode budgets.</dd>
+          </div>
+          <div>
+            <dt data-copy="whyTradeoff">Why / trade-off</dt>
+            <dd data-copy="pr2256WhyTradeoff">One semantic owner prevents divergent CLI/MCP interpretations; only allowlisted keys participate to avoid false resource matches.</dd>
+          </div>
+          <div>
+            <dt data-copy="value">Value</dt>
+            <dd data-copy="pr2256Value">Maintainer confirmed the approach was integrated into #2248 with coauthor credit.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/morluto/rea/pull/2256">#2256</a></p>
       </div>
     </details>
     <details>
       <summary><span data-copy="pr105NoteTag" class="tag">Diagram Design #105 · Integrated via #134</span> <span data-copy="pr105NoteTitle">Turn documentation arithmetic into a tested invariant</span></summary>
       <div class="decision-content">
-        <p><strong data-copy="problem">Problem:</strong> <span data-copy="pr105Problem">A reproducibility checklist incorrectly gave effective width 972 instead of 964 pixels and duplicated an item number.</span></p>
-        <p><strong data-copy="decision">Decision:</strong> <span data-copy="pr105Decision">Correct the width formula and checklist numbering; add documentation synchronization regression checks.</span></p>
-        <p><strong data-copy="whyTradeoff">Why / trade-off:</strong> <span data-copy="pr105WhyTradeoff">The geometry formula affects real layout output, so testing the documented invariant is more durable than a text-only correction.</span></p>
-        <p><strong data-copy="value">Value:</strong> <span data-copy="pr105Value">Maintainer confirmed inclusion in merged #134 with preserved authorship.</span></p>
-        <p><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/cathrynlavery/diagram-design/pull/105">#105</a></p>
+        <dl class="decision-fields">
+          <div>
+            <dt data-copy="problem">Problem</dt>
+            <dd data-copy="pr105Problem">A reproducibility checklist incorrectly gave effective width 972 instead of 964 pixels and duplicated an item number.</dd>
+          </div>
+          <div>
+            <dt data-copy="decision">Decision</dt>
+            <dd data-copy="pr105Decision">Correct the width formula and checklist numbering; add documentation synchronization regression checks.</dd>
+          </div>
+          <div>
+            <dt data-copy="whyTradeoff">Why / trade-off</dt>
+            <dd data-copy="pr105WhyTradeoff">The geometry formula affects real layout output, so testing the documented invariant is more durable than a text-only correction.</dd>
+          </div>
+          <div>
+            <dt data-copy="value">Value</dt>
+            <dd data-copy="pr105Value">Maintainer confirmed inclusion in merged #134 with preserved authorship.</dd>
+          </div>
+        </dl>
+        <p class="decision-evidence"><span data-copy="evidence">PR evidence</span> · <a href="https://github.com/cathrynlavery/diagram-design/pull/105">#105</a></p>
       </div>
     </details>
   </div>
