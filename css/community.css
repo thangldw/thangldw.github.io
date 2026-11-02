@@ -56,8 +56,36 @@ main h3 { font-size: var(--text-title); line-height: var(--leading-heading); }
 .decisions details { border-top: 1px solid var(--color-border); }
 .decisions summary { padding: var(--space-12) 0; cursor: pointer; font-weight: var(--weight-medium); }
 .decisions summary .tag { display: inline; margin-inline-end: var(--space-8); }
-.decision-content { padding-bottom: var(--space-12); }
-.decision-content p { font-size: var(--text-body-sm); max-width: 75ch; overflow-wrap: anywhere; }
+.decision-content { container-type: inline-size; padding-bottom: var(--space-16); }
+.decision-fields { margin: 0; }
+.decision-fields > div {
+  display: grid;
+  gap: var(--space-4);
+  padding-block: var(--space-12);
+}
+.decision-fields > div + div, .decision-evidence {
+  border-top: 1px solid color-mix(in srgb, var(--color-section-divider) 65%, var(--color-canvas));
+}
+.decision-fields dt {
+  color: var(--color-text);
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+}
+.decision-fields dd {
+  margin: 0;
+  color: var(--color-text-description);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-prose);
+  overflow-wrap: anywhere;
+}
+.decision-evidence { margin: 0; padding-top: var(--space-12); font-size: var(--text-body-sm); }
+@container (min-width: 34rem) {
+  .decision-fields > div {
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    align-items: baseline;
+    column-gap: var(--space-16);
+  }
+}
 .credit { display: flex; flex-wrap: wrap; gap: var(--space-12) var(--space-24); justify-content: space-between; align-items: baseline; }
 .site-foot.community-footer { border-top: 1px solid var(--color-border); padding-block: var(--space-24) var(--space-64); text-align: start; font-family: var(--font-ui); }
 .credit nav { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16); }
