@@ -287,6 +287,16 @@ html:root[data-theme] :is(.locale-switch button, .carousel-controls button, .les
   }
 }
 
+/* An SVG loaded as an image cannot inherit the theme button's currentColor. */
+@media (forced-colors: none) {
+  html[data-theme="light"] #themeToggle > img[src$="/moon.svg"] {
+    filter: brightness(0) invert(35.7%);
+  }
+  html[data-theme="dark"] #themeToggle > img[src$="/sun.svg"] {
+    filter: brightness(0) invert(73.7%);
+  }
+}
+
 @media(max-width:720px){
  .site-page .site-header:has(> .site-shell-inner .locale-switch){height:auto}
  .site-header .site-shell-inner:has(.locale-switch){
