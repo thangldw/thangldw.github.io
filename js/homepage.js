@@ -1,4 +1,4 @@
-import { locales, projectTranslations } from './home-locales.mjs';
+import { locales, projectTranslations } from './home-locales.mjs?v=20261103-icons';
 import { sortProjects, circularIndex, visibleProjects } from './home-project-order.mjs';
 
 const root = document.documentElement;
@@ -82,9 +82,11 @@ function renderLocale() {
  sections[1].querySelector('h2').textContent=t.languages;
  text('.contact h2',t.work);
  text('.contact p',t.invitation);
- const contactLink = document.querySelector('.project-contact-link');
- contactLink.textContent = t.discuss;
- contactLink.href = locale === 'en' ? '/contact/' : '/contact/?lang=' + locale;
+ document.querySelectorAll('[data-contact-label]').forEach(link => {
+  const label = t[link.dataset.contactLabel];
+  link.setAttribute('aria-label', label);
+  link.title = label;
+ });
  const supportLabel = document.querySelector('.support-floating-trigger span');
  if (supportLabel) supportLabel.textContent = t.support;
  text('.about .section-title',t.about);
