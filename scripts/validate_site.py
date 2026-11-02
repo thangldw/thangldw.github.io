@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import parse_qs, unquote, urlsplit
 
 from audit_ui_standards import audit_site
 from validate_design_system import audit_design_system
@@ -485,7 +485,15 @@ def main() -> int:
                 )
 
     home_references = parsed_pages.get(ROOT / "index.html", PageParser()).references
-    for contact_page in [ROOT / "index.html", *(ROOT / route.lstrip('/') / 'index.html' for route in CASE_STUDY_ROUTES.values())]:
+    if "/contact/" not in home_references:
+        errors.append("index.html: missing project contact link")
+    contact_landing = ROOT / "contact/index.html"
+    contact_links = [urlsplit(ref) for ref in parsed_pages.get(contact_landing, PageParser()).references]
+    if not any(link.scheme == 'https' and link.netloc == 'mail.google.com' and link.path == '/mail/'
+               and parse_qs(link.query).get('view') == ['cm']
+               and parse_qs(link.query).get('to') == [CONTACT_EMAIL] for link in contact_links):
+        errors.append("contact/index.html: missing Gmail web compose link for the portfolio owner")
+    for contact_page in [contact_landing, *(ROOT / route.lstrip('/') / 'index.html' for route in CASE_STUDY_ROUTES.values())]:
         references = parsed_pages.get(contact_page, PageParser()).references
         if not any(urlsplit(reference).scheme == 'mailto' and urlsplit(reference).path == CONTACT_EMAIL for reference in references):
             errors.append(f"{contact_page.relative_to(ROOT)}: missing portable email contact")
