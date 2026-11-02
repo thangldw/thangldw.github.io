@@ -48,6 +48,10 @@ html[data-theme=dark]{color-scheme:dark}
 
 .contact .contact-trigger{margin-top:var(--space-6)}
 
+.resume-home .layout {
+  --line: var(--color-section-divider);
+}
+
 .resume-home :is(.profile p, .bio p, .about-experience dd, .process-grid p,
                  .project-description, .contact-dialog > p:first-of-type) {
   color: var(--color-text-description);
