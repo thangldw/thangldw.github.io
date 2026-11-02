@@ -47,3 +47,8 @@ html[data-theme=dark]{color-scheme:dark}
 @media(max-width:899px){.resume-home .layout{padding-bottom:var(--space-64)}}
 
 .contact .contact-trigger{margin-top:var(--space-6)}
+
+.resume-home :is(.profile p, .bio p, .about-experience dd, .process-grid p,
+                 .project-description, .contact-dialog > p:first-of-type) {
+  color: var(--color-text-description);
+}

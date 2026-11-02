@@ -7,6 +7,7 @@ html:root {
   --color-surface-subtle: #e9ede3;
   --color-text: #23291f;
   --color-text-body: #535e4b;
+  --color-text-description: #5b5b5b;
   --color-text-strong: #23291f;
   --color-text-muted: #535e4b;
   --color-border: #d1d7c9;
@@ -218,6 +219,7 @@ html:root[data-theme="dark"] {
   --color-surface-subtle: #20261c;
   --color-text: #e5e6df;
   --color-text-body: #b9bdb5;
+  --color-text-description: var(--color-text-body);
   --color-text-strong: #e5e6df;
   --color-text-muted: #b9bdb5;
   --color-border: #32382d;
