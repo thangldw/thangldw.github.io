@@ -136,7 +136,7 @@ new ResizeObserver(()=>{
 renderLocale();
 previousButton.disabled=nextButton.disabled=true;
 window.portfolioProjectsReady.then(()=>{
- projects=sortProjects(window.portfolioProjects.concat(window.portfolioLearningCollections));
+ projects=sortProjects(window.portfolioProjects);
  previousButton.disabled=nextButton.disabled=projects.length<2;
  renderProjects();
 }).catch(()=>{
