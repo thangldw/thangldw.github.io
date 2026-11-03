@@ -1,5 +1,5 @@
 /* Opt-in footer shared by the portfolio and its product sites. */
-body:where(.resume-home, .portfolio-catalog, .not-found-page, [data-page-kind="content"]):has(> .compact-footer) {
+body:where(.portfolio-catalog, .not-found-page, [data-page-kind="content"]):has(> .compact-footer) {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
