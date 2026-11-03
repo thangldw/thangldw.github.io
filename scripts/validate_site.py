@@ -385,7 +385,10 @@ def main() -> int:
         is_redirect = parser.refreshes or any(urlsplit(reference).path.endswith("redirect.js") for reference in parser.references)
         if page != ROOT / "index.html" and not is_redirect:
             support_scripts = [reference for reference in parser.references if urlsplit(reference).path == "/js/support-dialog.js"]
-            if not support_scripts and "Support my work" not in page.read_text(encoding="utf-8"):
+            if parser.classes["footer-signature"]:
+                if support_scripts:
+                    errors.append(f"{page.relative_to(ROOT)}: signature-only footer must not load the support dialog")
+            elif not support_scripts and "Support my work" not in page.read_text(encoding="utf-8"):
                 errors.append(f"{page.relative_to(ROOT)}: missing optional support entry")
 
         duplicates = sorted(key for key, count in Counter(parser.ids).items() if count > 1)
