@@ -10,14 +10,18 @@ const localeButtons = [...document.querySelectorAll('.locale-switch button')];
 const [previousButton, nextButton] = document.querySelectorAll('.carousel-controls button');
 let locale = 'en';
 let start = 0;
-let count = 3;
+function visibleProjectCount() {
+ return Number(getComputedStyle(rail).getPropertyValue('--visible-projects')) || 1;
+}
+let count = visibleProjectCount();
 let projects = [];
 const fallbackProjects = [...rail.querySelectorAll('article')].map(article => ({
  id: article.dataset.projectId,
  title: article.querySelector('h3').textContent,
  href: article.querySelector('a').href,
  description: article.querySelector('.project-description').textContent,
- catalogGroup: article.querySelector('.project-category').textContent === 'Learning' ? 'learning' : 'utilities'
+ catalogGroup: article.querySelector('.project-category').textContent === 'Learning' ? 'learning' : 'utilities',
+ category: article.querySelector('.project-category').textContent === 'Games' ? 'games' : undefined
 }));
 let catalogFailed = false;
 const text = (selector, value) => { document.querySelector(selector).textContent = value; };
@@ -47,7 +51,7 @@ function renderProjects() {
   title.textContent = project.title;
   const description = document.createElement('p');
   description.className = 'project-description';
-  description.textContent = locale === 'en' ? project.featuredDescription || project.catalogDescription || project.description : projectTranslations[locale][project.id] || project.description;
+  description.textContent = locale === 'en' ? project.featuredDescription || project.catalogDescription || project.description : projectTranslations[locale][project.id] || project.localizedDescriptions?.[locale] || project.description;
   const link = document.createElement('a');
   link.href = project.href;
   link.textContent = t.view;
@@ -59,8 +63,8 @@ function renderProjects() {
   return article;
  });
  rail.replaceChildren(...cards);
- if (projects.length) status.textContent = t.count(start+1,circularIndex(start+count-1,projects.length)+1,projects.length);
- if (catalogFailed) status.textContent = t.catalogFailed;
+ if (projects.length) status.textContent = t.count(start+1,circularIndex(start+cards.length-1,projects.length)+1,projects.length);
+ else status.textContent = catalogFailed ? t.catalogFailed : '';
 }
 function renderLocale() {
  const t = locales[locale];
@@ -126,7 +130,7 @@ rail.addEventListener('keydown',event=>{
 });
 document.addEventListener('themechange',syncTheme);
 new ResizeObserver(()=>{
- const visible=Number(getComputedStyle(rail).getPropertyValue('--visible-projects')) || 3;
+ const visible=visibleProjectCount();
  if(visible!==count){count=visible;renderProjects();}
 }).observe(rail);
 renderLocale();
