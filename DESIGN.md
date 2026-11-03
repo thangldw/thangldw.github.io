@@ -56,7 +56,7 @@ Family, size, line height, weight, and tracking are independent shared tokens. U
 
 Homepage: sidebar plus fluid main column, 1280 × 720 compact desktop target across EN/VN/JP/CN, growing frame on large screens, vertical reflow on mobile. Apps: searchable grouped catalog. Cert: its existing learning application layout.
 
-The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. Community, Macinity and KakeFlow use the opt-in `css/compact-footer.css` layout: a centered signature with the page or app name, the current year, and the English line “thang. crafted with care. stay steadfast, stay free”. The separate floating support button uses the same component as Japan PR Guide.
+The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. Community, Macinity and KakeFlow use the opt-in `css/compact-footer.css` layout: a centered signature with the page or app name, the current year, and the English line “thang. crafted with care. stay steadfast, stay free”. Portfolio pages use the same floating support button as Japan PR Guide. Load the shared support stylesheet and script and let the script mount the button directly on the page body.
 
 ## Elevation & Depth
 
