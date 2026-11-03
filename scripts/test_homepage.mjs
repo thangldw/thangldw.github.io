@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { locales, projectTranslations } from '../js/home-locales.mjs';
 import { sortProjects, circularIndex, visibleProjects } from '../js/home-project-order.mjs';
 const catalog=JSON.parse(await readFile(new URL('../js/projects-data.json',import.meta.url),'utf8'));
-const projects=sortProjects(catalog.projects.concat(catalog.learningCollections));
+const projects=sortProjects(catalog.projects);
 assert.equal(new Set(projects.map(project=>project.id)).size,projects.length);
 assert.equal(projects[0].title,'3級FP');
 assert.equal(projects.find(p=>p.id==='macinity').title,'Macinity');
