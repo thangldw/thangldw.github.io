@@ -72,3 +72,10 @@
 .compact-footer .footer-signature [data-footer-year] { color: inherit; }
 .compact-footer .footer-signature strong { color: var(--color-text); font-weight: var(--weight-semibold); }
 .compact-footer .footer-signature a { display: inline; min-height: 0; }
+
+/* At tablet widths the centered signature can reach the fixed support button. */
+@media (min-width: 681px) and (max-width: 960px) {
+  .site-page > .compact-footer:has(~ .support-floating-trigger) {
+    padding-bottom: calc(var(--space-24) + var(--control-size-touch));
+  }
+}
