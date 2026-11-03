@@ -3,8 +3,6 @@
 .quickstart .install-options{margin:0}.quickstart>.code-surface{margin-top:var(--space-12)}
 @media(max-width:1100px){.quickstart .section-heading{flex-wrap:wrap}.quickstart .install-options{order:3;width:100%}}
 @media(max-width:760px){.quickstart .install-options{order:initial}.check-groups p{font-size:var(--text-body-lg)}.graph-connector{min-height:var(--space-28)}}
-/* Leave the shared floating support action a clear area beside footer links. */
-@media(min-width:761px){footer{padding-right:240px}}
 
 /* Spatial overview follows the selected mockup; DOM order retains the workflow. */
 @media(min-width:1101px){

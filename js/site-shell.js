@@ -61,7 +61,9 @@
     });
   }
 
-  function initializeThemeControl() {
+  function initializeShell() {
+    var footerYear = document.querySelector(".footer-signature [data-footer-year]");
+    if (footerYear) footerYear.textContent = String(new Date().getFullYear());
     bindThemeControl();
     observeThemeControl();
   }
@@ -70,6 +72,6 @@
     ? root.dataset.theme
     : preferredTheme();
 
-  if (document.body) initializeThemeControl();
-  else document.addEventListener("DOMContentLoaded", initializeThemeControl);
+  if (document.body) initializeShell();
+  else document.addEventListener("DOMContentLoaded", initializeShell);
 })();
