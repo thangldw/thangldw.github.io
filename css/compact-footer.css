@@ -60,3 +60,15 @@
 @media (max-width: 360px) {
   .compact-footer nav { column-gap: var(--space-8); }
 }
+
+.compact-footer .footer-signature {
+  width: 100%;
+  margin: 0;
+  padding-block: var(--space-8);
+  color: inherit;
+  text-align: center;
+}
+.compact-footer .footer-signature > span { display: inline-block; max-width: 100%; color: inherit; }
+.compact-footer .footer-signature [data-footer-year] { color: inherit; }
+.compact-footer .footer-signature strong { color: var(--color-text); font-weight: var(--weight-semibold); }
+.compact-footer .footer-signature a { display: inline; min-height: 0; }
