@@ -20,6 +20,12 @@ SITE_URL = "https://thangldw.github.io"
 ANALYTICS_SCRIPT = "/js/analytics.js"
 CONTACT_EMAIL = "thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
+APP_REDIRECTS = {
+    "apps/japan-pr-guide/index.html": "/japan-pr-guide/",
+    "apps/maintainer-defense/index.html": "/awesome-maintainer-defense/",
+    "apps/proofline/index.html": "/proofline/",
+    "apps/ragops/index.html": "/ragops/",
+}
 EXPECTED_PROJECT_VERSIONS = {
     "ragops": "v2.0.2",
     "proofline": "v2.0.2",
@@ -447,10 +453,18 @@ def main() -> int:
                 if destination.path != expected or destination.scheme or destination.netloc or not (ROOT / expected.lstrip("/") / "index.html").is_file():
                     errors.append(f"{relative}: invalid standalone study redirect")
                 continue
-            if relative != "apps/japan-pr-guide/index.html" or parser.refreshes != ["0; url=/japan-pr-guide/"]:
-                errors.append(f"{page.relative_to(ROOT)}: unapproved redirect")
-            elif 'location.replace("/japan-pr-guide/" + location.search + location.hash)' not in page.read_text():
-                errors.append(f"{page.relative_to(ROOT)}: redirect must preserve query and hash")
+            if relative not in APP_REDIRECTS:
+                errors.append(f"{relative}: unapproved redirect")
+
+    for relative, destination in APP_REDIRECTS.items():
+        page = ROOT / relative
+        parser = parsed_pages.get(page)
+        if not parser or parser.refreshes != [f"0; url={destination}"]:
+            errors.append(f"{relative}: expected redirect to {destination}")
+        elif parser.canonicals != [SITE_URL + destination]:
+            errors.append(f"{relative}: incorrect canonical URL")
+        elif f'location.replace("{destination}" + location.search + location.hash)' not in page.read_text():
+            errors.append(f"{relative}: redirect must preserve query and hash")
 
     for route in CASE_STUDY_ROUTES.values():
         page_file = ROOT / route.lstrip("/") / "index.html"
