@@ -9,7 +9,7 @@ import {
   HistoricalScreen,
   RequirementsScreen,
   ScoreInspector,
-  SourceFooter,
+  SourceNotes,
   StepProgress,
 } from "./components/ScoreCalculator";
 import {
@@ -216,7 +216,7 @@ export function App() {
         </div>
       ) : null}
 
-      <SourceFooter />
+      <SourceNotes />
       <a className="app-explore-link" href="/apps/">Explore more apps →</a>
     </div>
   );

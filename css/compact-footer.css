@@ -1,5 +1,10 @@
 /* Opt-in footer shared by the portfolio and its product sites. */
-.site-page > .compact-footer {
+body:where(.resume-home, .portfolio-catalog, .not-found-page, [data-page-kind="content"]):has(> .compact-footer) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+body > .compact-footer {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -8,7 +13,8 @@
   gap: 0 var(--space-24);
   width: 100%;
   max-width: 1600px;
-  margin-inline: auto;
+  margin: auto auto 0;
+  flex: none;
   padding: var(--space-8) var(--space-56);
   border-top: 1px solid var(--color-section-divider);
   background: var(--color-canvas);
@@ -51,10 +57,10 @@
 /* The shared dialog sets aria-controls when it binds the trigger. */
 .compact-footer [data-support-open]:not([aria-controls]) { display: none; }
 @media (max-width: 1100px) {
-  .site-page > .compact-footer { padding-inline: var(--space-32); }
+  body > .compact-footer { padding-inline: var(--space-32); }
 }
 @media (max-width: 600px) {
-  .site-page > .compact-footer { padding-inline: var(--space-16); }
+  body > .compact-footer { padding-inline: var(--space-16); }
   .compact-footer nav { flex-basis: 100%; gap: 0 var(--space-12); }
 }
 @media (max-width: 360px) {
@@ -65,6 +71,7 @@
   width: 100%;
   margin: 0;
   padding-block: var(--space-8);
+  font: inherit;
   color: inherit;
   text-align: center;
 }
@@ -75,7 +82,7 @@
 
 /* At tablet widths the centered signature can reach the fixed support button. */
 @media (min-width: 681px) and (max-width: 960px) {
-  .site-page > .compact-footer:has(~ .support-floating-trigger) {
+  body > .compact-footer:has(~ .support-floating-trigger) {
     padding-bottom: calc(var(--space-24) + var(--control-size-touch));
   }
 }

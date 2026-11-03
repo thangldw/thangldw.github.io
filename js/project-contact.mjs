@@ -13,6 +13,7 @@ function render(lang) {
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
   document.title = t.discuss + ' — Thang Luu';
   document.querySelector('h1').textContent = t.discuss;
+  document.querySelector('[data-footer-name]').textContent = t.discuss;
   document.querySelector('.skip-link').textContent = t.skip;
   document.querySelector('.site-brand').setAttribute('aria-label', t.home);
   document.querySelector('.locale-switch').setAttribute('aria-label', t.languageSwitch);

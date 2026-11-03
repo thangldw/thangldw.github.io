@@ -420,9 +420,9 @@ export function ApplicationPlanScreen({ evidenceReady, onBack, onToggle, result 
   );
 }
 
-export function SourceFooter() {
+export function SourceNotes() {
   return (
-    <footer className="source-footer">
+    <section className="source-footer" aria-label="Sources and guidance">
       <div className="source-guidance"><ShieldCheck size={22} aria-hidden="true" /><p><strong>Guidance only, not a legal determination.</strong><span lang="vi">Chỉ mang tính hướng dẫn, không phải quyết định pháp lý.</span></p></div>
       <nav className="source-links" aria-label="Official reference sources">
         <a href="https://www.moj.go.jp/isa/content/001398882.pdf" target="_blank" rel="noreferrer">MOJ points table <ArrowSquareOut size={13} /></a>
@@ -430,6 +430,6 @@ export function SourceFooter() {
         <a href="https://www.moj.go.jp/isa/10_00279.html" target="_blank" rel="noreferrer">Published 2027 guideline <ArrowSquareOut size={13} /></a>
       </nav>
       <p className="source-reviewed"><strong>Sources checked <time dateTime="2026-10-05">05 Oct 2026</time></strong><span lang="vi">Đối chiếu nguồn ngày 05/10/2026</span></p>
-    </footer>
+    </section>
   );
 }
