@@ -2,7 +2,6 @@ import vi from './locales/vi.mjs?v=20261103-signature';
 import ja from './locales/ja.mjs?v=20261103-signature';
 import zh from './locales/zh.mjs?v=20261103-signature';
 
-document.querySelector('[data-footer-year]').textContent = String(new Date().getFullYear());
 
 const messages = { en: {}, vi, ja, zh };
 const buttons = document.querySelectorAll('.locale-switch button');
