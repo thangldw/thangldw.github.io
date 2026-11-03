@@ -127,7 +127,7 @@ body.portfolio-app :where(input, select, textarea) {
   box-shadow: none !important;
 }
 
-body.portfolio-app :where(button, .btn, label.btn) {
+body.portfolio-app :where(button:not(.support-floating-trigger), .btn, label.btn) {
   border-radius: 8px !important;
   box-shadow: none !important;
   letter-spacing: 0 !important;
