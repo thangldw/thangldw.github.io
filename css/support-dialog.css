@@ -20,6 +20,11 @@
   cursor: pointer;
 }
 
+:where(.site-page, [data-page-kind="content"]) > .support-floating-trigger {
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .support-floating-trigger:hover {
   filter: brightness(1.06);
 }
