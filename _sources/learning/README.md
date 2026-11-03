@@ -10,6 +10,8 @@ Run `npm ci`, `npm run build:pages`, `node --test tests/bank-session.test.mjs te
 
 Production loads official root `/css/site-shell.css` and `/js/site-shell.js`. Route CSS owns content layout and extends the canonical Vietnamese optical-metrics rule. Local development uses `npm run dev -- --host 127.0.0.1 --port 8797 --strictPort`.
 
+The Pages generator adds the portfolio signature and floating support button to the directory and shared certification pages. It uses the catalog short name for each signature. The public BJT project, dedicated PMP and JLPT N1 workspaces, and Classic pages keep their own layouts.
+
 ## Scope and boundaries
 
 Vietnamese navigation and guidance; source-language questions remain unchanged. Guided lessons cover one AWS RDS topic and one Japanese negation-scope topic; chapter outlines are not complete courses. Question practice uses the existing controlled API at its approved production origin. PMP uses its existing separate workspace; HSK has no API question bank. No full-exam readiness or pass-probability claims.
