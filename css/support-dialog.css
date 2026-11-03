@@ -25,14 +25,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Keep answers and navigation tappable during quick practice and guided lessons. */
-@media (max-width: 720px), (max-width: 1024px) and (pointer: coarse) {
-  .site-page:has(.bank-practice .question-toolbar, .study-page .steps) > .support-floating-trigger {
-    position: static;
-    display: flex;
-    width: fit-content;
-    margin: 0 auto max(var(--space-16), env(safe-area-inset-bottom));
-  }
+/* Keep the support button below the content during quick practice and guided lessons. */
+.site-page:has(.bank-practice .question-toolbar, .study-page .steps) > .support-floating-trigger {
+  position: static;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto max(var(--space-16), env(safe-area-inset-bottom));
 }
 
 .support-floating-trigger:hover {
