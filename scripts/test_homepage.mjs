@@ -9,7 +9,7 @@ assert.equal(projects[0].title,'3級FP');
 assert.equal(projects.find(p=>p.id==='macinity').title,'Macinity');
 assert.equal(projects.find(p=>p.id==='macinity').status,'v3.1.0');
 assert.equal(projects.findIndex(project=>project.title==='AP') < projects.findIndex(project=>project.title==='Awesome Maintainer Defense'),true);
-for(const count of [1,2,3]) {
+for(const count of [1,2,3,5]) {
  let start=0;
  const visited=new Set();
  for(let index=0;index<projects.length*3;index++) {
@@ -32,7 +32,7 @@ for(const locale of ['en','vi','ja','zh']) {
  assert.equal(t.roles.length,3);
  assert.equal(t.process.length,4);
  assert.equal(t.bio.length,2);
- assert.ok(t.count(1,3,projects.length).includes(String(projects.length)));
- if(locale!=='en') for(const project of projects) assert.ok(projectTranslations[locale][project.id],`${locale}: missing ${project.id}`);
+ assert.ok(t.count(1,5,projects.length).includes(String(projects.length)));
+ if(locale!=='en') for(const project of projects) assert.ok(projectTranslations[locale][project.id] || project.localizedDescriptions?.[locale],`${locale}: missing ${project.id}`);
 }
-console.log(`Passed circular navigation in both directions at 1/2/3 cards, A–Z ordering, and complete locale coverage for ${projects.length} projects.`);
+console.log(`Passed circular navigation in both directions at 1/2/3/5 cards, A–Z ordering, and complete locale coverage for ${projects.length} projects.`);

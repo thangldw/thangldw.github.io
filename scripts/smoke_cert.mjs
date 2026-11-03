@@ -151,7 +151,7 @@ try{
  await page.evaluate("document.getElementById('finish').click()");await page.waitUntil("document.getElementById('home')");await page.evaluate("document.getElementById('home').click();document.querySelector('[data-skill=\"kanji-reading\"]').click();document.getElementById('mode').value='recall';document.getElementById('count').value='5';document.getElementById('start').click()");await page.waitUntil("document.getElementById('check')&&!document.querySelector('[data-choice]')");await page.evaluate("document.getElementById('check').click()");await page.waitUntil("document.querySelector('[data-rate=good]')");await page.evaluate("document.querySelector('[data-rate=good]').click()");await page.waitUntil("document.getElementById('next')");assertResult(`JLPT self-recall flow ${width}`,{ok:true},page.exceptions);await page.evaluate("document.getElementById('finish').click();location.hash='#progress'");await page.waitUntil("document.getElementById('export')");assertResult(`JLPT progress layout ${width}`,await page.evaluate("({ok:document.documentElement.scrollWidth<=innerWidth})"),page.exceptions);
  }
  await page.navigate(origin+'/',1280);
- await page.waitUntil("document.querySelectorAll('#project-rail a').length===3&&!document.querySelector('.carousel-controls button').disabled");
+ await page.waitUntil("document.querySelectorAll('#project-rail a').length===5&&!document.querySelector('.carousel-controls button').disabled");
  const homeProjectPaths=new Set();
  for(let index=0;index<16;index++){
   for(const path of await page.evaluate("Array.from(document.querySelectorAll('#project-rail a')).map(a=>new URL(a.href).pathname)"))homeProjectPaths.add(path);
