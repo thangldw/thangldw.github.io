@@ -187,10 +187,14 @@ try {
       message: 'layout, focus, destination or analytics payload mismatch'
     })`), page.exceptions);
     await page.evaluate(`document.querySelector('.project-support').scrollIntoView({block:'start',behavior:'instant'})`);
-    await page.waitUntil('document.querySelector(".project-support").getBoundingClientRect().top >= -1 && document.querySelector(".project-support").getBoundingClientRect().top < 200');
+    await page.waitUntil('document.querySelector(".project-support").getBoundingClientRect().top >= -1 && document.querySelector(".project-support").getBoundingClientRect().bottom <= innerHeight');
     const shot = await page.send('Page.captureScreenshot', { format: 'png' });
     await writeFile(`${screenshots}/support-${width}.png`, Buffer.from(shot.data, 'base64'));
-    await page.evaluate(`document.querySelector('.project-support summary').click(); document.querySelector('.screen-actions .primary-button').click()`);
+    await page.evaluate(`document.querySelector('.project-support summary').click()`);
+    await page.waitUntil('!document.querySelector(".project-support details").open');
+    const compact = await page.send('Page.captureScreenshot', { format: 'png' });
+    await writeFile(`${screenshots}/compact-${width}.png`, Buffer.from(compact.data, 'base64'));
+    await page.evaluate(`document.querySelector('.screen-actions .primary-button').click()`);
     await page.waitUntil('document.querySelector(".historical-rail .primary-button")');
     await page.evaluate(`document.querySelector('.historical-rail .primary-button').click()`);
     await page.waitUntil('document.querySelector(".requirements-list")');
