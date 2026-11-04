@@ -141,7 +141,7 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
-The support trigger uses the Ko-fi cup logo, self-hosted at `assets/kofi-cup.png`, sourced from `https://storage.ko-fi.com/cdn/cup-border.png`.
+The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
 
 The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam Only. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Vietnam details start collapsed on mobile. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
 

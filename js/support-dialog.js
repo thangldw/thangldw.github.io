@@ -38,7 +38,7 @@
     trigger.className = "support-floating-trigger";
     trigger.setAttribute("aria-haspopup", "dialog");
     trigger.setAttribute("aria-controls", "supportDialog");
-    trigger.innerHTML = '<img class="support-trigger-icon" src="/assets/kofi-cup.png" width="22" height="18" alt="" aria-hidden="true"><span>Fuel my next build</span>';
+    trigger.innerHTML = '<span>Fuel my next build</span>';
 
     var slot = document.getElementById('supportSlot');
     document.body.insertAdjacentHTML("beforeend", dialogMarkup());
