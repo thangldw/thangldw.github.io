@@ -46,7 +46,7 @@
 
 /* Modal surfaces inherit the shared light/dark palette. */
 .support-dialog {
-  width: min(720px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px);
+  width: min(620px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px);
   margin: auto; padding: 0; overflow: auto; border: 1px solid var(--color-border);
   border-radius: var(--radius-control); background: var(--color-canvas); color: var(--color-text);
   box-shadow: 0 24px 80px rgba(0,0,0,.22); font: 400 14px/1.5 var(--font-ui,Inter,system-ui,sans-serif);
@@ -59,15 +59,15 @@
 .support-dialog .support-dialog-heading { position: static; display: block; width: auto; height: auto; min-height: 0; max-width: none; margin: 0; padding: 0 32px 0 0; border: 0; background: transparent; }
 .support-dialog-heading h2 { margin: 0 0 8px; color: var(--color-text); font-size: 24px; line-height: 1.2; letter-spacing: -.035em; font-weight: 600; }
 .support-dialog-heading p { margin: 0; color: var(--color-text-body); font-size: 13px; }
-.support-options { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 24px; margin-top: 24px; }
+.support-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
 .support-dialog .support-international, .support-dialog .support-github, .support-dialog .support-kofi, .support-dialog .support-bank { min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; }
 .support-dialog .support-bank { border-left: 1px solid var(--color-border); padding-left: 24px; }
 .support-options h3 { margin: 0 0 16px; font-size: 16px; font-weight: 600; color: var(--color-text); }
 .support-dialog .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-/* Ko-fi owns the payment form and its internal styling. */
-.support-kofi-frame { display: block; width: 100%; height: 640px; border: 0; border-radius: var(--radius-control); background: #fff; }
-.support-dialog .support-kofi-link, .support-dialog a.support-github { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-text-body); font-size: 12px; text-underline-offset: 3px; }
-.support-dialog .support-kofi-link:hover, .support-dialog a.support-github:hover { color: var(--color-accent); }
+.support-kofi figure { margin: 0; }
+.support-kofi img { display: block; width: 220px; max-width: 100%; height: auto; margin: auto; border-radius: 4px; }
+.support-dialog a.support-github { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-text-body); font-size: 12px; text-underline-offset: 3px; }
+.support-dialog a.support-github:hover { color: var(--color-accent); }
 .support-bank details { margin: 0; padding: 0; border: 0; background: transparent; }
 .support-bank summary { cursor: pointer; font-size: 16px; font-weight: 600; }
 .support-bank summary span { font-size: 12px; font-weight: 400; color: var(--color-text-body); }
