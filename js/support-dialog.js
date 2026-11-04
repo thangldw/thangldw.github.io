@@ -38,12 +38,11 @@
             '<article class="support-kofi"><a class="support-kofi-button" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer">Support via Ko-fi ↗</a></article>' +
           '</section>' +
           '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
-            '<summary>Bank transfer <span>Vietnam</span></summary>' +
-            '<figure><img src="/assets/support-vietqr-mb.jpg" width="845" height="1151" alt="VietQR: MB Bank, Luu Duc Thang, account 919324689999"></figure>' +
-            '<p class="support-bank-account">MB Bank · Luu Duc Thang<br><span>919324689999</span></p>' +
-            '<div class="support-bank-actions"><button id="supportCopyAccount" type="button">Copy account</button>' +
-              '<a href="/assets/support-vietqr-mb.jpg" download="thang-vietqr-mb.jpg">Download QR</a></div>' +
-            '<p id="supportCopyStatus" class="support-copy-status" role="status" aria-live="polite"></p>' +
+            '<summary>ShopeePay <span>Vietnam</span></summary>' +
+            '<figure><img src="/assets/support-shopeepay.jpg" width="1096" height="1096" alt="ShopeePay QR for voluntary support"></figure>' +
+            '<p class="support-bank-account">Scan with ShopeePay.</p>' +
+            '<div class="support-bank-actions">' +
+              '<a href="/assets/support-shopeepay.jpg" download="thang-shopeepay.jpg">Download QR</a></div>' +
           '</details></article>' +
         '</div></div></dialog>';
   }
@@ -100,18 +99,8 @@
         if (custom) amount.focus();
       });
     });
-    dialog.querySelector('#supportCopyAccount').addEventListener('click', async function () {
-      var status = dialog.querySelector('#supportCopyStatus');
-      try {
-        await navigator.clipboard.writeText('919324689999');
-        status.textContent = 'Account number copied.';
-      } catch {
-        status.textContent = 'Copy manually: 919324689999';
-      }
-    });
     function openSupport() {
       dialog.querySelector('#supportBankDetails').open = !window.matchMedia('(max-width: 680px)').matches;
-      dialog.querySelector('#supportCopyStatus').textContent = '';
       dialog.showModal();
       document.body.classList.add('support-dialog-open');
     }
