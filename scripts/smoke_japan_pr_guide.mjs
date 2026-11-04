@@ -173,9 +173,11 @@ try {
     ok: document.querySelector('#supportDialog')?.open && document.querySelectorAll('#supportDialog .support-github').length === 1 && document.querySelectorAll('#supportDialog .support-bank').length === 1,
     message: 'support dialog missing'
   }))()`), page.exceptions);
-  assertResult('Official Ko-fi panel and fallback', await page.evaluate(`({ok:
-    document.querySelector('.support-kofi-frame')?.src === 'https://ko-fi.com/F4N224DDUV/?hidefeed=true&widget=true&embed=true'
-    && document.querySelector('.support-kofi-link')?.href === 'https://ko-fi.com/F4N224DDUV'
+  await page.waitUntil("document.querySelector('.support-kofi img')?.naturalWidth > 0");
+  assertResult('Local Ko-fi QR replaces payment embed', await page.evaluate(`({ok:
+    document.querySelector('.support-kofi img')?.getAttribute('src') === '/assets/support-kofi.png'
+    && !document.querySelector('#supportDialog iframe')
+    && !document.querySelector('.support-kofi-link')
     && !document.querySelector('.sponsor-form')})`), page.exceptions);
   await page.navigate(`${origin}/japan-pr-guide/`, 390);
   await page.waitUntil('document.querySelector(".support-floating-trigger")');
