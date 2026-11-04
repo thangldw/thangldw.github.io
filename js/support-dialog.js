@@ -40,9 +40,6 @@
           '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
             '<summary>ShopeePay <span>Vietnam</span></summary>' +
             '<figure><img src="/assets/support-shopeepay.jpg" width="1096" height="1096" alt="ShopeePay QR for voluntary support"></figure>' +
-            '<p class="support-bank-account">Scan with ShopeePay.</p>' +
-            '<div class="support-bank-actions">' +
-              '<a href="/assets/support-shopeepay.jpg" download="thang-shopeepay.jpg">Download QR</a></div>' +
           '</details></article>' +
         '</div></div></dialog>';
   }

@@ -141,7 +141,7 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
-The shared Support dialog uses a neutral canvas in both themes. GitHub sponsorship defaults to one-time USD 5, with USD 3/5/10 presets and a validated custom amount. Ko-fi uses a secondary text button. ShopeePay details start collapsed on mobile; the user-supplied QR can be downloaded. Restricted study pages retain the links-only variant without forms or external images.
+The shared Support dialog uses a neutral canvas in both themes. GitHub sponsorship defaults to one-time USD 5, with USD 3/5/10 presets and a validated custom amount. Ko-fi uses a secondary text button. ShopeePay details start collapsed on mobile and show only the user-supplied QR. Restricted study pages retain the links-only variant without forms or external images.
 
 The portfolio home includes an optional Support dialog. GitHub Sponsors opens an external confirmation flow, Ko-fi opens an external support link, and Vietnamese wallet support uses the user-supplied `assets/support-shopeepay.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
 
