@@ -24,3 +24,6 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 ## Selected 2026-10-11 preview
 The user selected displayed option 2: horizontal five-step timeline, full-width scoring table and horizontal estimated-score summary. Shared portfolio tokens supersede the old route palette. Scoring and proof semantics remain unchanged.
+
+## Contextual donations — 2026-11-04
+Keep Japan PR Guide free with optional, project-specific donations after claim review and in the application plan. Use bilingual English/Vietnamese copy and existing payment destinations. Do not imply that donations influence immigration decisions. The contextual panel replaces the floating support dialog on this route.

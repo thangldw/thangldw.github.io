@@ -391,7 +391,15 @@ def main() -> int:
         is_redirect = parser.refreshes or any(urlsplit(reference).path.endswith("redirect.js") for reference in parser.references)
         if page != ROOT / "index.html" and not is_redirect:
             support_scripts = [reference for reference in parser.references if urlsplit(reference).path == "/js/support-dialog.js"]
-            if not support_scripts and "Support my work" not in page.read_text(encoding="utf-8"):
+            contextual_support = page == ROOT / "japan-pr-guide/index.html" and any(
+                "Help keep Japan PR Guide free" in (ROOT / urlsplit(reference).path.lstrip("/")).read_text(encoding="utf-8")
+                and "support_checkout" in (ROOT / urlsplit(reference).path.lstrip("/")).read_text(encoding="utf-8")
+                for reference in parser.references
+                if urlsplit(reference).path.startswith("/japan-pr-guide/assets/")
+                and urlsplit(reference).path.endswith(".js")
+                and (ROOT / urlsplit(reference).path.lstrip("/")).is_file()
+            )
+            if not support_scripts and not contextual_support and "Support my work" not in page.read_text(encoding="utf-8"):
                 errors.append(f"{page.relative_to(ROOT)}: missing optional support entry")
 
         duplicates = sorted(key for key, count in Counter(parser.ids).items() if count > 1)

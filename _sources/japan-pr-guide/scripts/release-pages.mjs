@@ -14,9 +14,8 @@ for (const name of readdirSync(path.join(target, "assets"))) {
   const css = path.join(target, "assets", name);
   writeFileSync(css, readFileSync(css, "utf8").replaceAll("font-display:swap", "font-display:optional"));
 }
-const index = path.join(target, "index.html");
-const shell = `    <link rel="stylesheet" href="/css/icons.css?v=20260714" />\n    <link rel="stylesheet" href="/css/support-dialog.css?v=20261007sharedsupport" />\n    <script defer src="/js/support-dialog.js?v=20261007sharedsupport"></script>\n`;
-writeFileSync(index, readFileSync(index, "utf8").replace("  </head>", `${shell}  </head>`));
+// This route owns its contextual support panel; do not inject the global floating dialog.
+
 console.log(`Generated Pages app: ${target}`);
 
 const legacy = path.join(pages, "apps/japan-pr-guide");
