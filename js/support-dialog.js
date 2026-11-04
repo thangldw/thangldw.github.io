@@ -14,8 +14,8 @@
     return '<dialog class="support-dialog" id="supportDialog" aria-labelledby="supportDialogTitle" aria-describedby="supportDialogIntro">' +
       '<div class="support-dialog-shell">' +
         '<button class="support-dialog-close" id="supportClose" type="button" aria-label="Close support options">&times;</button>' +
-        '<header class="support-dialog-heading"><h2 id="supportDialogTitle">Support my work</h2>' +
-          '<p id="supportDialogIntro">Help me maintain these free tools. Support is optional.</p></header>' +
+        '<header class="support-dialog-heading"><h2 id="supportDialogTitle">Found this useful? Buy me a coffee.</h2>' +
+          '<p id="supportDialogIntro">Your support helps me improve these apps and keep them free for everyone.</p></header>' +
         '<div class="support-options">' +
           '<section class="support-international" aria-label="International support options">' +
             '<article class="support-kofi">' +
