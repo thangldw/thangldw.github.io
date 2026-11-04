@@ -38,7 +38,7 @@
             '<article class="support-kofi"><a class="support-kofi-button" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer">Support via Ko-fi ↗</a></article>' +
           '</section>' +
           '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
-            '<summary>ShopeePay <span>Vietnam</span></summary>' +
+            '<summary>Vietnam</summary>' +
             '<figure><img src="/assets/support-shopeepay.jpg" width="1096" height="1096" alt="ShopeePay QR for voluntary support"></figure>' +
           '</details></article>' +
         '</div></div></dialog>';
