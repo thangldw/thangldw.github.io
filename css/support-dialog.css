@@ -67,7 +67,8 @@
 .support-kofi figure { margin: 0; }
 .support-kofi img { display: block; width: 220px; max-width: 100%; height: auto; margin: auto; border-radius: 4px; }
 .support-bank details { margin: 0; padding: 0; border: 0; background: transparent; }
-.support-bank summary { cursor: pointer; font-size: 16px; font-weight: 600; }
+.support-bank summary { cursor: pointer; font-size: 16px; font-weight: 600; list-style: none; }
+.support-bank summary::-webkit-details-marker { display: none; }
 .support-bank summary span { font-size: 12px; font-weight: 400; color: var(--color-text-body); }
 .support-bank figure { margin: 16px 0 8px; }
 .support-bank img { display: block; width: 180px; max-width: 100%; height: auto; margin: auto; border-radius: 4px; }
