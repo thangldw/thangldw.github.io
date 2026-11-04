@@ -22,10 +22,10 @@
               '<h3>Global</h3><figure><span class="support-qr-crop"><img src="/assets/support-kofi.png" width="820" height="820" alt="QR code to support Thang Luu on Ko-fi"></span></figure>' +
             '</article>' +
           '</section>' +
-          '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
-            '<summary>Vietnam Only</summary>' +
+          '<article class="support-option support-bank">' +
+            '<h3>Vietnam</h3>' +
             '<figure><img src="/assets/support-shopeepay.jpg" width="1096" height="1096" alt="ShopeePay QR for voluntary support"></figure>' +
-          '</details></article>' +
+          '</article>' +
         '</div></div></dialog>';
   }
 
@@ -67,7 +67,6 @@
     if (!dialog || typeof dialog.showModal !== "function") return;
 
     function openSupport() {
-      dialog.querySelector('#supportBankDetails').open = !window.matchMedia('(max-width: 680px)').matches;
       dialog.showModal();
       document.body.classList.add('support-dialog-open');
     }

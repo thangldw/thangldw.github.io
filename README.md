@@ -143,7 +143,7 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
 
-The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam Only. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Vietnam details start collapsed on mobile. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
+The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Both QR codes remain visible on desktop and mobile; headings are not interactive. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
 
 The portfolio home includes an optional Support dialog. Ko-fi uses a local QR image, and Vietnamese wallet support uses the user-supplied `assets/support-shopeepay.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
 
