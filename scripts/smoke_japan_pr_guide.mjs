@@ -170,7 +170,7 @@ try {
   await page.evaluate('document.querySelector(".support-floating-trigger").click()');
   await page.waitUntil('document.querySelector("#supportDialog")?.open');
   assertResult('Japan PR Guide support', await page.evaluate(`(() => ({
-    ok: document.querySelector('#supportDialog')?.open && document.querySelectorAll('#supportDialog .support-github').length === 1 && document.querySelectorAll('#supportDialog .support-bank').length === 1,
+    ok: document.querySelector('#supportDialog')?.open && document.querySelectorAll('#supportDialog img').length === 2 && !document.querySelector('#supportDialog a') && document.querySelectorAll('#supportDialog .support-bank').length === 1,
     message: 'support dialog missing'
   }))()`), page.exceptions);
   await page.waitUntil("document.querySelector('.support-kofi img')?.naturalWidth > 0");
