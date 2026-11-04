@@ -3,7 +3,7 @@ export const locales = {
   catalogFailed: 'The project list could not be loaded. Reload this page to try again.', languageName: 'English', languageSwitch: 'Display language', skip: 'Skip to content', home: 'Thang Luu home', dark: 'Switch to dark theme', light: 'Switch to light theme',
   motto: ['Crafted with care', 'stay steadfast, stay free'], what: 'What I do', languages: 'Languages', work: 'Work with me',
   roles: [['Forward Deployed Engineer','Ship tools that solve real problems in real environments.'],['Data & AI Engineer','Turn data into insights and systems teams can act on.'],['Technical Lead','Lead by example. Build with clarity. Unlock team impact.']],
-  invitation: 'AI, data engineering, and outsourced technical delivery through independent FDE engagements.', discuss: 'Discuss a project', support: 'Support my work', about: 'About',
+  invitation: 'AI, data engineering, and outsourced technical delivery through independent FDE engagements.', discuss: 'Discuss a project', support: 'Fuel my next build', about: 'About',
   projectEmail: 'Discuss a project in Gmail', contributions: 'Open-source contributions',
   headline: ['I help teams turn complex, ambiguous ', 'problems', ' into reliable systems.'],
   bio: ['I’m Thang Luu, a data-driven problem solver working at the intersection of engineering and business. Over the past 10+ years, I’ve grown from statistical analysis into data engineering and technical delivery, and I now lead front-line technical delivery at a global IT consulting firm.', 'I do my best work when the goal is still taking shape, the data is fragmented, and a team needs a practical path forward. I still consider myself a learner in this field—the people I build with continue to teach me the most.'],
