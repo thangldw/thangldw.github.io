@@ -18,24 +18,11 @@
           '<p id="supportDialogIntro">Help me maintain these free tools. Support is optional.</p></header>' +
         '<div class="support-options">' +
           '<section class="support-international" aria-label="International support options">' +
-            '<article class="support-github"><h3>GitHub Sponsors</h3>' +
-              (linksOnly ?
-              '<a class="support-primary" href="https://github.com/sponsors/thangldw" target="_blank" rel="noopener noreferrer">Continue on GitHub ↗</a>' :
-              '<form class="sponsor-form" action="https://github.com/sponsors/thangldw/sponsorships" method="get" target="_blank" rel="noopener noreferrer">' +
-                '<fieldset class="sponsor-frequency"><legend class="sr-only">Contribution type</legend>' +
-                  '<input class="sponsor-frequency-input" type="radio" name="frequency" id="sharedSponsorOneTime" value="one-time" checked><label for="sharedSponsorOneTime">One-time</label>' +
-                  '<input class="sponsor-frequency-input" type="radio" name="frequency" id="sharedSponsorMonthly" value="recurring"><label for="sharedSponsorMonthly">Monthly</label></fieldset>' +
-                '<div class="sponsor-presets" role="group" aria-label="Amount in USD">' +
-                  '<button type="button" data-amount="3" aria-pressed="false">$3</button>' +
-                  '<button type="button" data-amount="5" aria-pressed="true">$5</button>' +
-                  '<button type="button" data-amount="10" aria-pressed="false">$10</button>' +
-                  '<button type="button" data-amount="other" aria-pressed="false">Other</button></div>' +
-                '<div class="sponsor-custom" hidden><label for="sharedSponsorAmount">Amount (USD)</label>' +
-                  '<input id="sharedSponsorAmount" name="amount" type="number" min="1" max="12000" step="1" inputmode="numeric" value="5" required></div>' +
-                '<button class="support-primary" type="submit">Continue on GitHub ↗</button>' +
-                '<p class="sponsor-help">Review before confirming on GitHub.</p></form>') +
+            '<article class="support-kofi">' +
+              (linksOnly ? '' : '<iframe class="support-kofi-frame" title="Support Thang Luu on Ko-fi" data-src="https://ko-fi.com/F4N224DDUV/?hidefeed=true&amp;widget=true&amp;embed=true"></iframe>') +
+              '<a class="support-kofi-link" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer">Open Ko-fi ↗</a>' +
             '</article>' +
-            '<article class="support-kofi"><a class="support-kofi-button" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer">Support via Ko-fi ↗</a></article>' +
+            '<a class="support-github" href="https://github.com/sponsors/thangldw" target="_blank" rel="noopener noreferrer">GitHub Sponsors ↗</a>' +
           '</section>' +
           '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
             '<summary>Vietnam</summary>' +
@@ -84,21 +71,11 @@
     var closeButton = document.getElementById("supportClose");
     if (!dialog || typeof dialog.showModal !== "function") return;
 
-    var amount = dialog.querySelector('#sharedSponsorAmount');
-    dialog.querySelectorAll('[data-amount]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        var custom = button.dataset.amount === 'other';
-        dialog.querySelectorAll('[data-amount]').forEach(function (item) {
-          item.setAttribute('aria-pressed', String(item === button));
-        });
-        dialog.querySelector('.sponsor-custom').hidden = !custom;
-        amount.value = custom ? '' : button.dataset.amount;
-        if (custom) amount.focus();
-      });
-    });
     function openSupport() {
       dialog.querySelector('#supportBankDetails').open = !window.matchMedia('(max-width: 680px)').matches;
       dialog.showModal();
+      var frame = dialog.querySelector('.support-kofi-frame');
+      if (frame && !frame.hasAttribute('src')) frame.src = frame.dataset.src;
       document.body.classList.add('support-dialog-open');
     }
     (customTriggers.length ? customTriggers : [trigger]).forEach(function (button) {

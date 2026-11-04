@@ -173,13 +173,10 @@ try {
     ok: document.querySelector('#supportDialog')?.open && document.querySelectorAll('#supportDialog .support-github').length === 1 && document.querySelectorAll('#supportDialog .support-bank').length === 1,
     message: 'support dialog missing'
   }))()`), page.exceptions);
-  assertResult('Support defaults to one-time USD 5', await page.evaluate(`(() => {
-    const form = document.querySelector('.sponsor-form');
-    const values = new FormData(form);
-    return {ok: values.get('frequency') === 'one-time' && values.get('amount') === '5'};
-  })()`), page.exceptions);
-  await page.evaluate(`document.querySelector('[data-amount="10"]').click()`);
-  assertResult('Selected amount reaches sponsorship form', await page.evaluate(`({ok: new FormData(document.querySelector('.sponsor-form')).get('amount') === '10'})`), page.exceptions);
+  assertResult('Official Ko-fi panel and fallback', await page.evaluate(`({ok:
+    document.querySelector('.support-kofi-frame')?.src === 'https://ko-fi.com/F4N224DDUV/?hidefeed=true&widget=true&embed=true'
+    && document.querySelector('.support-kofi-link')?.href === 'https://ko-fi.com/F4N224DDUV'
+    && !document.querySelector('.sponsor-form')})`), page.exceptions);
   await page.navigate(`${origin}/japan-pr-guide/`, 390);
   await page.waitUntil('document.querySelector(".support-floating-trigger")');
   await page.evaluate(`document.querySelector('.support-floating-trigger').click()`);
