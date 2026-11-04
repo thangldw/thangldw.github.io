@@ -21,7 +21,6 @@
             '<article class="support-kofi">' +
               '<h3>Global</h3><figure><img src="/assets/support-kofi.png" width="820" height="820" alt="QR code to support Thang Luu on Ko-fi"></figure>' +
             '</article>' +
-            '<a class="support-github" href="https://github.com/sponsors/thangldw" target="_blank" rel="noopener noreferrer">GitHub Sponsors ↗</a>' +
           '</section>' +
           '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
             '<summary>Vietnam Only</summary>' +
