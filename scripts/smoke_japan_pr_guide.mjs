@@ -2,7 +2,7 @@
 
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
-import { mkdtemp, rm, mkdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, rm } from 'node:fs/promises';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
@@ -165,43 +165,14 @@ try {
     }))()`), page.exceptions);
   }
 
-  const screenshots = process.env.SCREENSHOT_DIR || '/tmp/japan-pr-donate-preview';
-  await mkdir(screenshots, { recursive: true });
-  for (const width of [1280, 390]) {
-    await page.navigate(`${origin}/japan-pr-guide/`, width);
-    await page.waitUntil('document.querySelector(".workflow-steps button")');
-    assertResult(`No premature donation prompt ${width}`, await page.evaluate(`({ok: !document.querySelector('.project-support, .support-floating-trigger')})`), page.exceptions);
-    await page.evaluate(`window.supportEvents = []; window.umami = { track: (event, data) => supportEvents.push({event, data}) }; document.querySelector('.score-inspector button').click()`);
-    await page.waitUntil('document.querySelector(".project-support")');
-    await page.evaluate(`document.querySelector('.project-support').scrollIntoView({behavior:'instant'}); document.querySelector('.project-support summary').focus()`);
-    await page.send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Enter', code: 'Enter', text: '\r', windowsVirtualKeyCode: 13 });
-    await page.send('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13 });
-    await page.waitUntil('document.querySelector(".project-support details").open');
-    await page.waitUntil('supportEvents.some(e => e.event === "support_open")');
-    assertResult(`Contextual donation and keyboard ${width}`, await page.evaluate(`({
-      ok: document.documentElement.scrollWidth <= innerWidth
-        && document.activeElement.matches('.project-support summary')
-        && document.querySelector('.project-support a').href === 'https://ko-fi.com/F4N224DDUV'
-        && document.querySelector('.project-support a[download]').getAttribute('href') === '/assets/support-vietqr-mb.jpg'
-        && supportEvents.every(e => Object.keys(e.data).sort().join(',') === 'location,project'),
-      message: 'layout, focus, destination or analytics payload mismatch'
-    })`), page.exceptions);
-    await page.evaluate(`document.querySelector('.project-support').scrollIntoView({block:'start',behavior:'instant'})`);
-    await page.waitUntil('document.querySelector(".project-support").getBoundingClientRect().top >= -1 && document.querySelector(".project-support").getBoundingClientRect().bottom <= innerHeight');
-    const shot = await page.send('Page.captureScreenshot', { format: 'png' });
-    await writeFile(`${screenshots}/support-${width}.png`, Buffer.from(shot.data, 'base64'));
-    await page.evaluate(`document.querySelector('.project-support summary').click()`);
-    await page.waitUntil('!document.querySelector(".project-support details").open');
-    const compact = await page.send('Page.captureScreenshot', { format: 'png' });
-    await writeFile(`${screenshots}/compact-${width}.png`, Buffer.from(compact.data, 'base64'));
-    await page.evaluate(`document.querySelector('.screen-actions .primary-button').click()`);
-    await page.waitUntil('document.querySelector(".historical-rail .primary-button")');
-    await page.evaluate(`document.querySelector('.historical-rail .primary-button').click()`);
-    await page.waitUntil('document.querySelector(".requirements-list")');
-    await page.evaluate(`document.querySelector('.screen-actions .primary-button').click()`);
-    await page.waitUntil('document.querySelector("#support-title-application-plan")');
-    assertResult(`Checklist remains available ${width}`, await page.evaluate(`({ok: !!document.querySelector('.workflow-content input[type="checkbox"]') && !document.querySelector('.project-support details').open})`), page.exceptions);
-  }
+  await page.navigate(`${origin}/japan-pr-guide/`, 1280);
+  await page.waitUntil('document.querySelector(".support-floating-trigger")');
+  await page.evaluate('document.querySelector(".support-floating-trigger").click()');
+  await page.waitUntil('document.querySelector("#supportDialog")?.open');
+  assertResult('Japan PR Guide support', await page.evaluate(`(() => ({
+    ok: document.querySelector('#supportDialog')?.open && document.querySelectorAll('#supportDialog .support-github').length === 1 && document.querySelectorAll('#supportDialog .support-bank').length === 1,
+    message: 'support dialog missing'
+  }))()`), page.exceptions);
   const catalog = await fetch(`${origin}/js/projects-data.json`).then(r => r.json());
   if (!JSON.stringify(catalog).includes('"href":"/japan-pr-guide/"')) throw new Error('Catalog URL mismatch');
   console.log('Japan PR Guide migration smoke passed.');

@@ -25,7 +25,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Selected 2026-10-11 preview
 The user selected displayed option 2: horizontal five-step timeline, full-width scoring table and horizontal estimated-score summary. Shared portfolio tokens supersede the old route palette. Scoring and proof semantics remain unchanged.
 
-## Contextual donations — 2026-11-04
-Keep Japan PR Guide free with optional, project-specific donations after claim review and in the application plan. Use bilingual English/Vietnamese copy and existing payment destinations. Do not imply that donations influence immigration decisions. The contextual panel replaces the floating support dialog on this route.
-
-User refinement: keep the support prompt compact: one short bilingual invitation, a direct Ko-fi link and a bank-transfer disclosure. Hide QR until requested; avoid a large card or repeated explanations.
+## Support preference — 2026-11-04
+The user reverted the contextual donation experiment. Keep the original shared floating Support my work dialog on Japan PR Guide.
