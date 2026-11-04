@@ -217,7 +217,6 @@ export function App() {
       ) : null}
 
       <SourceNotes />
-      <a className="app-explore-link" href="/apps/">Explore more apps →</a>
     </div>
   );
 }

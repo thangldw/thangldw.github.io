@@ -27,3 +27,5 @@ The user selected displayed option 2: horizontal five-step timeline, full-width 
 
 ## Support preference — 2026-11-04
 The user reverted the contextual donation experiment. Keep the original shared floating Support my work dialog on Japan PR Guide.
+
+Do not display the Explore more apps link below the source notes on Japan PR Guide.
