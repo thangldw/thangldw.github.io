@@ -12,7 +12,7 @@
   padding: var(--space-12) var(--space-16);
   border: 0;
   border-radius: 14px;
-  background: #72a4f2;
+  background: #f08804;
   color: #fff;
   box-shadow: none;
   font: 700 var(--text-body-sm)/var(--leading-tight) var(--font-ui, Inter, system-ui, sans-serif);
@@ -34,7 +34,7 @@
 }
 
 .support-floating-trigger:hover {
-  background: #72a4f2;
+  background: #f08804;
   color: #fff;
   filter: brightness(1.06);
 }
@@ -79,7 +79,6 @@
 .support-copy-status { margin: 0; color: var(--color-text-body); font-size: 12px; text-align: center; }
 .support-dialog :is(button,a,input,summary):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 body.support-dialog-open { overflow: hidden; }
-.support-floating-trigger .support-trigger-icon { display: block; width: 22px; height: 18px; object-fit: contain; flex: none; }
 .support-floating-trigger:active { filter: brightness(.94); }
 .support-floating-trigger:disabled { opacity: var(--disabled-opacity); cursor: default; }
 @media(max-width:680px) {
