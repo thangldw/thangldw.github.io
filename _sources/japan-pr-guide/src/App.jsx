@@ -1,4 +1,3 @@
-import { ProjectSupport } from "./components/ProjectSupport";
 import { PolicyOverview, FilingNotes } from "./components/PolicyOverview";
 import { useMemo, useState } from "react";
 import {
@@ -168,7 +167,6 @@ export function App() {
             proofReady={proofReady}
             result={currentResult}
           />
-          <ProjectSupport location="claims" />
         </div>
       ) : null}
 
@@ -215,7 +213,6 @@ export function App() {
             onToggle={(id) => toggleChecklistItem(setEvidenceReady, id)}
             result={currentResult}
           />
-          <ProjectSupport location="application-plan" />
         </div>
       ) : null}
 
