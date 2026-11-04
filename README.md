@@ -141,9 +141,9 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
-The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, with GitHub Sponsors as a secondary link. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Vietnam details start collapsed on mobile. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
+The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam Only. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Vietnam details start collapsed on mobile. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
 
-The portfolio home includes an optional Support dialog. GitHub Sponsors opens an external confirmation flow, Ko-fi uses a local QR image, and Vietnamese wallet support uses the user-supplied `assets/support-shopeepay.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
+The portfolio home includes an optional Support dialog. Ko-fi uses a local QR image, and Vietnamese wallet support uses the user-supplied `assets/support-shopeepay.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
 
 Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. `scripts/validate_site.py` permits only these durable license documents plus the root README; temporary Markdown reports and QA screenshots must stay outside the repository.
 
@@ -238,7 +238,7 @@ Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo
 
 ### Support và nguồn gốc asset
 
-Trang chủ có dialog Support tùy chọn. GitHub Sponsors mở luồng xác nhận bên ngoài, Ko-fi dùng ảnh QR local, và ủng hộ qua ShopeePay dùng ảnh local `assets/support-shopeepay.jpg`. Website tĩnh không thu thập thông tin thanh toán. Phải xác minh người nhận QR trước mỗi release thay đổi ảnh. Hồ sơ nguồn và license font tự host nằm trong `assets/fonts/licenses/`; report Markdown và ảnh QA tạm không được commit.
+Trang chủ có dialog Support tùy chọn. Ko-fi dùng ảnh QR local, và ủng hộ qua ShopeePay dùng ảnh local `assets/support-shopeepay.jpg`. Website tĩnh không thu thập thông tin thanh toán. Phải xác minh người nhận QR trước mỗi release thay đổi ảnh. Hồ sơ nguồn và license font tự host nằm trong `assets/fonts/licenses/`; report Markdown và ảnh QA tạm không được commit.
 
 ### Publish Certification Library
 
@@ -315,7 +315,7 @@ Project metadata は `js/projects-data.json` だけで編集します。Stable u
 
 Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して source release helper で `/cert/`、`/jlpt-n1/` と legacy redirect を同期します。PMP は `/pmp/` 専用 helper を使用します。Content 変更時は shell 公開前に API を deploy します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
 
-Home の optional Support dialog は external GitHub Sponsors flow、local Ko-fi QR、local ShopeePay QR を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
+Home の optional Support dialog は local Ko-fi QR、local ShopeePay QR を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
 
 ### Deployment、security、contribution
 
