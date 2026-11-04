@@ -85,3 +85,6 @@ body.support-dialog-open { overflow: hidden; }
  .support-dialog .support-bank { padding: 8px 0 0; }
 
 }
+
+/* Legacy app bundles hide support; the shared entry must remain available. */
+body button.support-floating-trigger[aria-controls="supportDialog"] { display: inline-flex !important; }

@@ -141,6 +141,8 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
+All non-redirect HTML pages load the shared support assets with cache version `20261105-qr`; the Learning and Japan PR Guide exporters preserve this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
+
 The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
 
 The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Both QR codes remain visible on desktop and mobile; headings are not interactive. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
