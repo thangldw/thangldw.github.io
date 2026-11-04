@@ -19,7 +19,7 @@
         '<div class="support-options">' +
           '<section class="support-international" aria-label="International support options">' +
             '<article class="support-kofi">' +
-              '<h3>Global</h3><figure><img src="/assets/support-kofi.png" width="820" height="820" alt="QR code to support Thang Luu on Ko-fi"></figure>' +
+              '<h3>Global</h3><figure><span class="support-qr-crop"><img src="/assets/support-kofi.png" width="820" height="820" alt="QR code to support Thang Luu on Ko-fi"></span></figure>' +
             '</article>' +
           '</section>' +
           '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
