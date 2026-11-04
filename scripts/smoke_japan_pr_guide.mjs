@@ -173,6 +173,17 @@ try {
     ok: document.querySelector('#supportDialog')?.open && document.querySelectorAll('#supportDialog .support-github').length === 1 && document.querySelectorAll('#supportDialog .support-bank').length === 1,
     message: 'support dialog missing'
   }))()`), page.exceptions);
+  assertResult('Support defaults to one-time USD 5', await page.evaluate(`(() => {
+    const form = document.querySelector('.sponsor-form');
+    const values = new FormData(form);
+    return {ok: values.get('frequency') === 'one-time' && values.get('amount') === '5'};
+  })()`), page.exceptions);
+  await page.evaluate(`document.querySelector('[data-amount="10"]').click()`);
+  assertResult('Selected amount reaches sponsorship form', await page.evaluate(`({ok: new FormData(document.querySelector('.sponsor-form')).get('amount') === '10'})`), page.exceptions);
+  await page.navigate(`${origin}/japan-pr-guide/`, 390);
+  await page.waitUntil('document.querySelector(".support-floating-trigger")');
+  await page.evaluate(`document.querySelector('.support-floating-trigger').click()`);
+  assertResult('Mobile bank details start collapsed', await page.evaluate(`({ok: !document.querySelector('#supportBankDetails').open && document.querySelector('#supportDialog').scrollWidth <= document.querySelector('#supportDialog').clientWidth})`), page.exceptions);
   const catalog = await fetch(`${origin}/js/projects-data.json`).then(r => r.json());
   if (!JSON.stringify(catalog).includes('"href":"/japan-pr-guide/"')) throw new Error('Catalog URL mismatch');
   console.log('Japan PR Guide migration smoke passed.');
