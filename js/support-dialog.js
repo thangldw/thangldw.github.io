@@ -14,52 +14,38 @@
     return '<dialog class="support-dialog" id="supportDialog" aria-labelledby="supportDialogTitle" aria-describedby="supportDialogIntro">' +
       '<div class="support-dialog-shell">' +
         '<button class="support-dialog-close" id="supportClose" type="button" aria-label="Close support options">&times;</button>' +
-        '<header class="support-dialog-heading">' +
-          '<p class="support-kicker">Support</p>' +
-          '<h2 id="supportDialogTitle">Support my work</h2>' +
-          '<p id="supportDialogIntro">If these projects have been useful to you, your support helps me maintain them and build new learning tools. Support is always optional.</p>' +
-        '</header>' +
+        '<header class="support-dialog-heading"><h2 id="supportDialogTitle">Support my work</h2>' +
+          '<p id="supportDialogIntro">Help me maintain these free tools. Support is optional.</p></header>' +
         '<div class="support-options">' +
           '<section class="support-international" aria-label="International support options">' +
-            '<article class="support-github">' +
-              '<p class="support-option-label">International</p>' +
-              '<h3>GitHub Sponsors</h3>' +
-              '<p>Choose a contribution type and enter an amount in USD.</p>' +
+            '<article class="support-github"><h3>GitHub Sponsors</h3>' +
               (linksOnly ?
-              '<a class="support-primary" href="https://github.com/sponsors/thangldw" target="_blank" rel="noopener noreferrer">Continue on GitHub</a>' :
-              '<form class="sponsor-form" action="https://github.com/sponsors/thangldw/sponsorships" method="get" target="_blank">' +
-                '<fieldset class="sponsor-frequency">' +
-                  '<legend class="sr-only">Contribution type</legend>' +
-                  '<input class="sponsor-frequency-input" type="radio" name="frequency" id="sharedSponsorMonthly" value="recurring" checked>' +
-                  '<label for="sharedSponsorMonthly">Monthly</label>' +
-                  '<input class="sponsor-frequency-input" type="radio" name="frequency" id="sharedSponsorOneTime" value="one-time">' +
-                  '<label for="sharedSponsorOneTime">One-time</label>' +
-                '</fieldset>' +
-                '<label class="sponsor-amount-label" for="sharedSponsorAmount">Amount <span>USD</span></label>' +
-                '<div class="sponsor-amount-control"><span aria-hidden="true">$</span>' +
-                  '<input id="sharedSponsorAmount" name="amount" type="number" min="1" max="12000" step="1" inputmode="numeric" placeholder="5" aria-describedby="sharedSponsorAmountHelp" required>' +
-                '</div>' +
-                '<button class="support-primary" type="submit">Continue on GitHub <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>' +
-                '<p class="sponsor-help" id="sharedSponsorAmountHelp">GitHub will open to review and confirm your sponsorship.</p>' +
-              '</form>') +
+              '<a class="support-primary" href="https://github.com/sponsors/thangldw" target="_blank" rel="noopener noreferrer">Continue on GitHub ↗</a>' :
+              '<form class="sponsor-form" action="https://github.com/sponsors/thangldw/sponsorships" method="get" target="_blank" rel="noopener noreferrer">' +
+                '<fieldset class="sponsor-frequency"><legend class="sr-only">Contribution type</legend>' +
+                  '<input class="sponsor-frequency-input" type="radio" name="frequency" id="sharedSponsorOneTime" value="one-time" checked><label for="sharedSponsorOneTime">One-time</label>' +
+                  '<input class="sponsor-frequency-input" type="radio" name="frequency" id="sharedSponsorMonthly" value="recurring"><label for="sharedSponsorMonthly">Monthly</label></fieldset>' +
+                '<div class="sponsor-presets" role="group" aria-label="Amount in USD">' +
+                  '<button type="button" data-amount="3" aria-pressed="false">$3</button>' +
+                  '<button type="button" data-amount="5" aria-pressed="true">$5</button>' +
+                  '<button type="button" data-amount="10" aria-pressed="false">$10</button>' +
+                  '<button type="button" data-amount="other" aria-pressed="false">Other</button></div>' +
+                '<div class="sponsor-custom" hidden><label for="sharedSponsorAmount">Amount (USD)</label>' +
+                  '<input id="sharedSponsorAmount" name="amount" type="number" min="1" max="12000" step="1" inputmode="numeric" value="5" required></div>' +
+                '<button class="support-primary" type="submit">Continue on GitHub ↗</button>' +
+                '<p class="sponsor-help">Review before confirming on GitHub.</p></form>') +
             '</article>' +
-            '<article class="support-kofi">' +
-              '<p class="support-option-label">International</p>' +
-              '<h3>Ko-fi</h3>' +
-              '<p class="support-kofi-copy">Leave a one-time tip securely through Ko-fi.</p>' +
-              '<a class="support-kofi-button" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer" aria-label="Buy me a coffee on Ko-fi">' +
-                (linksOnly ? 'Support on Ko-fi' : '<img src="https://storage.ko-fi.com/cdn/kofi6.png?v=6" height="28" alt="Buy Me a Coffee at ko-fi.com">') +
-              '</a>' +
-            '</article>' +
+            '<article class="support-kofi"><a class="support-kofi-button" href="https://ko-fi.com/F4N224DDUV" target="_blank" rel="noopener noreferrer">Support via Ko-fi ↗</a></article>' +
           '</section>' +
-          '<article class="support-option support-bank">' +
-            '<div class="support-bank-heading"><div><p class="support-option-label">Vietnam</p><h3>Bank transfer</h3></div><span>MB Bank</span></div>' +
-            '<figure><img src="/assets/support-vietqr-mb.jpg" width="845" height="1151" alt="VietQR for an MB Bank transfer to Luu Duc Thang">' +
-              '<figcaption>Scan with a Vietnamese banking app.</figcaption></figure>' +
-          '</article>' +
-        '</div>' +
-      '</div>' +
-    '</dialog>';
+          '<article class="support-option support-bank"><details id="supportBankDetails" open>' +
+            '<summary>Bank transfer <span>Vietnam</span></summary>' +
+            '<figure><img src="/assets/support-vietqr-mb.jpg" width="845" height="1151" alt="VietQR: MB Bank, Luu Duc Thang, account 919324689999"></figure>' +
+            '<p class="support-bank-account">MB Bank · Luu Duc Thang<br><span>919324689999</span></p>' +
+            '<div class="support-bank-actions"><button id="supportCopyAccount" type="button">Copy account</button>' +
+              '<a href="/assets/support-vietqr-mb.jpg" download="thang-vietqr-mb.jpg">Download QR</a></div>' +
+            '<p id="supportCopyStatus" class="support-copy-status" role="status" aria-live="polite"></p>' +
+          '</details></article>' +
+        '</div></div></dialog>';
   }
 
   function initializeSupport() {
@@ -102,15 +88,40 @@
     var closeButton = document.getElementById("supportClose");
     if (!dialog || typeof dialog.showModal !== "function") return;
 
+    var amount = dialog.querySelector('#sharedSponsorAmount');
+    dialog.querySelectorAll('[data-amount]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var custom = button.dataset.amount === 'other';
+        dialog.querySelectorAll('[data-amount]').forEach(function (item) {
+          item.setAttribute('aria-pressed', String(item === button));
+        });
+        dialog.querySelector('.sponsor-custom').hidden = !custom;
+        amount.value = custom ? '' : button.dataset.amount;
+        if (custom) amount.focus();
+      });
+    });
+    dialog.querySelector('#supportCopyAccount').addEventListener('click', async function () {
+      var status = dialog.querySelector('#supportCopyStatus');
+      try {
+        await navigator.clipboard.writeText('919324689999');
+        status.textContent = 'Account number copied.';
+      } catch {
+        status.textContent = 'Copy manually: 919324689999';
+      }
+    });
+    function openSupport() {
+      dialog.querySelector('#supportBankDetails').open = !window.matchMedia('(max-width: 680px)').matches;
+      dialog.querySelector('#supportCopyStatus').textContent = '';
+      dialog.showModal();
+      document.body.classList.add('support-dialog-open');
+    }
     (customTriggers.length ? customTriggers : [trigger]).forEach(function (button) {
       button.addEventListener("click", function () {
-        dialog.showModal();
-        document.body.classList.add("support-dialog-open");
+        openSupport();
       });
     });
     if (customTriggers.length && window.location.hash === "#support") {
-      dialog.showModal();
-      document.body.classList.add("support-dialog-open");
+      openSupport();
     }
     closeButton.addEventListener("click", function () {
       dialog.close();

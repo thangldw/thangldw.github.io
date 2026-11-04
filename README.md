@@ -141,6 +141,8 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
+The shared Support dialog uses a neutral canvas in both themes. GitHub sponsorship defaults to one-time USD 5, with USD 3/5/10 presets and a validated custom amount. Ko-fi uses a secondary text button. Bank details start collapsed on mobile; the unchanged VietQR can be downloaded and the displayed account number copied, with a manual-copy fallback if clipboard access is denied. Restricted study pages retain the links-only variant without forms or external images.
+
 The portfolio home includes an optional Support dialog. GitHub Sponsors opens an external confirmation flow, Ko-fi opens an external support link, and Vietnamese bank support uses the local `assets/support-vietqr-mb.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
 
 Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. `scripts/validate_site.py` permits only these durable license documents plus the root README; temporary Markdown reports and QA screenshots must stay outside the repository.
