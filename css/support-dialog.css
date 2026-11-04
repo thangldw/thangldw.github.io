@@ -1,4 +1,4 @@
-/* Shared Support my work trigger and dialog for project and certification pages. */
+/* Shared Fuel my next build trigger and dialog for project and certification pages. */
 
 .support-floating-trigger {
   position: fixed;
@@ -10,12 +10,12 @@
   gap: var(--space-8);
   min-height: var(--control-size-touch);
   padding: var(--space-12) var(--space-16);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-support);
-  color: var(--color-on-support);
-  box-shadow: 0 12px 30px rgba(20, 22, 18, .16);
-  font: var(--weight-semibold) var(--text-body-sm)/var(--leading-tight) var(--font-ui, Inter, system-ui, sans-serif);
+  border: 0;
+  border-radius: 14px;
+  background: #72a4f2;
+  color: #fff;
+  box-shadow: none;
+  font: 700 var(--text-body-sm)/var(--leading-tight) var(--font-ui, Inter, system-ui, sans-serif);
   letter-spacing: .01em;
   cursor: pointer;
 }
@@ -34,8 +34,8 @@
 }
 
 .support-floating-trigger:hover {
-  background: var(--color-support);
-  color: var(--color-on-support);
+  background: #72a4f2;
+  color: #fff;
   filter: brightness(1.06);
 }
 
@@ -79,7 +79,7 @@
 .support-copy-status { margin: 0; color: var(--color-text-body); font-size: 12px; text-align: center; }
 .support-dialog :is(button,a,input,summary):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 body.support-dialog-open { overflow: hidden; }
-.support-floating-trigger svg { width: 12px; height: 12px; flex: none; }
+.support-floating-trigger .support-trigger-icon { display: block; width: 22px; height: 18px; object-fit: contain; flex: none; }
 .support-floating-trigger:active { filter: brightness(.94); }
 .support-floating-trigger:disabled { opacity: var(--disabled-opacity); cursor: default; }
 @media(max-width:680px) {
