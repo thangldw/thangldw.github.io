@@ -182,7 +182,8 @@ try {
   await page.navigate(`${origin}/japan-pr-guide/`, 390);
   await page.waitUntil('document.querySelector(".support-floating-trigger")');
   await page.evaluate(`document.querySelector('.support-floating-trigger').click()`);
-  assertResult('Mobile bank details start collapsed', await page.evaluate(`({ok: !document.querySelector('#supportBankDetails').open && document.querySelector('#supportDialog').scrollWidth <= document.querySelector('#supportDialog').clientWidth})`), page.exceptions);
+  await page.evaluate("document.querySelector('.support-bank h3').click()");
+  assertResult('Vietnam QR stays visible after heading click', await page.evaluate(`({ok: document.querySelector('.support-bank h3').textContent === 'Vietnam' && document.querySelector('.support-bank img').getBoundingClientRect().height > 0 && !document.querySelector('#supportDialog details') && document.querySelector('#supportDialog').scrollWidth <= document.querySelector('#supportDialog').clientWidth})`), page.exceptions);
   const catalog = await fetch(`${origin}/js/projects-data.json`).then(r => r.json());
   if (!JSON.stringify(catalog).includes('"href":"/japan-pr-guide/"')) throw new Error('Catalog URL mismatch');
   console.log('Japan PR Guide migration smoke passed.');
