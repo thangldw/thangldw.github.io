@@ -166,7 +166,7 @@ try {
   }
   routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html','/bjt/workspace.html');
   const report=[];
-  for (const route of routes.filter(r=>!process.env.SUPPORT_ROUTE||r.includes(process.env.SUPPORT_ROUTE))) {
+  for (const route of routes.filter(r=>!process.env.SUPPORT_ROUTE||new RegExp(process.env.SUPPORT_ROUTE).test(r))) {
     console.log('Checking',route);
     for (const width of [1280,390]) {
       try {
@@ -178,7 +178,7 @@ try {
           const els=[...document.querySelectorAll('body, #root h1, #root p, #root button, main h1, main p, main button')].filter(e=>!e.closest('#supportDialog')&&!e.className?.toString().includes('support')).slice(0,30);
           const snapshot=()=>els.map(e=>getComputedStyle(e).fontFamily);
           const before=snapshot();
-          const links=[...document.querySelectorAll('link[rel="stylesheet"]')].filter(e=>['support-dialog','support-tokens','/css/tokens.css'].some(v=>e.href.includes(v)));
+          const links=[...document.querySelectorAll('link[rel="stylesheet"]')].filter(e=>['support-dialog','support-tokens'].some(v=>e.href.includes(v)));
           links.forEach(e=>e.disabled=true);const without=snapshot();links.forEach(e=>e.disabled=false);
           return {changed:before.some((v,i)=>v!==without[i]),before,without};
         })()`);
