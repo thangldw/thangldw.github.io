@@ -25,6 +25,34 @@
       "catalogDescription": "Calculate HSP points and explore permanent-residence routes in Japan, in English or Vietnamese."
     },
     {
+      "id": "jetrise",
+      "title": "JETRISE",
+      "description": "A browser airline-management game: build a fleet, open routes, plan weekly schedules, manage finances and optionally compete with AI airlines. Play in Vietnamese, English or Japanese, with local saves and backup/restore.",
+      "featuredDescription": "Run an airline with fleet and route planning, financial reports and optional AI competition. Available in Vietnamese, English and Japanese.",
+      "catalogDescription": "Build and run an airline: manage fleets, routes, weekly schedules and finances, with optional AI competition. Play in Vietnamese, English or Japanese and save progress on your device.",
+      "localizedDescriptions": {
+        "vi": "Game quản lý hãng hàng không trên trình duyệt: phát triển đội bay, mở tuyến, xếp lịch và theo dõi tài chính, với đối thủ AI tùy chọn. Hỗ trợ Việt, Anh, Nhật và lưu tiến trình trên thiết bị.",
+        "ja": "ブラウザーで遊べる航空会社経営ゲーム。機材・路線・運航スケジュール・財務を管理し、任意でAI他社との競争も楽しめます。ベトナム語・英語・日本語に対応し、進行状況は端末に保存されます。",
+        "zh": "浏览器航空公司经营游戏：管理机队、航线、航班计划和财务，可选择与 AI 对手竞争。支持越南语、英语和日语，进度保存在本地。"
+      },
+      "href": "https://thangldw.github.io/jetrise/",
+      "ariaLabel": "Play JETRISE",
+      "icon": "fa-plane",
+      "accent": "blue",
+      "status": "Live",
+      "tags": [
+        "Airline management",
+        "Fleet & routes",
+        "VI · EN · JA",
+        "Local saves"
+      ],
+      "category": "games",
+      "categoryLabel": "Airline management",
+      "cta": "Play JETRISE",
+      "featured": false,
+      "catalogGroup": "experiments"
+    },
+    {
       "id": "bizroll",
       "title": "BizRoll",
       "description": "A 2–4 player economic strategy board game with multiplayer rooms, AI opponents, auctions, market cycles, secret objectives, and Black Swan events.",
