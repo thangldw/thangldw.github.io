@@ -5,10 +5,24 @@ from pathlib import Path
 from unittest.mock import patch
 
 import audit_ui_standards as ui
+import validate_design_system as design
 from validate_site import PageParser, audit_analytics, tracked_local_metadata
 
 
 class SiteAuditRegressionTests(unittest.TestCase):
+    def test_isolated_support_export_cannot_drift_from_canonical_tokens(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for relative in ['css/tokens.css', 'css/site-shell.css', 'css/homepage.css', 'css/apps-catalog.css', 'css/support-tokens.css', 'DESIGN.md', 'index.html', 'apps/index.html', 'aws/index.html']:
+                target = root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((design.ROOT / relative).read_bytes())
+            with patch.object(design, 'ROOT', root):
+                self.assertEqual(design.audit_design_system(), [])
+                support = root / 'css/support-tokens.css'
+                support.write_text(support.read_text().replace('--color-canvas: #ffffff;', '--color-canvas: #000000;'))
+                self.assertTrue(any('generated tokens differ' in error for error in design.audit_design_system()))
+
     def test_metadata_is_checked_in_the_published_git_tree(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
