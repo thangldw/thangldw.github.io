@@ -179,25 +179,27 @@ try {
         if(initial.text!==(labels[initial.language]||labels.en))throw Error('Initial label mismatch '+JSON.stringify(initial));
         for(const locale of ['en','vi','ja','zh','ja-JP','zh-TW','fr']) {
           const expected=labels[locale.split('-')[0]]||labels.en;
-          await page.evaluate(`(() => {
+          const selectedWithControl=await page.evaluate(`(() => {
             const button=document.querySelector('.locale-switch button[data-lang="${locale}"], .locale-switch button[lang="${locale}"]');
-            if(button) button.click(); else document.documentElement.lang=${JSON.stringify(locale)};
+            if(button) button.click();
+            return Boolean(button);
           })()`);
-          await page.waitUntil(`document.querySelector('.support-floating-trigger span')?.textContent===${JSON.stringify(expected)}`,2000);
-          const fits=await page.evaluate(`(() => {const b=document.querySelector('.support-floating-trigger'),r=b.getBoundingClientRect();return r.width>0&&r.right<=innerWidth&&r.left>=0})()`);
-          if(!fits)throw Error('Button overflow '+locale);
+          if(selectedWithControl)await page.waitUntil(`document.querySelector('.support-floating-trigger span')?.textContent===${JSON.stringify(expected)}`,2000);
           await page.evaluate(`document.querySelector('.support-floating-trigger').focus(); document.querySelector('.support-floating-trigger').click()`);
           await page.waitUntil('document.querySelector("#supportDialog")?.open && [...document.querySelectorAll("#supportDialog img")].every(i=>i.naturalWidth>0)');
           const translated = headings[locale.split('-')[0]] || headings.en;
-          const modal = await page.evaluate(`(() => {
+          // Observe injected fallback locales in the same task, before an async page render can restore its own locale.
+          const modal = await page.evaluate(`(async () => {
+            if(!${selectedWithControl}) {document.documentElement.lang=${JSON.stringify(locale)};await Promise.resolve();}
             const d=document.querySelector('#supportDialog'),r=d.getBoundingClientRect(),close=d.querySelector('button').getBoundingClientRect();
-            return {headings:[...d.querySelectorAll('h2,h3')].map(e=>e.textContent),lang:d.lang,
+            const trigger=document.querySelector('.support-floating-trigger'),button=trigger.getBoundingClientRect();
+            return {headings:[...d.querySelectorAll('h2,h3')].map(e=>e.textContent),lang:d.lang,label:trigger.textContent,
               intro:d.querySelector('p').textContent,close:d.querySelector('button').getAttribute('aria-label'),
               alts:[...d.querySelectorAll('img')].map(i=>i.alt),
-              fits:d.scrollWidth<=d.clientWidth && r.left>=0 && r.right<=innerWidth && [...d.querySelectorAll('h2,p')].every(e=>{const rect=e.getBoundingClientRect();return rect.right<=close.left || rect.top>=close.bottom}),
+              fits:button.width>0 && button.left>=0 && button.right<=innerWidth && d.scrollWidth<=d.clientWidth && r.left>=0 && r.right<=innerWidth && [...d.querySelectorAll('h2,p')].every(e=>{const rect=e.getBoundingClientRect();return rect.right<=close.left || rect.top>=close.bottom}),
               focus:document.activeElement.id};
           })()`);
-          if(JSON.stringify(modal.headings)!==JSON.stringify(translated)||!modal.fits||modal.focus!=='supportClose')throw Error('Dialog mismatch '+JSON.stringify(modal));
+          if(modal.label!==expected||JSON.stringify(modal.headings)!==JSON.stringify(translated)||!modal.fits||modal.focus!=='supportClose')throw Error('Dialog mismatch '+locale+' '+JSON.stringify(modal));
           if(!modal.lang.startsWith(headings[locale.split('-')[0]]?locale.split('-')[0]:'en'))throw Error('Dialog language mismatch');
           if(['vi','ja','zh'].includes(locale) && (modal.intro.startsWith('Help cover')||modal.close==='Close support options'||modal.alts.some(a=>a.startsWith('QR code')||a.startsWith('ShopeePay QR'))))throw Error('Untranslated dialog accessibility copy');
           if(process.env.SUPPORT_SCREENSHOTS && route==='/index.html' && ['vi','ja'].includes(locale)) {
