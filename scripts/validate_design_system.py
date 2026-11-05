@@ -3,6 +3,7 @@
 import re
 from pathlib import Path
 from audit_ui_standards import audit_color_contract
+from generate_support_tokens import render_support_tokens
 ROOT = Path(__file__).resolve().parent.parent
 
 def audit_design_system():
@@ -33,6 +34,10 @@ def audit_design_system():
     protected = re.compile(r'--(?:color-[\w-]+|font-family-ui|text-[\w-]+|leading-[\w-]+|weight-[\w-]+|tracking-[\w-]+|space-[\w-]+|logo-[\w-]+|control-size[\w-]*|focus-[\w-]+|disabled-opacity|radius-[\w-]+)\s*:')
     for stylesheet in (ROOT/'css').glob('*.css'):
         if stylesheet.name == 'tokens.css':
+            continue
+        if stylesheet.name == 'support-tokens.css':
+            if stylesheet.read_text() != render_support_tokens(tokens):
+                errors.append('css/support-tokens.css: generated tokens differ from css/tokens.css; run scripts/generate_support_tokens.py')
             continue
         authored = re.sub(r'/\*.*?\*/', '', stylesheet.read_text(), flags=re.S)
         for definition in protected.findall(authored):

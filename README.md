@@ -127,7 +127,7 @@ node scripts/smoke_product_pages.mjs
 
 Tests use isolated temporary servers and Chrome profiles and remove them after completion.
 
-The Learning exporter in `_sources/learning/scripts/prepare-learning-pages.mjs` owns the directory and shared workspace HTML. It provides route metadata, a usable fallback before React mounts, the canonical stylesheet as the last layer, and the shared footer. `smoke_learning_pages.mjs` verifies all 23 generated entries in both themes at desktop/mobile widths, checks fallback and keyboard recovery, and blocks the content API to avoid creating practice sessions. Set `SITE_ORIGIN=https://thangldw.github.io` for the same live checks; opt into `LEARNING_LIVE_INDEX=1` to verify AWS Retry and index loading without starting practice or retrieving questions. The site validator checks Finder metadata in Git's published file set, not ignored local caches.
+The Learning exporter in `_sources/learning/scripts/prepare-learning-pages.mjs` owns the directory and shared workspace HTML. It provides route metadata, a usable fallback before React mounts, the canonical stylesheet as the last layer, and the shared footer. `smoke_learning_pages.mjs` verifies all 23 generated entries locally in both themes at desktop/mobile widths, checks fallback and keyboard recovery, and blocks the content API to avoid creating practice sessions. On production it checks 22 Learning routes and separately verifies Kotonari at `/bjt/`, which is served by project Pages from `thangldw/bjt`; the portfolio BJT entry is only a local preview fallback. Set `SITE_ORIGIN=https://thangldw.github.io` for the same live checks; opt into `LEARNING_LIVE_INDEX=1` to verify AWS Retry and index loading without starting practice or retrieving questions. The site validator checks Finder metadata in Git's published file set, not ignored local caches.
 
 ### Updating projects
 
@@ -149,7 +149,7 @@ All non-redirect HTML pages load the shared support assets with cache version `2
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
 
-Support components inherit the canonical tokens through `site-shell.css`. The old `support-tokens.css` URL is retained as an empty compatibility file and must not redefine the palette or type scale.
+Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites, including Kotonari at `/bjt/`, use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
 
 The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
 

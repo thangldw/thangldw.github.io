@@ -160,7 +160,9 @@ try {
   // Shell verification must not create content API sessions or retrieve protected questions.
   await page.send('Network.setBlockedURLs',{urls:['*cert-content-api.bizroll-game.workers.dev/*']});
   const catalog=JSON.parse(await readFile(resolve(ROOT,'_sources/learning/src/bank-api/catalog.json'),'utf8'));
-  const routes=[{slug:'learning',shortName:'Learning'},...catalog.certifications.filter(c=>c.id!=='pmp')];
+  // GitHub project Pages takes precedence over the user site's /bjt/ directory.
+  const standaloneBjt=new URL(origin).hostname==='thangldw.github.io';
+  const routes=[{slug:'learning',shortName:'Learning'},...catalog.certifications.filter(c=>c.id!=='pmp'&&!(standaloneBjt&&c.id==='bjt'))];
   for(const route of routes) {
     for(const width of [1280,390]) {
       await page.navigate(`${origin}/${route.slug}/`,width);
@@ -202,7 +204,7 @@ try {
   console.log('PASS keyboard dialog open, Escape, and focus restoration');
 
   await page.send('Emulation.setScriptExecutionDisabled',{value:true});
-  for(const route of ['learning','aws','bjt']) {
+  for(const route of standaloneBjt?['learning','aws']:['learning','aws','bjt']) {
     for(const width of [1280,390]) {
       await page.navigate(`${origin}/${route}/`,width);
       const fallback=await page.evaluate(`({ok:document.querySelector('[data-learning-fallback]')?.getBoundingClientRect().height>0 && document.querySelectorAll('main').length===1 && document.querySelectorAll('h1').length===1 && document.documentElement.scrollWidth<=innerWidth && document.body.innerText.includes('Bật JavaScript') && [...document.querySelectorAll('main a')].some(a=>a.textContent==='tải lại trang'),message:document.title})`);
@@ -233,6 +235,29 @@ try {
     await page.waitUntil(`location.pathname==='/${target}/' && location.search==='?view=practice' && location.hash==='#saved'`);
   }
   console.log('PASS classic redirects preserve query and hash');
+  if(standaloneBjt) {
+    for(const width of [1280,390]) {
+      await page.navigate(origin+'/bjt/',width);
+      await page.waitUntil('document.querySelector("#app h1") && document.querySelector(".support-floating-trigger")');
+      const before=await page.evaluate(`({background:getComputedStyle(document.body).backgroundColor,font:getComputedStyle(document.body).fontFamily})`);
+      await page.evaluate('document.querySelector(".support-floating-trigger").click()');
+      await page.waitUntil('document.querySelector("#supportDialog").open');
+      const result=await page.evaluate(`(() => {
+        const dialog=document.querySelector('#supportDialog'),style=getComputedStyle(dialog),rect=dialog.getBoundingClientRect();
+        return {ok:document.querySelector('meta[name="application-name"]').content==='Kotonari' &&
+          document.querySelector('link[rel="canonical"]').href==='https://thangldw.github.io/bjt/' &&
+          style.backgroundColor==='rgb(255, 255, 255)' && style.getPropertyValue('--control-size-touch').trim()==='44px' &&
+          rect.left>=0 && rect.right<=innerWidth && dialog.scrollWidth<=dialog.clientWidth &&
+          getComputedStyle(document.body).backgroundColor===${JSON.stringify(before.background)} && getComputedStyle(document.body).fontFamily===${JSON.stringify(before.font)},
+          message:JSON.stringify({background:style.backgroundColor,width:rect.width})};
+      })()`);
+      assertResult(`Kotonari ${width}: separate app and isolated support palette`,result,page.exceptions);
+      if(process.env.LEARNING_SCREENSHOTS) {
+        const screenshot=await page.send('Page.captureScreenshot',{format:'png'});
+        await writeFile(resolve(process.env.LEARNING_SCREENSHOTS,`kotonari-support-${width}.png`),Buffer.from(screenshot.data,'base64'));
+      }
+    }
+  }
   console.log(`Verified ${routes.length} generated routes at two widths, both themes, keyboard, fallback, and recovery.`);
   page.close();
 } finally {
