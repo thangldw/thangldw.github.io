@@ -1,4 +1,5 @@
 import { locales } from './home-locales.mjs';
+import { bindLocaleSwitch } from './site-locale.mjs';
 
 const actions = {
   en: { gmail: 'Compose in Gmail (browser)', app: 'Open mail app' },
@@ -24,14 +25,4 @@ function render(lang) {
   buttons.forEach(button => button.setAttribute('aria-pressed', String(button.lang === lang)));
 }
 
-for (const button of buttons) {
-  button.addEventListener('click', () => {
-    const url = new URL(location.href);
-    if (button.lang === 'en') url.searchParams.delete('lang');
-    else url.searchParams.set('lang', button.lang);
-    history.replaceState(null, '', url);
-    render(button.lang);
-  });
-}
-const requested = new URLSearchParams(location.search).get('lang');
-render(Object.hasOwn(actions, requested) ? requested : 'en');
+bindLocaleSwitch(render, { updateUrl: true });

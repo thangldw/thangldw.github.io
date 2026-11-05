@@ -1,4 +1,5 @@
 import { locales, projectTranslations } from '/js/home-locales.mjs';
+import { bindLocaleSwitch } from './site-locale.mjs';
 const copy = {
  en: { title:'Apps', intro:'Tools for work, learning and a little play.', home:'Home', cert:'Cert', all:'All', search:'Find an app, topic, or tool…', searchLabel:'Search apps and projects', open:'Open', loading:'Loading projects…', failed:'Projects could not be loaded.', retry:'Try again', empty:'No projects found', hint:'Try another keyword or clear the filters.', clear:'Clear filters', browse:'Browse project groups', count:n=>`${n} ${n===1?'project':'projects'}`, more:n=>`View all ${n} learning projects`, names:['Engineering','Utilities','Learning','Experiments'], descriptions:['Build, evaluate, and protect software.','A little help with everyday tasks.','Study by topic and practise at your own pace.','Games and things to explore.'] },
  vi: {title:'Apps',intro:'Công cụ cho công việc, học tập và giải trí.',home:'Trang chủ',cert:'Chứng chỉ',all:'Tất cả',search:'Tìm ứng dụng, chủ đề hoặc công cụ…',searchLabel:'Tìm ứng dụng và dự án',open:'Mở',loading:'Đang tải dự án…',failed:'Không tải được danh sách dự án.',retry:'Thử lại',empty:'Không tìm thấy dự án',hint:'Thử từ khóa khác hoặc bỏ bộ lọc.',clear:'Bỏ bộ lọc',browse:'Lọc theo nhóm dự án',count:n=>`${n} dự án`,more:n=>`Xem tất cả ${n} dự án học tập`,names:['Kỹ thuật','Tiện ích','Học tập','Thử nghiệm'],descriptions:['Xây dựng, đánh giá và bảo vệ phần mềm.','Hỗ trợ những công việc hằng ngày.','Học theo chủ đề, luyện tập theo nhịp của bạn.','Trò chơi và những điều để khám phá.']},
@@ -44,7 +45,6 @@ function render(){
  if(!visible.length)library.innerHTML='<div class="catalog-state"><h2>'+c.empty+'</h2><p>'+c.hint+'</p><button type="button" class="ui-button" data-clear>'+c.clear+'</button></div>';
 }
 buttons.forEach(b=>b.addEventListener('click',()=>{group=b.dataset.group;render();}));
-document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;render();}));
 search.addEventListener('input',e=>{if(!e.isComposing)render();});search.addEventListener('compositionend',render);
 document.addEventListener('themechange',syncThemeLabel);
 library.addEventListener('click',e=>{
@@ -52,6 +52,6 @@ library.addEventListener('click',e=>{
  if(e.target.closest('[data-clear]')){search.value='';group='all';render();search.focus();}
  if(e.target.closest('[data-retry]'))location.reload();
 });
-render();
+bindLocaleSwitch(language => { lang = language; render(); });
 try{await window.portfolioProjectsReady;if(!window.portfolioCertificationManifest)throw new Error('Learning catalog is unavailable');projects=[...window.portfolioProjects,...window.portfolioLearningCollections.filter(p=>p.id!=='certification-study'),...(window.portfolioCertificationProjects||[])].sort((a,b)=>a.title.localeCompare(b.title,'en',{numeric:true,sensitivity:'base'}));status='ready';search.disabled=false;}catch{status='error';}
 render();

@@ -56,8 +56,8 @@
 .support-dialog-shell { position: relative; padding: 12px; }
 .support-dialog .support-dialog-close { position: absolute; top: 4px; right: 4px; display: grid; place-items: center; width: 44px; height: 44px; min-height: 44px; padding: 0; border: 0; border-radius: var(--radius-control); background: transparent; color: var(--color-text); font: 24px/1 var(--font-ui); cursor: pointer; }
 .support-dialog .support-dialog-close:hover { background: var(--color-surface-subtle); }
-.support-dialog .support-dialog-heading { position: static; display: block; width: auto; height: auto; min-height: 0; max-width: none; margin: 0; padding: 0; border: 0; background: transparent; }
-.support-dialog-heading h2 { padding-right: 32px; margin: 0 0 6px; color: var(--color-text); font-size: 20px; line-height: 1.2; letter-spacing: -.035em; font-weight: 600; }
+.support-dialog .support-dialog-heading { position: static; display: block; width: auto; height: auto; min-height: 0; max-width: none; margin: 0; padding: 0 44px 0 0; border: 0; background: transparent; }
+.support-dialog-heading h2 { padding-right: 0; margin: 0 0 6px; color: var(--color-text); font-size: 20px; line-height: 1.2; letter-spacing: -.035em; font-weight: 600; }
 .support-dialog-heading p { margin: 0; color: var(--color-text-body); font-size: 13px; }
 .support-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px; }
 .support-dialog .support-international, .support-dialog .support-kofi, .support-dialog .support-bank { min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; }

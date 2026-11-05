@@ -1,5 +1,6 @@
 import { locales, projectTranslations } from './home-locales.mjs?v=20261103-icons';
 import { sortProjects, circularIndex, visibleProjects } from './home-project-order.mjs';
+import { bindLocaleSwitch } from './site-locale.mjs';
 
 const root = document.documentElement;
 const page = document.querySelector('.page');
@@ -121,7 +122,6 @@ function move(direction) {
  start=circularIndex(start+direction,projects.length);
  renderProjects();
 }
-localeButtons.forEach(button=>button.addEventListener('click',()=>{locale=button.lang;renderLocale();}));
 previousButton.addEventListener('click',()=>move(-1));
 nextButton.addEventListener('click',()=>move(1));
 rail.addEventListener('keydown',event=>{
@@ -133,7 +133,7 @@ new ResizeObserver(()=>{
  const visible=visibleProjectCount();
  if(visible!==count){count=visible;renderProjects();}
 }).observe(rail);
-renderLocale();
+bindLocaleSwitch(language => { locale = language; renderLocale(); });
 previousButton.disabled=nextButton.disabled=true;
 window.portfolioProjectsReady.then(()=>{
  projects=sortProjects(window.portfolioProjects);
