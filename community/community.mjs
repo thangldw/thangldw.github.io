@@ -1,6 +1,7 @@
 import vi from './locales/vi.mjs?v=20261103-signature';
 import ja from './locales/ja.mjs?v=20261103-signature';
 import zh from './locales/zh.mjs?v=20261103-signature';
+import { bindLocaleSwitch } from '/js/site-locale.mjs';
 
 
 const messages = { en: {}, vi, ja, zh };
@@ -35,20 +36,7 @@ function render(language) {
   buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.lang === language)));
 }
 
-const preference = 'community.site.locale';
-buttons.forEach(button => button.addEventListener('click', () => {
-  const language = button.dataset.lang;
-  render(language);
-  const url = new URL(location.href);
-  url.searchParams.set('lang', language);
-  history.replaceState(null, '', url);
-  try { localStorage.setItem(preference, language); } catch { /* The URL retains the selection. */ }
-}));
-let requested = new URLSearchParams(location.search).get('lang');
-if (!requested) {
-  try { requested = localStorage.getItem(preference); } catch { /* Default to English. */ }
-}
-render(Object.hasOwn(messages, requested) ? requested : 'en');
+bindLocaleSwitch(render, { updateUrl: true });
 
 function syncThemeIcon() {
   document.getElementById('themeToggle').textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾';
