@@ -188,7 +188,7 @@ try {
         for(const theme of ['light','dark']) {
           await page.evaluate(`document.documentElement.setAttribute('data-theme',${JSON.stringify(theme)})`);
           const result=await page.evaluate(`(() => {
-            const d=document.querySelector('#supportDialog'), f=[...d.querySelectorAll('figure')], b=[...document.querySelectorAll('button,a')].filter(e=>!e.closest('#supportDialog')&&/^(Support my work|Fuel my next build)$/.test(e.textContent.trim()));
+            const d=document.querySelector('#supportDialog'), f=[...d.querySelectorAll('figure')], b=[...document.querySelectorAll('.support-floating-trigger,[data-support-open]')];
             const rect=f.map(e=>e.getBoundingClientRect());
             return {buttons:b.length, visible:b.filter(e=>e.getBoundingClientRect().width>0).length, old:!!document.querySelector('.support-trigger,.support-button,.support-work,.bizroll-support-dialog'), qr:f.length, aligned:rect.length===2&&(innerWidth>680?Math.abs(rect[0].top-rect[1].top)<2:rect[1].top>=rect[0].bottom), equal:rect.length===2&&Math.abs(rect[0].width-rect[1].width)<1&&Math.abs(rect[0].height-rect[1].height)<1,overflow:d.scrollWidth>d.clientWidth};
           })()`);
