@@ -10,7 +10,9 @@ Run `npm ci`, `npm run build:pages`, `node --test tests/bank-session.test.mjs te
 
 Production loads official root `/css/site-shell.css` and `/js/site-shell.js`. Route CSS owns content layout and extends the canonical Vietnamese optical-metrics rule. Local development uses `npm run dev -- --host 127.0.0.1 --port 8797 --strictPort`.
 
-The Pages generator adds the portfolio signature and floating support button to the directory and shared certification pages. It uses the catalog short name for each signature. The public BJT project, dedicated PMP and JLPT N1 workspaces, and Classic pages keep their own layouts.
+The Pages generator adds the portfolio signature and floating support button to the directory and shared certification pages, including BJT. It uses the catalog short name for each signature. The dedicated PMP and JLPT N1 workspaces and Classic pages keep their own layouts.
+
+Each generated entry has route-specific metadata, a meaningful HTML fallback inside the React mount, and the versioned canonical site stylesheet as its final style layer. React replaces the fallback with the workspace; never add a second persistent main landmark. These study pages declare `data-analytics="off"` and retain the restrictive CSP. Do not enable external tracking to satisfy the portfolio audit.
 
 ## Scope and boundaries
 

@@ -38,7 +38,7 @@ flowchart LR
 - Default branch: `master`
 - Runtime: standards-based browser APIs
 - Deployment: GitHub Pages from the repository root
-- Analytics: shared local script included once on non-redirect pages
+- Analytics: shared local script included once on non-redirect pages, except study apps with an explicit no-tracking policy
 
 ### Public routes
 
@@ -111,7 +111,9 @@ Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather
 python3 scripts/audit_ui_standards.py
 python3 scripts/validate_design_system.py
 python3 scripts/validate_site.py
+python3 scripts/test_site_audits.py
 node scripts/test_homepage.mjs
+node scripts/smoke_learning_pages.mjs
 node scripts/smoke_cert.mjs
 node scripts/smoke_brand.mjs
 node scripts/smoke_product_pages.mjs
@@ -124,6 +126,8 @@ node scripts/smoke_product_pages.mjs
 | Browser smoke suite | Project JSON loading, certification manifest propagation, catalog layout, every certification route, theme isolation, exam mode, and responsive behavior |
 
 Tests use isolated temporary servers and Chrome profiles and remove them after completion.
+
+The Learning exporter in `_sources/learning/scripts/prepare-learning-pages.mjs` owns the directory and shared workspace HTML. It provides route metadata, a usable fallback before React mounts, the canonical stylesheet as the last layer, and the shared footer. `smoke_learning_pages.mjs` verifies all 23 generated entries in both themes at desktop/mobile widths, checks fallback and keyboard recovery, and blocks the content API to avoid creating practice sessions. Set `SITE_ORIGIN=https://thangldw.github.io` for the same live checks; opt into `LEARNING_LIVE_INDEX=1` to verify AWS Retry and index loading without starting practice or retrieving questions. The site validator checks Finder metadata in Git's published file set, not ignored local caches.
 
 ### Updating projects
 
@@ -144,6 +148,8 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 All non-redirect HTML pages load the shared support assets with cache version `20261105-qr`; the Learning and Japan PR Guide exporters preserve this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
+
+Support components inherit the canonical tokens through `site-shell.css`. The old `support-tokens.css` URL is retained as an empty compatibility file and must not redefine the palette or type scale.
 
 The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
 
@@ -184,7 +190,7 @@ Do not silently replace generated assets in an unrelated commit. If production i
 - Validate all JSON before rendering and escape catalog text inserted into HTML.
 - Keep question banks out of Pages; controlled content requires network access. Browser-visible material remains copyable.
 - Certification learner data remains in browser storage; the website does not collect or synchronize it.
-- Analytics must not run on redirect pages and must appear exactly once elsewhere.
+- Analytics must not run on redirect pages or study pages declaring `data-analytics="off"`; it must appear exactly once elsewhere. Learning exports retain their restrictive CSP and no-tracking policy.
 
 ### Contribution policy
 

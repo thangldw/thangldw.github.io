@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -101,9 +102,12 @@ class PageParser(HTMLParser):
         self.refreshes: list[str] = []
         self.meta_names: dict[str, str] = {}
         self.meta_properties: dict[str, str] = {}
+        self.body_attrs: dict[str, str] = {}
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         values = {key.lower(): value or "" for key, value in attrs}
+        if tag == "body":
+            self.body_attrs = values
         self.classes.update(values.get("class", "").split())
         if values.get("id"):
             self.ids.append(values["id"])
@@ -136,6 +140,24 @@ def local_target(page: Path, reference: str) -> Path | None:
     if clean.endswith("/") or target.is_dir():
         target /= "index.html"
     return target
+
+
+def tracked_local_metadata(root: Path) -> list[str]:
+    # Pages publishes committed files; ignored Finder metadata is not an artifact.
+    files = subprocess.check_output(
+        ["git", "ls-files", "-z", "--", ".DS_Store", "**/.DS_Store"], cwd=root
+    )
+    return files.decode().split("\0")[:-1]
+
+
+def audit_analytics(relative: Path, parser: PageParser) -> list[str]:
+    references = [reference for reference in parser.references if urlsplit(reference).path == ANALYTICS_SCRIPT]
+    # Study apps can explicitly retain their no-tracking policy and restrictive CSP.
+    disabled = parser.body_attrs.get("data-analytics") == "off"
+    standalone = relative.as_posix() in {"pmp/index.html", "jlpt-n1/index.html", "apps/pmp/index.html", "cert/pmp/index.html"}
+    if parser.refreshes or disabled or standalone:
+        return [f"{relative}: redirect and opted-out study pages must not load analytics"] if references else []
+    return [f"{relative}: expected one {ANALYTICS_SCRIPT} reference"] if len(references) != 1 else []
 
 
 def main() -> int:
@@ -364,11 +386,9 @@ def main() -> int:
         errors.append(
             f"{stale_markdown}: Markdown file is not in the durable-document allowlist"
         )
-    for metadata_file in sorted(
-        path for path in ROOT.rglob(".DS_Store") if ".git" not in path.parts
-    ):
+    for metadata_file in tracked_local_metadata(ROOT):
         errors.append(
-            f"{metadata_file.relative_to(ROOT)}: local metadata must not be kept"
+            f"{metadata_file}: local metadata must not be committed"
         )
 
     for page in pages:
@@ -398,19 +418,7 @@ def main() -> int:
         if duplicates:
             errors.append(f"{page.relative_to(ROOT)}: duplicate ids: {', '.join(duplicates)}")
 
-        analytics_references = [
-            reference for reference in parser.references if urlsplit(reference).path == ANALYTICS_SCRIPT
-        ]
-        # The owner-held PMP app intentionally has no analytics or remote tracking.
-        if parser.refreshes or page.relative_to(ROOT).as_posix() in {"pmp/index.html", "jlpt-n1/index.html", "apps/pmp/index.html", "cert/pmp/index.html"}:
-            if analytics_references:
-                errors.append(
-                    f"{page.relative_to(ROOT)}: redirect pages and standalone study apps must not load analytics"
-                )
-        elif len(analytics_references) != 1:
-            errors.append(
-                f"{page.relative_to(ROOT)}: expected one {ANALYTICS_SCRIPT} reference"
-            )
+        errors.extend(audit_analytics(page.relative_to(ROOT), parser))
 
         font_references = [
             reference
@@ -447,9 +455,9 @@ def main() -> int:
                 if "target.hash = location.hash" not in script or "new URLSearchParams(location.search)" not in script:
                     errors.append(f"{relative}: redirect must preserve query and hash")
                 continue
-            if relative in {"jlpt/index.html", "g/index.html"} or relative.startswith("n1-modules/"):
+            if relative in {"jlpt/index.html", "jlpt/classic.html", "g/index.html", "g/classic.html"} or relative.startswith("n1-modules/"):
                 destination = urlsplit(parser.refreshes[0].removeprefix("0;url="))
-                expected = "/g-kentei/" if relative == "g/index.html" else "/jlpt-n1/"
+                expected = "/g-kentei/" if relative.startswith("g/") else "/jlpt-n1/"
                 if destination.path != expected or destination.scheme or destination.netloc or not (ROOT / expected.lstrip("/") / "index.html").is_file():
                     errors.append(f"{relative}: invalid standalone study redirect")
                 continue
