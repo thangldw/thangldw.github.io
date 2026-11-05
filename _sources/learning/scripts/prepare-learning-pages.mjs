@@ -9,7 +9,7 @@ function portfolioPage(html, name) {
  return html.replace('</head>', `    <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/compact-footer.css?v=20261103-portfolio">
     <link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr">
-    <script defer src="/js/support-dialog.js?v=20261105-qr"></script>
+    <script defer src="/js/support-dialog.js?v=20261106-i18n"></script>
   </head>`)
   .replace('<body>', '<body class="site-page" data-support-links>')
   .replace('</body>', `  <footer class="compact-footer" id="footer">
@@ -29,6 +29,6 @@ for(const cert of catalog.certifications){
  await mkdir(directory,{recursive:true});
  const entry=template.replace('https://thangldw.github.io/learning/"',`https://thangldw.github.io/${cert.slug}/"`);
  // The public /bjt/ URL belongs to the standalone Cert Studio BJT project.
- await writeFile(new URL('index.html',directory),cert.slug==='bjt'?entry.replace('</head>', '<link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr"><script defer src="/js/support-dialog.js?v=20261105-qr"></script></head>'):portfolioPage(entry,cert.shortName));
+ await writeFile(new URL('index.html',directory),cert.slug==='bjt'?entry.replace('</head>', '<link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr"><script defer src="/js/support-dialog.js?v=20261106-i18n"></script></head>'):portfolioPage(entry,cert.shortName));
 }
 console.log(`Prepared /learning/ directory and ${catalog.certifications.filter(cert=>cert.id!=='pmp').length} root certification routes in dist/pages`);
