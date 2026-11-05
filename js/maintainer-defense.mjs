@@ -1,4 +1,5 @@
 import { locales } from '/js/home-locales.mjs';
+import { bindLocaleSwitch } from './site-locale.mjs';
 
 const messages = {
  en: {
@@ -51,7 +52,6 @@ function renderLanguage(){
  const trigger=document.querySelector('.support-floating-trigger');if(trigger){trigger.querySelector('span').textContent=shared.support;trigger.setAttribute('aria-label',shared.support);}
  document.getElementById('clipboardStatus').textContent='';renderInstallation();renderExample();syncTheme();
 }
-document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;renderLanguage();}));
 document.querySelectorAll('[data-install]').forEach(b=>b.addEventListener('click',()=>{method=b.dataset.install;renderInstallation();renderExample();document.getElementById('clipboardStatus').textContent='';}));
 document.querySelectorAll('[data-example]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.example;renderExample();}));
 document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{
@@ -59,6 +59,6 @@ document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',a
 }));
 document.getElementById('showExample').addEventListener('click',()=>{document.getElementById('example').open=true;});
 document.addEventListener('themechange',syncTheme);
-renderLanguage();
+bindLocaleSwitch(language => { lang = language; renderLanguage(); });
 try{const response=await fetch('/assets/maintainer-defense/example.json');if(!response.ok)throw new Error('Example unavailable');example=await response.json();if(example.report.findings[0]?.rule_id!=='MD-WF-002'||!example.patch)throw new Error('Invalid example');}catch{exampleFailed=true;}
 renderExample();
