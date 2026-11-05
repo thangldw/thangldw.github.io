@@ -167,12 +167,13 @@ try {
   routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html','/bjt/workspace.html');
   const report=[];
   for (const route of routes.filter(r=>!process.env.SUPPORT_ROUTE||r.includes(process.env.SUPPORT_ROUTE))) {
+    console.log('Checking',route);
     for (const width of [1280,390]) {
       try {
         await page.navigate(origin+route,width);
         await page.waitUntil('document.querySelector(".support-floating-trigger, [data-support-open], .support-trigger, .support-button")');
         await new Promise(r=>setTimeout(r,500));
-        await page.evaluate('document.fonts.ready');
+        await page.evaluate('Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,2000))])');
         const font=await page.evaluate(`(() => {
           const els=[...document.querySelectorAll('body, #root h1, #root p, #root button, main h1, main p, main button')].filter(e=>!e.closest('#supportDialog')&&!e.className?.toString().includes('support')).slice(0,30);
           const snapshot=()=>els.map(e=>getComputedStyle(e).fontFamily);
