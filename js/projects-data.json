@@ -254,7 +254,7 @@
       "description": "Practise business Japanese through workplace emails, honorific language and realistic scenarios, with explanations and review of uncertain answers.",
       "featuredDescription": "Business Japanese practice through workplace emails, honorific language and realistic scenarios, with explanations and targeted review.",
       "catalogDescription": "Practise workplace Japanese, understand the reasoning, and review answers you are unsure about.",
-      "href": "https://thangldw.github.io/kotonari/",
+      "href": "https://kotonari.cert-apps.workers.dev/",
       "ariaLabel": "Open Kotonari",
       "icon": "fa-language",
       "accent": "rust",
