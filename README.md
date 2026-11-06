@@ -9,7 +9,7 @@ A dependency-light portfolio, application catalog, and static application host d
 flowchart LR
     PJ["projects-data.json<br/>project source"]:::yellow --> PL["Runtime catalog<br/>loader"]:::blue
     CM["Certification public<br/>manifest"]:::pink --> PL
-    PL --> H["Portfolio home<br/>featured projects"]:::purple
+    PL --> H["Portfolio home<br/>projects by title"]:::purple
     PL --> A["/apps/<br/>full catalog"]:::green
     CS["Private cert source<br/>+ question banks"]:::orange --> CB["Local production<br/>build"]:::blue
     CB --> CA["/<test>/<br/>generated study shells"]:::cyan
@@ -44,7 +44,7 @@ flowchart LR
 
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Portfolio profile and selected engineering work | Root HTML plus shared project catalog |
+| `/` | Portfolio profile and projects sorted by title | Root HTML plus shared project catalog |
 | `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/<test>/` | Generated certification study shells | Private `thangldw/cert` source repository |
@@ -53,6 +53,8 @@ flowchart LR
 | `/assets/learning/certifications-manifest.json` | Public certification metadata and counts | Local certification production build |
 | `/case-studies/{flagship}/` | Recruiter-facing evidence for four flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |
+
+Kotonari (`/bjt/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
 
@@ -211,10 +213,10 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 
 | Route | Trách nhiệm | Nguồn chuẩn |
 | --- | --- | --- |
-| `/` | Portfolio và Side Projects tiêu biểu | Root HTML và catalog project dùng chung |
+| `/` | Portfolio và các dự án theo thứ tự tên | Root HTML và catalog project dùng chung |
 | `/apps/` | Danh mục ứng dụng có search/filter | `js/projects-data.json` |
 | `/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
-| `/cert/` | Certification Library đã build | Repo private `thangldw/cert` |
+| `/<test>/` | Ứng dụng ôn thi được build theo từng chứng chỉ | Repo private `thangldw/cert` |
 | `/jlpt-n1/`, `/pmp/` | Luyện N1 theo kỹ năng và PMP độc lập | Source cert private và API có kiểm soát |
 | Certification manifest | Metadata và count công khai | Local production build của repo cert |
 | `/case-studies/{flagship}/` | Bằng chứng recruiter-facing cho bốn flagship | Semantic HTML theo route và CSS dùng chung |
@@ -232,7 +234,7 @@ Manifest chứng chỉ chỉ dùng allowlist metadata công khai: định danh, 
 
 ### Cấu trúc và phát triển local
 
-Dùng cây thư mục ở phần English. `cert/` là generated artifact, không sửa bundle thủ công. Cần Python 3.10+, Node.js 22+ và Chrome. Không cần cài dependency.
+Dùng cây thư mục ở phần English. Các route `/<test>/` là generated artifact, không sửa bundle thủ công. Cần Python 3.10+, Node.js 22+ và Chrome. Không cần cài dependency.
 
 ```bash
 python3 -m http.server 4173
@@ -246,7 +248,7 @@ Chạy UI audit, site validator và browser smoke suite bằng các command tron
 
 ### Cập nhật project
 
-Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, dùng `featured` cùng `featuredOrder` cho trang chủ, sau đó chạy validation/smoke test và push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
+Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, giữ `featured` cho các nơi còn sử dụng. Trang chủ sắp xếp theo tên với English collation và numeric ordering. Chạy validation/smoke test và push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
 
 ### Support và nguồn gốc asset
 
@@ -258,7 +260,7 @@ Repo private `thangldw/cert` quản lý dữ liệu, question bank, application 
 
 1. Chạy `npm ci`, validation, test và production build.
 2. Kiểm tra public manifest chỉ có metadata.
-3. Dùng release helper đồng bộ `dist/client/` sang `/cert/`, shell N1 sang `/jlpt-n1/` và redirect cũ. PMP có helper build/release riêng tại `/pmp/`. Deploy content API trước shell khi nội dung thay đổi.
+3. Dùng release helper đồng bộ shared assets sang `/assets/learning/`, shell từng chứng chỉ sang `/<test>/`, shell N1 sang `/jlpt-n1/` và redirect cũ. PMP có helper build/release riêng tại `/pmp/`. Deploy content API trước shell khi nội dung thay đổi.
 4. Giữ các integration layer cần thiết của website.
 5. Chạy toàn bộ quality gate của website.
 6. Push source repo trước generated artifact.
@@ -289,7 +291,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Portfolio と featured project | Root HTML と shared project catalog |
+| `/` | Portfolio とタイトル順のプロジェクト | Root HTML と shared project catalog |
 | `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
 | `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
 | `/<test>/` | Generated certification study shells | Private `thangldw/cert` repo |
@@ -297,6 +299,8 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | Certification manifest | Public metadata と count | Cert local production build |
 | `/case-studies/{flagship}/` | 4 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
 | `/404.html` | GitHub Pages fallback | Repository source |
+
+Kotonari (`/bjt/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
 
@@ -310,7 +314,7 @@ Certification manifest は identity、issuer、route、syllabus、public exam me
 
 ### Local development と quality gate
 
-English セクションの directory tree を参照してください。`cert/` は generated artifact で、bundle を直接編集しません。Python 3.10+、Node.js 22+、Chrome が必要です。Dependency install は不要です。
+English セクションの directory tree を参照してください。`/<test>/` は generated artifact で、bundle を直接編集しません。Python 3.10+、Node.js 22+、Chrome が必要です。Dependency install は不要です。
 
 ```bash
 python3 -m http.server 4173
@@ -323,9 +327,9 @@ JSON runtime loading のため file を直接開かず HTTP server を使いま�
 
 ### Project と certification の更新
 
-Project metadata は `js/projects-data.json` だけで編集します。Stable unique ID、required field、安全な URL、`featured`/`featuredOrder` を設定し、test 後に push します。JSON content update のたびに HTML cache key を変える必要はありません。
+Project metadata は `js/projects-data.json` だけで編集します。Stable unique ID、required field、安全な URL を設定します。ホームは英語の照合順で数値を考慮してタイトルを並べます。`featured` は他の利用箇所のために保持し、テスト後に push します。JSON content update のたびに HTML cache key を変える必要はありません。
 
-Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して source release helper で `/cert/`、`/jlpt-n1/` と legacy redirect を同期します。PMP は `/pmp/` 専用 helper を使用します。Content 変更時は shell 公開前に API を deploy します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
+Certification は private `thangldw/cert` repo で data validation、test、production build を行い、metadata-only manifest を確認して source release helper で `/assets/learning/`、各 `/<test>/`、`/jlpt-n1/` と legacy redirect を同期します。PMP は `/pmp/` 専用 helper を使用します。Content 変更時は shell 公開前に API を deploy します。Website gate 後、source repo、generated artifact の順に push し、Pages が `built` になったら production を検証します。GitHub Actions は不要ですが intentional local build/deploy は必要です。
 
 Home の optional Support dialog は local Ko-fi QR、local ShopeePay QR を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
 
@@ -339,7 +343,7 @@ Secret、credential、private dataset、learner backup、machine-specific path �
 
 ## Canonical homepage design — 2026-10-10
 
-The approved homepage is the design reference for future `/apps/` and `/cert/` updates. Those routes retain their current implementation in this release; generated `/cert/` changes must be made in its source repository.
+The homepage is the design reference for `/apps/` and the generated certification routes. Maintain each certification shell in its owning source repository.
 
 - Visual register: minimal portfolio, restrained separators, no decorative cards.
 - Light default on every homepage load; dark mode is an explicit user action. Use the shared `site-shell.js` theme control and `themechange` event.
@@ -349,7 +353,7 @@ The approved homepage is the design reference for future `/apps/` and `/cert/` u
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
 - Project source: existing shared catalog and certification-manifest loader. All entries appear A–Z with circular manual navigation; no autoplay. The renderer shows three cards on desktop, two on tablet, one on mobile; arrows and keyboard navigation wrap in both directions.
 - The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`. The shareable `/contact/` page also offers a link to the reader’s configured mail app.
-- Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and the `/cert/` source. Preserve route-specific information architecture and application behavior.
+- Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and the certification source. Preserve route-specific information architecture and application behavior.
 
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
 
