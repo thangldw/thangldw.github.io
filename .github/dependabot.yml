@@ -1,15 +1,6 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: /_sources/learning
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 0
-    groups:
-      learning-tooling-security:
-        applies-to: security-updates
-        patterns: ["vite", "vitest", "@vitest/*", "postcss", "nanoid", "source-map-js", "browserslist", "baseline-browser-mapping", "undici"]
-  - package-ecosystem: npm
     directory: /_sources/japan-pr-guide
     schedule:
       interval: weekly

@@ -22,6 +22,8 @@ ANALYTICS_SCRIPT = "/js/analytics.js"
 CONTACT_EMAIL = "thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 APP_REDIRECTS = {
+    "bjt/index.html": "/kotonari/",
+    "ccar-f/index.html": "/claude-cert/",
     "apps/japan-pr-guide/index.html": "/japan-pr-guide/",
     "apps/maintainer-defense/index.html": "/awesome-maintainer-defense/",
     "apps/proofline/index.html": "/proofline/",
@@ -41,20 +43,13 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "macinity": 4,
     "maintainer-defense": 5,
     "igo": 6,
-    "pmp-studio": 7,
     "bjt": 8,
-    "jlpt-n1-skills": 9,
-    "fp3": 12,
-    "g-kentei": 11,
-    "ap": 10,
 }
-EXPECTED_LANGUAGE_COLLECTION_ORDER = 3
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}
 CASE_STUDY_ROUTES = {
     "ragops": "/case-studies/ragops/",
     "proofline": "/case-studies/proofline/",
     "kakeflow": "/case-studies/kakeflow/",
-    "certification-study": "/case-studies/certification-library/",
 }
 CASE_STUDY_SECTION_IDS = {
     "production-problem",
@@ -178,7 +173,6 @@ def main() -> int:
         catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
         projects = catalog.get("projects")
         learning_collections = catalog.get("learningCollections")
-        language_collection = catalog.get("languageCollection")
         if catalog.get("schemaVersion") != 1:
             errors.append("js/projects-data.json: unsupported schemaVersion")
         if not isinstance(projects, list) or not isinstance(learning_collections, list):
@@ -259,34 +253,11 @@ def main() -> int:
             if sum(project_id == "macinity" for project_id in project_by_id) != 1:
                 errors.append("js/projects-data.json: Macinity must appear exactly once")
             for project_id, expected_href in CASE_STUDY_ROUTES.items():
-                if project_id == "certification-study":
-                    continue
                 project = project_by_id.get(project_id)
                 if not isinstance(project, dict) or project.get("caseStudyHref") != expected_href:
                     errors.append(
                         "js/projects-data.json: "
                         f"{project_id} caseStudyHref must be {expected_href}"
-                    )
-            if not isinstance(language_collection, dict):
-                errors.append("js/projects-data.json: missing languageCollection")
-            elif language_collection.get("caseStudyHref") != CASE_STUDY_ROUTES[
-                "certification-study"
-            ]:
-                errors.append(
-                    "js/projects-data.json: Certification Library caseStudyHref must be "
-                    f"{CASE_STUDY_ROUTES['certification-study']}"
-                )
-            elif language_collection.get("featuredOrder") != EXPECTED_LANGUAGE_COLLECTION_ORDER:
-                errors.append(
-                    "js/projects-data.json: Certification Library featuredOrder must be "
-                    f"{EXPECTED_LANGUAGE_COLLECTION_ORDER}"
-                )
-            else:
-                target = local_target(catalog_path, language_collection["caseStudyHref"])
-                if target is None or not target.is_file():
-                    errors.append(
-                        "js/projects-data.json: broken Certification Library "
-                        f"caseStudyHref {language_collection['caseStudyHref']}"
                     )
             kakeflow = next(
                 (project for project in projects if project.get("id") == "kakeflow"),
@@ -307,76 +278,6 @@ def main() -> int:
 
     if (ROOT / "cert").exists():
         errors.append("cert/: retired directory must not be recreated")
-    certification_manifest_path = ROOT / "assets/learning/certifications-manifest.json"
-    try:
-        certification_manifest = json.loads(
-            certification_manifest_path.read_text(encoding="utf-8")
-        )
-        certifications = certification_manifest.get("certifications")
-        if certification_manifest.get("schemaVersion") != "1.0":
-            errors.append(
-                "assets/learning/certifications-manifest.json: unsupported schemaVersion"
-            )
-        if not isinstance(certifications, list):
-            errors.append(
-                "assets/learning/certifications-manifest.json: certifications must be an array"
-            )
-        elif certification_manifest.get("certificationCount") != len(certifications):
-            errors.append(
-                "assets/learning/certifications-manifest.json: certificationCount mismatch"
-            )
-        else:
-            allowed_fields = {
-                "id", "slug", "displayOrder", "accent", "shortName", "name",
-                "issuer", "syllabusVersion", "href", "availableQuestionCount", "exam",
-            }
-            allowed_exam_fields = {
-                "durationMinutes", "questionCount", "format", "structure",
-            }
-            manifest_ids: list[str] = []
-            for index, certification in enumerate(certifications):
-                if not isinstance(certification, dict):
-                    errors.append(
-                        f"assets/learning/certifications-manifest.json: entry {index} must be an object"
-                    )
-                    continue
-                unexpected = sorted(certification.keys() - allowed_fields)
-                missing = sorted(allowed_fields - certification.keys())
-                if unexpected or missing:
-                    errors.append(
-                        "assets/learning/certifications-manifest.json: "
-                        f"entry {index} fields differ; missing={missing}, unexpected={unexpected}"
-                    )
-                exam = certification.get("exam")
-                if not isinstance(exam, dict) or set(exam.keys()) != allowed_exam_fields:
-                    errors.append(
-                        f"assets/learning/certifications-manifest.json: entry {index} has invalid exam metadata"
-                    )
-                identifier = certification.get("id")
-                if isinstance(identifier, str):
-                    manifest_ids.append(identifier)
-                href = certification.get("href")
-                if isinstance(href, str):
-                    target = local_target(certification_manifest_path, href)
-                    if target is not None and not target.exists():
-                        errors.append(
-                            f"assets/learning/certifications-manifest.json: broken href {href}"
-                        )
-            duplicate_manifest_ids = sorted(
-                identifier
-                for identifier, count in Counter(manifest_ids).items()
-                if count > 1
-            )
-            if duplicate_manifest_ids:
-                errors.append(
-                    "assets/learning/certifications-manifest.json: duplicate ids: "
-                    + ", ".join(duplicate_manifest_ids)
-                )
-    except (OSError, json.JSONDecodeError) as exc:
-        errors.append(
-            f"assets/learning/certifications-manifest.json: cannot load manifest: {exc}"
-        )
-
     markdown_files = {
         path.relative_to(ROOT)
         for path in ROOT.rglob("*.md")
@@ -446,21 +347,6 @@ def main() -> int:
     for page, parser in parsed_pages.items():
         if parser.refreshes:
             relative = page.relative_to(ROOT).as_posix()
-            if relative.startswith("apps/cert/"):
-                refresh = parser.refreshes[0] if len(parser.refreshes) == 1 else ""
-                target = urlsplit(refresh.removeprefix("0;url=")).path
-                if not refresh.startswith("0;url=/") or not (ROOT / target.lstrip("/") / "index.html").is_file():
-                    errors.append(f"{relative}: invalid certification redirect")
-                script = (ROOT / "js/learning-route-redirect.js").read_text()
-                if "target.hash = location.hash" not in script or "new URLSearchParams(location.search)" not in script:
-                    errors.append(f"{relative}: redirect must preserve query and hash")
-                continue
-            if relative in {"jlpt/index.html", "jlpt/classic.html", "g/index.html", "g/classic.html"} or relative.startswith("n1-modules/"):
-                destination = urlsplit(parser.refreshes[0].removeprefix("0;url="))
-                expected = "/g-kentei/" if relative.startswith("g/") else "/jlpt-n1/"
-                if destination.path != expected or destination.scheme or destination.netloc or not (ROOT / expected.lstrip("/") / "index.html").is_file():
-                    errors.append(f"{relative}: invalid standalone study redirect")
-                continue
             if relative not in APP_REDIRECTS:
                 errors.append(f"{relative}: unapproved redirect")
 
@@ -486,25 +372,6 @@ def main() -> int:
                 f"{page_file.relative_to(ROOT)}: missing case-study sections: "
                 + ", ".join(missing_sections)
             )
-
-    certification_case_study = (
-        ROOT / "case-studies/certification-library/index.html"
-    )
-    if certification_case_study.is_file():
-        certification_case_text = certification_case_study.read_text(encoding="utf-8").lower()
-        forbidden_certification_text = {
-            "github.com/thangldw/cert",
-            "protected-data/",
-            "question-media/",
-            "data/certifications/",
-            '"correctanswer"',
-        }
-        for forbidden in sorted(forbidden_certification_text):
-            if forbidden in certification_case_text:
-                errors.append(
-                    "case-studies/certification-library/index.html: "
-                    f"forbidden private-content reference {forbidden}"
-                )
 
     contact_landing = ROOT / "contact/index.html"
     for page in (ROOT / "index.html", contact_landing):

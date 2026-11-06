@@ -13,7 +13,7 @@ class SiteAuditRegressionTests(unittest.TestCase):
     def test_isolated_support_export_cannot_drift_from_canonical_tokens(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            for relative in ['css/tokens.css', 'css/site-shell.css', 'css/homepage.css', 'css/apps-catalog.css', 'css/support-tokens.css', 'DESIGN.md', 'index.html', 'apps/index.html', 'aws/index.html']:
+            for relative in ['css/tokens.css', 'css/site-shell.css', 'css/homepage.css', 'css/apps-catalog.css', 'css/support-tokens.css', 'DESIGN.md', 'ragops/index.html', 'index.html', 'apps/index.html', 'contact/index.html']:
                 target = root / relative
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes((design.ROOT / relative).read_bytes())
@@ -47,17 +47,17 @@ class SiteAuditRegressionTests(unittest.TestCase):
             with self.subTest(body=body, scripts=scripts):
                 parser = PageParser()
                 parser.feed(f'<html><body {body}>{scripts}</body></html>')
-                self.assertEqual(not audit_analytics(Path("aws/index.html"), parser), valid)
+                self.assertEqual(not audit_analytics(Path("contact/index.html"), parser), valid)
 
-    def test_generated_fallback_keeps_landmark_and_style_gates(self):
-        source = (ui.ROOT / "aws/index.html").read_text()
+    def test_product_page_keeps_landmark_and_style_gates(self):
+        source = (ui.ROOT / "contact/index.html").read_text()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             page = root / "index.html"
             with patch.object(ui, "ROOT", root), patch.object(ui, "public_pages", return_value=[page]):
                 page.write_text(source)
                 self.assertEqual(ui.audit_site(), [])
-                page.write_text(source.replace('<h1>AWS SAA</h1>', ''))
+                page.write_text(source.replace('<h1 id="contact-title">Discuss a project</h1>', ''))
                 self.assertTrue(any('source <h1>' in error for error in ui.audit_site()))
                 page.write_text(source.replace('class="site-header"', 'class="missing-header"'))
                 self.assertTrue(any('header.site-header' in error for error in ui.audit_site()))

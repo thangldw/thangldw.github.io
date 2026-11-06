@@ -5,10 +5,9 @@ import { sortProjects, circularIndex, visibleProjects } from '../js/home-project
 const catalog=JSON.parse(await readFile(new URL('../js/projects-data.json',import.meta.url),'utf8'));
 const projects=sortProjects(catalog.projects);
 assert.equal(new Set(projects.map(project=>project.id)).size,projects.length);
-assert.equal(projects[0].title,'3級FP');
+assert.equal(projects[0].title,'Awesome Maintainer Defense');
 assert.equal(projects.find(p=>p.id==='macinity').title,'Macinity');
 assert.equal(projects.find(p=>p.id==='macinity').status,'v3.1.0');
-assert.equal(projects.findIndex(project=>project.title==='AP') < projects.findIndex(project=>project.title==='Awesome Maintainer Defense'),true);
 for(const count of [1,2,3,5]) {
  let start=0;
  const visited=new Set();
