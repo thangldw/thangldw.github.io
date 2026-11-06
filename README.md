@@ -44,7 +44,7 @@ flowchart LR
 | `/case-studies/{flagship}/` | Recruiter-facing evidence for three flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-Kotonari (`/bjt/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
+Kotonari (`/kotonari/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
 
@@ -243,7 +243,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | `/case-studies/{flagship}/` | 3 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-Kotonari (`/bjt/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
+Kotonari (`/kotonari/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
 

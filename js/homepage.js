@@ -1,4 +1,4 @@
-import { locales, projectTranslations } from './home-locales.mjs?v=20261106-private';
+import { locales, projectTranslations } from './home-locales.mjs?v=20261106-kotonari';
 import { sortProjects, circularIndex, visibleProjects } from './home-project-order.mjs';
 import { bindLocaleSwitch } from './site-locale.mjs';
 

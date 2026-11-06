@@ -64,7 +64,7 @@ export const projectTranslations = {
   proofline: 'Lưu lại quyết định kỹ thuật với nguồn bất biến và trích dẫn chính xác.',
   kakeflow: 'Quản lý tài chính gia đình trên macOS, lưu dữ liệu cục bộ, có chứng từ và đối soát.',
   igo: 'Học cờ vây bằng tiếng Việt qua bài học, luyện chiến thuật, chơi và xem lại SGF.',
-  bjt: 'Luyện đọc tiếng Nhật thương mại theo nhóm chủ đề, lưu tiến độ trên thiết bị.'
+  bjt: 'Luyện tiếng Nhật công việc qua email, kính ngữ và tình huống thực tế; xem lời giải và ôn lại câu chưa chắc.'
  },
  ja: {
   'japan-pr-guide': '日本の永住ルート、HSPポイント、必要な証明資料を確認できる英越バイリンガルガイド。',
@@ -76,7 +76,7 @@ export const projectTranslations = {
   proofline: '変更されない原資料と正確な引用で、技術上の意思決定を追跡。',
   kakeflow: '証憑と照合機能を備え、データをローカルに保存するmacOS向け家計管理。',
   igo: 'レッスン、戦術練習、対局、SGF棋譜レビューで、ベトナム語で囲碁を学習。',
-  bjt: '分野別にビジネス日本語の読解を練習し、進捗を端末に保存。'
+  bjt: 'メール、敬語、実際の仕事場面でビジネス日本語を練習。解説を読み、自信のない問題を復習。'
  },
  zh: {
   'japan-pr-guide': '英越双语指南，涵盖日本永住途径、HSP 积分及所需证明材料。',
@@ -88,6 +88,6 @@ export const projectTranslations = {
   proofline: '通过不可变的原始资料和精确引用，追溯工程决策。',
   kakeflow: 'macOS 家庭财务管理，数据保存在本地，支持原始凭证与对账。',
   igo: '通过课程、战术练习、对局和 SGF 棋谱复盘，用越南语学习围棋。',
-  bjt: '按主题练习商务日语阅读，将学习进度保存在本地。'
+  bjt: '通过邮件、敬语和真实职场情境练习商务日语，阅读解析并复习不确定的题目。'
  }
 };
