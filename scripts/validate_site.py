@@ -22,7 +22,7 @@ ANALYTICS_SCRIPT = "/js/analytics.js"
 CONTACT_EMAIL = "thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 APP_REDIRECTS = {
-    "bjt/index.html": "/kotonari/",
+    "bjt/index.html": "https://kotonari.cert-apps.workers.dev/",
     "ccar-f/index.html": "/claude-cert/",
     "apps/japan-pr-guide/index.html": "/japan-pr-guide/",
     "apps/maintainer-defense/index.html": "/awesome-maintainer-defense/",
@@ -355,7 +355,7 @@ def main() -> int:
         parser = parsed_pages.get(page)
         if not parser or parser.refreshes != [f"0; url={destination}"]:
             errors.append(f"{relative}: expected redirect to {destination}")
-        elif parser.canonicals != [SITE_URL + destination]:
+        elif parser.canonicals != [destination if destination.startswith("https://") else SITE_URL + destination]:
             errors.append(f"{relative}: incorrect canonical URL")
         elif f'location.replace("{destination}" + location.search + location.hash)' not in page.read_text():
             errors.append(f"{relative}: redirect must preserve query and hash")
