@@ -1,4 +1,4 @@
-import { locales, projectTranslations } from './home-locales.mjs?v=20261103-icons';
+import { locales, projectTranslations } from './home-locales.mjs?v=20261106-private';
 import { sortProjects, circularIndex, visibleProjects } from './home-project-order.mjs';
 import { bindLocaleSwitch } from './site-locale.mjs';
 

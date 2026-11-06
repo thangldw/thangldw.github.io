@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Apps — Thang Luu</title>
+  <meta name="description" content="Independent engineering systems, games, and learning programs by Thang Luu, shared for feedback, collaboration, and continued learning.">
+  <link rel="canonical" href="https://thangldw.github.io/apps/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Apps — Thang Luu">
+  <meta property="og:description" content="Practical engineering systems, games, and learning programs, shared for feedback, collaboration, and continued learning.">
+  <meta property="og:url" content="https://thangldw.github.io/apps/">
+  <meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/icons.css?v=20260714">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/tokens.css?v=20261010warm">
+  <link rel="stylesheet" href="/css/project-title-link.css?v=20260727a">
+  <link rel="stylesheet" href="/css/page-frame.css?v=20260727b">
+  <link rel="stylesheet" href="/css/apps-catalog.css?v=20261011header">
+  <link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr">
+  <link rel="stylesheet" href="/css/compact-footer.css?v=20261103-portfolio">
+  <link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
+  <script src="/js/site-shell.js?v=20261103-footer"></script>
+  <script defer src="/js/support-dialog.js?v=20261106-i18n"></script>
+  <script defer src="/js/analytics.js"></script>
+  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body class="site-page portfolio-catalog" data-page-kind="product" data-site-shell="none">
+  <a class="skip-link" href="#catalog">Skip to projects</a>
+
+  <div class="apps-preview">
+    <header class="topbar">
+      <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a>
+      <div class="header-actions">
+        <div class="locale-switch" role="group" aria-label="Display language"><button type="button" data-lang="en" aria-label="English" aria-pressed="true">EN</button><button type="button" data-lang="vi" aria-label="Tiếng Việt" aria-pressed="false">VN</button><button type="button" data-lang="ja" aria-label="日本語" aria-pressed="false">JP</button><button type="button" data-lang="zh" aria-label="中文" aria-pressed="false">CN</button></div>
+        <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+      </div>
+    </header>
+    <main id="main">
+      <section class="intro" aria-labelledby="apps-title">
+        <div><h1 id="apps-title">Apps</h1><p data-copy="intro">Tools for work, learning and a little play.</p></div>
+        <div class="browse">
+          <label class="search-field"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="sr-only" data-copy="searchLabel">Search apps and projects</span><input id="projectSearch" type="search" placeholder="Find an app, topic, or tool…" disabled></label>
+          <nav class="apps-group-nav" aria-label="Browse project groups"><button class="ui-button" type="button" data-group="all" aria-pressed="true" disabled>All</button><button class="ui-button" type="button" data-group="engineering" aria-pressed="false" disabled>Engineering</button><button class="ui-button" type="button" data-group="utilities" aria-pressed="false" disabled>Utilities</button><button class="ui-button" type="button" data-group="learning" aria-pressed="false" disabled>Learning</button><button class="ui-button" type="button" data-group="experiments" aria-pressed="false" disabled>Experiments</button></nav>
+        </div>
+      </section>
+      <p class="sr-only" id="projectCount" role="status" aria-live="polite">Loading projects…</p>
+      <section class="library" id="catalog" aria-label="Project library" tabindex="-1"><p class="catalog-state">Loading projects…</p></section>
+    </main>
+  </div>
+
+  <script src="/js/projects-data.js?v=20261106-private"></script>
+  <script type="module" src="/js/apps-catalog.js?v=20261106-private"></script>
+<footer class="compact-footer" id="footer">
+  <p class="footer-signature"><span><strong translate="no">Apps</strong> © <span data-footer-year>2026</span> <a href="/">thang.</a></span> <span lang="en" translate="no">crafted with care. stay steadfast, stay free</span></p>
+</footer>
+</body>
+</html>

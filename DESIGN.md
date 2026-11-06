@@ -54,7 +54,7 @@ Family, size, line height, weight, and tracking are independent shared tokens. U
 
 ## Layout
 
-Homepage: sidebar plus fluid main column, 1280 × 720 compact desktop target across EN/VN/JP/CN, growing frame on large screens, vertical reflow on mobile. Apps: searchable grouped catalog. Cert: its existing learning application layout.
+Homepage: sidebar plus fluid main column, 1280 × 720 compact desktop target across EN/VN/JP/CN, growing frame on large screens, vertical reflow on mobile. Apps: searchable grouped catalog.
 
 The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. Portfolio subpages, case studies, and product introductions use the opt-in `css/compact-footer.css` layout: a centered signature with the page or app name, the current year, and the English line “thang. crafted with care. stay steadfast, stay free”. Portfolio pages use the same floating support button as Japan PR Guide. Load the shared support stylesheet and script and let the script mount the button directly on the page body.
 
@@ -74,15 +74,13 @@ Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `-
 | Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, generated Cert via the compatibility adapter |
 | Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, carousel, locale, contact; reusable on subsequent screens |
 | Floating support and overlay | `css/support-dialog.css`, `js/support-dialog.js` | Home and existing public route integrations |
-| Cert catalog aliases | Scoped compatibility adapter in `css/site-shell.css` | Existing generated `.certification-hub` shell |
 
 The logo never adopts link underline or changes its geometry on hover. Controls have hover, pressed, focus-visible and disabled recipes; keyboard/ARIA semantics remain the responsibility of runtime behavior. Touch controls are at least 44px high. Navigation links retain link semantics.
 
 Across the shared shell, language selectors, theme toggles, carousel arrows and lesson pagination use neutral text on a transparent background in both themes. The selected language has a 1px underline. Hover and press add a neutral fill, and keyboard focus shows an outline.
 
-The generated Cert bundle is not hand-edited. Its learning/assessment internals can be migrated in the source repository later without introducing another token source. This release establishes shared foundation and shell consistency, rather than changing exam workflows.
 
-Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_site.py` before release. The design gate checks token/document drift, route literal debt, integration, shared recipes, and contrast. Verify rendered Home/Apps/Cert in both themes and mobile as well.
+Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_site.py` before release. The design gate checks token/document drift, route literal debt, integration, shared recipes, and contrast. Verify rendered Home/Apps in both themes and mobile as well.
 
 ## Do's and Don'ts
 
