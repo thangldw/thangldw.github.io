@@ -251,24 +251,51 @@
     {
       "id": "bjt",
       "title": "Kotonari",
-      "description": "Practise business Japanese through workplace emails, honorific language and realistic scenarios, with explanations and review of uncertain answers.",
-      "featuredDescription": "Business Japanese practice through workplace emails, honorific language and realistic scenarios, with explanations and targeted review.",
-      "catalogDescription": "Practise workplace Japanese, understand the reasoning, and review answers you are unsure about.",
+      "description": "Practise BJT business Japanese with listening, listening–reading and reading exercises, answer explanations, targeted review and an 80-question mock exam.",
+      "featuredDescription": "BJT listening and reading practice, with explanations, targeted review and an 80-question mock exam.",
+      "catalogDescription": "Prepare for BJT with listening and reading practice, explanations, review and an 80-question mock exam.",
       "href": "https://kotonari.cert-apps.workers.dev/",
       "ariaLabel": "Open Kotonari",
       "icon": "fa-language",
       "accent": "rust",
       "status": "Live",
       "tags": [
-        "Business Japanese",
-        "Workplace scenarios",
-        "Explanations & review"
+        "BJT preparation",
+        "Listening & reading",
+        "80-question mock exam"
       ],
       "category": "learning",
       "categoryLabel": "Business Japanese",
       "cta": "Open Kotonari",
       "featured": true,
       "featuredOrder": 8,
+      "catalogGroup": "learning"
+    },
+    {
+      "id": "claude-cert",
+      "title": "Claude Cert Prep",
+      "description": "Practise Claude certification topics across four workspaces, with English questions, optional Vietnamese, Japanese or Chinese subtitles, answer explanations and spaced review.",
+      "featuredDescription": "Claude certification practice with answer explanations, multilingual subtitles and spaced review.",
+      "catalogDescription": "Study Claude architecture, API integration and agent workflows with explanations, multilingual subtitles and spaced review.",
+      "localizedDescriptions": {
+        "vi": "Luyện kiến thức chứng chỉ Claude với lời giải, phụ đề Việt/Nhật/Trung và ôn tập ngắt quãng.",
+        "ja": "Claude認定に向けた練習問題。解説、ベトナム語・日本語・中国語の字幕、間隔を空けた復習に対応。",
+        "zh": "练习 Claude 认证知识，提供答案解析、越南语／日语／中文字幕和间隔复习。"
+      },
+      "href": "https://claude.cert-apps.workers.dev/",
+      "ariaLabel": "Open Claude Cert Prep",
+      "icon": "fa-graduation-cap",
+      "accent": "rust",
+      "status": "Live",
+      "tags": [
+        "Claude certification",
+        "Explanations & review",
+        "Multilingual subtitles"
+      ],
+      "category": "learning",
+      "categoryLabel": "Claude certification practice",
+      "cta": "Open Claude Cert Prep",
+      "featured": false,
       "catalogGroup": "learning"
     }
   ],
