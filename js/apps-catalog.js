@@ -1,4 +1,4 @@
-import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261106-kotonari';
+import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261107-cert-projects';
 import { bindLocaleSwitch } from './site-locale.mjs';
 const copy = {
  en: { title:'Apps', intro:'Tools for work, learning and a little play.', home:'Home', cert:'Cert', all:'All', search:'Find an app, topic, or tool…', searchLabel:'Search apps and projects', open:'Open', loading:'Loading projects…', failed:'Projects could not be loaded.', retry:'Try again', empty:'No projects found', hint:'Try another keyword or clear the filters.', clear:'Clear filters', browse:'Browse project groups', count:n=>`${n} ${n===1?'project':'projects'}`, more:n=>`View all ${n} learning projects`, names:['Engineering','Utilities','Learning','Experiments'], descriptions:['Build, evaluate, and protect software.','A little help with everyday tasks.','Study by topic and practise at your own pace.','Games and things to explore.'] },
