@@ -33,6 +33,12 @@
   margin: 0 auto max(var(--space-16), env(safe-area-inset-bottom));
 }
 
+/* Inline placement (#supportSlot): the trigger sits in the page flow instead of floating over content. */
+.support-floating-trigger.support-inline-trigger {
+  position: static;
+  z-index: auto;
+}
+
 .support-floating-trigger:hover {
   background: var(--color-support, #b83a06);
   color: #fff;

@@ -48,15 +48,15 @@ No route declares raw palette values. Root token specificity also protects the c
 
 The self-hosted Inter family is declared once as `--font-family-ui`, with legacy font names adapting to it. Japanese and Simplified Chinese use `--font-jp-sans` and `--font-cn-sans` with explicit script-capable system fallbacks.
 
-The complete scale lives under `--text-*`. Main portfolio body is 14px for the approved single-screen desktop density; mobile prose is 16px. Caption is 12px; small supporting copy is 13px; titles use the registered 16–24px roles; display sizes use registered 26–56px roles. The application catalog uses the tokenized fluid page title. Domain-specific exam typography remains owned by its source application until that screen is migrated; the common shell and catalog already use shared recipes.
+The complete scale lives under `--text-*`. Main portfolio body is 14px for the approved desktop density; mobile prose is 16px. Caption is 12px; small supporting copy is 13px; titles use the registered 16–24px roles; display sizes use registered 26–56px roles. The application catalog uses the tokenized fluid page title. Domain-specific exam typography remains owned by its source application until that screen is migrated; the common shell and catalog already use shared recipes.
 
 Family, size, line height, weight, and tracking are independent shared tokens. Use regular body, medium/semibold titles, and bold brand text. Text reflows naturally; do not shrink or clip essential copy just to suppress scrolling at zoom.
 
 ## Layout
 
-Homepage: sidebar plus fluid main column, 1280 × 720 compact desktop target across EN/VN/JP/CN, growing frame on large screens, vertical reflow on mobile. Apps: searchable grouped catalog.
+Homepage: sidebar plus fluid main column. The page reflows and scrolls naturally at every viewport; there is no single-screen target, so content is never compressed to fit a fixed height. Growing frame on large screens, vertical reflow on mobile. Side projects are a filterable grid (All, Tools, Data & AI, Games, Learning) instead of a carousel. Apps: searchable grouped catalog.
 
-The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. Portfolio subpages, case studies, and product introductions use the opt-in `css/compact-footer.css` layout: a centered signature with the page or app name, the current year, and the English line “thang. crafted with care. stay steadfast, stay free”. Portfolio pages use the same floating support button as Japan PR Guide. Load the shared support stylesheet and script and let the script mount the button directly on the page body.
+The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. The homepage avoids the problem by mounting the support trigger inline in the sidebar (`#supportSlot`) instead of floating it over content. Portfolio subpages, case studies, and product introductions use the opt-in `css/compact-footer.css` layout: a centered signature with the page or app name, the current year, and the English line “thang. crafted with care. stay steadfast, stay free”. Portfolio pages use the same floating support button as Japan PR Guide. Load the shared support stylesheet and script and let the script mount the button directly on the page body.
 
 ## Elevation & Depth
 
@@ -72,12 +72,12 @@ Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `-
 | --- | --- | --- |
 | Colors, type, spacing, shape, control/focus values | `css/tokens.css` | All public routes through the shared shell |
 | Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, generated Cert via the compatibility adapter |
-| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, carousel, locale, contact; reusable on subsequent screens |
+| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, locale, contact; reusable on subsequent screens |
 | Floating support and overlay | `css/support-dialog.css`, `js/support-dialog.js` | Home and existing public route integrations |
 
 The logo never adopts link underline or changes its geometry on hover. Controls have hover, pressed, focus-visible and disabled recipes; keyboard/ARIA semantics remain the responsibility of runtime behavior. Touch controls are at least 44px high. Navigation links retain link semantics.
 
-Across the shared shell, language selectors, theme toggles, carousel arrows and lesson pagination use neutral text on a transparent background in both themes. The selected language has a 1px underline. Hover and press add a neutral fill, and keyboard focus shows an outline.
+Across the shared shell, language selectors, theme toggles and lesson pagination use neutral text on a transparent background in both themes. The selected language has a 1px underline. Hover and press add a neutral fill, and keyboard focus shows an outline.
 
 
 Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_site.py` before release. The design gate checks token/document drift, route literal debt, integration, shared recipes, and contrast. Verify rendered Home/Apps in both themes and mobile as well.
