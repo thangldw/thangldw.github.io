@@ -21,6 +21,7 @@ import {
   historicalReferenceForRoute,
 } from "./domain/historical";
 import { calculateScore, toScoringInput } from "./domain/scoring";
+import { suggestClaims } from "./domain/suggestions";
 import {
   initialFactors,
   parseFactorValue,
@@ -51,6 +52,11 @@ export function App() {
   const currentResult = useMemo(
     () => calculateScore(toScoringInput({ ...factors, activity })),
     [activity, factors],
+  );
+
+  const nextClaims = useMemo(
+    () => suggestClaims(activity, factors, currentResult),
+    [activity, factors, currentResult],
   );
 
   const historicalScenario = useMemo(
@@ -142,6 +148,7 @@ export function App() {
         <section className="calculator-layout workflow-content">
           <ScoreDock onContinue={() => navigateToStep(2)} result={currentResult} />
           <ScoreInspector
+            nextClaims={nextClaims}
             onContinue={() => navigateToStep(2)}
             result={currentResult}
           />

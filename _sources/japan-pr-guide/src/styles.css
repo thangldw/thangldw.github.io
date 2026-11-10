@@ -480,3 +480,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { 
   .factor-footer { flex-direction: column; align-items: stretch; }
 }
 @media (prefers-reduced-motion: reduce) { .score-dock { animation: none; } }
+
+.sample-badge { padding: 1px var(--space-6); border: 1px solid var(--color-accent); border-radius: var(--radius-control); color: var(--color-accent); font-size: var(--text-caption); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: .04em; }
+.score-nudge { grid-column: 1 / -1; display: grid; gap: var(--space-4); color: var(--color-text-body); font-size: var(--text-caption); }
+.score-nudge strong { color: var(--color-text); font-size: var(--text-body); }
+.score-nudge ul { margin: var(--space-4) 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-16); }
+.score-nudge b { color: var(--color-accent); }

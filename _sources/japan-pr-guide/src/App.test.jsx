@@ -199,4 +199,14 @@ describe("Japan PR Guide route-specific assessment", () => {
     }
   });
 
+  it("labels the starting profile as a sample and lists claims that could close the gap", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    expect(screen.getByText("Sample")).toBeVisible();
+    expect(screen.getByText("5 more points to reach 80")).toBeVisible();
+    await user.selectOptions(screen.getByLabelText("Highest qualifying degree"), "doctor");
+    expect(screen.queryByText(/more points to reach/)).not.toBeInTheDocument();
+  });
+
 });
