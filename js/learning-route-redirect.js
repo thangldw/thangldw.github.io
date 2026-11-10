@@ -1,5 +1,4 @@
 const destinations = {
-  "bjt": "/bjt/",
   "ccar-f": "/claude-cert/"
 };
 const prefix = ['/cert/', '/apps/cert/'].find(value => location.pathname.startsWith(value));
