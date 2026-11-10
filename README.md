@@ -128,13 +128,13 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
-All non-redirect HTML pages load the shared support assets with cache version `20261105-qr`; the Japan PR Guide exporter preserves this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
+All non-redirect HTML pages load the shared support assets with cache version `20261111-contrast`; the Japan PR Guide exporter preserves this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
 
 Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
 
-The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
+The support trigger is text-only and uses the `--color-support` token (`#b83a06`, 5.76:1 with white text). The previously used Ko-fi cup asset is retained for cached versions.
 
 The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Both QR codes remain visible on desktop and mobile; headings are not interactive. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
 

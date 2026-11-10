@@ -161,7 +161,7 @@ try {
     if (file.startsWith('_sources/')) continue;
     const html = await readFile(resolve(ROOT, file), 'utf8');
     if (/http-equiv=["']refresh|redirect.js/i.test(html)) continue;
-    if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261105-qr')) throw Error(`Missing shared version: ${file}`);
+    if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261111-contrast')) throw Error(`Missing shared version: ${file}`);
     routes.push('/'+file);
   }
   for (const route of routes.filter(r => !process.env.SUPPORT_ROUTE || r.includes(process.env.SUPPORT_ROUTE))) {
@@ -174,7 +174,7 @@ try {
         const d=document.querySelector('#supportDialog'), q=d.querySelector('.support-bank'), b=document.querySelector('.support-floating-trigger');
         const language=document.documentElement.lang.toLowerCase().split('-')[0];
         const headings=({en:['Global','Vietnam'],vi:['Quốc tế','Việt Nam'],ja:['海外から','ベトナム国内'],zh:['国际','越南']}[language]||['Global','Vietnam']);
-        return {ok: document.querySelectorAll('#supportDialog').length===1 && d.querySelectorAll('img').length===2 && d.querySelector('h3').textContent===headings[0] && q.querySelector('h3').textContent===headings[1] && !d.querySelector('details,iframe,a') && getComputedStyle(q).borderTopWidth==='0px' && d.scrollWidth<=d.clientWidth && b.getBoundingClientRect().width>0 && b.textContent===({en:'Fuel my next build',vi:'Tiếp sức cho dự án mới',ja:'次の開発を応援する',zh:'支持我的下一个项目'}[document.documentElement.lang.toLowerCase().split('-')[0]]||'Fuel my next build') && getComputedStyle(b).backgroundColor==='rgb(240, 136, 4)', message: JSON.stringify({label:b.textContent,color:getComputedStyle(b).backgroundColor,width:b.getBoundingClientRect().width,display:getComputedStyle(b).display,parent:b.parentElement.outerHTML.slice(0,300),overflow:[d.scrollWidth,d.clientWidth],border:getComputedStyle(q).borderTopWidth})};
+        return {ok: document.querySelectorAll('#supportDialog').length===1 && d.querySelectorAll('img').length===2 && d.querySelector('h3').textContent===headings[0] && q.querySelector('h3').textContent===headings[1] && !d.querySelector('details,iframe,a') && getComputedStyle(q).borderTopWidth==='0px' && d.scrollWidth<=d.clientWidth && b.getBoundingClientRect().width>0 && b.textContent===({en:'Fuel my next build',vi:'Tiếp sức cho dự án mới',ja:'次の開発を応援する',zh:'支持我的下一个项目'}[document.documentElement.lang.toLowerCase().split('-')[0]]||'Fuel my next build') && getComputedStyle(b).backgroundColor==='rgb(184, 58, 6)', message: JSON.stringify({label:b.textContent,color:getComputedStyle(b).backgroundColor,width:b.getBoundingClientRect().width,display:getComputedStyle(b).display,parent:b.parentElement.outerHTML.slice(0,300),overflow:[d.scrollWidth,d.clientWidth],border:getComputedStyle(q).borderTopWidth})};
       })()`);
       assertResult(route+' '+width, result, []);
       await page.send('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});

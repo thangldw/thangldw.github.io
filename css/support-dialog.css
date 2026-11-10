@@ -12,7 +12,7 @@
   padding: var(--space-12) var(--space-16);
   border: 0;
   border-radius: 14px;
-  background: #f08804;
+  background: var(--color-support, #b83a06);
   color: #fff;
   box-shadow: none;
   font: 700 var(--text-body-sm)/var(--leading-tight) var(--font-ui, Inter, system-ui, sans-serif);
@@ -34,7 +34,7 @@
 }
 
 .support-floating-trigger:hover {
-  background: #f08804;
+  background: var(--color-support, #b83a06);
   color: #fff;
   filter: brightness(1.06);
 }
