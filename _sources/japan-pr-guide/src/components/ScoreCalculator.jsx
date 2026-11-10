@@ -258,6 +258,40 @@ function ProofCoverage({ proofReady, rows }) {
   return { active, ready, total: active.length };
 }
 
+// Compact summary pinned to the top once the full score summary has scrolled
+// out of view, so the total stays visible while editing the long factor table.
+export function ScoreDock({ onContinue, result }) {
+  const [docked, setDocked] = useState(false);
+  useEffect(() => {
+    const target = document.querySelector(".score-inspector");
+    if (!target || typeof IntersectionObserver === "undefined") return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      setDocked(!entry.isIntersecting && entry.boundingClientRect.bottom < 0);
+    });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+  if (!docked) return null;
+  return (
+    <div className="score-dock" role="region" aria-label="Score summary">
+      <div className="score-dock-inner">
+        <span className="score-dock-score"><strong>{result.score}</strong> points</span>
+        <span className="score-dock-route">{routeCopy(result).en}</span>
+        <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Review claims <ArrowRight size={18} /></button>
+      </div>
+    </div>
+  );
+}
+
+export function FactorTableFooter({ onContinue, result }) {
+  return (
+    <div className="factor-footer">
+      <span><strong>{result.score} points</strong> · {routeCopy(result).en}</span>
+      <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Continue to review claims <ArrowRight size={18} /></button>
+    </div>
+  );
+}
+
 export function ClaimsScreen({ activity, factors, onBack, onContinue, onToggleProof, proofReady, result }) {
   const rows = pointRows(activity, factors, result);
   const coverage = ProofCoverage({ proofReady, rows });

@@ -6,8 +6,10 @@ import {
   CalculatorHeader,
   ClaimsScreen,
   FactorTable,
+  FactorTableFooter,
   HistoricalScreen,
   RequirementsScreen,
+  ScoreDock,
   ScoreInspector,
   SourceNotes,
   StepProgress,
@@ -138,6 +140,7 @@ export function App() {
 
       {currentStep === 1 ? (
         <section className="calculator-layout workflow-content">
+          <ScoreDock onContinue={() => navigateToStep(2)} result={currentResult} />
           <ScoreInspector
             onContinue={() => navigateToStep(2)}
             result={currentResult}
@@ -151,8 +154,8 @@ export function App() {
               onUniversitySelect={updateUniversity}
               result={currentResult}
             />
+            <FactorTableFooter onContinue={() => navigateToStep(2)} result={currentResult} />
           </div>
-
         </section>
       ) : null}
 

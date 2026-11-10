@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { App } from "./App";
@@ -159,6 +159,44 @@ describe("Japan PR Guide route-specific assessment", () => {
     expect(screen.getByText("85", { selector: "[data-current-total]" })).toBeVisible();
     expect(screen.getByText("80", { selector: "[data-historical-total]" })).toBeVisible();
     expect(screen.getByText("5 Oct 2025", { selector: "[data-historical-date]" })).toBeVisible();
+  });
+
+  it("offers a next step at the end of the factor table", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: "Continue to review claims" }));
+    expect(screen.getByRole("button", { name: "Continue to historical score" })).toBeInTheDocument();
+  });
+
+  it("pins a compact score summary once the full summary scrolls out of view", async () => {
+    const user = userEvent.setup();
+    let notify;
+    vi.stubGlobal("IntersectionObserver", class {
+      constructor(callback) { notify = callback; }
+      observe() {}
+      disconnect() {}
+    });
+    try {
+      render(<App />);
+      expect(screen.queryByRole("region", { name: "Score summary" })).not.toBeInTheDocument();
+
+      act(() => notify([{ isIntersecting: false, boundingClientRect: { bottom: -40 } }]));
+      const dock = screen.getByRole("region", { name: "Score summary" });
+      expect(dock).toHaveTextContent("75 points");
+
+      await user.selectOptions(screen.getByLabelText("Highest qualifying degree"), "doctor");
+      expect(dock).toHaveTextContent("85 points");
+
+      act(() => notify([{ isIntersecting: false, boundingClientRect: { bottom: 900 } }]));
+      expect(screen.queryByRole("region", { name: "Score summary" })).not.toBeInTheDocument();
+
+      act(() => notify([{ isIntersecting: false, boundingClientRect: { bottom: -40 } }]));
+      await user.click(within(screen.getByRole("region", { name: "Score summary" })).getByRole("button", { name: "Review claims" }));
+      expect(screen.getByRole("button", { name: "Continue to historical score" })).toBeInTheDocument();
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 
 });
