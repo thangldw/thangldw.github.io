@@ -234,17 +234,24 @@ function routeCopy(result) {
   return { en: `${Math.max(0, 70 - result.score)} points to the 3-year route`, vi: "Cần thêm điểm để đánh giá lộ trình HSP" };
 }
 
-export function ScoreInspector({ onContinue, result }) {
+export function ScoreInspector({ nextClaims, onContinue, result }) {
   const copy = routeCopy(result);
   return (
     <aside className="score-inspector">
       <div className="score-inspector-inner">
-        <div className="score-summary-title"><h2>Your estimated HSP score</h2><p>Example profile · update with your own details</p></div>
+        <div className="score-summary-title"><h2>Your estimated HSP score</h2><p><span className="sample-badge">Sample</span> Example profile · update with your own details</p></div>
         <div className="live-score"><strong data-live-score>{result.score}</strong><span> points</span></div>
         <div className="threshold-line"><span style={{ width: `${Math.min(result.score, 100)}%` }} /><i style={{ left: `${Math.min(result.score, 100)}%` }} /><b className="at-70">70</b><b className="at-80">80</b></div>
         <div className="threshold-copy"><span><strong>70 points</strong><small>3-year route</small></span><span><strong>80 points</strong><small>1-year route</small></span></div>
         <div className={`route-callout ${result.route || "none"}`}><strong>{copy.en}</strong><span>{copy.vi}</span></div>
         {result.warnings.length ? <ul className="score-warnings">{result.warnings.map((warning) => <li key={warning}>{warningCopy[warning] || "Review this scoring dependency."}</li>)}</ul> : null}
+        {nextClaims?.suggestions.length ? (
+          <div className="score-nudge">
+            <strong>{nextClaims.pointsNeeded} more points to reach {nextClaims.target}</strong>
+            <small>Claims that would add points if they apply to you and you can document them. / Mục có thể cộng điểm nếu bạn đủ điều kiện và có chứng từ.</small>
+            <ul>{nextClaims.suggestions.map((item) => <li key={item.id}><b>+{item.points}</b> {item.label}</li>)}</ul>
+          </div>
+        ) : null}
         <div className="proof-summary"><strong>Proof review</strong><span>Not started</span><small>Review claims and prepare documents in the next step.</small></div><p className="guidance-note"><Info size={18} />Point thresholds open a potential assessment route; they do not determine PR eligibility.</p>
         <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Review score claims <ArrowRight size={18} /></button>
       </div>
