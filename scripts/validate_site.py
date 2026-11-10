@@ -22,7 +22,6 @@ ANALYTICS_SCRIPT = "/js/analytics.js"
 CONTACT_EMAIL = "thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 APP_REDIRECTS = {
-    "bjt/index.html": "https://kotonari.cert-apps.workers.dev/",
     "ccar-f/index.html": "/claude-cert/",
     "apps/japan-pr-guide/index.html": "/japan-pr-guide/",
     "apps/maintainer-defense/index.html": "/awesome-maintainer-defense/",
