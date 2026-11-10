@@ -132,7 +132,7 @@ All non-redirect HTML pages load the shared support assets with cache version `2
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
 
-Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites, including Kotonari at `/bjt/`, use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
+Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
 
 The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
 
