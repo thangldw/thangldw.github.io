@@ -134,7 +134,7 @@ The support button follows the active HTML language (EN/VI/JA/ZH), updates on la
 
 Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
 
-The support trigger is text-only with a `#f08804` background. The previously used Ko-fi cup asset is retained for cached versions.
+The support trigger is text-only with a `--color-support` background and `--color-on-support` text (white on `#b83a06`, 5.8:1). The previously used Ko-fi cup asset is retained for cached versions.
 
 The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Both QR codes remain visible on desktop and mobile; headings are not interactive. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
 
