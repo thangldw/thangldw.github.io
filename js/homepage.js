@@ -1,29 +1,17 @@
-import { locales, projectTranslations } from './home-locales.mjs?v=20261107-cert-projects';
-import { sortProjects, circularIndex, visibleProjects } from './home-project-order.mjs';
+import { locales, projectTranslations } from './home-locales.mjs?v=20261111-grid';
+import { sortProjects, projectGroups, filterProjects } from './home-project-order.mjs';
 import { bindLocaleSwitch } from './site-locale.mjs';
 
 const root = document.documentElement;
 const page = document.querySelector('.page');
-const rail = document.getElementById('project-rail');
-const status = document.querySelector('.carousel-status');
+const grid = document.getElementById('project-grid');
+const loadState = document.querySelector('.project-load-state');
 const themeButton = document.getElementById('themeToggle');
 const localeButtons = [...document.querySelectorAll('.locale-switch button')];
-const [previousButton, nextButton] = document.querySelectorAll('.carousel-controls button');
+const filterButtons = [...document.querySelectorAll('.project-filters [data-group]')];
 let locale = 'en';
-let start = 0;
-function visibleProjectCount() {
- return Number(getComputedStyle(rail).getPropertyValue('--visible-projects')) || 1;
-}
-let count = visibleProjectCount();
+let group = 'all';
 let projects = [];
-const fallbackProjects = [...rail.querySelectorAll('article')].map(article => ({
- id: article.dataset.projectId,
- title: article.querySelector('h3').textContent,
- href: article.querySelector('a').href,
- description: article.querySelector('.project-description').textContent,
- catalogGroup: article.querySelector('.project-category').textContent === 'Learning' ? 'learning' : 'utilities',
- category: article.querySelector('.project-category').textContent === 'Games' ? 'games' : undefined
-}));
 let catalogFailed = false;
 const text = (selector, value) => { document.querySelector(selector).textContent = value; };
 
@@ -32,40 +20,65 @@ function syncTheme() {
  page.classList.toggle('light', light);
  themeButton.setAttribute('aria-label', light ? locales[locale].dark : locales[locale].light);
 }
-function projectGroup(project) {
- if (project.catalogGroup === 'learning') return 'Learning';
- if (project.category === 'games') return 'Games';
- if (['ragops','proofline'].includes(project.id)) return 'Data & AI';
- return 'Tools';
+function renderFilters() {
+ const t = locales[locale];
+ filterButtons.forEach(button => {
+  const id = button.dataset.group;
+  const total = id === 'all' ? projects.length : projects.filter(project => project.catalogGroup === id).length;
+  const label = document.createTextNode(id === 'all' ? t.filterAll : t.groupNames[projectGroups.indexOf(id)]);
+  button.replaceChildren(label);
+  if (projects.length) {
+   const badge = document.createElement('span');
+   badge.setAttribute('aria-hidden', 'true');
+   badge.textContent = total;
+   button.append(' ', badge);
+  }
+  button.setAttribute('aria-pressed', String(id === group));
+  button.disabled = !projects.length;
+ });
 }
 function renderProjects() {
  const t = locales[locale];
- const items = projects.length ? projects : fallbackProjects;
- if (!items.length) return;
- const cards = visibleProjects(items, start, count).map(project => {
+ renderFilters();
+ if (!projects.length) {
+  loadState.textContent = catalogFailed ? t.catalogFailed : '';
+  return;
+ }
+ const cards = filterProjects(projects, group).map(project => {
   const article = document.createElement('article');
+  article.setAttribute('role', 'listitem');
   article.dataset.projectId = project.id;
-  const group = document.createElement('p');
-  group.className = 'project-category';
-  group.textContent = t.groups[projectGroup(project)];
+  const meta = document.createElement('div');
+  meta.className = 'project-card-meta';
+  const category = document.createElement('p');
+  category.className = 'project-category';
+  category.textContent = t.groupNames[projectGroups.indexOf(project.catalogGroup)] || '';
+  meta.append(category);
+  if (project.status) {
+   const badge = document.createElement('span');
+   badge.className = 'project-status';
+   badge.dataset.status = String(project.status).toLowerCase() === 'live' ? 'live' : 'release';
+   badge.textContent = project.status;
+   meta.append(badge);
+  }
   const title = document.createElement('h3');
   title.textContent = project.title;
   const description = document.createElement('p');
   description.className = 'project-description';
   description.textContent = locale === 'en' ? project.featuredDescription || project.catalogDescription || project.description : projectTranslations[locale][project.id] || project.localizedDescriptions?.[locale] || project.description;
   const link = document.createElement('a');
+  link.className = 'project-link';
   link.href = project.href;
   link.textContent = t.view;
   const name = document.createElement('span');
   name.className = 'sr-only';
   name.textContent = ': ' + project.title;
   link.append(name);
-  article.append(group,title,description,link);
+  article.append(meta, title, description, link);
   return article;
  });
- rail.replaceChildren(...cards);
- if (projects.length) status.textContent = t.count(start+1,circularIndex(start+cards.length-1,projects.length)+1,projects.length);
- else status.textContent = catalogFailed ? t.catalogFailed : '';
+ grid.replaceChildren(...cards);
+ loadState.textContent = '';
 }
 function renderLocale() {
  const t = locales[locale];
@@ -111,35 +124,18 @@ function renderLocale() {
  });
  text('.projects .section-title',t.projects);
  text('.project-actions>a',t.all);
- previousButton.setAttribute('aria-label',t.previous);
- nextButton.setAttribute('aria-label',t.next);
- rail.setAttribute('aria-label',t.carousel);
+ document.querySelector('.project-filters').setAttribute('aria-label',t.filterLabel);
+ grid.setAttribute('aria-label',t.projects);
  renderProjects();
  syncTheme();
 }
-function move(direction) {
- if (!projects.length) return;
- start=circularIndex(start+direction,projects.length);
- renderProjects();
-}
-previousButton.addEventListener('click',()=>move(-1));
-nextButton.addEventListener('click',()=>move(1));
-rail.addEventListener('keydown',event=>{
- if (event.target!==rail || event.isComposing) return;
- if (event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); move(event.key==='ArrowRight'?1:-1); }
-});
+filterButtons.forEach(button => button.addEventListener('click', () => { group = button.dataset.group; renderProjects(); }));
 document.addEventListener('themechange',syncTheme);
-new ResizeObserver(()=>{
- const visible=visibleProjectCount();
- if(visible!==count){count=visible;renderProjects();}
-}).observe(rail);
 bindLocaleSwitch(language => { locale = language; renderLocale(); });
-previousButton.disabled=nextButton.disabled=true;
 window.portfolioProjectsReady.then(()=>{
  projects=sortProjects(window.portfolioProjects);
- previousButton.disabled=nextButton.disabled=projects.length<2;
  renderProjects();
 }).catch(()=>{
  catalogFailed=true;
- status.textContent=locales[locale].catalogFailed;
+ loadState.textContent=locales[locale].catalogFailed;
 });

@@ -122,7 +122,7 @@ Edit only `js/projects-data.json`.
 4. Run validation and browser smoke tests.
 5. Commit and push.
 
-Home preserves the complete one-page profile, working approach, languages, contact links, and selected-project carousel. The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
+Home preserves the complete one-page profile, working approach, languages, contact links, and a filterable side-project grid. The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
@@ -132,7 +132,7 @@ All non-redirect HTML pages load the shared support assets with cache version `2
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
 
-Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
+Home (sidebar) and Apps (header) mount the support trigger inline through `<div id="supportSlot">`, so neither page has a floating button. Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
 
 The support trigger is text-only with a `--color-support` background and `--color-on-support` text (white on `#b83a06`, 5.8:1). The previously used Ko-fi cup asset is retained for cached versions.
 
@@ -284,10 +284,10 @@ The homepage is the design reference for `/apps/` and the application catalog. M
 - Visual register: minimal portfolio, restrained separators, no decorative cards.
 - Light default on every homepage load; dark mode is an explicit user action. Use the shared `site-shell.js` theme control and `themechange` event.
 - Canonical runtime token owner: `css/tokens.css`; shared recipes: `css/site-shell.css`; full contract: [DESIGN.md](DESIGN.md). Light: canvas `#ffffff`, text `#23291f`, muted `#535e4b`, accent `#965025`, border `#d1d7c9`, controls `#e9ede3`. Dark: canvas `#11150e`, text `#e5e6df`, muted `#b9bdb5`, accent `#e69d6b`, border `#32382d`, controls `#20261c`. Home and Apps consume the same tokens; generated Cert receives shared shell and catalog aliases through the existing integration stylesheet.
-- Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px for the explicit single-screen requirement, with 16px mobile prose. No clipped content or forced hidden document overflow.
-- Layout: sidebar plus fluid main column, compact spacing at short desktop heights. About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
+- Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px (compact density), with 16px mobile prose. No clipped content or forced hidden document overflow.
+- Layout: sidebar plus fluid main column, About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
-- Project source: existing shared catalog loader. All entries appear A–Z with circular manual navigation; no autoplay. The renderer shows three cards on desktop, two on tablet, one on mobile; arrows and keyboard navigation wrap in both directions.
+- Project source: existing shared catalog loader. All entries appear A–Z in a responsive card grid filtered by `catalogGroup` (All, Engineering, Utilities, Learning, Experiments); the filters are native buttons with `aria-pressed`.
 - The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`. The shareable `/contact/` page also offers a link to the reader’s configured mail app.
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and other application sources. Preserve route-specific information architecture and application behavior.
 

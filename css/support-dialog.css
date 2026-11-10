@@ -76,6 +76,7 @@
 .support-copy-status { margin: 0; color: var(--color-text-body); font-size: 12px; text-align: center; }
 .support-dialog :is(button,a,input,summary):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 body.support-dialog-open { overflow: hidden; }
+.support-floating-trigger.support-inline-trigger { position: static; z-index: auto; }
 .support-floating-trigger:active { filter: brightness(.94); }
 .support-floating-trigger:disabled { opacity: var(--disabled-opacity); cursor: default; }
 @media(max-width:680px) {
