@@ -122,7 +122,7 @@ Edit only `js/projects-data.json`.
 4. Run validation and browser smoke tests.
 5. Commit and push.
 
-Home preserves the complete one-page profile, working approach, languages, contact links, and filterable side-project grid. The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
+Home preserves the complete one-page profile, working approach, languages, contact links, and side-project carousel that shows all `featured` projects in a fresh random order on each load, auto-rotating every 7 s with a pause/resume button (rotation stops on hover, focus, manual navigation, or `prefers-reduced-motion`). The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
