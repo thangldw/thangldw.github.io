@@ -171,9 +171,10 @@ describe("Japan PR Guide route-specific assessment", () => {
 
   it("pins a compact score summary once the full summary scrolls out of view", async () => {
     const user = userEvent.setup();
-    let notify;
+    const callbacks = [];
+    const notify = (entries) => callbacks.forEach((callback) => callback(entries));
     vi.stubGlobal("IntersectionObserver", class {
-      constructor(callback) { notify = callback; }
+      constructor(callback) { callbacks.push(callback); }
       observe() {}
       disconnect() {}
     });
@@ -207,6 +208,31 @@ describe("Japan PR Guide route-specific assessment", () => {
     expect(screen.getByText("5 more points to reach 80")).toBeVisible();
     await user.selectOptions(screen.getByLabelText("Highest qualifying degree"), "doctor");
     expect(screen.queryByText(/more points to reach/)).not.toBeInTheDocument();
+  });
+
+  it("shrinks the support button only while the factor table is behind it", () => {
+    const callbacks = [];
+    vi.stubGlobal("IntersectionObserver", class {
+      constructor(callback) { callbacks.push(callback); }
+      observe() {}
+      disconnect() {}
+    });
+    try {
+      const { unmount } = render(<App />);
+      const notify = (isIntersecting) => act(() => callbacks.forEach((callback) => callback([{ isIntersecting, boundingClientRect: { bottom: 900 } }])));
+
+      expect(document.body).not.toHaveClass("support-compact");
+      notify(true);
+      expect(document.body).toHaveClass("support-compact");
+      notify(false);
+      expect(document.body).not.toHaveClass("support-compact");
+
+      notify(true);
+      unmount();
+      expect(document.body).not.toHaveClass("support-compact");
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 
 });

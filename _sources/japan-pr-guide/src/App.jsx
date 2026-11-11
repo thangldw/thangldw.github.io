@@ -10,6 +10,7 @@ import {
   HistoricalScreen,
   RequirementsScreen,
   ScoreDock,
+  SupportButtonCompactor,
   ScoreInspector,
   SourceNotes,
   StepProgress,
@@ -146,6 +147,7 @@ export function App() {
 
       {currentStep === 1 ? (
         <section className="calculator-layout workflow-content">
+          <SupportButtonCompactor />
           <ScoreDock onContinue={() => navigateToStep(2)} result={currentResult} />
           <ScoreInspector
             nextClaims={nextClaims}
