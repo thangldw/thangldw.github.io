@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link rel="stylesheet" href="/css/tokens.css?v=20261102b">
   <link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr">
-  <link rel="stylesheet" href="/css/homepage.css?v=20261103-five">
+  <link rel="stylesheet" href="/css/homepage.css?v=20261111-grid">
   <link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
   <script src="/js/site-shell.js?v=20261103-footer"></script>
   <script defer src="/js/support-dialog.js?v=20261106-i18n"></script>
@@ -33,7 +33,7 @@
 <article><h3>Technical Lead</h3><p>Lead by example. Build with clarity. Unlock team impact.</p></article>
 </section>
 
-<section class="profile"><h2>Languages</h2><ul class="languages"><li><i class="fa-solid fa-circle" aria-hidden="true"></i>English</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>日本語</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>Tiếng Việt</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>中文</li></ul></section>
+<section class="profile"><h2>Languages</h2><ul class="languages"><li>English</li><li>日本語</li><li>Tiếng Việt</li><li>中文</li></ul></section>
 
 <section class="profile contact"><h2>Work with me</h2><p>AI, data engineering, and outsourced technical delivery through independent FDE engagements.</p>
   <div class="contact-links">
@@ -46,6 +46,7 @@
       </svg>
     </a>
   </div>
+  <div id="supportSlot" class="support-slot"></div>
 </section>
 </aside>
 
@@ -62,15 +63,15 @@
 <article><i class="fa-solid fa-chart-line" aria-hidden="true"></i><h3>Improve</h3><p>Use feedback and operational signals to measure outcomes and refine the system.</p></article>
 </div></section>
 
-<section class="projects"><div class="section-header"><h2 class="section-title">Side projects</h2><div class="project-actions"><a href="https://thangldw.github.io/apps/">View all projects</a><div class="carousel-controls"><button type="button" aria-label="Show previous project" aria-controls="project-rail"><i class="fa-solid fa-arrow-right previous-icon" aria-hidden="true"></i></button><button type="button" aria-label="Show next project" aria-controls="project-rail"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div></div></div><div id="project-rail" class="project-rail" tabindex="0" role="region" aria-label="Side projects carousel">
-<article data-project-id="maintainer-defense"><p class="project-category">Tools</p><h3>Awesome Maintainer Defense</h3><p class="project-description">Offline, reversible security audits and defense profiles for open-source maintainers.</p><a href="https://thangldw.github.io/awesome-maintainer-defense/">View project<span class="sr-only">: Awesome Maintainer Defense</span></a></article>
-
-<article data-project-id="bizroll"><p class="project-category">Games</p><h3>BizRoll</h3><p class="project-description">A multiplayer economic strategy game shaped by auctions, AI opponents, market cycles, and Black Swan events.</p><a href="https://thangldw.github.io/bizroll/">View project<span class="sr-only">: BizRoll</span></a></article>
-
-<article data-project-id="bjt"><p class="project-category">Learning</p><h3>Kotonari</h3><p class="project-description">Business Japanese practice through workplace emails, honorific language and realistic scenarios, with explanations and targeted review.</p><a href="https://kotonari.cert-apps.workers.dev/">View project<span class="sr-only">: Kotonari</span></a></article>
-</div><p class="carousel-status" role="status" aria-live="polite" aria-atomic="true">1–3 of 11 projects</p></section>
+<section class="projects"><div class="section-header"><h2 class="section-title">Side projects</h2><div class="project-actions"><a href="https://thangldw.github.io/apps/">View all projects</a></div></div>
+<div class="project-filters" role="group" aria-label="Filter projects"><button class="ui-button" type="button" data-group="all" aria-pressed="true">All</button><button class="ui-button" type="button" data-group="engineering" aria-pressed="false">Engineering</button><button class="ui-button" type="button" data-group="utilities" aria-pressed="false">Utilities</button><button class="ui-button" type="button" data-group="learning" aria-pressed="false">Learning</button><button class="ui-button" type="button" data-group="experiments" aria-pressed="false">Experiments</button></div>
+<div id="project-grid" class="project-cards" role="list" aria-label="Side projects">
+<article role="listitem" data-project-id="maintainer-defense"><div class="project-card-meta"><p class="project-category">Engineering</p></div><h3>Awesome Maintainer Defense</h3><p class="project-description">Offline, reversible security audits and defense profiles for open-source maintainers.</p><a class="project-link" href="https://thangldw.github.io/awesome-maintainer-defense/">View project<span class="sr-only">: Awesome Maintainer Defense</span></a></article>
+<article role="listitem" data-project-id="bizroll"><div class="project-card-meta"><p class="project-category">Experiments</p></div><h3>BizRoll</h3><p class="project-description">A multiplayer economic strategy game shaped by auctions, AI opponents, market cycles, and Black Swan events.</p><a class="project-link" href="https://thangldw.github.io/bizroll/">View project<span class="sr-only">: BizRoll</span></a></article>
+<article role="listitem" data-project-id="bjt"><div class="project-card-meta"><p class="project-category">Learning</p></div><h3>Kotonari</h3><p class="project-description">Business Japanese practice through workplace emails, honorific language and realistic scenarios, with explanations and targeted review.</p><a class="project-link" href="https://kotonari.cert-apps.workers.dev/">View project<span class="sr-only">: Kotonari</span></a></article>
+</div><p class="project-load-state" role="status" aria-live="polite" aria-atomic="true"></p></section>
 </main></div></div>
 <script src="/js/projects-data.js?v=20261106-private"></script>
-<script type="module" src="/js/homepage.js?v=20261107-cert-projects"></script>
+<script type="module" src="/js/homepage.js?v=20261111-grid"></script>
 </body>
 </html>
