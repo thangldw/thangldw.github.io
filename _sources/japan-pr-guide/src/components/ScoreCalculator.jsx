@@ -290,6 +290,26 @@ export function ScoreDock({ onContinue, result }) {
   );
 }
 
+// While the factor table sits behind the shared floating support button, shrink
+// that button to an icon. The shared shell is untouched; styles.css reacts to the body class.
+export function SupportButtonCompactor() {
+  useEffect(() => {
+    const table = document.querySelector(".factor-table");
+    if (!table || typeof IntersectionObserver === "undefined") return undefined;
+    // Observe only the bottom band of the viewport, where the button sits.
+    const observer = new IntersectionObserver(
+      ([entry]) => document.body.classList.toggle("support-compact", entry.isIntersecting),
+      { rootMargin: "-88% 0px 0px 0px" },
+    );
+    observer.observe(table);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove("support-compact");
+    };
+  }, []);
+  return null;
+}
+
 export function FactorTableFooter({ onContinue, result }) {
   return (
     <div className="factor-footer">
