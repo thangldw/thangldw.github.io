@@ -366,3 +366,8 @@ html:root .certification-hub .hub-theme-toggle:disabled{opacity:var(--disabled-o
 @media(prefers-reduced-motion:reduce){
  :is(.ui-button,.ui-icon-button,.site-theme-toggle,.carousel-controls button,.locale-switch button,.contact-actions button){transition:none;transform:none}
 }
+
+/* Shared project status badge (Home cards, Apps rows). */
+.project-status{display:inline-flex;align-items:center;gap:var(--space-6);font-size:var(--text-caption);font-weight:var(--weight-medium);line-height:var(--leading-body);color:var(--color-text-body)}
+.project-status::before{content:"";width:var(--space-6);height:var(--space-6);border-radius:50%;background:var(--color-border)}
+.project-status[data-status=live]::before{background:var(--color-success)}
