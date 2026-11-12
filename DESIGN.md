@@ -54,7 +54,7 @@ Family, size, line height, weight, and tracking are independent shared tokens. U
 
 ## Layout
 
-Homepage: sidebar plus fluid main column, a growing frame on large screens, and vertical reflow on mobile. Content stays in normal flow at every viewport height; there is no fixed single-screen target, and the page scrolls. Side projects are a filterable grid (All, Engineering, Utilities, Learning, Experiments) fed by `js/projects-data.json`. Apps: searchable grouped catalog whose rows add a status badge and tags, link as a whole row, and keep `?q=` and `?group=` in the URL.
+Homepage: sidebar plus fluid main column, a growing frame on large screens, and vertical reflow on mobile. Content stays in normal flow at every viewport height; there is no fixed single-screen target, and the page scrolls. Side projects are a carousel over all `featured` projects from `js/projects-data.json`, shuffled once per page load (5 visible at ≥1200px, 3/2/1 below), auto-rotating every 7 s. Per WCAG 2.2.2 it has a visible pause/resume control, pauses on hover and focus, stops after manual prev/next, starts paused under `prefers-reduced-motion`, and keeps `aria-live` off while rotating. Apps: searchable grouped catalog whose rows add a status badge and tags, link as a whole row, and keep `?q=` and `?group=` in the URL.
 
 The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. Pages with a floating support action must keep the bottom-right safe area clear of essential links. Home (sidebar) and Apps (header) place the same trigger inline through `#supportSlot` instead, so they have no floating action. Portfolio subpages, case studies, and product introductions use the opt-in `css/compact-footer.css` layout: a centered signature with the page or app name, the current year, and the English line “thang. crafted with care. stay steadfast, stay free”. Portfolio pages use the same floating support button as Japan PR Guide. Load the shared support stylesheet and script and let the script mount the button directly on the page body.
 
@@ -72,7 +72,7 @@ Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `-
 | --- | --- | --- |
 | Colors, type, spacing, shape, control/focus values | `css/tokens.css` | All public routes through the shared shell |
 | Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, generated Cert via the compatibility adapter |
-| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, locale, contact, project filters; reusable on subsequent screens |
+| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, locale, contact, project carousel controls; reusable on subsequent screens |
 | Floating support and overlay | `css/support-dialog.css`, `js/support-dialog.js` | Home and existing public route integrations |
 
 The logo never adopts link underline or changes its geometry on hover. Controls have hover, pressed, focus-visible and disabled recipes; keyboard/ARIA semantics remain the responsibility of runtime behavior. Touch controls are at least 44px high. Navigation links retain link semantics.
