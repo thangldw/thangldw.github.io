@@ -16,8 +16,8 @@
   <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/icons.css?v=20260714">
   <link rel="stylesheet" href="/css/tokens.css?v=20261102b">
-  <link rel="stylesheet" href="/css/support-dialog.css?v=20261111-contrast">
-  <link rel="stylesheet" href="/css/homepage.css?v=20261103-five">
+  <link rel="stylesheet" href="/css/support-dialog.css?v=20261111-inline">
+  <link rel="stylesheet" href="/css/homepage.css?v=20261111-rotate">
   <link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
   <script src="/js/site-shell.js?v=20261103-footer"></script>
   <script defer src="/js/support-dialog.js?v=20261106-i18n"></script>
@@ -25,15 +25,7 @@
 </head>
 <body class="site-page resume-home" data-page-kind="product">
 <div class="page light" lang="en"><a class="skip" href="#main">Skip to content</a><div class="layout"><aside aria-labelledby="name"><div class="utility resume-utility"><a class="brand site-brand" href="https://thangldw.github.io/" aria-label="Thang Luu home"><span class="brand-mark site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang.</span></a><button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button></div><div class="locale-switch" role="group" aria-label="Display language"><button type="button" lang="en" aria-label="English" aria-pressed="true">EN</button><button type="button" lang="vi" aria-label="Tiếng Việt" aria-pressed="false">VN</button><button type="button" lang="ja" aria-label="日本語" aria-pressed="false">JP</button><button type="button" lang="zh" aria-label="中文" aria-pressed="false">CN</button></div><h1 id="name">Thang Luu</h1><p class="motto">Crafted with care<br/>stay steadfast, stay free</p>
-<section class="profile"><h2>What I do</h2>
-<article><h3>Forward Deployed Engineer</h3><p>Ship tools that solve real problems in real environments.</p></article>
-
-<article><h3>Data &amp; AI Engineer</h3><p>Turn data into insights and systems teams can act on.</p></article>
-
-<article><h3>Technical Lead</h3><p>Lead by example. Build with clarity. Unlock team impact.</p></article>
-</section>
-
-<section class="profile"><h2>Languages</h2><ul class="languages"><li><i class="fa-solid fa-circle" aria-hidden="true"></i>English</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>日本語</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>Tiếng Việt</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>中文</li></ul></section>
+<section class="profile languages-section"><h2>Languages</h2><ul class="languages"><li><i class="fa-solid fa-circle" aria-hidden="true"></i>English</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>日本語</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>Tiếng Việt</li><li><i class="fa-solid fa-circle" aria-hidden="true"></i>中文</li></ul></section>
 
 <section class="profile contact"><h2>Work with me</h2><p>AI, data engineering, and outsourced technical delivery through independent FDE engagements.</p>
   <div class="contact-links">
@@ -46,11 +38,20 @@
       </svg>
     </a>
   </div>
+  <div id="supportSlot" class="support-slot"></div>
 </section>
 </aside>
 
 <main id="main">
 <section class="about"><h2 class="section-title">About</h2><p class="headline">I help teams turn complex, ambiguous <span>problems</span> into reliable systems.</p><div class="bio"><p>I’m Thang Luu, a data-driven problem solver working at the intersection of engineering and business. Over the past 10+ years, I’ve grown from statistical analysis into data engineering and technical delivery, and I now lead front-line technical delivery at a global IT consulting firm.</p><p>I do my best work when the goal is still taking shape, the data is fragmented, and a team needs a practical path forward. I still consider myself a learner in this field—the people I build with continue to teach me the most.</p></div><dl class="about-experience"><div><dt>Experience across sectors</dt><dd>Retail, real estate, fintech, healthcare, and research.</dd></div><div><dt>End-to-end contribution</dt><dd>Discovery, architecture, pipelines, models, delivery leadership, and stakeholder alignment.</dd></div></dl></section>
+
+<section class="roles"><h2 class="section-title">What I do</h2><div class="roles-grid">
+<article><h3>Forward Deployed Engineer</h3><p>Ship tools that solve real problems in real environments.</p></article>
+
+<article><h3>Data &amp; AI Engineer</h3><p>Turn data into insights and systems teams can act on.</p></article>
+
+<article><h3>Technical Lead</h3><p>Lead by example. Build with clarity. Unlock team impact.</p></article>
+</div></section>
 
 <section class="process"><h2 class="section-title">How I work</h2><div class="process-grid">
 <article><i class="fa-solid fa-database" aria-hidden="true"></i><h3>Understand</h3><p>Embed with your team. Clarify the problem, data, and outcomes that matter.</p></article>
@@ -62,15 +63,15 @@
 <article><i class="fa-solid fa-chart-line" aria-hidden="true"></i><h3>Improve</h3><p>Use feedback and operational signals to measure outcomes and refine the system.</p></article>
 </div></section>
 
-<section class="projects"><div class="section-header"><h2 class="section-title">Side projects</h2><div class="project-actions"><a href="https://thangldw.github.io/apps/">View all projects</a><div class="carousel-controls"><button type="button" aria-label="Show previous project" aria-controls="project-rail"><i class="fa-solid fa-arrow-right previous-icon" aria-hidden="true"></i></button><button type="button" aria-label="Show next project" aria-controls="project-rail"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div></div></div><div id="project-rail" class="project-rail" tabindex="0" role="region" aria-label="Side projects carousel">
+<section class="projects"><div class="section-header"><h2 class="section-title">Side projects</h2><div class="project-actions"><a href="https://thangldw.github.io/apps/">View all projects</a><div class="carousel-controls" hidden><button type="button" class="carousel-toggle" aria-label="Pause project rotation" aria-pressed="false" aria-controls="project-rail"><i class="fa-solid fa-pause" aria-hidden="true"></i></button><button type="button" class="carousel-prev" aria-label="Show previous project" aria-controls="project-rail"><i class="fa-solid fa-arrow-right previous-icon" aria-hidden="true"></i></button><button type="button" class="carousel-next" aria-label="Show next project" aria-controls="project-rail"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div></div></div><div id="project-rail" class="project-rail" tabindex="0" role="region" aria-label="Side projects carousel">
+<article data-project-id="ragops"><p class="project-category">Data & AI</p><h3>RAGOps</h3><p class="project-description">Evaluation and release gates for production RAG and agent systems.</p><a href="https://thangldw.github.io/ragops/">View project<span class="sr-only">: RAGOps</span></a></article>
+<article data-project-id="proofline"><p class="project-category">Data & AI</p><h3>Proofline</h3><p class="project-description">Traceable decision memory with immutable sources and exact citations.</p><a href="https://thangldw.github.io/proofline/">View project<span class="sr-only">: Proofline</span></a></article>
+<article data-project-id="kakeflow"><p class="project-category">Tools</p><h3>KakeFlow</h3><p class="project-description">Open-source local-first household finance for macOS, with reviewable reconciliation and source evidence.</p><a href="https://thangldw.github.io/kakeflow/">View project<span class="sr-only">: KakeFlow</span></a></article>
+<article data-project-id="macinity"><p class="project-category">Tools</p><h3>Macinity</h3><p class="project-description">Your Mac. Everything connected: monitoring, diagnostics and everyday utilities.</p><a href="https://thangldw.github.io/macinity/">View project<span class="sr-only">: Macinity</span></a></article>
 <article data-project-id="maintainer-defense"><p class="project-category">Tools</p><h3>Awesome Maintainer Defense</h3><p class="project-description">Offline, reversible security audits and defense profiles for open-source maintainers.</p><a href="https://thangldw.github.io/awesome-maintainer-defense/">View project<span class="sr-only">: Awesome Maintainer Defense</span></a></article>
-
-<article data-project-id="bizroll"><p class="project-category">Games</p><h3>BizRoll</h3><p class="project-description">A multiplayer economic strategy game shaped by auctions, AI opponents, market cycles, and Black Swan events.</p><a href="https://thangldw.github.io/bizroll/">View project<span class="sr-only">: BizRoll</span></a></article>
-
-<article data-project-id="bjt"><p class="project-category">Learning</p><h3>Kotonari</h3><p class="project-description">Business Japanese practice through workplace emails, honorific language and realistic scenarios, with explanations and targeted review.</p><a href="https://kotonari.cert-apps.workers.dev/">View project<span class="sr-only">: Kotonari</span></a></article>
-</div><p class="carousel-status" role="status" aria-live="polite" aria-atomic="true">1–3 of 11 projects</p></section>
+</div><p class="carousel-status" role="status" aria-live="off" aria-atomic="true"></p></section>
 </main></div></div>
 <script src="/js/projects-data.js?v=20261106-private"></script>
-<script type="module" src="/js/homepage.js?v=20261107-cert-projects"></script>
+<script type="module" src="/js/homepage.js?v=20261111-rotate"></script>
 </body>
 </html>

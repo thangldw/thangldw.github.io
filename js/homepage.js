@@ -1,21 +1,27 @@
-import { locales, projectTranslations } from './home-locales.mjs?v=20261107-cert-projects';
-import { sortProjects, circularIndex, visibleProjects } from './home-project-order.mjs';
+import { locales, projectTranslations } from './home-locales.mjs?v=20261111-rotate';
+import { sortProjects, featuredProjects, shuffle, projectGroup, circularIndex, visibleProjects } from './home-project-order.mjs';
 import { bindLocaleSwitch } from './site-locale.mjs';
 
+const ROTATE_MS = 7000;
 const root = document.documentElement;
 const page = document.querySelector('.page');
 const rail = document.getElementById('project-rail');
+const controls = document.querySelector('.carousel-controls');
+const toggleButton = controls.querySelector('.carousel-toggle');
+const previousButton = controls.querySelector('.carousel-prev');
+const nextButton = controls.querySelector('.carousel-next');
 const status = document.querySelector('.carousel-status');
 const themeButton = document.getElementById('themeToggle');
 const localeButtons = [...document.querySelectorAll('.locale-switch button')];
-const [previousButton, nextButton] = document.querySelectorAll('.carousel-controls button');
 let locale = 'en';
-let start = 0;
-function visibleProjectCount() {
- return Number(getComputedStyle(rail).getPropertyValue('--visible-projects')) || 1;
-}
-let count = visibleProjectCount();
 let projects = [];
+let start = 0;
+let timer = null;
+let hovered = false;
+let focused = false;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+// The button reflects the user's choice; hover/focus pauses are temporary and do not change it.
+let userPaused = reduceMotion.matches;
 const fallbackProjects = [...rail.querySelectorAll('article')].map(article => ({
  id: article.dataset.projectId,
  title: article.querySelector('h3').textContent,
@@ -32,17 +38,17 @@ function syncTheme() {
  page.classList.toggle('light', light);
  themeButton.setAttribute('aria-label', light ? locales[locale].dark : locales[locale].light);
 }
-function projectGroup(project) {
- if (project.catalogGroup === 'learning') return 'Learning';
- if (project.category === 'games') return 'Games';
- if (['ragops','proofline'].includes(project.id)) return 'Data & AI';
- return 'Tools';
-}
+const visibleCount = () => Math.max(1, Number.parseInt(getComputedStyle(rail).getPropertyValue('--visible-projects'), 10) || 3);
+const items = () => projects.length ? projects : fallbackProjects;
+const rotating = () => timer !== null;
 function renderProjects() {
  const t = locales[locale];
- const items = projects.length ? projects : fallbackProjects;
- if (!items.length) return;
- const cards = visibleProjects(items, start, count).map(project => {
+ const list = items();
+ if (!list.length) return;
+ const count = Math.min(visibleCount(), list.length);
+ start = circularIndex(start, list.length);
+ const shown = visibleProjects(list, start, count);
+ rail.replaceChildren(...shown.map(project => {
   const article = document.createElement('article');
   article.dataset.projectId = project.id;
   const group = document.createElement('p');
@@ -62,10 +68,41 @@ function renderProjects() {
   link.append(name);
   article.append(group,title,description,link);
   return article;
- });
- rail.replaceChildren(...cards);
- if (projects.length) status.textContent = t.count(start+1,circularIndex(start+cards.length-1,projects.length)+1,projects.length);
+ }));
+ rail.setAttribute('aria-label', t.carousel);
+ previousButton.setAttribute('aria-label', t.previous);
+ nextButton.setAttribute('aria-label', t.next);
+ if (projects.length) status.textContent = t.count(start + 1, circularIndex(start + count - 1, list.length) + 1, list.length);
  else status.textContent = catalogFailed ? t.catalogFailed : '';
+ syncToggle();
+}
+function syncToggle() {
+ const t = locales[locale];
+ const paused = userPaused;
+ toggleButton.setAttribute('aria-label', paused ? t.play : t.pause);
+ toggleButton.setAttribute('aria-pressed', String(paused));
+ toggleButton.firstElementChild.className = paused ? 'fa-solid fa-play' : 'fa-solid fa-pause';
+ // Announce position changes only when the user drives them; auto-rotation stays silent.
+ status.setAttribute('aria-live', rotating() ? 'off' : 'polite');
+}
+function move(direction) {
+ const list = items();
+ if (list.length <= visibleCount()) return;
+ start = circularIndex(start + direction, list.length);
+ renderProjects();
+}
+function stop() {
+ if (timer !== null) { clearInterval(timer); timer = null; }
+ syncToggle();
+}
+function play() {
+ if (timer !== null || userPaused || hovered || focused || reduceMotion.matches || !projects.length || projects.length <= visibleCount()) return syncToggle();
+ timer = setInterval(() => { if (!document.hidden) move(1); }, ROTATE_MS);
+ syncToggle();
+}
+function updateControls() {
+ controls.hidden = !projects.length || projects.length <= visibleCount();
+ if (controls.hidden) stop();
 }
 function renderLocale() {
  const t = locales[locale];
@@ -78,13 +115,12 @@ function renderLocale() {
  localeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.lang===locale)));
  const motto = document.querySelector('.motto');
  motto.replaceChildren(document.createTextNode(t.motto[0]),document.createElement('br'),document.createTextNode(t.motto[1]));
- const sections = document.querySelectorAll('aside .profile');
- sections[0].querySelector('h2').textContent = t.what;
- sections[0].querySelectorAll('article').forEach((article,index)=>{
+ text('.languages-section h2',t.languages);
+ text('.roles .section-title',t.what);
+ document.querySelectorAll('.roles-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.roles[index][0];
   article.querySelector('p').textContent=t.roles[index][1];
  });
- sections[1].querySelector('h2').textContent=t.languages;
  text('.contact h2',t.work);
  text('.contact p',t.invitation);
  document.querySelectorAll('[data-contact-label]').forEach(link => {
@@ -110,35 +146,37 @@ function renderLocale() {
   article.querySelector('p').textContent=t.process[index][1];
  });
  text('.projects .section-title',t.projects);
- text('.project-actions>a',t.all);
- previousButton.setAttribute('aria-label',t.previous);
- nextButton.setAttribute('aria-label',t.next);
- rail.setAttribute('aria-label',t.carousel);
+ text('.project-actions > a',t.all);
  renderProjects();
  syncTheme();
 }
-function move(direction) {
- if (!projects.length) return;
- start=circularIndex(start+direction,projects.length);
- renderProjects();
-}
-previousButton.addEventListener('click',()=>move(-1));
-nextButton.addEventListener('click',()=>move(1));
-rail.addEventListener('keydown',event=>{
- if (event.target!==rail || event.isComposing) return;
- if (event.key==='ArrowLeft'||event.key==='ArrowRight') { event.preventDefault(); move(event.key==='ArrowRight'?1:-1); }
+toggleButton.addEventListener('click',()=>{
+ if (userPaused) { userPaused = false; hovered = false; focused = false; play(); }
+ else { userPaused = true; stop(); }
 });
+// Manual navigation ends autoplay until the user resumes it explicitly.
+const manual = direction => { userPaused = true; stop(); move(direction); };
+previousButton.addEventListener('click',()=>manual(-1));
+nextButton.addEventListener('click',()=>manual(1));
+rail.addEventListener('keydown',event=>{
+ if (event.key === 'ArrowLeft') { event.preventDefault(); manual(-1); }
+ if (event.key === 'ArrowRight') { event.preventDefault(); manual(1); }
+});
+const section = document.querySelector('.projects');
+section.addEventListener('mouseenter',()=>{ hovered = true; stop(); });
+section.addEventListener('mouseleave',()=>{ hovered = false; play(); });
+section.addEventListener('focusin',()=>{ focused = true; stop(); });
+section.addEventListener('focusout',event=>{ if (!section.contains(event.relatedTarget)) { focused = false; play(); } });
+reduceMotion.addEventListener('change',()=>{ if (reduceMotion.matches) { userPaused = true; stop(); } });
+window.addEventListener('resize',()=>{ updateControls(); renderProjects(); });
 document.addEventListener('themechange',syncTheme);
-new ResizeObserver(()=>{
- const visible=visibleProjectCount();
- if(visible!==count){count=visible;renderProjects();}
-}).observe(rail);
 bindLocaleSwitch(language => { locale = language; renderLocale(); });
-previousButton.disabled=nextButton.disabled=true;
 window.portfolioProjectsReady.then(()=>{
- projects=sortProjects(window.portfolioProjects);
- previousButton.disabled=nextButton.disabled=projects.length<2;
+ projects=shuffle(featuredProjects(sortProjects(window.portfolioProjects)));
+ start=0;
  renderProjects();
+ updateControls();
+ play();
 }).catch(()=>{
  catalogFailed=true;
  status.textContent=locales[locale].catalogFailed;

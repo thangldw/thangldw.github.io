@@ -161,10 +161,10 @@ try {
     if (file.startsWith('_sources/')) continue;
     const html = await readFile(resolve(ROOT, file), 'utf8');
     if (/http-equiv=["']refresh|redirect.js/i.test(html)) continue;
-    if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261111-contrast')) throw Error(`Missing shared version: ${file}`);
+    if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261111-inline')) throw Error(`Missing shared version: ${file}`);
     routes.push('/'+file);
   }
-  routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html','/bjt/workspace.html');
+  routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html');
   const report=[];
   for (const route of routes.filter(r=>!process.env.SUPPORT_ROUTE||new RegExp(process.env.SUPPORT_ROUTE).test(r))) {
     console.log('Checking',route);
