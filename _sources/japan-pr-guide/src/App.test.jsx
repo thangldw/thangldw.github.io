@@ -235,4 +235,15 @@ describe("Japan PR Guide route-specific assessment", () => {
     }
   });
 
+  it("shows the reported HSP minimum-remuneration change as not in force", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByText("Official updates: ISA · Police · MOFA"));
+    const notice = screen.getByRole("heading", { name: /HSP minimum remuneration/ }).closest("article");
+    expect(notice).toHaveTextContent("Reported · not in force");
+    expect(notice).toHaveTextContent("still applies the current ¥3,000,000 floor");
+    expect(screen.getByText(/ISA 12 Nov 2026; NPA and MOFA 05 Oct 2026/)).toBeInTheDocument();
+  });
+
 });

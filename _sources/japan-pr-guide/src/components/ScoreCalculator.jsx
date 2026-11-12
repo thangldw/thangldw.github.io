@@ -490,7 +490,7 @@ export function SourceNotes() {
         <a href="https://www.moj.go.jp/isa/applications/resources/nyukan_nyukan50.html" target="_blank" rel="noreferrer">PR guideline · before Apr 2027 <ArrowSquareOut size={13} /></a>
         <a href="https://www.moj.go.jp/isa/10_00279.html" target="_blank" rel="noreferrer">Published 2027 guideline <ArrowSquareOut size={13} /></a>
       </nav>
-      <p className="source-reviewed"><strong>Sources checked <time dateTime="2026-10-05">05 Oct 2026</time></strong><span lang="vi">Đối chiếu nguồn ngày 05/10/2026</span></p>
+      <p className="source-reviewed"><strong>Sources checked: ISA <time dateTime="2026-11-12">12 Nov 2026</time> · NPA, MOFA <time dateTime="2026-10-05">05 Oct 2026</time></strong><span lang="vi">Đối chiếu nguồn: ISA 12/11/2026 · NPA, MOFA 05/10/2026</span></p>
     </section>
   );
 }
