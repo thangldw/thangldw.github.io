@@ -122,7 +122,7 @@ Edit only `js/projects-data.json`.
 4. Run validation and browser smoke tests.
 5. Commit and push.
 
-Home preserves the complete one-page profile, working approach, languages, contact links, and a filterable side-project grid. The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
+Home preserves the complete one-page profile, working approach, languages, contact links, and a side-project carousel that shows all `featured` projects in a fresh random order on each load, auto-rotating every 7 s with a pause/resume button (rotation stops on hover, focus, manual navigation, or `prefers-reduced-motion`). The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
 
 Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
@@ -287,7 +287,7 @@ The homepage is the design reference for `/apps/` and the application catalog. M
 - Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px (compact density), with 16px mobile prose. No clipped content or forced hidden document overflow.
 - Layout: sidebar plus fluid main column, About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
-- Project source: existing shared catalog loader. All entries appear A–Z in a responsive card grid filtered by `catalogGroup` (All, Engineering, Utilities, Learning, Experiments); the filters are native buttons with `aria-pressed`.
+- Project source: existing shared catalog loader. Home shows `featured` projects in a carousel shuffled once per load (5/3/2/1 visible by width), auto-rotating with a pause/resume control; the full A–Z catalog lives at `/apps/`.
 - The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`. The shareable `/contact/` page also offers a link to the reader’s configured mail app.
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and other application sources. Preserve route-specific information architecture and application behavior.
 

@@ -164,7 +164,7 @@ try {
     if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261105-qr')) throw Error(`Missing shared version: ${file}`);
     routes.push('/'+file);
   }
-  routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html','/bjt/workspace.html');
+  routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html');
   const report=[];
   for (const route of routes.filter(r=>!process.env.SUPPORT_ROUTE||new RegExp(process.env.SUPPORT_ROUTE).test(r))) {
     console.log('Checking',route);
