@@ -20,6 +20,18 @@ ragops evidence verify --bundle ./demo-output/evidence</code></pre><button class
 <p id="clipboardStatus" class="clipboard-status" role="status"></p></section>
 <details id="example"><summary data-text="example">Try the regression demo</summary><p data-text="exampleCopy">Recorded output from the source demo. This page does not run RAGOps or inspect your files.</p><div class="example-options" role="group" aria-label="Example view"><button class="ui-button" data-example="source" aria-pressed="true" data-text="sourceChange">Comparison</button><button class="ui-button" data-example="states" aria-pressed="false" data-text="states">Release decision</button><button class="ui-button" data-example="verify" aria-pressed="false" data-text="verify">Verify evidence</button></div><div class="code-surface"><pre id="exampleCode" tabindex="0"><code></code></pre><button class="ui-button copy-button" data-copy="exampleCode" data-text="copy">Copy</button></div><p class="caption" data-text="demoHelp">The demo writes local reports to ./demo-output. Its BLOCK decision is intentional.</p><a href="https://github.com/thangldw/ragops/blob/main/apps/api/ragops/stale_decision_demo.py" data-text="demoSource">Read demo source →</a></details>
 <section class="check-groups"><article><h2 data-text="exact">Regression checks</h2><p data-text="exactCopy">Compare recorded traces for citation, grounding and other quality regressions.</p></article><article><h2 data-text="impact">Versioned policy</h2><p data-text="impactCopy">Keep gate thresholds and the canonical PASS/WARN/BLOCK decision inspectable.</p></article><article><h2 data-text="portable">Portable evidence</h2><p data-text="portableCopy">Export reports and verify evidence bundle integrity without network calls.</p></article></section>
+<details><summary data-text="traceSummary">Recorded trace format</summary><p data-text="traceCopy">Each file is a JSON array with one entry per scenario case. This excerpt is from the demo baseline.json; the scenario file defines thresholds and required citations.</p><div class="code-surface"><pre tabindex="0"><code>[
+  {
+    "case_id": "demo-procedure",
+    "answer": "Stop A1000, inspect the cooling fan guard, remove debris, and restart below 60C.",
+    "citation_ids": [
+      "manual-a1000-e42"
+    ],
+    "latency_ms": 850,
+    "cost_usd": 0.008
+  }
+]</code></pre></div></details>
+<details><summary data-text="statSummary">Statistical gates and limits</summary><p data-text="statCopy">For larger replay bundles RAGOps also offers a paired hierarchical bootstrap comparison and a sequential comparison. Lexical groundedness is token overlap between answer and evidence, not semantic verification, and evidence verification checks integrity, not model safety.</p></details>
 <details><summary data-text="packages">Reports &amp; integrations</summary><p data-text="packageCopy">Export HTML, JSON, Markdown, JUnit, SARIF and GitHub Summary. API/workbench and vendor adapters are optional. The core does not make network calls. Evidence verification checks integrity, not model safety.</p><a href="https://github.com/thangldw/ragops/blob/main/docs/CONTRACTS.md" data-text="docs">Read documentation →</a></details></main></div><footer class="compact-footer" id="footer">
   <p class="footer-signature"><span><strong translate="no">RAGOps</strong> © <span data-footer-year>2026</span> <a href="/">thang.</a></span> <span lang="en" translate="no">crafted with care. stay steadfast, stay free</span></p>
 </footer>
