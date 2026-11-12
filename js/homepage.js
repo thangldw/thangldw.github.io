@@ -1,5 +1,5 @@
-import { locales, projectTranslations } from './home-locales.mjs?v=20261111-rotate';
-import { sortProjects, featuredProjects, shuffle, projectGroup, circularIndex, visibleProjects } from './home-project-order.mjs';
+import { locales, projectTranslations } from './home-locales.mjs?v=20261112-rotate';
+import { sortProjects, featuredProjects, shuffle, projectGroups, circularIndex, visibleProjects } from './home-project-order.mjs';
 import { bindLocaleSwitch } from './site-locale.mjs';
 
 const ROTATE_MS = 7000;
@@ -27,8 +27,7 @@ const fallbackProjects = [...rail.querySelectorAll('article')].map(article => ({
  title: article.querySelector('h3').textContent,
  href: article.querySelector('a').href,
  description: article.querySelector('.project-description').textContent,
- catalogGroup: article.querySelector('.project-category').textContent === 'Learning' ? 'learning' : 'utilities',
- category: article.querySelector('.project-category').textContent === 'Games' ? 'games' : undefined
+ catalogGroup: article.dataset.group
 }));
 let catalogFailed = false;
 const text = (selector, value) => { document.querySelector(selector).textContent = value; };
@@ -53,7 +52,7 @@ function renderProjects() {
   article.dataset.projectId = project.id;
   const group = document.createElement('p');
   group.className = 'project-category';
-  group.textContent = t.groups[projectGroup(project)];
+  group.textContent = t.groupNames[projectGroups.indexOf(project.catalogGroup)] || '';
   const title = document.createElement('h3');
   title.textContent = project.title;
   const description = document.createElement('p');
@@ -66,7 +65,15 @@ function renderProjects() {
   name.className = 'sr-only';
   name.textContent = ': ' + project.title;
   link.append(name);
-  article.append(group,title,description,link);
+  article.append(group,title);
+  if (project.status) {
+   const badge = document.createElement('span');
+   badge.className = 'project-status';
+   badge.dataset.status = String(project.status).toLowerCase() === 'live' ? 'live' : 'release';
+   badge.textContent = project.status;
+   article.append(badge);
+  }
+  article.append(description,link);
   return article;
  }));
  rail.setAttribute('aria-label', t.carousel);

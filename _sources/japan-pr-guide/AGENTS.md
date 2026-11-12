@@ -29,3 +29,6 @@ The user selected displayed option 2: horizontal five-step timeline, full-width 
 The user reverted the contextual donation experiment. Keep the original shared floating Support my work dialog on Japan PR Guide.
 
 Do not display the Explore more apps link below the source notes on Japan PR Guide.
+
+## Age input — 2026-11-11
+The user decided against a date-of-birth input. Keep the manual age field; users enter their own age as of each reference date. Do not add DOB-based age calculation.

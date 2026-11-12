@@ -10,7 +10,7 @@ export const locales = {
   sectors: 'Experience across sectors', sectorText: 'Retail, real estate, fintech, healthcare, and research.', contribution: 'End-to-end contribution', contributionText: 'Discovery, architecture, pipelines, models, delivery leadership, and stakeholder alignment.', how: 'How I work',
   process: [['Understand','Embed with your team. Clarify the problem, data, and outcomes that matter.'],['Build','Design, integrate, and ship reliable systems with evaluation and observability.'],['Enable','Document decisions and transfer knowledge so your team can own what we ship.'],['Improve','Use feedback and operational signals to measure outcomes and refine the system.']],
   projects: 'Side projects', all: 'View all projects', view: 'View project', previous: 'Show previous project', next: 'Show next project', carousel: 'Side projects carousel', pause: 'Pause project rotation', play: 'Resume project rotation', count: (first,last,total) => `${first}–${last} of ${total} projects`,
-  groups: {'Tools':'Tools','Games':'Games','Data & AI':'Data & AI','Learning':'Learning'}
+  groupNames: ['Engineering', 'Utilities', 'Learning', 'Experiments']
  },
  vi: {
   catalogFailed: 'Không tải được danh sách dự án. Hãy tải lại trang để thử lại.', languageName: 'Tiếng Việt', languageSwitch: 'Ngôn ngữ hiển thị', skip: 'Đến nội dung chính', home: 'Trang chủ Thang Luu', dark: 'Chuyển sang giao diện tối', light: 'Chuyển sang giao diện sáng',
@@ -23,7 +23,7 @@ export const locales = {
   sectors: 'Kinh nghiệm đa lĩnh vực', sectorText: 'Bán lẻ, bất động sản, fintech, y tế và nghiên cứu.', contribution: 'Đóng góp xuyên suốt', contributionText: 'Khảo sát, kiến trúc, pipeline, mô hình, dẫn dắt triển khai và thống nhất với các bên liên quan.', how: 'Cách tôi làm việc',
   process: [['Thấu hiểu','Làm việc cùng đội ngũ. Làm rõ vấn đề, dữ liệu và kết quả cần đạt.'],['Xây dựng','Thiết kế, tích hợp và triển khai hệ thống tin cậy, có đánh giá và khả năng quan sát.'],['Chuyển giao','Ghi lại quyết định, chia sẻ kiến thức để đội ngũ tự vận hành hệ thống.'],['Cải tiến','Đo lường kết quả và cải tiến hệ thống qua phản hồi và tín hiệu vận hành.']],
   projects: 'Dự án cá nhân', all: 'Xem tất cả dự án', view: 'Xem dự án', previous: 'Xem dự án trước', next: 'Xem dự án tiếp theo', carousel: 'Danh sách dự án cá nhân', pause: 'Tạm dừng xoay dự án', play: 'Tiếp tục xoay dự án', count: (first,last,total) => `${first}–${last} / ${total} dự án`,
-  groups: {'Tools':'Công cụ','Games':'Trò chơi','Data & AI':'Data & AI','Learning':'Học tập'}
+  groupNames: ['Kỹ thuật', 'Tiện ích', 'Học tập', 'Thử nghiệm']
  },
  ja: {
   catalogFailed: 'プロジェクト一覧を読み込めませんでした。ページを再読み込みしてください。', languageName: '日本語', languageSwitch: '表示言語', skip: '本文へ移動', home: 'Thang Luuのホーム', dark: 'ダークモードに切り替え', light: 'ライトモードに切り替え',
@@ -36,7 +36,7 @@ export const locales = {
   sectors: '業界横断の経験', sectorText: '小売、不動産、フィンテック、医療、研究。', contribution: '一貫した支援', contributionText: '課題探索、設計、パイプライン、モデル、開発推進、関係者との合意形成。', how: '仕事の進め方',
   process: [['理解する','チームに入り、課題・データ・目指す成果を明確にします。'],['構築する','評価と可観測性を備えた、信頼できるシステムを設計・統合・提供します。'],['引き継ぐ','意思決定を記録し、知識を共有して、チームの自律的な運用を支えます。'],['改善する','フィードバックと運用データから成果を測り、システムを改善します。']],
   projects: '個人プロジェクト', all: 'すべてのプロジェクト', view: 'プロジェクトを見る', previous: '前のプロジェクト', next: '次のプロジェクト', carousel: '個人プロジェクト一覧', pause: '自動切り替えを停止', play: '自動切り替えを再開', count: (first,last,total) => `${total}件中 ${first}〜${last}件を表示`,
-  groups: {'Tools':'ツール','Games':'ゲーム','Data & AI':'データ・AI','Learning':'学習'}
+  groupNames: ['エンジニアリング', 'ユーティリティ', '学習', '実験']
  },
  zh: {
   catalogFailed: '项目列表加载失败，请刷新页面重试。', languageName: '中文', languageSwitch: '显示语言', skip: '跳转到正文', home: 'Thang Luu 首页', dark: '切换为深色模式', light: '切换为浅色模式',
@@ -49,7 +49,7 @@ export const locales = {
   sectors: '跨行业经验', sectorText: '零售、房地产、金融科技、医疗及研究。', contribution: '端到端贡献', contributionText: '需求探索、架构、数据管道、模型、交付领导及利益相关方协调。', how: '工作方式',
   process: [['理解','深入团队，明确问题、数据以及真正重要的成果。'],['构建','设计、集成并交付可靠的系统，配备评估与可观测能力。'],['赋能','记录决策、传递知识，让团队能够自主维护所交付的系统。'],['改进','通过反馈与运行数据衡量成果，持续改进系统。']],
   projects: '个人项目', all: '查看所有项目', view: '查看项目', previous: '上一个项目', next: '下一个项目', carousel: '个人项目轮播', pause: '暂停项目轮播', play: '继续项目轮播', count: (first,last,total) => `共 ${total} 个项目，当前为 ${first}–${last}`,
-  groups: {'Tools':'工具','Games':'游戏','Data & AI':'数据与 AI','Learning':'学习'}
+  groupNames: ['工程', '实用工具', '学习', '实验']
  }
 };
 

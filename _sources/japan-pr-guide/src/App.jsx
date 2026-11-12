@@ -6,8 +6,11 @@ import {
   CalculatorHeader,
   ClaimsScreen,
   FactorTable,
+  FactorTableFooter,
   HistoricalScreen,
   RequirementsScreen,
+  ScoreDock,
+  SupportButtonCompactor,
   ScoreInspector,
   SourceNotes,
   StepProgress,
@@ -19,6 +22,7 @@ import {
   historicalReferenceForRoute,
 } from "./domain/historical";
 import { calculateScore, toScoringInput } from "./domain/scoring";
+import { suggestClaims } from "./domain/suggestions";
 import {
   initialFactors,
   parseFactorValue,
@@ -49,6 +53,11 @@ export function App() {
   const currentResult = useMemo(
     () => calculateScore(toScoringInput({ ...factors, activity })),
     [activity, factors],
+  );
+
+  const nextClaims = useMemo(
+    () => suggestClaims(activity, factors, currentResult),
+    [activity, factors, currentResult],
   );
 
   const historicalScenario = useMemo(
@@ -138,7 +147,10 @@ export function App() {
 
       {currentStep === 1 ? (
         <section className="calculator-layout workflow-content">
+          <SupportButtonCompactor />
+          <ScoreDock onContinue={() => navigateToStep(2)} result={currentResult} />
           <ScoreInspector
+            nextClaims={nextClaims}
             onContinue={() => navigateToStep(2)}
             result={currentResult}
           />
@@ -151,8 +163,8 @@ export function App() {
               onUniversitySelect={updateUniversity}
               result={currentResult}
             />
+            <FactorTableFooter onContinue={() => navigateToStep(2)} result={currentResult} />
           </div>
-
         </section>
       ) : null}
 

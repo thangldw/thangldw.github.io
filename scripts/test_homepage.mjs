@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { locales, projectTranslations } from '../js/home-locales.mjs';
-import { sortProjects, featuredProjects, shuffle, circularIndex, visibleProjects, projectGroup } from '../js/home-project-order.mjs';
+import { sortProjects, featuredProjects, shuffle, circularIndex, visibleProjects, projectGroups } from '../js/home-project-order.mjs';
 const catalog=JSON.parse(await readFile(new URL('../js/projects-data.json',import.meta.url),'utf8'));
 const projects=sortProjects(catalog.projects);
 assert.equal(new Set(projects.map(project=>project.id)).size,projects.length);
@@ -29,14 +29,14 @@ for(const count of [1,2,3,5]) {
  }
 }
 assert.equal(visibleProjects(featured,featured.length-1,2)[1],featured[0],'wraps around');
-assert.deepEqual(featured.map(projectGroup).every(g=>['Tools','Data & AI','Games','Learning'].includes(g)),true);
+assert.ok(featured.every(p=>projectGroups.includes(p.catalogGroup)),'featured projects use known catalog groups');
 for(const locale of ['en','vi','ja','zh']) {
  const t=locales[locale];
  assert.deepEqual(Object.keys(t).sort(),Object.keys(locales.en).sort());
  assert.equal(t.roles.length,3);
  assert.equal(t.process.length,4);
  assert.equal(t.bio.length,2);
- for(const group of ['Tools','Data & AI','Games','Learning']) assert.ok(t.groups[group],`${locale}: missing group label ${group}`);
+ assert.equal(t.groupNames.length,projectGroups.length);
  for(const key of ['previous','next','carousel','pause','play']) assert.ok(t[key],`${locale}: missing ${key}`);
  assert.ok(t.count(1,5,featured.length).includes(String(featured.length)));
  if(locale!=='en') for(const project of projects) assert.ok(projectTranslations[locale][project.id] || project.localizedDescriptions?.[locale],`${locale}: missing ${project.id}`);

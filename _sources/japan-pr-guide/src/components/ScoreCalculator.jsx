@@ -234,17 +234,24 @@ function routeCopy(result) {
   return { en: `${Math.max(0, 70 - result.score)} points to the 3-year route`, vi: "Cần thêm điểm để đánh giá lộ trình HSP" };
 }
 
-export function ScoreInspector({ onContinue, result }) {
+export function ScoreInspector({ nextClaims, onContinue, result }) {
   const copy = routeCopy(result);
   return (
     <aside className="score-inspector">
       <div className="score-inspector-inner">
-        <div className="score-summary-title"><h2>Your estimated HSP score</h2><p>Example profile · update with your own details</p></div>
+        <div className="score-summary-title"><h2>Your estimated HSP score</h2><p><span className="sample-badge">Sample</span> Example profile · update with your own details</p></div>
         <div className="live-score"><strong data-live-score>{result.score}</strong><span> points</span></div>
         <div className="threshold-line"><span style={{ width: `${Math.min(result.score, 100)}%` }} /><i style={{ left: `${Math.min(result.score, 100)}%` }} /><b className="at-70">70</b><b className="at-80">80</b></div>
         <div className="threshold-copy"><span><strong>70 points</strong><small>3-year route</small></span><span><strong>80 points</strong><small>1-year route</small></span></div>
         <div className={`route-callout ${result.route || "none"}`}><strong>{copy.en}</strong><span>{copy.vi}</span></div>
         {result.warnings.length ? <ul className="score-warnings">{result.warnings.map((warning) => <li key={warning}>{warningCopy[warning] || "Review this scoring dependency."}</li>)}</ul> : null}
+        {nextClaims?.suggestions.length ? (
+          <div className="score-nudge">
+            <strong>{nextClaims.pointsNeeded} more points to reach {nextClaims.target}</strong>
+            <small>Claims that would add points if they apply to you and you can document them. / Mục có thể cộng điểm nếu bạn đủ điều kiện và có chứng từ.</small>
+            <ul>{nextClaims.suggestions.map((item) => <li key={item.id}><b>+{item.points}</b> {item.label}</li>)}</ul>
+          </div>
+        ) : null}
         <div className="proof-summary"><strong>Proof review</strong><span>Not started</span><small>Review claims and prepare documents in the next step.</small></div><p className="guidance-note"><Info size={18} />Point thresholds open a potential assessment route; they do not determine PR eligibility.</p>
         <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Review score claims <ArrowRight size={18} /></button>
       </div>
@@ -256,6 +263,60 @@ function ProofCoverage({ proofReady, rows }) {
   const active = rows.filter((row) => row.points > 0);
   const ready = active.filter((row) => proofReady[row.id]).length;
   return { active, ready, total: active.length };
+}
+
+// Compact summary pinned to the top once the full score summary has scrolled
+// out of view, so the total stays visible while editing the long factor table.
+export function ScoreDock({ onContinue, result }) {
+  const [docked, setDocked] = useState(false);
+  useEffect(() => {
+    const target = document.querySelector(".score-inspector");
+    if (!target || typeof IntersectionObserver === "undefined") return undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      setDocked(!entry.isIntersecting && entry.boundingClientRect.bottom < 0);
+    });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+  if (!docked) return null;
+  return (
+    <div className="score-dock" role="region" aria-label="Score summary">
+      <div className="score-dock-inner">
+        <span className="score-dock-score"><strong>{result.score}</strong> points</span>
+        <span className="score-dock-route">{routeCopy(result).en}</span>
+        <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Review claims <ArrowRight size={18} /></button>
+      </div>
+    </div>
+  );
+}
+
+// While the factor table sits behind the shared floating support button, shrink
+// that button to an icon. The shared shell is untouched; styles.css reacts to the body class.
+export function SupportButtonCompactor() {
+  useEffect(() => {
+    const table = document.querySelector(".factor-table");
+    if (!table || typeof IntersectionObserver === "undefined") return undefined;
+    // Observe only the bottom band of the viewport, where the button sits.
+    const observer = new IntersectionObserver(
+      ([entry]) => document.body.classList.toggle("support-compact", entry.isIntersecting),
+      { rootMargin: "-88% 0px 0px 0px" },
+    );
+    observer.observe(table);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove("support-compact");
+    };
+  }, []);
+  return null;
+}
+
+export function FactorTableFooter({ onContinue, result }) {
+  return (
+    <div className="factor-footer">
+      <span><strong>{result.score} points</strong> · {routeCopy(result).en}</span>
+      <button className="ui-button ui-button-primary primary-button" onClick={onContinue} type="button">Continue to review claims <ArrowRight size={18} /></button>
+    </div>
+  );
 }
 
 export function ClaimsScreen({ activity, factors, onBack, onContinue, onToggleProof, proofReady, result }) {
@@ -429,7 +490,7 @@ export function SourceNotes() {
         <a href="https://www.moj.go.jp/isa/applications/resources/nyukan_nyukan50.html" target="_blank" rel="noreferrer">PR guideline · before Apr 2027 <ArrowSquareOut size={13} /></a>
         <a href="https://www.moj.go.jp/isa/10_00279.html" target="_blank" rel="noreferrer">Published 2027 guideline <ArrowSquareOut size={13} /></a>
       </nav>
-      <p className="source-reviewed"><strong>Sources checked <time dateTime="2026-10-05">05 Oct 2026</time></strong><span lang="vi">Đối chiếu nguồn ngày 05/10/2026</span></p>
+      <p className="source-reviewed"><strong>Sources checked: ISA <time dateTime="2026-11-12">12 Nov 2026</time> · NPA, MOFA <time dateTime="2026-10-05">05 Oct 2026</time></strong><span lang="vi">Đối chiếu nguồn: ISA 12/11/2026 · NPA, MOFA 05/10/2026</span></p>
     </section>
   );
 }

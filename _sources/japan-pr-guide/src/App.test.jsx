@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { App } from "./App";
@@ -159,6 +159,91 @@ describe("Japan PR Guide route-specific assessment", () => {
     expect(screen.getByText("85", { selector: "[data-current-total]" })).toBeVisible();
     expect(screen.getByText("80", { selector: "[data-historical-total]" })).toBeVisible();
     expect(screen.getByText("5 Oct 2025", { selector: "[data-historical-date]" })).toBeVisible();
+  });
+
+  it("offers a next step at the end of the factor table", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: "Continue to review claims" }));
+    expect(screen.getByRole("button", { name: "Continue to historical score" })).toBeInTheDocument();
+  });
+
+  it("pins a compact score summary once the full summary scrolls out of view", async () => {
+    const user = userEvent.setup();
+    const callbacks = [];
+    const notify = (entries) => callbacks.forEach((callback) => callback(entries));
+    vi.stubGlobal("IntersectionObserver", class {
+      constructor(callback) { callbacks.push(callback); }
+      observe() {}
+      disconnect() {}
+    });
+    try {
+      render(<App />);
+      expect(screen.queryByRole("region", { name: "Score summary" })).not.toBeInTheDocument();
+
+      act(() => notify([{ isIntersecting: false, boundingClientRect: { bottom: -40 } }]));
+      const dock = screen.getByRole("region", { name: "Score summary" });
+      expect(dock).toHaveTextContent("75 points");
+
+      await user.selectOptions(screen.getByLabelText("Highest qualifying degree"), "doctor");
+      expect(dock).toHaveTextContent("85 points");
+
+      act(() => notify([{ isIntersecting: false, boundingClientRect: { bottom: 900 } }]));
+      expect(screen.queryByRole("region", { name: "Score summary" })).not.toBeInTheDocument();
+
+      act(() => notify([{ isIntersecting: false, boundingClientRect: { bottom: -40 } }]));
+      await user.click(within(screen.getByRole("region", { name: "Score summary" })).getByRole("button", { name: "Review claims" }));
+      expect(screen.getByRole("button", { name: "Continue to historical score" })).toBeInTheDocument();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("labels the starting profile as a sample and lists claims that could close the gap", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    expect(screen.getByText("Sample")).toBeVisible();
+    expect(screen.getByText("5 more points to reach 80")).toBeVisible();
+    await user.selectOptions(screen.getByLabelText("Highest qualifying degree"), "doctor");
+    expect(screen.queryByText(/more points to reach/)).not.toBeInTheDocument();
+  });
+
+  it("shrinks the support button only while the factor table is behind it", () => {
+    const callbacks = [];
+    vi.stubGlobal("IntersectionObserver", class {
+      constructor(callback) { callbacks.push(callback); }
+      observe() {}
+      disconnect() {}
+    });
+    try {
+      const { unmount } = render(<App />);
+      const notify = (isIntersecting) => act(() => callbacks.forEach((callback) => callback([{ isIntersecting, boundingClientRect: { bottom: 900 } }])));
+
+      expect(document.body).not.toHaveClass("support-compact");
+      notify(true);
+      expect(document.body).toHaveClass("support-compact");
+      notify(false);
+      expect(document.body).not.toHaveClass("support-compact");
+
+      notify(true);
+      unmount();
+      expect(document.body).not.toHaveClass("support-compact");
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("shows the reported HSP minimum-remuneration change as not in force", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByText("Official updates: ISA · Police · MOFA"));
+    const notice = screen.getByRole("heading", { name: /HSP minimum remuneration/ }).closest("article");
+    expect(notice).toHaveTextContent("Reported · not in force");
+    expect(notice).toHaveTextContent("still applies the current ¥3,000,000 floor");
+    expect(screen.getByText(/ISA 12 Nov 2026; NPA and MOFA 05 Oct 2026/)).toBeInTheDocument();
   });
 
 });

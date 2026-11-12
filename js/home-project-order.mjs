@@ -1,6 +1,7 @@
 export function sortProjects(projects) {
  return [...projects].sort((a, b) => a.title.localeCompare(b.title, 'en', { numeric: true, sensitivity: 'base' }));
 }
+export const projectGroups = ['engineering', 'utilities', 'learning', 'experiments'];
 export function featuredProjects(projects) {
  return projects.filter(project => project.featured === true);
 }
@@ -12,12 +13,6 @@ export function shuffle(items, random = Math.random) {
   [result[index], result[swap]] = [result[swap], result[index]];
  }
  return result;
-}
-export function projectGroup(project) {
- if (project.catalogGroup === 'learning') return 'Learning';
- if (project.category === 'games') return 'Games';
- if (['ragops', 'proofline'].includes(project.id)) return 'Data & AI';
- return 'Tools';
 }
 export function circularIndex(index, length) {
  return ((index % length) + length) % length;

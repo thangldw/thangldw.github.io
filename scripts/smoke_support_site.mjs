@@ -161,7 +161,7 @@ try {
     if (file.startsWith('_sources/')) continue;
     const html = await readFile(resolve(ROOT, file), 'utf8');
     if (/http-equiv=["']refresh|redirect.js/i.test(html)) continue;
-    if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261111-inline')) throw Error(`Missing shared version: ${file}`);
+    if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261105-qr')) throw Error(`Missing shared version: ${file}`);
     routes.push('/'+file);
   }
   for (const route of routes.filter(r => !process.env.SUPPORT_ROUTE || r.includes(process.env.SUPPORT_ROUTE))) {
