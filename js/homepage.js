@@ -149,7 +149,6 @@ function renderLocale() {
  details[1].querySelector('dt').textContent=t.contribution;
  details[1].querySelector('dd').textContent=t.contributionText;
  details[2].querySelector('dt').textContent=t.languages;
- text('.process .section-title',t.how);
  document.querySelectorAll('.process-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.process[index][0];
   article.querySelector('p').textContent=t.process[index][1];
