@@ -125,7 +125,6 @@ function renderLocale() {
  localeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.lang===locale)));
  const motto = document.querySelector('.motto');
  motto.replaceChildren(document.createTextNode(t.motto[0]),document.createElement('br'),document.createTextNode(t.motto[1]));
- text('.roles .section-title',t.what);
  document.querySelectorAll('.roles-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.roles[index][0];
   article.querySelector('p').textContent=t.roles[index][1];

@@ -80,8 +80,7 @@ html[data-theme=dark]{color-scheme:dark}
 .languages{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-16);max-width:none;font-size:var(--text-body-sm);color:var(--muted)}
 .languages li{gap:var(--space-8)}
 .support-slot{margin-top:var(--space-16)}
-.roles{border-top:1px solid var(--line);margin-top:var(--space-24);padding-top:var(--space-20)}
-.roles-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-28);padding:var(--space-24) 0}
+.roles-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-28);padding:var(--space-24) 0 0}
 .roles-grid h3{font-size:var(--text-title-xs);margin-bottom:var(--space-9)}
 .roles-grid p{font-size:var(--text-body-sm);line-height:1.55;color:var(--color-text-description)}
 .project-actions{display:flex;align-items:center;gap:var(--space-16)}
