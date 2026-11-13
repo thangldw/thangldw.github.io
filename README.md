@@ -286,7 +286,7 @@ The homepage is the design reference for `/apps/` and the application catalog. M
 - Layout: sidebar plus fluid main column, About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
 - Project source: existing shared catalog loader. Home shows `featured` projects in a carousel shuffled once per load (5/3/2/1 visible by width), auto-rotating with a pause/resume control; the full A–Z catalog lives at `/apps/`.
-- The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`. The shareable `/contact/` page also offers a link to the reader’s configured mail app.
+- The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`.
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and other application sources. Preserve route-specific information architecture and application behavior.
 
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.

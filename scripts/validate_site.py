@@ -323,17 +323,12 @@ def main() -> int:
         elif f'location.replace("{destination}" + location.search + location.hash)' not in page.read_text():
             errors.append(f"{relative}: redirect must preserve query and hash")
 
-    contact_landing = ROOT / "contact/index.html"
-    for page in (ROOT / "index.html", contact_landing):
-        contact_links = (urlsplit(ref) for ref in parsed_pages.get(page, PageParser()).references)
-        if not any(link.scheme == 'https' and link.netloc == 'mail.google.com' and link.path == '/mail/'
-                   and parse_qs(link.query).get('view') == ['cm']
-                   and parse_qs(link.query).get('to') == [CONTACT_EMAIL] for link in contact_links):
-            errors.append(f"{page.relative_to(ROOT)}: missing Gmail web compose link for the portfolio owner")
-    for contact_page in [contact_landing]:
-        references = parsed_pages.get(contact_page, PageParser()).references
-        if not any(urlsplit(reference).scheme == 'mailto' and urlsplit(reference).path == CONTACT_EMAIL for reference in references):
-            errors.append(f"{contact_page.relative_to(ROOT)}: missing portable email contact")
+    home_page = ROOT / "index.html"
+    home_links = (urlsplit(ref) for ref in parsed_pages.get(home_page, PageParser()).references)
+    if not any(link.scheme == 'https' and link.netloc == 'mail.google.com' and link.path == '/mail/'
+               and parse_qs(link.query).get('view') == ['cm']
+               and parse_qs(link.query).get('to') == [CONTACT_EMAIL] for link in home_links):
+        errors.append(f"{home_page.relative_to(ROOT)}: missing Gmail web compose link for the portfolio owner")
 
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}

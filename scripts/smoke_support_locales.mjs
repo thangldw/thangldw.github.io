@@ -222,7 +222,7 @@ try {
   console.log(JSON.stringify({routes:new Set(report.map(r=>r.route)).size,viewports:report.length,failed:report.filter(r=>!r.ok).length}));
   if(report.some(r=>!r.ok)) process.exitCode=1;
 
-  const localeRoutes=['/','/apps/','/community/','/contact/','/ragops/','/proofline/','/awesome-maintainer-defense/'];
+  const localeRoutes=['/','/apps/','/community/','/ragops/','/proofline/','/awesome-maintainer-defense/'];
   async function expectLocale(language) {
     await page.waitUntil(`document.documentElement.lang.split('-')[0]===${JSON.stringify(language)} && document.querySelector('.locale-switch button[aria-pressed="true"]')?.matches('[lang="${language}"], [data-lang="${language}"]') && document.querySelector('#supportDialogTitle')?.textContent===${JSON.stringify(headings[language][0])}`);
     if(page.exceptions.length)throw Error(page.exceptions.join('; '));
@@ -262,7 +262,7 @@ try {
   if(!await page.evaluate(`new URLSearchParams(location.search).get('lang')==='zh'`))throw Error('Back retained an obsolete language URL');
   console.log('PASS latest choice replaces an obsolete language URL on Back');
 
-  await page.navigate(origin+'/contact/?lang=ja&from=test#main',1280);
+  await page.navigate(origin+'/?lang=ja&from=test#main',1280);
   await expectLocale('ja');
   await page.evaluate(`document.querySelector('.locale-switch [lang="en"]').click()`);
   await expectLocale('en');

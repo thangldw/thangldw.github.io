@@ -8,7 +8,7 @@
 <meta property="og:type" content="website"><meta property="og:title" content="Contributing to the Community — Thang Luu"><meta property="og:description" content="Engineering beyond my own repositories: upstream code, collaboration and shared learning."><meta property="og:url" content="https://thangldw.github.io/community/"><meta property="og:image" content="https://thangldw.github.io/assets/social-apps.jpg">
 <meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.svg">
 <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/icons.css?v=20260714"><link rel="stylesheet" href="/css/community.css?v=20261103-compact">
+<link rel="stylesheet" href="/css/icons.css?v=20260714"><link rel="stylesheet" href="/css/community.css?v=20261113-apps-layout">
 <link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr">
 <link rel="stylesheet" href="/css/compact-footer.css?v=20261103-floating">
 <link rel="stylesheet" href="/css/site-shell.css?v=20261011vi">
@@ -20,8 +20,9 @@
 <body class="site-page" data-page-kind="product">
 <a class="skip-link" href="#main" data-copy="skip">Skip to content</a>
 <header class="site-header"><div class="site-shell-inner">
-  <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a><nav class="site-nav" aria-label="Site"><a href="/apps/" data-site-nav="apps">Apps</a><a href="/community/" data-site-nav="community">Community</a><a href="/contact/" data-site-nav="contact">Contact</a></nav>
+  <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a><nav class="site-nav" aria-label="Site"><a href="/apps/" data-site-nav="apps">Apps</a><a href="/community/" data-site-nav="community">Community</a></nav>
   <div class="controls">
+    <span id="supportSlot"></span>
     <div class="locale-switch" role="group" aria-label="Display language">
       <button type="button" data-lang="en" aria-label="English" aria-pressed="true">EN</button>
       <button type="button" data-lang="vi" aria-label="Tiếng Việt" aria-pressed="false">VN</button>
@@ -64,8 +65,10 @@
   </table></div>
 </figure></section>
 <section class="section" id="merged">
-  <h2 data-copy="mergedTitle">Merged upstream</h2>
-  <p data-copy="mergedIntro">Direct merges in morluto/rea, a project for reverse engineering.</p>
+  <div class="group-heading">
+    <h2><span data-copy="mergedTitle">Merged upstream</span> <span class="count">5</span></h2>
+    <p data-copy="mergedIntro">Direct merges in morluto/rea, a project for reverse engineering.</p>
+  </div>
   <div class="grid">
     <article id="pr-1533">
       <span data-copy="pr1533Tag" class="tag">WASM · Tooling</span>
@@ -95,8 +98,10 @@
   </div>
 </section>
 <section class="section" id="other">
-  <h2 data-copy="otherTitle">Other direct merges</h2>
-  <p data-copy="otherIntro">Accepted changes in machine learning, compilers, privacy, media transport and developer tools.</p>
+  <div class="group-heading">
+    <h2><span data-copy="otherTitle">Other direct merges</span> <span class="count">6</span></h2>
+    <p data-copy="otherIntro">Accepted changes in machine learning, compilers, privacy, media transport and developer tools.</p>
+  </div>
   <div class="grid">
     <article id="pr-1379">
       <span data-copy="pr1379Tag" class="tag">Chemprop · Machine learning</span>
@@ -131,8 +136,10 @@
   </div>
 </section>
 <section class="section" id="integrated">
-  <h2 data-copy="integratedTitle">Integrated through upstream work</h2>
-  <p data-copy="integratedIntro">Maintainers integrated these changes through other pull requests and preserved authorship.</p>
+  <div class="group-heading">
+    <h2><span data-copy="integratedTitle">Integrated through upstream work</span> <span class="count">3</span></h2>
+    <p data-copy="integratedIntro">Maintainers integrated these changes through other pull requests and preserved authorship.</p>
+  </div>
   <div class="grid">
     <article id="pr-2256">
       <span data-copy="pr2256Tag" class="tag">REA · Coauthor credit</span>
@@ -155,8 +162,10 @@
   </div>
 </section>
 <section class="section" id="engineering-decisions">
-  <h2 data-copy="decisionsTitle">Engineering decisions and trade-offs</h2>
-  <p data-copy="decisionsIntro">Open a case to read the problem, the implementation choice and its limits. Each note is based on the public PR record.</p>
+  <div class="group-heading">
+    <h2><span data-copy="decisionsTitle">Engineering decisions and trade-offs</span></h2>
+    <p data-copy="decisionsIntro">Open a case to read the problem, the implementation choice and its limits. Each note is based on the public PR record.</p>
+  </div>
   <div class="decisions">
     <details>
       <summary><span data-copy="pr2214NoteTag" class="tag">REA #2214 · Data contracts</span> <span data-copy="pr2214NoteTitle">Make coverage a typed fact, not a diagnostic string</span></summary>
@@ -353,8 +362,10 @@
   </div>
 </section>
 <section class="section" id="remaining-decisions">
-  <h2 data-copy="moreNotesTitle">More engineering decisions</h2>
-  <p data-copy="moreNotesIntro">Six more cases cover binary inspection, CI, identifier validation, workflow portability and documentation.</p>
+  <div class="group-heading">
+    <h2><span data-copy="moreNotesTitle">More engineering decisions</span></h2>
+    <p data-copy="moreNotesIntro">Six more cases cover binary inspection, CI, identifier validation, workflow portability and documentation.</p>
+  </div>
   <div class="decisions">
     <details>
       <summary><span data-copy="pr1482NoteTag" class="tag">REA #1482 · PE resources</span> <span data-copy="pr1482NoteTitle">Expose exact resource identities without decoding payloads</span></summary>
@@ -503,8 +514,10 @@
   </div>
 </section>
 <section class="section" id="approach">
-  <h2 data-copy="approach">How I contribute</h2>
-  <p data-copy="approachText">I work on the reliability of existing systems. I preserve information at its source, validate it at system boundaries, and add regression tests where a claim can be checked. I keep changes small enough to review and document the limits of the evidence.</p>
+  <div class="group-heading">
+    <h2><span data-copy="approach">How I contribute</span></h2>
+    <p data-copy="approachText">I work on the reliability of existing systems. I preserve information at its source, validate it at system boundaries, and add regression tests where a claim can be checked. I keep changes small enough to review and document the limits of the evidence.</p>
+  </div>
   <p class="caption" data-copy="policy">These figures cover the PRs listed here. A direct merge is recorded by GitHub. Integration requires confirmation from a maintainer and preserved authorship. Acknowledgments, direct commits, reviews and discussions are outside this count.</p>
   <p class="caption" data-copy="thanks">Credit belongs to the upstream maintainers and fellow contributors.</p>
 </section>
