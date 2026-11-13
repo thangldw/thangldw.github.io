@@ -3,6 +3,7 @@
 import { spawn, execFileSync } from 'node:child_process';
 import { once } from 'node:events';
 import { mkdtemp, rm, readFile, writeFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
@@ -165,7 +166,9 @@ try {
     if (!html.includes('/js/support-dialog.js?v=20261106-i18n') || !html.includes('/css/support-dialog.css?v=20261105-qr')) throw Error(`Missing shared version: ${file}`);
     routes.push('/'+file);
   }
-  routes.push('/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html','/bjt/workspace.html');
+  // These routes are served by other repositories; they only exist on the live origin.
+  const external = ['/bizroll/','/neon-glider/','/kakeflow/','/kakeflow/app/','/macinity/','/macinity/guide.html','/macinity/privacy.html','/igo/','/igo/train.html','/igo/review.html','/bjt/workspace.html'];
+  routes.push(...external.filter(r => process.env.SITE_ORIGIN || existsSync(resolve(ROOT, r.split('/')[1]))));
   const labels={en:'Fuel my next build',vi:'Tiếp sức cho dự án mới',ja:'次の開発を応援する',zh:'支持我的下一个项目'};
   const headings={en:['Found this useful? Fuel my next build.','Global','Vietnam'],vi:['Bạn thấy hữu ích? Tiếp sức cho dự án mới.','Quốc tế','Việt Nam'],ja:['役に立ちましたか？次の開発を応援する。','海外から','ベトナム国内'],zh:['觉得有用？支持我的下一个项目。','国际','越南']};
   const report=[];
