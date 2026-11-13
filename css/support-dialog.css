@@ -89,10 +89,33 @@ body.support-dialog-open { overflow: hidden; }
 
 /* Legacy app bundles hide support; the shared entry must remain available. */
 body button.support-floating-trigger[aria-controls="supportDialog"] { display: inline-flex !important; }
-/* Phone placement: in flow after the footer, never over content. */
-body button.support-floating-trigger.support-flow-trigger[aria-controls="supportDialog"] {
-  position: static;
-  display: flex !important;
-  width: fit-content;
-  margin: var(--space-8) auto max(var(--space-16), env(safe-area-inset-bottom));
+/* Header/sidebar placement: same trigger, sized as a control. */
+.support-floating-trigger.support-inline-trigger {
+  min-height: var(--control-size, 36px);
+  padding: var(--space-6, 6px) var(--space-12, 12px);
+}
+@media (pointer: coarse) {
+  .support-floating-trigger.support-inline-trigger { min-height: var(--control-size-touch, 44px); }
+}
+/* Phones: compact icon button fixed to the corner; the label stays for assistive tech. */
+body button.support-floating-trigger.support-compact-trigger[aria-controls="supportDialog"] {
+  position: fixed;
+  right: max(var(--space-16, 16px), env(safe-area-inset-right));
+  bottom: max(var(--space-16, 16px), env(safe-area-inset-bottom));
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-size-touch, 44px);
+  height: var(--control-size-touch, 44px);
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+}
+.support-compact-trigger > span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap;
+}
+/* Keep the corner button clear of the last line of the page. */
+body:has(> .support-compact-trigger) > .compact-footer {
+  padding-bottom: calc(var(--space-8, 8px) + var(--control-size-touch, 44px));
 }
