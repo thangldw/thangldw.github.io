@@ -141,6 +141,7 @@ textarea {
 .site-theme-controls {
   display: flex;
   align-items: center;
+  gap: var(--space-12);
 }
 
 .site-theme-toggle {
