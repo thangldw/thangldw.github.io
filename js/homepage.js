@@ -125,10 +125,6 @@ function renderLocale() {
  localeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.lang===locale)));
  const motto = document.querySelector('.motto');
  motto.replaceChildren(document.createTextNode(t.motto[0]),document.createElement('br'),document.createTextNode(t.motto[1]));
- document.querySelectorAll('.roles-grid article').forEach((article,index)=>{
-  article.querySelector('h3').textContent=t.roles[index][0];
-  article.querySelector('p').textContent=t.roles[index][1];
- });
  text('.contact h2',t.work);
  text('.contact p',t.invitation);
  document.querySelectorAll('[data-contact-label]').forEach(link => {

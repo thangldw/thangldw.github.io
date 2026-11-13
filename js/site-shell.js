@@ -30,10 +30,10 @@
   }
 
   var navLabels = {
-    en: { apps: "Apps", community: "Community", contact: "Contact", nav: "Site" },
-    vi: { apps: "Ứng dụng", community: "Cộng đồng", contact: "Liên hệ", nav: "Điều hướng trang" },
-    ja: { apps: "アプリ", community: "コミュニティ", contact: "お問い合わせ", nav: "サイト内ナビゲーション" },
-    zh: { apps: "应用", community: "社区", contact: "联系", nav: "站点导航" }
+    en: { apps: "Apps", community: "Community", nav: "Site" },
+    vi: { apps: "Ứng dụng", community: "Cộng đồng", nav: "Điều hướng trang" },
+    ja: { apps: "アプリ", community: "コミュニティ", nav: "サイト内ナビゲーション" },
+    zh: { apps: "应用", community: "社区", nav: "站点导航" }
   };
 
   function syncSiteNav() {
