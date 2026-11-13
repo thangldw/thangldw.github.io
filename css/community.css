@@ -2,6 +2,8 @@
 * { box-sizing: border-box; }
 body { font-size: var(--text-body); line-height: var(--leading-body); }
 main a { color: var(--color-accent); text-underline-offset: .2em; }
+/* Inline padding enlarges the pointer target to 24px without moving text. */
+main a:not(.ui-button) { padding-block: var(--space-4); }
 main a:focus-visible, summary:focus-visible {
   outline: var(--focus-width) solid var(--color-accent);
   outline-offset: var(--focus-offset);

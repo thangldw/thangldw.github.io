@@ -29,6 +29,31 @@
     if (icon) icon.className = dark ? "fa-solid fa-sun" : "fa-solid fa-moon";
   }
 
+  var navLabels = {
+    en: { apps: "Apps", community: "Community", contact: "Contact", nav: "Site" },
+    vi: { apps: "Ứng dụng", community: "Cộng đồng", contact: "Liên hệ", nav: "Điều hướng trang" },
+    ja: { apps: "アプリ", community: "コミュニティ", contact: "お問い合わせ", nav: "サイト内ナビゲーション" },
+    zh: { apps: "应用", community: "社区", contact: "联系", nav: "站点导航" }
+  };
+
+  function syncSiteNav() {
+    var copy = navLabels[root.lang.split("-")[0]] || navLabels.en;
+    var path = location.pathname.replace(/index\.html$/, "");
+    document.querySelectorAll(".site-nav").forEach(function (nav) {
+      if (nav.getAttribute("aria-label") !== copy.nav) nav.setAttribute("aria-label", copy.nav);
+    });
+    document.querySelectorAll(".site-nav [data-site-nav]").forEach(function (link) {
+      var label = copy[link.dataset.siteNav];
+      // Write only on change: this runs from a subtree MutationObserver.
+      if (label && link.textContent !== label) link.textContent = label;
+      var current = link.getAttribute("href") === path;
+      if (current !== (link.getAttribute("aria-current") === "page")) {
+        if (current) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      }
+    });
+  }
+
   function setTheme(theme, button) {
     root.dataset.theme = theme;
     try {
@@ -41,6 +66,7 @@
   }
 
   function bindThemeControl() {
+    syncSiteNav();
     var button = document.getElementById("themeToggle");
     if (!button) return;
     syncThemeButton(button);

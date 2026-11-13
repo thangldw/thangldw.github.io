@@ -14,9 +14,6 @@
     if (!Array.isArray(project.tags)) {
       throw new TypeError('Project ' + project.id + ' must provide a tags array.');
     }
-    if (project.caseStudyHref !== undefined && (typeof project.caseStudyHref !== 'string' || !project.caseStudyHref.startsWith('/case-studies/'))) {
-      throw new TypeError('Project ' + project.id + ' has an invalid caseStudyHref.');
-    }
     return project;
   }
 
