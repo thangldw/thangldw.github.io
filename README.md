@@ -41,10 +41,9 @@ flowchart LR
 | `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
-| `/case-studies/{flagship}/` | Recruiter-facing evidence for three flagship projects | Route-local semantic HTML and shared case-study styles |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-Kotonari (`/kotonari/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
+Kotonari (`/kotonari/`), Claude Cert Prep (`https://claude.cert-apps.workers.dev/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
 
@@ -62,7 +61,6 @@ thangldw.github.io/
 │   ├── index.html
 │   ├── japan-pr-guide/       # Redirect to /japan-pr-guide/
 ├── japan-pr-guide/           # Generated Japan PR Guide app
-├── case-studies/              # Three static flagship evidence narratives
 ├── assets/                    # Social images and local fonts
 │   └── fonts/licenses/        # Upstream font notices and provenance
 ├── css/                       # Tokens, shared shell, and route styles
@@ -183,7 +181,6 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 | `/` | Portfolio và các dự án theo thứ tự tên | Root HTML và catalog project dùng chung |
 | `/apps/` | Danh mục ứng dụng có search/filter | `js/projects-data.json` |
 | `/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
-| `/case-studies/{flagship}/` | Bằng chứng recruiter-facing cho ba flagship | Semantic HTML theo route và CSS dùng chung |
 | `/404.html` | Fallback của GitHub Pages | Source repository |
 
 Mọi route trong sitemap phải có canonical, description, Open Graph và social image hợp lệ khi cần.
@@ -240,10 +237,9 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | `/` | Portfolio とタイトル順のプロジェクト | Root HTML と shared project catalog |
 | `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
 | `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
-| `/case-studies/{flagship}/` | 3 flagship の recruiter-facing evidence | Route-local semantic HTML と shared CSS |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-Kotonari (`/kotonari/`), Claude Cert Prep (`/claude-cert/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
+Kotonari (`/kotonari/`), Claude Cert Prep (`https://claude.cert-apps.workers.dev/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
 

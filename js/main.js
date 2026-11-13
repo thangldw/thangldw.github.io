@@ -64,8 +64,8 @@
       title: 'RAGOps',
       description: 'Evaluate RAG and agent releases against an accepted baseline, detect regressions, and preserve the evidence behind a decision.',
       purpose: 'Turn an ambiguous AI request into a defensible release decision with explicit trade-offs and open questions.',
-      href: '/case-studies/ragops/',
-      action: 'Read case study'
+      href: '/ragops/',
+      action: 'View project'
     }
   };
 

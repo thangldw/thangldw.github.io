@@ -264,6 +264,10 @@ body.content-page .content-section h2 {
   font-size: clamp(24px, 3vw, 32px) !important;
 }
 
+body.content-page .content-section > .content-grid:first-child {
+  margin-top: 0;
+}
+
 body.content-page .content-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -279,7 +283,7 @@ body.content-page .content-card {
   background: var(--portfolio-surface-raised);
 }
 
-body.content-page .content-card h3 {
+body.content-page .content-card :is(h2, h3) {
   margin: 0 0 8px;
   font-size: 18px !important;
 }

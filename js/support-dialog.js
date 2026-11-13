@@ -115,6 +115,19 @@
       document.body.appendChild(trigger);
     }
 
+    // On phones a fixed or header trigger covers content, so it sits in normal flow after the footer.
+    if (!customTriggers.length && typeof window.matchMedia === "function") {
+      var narrow = window.matchMedia("(max-width: 720px)");
+      var placeTrigger = function () {
+        var home = narrow.matches || !slot ? document.body : slot;
+        trigger.classList.toggle("support-inline-trigger", !narrow.matches && Boolean(slot));
+        trigger.classList.toggle("support-flow-trigger", narrow.matches);
+        if (trigger.parentElement !== home) home.appendChild(trigger);
+      };
+      placeTrigger();
+      narrow.addEventListener("change", placeTrigger);
+    }
+
     var dialog = document.getElementById("supportDialog");
     var closeButton = document.getElementById("supportClose");
     syncSupportLanguage();

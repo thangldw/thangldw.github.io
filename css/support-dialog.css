@@ -89,3 +89,10 @@ body.support-dialog-open { overflow: hidden; }
 
 /* Legacy app bundles hide support; the shared entry must remain available. */
 body button.support-floating-trigger[aria-controls="supportDialog"] { display: inline-flex !important; }
+/* Phone placement: in flow after the footer, never over content. */
+body button.support-floating-trigger.support-flow-trigger[aria-controls="supportDialog"] {
+  position: static;
+  display: flex !important;
+  width: fit-content;
+  margin: var(--space-8) auto max(var(--space-16), env(safe-area-inset-bottom));
+}

@@ -10,13 +10,13 @@
 | Icons | Creative Commons Attribution 4.0 International |
 | CSS/code | MIT |
 | Local use | Self-hosted subset declared by `css/icons.css` |
-| Subsetting recipe | Not present in the repository; provenance is partial |
+| Subsetting recipe | Solid: `fontTools.subset` over upstream `fa-solid-900.woff2` (npm `@fortawesome/fontawesome-free@6.4.2`) with the code points declared in `css/icons.css`, no layout features, WOFF2 output. Brands: not present in the repository; provenance is partial |
 
 Local file hashes:
 
 | File | SHA-256 |
 | --- | --- |
-| `fa-solid-subset.woff2` | `3b01e3e23a3a56690cfdc745eb715c014635930f14d9d6d5daf6be56f492e42b` |
+| `fa-solid-subset.woff2` | `628ec62d92059067543feda70a4e14a97da1fd894ab82219820db56c5cf9d773` |
 | `fa-brands-subset.woff2` | `cb0823497afcbe1795d269b1bbb189889136eddce9d69f6bef1e37de526372b7` |
 
 `OFL.txt` preserves the font license and reserved font name. `LICENSE.txt`

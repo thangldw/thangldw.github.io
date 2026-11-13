@@ -38,6 +38,8 @@ function syncTheme() {
  themeButton.setAttribute('aria-label', light ? locales[locale].dark : locales[locale].light);
 }
 const visibleCount = () => Math.max(1, Number.parseInt(getComputedStyle(rail).getPropertyValue('--visible-projects'), 10) || 3);
+// Phones show a static stacked list: no rotation, no carousel controls.
+const stacked = () => getComputedStyle(rail).getPropertyValue('--rail-columns').trim() === '1';
 const items = () => projects.length ? projects : fallbackProjects;
 const rotating = () => timer !== null;
 function renderProjects() {
@@ -103,13 +105,14 @@ function stop() {
  syncToggle();
 }
 function play() {
- if (timer !== null || userPaused || hovered || focused || reduceMotion.matches || !projects.length || projects.length <= visibleCount()) return syncToggle();
+ if (timer !== null || userPaused || hovered || focused || stacked() || reduceMotion.matches || !projects.length || projects.length <= visibleCount()) return syncToggle();
  timer = setInterval(() => { if (!document.hidden) move(1); }, ROTATE_MS);
  syncToggle();
 }
 function updateControls() {
- controls.hidden = !projects.length || projects.length <= visibleCount();
+ controls.hidden = !projects.length || projects.length <= visibleCount() || stacked();
  if (controls.hidden) stop();
+ else play();
 }
 function renderLocale() {
  const t = locales[locale];
@@ -122,7 +125,6 @@ function renderLocale() {
  localeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.lang===locale)));
  const motto = document.querySelector('.motto');
  motto.replaceChildren(document.createTextNode(t.motto[0]),document.createElement('br'),document.createTextNode(t.motto[1]));
- text('.languages-section h2',t.languages);
  text('.roles .section-title',t.what);
  document.querySelectorAll('.roles-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.roles[index][0];
@@ -147,6 +149,7 @@ function renderLocale() {
  details[0].querySelector('dd').textContent=t.sectorText;
  details[1].querySelector('dt').textContent=t.contribution;
  details[1].querySelector('dd').textContent=t.contributionText;
+ details[2].querySelector('dt').textContent=t.languages;
  text('.process .section-title',t.how);
  document.querySelectorAll('.process-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.process[index][0];

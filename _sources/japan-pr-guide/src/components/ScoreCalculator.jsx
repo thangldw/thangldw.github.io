@@ -80,13 +80,6 @@ const iconByFactor = {
 };
 
 export function CalculatorHeader() {
-  const [themeIcon, setThemeIcon] = useState("☾");
-  const syncThemeIcon = () => setThemeIcon(document.documentElement.dataset.theme === "dark" ? "☀" : "☾");
-  useEffect(() => {
-    syncThemeIcon();
-    document.addEventListener("themechange", syncThemeIcon);
-    return () => document.removeEventListener("themechange", syncThemeIcon);
-  }, []);
   return (
     <header className="app-header">
       <div className="app-owner-group"><a className="site-brand app-owner-brand" href="/" aria-label="Trang chủ Thang Luu"><span className="site-brand-mark" aria-hidden="true">t:&gt;</span><span aria-hidden="true">thang<span className="site-brand-dot">.</span></span></a>
@@ -95,7 +88,7 @@ export function CalculatorHeader() {
       </a></div>
       <div className="header-actions">
         <a href="#official-updates">Official sources <ArrowSquareOut size={15} /></a>
-        <button id="themeToggle" className="ui-icon-button" type="button" aria-label="Switch to dark theme" onClick={syncThemeIcon}>{themeIcon}</button>
+        <button id="themeToggle" className="site-theme-toggle" type="button" aria-label="Switch to dark theme"><i className="fa-solid fa-moon" aria-hidden="true" /></button>
       </div>
     </header>
   );
