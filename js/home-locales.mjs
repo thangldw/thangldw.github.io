@@ -1,7 +1,7 @@
 export const locales = {
  en: {
   catalogFailed: 'The project list could not be loaded. Reload this page to try again.', languageName: 'English', languageSwitch: 'Display language', skip: 'Skip to content', home: 'Thang Luu home', dark: 'Switch to dark theme', light: 'Switch to light theme',
-  motto: ['Crafted with care', 'stay steadfast, stay free'], what: 'What I do', languages: 'Languages', work: 'Work with me',
+  motto: ['Crafted with care', 'stay steadfast, stay free'], what: 'What I do', languages: 'Working languages', work: 'Work with me',
   roles: [['Forward Deployed Engineer','Ship tools that solve real problems in real environments.'],['Data & AI Engineer','Turn data into insights and systems teams can act on.'],['Technical Lead','Lead by example. Build with clarity. Unlock team impact.']],
   invitation: 'AI, data engineering, and outsourced technical delivery through independent FDE engagements.', discuss: 'Discuss a project', support: 'Fuel my next build', about: 'About',
   projectEmail: 'Discuss a project in Gmail', contributions: 'Open-source contributions',
@@ -14,7 +14,7 @@ export const locales = {
  },
  vi: {
   catalogFailed: 'Không tải được danh sách dự án. Hãy tải lại trang để thử lại.', languageName: 'Tiếng Việt', languageSwitch: 'Ngôn ngữ hiển thị', skip: 'Đến nội dung chính', home: 'Trang chủ Thang Luu', dark: 'Chuyển sang giao diện tối', light: 'Chuyển sang giao diện sáng',
-  motto: ['Làm việc bằng sự tận tâm', 'vững vàng, tự do'], what: 'Công việc của tôi', languages: 'Ngôn ngữ', work: 'Hợp tác cùng tôi',
+  motto: ['Làm việc bằng sự tận tâm', 'vững vàng, tự do'], what: 'Công việc của tôi', languages: 'Ngôn ngữ làm việc', work: 'Hợp tác cùng tôi',
   roles: [['Forward Deployed Engineer','Xây dựng công cụ giải quyết vấn đề thực tế trong môi trường thực tế.'],['Kỹ sư Data & AI','Biến dữ liệu thành hiểu biết và hệ thống giúp đội ngũ hành động.'],['Technical Lead','Dẫn dắt bằng hành động. Làm rõ hướng đi, giúp đội ngũ tạo tác động.']],
   invitation: 'Nhận dự án FDE độc lập về AI, kỹ thuật dữ liệu và triển khai kỹ thuật thuê ngoài.', discuss: 'Trao đổi về dự án', support: 'Tiếp sức cho dự án mới', about: 'Giới thiệu',
   projectEmail: 'Trao đổi về dự án qua Gmail', contributions: 'Đóng góp cho cộng đồng mã nguồn mở',

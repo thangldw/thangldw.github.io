@@ -22,7 +22,6 @@ ANALYTICS_SCRIPT = "/js/analytics.js"
 CONTACT_EMAIL = "thangldw@gmail.com"
 APP_CATALOG_PAGE = ROOT / "apps/index.html"
 APP_REDIRECTS = {
-    "ccar-f/index.html": "/claude-cert/",
     "apps/japan-pr-guide/index.html": "/japan-pr-guide/",
     "apps/maintainer-defense/index.html": "/awesome-maintainer-defense/",
     "apps/proofline/index.html": "/proofline/",
@@ -45,19 +44,6 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "bjt": 8,
 }
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}
-CASE_STUDY_ROUTES = {
-    "ragops": "/case-studies/ragops/",
-    "proofline": "/case-studies/proofline/",
-    "kakeflow": "/case-studies/kakeflow/",
-}
-CASE_STUDY_SECTION_IDS = {
-    "production-problem",
-    "architecture-tradeoffs",
-    "benchmark-failure",
-    "demo-under-five",
-    "ownership-leadership",
-    "limitations-evidence",
-}
 SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20261011vi"
 SITE_FONT_ASSET = Path("assets/fonts/InterVariable.woff2")
 SITE_FONT_LICENSE = Path("assets/fonts/Inter-LICENSE.txt")
@@ -196,21 +182,6 @@ def main() -> int:
                     errors.append(f"js/projects-data.json: entry {index} tags must be an array")
                 if isinstance(project.get("id"), str):
                     identifiers.append(project["id"])
-                case_study_href = project.get("caseStudyHref")
-                if case_study_href is not None:
-                    if not isinstance(case_study_href, str) or not case_study_href.startswith(
-                        "/case-studies/"
-                    ):
-                        errors.append(
-                            f"js/projects-data.json: entry {index} has invalid caseStudyHref"
-                        )
-                    else:
-                        target = local_target(catalog_path, case_study_href)
-                        if target is None or not target.is_file():
-                            errors.append(
-                                "js/projects-data.json: broken caseStudyHref "
-                                f"{case_study_href}"
-                            )
             duplicates = sorted(
                 identifier for identifier, count in Counter(identifiers).items() if count > 1
             )
@@ -251,13 +222,6 @@ def main() -> int:
                 )
             if sum(project_id == "macinity" for project_id in project_by_id) != 1:
                 errors.append("js/projects-data.json: Macinity must appear exactly once")
-            for project_id, expected_href in CASE_STUDY_ROUTES.items():
-                project = project_by_id.get(project_id)
-                if not isinstance(project, dict) or project.get("caseStudyHref") != expected_href:
-                    errors.append(
-                        "js/projects-data.json: "
-                        f"{project_id} caseStudyHref must be {expected_href}"
-                    )
             kakeflow = next(
                 (project for project in projects if project.get("id") == "kakeflow"),
                 None,
@@ -359,19 +323,6 @@ def main() -> int:
         elif f'location.replace("{destination}" + location.search + location.hash)' not in page.read_text():
             errors.append(f"{relative}: redirect must preserve query and hash")
 
-    for route in CASE_STUDY_ROUTES.values():
-        page_file = ROOT / route.lstrip("/") / "index.html"
-        parser = parsed_pages.get(page_file)
-        if parser is None:
-            errors.append(f"{page_file.relative_to(ROOT)}: required case study is missing")
-            continue
-        missing_sections = sorted(CASE_STUDY_SECTION_IDS - set(parser.ids))
-        if missing_sections:
-            errors.append(
-                f"{page_file.relative_to(ROOT)}: missing case-study sections: "
-                + ", ".join(missing_sections)
-            )
-
     contact_landing = ROOT / "contact/index.html"
     for page in (ROOT / "index.html", contact_landing):
         contact_links = (urlsplit(ref) for ref in parsed_pages.get(page, PageParser()).references)
@@ -379,7 +330,7 @@ def main() -> int:
                    and parse_qs(link.query).get('view') == ['cm']
                    and parse_qs(link.query).get('to') == [CONTACT_EMAIL] for link in contact_links):
             errors.append(f"{page.relative_to(ROOT)}: missing Gmail web compose link for the portfolio owner")
-    for contact_page in [contact_landing, *(ROOT / route.lstrip('/') / 'index.html' for route in CASE_STUDY_ROUTES.values())]:
+    for contact_page in [contact_landing]:
         references = parsed_pages.get(contact_page, PageParser()).references
         if not any(urlsplit(reference).scheme == 'mailto' and urlsplit(reference).path == CONTACT_EMAIL for reference in references):
             errors.append(f"{contact_page.relative_to(ROOT)}: missing portable email contact")
@@ -387,11 +338,6 @@ def main() -> int:
     sitemap_root = ET.parse(ROOT / "sitemap.xml").getroot()
     namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
     sitemap_urls = {node.text for node in sitemap_root.findall("s:url/s:loc", namespace)}
-
-    for route in CASE_STUDY_ROUTES.values():
-        expected_url = SITE_URL + route
-        if expected_url not in sitemap_urls:
-            errors.append(f"sitemap.xml: missing case-study URL {expected_url}")
 
     required_og = {"og:type", "og:title", "og:description", "og:url"}
     for absolute in sorted(sitemap_urls):

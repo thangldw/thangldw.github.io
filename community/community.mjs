@@ -38,8 +38,3 @@ function render(language) {
 
 bindLocaleSwitch(render, { updateUrl: true });
 
-function syncThemeIcon() {
-  document.getElementById('themeToggle').textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾';
-}
-document.addEventListener('themechange', syncThemeIcon);
-syncThemeIcon();

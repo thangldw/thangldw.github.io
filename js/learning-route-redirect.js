@@ -1,5 +1,5 @@
 const destinations = {
-  "ccar-f": "/claude-cert/"
+  "ccar-f": "https://claude.cert-apps.workers.dev/"
 };
 const prefix = ['/cert/', '/apps/cert/'].find(value => location.pathname.startsWith(value));
 if (prefix || ['/cert', '/apps/cert'].includes(location.pathname)) {
@@ -8,6 +8,6 @@ if (prefix || ['/cert', '/apps/cert'].includes(location.pathname)) {
   const target = new URL(destinations[suffix], location.origin);
   new URLSearchParams(location.search).forEach((value, key) => target.searchParams.set(key, value));
   target.hash = location.hash;
-  location.replace(target.pathname + target.search + target.hash);
+  location.replace(target.href);
  }
 }
