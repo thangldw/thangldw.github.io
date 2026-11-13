@@ -142,6 +142,8 @@ Self-hosted font provenance and upstream license texts live under `assets/fonts/
 
 ### Deployment and rollback
 
+GitHub Pages publishes the `master` branch root directly (Settings → Pages → Source: *Deploy from a branch*); `.nojekyll` serves the tree as-is. There is no GitHub Actions workflow in this repository, so nothing validates a push remotely: run `python3 scripts/validate_site.py` before pushing to `master`.
+
 1. Start from a clean working tree and review all generated changes.
 2. Run every relevant quality gate.
 3. Commit a focused change and push `master`.
