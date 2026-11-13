@@ -72,8 +72,8 @@ Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `-
 | --- | --- | --- |
 | Colors, type, spacing, shape, control/focus values | `css/tokens.css` | All public routes through the shared shell |
 | Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, generated Cert via the compatibility adapter |
-| Site navigation (Apps · Community · Contact) | `.site-nav` in `css/site-shell.css`; labels and `aria-current` from `js/site-shell.js` | Apps, Community, Contact, product introductions, 404 |
-| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, locale, contact, project carousel controls; reusable on subsequent screens |
+| Site navigation (Apps · Community) | `.site-nav` in `css/site-shell.css`; labels and `aria-current` from `js/site-shell.js` | Apps, Community, product introductions, 404 |
+| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, locale, project carousel controls; reusable on subsequent screens |
 | Floating support and overlay | `css/support-dialog.css`, `js/support-dialog.js` | Home and existing public route integrations |
 
 The logo never adopts link underline or changes its geometry on hover. Controls have hover, pressed, focus-visible and disabled recipes; keyboard/ARIA semantics remain the responsibility of runtime behavior. Touch controls are at least 44px high. Navigation links retain link semantics. Every theme toggle is `#themeToggle.site-theme-toggle` with a Font Awesome moon/sun icon that `js/site-shell.js` swaps; routes do not render their own glyph.
