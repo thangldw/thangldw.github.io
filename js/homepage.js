@@ -125,7 +125,6 @@ function renderLocale() {
  localeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.lang===locale)));
  const motto = document.querySelector('.motto');
  motto.replaceChildren(document.createTextNode(t.motto[0]),document.createElement('br'),document.createTextNode(t.motto[1]));
- text('.roles .section-title',t.what);
  document.querySelectorAll('.roles-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.roles[index][0];
   article.querySelector('p').textContent=t.roles[index][1];
@@ -150,7 +149,6 @@ function renderLocale() {
  details[1].querySelector('dt').textContent=t.contribution;
  details[1].querySelector('dd').textContent=t.contributionText;
  details[2].querySelector('dt').textContent=t.languages;
- text('.process .section-title',t.how);
  document.querySelectorAll('.process-grid article').forEach((article,index)=>{
   article.querySelector('h3').textContent=t.process[index][0];
   article.querySelector('p').textContent=t.process[index][1];
