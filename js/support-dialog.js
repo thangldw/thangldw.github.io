@@ -105,7 +105,10 @@
         function placeSupport() {
           var host = document.querySelector(hostSelector);
           slot.hidden = !host;
-          if (host && slot.parentElement !== host) host.appendChild(slot);
+          if (host && slot.parentElement !== host) {
+            if (slot.getAttribute('data-support-position') === 'start') host.insertBefore(slot, host.firstChild);
+            else host.appendChild(slot);
+          }
         }
         placeSupport();
         new MutationObserver(placeSupport).observe(document.body, { childList: true, subtree: true });
@@ -115,13 +118,20 @@
       document.body.appendChild(trigger);
     }
 
-    // On phones a fixed or header trigger covers content, so it sits in normal flow after the footer.
-    if (!customTriggers.length && typeof window.matchMedia === "function") {
+    // One trigger everywhere. With a #supportSlot it sits in the header (or sidebar) at full
+    // size; on phones it becomes a compact icon button fixed to the corner. Pages without a
+    // slot keep the legacy floating button.
+    if (!customTriggers.length && slot && typeof window.matchMedia === "function") {
       var narrow = window.matchMedia("(max-width: 720px)");
+      var heart = '<svg class="support-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 2.8 4.5 6.4 4.5c2 0 3.5 1 4.3 2.4.2.3.6.3.8 0 .8-1.4 2.3-2.4 4.3-2.4 3.6 0 5.5 3.8 4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
       var placeTrigger = function () {
-        var home = narrow.matches || !slot ? document.body : slot;
-        trigger.classList.toggle("support-inline-trigger", !narrow.matches && Boolean(slot));
-        trigger.classList.toggle("support-flow-trigger", narrow.matches);
+        var compact = narrow.matches;
+        trigger.classList.toggle("support-inline-trigger", !compact);
+        trigger.classList.toggle("support-compact-trigger", compact);
+        var icon = trigger.querySelector(".support-icon");
+        if (compact && !icon) trigger.insertAdjacentHTML("afterbegin", heart);
+        else if (!compact && icon) icon.remove();
+        var home = compact ? document.body : slot;
         if (trigger.parentElement !== home) home.appendChild(trigger);
       };
       placeTrigger();
