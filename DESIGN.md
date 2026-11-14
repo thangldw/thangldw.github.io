@@ -81,7 +81,7 @@ The logo never adopts link underline or changes its geometry on hover. Controls 
 Across the shared shell, language selectors, theme toggles and lesson pagination use neutral text on a transparent background in both themes. The selected language has a 1px underline. Hover and press add a neutral fill, and keyboard focus shows an outline.
 
 
-Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_site.py` before release. The design gate checks token/document drift, route literal debt, integration, shared recipes, and contrast. Verify rendered Home/Apps in both themes and mobile as well.
+Before release, check token/document drift, route literal debt, integration, shared recipes, and contrast by hand (the automated validators were removed with `scripts/`). Verify rendered Home/Apps in both themes and mobile as well.
 
 ## Do's and Don'ts
 

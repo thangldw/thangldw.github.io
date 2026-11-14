@@ -2,7 +2,7 @@
 
 ## Approved reference
 
-- Primary desktop: `references/approved-historical-recalculation.png` (1488 x 1058 raster; 1440 x 1024 CSS target).
+- Primary desktop: 1440 x 1024 CSS target (the approved raster, `references/approved-historical-recalculation.png`, was removed from the repository; recover it from git history).
 - The calculator-first screen remains the required entry step, but this reference supersedes the prior result, requirements, and evidence layouts.
 - Product flow: `docs/japan-pr-guide-flow.html`.
 
