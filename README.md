@@ -43,9 +43,9 @@ flowchart LR
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-The Workers study apps ship a self-contained copy of `/404.html`; regenerate it with `python3 scripts/export_standalone_404.py OUTPUT.html` after changing the 404 design and copy the result into each app (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari).
+The Workers study apps ship a self-contained copy of `/404.html` (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari). After changing the 404 design, update each copy by hand; the generator that inlined this site's CSS (`scripts/export_standalone_404.py`) is only in git history.
 
-Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. `scripts/validate_site.py` fails on any `<meta http-equiv="refresh">` page.
+Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly.
 
 The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
@@ -71,20 +71,13 @@ thangldw.github.io/
 │   ├── projects-data.json     # Project metadata source of truth
 │   ├── projects-data.js       # Runtime loader and schema guard
 │   └── shared behavior
-├── scripts/                   # Static audits and browser smoke tests
 ├── robots.txt
 └── sitemap.xml
 ```
 
 ### Local development
 
-Requirements:
-
-- Python 3.10 or later
-- Node.js 22 or later
-- Google Chrome at the standard macOS path, or `CHROME_BIN` pointing to a compatible executable
-
-No dependency installation is required.
+Requirements: Python 3 (for a local static server). No dependency installation is required.
 
 ```bash
 python3 -m http.server 4173
@@ -92,26 +85,9 @@ python3 -m http.server 4173
 
 Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather than opening files directly because runtime JSON loading requires HTTP.
 
-### Quality gates
+### Verification
 
-```bash
-python3 scripts/audit_ui_standards.py
-python3 scripts/validate_design_system.py
-python3 scripts/validate_site.py
-python3 scripts/test_site_audits.py
-node scripts/test_homepage.mjs
-node scripts/test_project_catalog.mjs
-node scripts/smoke_brand.mjs
-node scripts/smoke_product_pages.mjs
-```
-
-| Gate | Coverage |
-| --- | --- |
-| UI audit | Shared shell, design tokens, contrast, accessibility conventions, and prohibited presentation debt |
-| Site validator | HTML parsing, local links, Markdown policy, JSON contracts, analytics, sitemap, canonical and social metadata |
-| Browser smoke suite | Project JSON loading, catalog layout, theme controls, navigation, and responsive behavior |
-
-Tests use isolated temporary servers and Chrome profiles and remove them after completion.
+The validators, audits and smoke tests formerly in `scripts/` were removed; they remain in git history. Before pushing to `master`, serve the site locally and check Home, Apps and any changed route in both themes and at mobile width, and that every link and `js/projects-data.json` entry resolves.
 
 ### Updating projects
 
@@ -120,7 +96,7 @@ Edit only `js/projects-data.json`.
 1. Keep IDs unique and stable.
 2. Provide all required catalog fields and a safe destination URL.
 3. The home page includes all current projects in title order (English collation, numeric titles first). Keep `featured` metadata for other consumers.
-4. Run validation and browser smoke tests.
+4. Check the changed routes locally.
 5. Commit and push.
 
 Home preserves the complete one-page profile, working approach, languages, contact links, and a side-project carousel that shows all `featured` projects in a fresh random order on each load, auto-rotating every 7 s with a pause/resume button (rotation stops on hover, focus, manual navigation, or `prefers-reduced-motion`). The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
@@ -129,11 +105,11 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
-All HTML pages load the shared support assets with cache version `20261105-qr`; the Japan PR Guide exporter preserves this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
+All HTML pages load the shared support assets with cache version `20261105-qr`; the Japan PR Guide exporter preserves this integration.
 
-The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
+The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages.
 
-Home (sidebar) and Apps (header) mount the support trigger inline through `<div id="supportSlot">`, so neither page has a floating button. Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Regenerate that file with `python3 scripts/generate_support_tokens.py` after editing `tokens.css`; the design validator rejects any export that differs from its canonical source.
+Home (sidebar) and Apps (header) mount the support trigger inline through `<div id="supportSlot">`, so neither page has a floating button. Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Keep that file in sync with `tokens.css` by hand; the generator (`scripts/generate_support_tokens.py`) is only in git history.
 
 The support trigger is text-only with a `--color-support` background and `--color-on-support` text (white on `#b83a06`, 5.8:1). The previously used Ko-fi cup asset is retained for cached versions.
 
@@ -141,16 +117,16 @@ The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/suppor
 
 The portfolio home includes an optional Support dialog. Ko-fi uses a local QR image, and Vietnamese wallet support uses the user-supplied `assets/support-shopeepay.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
 
-Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. `scripts/validate_site.py` permits only these durable license documents plus the root README; temporary Markdown reports and QA screenshots must stay outside the repository.
+Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. Keep only these durable license documents plus the root README and `DESIGN.md`; temporary Markdown reports and QA screenshots must stay outside the repository.
 
 ### Deployment and rollback
 
-GitHub Pages publishes the `master` branch root directly (Settings → Pages → Source: *Deploy from a branch*); `.nojekyll` serves the tree as-is. There is no GitHub Actions workflow in this repository, so nothing validates a push remotely: run `python3 scripts/validate_site.py` before pushing to `master`. After merging, confirm the deploy in the Actions tab ("pages build and deployment") or check the `last-modified` header of `https://thangldw.github.io/`; changing the Pages source does not build by itself, only a push to `master` does.
+GitHub Pages publishes the `master` branch root directly (Settings → Pages → Source: *Deploy from a branch*); `.nojekyll` serves the tree as-is. There is no GitHub Actions workflow in this repository, so nothing validates a push remotely. After merging, confirm the deploy in the Actions tab ("pages build and deployment") or check the `last-modified` header of `https://thangldw.github.io/`; changing the Pages source does not build by itself, only a push to `master` does.
 
-Because the whole tree is served, internal paths (`_sources/`, `scripts/`, `*.md`) are reachable by URL even though nothing links to them. `robots.txt` disallows them for crawlers, which keeps them out of search indexes but does not restrict access. Making them genuinely private requires deploying a filtered artifact (Pages source *GitHub Actions*) instead of the repository root.
+Because the whole tree is served, internal paths (`_sources/`, `*.md`) are reachable by URL even though nothing links to them. `robots.txt` disallows them for crawlers, which keeps them out of search indexes but does not restrict access. Making them genuinely private requires deploying a filtered artifact (Pages source *GitHub Actions*) instead of the repository root.
 
 1. Start from a clean working tree and review all generated changes.
-2. Run every relevant quality gate.
+2. Check the affected routes locally.
 3. Commit a focused change and push `master`.
 4. Monitor GitHub Pages until its state is `built`.
 5. Verify production HTML, JSON responses, and critical rendered content.
@@ -198,7 +174,7 @@ Mọi route trong sitemap phải có canonical, description, Open Graph và soci
 
 ### Cấu trúc và phát triển local
 
-Dùng cây thư mục ở phần English. Cần Python 3.10+, Node.js 22+ và Chrome. Không cần cài dependency.
+Dùng cây thư mục ở phần English. Cần Python 3. Không cần cài dependency.
 
 ```bash
 python3 -m http.server 4173
@@ -208,11 +184,11 @@ Mở [http://localhost:4173/](http://localhost:4173/). Phải dùng HTTP server 
 
 ### Cổng chất lượng
 
-Chạy UI audit, site validator và browser smoke suite bằng các command trong phần English. Các gate kiểm tra shared shell, token/contrast/accessibility, link và metadata, contract JSON, analytics, sitemap, project loader, theme và responsive layout.
+Các validator và smoke test trước đây trong `scripts/` đã bị xoá (xem git history). Kiểm tra thủ công trang chủ, Apps và route thay đổi ở cả hai theme và mobile.
 
 ### Cập nhật project
 
-Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, giữ `featured` cho các nơi còn sử dụng. Trang chủ sắp xếp theo tên với English collation và numeric ordering. Chạy validation/smoke test và push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
+Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, giữ `featured` cho các nơi còn sử dụng. Trang chủ sắp xếp theo tên với English collation và numeric ordering. Kiểm tra thủ công rồi push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
 
 ### Support và nguồn gốc asset
 
@@ -254,17 +230,15 @@ Sitemap route には canonical、description、Open Graph、必要な social ima
 
 `js/projects-data.json` が project metadata の唯一の source です。Loader が runtime に validation/fetch し、home page と `/apps/` は同じ readiness promise 後に render します。
 
-### Local development と quality gate
+### Local development と verification
 
-English セクションの directory tree を参照してください。Python 3.10+、Node.js 22+、Chrome が必要です。Dependency install は不要です。
+English セクションの directory tree を参照してください。Python 3 が必要です。Dependency install は不要です。
 
 ```bash
 python3 -m http.server 4173
-python3 scripts/audit_ui_standards.py
-python3 scripts/validate_site.py
 ```
 
-JSON runtime loading のため file を直接開かず HTTP server を使います。Quality gate は shared shell、token、contrast、accessibility、link、metadata、JSON contract、analytics、sitemap、catalog loading、theme、responsive behavior を確認します。
+JSON runtime loading のため file を直接開かず HTTP server を使います。以前 `scripts/` にあった validator と smoke test は削除済みです（git history 参照）。Home、Apps、変更した route を両 theme と mobile 幅で手動確認してください。
 
 ### Project の更新
 
@@ -296,9 +270,9 @@ The homepage is the design reference for `/apps/` and the application catalog. M
 
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
 
-Technical standardization is enforced by `scripts/validate_design_system.py`, also invoked by the site validator. It checks light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
+Technical standardization is documented in `DESIGN.md`; the automated design validator formerly in `scripts/` was removed. Light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration are now checked by hand. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
 
-Official CSS entry point: `css/site-shell.css` → `css/tokens.css`. Every public route inherits this foundation; page CSS owns composition. Core token redefinition anywhere in authored `css/` is rejected by the design validation gate. See [mandatory inheritance contract](DESIGN.md#mandatory-inheritance-contract).
+Official CSS entry point: `css/site-shell.css` → `css/tokens.css`. Every public route inherits this foundation; page CSS owns composition. Do not redefine core tokens anywhere in authored `css/`. See [mandatory inheritance contract](DESIGN.md#mandatory-inheritance-contract).
 
 
 
