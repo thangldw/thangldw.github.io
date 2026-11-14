@@ -294,6 +294,64 @@
       "cta": "Open Claude Cert Prep",
       "featured": false,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "gkentei",
+      "title": "G検定 Prep",
+      "description": "Unofficial practice questions for the JDLA G-kentei (Generalist) exam, aligned with the 2024 syllabus, with explanations and optional English, Vietnamese or Chinese translations.",
+      "featuredDescription": "Unofficial G-kentei practice questions on the JDLA 2024 syllabus, with explanations and optional translations.",
+      "catalogDescription": "Prepare for the JDLA G-kentei with original practice questions on the 2024 syllabus, explanations and optional English, Vietnamese or Chinese translations.",
+      "localizedDescriptions": {
+        "vi": "Luyện thi G検定 (JDLA) theo giáo trình 2024 với câu hỏi tự soạn (không chính thức), lời giải và bản dịch tùy chọn.",
+        "ja": "JDLA G検定シラバス2024に沿った学習用の独自問題（非公式）。解説と、英語・ベトナム語・中国語の翻訳表示に対応。",
+        "zh": "按 JDLA G检定 2024 大纲编写的原创练习题（非官方），提供解析和可选的英语、越南语、中文翻译。"
+      },
+      "href": "https://gkentei.cert-apps.workers.dev/",
+      "ariaLabel": "Open G検定 Prep",
+      "icon": "fa-wand-magic-sparkles",
+      "accent": "violet",
+      "status": "Live",
+      "tags": [
+        "G-kentei",
+        "JDLA AI exam",
+        "Japanese",
+        "Multilingual translations"
+      ],
+      "category": "learning",
+      "categoryLabel": "AI certification practice",
+      "cta": "Open G検定 Prep",
+      "featured": true,
+      "featuredOrder": 9,
+      "catalogGroup": "learning"
+    },
+    {
+      "id": "pmp",
+      "title": "PMP Cert Prep",
+      "description": "Practise PMP exam topics across people, process and business environment for predictive, agile and hybrid projects, with answer explanations and optional Vietnamese, Japanese or Chinese subtitles.",
+      "featuredDescription": "PMP practice across people, process and business environment, with explanations and multilingual subtitles.",
+      "catalogDescription": "Study PMP topics across predictive, agile and hybrid projects with answer explanations and optional Vietnamese, Japanese or Chinese subtitles.",
+      "localizedDescriptions": {
+        "vi": "Luyện thi PMP về con người, quy trình và môi trường kinh doanh cho dự án predictive, agile và hybrid, kèm lời giải và phụ đề Việt/Nhật/Trung.",
+        "ja": "PMP試験の練習問題。人・プロセス・ビジネス環境をカバーし、解説とベトナム語・日本語・中国語の字幕に対応。",
+        "zh": "练习 PMP 考试内容，涵盖人员、流程与商业环境，适用于预测型、敏捷和混合项目，提供答案解析与越南语／日语／中文字幕。"
+      },
+      "href": "https://pmp.cert-apps.workers.dev/",
+      "ariaLabel": "Open PMP Cert Prep",
+      "icon": "fa-list-ol",
+      "accent": "blue",
+      "status": "Live",
+      "tags": [
+        "PMP",
+        "Project management",
+        "Explanations & review",
+        "Multilingual subtitles"
+      ],
+      "category": "learning",
+      "categoryLabel": "Project management certification",
+      "cta": "Open PMP Cert Prep",
+      "featured": true,
+      "featuredOrder": 10,
+      "catalogGroup": "learning"
     }
   ],
   "learningCollections": []

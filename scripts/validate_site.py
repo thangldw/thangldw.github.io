@@ -42,6 +42,8 @@ EXPECTED_HOMEPAGE_FEATURED_ORDER = {
     "maintainer-defense": 5,
     "igo": 6,
     "bjt": 8,
+    "gkentei": 9,
+    "pmp": 10,
 }
 RETIRED_PROJECT_IDS = {"diskora", "changeora"}
 SITE_FONT_STYLESHEET = "/css/site-shell.css?v=20261011vi"
