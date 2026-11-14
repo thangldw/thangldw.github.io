@@ -199,7 +199,7 @@
     {
       "id": "kakeflow",
       "title": "KakeFlow",
-      "description": "An open-source, MIT-licensed local-first household finance app for macOS. It turns bank, card, wallet, receipt, spreadsheet, PDF, and securities data into a reviewable ledger with source evidence and reconciliation.",
+      "description": "An open-source, Apache-2.0-licensed local-first household finance app for macOS. It turns bank, card, wallet, receipt, spreadsheet, PDF, and securities data into a reviewable ledger with source evidence and reconciliation.",
       "featuredDescription": "Open-source local-first household finance for macOS, with reviewable reconciliation and source evidence.",
       "href": "https://thangldw.github.io/kakeflow/",
       "ariaLabel": "Open the KakeFlow website",
@@ -209,7 +209,7 @@
       "tags": [
         "Household finance",
         "Local-first",
-        "MIT License",
+        "Apache License 2.0",
         "Tauri · React"
       ],
       "category": "personal-finance",
