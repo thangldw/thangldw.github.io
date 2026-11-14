@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /_sources/
+Disallow: /*.md$
 
 Sitemap: https://thangldw.github.io/sitemap.xml

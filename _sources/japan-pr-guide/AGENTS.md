@@ -8,7 +8,7 @@ When implementing from a selected generated mock, treat that image as the source
 
 ## Approved design contract
 
-- Current source of truth: `references/approved-historical-recalculation.png`.
+- Design references (`references/*.png`) were removed from the repository; recover them from git history if needed.
 - Superseding decision: on 2026-08-18 the user selected the route-specific historical recalculation workspace.
 - Preserve the five-step flow: Calculate score, Review claims, Verify historical score, PR requirements, Application plan.
 - Keep exactly one HSP score for each reference date. Evidence is shown as proof coverage and must never be presented as a second or adjusted score.
