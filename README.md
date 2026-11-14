@@ -43,6 +43,8 @@ flowchart LR
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
+The Workers study apps ship a self-contained copy of `/404.html`; regenerate it with `python3 scripts/export_standalone_404.py OUTPUT.html` after changing the 404 design and copy the result into each app (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari).
+
 Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. `scripts/validate_site.py` fails on any `<meta http-equiv="refresh">` page.
 
 The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
