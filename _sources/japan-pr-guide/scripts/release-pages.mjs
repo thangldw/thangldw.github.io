@@ -18,19 +18,3 @@ const index = path.join(target, "index.html");
 const shell = `    <link rel="stylesheet" href="/css/icons.css?v=20260714" />\n    <link rel="stylesheet" href="/css/support-dialog.css?v=20261105-qr" />\n    <script defer src="/js/support-dialog.js?v=20261106-i18n"></script>\n`;
 writeFileSync(index, readFileSync(index, "utf8").replace("  </head>", `${shell}  </head>`));
 console.log(`Generated Pages app: ${target}`);
-
-const legacy = path.join(pages, "apps/japan-pr-guide");
-mkdirSync(legacy, { recursive: true });
-writeFileSync(path.join(legacy, "index.html"), `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Japan PR Guide — moved</title>
-  <link rel="canonical" href="https://thangldw.github.io/japan-pr-guide/" />
-  <meta http-equiv="refresh" content="0; url=/japan-pr-guide/" />
-  <script>location.replace("/japan-pr-guide/" + location.search + location.hash);</script>
-</head>
-<body><p><a href="/japan-pr-guide/">Open Japan PR Guide</a></p></body>
-</html>
-`);
