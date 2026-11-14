@@ -147,7 +147,7 @@ Self-hosted font provenance and upstream license texts live under `assets/fonts/
 
 GitHub Pages publishes the `master` branch root directly (Settings → Pages → Source: *Deploy from a branch*); `.nojekyll` serves the tree as-is. There is no GitHub Actions workflow in this repository, so nothing validates a push remotely: run `python3 scripts/validate_site.py` before pushing to `master`. After merging, confirm the deploy in the Actions tab ("pages build and deployment") or check the `last-modified` header of `https://thangldw.github.io/`; changing the Pages source does not build by itself, only a push to `master` does.
 
-Because the whole tree is served, internal paths (`_sources/`, `docs/`, `scripts/`, `*.md`) are reachable by URL even though nothing links to them. `robots.txt` disallows them for crawlers, which keeps them out of search indexes but does not restrict access. Making them genuinely private requires deploying a filtered artifact (Pages source *GitHub Actions*) instead of the repository root.
+Because the whole tree is served, internal paths (`_sources/`, `scripts/`, `*.md`) are reachable by URL even though nothing links to them. `robots.txt` disallows them for crawlers, which keeps them out of search indexes but does not restrict access. Making them genuinely private requires deploying a filtered artifact (Pages source *GitHub Actions*) instead of the repository root.
 
 1. Start from a clean working tree and review all generated changes.
 2. Run every relevant quality gate.

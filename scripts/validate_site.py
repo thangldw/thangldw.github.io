@@ -53,18 +53,6 @@ ALLOWED_MARKDOWN = {
     Path("DESIGN.md"),
     Path("assets/fonts/licenses/be-vietnam-pro/SOURCE.md"),
     Path("assets/fonts/licenses/font-awesome-6.4.2/SOURCE.md"),
-    Path("docs/japan-pr-guide/DESIGN_CONTRACT.md"),
-    Path("docs/japan-pr-guide/DESIGN_QA.md"),
-    Path("docs/japan-pr-guide/README.md"),
-    Path("docs/japan-pr-guide/historical-scoring-parity-plan.md"),
-    Path("docs/superpowers/plans/2026-08-11-apps-viewport-background.md"),
-    Path("docs/superpowers/plans/2026-08-12-japan-hsp-calculator-renewal.md"),
-    Path("docs/superpowers/plans/2026-08-13-japan-hsp-score-spine.md"),
-    Path("docs/superpowers/plans/2026-08-28-portfolio-flagship-case-studies.md"),
-    Path("docs/superpowers/specs/2026-08-11-apps-viewport-background-design.md"),
-    Path("docs/superpowers/specs/2026-08-12-japan-hsp-calculator-renewal-design.md"),
-    Path("docs/superpowers/specs/2026-08-13-japan-hsp-score-spine-design.md"),
-    Path("docs/superpowers/specs/2026-08-28-portfolio-flagship-case-studies-design.md"),
 }
 
 
