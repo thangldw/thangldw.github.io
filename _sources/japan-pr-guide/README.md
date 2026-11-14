@@ -11,4 +11,4 @@ npm run release:pages
 
 The release command runs domain/UI tests, packaging tests and the production build before generating the Pages route with the portfolio support/analytics/font shell. Previous hashed bundles are retained during propagation. Preview the generated route with a static server at the repository root.
 
-Policy review: 2026-10-05. See the portfolio `docs/japan-pr-guide/README.md` for provenance. This is a dated snapshot, not a live government feed.
+Policy review: 2026-10-05. This is a dated snapshot, not a live government feed.

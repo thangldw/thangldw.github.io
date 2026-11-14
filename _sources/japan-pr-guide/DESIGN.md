@@ -80,7 +80,7 @@ The logo never adopts link underline or changes its geometry on hover. Controls 
 
 The generated Cert bundle is not hand-edited. Its learning/assessment internals can be migrated in the source repository later without introducing another token source. This release establishes shared foundation and shell consistency, rather than changing exam workflows.
 
-Run `python3 scripts/validate_design_system.py` and `python3 scripts/validate_site.py` before release. The design gate checks token/document drift, route literal debt, integration, shared recipes, and contrast. Verify rendered Home/Apps/Cert in both themes and mobile as well.
+Before release, check token/document drift, route literal debt, integration, shared recipes, and contrast by hand (the automated validators were removed with `scripts/`). Verify rendered Home/Apps/Cert in both themes and mobile as well.
 
 ## Do's and Don'ts
 
