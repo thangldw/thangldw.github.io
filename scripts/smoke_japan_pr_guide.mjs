@@ -155,7 +155,7 @@ try {
   const origin = process.env.SITE_ORIGIN || `http://127.0.0.1:${serverPort}`;
   const page = await openPage(debugPort);
   for (const width of [1280, 390]) {
-    await page.navigate(`${origin}/apps/japan-pr-guide/?migration=1#historical`, width);
+    await page.navigate(`${origin}/japan-pr-guide/?migration=1#historical`, width);
     await page.waitUntil('location.pathname === "/japan-pr-guide/" && document.querySelector("#root button")');
     assertResult(`Japan PR Guide migration ${width}`, await page.evaluate(`(() => ({
       ok: location.search === '?migration=1' && location.hash === '#historical'

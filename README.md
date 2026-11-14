@@ -31,7 +31,7 @@ flowchart LR
 - Default branch: `master`
 - Runtime: standards-based browser APIs
 - Deployment: GitHub Pages from the repository root
-- Analytics: shared local script included once on non-redirect pages, except study apps with an explicit no-tracking policy
+- Analytics: shared local script included once on every page, except study apps with an explicit no-tracking policy
 
 ### Public routes
 
@@ -43,7 +43,11 @@ flowchart LR
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-Kotonari (`/kotonari/`), Claude Cert Prep (`https://claude.cert-apps.workers.dev/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
+The Workers study apps ship a self-contained copy of `/404.html`; regenerate it with `python3 scripts/export_standalone_404.py OUTPUT.html` after changing the 404 design and copy the result into each app (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari).
+
+Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. `scripts/validate_site.py` fails on any `<meta http-equiv="refresh">` page.
+
+The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
 
@@ -58,8 +62,7 @@ thangldw.github.io/
 ├── index.html
 ├── 404.html
 ├── apps/
-│   ├── index.html
-│   ├── japan-pr-guide/       # Redirect to /japan-pr-guide/
+│   └── index.html
 ├── japan-pr-guide/           # Generated Japan PR Guide app
 ├── assets/                    # Social images and local fonts
 │   └── fonts/licenses/        # Upstream font notices and provenance
@@ -126,7 +129,7 @@ Do not duplicate project descriptions in `index.html` or `apps/index.html`. The 
 
 ### Support dialog and asset provenance
 
-All non-redirect HTML pages load the shared support assets with cache version `20261105-qr`; the Japan PR Guide exporter preserves this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
+All HTML pages load the shared support assets with cache version `20261105-qr`; the Japan PR Guide exporter preserves this integration. Run `node scripts/smoke_support_site.mjs` to check all content pages on desktop and mobile.
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages. Run `node scripts/smoke_support_locales.mjs` to verify route-wide language updates and regional language codes.
 
@@ -144,6 +147,8 @@ Self-hosted font provenance and upstream license texts live under `assets/fonts/
 
 GitHub Pages publishes the `master` branch root directly (Settings → Pages → Source: *Deploy from a branch*); `.nojekyll` serves the tree as-is. There is no GitHub Actions workflow in this repository, so nothing validates a push remotely: run `python3 scripts/validate_site.py` before pushing to `master`. After merging, confirm the deploy in the Actions tab ("pages build and deployment") or check the `last-modified` header of `https://thangldw.github.io/`; changing the Pages source does not build by itself, only a push to `master` does.
 
+Because the whole tree is served, internal paths (`_sources/`, `docs/`, `scripts/`, `*.md`) are reachable by URL even though nothing links to them. `robots.txt` disallows them for crawlers, which keeps them out of search indexes but does not restrict access. Making them genuinely private requires deploying a filtered artifact (Pages source *GitHub Actions*) instead of the repository root.
+
 1. Start from a clean working tree and review all generated changes.
 2. Run every relevant quality gate.
 3. Commit a focused change and push `master`.
@@ -159,7 +164,7 @@ Do not silently replace generated assets in an unrelated commit. If production i
 - Validate all JSON before rendering and escape catalog text inserted into HTML.
 - Keep question banks out of Pages; controlled content requires network access. Browser-visible material remains copyable.
 - Certification learner data remains in browser storage; the website does not collect or synchronize it.
-- Analytics must not run on redirect pages or study pages declaring `data-analytics="off"`; it must appear exactly once elsewhere. Learning exports retain their restrictive CSP and no-tracking policy.
+- Analytics must not run on study pages declaring `data-analytics="off"`; it must appear exactly once elsewhere. Learning exports retain their restrictive CSP and no-tracking policy.
 
 ### Contribution policy
 
@@ -241,7 +246,7 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
-Kotonari (`/kotonari/`), Claude Cert Prep (`https://claude.cert-apps.workers.dev/`), JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) each publish from a separate project repository. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
+The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
 Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
 
