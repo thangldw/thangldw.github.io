@@ -144,7 +144,7 @@ Do not silently replace generated assets in an unrelated commit. If production i
 
 ### Contribution policy
 
-Keep changes route-focused, accessible, responsive, and independently verifiable. Shared visual behavior belongs in tokens or shared styles rather than inline presentation. New routes require sitemap, canonical, Open Graph, social-image, analytics, validation, and smoke-test updates.
+Keep changes route-focused, accessible, responsive, and independently verifiable. Shared visual behavior belongs in tokens or shared styles rather than inline presentation. New routes require sitemap, canonical, Open Graph, social-image, and analytics updates, plus the manual checks described under Deploy.
 
 ## Tiếng Việt
 
@@ -200,7 +200,7 @@ Luôn bắt đầu từ working tree sạch, kiểm tra generated diff, chạy t
 
 Không commit secret, credential, private dataset, learner backup hoặc đường dẫn máy. Font và asset phải local. JSON phải được validate và text phải escape trước khi chèn HTML. Bank không được deploy lên Pages; API cần kết nối mạng và nội dung đã hiển thị vẫn có thể sao chép. Dữ liệu học nằm trong browser storage và không được website đồng bộ.
 
-Thay đổi cần tập trung theo route, accessible, responsive và test được. Route mới phải cập nhật sitemap, canonical, Open Graph, social image, analytics, validation và smoke test.
+Thay đổi cần tập trung theo route, accessible, responsive và test được. Route mới phải cập nhật sitemap, canonical, Open Graph, social image, analytics và qua các bước kiểm tra thủ công ở mục Deploy.
 
 ## 日本語
 
@@ -252,7 +252,7 @@ Clean working tree、generated diff review、全 test、focused commit、`master
 
 Secret、credential、private dataset、learner backup、machine-specific path を commit しません。Font/asset は local に置き、JSON を validate し、HTML 挿入前に text を escape します。Bank は Pages に配置しません。API content は network 接続を必要とし、表示済み content のコピーを防止する保証はありません。Learner data は browser storage 内に留まります。
 
-変更は route-focused、accessible、responsive、independently verifiable にします。新 route では sitemap、canonical、Open Graph、social image、analytics、validation、smoke test を更新します。
+変更は route-focused、accessible、responsive、independently verifiable にします。新 route では sitemap、canonical、Open Graph、social image、analytics を更新し、Deploy 節の手動確認を行います。
 
 ## Canonical homepage design — 2026-10-10
 
