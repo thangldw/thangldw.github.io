@@ -11,7 +11,6 @@ const copy = {
 
 const groups=['engineering','utilities','learning','experiments'];
 const section=document.getElementById('apps');
-const search=document.getElementById('projectSearch');
 const library=document.getElementById('catalog');
 const count=document.getElementById('projectCount');
 const nav=section.querySelector('.apps-group-nav');
@@ -19,33 +18,30 @@ const buttons=[...nav.querySelectorAll('[data-group]')];
 const initialParams=new URLSearchParams(location.search);
 const initialGroup=initialParams.get('group');
 let lang='en', group=groups.includes(initialGroup)?initialGroup:'all', projects=[], status='loading';
-search.value=initialParams.get('q')||'';
-function syncUrl(){const url=new URL(location.href),query=search.value.trim();
+function syncUrl(){const url=new URL(location.href);
  if(group==='all')url.searchParams.delete('group');else url.searchParams.set('group',group);
- if(query)url.searchParams.set('q',query);else url.searchParams.delete('q');
+ url.searchParams.delete('q');
  if(url.href!==location.href)history.replaceState(history.state,'',url.pathname+url.search+url.hash);}
 const isExternal=p=>{try{return new URL(p.href,location.href).origin!==location.origin;}catch{return false;}};
 const statusBadge=p=>p.status?'<span class="project-status" data-status="'+(String(p.status).toLowerCase()==='live'?'live':'release')+'">'+escapeHtml(p.status)+'</span>':'';
 const metaList=p=>Array.isArray(p.tags)&&p.tags.length?'<ul class="project-meta">'+p.tags.map(t=>'<li>'+escapeHtml(t)+'</li>').join('')+'</ul>':'';
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const normalize=value=>String(value).normalize('NFKC').toLocaleLowerCase().trim();
 const description=p=>p.localizedDescriptions?.[lang] || projectTranslations[lang]?.[p.id]||p.catalogDescription||p.description;
 function syncLanguage(){
  const c=copy[lang];
  section.querySelectorAll('[data-copy]').forEach(el=>el.textContent=c[el.dataset.copy]);
  nav.setAttribute('aria-label',c.browse);
- library.setAttribute('aria-label',locales[lang].projects);search.placeholder=c.search;
+ library.setAttribute('aria-label',locales[lang].projects);
  buttons.forEach(b=>{const id=b.dataset.group;const n=id==='all'?projects.length:projects.filter(p=>p.catalogGroup===id).length;b.innerHTML=escapeHtml(id==='all'?c.all:c.names[groups.indexOf(id)])+' <span aria-hidden="true">'+n+'</span>';b.setAttribute('aria-pressed',String(id===group));b.disabled=status!=='ready';});
 }
 function render(){
  const c=copy[lang];syncLanguage();library.classList.toggle('filtered',group!=='all');
  if(status!=='ready'){count.textContent=status==='error'?c.failed:c.loading;library.innerHTML='<div class="catalog-state">'+(status==='error'?'<h3>'+c.failed+'</h3><button type="button" class="ui-button" data-retry>'+c.retry+'</button>':c.loading)+'</div>';return;}
- const words=normalize(search.value).split(/\s+/u).filter(Boolean);
- const visible=projects.filter(p=>(group==='all'||p.catalogGroup===group)&&words.every(w=>normalize([p.title,p.description,description(p),p.categoryLabel,...p.tags].join(' ')).includes(w)));
+ const visible=projects.filter(p=>group==='all'||p.catalogGroup===group);
  count.textContent=c.count(visible.length);
  library.innerHTML=groups.map((id,i)=>{
   const members=visible.filter(p=>p.catalogGroup===id);if(!members.length)return '';
-  const collapsed=id==='learning'&&group==='all'&&!words.length;const shown=collapsed?members.slice(0,4):members;
+  const collapsed=id==='learning'&&group==='all';const shown=collapsed?members.slice(0,4):members;
   const items=shown.map(p=>{const ext=isExternal(p);return '<li class="project-row" data-project-id="'+escapeHtml(p.id)+'"><div class="project-title"><h4><a href="'+escapeHtml(p.href)+'">'+escapeHtml(p.title)+(ext?'<span class="sr-only"> ('+escapeHtml(c.external)+')</span>':'')+'</a></h4>'+statusBadge(p)+'</div><p>'+escapeHtml(description(p))+'</p>'+metaList(p)+'<span class="project-go" aria-hidden="true">'+(ext?'↗':'→')+'</span></li>';}).join('');
   return '<section class="catalog-group" aria-labelledby="'+id+'-title"><header class="group-heading"><h3 id="'+id+'-title">'+c.names[i]+' <span class="group-count">'+members.length+'</span></h3><p>'+c.descriptions[i]+'</p></header><div class="group-body"><ul class="project-list">'+items+'</ul>'+(collapsed&&members.length>4?'<button type="button" class="ui-link-button more-projects" data-more>'+c.more(members.length)+'</button>':'')+'</div></section>';
  }).join('');
@@ -53,17 +49,11 @@ function render(){
  syncUrl();
 }
 buttons.forEach(b=>b.addEventListener('click',()=>{group=b.dataset.group;render();}));
-search.addEventListener('input',e=>{if(!e.isComposing)render();});search.addEventListener('compositionend',render);
-document.addEventListener('keydown',e=>{
- if(e.key!=='/'||e.ctrlKey||e.metaKey||e.altKey||e.defaultPrevented||search.disabled)return;
- const t=e.target;if(t instanceof HTMLElement&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.closest('dialog[open]')))return;
- e.preventDefault();search.focus();search.select();
-});
 library.addEventListener('click',e=>{
  if(e.target.closest('[data-more]')){group='learning';render();library.focus();}
- if(e.target.closest('[data-clear]')){search.value='';group='all';render();search.focus();}
+ if(e.target.closest('[data-clear]')){group='all';render();library.focus();}
  if(e.target.closest('[data-retry]'))location.reload();
 });
 bindLocaleSwitch(language => { lang = language; render(); });
-try{await window.portfolioProjectsReady;projects=[...window.portfolioProjects,...window.portfolioLearningCollections].sort((a,b)=>a.title.localeCompare(b.title,'en',{numeric:true,sensitivity:'base'}));status='ready';search.disabled=false;}catch{status='error';}
+try{await window.portfolioProjectsReady;projects=[...window.portfolioProjects,...window.portfolioLearningCollections].sort((a,b)=>a.title.localeCompare(b.title,'en',{numeric:true,sensitivity:'base'}));status='ready';}catch{status='error';}
 render();

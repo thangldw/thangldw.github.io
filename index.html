@@ -74,7 +74,6 @@
 <section class="apps" id="apps" aria-labelledby="apps-title">
   <div class="apps-head">
     <div><h2 class="section-heading" id="apps-title" data-home="projects">Apps</h2><p class="section-lead" data-copy="intro">Tools for work, learning and a little play.</p></div>
-    <label class="search-field"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="sr-only" data-copy="searchLabel">Search apps and projects</span><input id="projectSearch" type="search" placeholder="Find an app, topic, or tool…" aria-keyshortcuts="/" disabled></label>
   </div>
   <nav class="apps-group-nav" aria-label="Browse project groups"><button type="button" data-group="all" aria-pressed="true" disabled>All</button><button type="button" data-group="engineering" aria-pressed="false" disabled>Engineering</button><button type="button" data-group="utilities" aria-pressed="false" disabled>Utilities</button><button type="button" data-group="learning" aria-pressed="false" disabled>Learning</button><button type="button" data-group="experiments" aria-pressed="false" disabled>Experiments</button></nav>
   <p class="sr-only" id="projectCount" role="status" aria-live="polite">Loading projects…</p>
@@ -84,10 +83,6 @@
 <section class="community" id="community" aria-labelledby="community-title"><div class="community-hero"><div class="hero-copy">
   <h2 class="section-heading" id="community-title"><span data-copy="title">Contributing to</span> <span data-copy="accent">the Community</span></h2>
   <p class="lead" data-copy="lead">Code and engineering decisions I contributed to open-source projects, from WebAssembly inspection to machine learning and privacy tools.</p>
-  <div class="actions">
-    <a class="ui-button ui-button-primary" href="#repo-rea" data-copy="browse">Browse contributions</a>
-    <a href="https://github.com/thangldw"><span data-copy="github">GitHub profile</span></a>
-  </div>
 </div></div>
 <section class="section repo" id="repo-rea"><div class="group-heading"><h3><a href="https://github.com/morluto/rea">REA</a></h3><p>Reverse-engineering toolkit; direct merges and one change integrated by the maintainer.</p></div><div class="pr-list"><article id="pr-1533"><h4><a href="https://github.com/morluto/rea/pull/1533">#1533 · <span data-copy="pr1533Title">Inspect local WASM artifacts</span></a></h4><p data-copy="pr1533Body">Added WABT-backed, target-free WebAssembly inspection with reproducible artifact and executable evidence shared across CLI and MCP. Reused a mature toolchain rather than introducing a new parser.</p><dl class="decision-fields"><div><dt data-copy="problem">Problem</dt><dd data-copy="pr1533Problem">Saved WASM artifacts could not be inspected without an active target.</dd></div><div><dt data-copy="decision">Approach</dt><dd data-copy="pr1533Decision">Admit an explicitly selected local artifact and pinned WABT tools behind a narrow adapter; preserve digests and CLI/MCP parity.</dd></div></dl></article>
 <article id="pr-2464"><h4><a href="https://github.com/morluto/rea/pull/2464">#2464 · <span data-copy="pr2464Title">Compare WASM interfaces</span></a></h4><p data-copy="pr2464Body">Introduced typed import/export comparison so meaningful interface changes can be distinguished from binary encoding differences.</p><dl class="decision-fields"><div><dt data-copy="problem">Problem</dt><dd data-copy="pr2464Problem">Changes in binary hashes or WAT type indices do not necessarily imply changed imports or exports.</dd></div><div><dt data-copy="decision">Approach</dt><dd data-copy="pr2464Decision">Resolve typed interface facts once in the producer and compare retained Evidence without reparsing display text.</dd></div></dl></article>
@@ -117,7 +112,7 @@
 <footer class="home-foot"><p class="footer-signature"><span data-home="motto">Crafted with care, stay steadfast, stay free</span><span>© <span data-footer-year>2026</span> Thang Luu</span></p></footer>
 <script src="/js/projects-data.js?v=20261106-private"></script>
 <script type="module" src="/js/homepage.js?v=20261124-redesign"></script>
-<script type="module" src="/js/apps-catalog.js?v=20261124-redesign"></script>
+<script type="module" src="/js/apps-catalog.js?v=20261125-nosearch"></script>
 <script type="module" src="/js/community-section.mjs?v=20261124-merge"></script>
 </body>
 </html>
