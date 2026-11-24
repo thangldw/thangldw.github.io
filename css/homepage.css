@@ -56,11 +56,8 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 .section-lead{margin-top:var(--space-8);max-width:60ch;font-size:var(--text-body-lg);line-height:var(--leading-prose);color:var(--color-text-description)}
 
 /* Intro: the t:> prompt is the page's one signature moment. */
-.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);grid-template-areas:"id id" "statement statement" "bio engage" "facts facts";column-gap:var(--space-64);padding-top:var(--space-56,56px)}
-.intro-id{grid-area:id}.statement{grid-area:statement}.bio{grid-area:bio}.engage{grid-area:engage}.facts{grid-area:facts}
-.intro-id{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-4) var(--space-12)}
-.intro-id h1{font-size:var(--text-title);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-tight)}
-.intro-id p{font-size:var(--text-title);color:var(--color-text-description)}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);grid-template-areas:"statement statement" "bio engage" "facts facts";column-gap:var(--space-64);padding-top:var(--space-56,56px)}
+.statement{grid-area:statement}.bio{grid-area:bio}.engage{grid-area:engage}.facts{grid-area:facts}
 .statement{position:relative;margin-top:var(--space-32);max-width:21em;padding-left:1.7em;font-size:var(--text-hero-xl);line-height:1.12;font-weight:var(--weight-medium);letter-spacing:-.035em;text-wrap:balance}
 .statement .prompt{position:absolute;left:0;top:.12em;font:var(--weight-logo-mark) .62em/1 var(--font-mono);letter-spacing:var(--tracking-logo-mark);color:var(--color-accent)}
 .caret{display:inline-block;width:.09em;height:.82em;margin-left:.08em;vertical-align:-.06em;background:var(--color-accent);opacity:0;animation:caret 1.05s steps(1) 0s 4}
@@ -163,7 +160,7 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 /* Breakpoints. */
 @media(max-width:1100px){
  .resume-home{--home-gutter:var(--space-32)}
- .intro{grid-template-columns:1fr;grid-template-areas:"id" "statement" "bio" "engage" "facts"}
+ .intro{grid-template-columns:1fr;grid-template-areas:"statement" "bio" "engage" "facts"}
  .engage{max-width:68ch}
  .process-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--space-40)}
  .library{grid-template-columns:1fr}
