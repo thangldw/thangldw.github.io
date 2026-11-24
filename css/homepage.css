@@ -133,52 +133,26 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 #community .actions a:not(.ui-button):hover{text-decoration:underline}
 #community :is(.caption,.tag){font-size:var(--text-caption);color:var(--color-text-body)}
 #community .caption{margin-top:var(--space-16);max-width:72ch;line-height:var(--leading-prose)}
-#community .metrics{display:flex;flex-wrap:wrap;gap:var(--space-8) var(--space-24);margin-top:var(--space-16)}
-#community .metrics>div{display:flex;flex-direction:row-reverse;justify-content:flex-end;align-items:baseline;gap:var(--space-6)}
-#community .metrics dt{font-size:var(--text-body-sm);color:var(--color-text-description)}
-#community .metrics dd{font-size:var(--text-title-sm);font-weight:var(--weight-semibold);font-variant-numeric:tabular-nums}
-.record figcaption{margin-bottom:var(--space-12);font-size:var(--text-body-sm);font-weight:var(--weight-semibold)}
-.record table{width:100%;border-collapse:collapse;font-size:var(--text-body-sm)}
-.record :is(th,td){padding:var(--space-8) 0;text-align:start}
-.record thead :is(th,td){border-bottom:1px solid var(--home-rule)}
-.record thead th{font-weight:var(--weight-regular);color:var(--color-text-body)}
-.record th[scope=row]{font-weight:var(--weight-medium)}
-#community .record a{color:var(--color-text);text-decoration:none}
-#community .record a:hover{color:var(--color-accent);text-decoration:underline}
-.record td{width:32%;font-variant-numeric:tabular-nums}
-.record td::before{content:"";display:inline-block;height:8px;margin-right:var(--space-8);border-radius:2px;background:var(--color-accent);vertical-align:1px}
-.record td+td::before{background:var(--color-border)}
-.record td[data-n="0"]::before{display:none}
-.record td[data-n="1"]::before{width:12px}.record td[data-n="2"]::before{width:24px}.record td[data-n="3"]::before{width:36px}.record td[data-n="4"]::before{width:48px}.record td[data-n="5"]::before{width:60px}
 #community .section{margin-top:var(--space-48)}
 #community .section[id],#community article[id]{scroll-margin-top:84px}
 #community .group-heading{position:static}
 #community .group-heading h3{font-size:var(--text-title)}
 #community .count{margin-left:var(--space-4);font-size:var(--text-body-sm);font-weight:var(--weight-regular);color:var(--color-text-body)}
 #community .group-heading p{font-size:var(--text-body)}
-#community .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--space-48);margin-top:var(--space-12)}
-#community .grid article{position:relative;padding:var(--space-16) 0}
-#community .grid h4{font-size:var(--text-body-lg);font-weight:var(--weight-semibold);line-height:var(--leading-heading)}
-#community .grid h4 a{color:var(--color-text);text-decoration:none}
-#community .grid h4 a::after{content:"";position:absolute;inset:0}
-#community .grid h4 a:focus-visible{outline:0}
-#community .grid article:has(h4 a:focus-visible){outline:var(--focus-width) solid var(--color-accent);outline-offset:var(--focus-offset)}
-#community .grid article:hover h4 a{color:var(--color-accent)}
-#community .grid p{margin-top:var(--space-6);font-size:var(--text-body);line-height:var(--leading-prose);color:var(--color-text-description)}
-#community .grid article>a:not(:first-child){position:relative;z-index:1;display:inline-block;margin-top:var(--space-6);font-size:var(--text-body-sm)}
 #community .tag{display:block;margin-bottom:var(--space-4)}
-#community .decisions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--space-48);margin-top:var(--space-12);align-items:start}
-#community .decisions details{border-bottom:1px solid var(--home-rule)}
-#community .decisions summary{display:block;padding:var(--space-14) var(--space-24) var(--space-14) 0;position:relative;cursor:pointer;font-size:var(--text-body);font-weight:var(--weight-medium);line-height:var(--leading-heading);list-style:none}
-#community .decisions summary::-webkit-details-marker{display:none}
-#community .decisions summary::after{content:"+";position:absolute;right:0;top:var(--space-12);font-size:var(--text-title-sm);font-weight:var(--weight-regular);color:var(--color-text-body)}
-#community .decisions details[open] summary::after{content:"−"}
-#community .decisions summary .tag{margin-bottom:var(--space-2)}
+#community .repo .group-heading h3 a{color:var(--color-text);text-decoration:none}
+#community .repo .group-heading h3 a:hover{color:var(--color-accent);text-decoration:underline}
+#community .pr-list{margin-top:var(--space-8);max-width:78ch}
+#community .pr-list article{padding:var(--space-20,20px) 0;container-type:inline-size}
+#community .pr-list h4{font-size:var(--text-body-lg);font-weight:var(--weight-semibold);line-height:var(--leading-heading)}
+#community .pr-list h4 a{color:var(--color-text);text-decoration:none}
+#community .pr-list h4 a:hover{color:var(--color-accent);text-decoration:underline}
+#community .pr-list article>p{margin-top:var(--space-6);font-size:var(--text-body);line-height:var(--leading-prose);color:var(--color-text-description)}
+#community .pr-list .integration{font-size:var(--text-body-sm)}
 #community .decision-content{container-type:inline-size;padding-bottom:var(--space-16)}
 #community .decision-fields>div{display:grid;gap:var(--space-4);padding-block:var(--space-8)}
 #community .decision-fields dt{font-size:var(--text-body-sm);font-weight:var(--weight-semibold)}
 #community .decision-fields dd{margin:0;font-size:var(--text-body);line-height:var(--leading-prose);color:var(--color-text-description);overflow-wrap:anywhere}
-#community .decision-evidence{margin-top:var(--space-8);font-size:var(--text-body-sm)}
 @container (min-width:30rem){#community .decision-fields>div{grid-template-columns:7.5rem minmax(0,1fr);column-gap:var(--space-16)}}
 #community #approach>p{max-width:72ch}
 #community #approach .group-heading p{max-width:72ch;line-height:var(--leading-prose)}
@@ -196,7 +170,7 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
  .community-hero{grid-template-columns:1fr;gap:var(--space-40)}
 }
 @media(max-width:899px){
- .project-list,#community .grid,#community .decisions{grid-template-columns:1fr}
+ .project-list{grid-template-columns:1fr}
  .facts{grid-template-columns:1fr;gap:var(--space-16)}
 }
 @media(max-width:720px){
