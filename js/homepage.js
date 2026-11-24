@@ -1,4 +1,4 @@
-import { locales } from './home-locales.mjs?v=20261124-merge';
+import { locales } from './home-locales.mjs?v=20261125-release';
 import { bindLocaleSwitch } from './site-locale.mjs';
 
 const root = document.documentElement;
