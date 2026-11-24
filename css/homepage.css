@@ -10,6 +10,27 @@
  font-family:var(--font-ui);font-size:var(--text-body);line-height:var(--leading-body);
  -webkit-font-smoothing:antialiased;
 }
+/* Navy and cobalt palette, scoped to the home page. Product pages keep tokens.css. */
+html:root .resume-home{
+ --color-surface:#f6f7f9;--color-surface-subtle:#e8ecf2;
+ --color-text:#10213a;--color-text-strong:#10213a;--color-text-body:#3b4a60;--color-text-muted:#3b4a60;--color-text-description:#46556c;
+ --color-border:#cfd6e0;--color-section-divider:#d5dbe4;--color-border-strong:#aeb8c6;
+ --color-accent:#1d4ed8;--color-on-accent:#ffffff;--color-accent-soft:#e8eeff;
+ --color-support:#10213a;--color-on-support:#ffffff;
+ --color-contact:#10213a;
+ --color-control:var(--color-surface-subtle);--color-control-hover:var(--color-accent-soft);--color-control-active:var(--color-border);
+ --site-brand-ink:var(--color-text);--site-brand-accent:var(--color-accent);
+}
+html:root[data-theme="dark"] .resume-home{
+ --color-canvas:#0c1424;--color-surface:#0c1424;--color-surface-raised:#16213a;--color-surface-subtle:#16213a;
+ --color-text:#e6ebf5;--color-text-strong:#e6ebf5;--color-text-body:#b4bfd2;--color-text-muted:#b4bfd2;--color-text-description:#b4bfd2;
+ --color-border:#27344f;--color-section-divider:#27344f;--color-border-strong:#43516e;
+ --color-accent:#8aa8ff;--color-on-accent:#0c1424;--color-accent-soft:#1a2748;
+ --color-support:#e6ebf5;--color-on-support:#10213a;
+ --color-contact:#08101d;
+ --color-control:var(--color-surface-subtle);--color-control-hover:var(--color-accent-soft);--color-control-active:var(--color-border);
+ --site-brand-ink:var(--color-text);--site-brand-accent:var(--color-accent);
+}
 .resume-home *,.resume-home *::before,.resume-home *::after{box-sizing:border-box}
 html:has(.resume-home){scroll-behavior:smooth;scroll-padding-top:84px;color-scheme:light}
 html[data-theme=dark]:has(.resume-home){color-scheme:dark}
