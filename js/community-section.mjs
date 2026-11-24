@@ -1,4 +1,4 @@
-// Translations for the #community section of the home page.
+// Translations for the community sections of the home page.
 // Page chrome (document language, title, meta) is owned by homepage.js.
 import vi from './community-locales/vi.mjs?v=20261124-merge';
 import ja from './community-locales/ja.mjs?v=20261124-merge';
@@ -10,7 +10,7 @@ const bindings = [];
 
 // Bind text nodes rather than elements so switching languages keeps links and
 // the open state of individual engineering notes intact.
-document.querySelectorAll('#community [data-copy]').forEach(el => {
+document.querySelectorAll('.community [data-copy]').forEach(el => {
   const node = el.firstChild;
   if (node) bindings.push({ key: el.dataset.copy, node, english: node.nodeValue });
 });
