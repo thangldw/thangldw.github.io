@@ -9,8 +9,7 @@ export const locales = {
   bio: ['I’m Thang Luu. I solve problems with data, working where engineering meets the business. Over more than ten years I’ve moved from statistical analysis into data engineering and technical delivery, and today I lead front-line technical delivery at a global IT consulting firm.', 'I’m at my best when the goal is still taking shape, the data is scattered, and the team needs a practical way forward. I still think of myself as a learner: the people I build with teach me the most.'],
   sectors: 'Experience across sectors', sectorText: 'Retail, real estate, fintech, healthcare, and research.', contribution: 'End-to-end contribution', contributionText: 'Discovery, architecture, pipelines, models, delivery leadership, and stakeholder alignment.', how: 'How I work',
   process: [['Understand','I start alongside your team, pinning down the problem, the data, and the outcome that matters.'],['Build','I design, integrate, and ship the system, with evaluation and observability built in.'],['Enable','I document the decisions and hand over what I know, so your team owns what we ship.'],['Improve','I use feedback and operational signals to measure results and keep refining the system.']],
-  projects: 'Side projects', all: 'View all projects', view: 'View project', previous: 'Show previous project', next: 'Show next project', carousel: 'Side projects carousel', pause: 'Pause project rotation', play: 'Resume project rotation', count: (first,last,total) => `${first}–${last} of ${total} projects`,
-  groupNames: ['Engineering', 'Utilities', 'Learning', 'Experiments']
+  projects: 'Apps'
  },
  vi: {
   catalogFailed: 'Không tải được danh sách dự án. Hãy tải lại trang để thử lại.', languageName: 'Tiếng Việt', languageSwitch: 'Ngôn ngữ hiển thị', skip: 'Đến nội dung chính', home: 'Trang chủ Thang Luu', dark: 'Chuyển sang giao diện tối', light: 'Chuyển sang giao diện sáng',
@@ -22,8 +21,7 @@ export const locales = {
   bio: ['Tôi là Thang Luu. Tôi dùng dữ liệu để giải quyết vấn đề, ở nơi kỹ thuật gặp kinh doanh. Hơn 10 năm qua, tôi đi từ phân tích thống kê sang kỹ thuật dữ liệu rồi triển khai kỹ thuật, và hiện dẫn dắt mảng triển khai kỹ thuật trực tiếp với khách hàng tại một công ty tư vấn CNTT toàn cầu.', 'Tôi làm tốt nhất khi mục tiêu còn đang thành hình, dữ liệu nằm rải rác và đội ngũ cần một hướng đi làm được ngay. Tôi vẫn coi mình là người đang học: những người cùng tôi xây dựng hệ thống dạy tôi nhiều nhất.'],
   sectors: 'Kinh nghiệm đa lĩnh vực', sectorText: 'Bán lẻ, bất động sản, fintech, y tế và nghiên cứu.', contribution: 'Đóng góp xuyên suốt', contributionText: 'Khảo sát, kiến trúc, pipeline, mô hình, dẫn dắt triển khai và thống nhất với các bên liên quan.', how: 'Cách tôi làm việc',
   process: [['Thấu hiểu','Tôi bắt đầu bằng việc ngồi cùng đội ngũ để làm rõ vấn đề, dữ liệu và kết quả cần đạt.'],['Xây dựng','Tôi thiết kế, tích hợp và đưa hệ thống vào vận hành, có sẵn phần đánh giá và giám sát.'],['Chuyển giao','Tôi ghi lại các quyết định và chuyển giao kiến thức để đội ngũ tự làm chủ hệ thống.'],['Cải tiến','Tôi dựa vào phản hồi và số liệu vận hành để đo kết quả và tiếp tục cải tiến hệ thống.']],
-  projects: 'Dự án cá nhân', all: 'Xem tất cả dự án', view: 'Xem dự án', previous: 'Xem dự án trước', next: 'Xem dự án tiếp theo', carousel: 'Danh sách dự án cá nhân', pause: 'Tạm dừng xoay dự án', play: 'Tiếp tục xoay dự án', count: (first,last,total) => `${first}–${last} / ${total} dự án`,
-  groupNames: ['Kỹ thuật', 'Tiện ích', 'Học tập', 'Thử nghiệm']
+  projects: 'Ứng dụng'
  },
  ja: {
   catalogFailed: 'プロジェクト一覧を読み込めませんでした。ページを再読み込みしてください。', languageName: '日本語', languageSwitch: '表示言語', skip: '本文へ移動', home: 'Thang Luuのホーム', dark: 'ダークモードに切り替え', light: 'ライトモードに切り替え',
@@ -35,8 +33,7 @@ export const locales = {
   bio: ['Thang Luuです。エンジニアリングとビジネスが交わるところで、データを使って課題を解決しています。この10年あまりで、統計分析からデータエンジニアリング、技術の開発・導入へと仕事の幅を広げてきました。現在はグローバルITコンサルティング企業で、お客様の現場に入る技術導入をリードしています。', 'ゴールがまだ固まっておらず、データが散らばり、チームが現実的な進め方を探している。そんな場面がいちばん得意です。今も自分は学ぶ側だと思っていて、一緒につくる人たちから最も多くを教わっています。'],
   sectors: '業界横断の経験', sectorText: '小売、不動産、フィンテック、医療、研究。', contribution: '一貫した支援', contributionText: '課題探索、設計、パイプライン、モデル、開発推進、関係者との合意形成。', how: '仕事の進め方',
   process: [['理解する','チームに入り、課題・データ・目指す成果を明確にします。'],['構築する','評価と可観測性を備えた、信頼できるシステムを設計・統合・提供します。'],['引き継ぐ','意思決定を記録し、知識を共有して、チームの自律的な運用を支えます。'],['改善する','フィードバックと運用データから成果を測り、システムを改善します。']],
-  projects: '個人プロジェクト', all: 'すべてのプロジェクト', view: 'プロジェクトを見る', previous: '前のプロジェクト', next: '次のプロジェクト', carousel: '個人プロジェクト一覧', pause: '自動切り替えを停止', play: '自動切り替えを再開', count: (first,last,total) => `${total}件中 ${first}〜${last}件を表示`,
-  groupNames: ['エンジニアリング', 'ユーティリティ', '学習', '実験']
+  projects: 'アプリ'
  },
  zh: {
   catalogFailed: '项目列表加载失败，请刷新页面重试。', languageName: '中文', languageSwitch: '显示语言', skip: '跳转到正文', home: 'Thang Luu 首页', dark: '切换为深色模式', light: '切换为浅色模式',
@@ -48,8 +45,7 @@ export const locales = {
   bio: ['我是 Thang Luu，在工程与业务的交汇处，用数据解决问题。十多年来，我从统计分析一路做到数据工程和技术交付，现在在一家全球 IT 咨询公司带领一线技术交付。', '目标还在成形、数据零散、团队需要一条切实可行的路时，我最能发挥作用。我一直把自己当作学习者：和我一起做事的人教给我的最多。'],
   sectors: '跨行业经验', sectorText: '零售、房地产、金融科技、医疗及研究。', contribution: '端到端贡献', contributionText: '需求探索、架构、数据管道、模型、交付领导及利益相关方协调。', how: '工作方式',
   process: [['理解','深入团队，明确问题、数据以及真正重要的成果。'],['构建','设计、集成并交付可靠的系统，配备评估与可观测能力。'],['赋能','记录决策、传递知识，让团队能够自主维护所交付的系统。'],['改进','通过反馈与运行数据衡量成果，持续改进系统。']],
-  projects: '个人项目', all: '查看所有项目', view: '查看项目', previous: '上一个项目', next: '下一个项目', carousel: '个人项目轮播', pause: '暂停项目轮播', play: '继续项目轮播', count: (first,last,total) => `共 ${total} 个项目，当前为 ${first}–${last}`,
-  groupNames: ['工程', '实用工具', '学习', '实验']
+  projects: '应用'
  }
 };
 
