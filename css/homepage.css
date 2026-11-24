@@ -150,7 +150,7 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 @container (min-width:30rem){#community .decision-fields>div{grid-template-columns:7.5rem minmax(0,1fr);column-gap:var(--space-16)}}
 
 .home-foot{max-width:calc(var(--home-width) + 2 * var(--home-gutter));margin:0 auto;padding:var(--space-24) var(--home-gutter) var(--space-40)}
-.home-foot p{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-8);font-size:var(--text-body-sm);color:var(--color-text-body)}
+.home-foot p{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-4);font-size:var(--text-body-sm);color:var(--color-text-body)}
 
 /* Breakpoints. */
 @media(max-width:1100px){
