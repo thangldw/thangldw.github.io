@@ -134,7 +134,9 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 #community .tag{display:block;margin-bottom:var(--space-4)}
 #community .repo .group-heading h3 a{color:var(--color-text);text-decoration:none}
 #community .repo .group-heading h3 a:hover{color:var(--color-accent);text-decoration:underline}
-#community .pr-list{margin-top:var(--space-8);max-width:78ch}
+#community .repos{margin-top:var(--space-40);columns:2;column-gap:var(--space-48)}
+#community .repos>.repo{break-inside:avoid;margin-top:0;padding-bottom:var(--space-32)}
+#community .pr-list{margin-top:var(--space-8)}
 #community .pr-list article{padding:var(--space-20,20px) 0;container-type:inline-size}
 #community .pr-list h4{font-size:var(--text-body-lg);font-weight:var(--weight-semibold);line-height:var(--leading-heading)}
 #community .pr-list h4 a{color:var(--color-text);text-decoration:none}
@@ -162,7 +164,7 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
  .community-hero{grid-template-columns:1fr;gap:var(--space-40)}
 }
 @media(max-width:899px){
- .project-list,.catalog-group:only-child .project-list{grid-template-columns:1fr}
+ .project-list,.catalog-group:only-child .project-list
  .facts{grid-template-columns:1fr;gap:var(--space-16)}
 }
 @media(max-width:720px){
