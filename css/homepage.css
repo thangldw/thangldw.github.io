@@ -148,8 +148,6 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 #community .decision-fields dt{font-size:var(--text-body-sm);font-weight:var(--weight-semibold)}
 #community .decision-fields dd{margin:0;font-size:var(--text-body);line-height:var(--leading-prose);color:var(--color-text-description);overflow-wrap:anywhere}
 @container (min-width:30rem){#community .decision-fields>div{grid-template-columns:7.5rem minmax(0,1fr);column-gap:var(--space-16)}}
-#community #approach>p{max-width:72ch}
-#community #approach .group-heading p{max-width:72ch;line-height:var(--leading-prose)}
 
 .home-foot{max-width:calc(var(--home-width) + 2 * var(--home-gutter));margin:0 auto;padding:var(--space-24) var(--home-gutter) var(--space-40)}
 .home-foot p{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--space-8);font-size:var(--text-body-sm);color:var(--color-text-body)}
