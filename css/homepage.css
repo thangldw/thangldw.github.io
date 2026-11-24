@@ -99,12 +99,14 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
 .resume-home .apps-group-nav button[aria-pressed=true]{background:none;color:var(--color-text);border-bottom-color:var(--color-accent);font-weight:var(--weight-semibold)}
 .apps-group-nav button:disabled{opacity:var(--disabled-opacity);cursor:default}
 .library{outline-offset:var(--space-8)}
-.catalog-group{display:grid;grid-template-columns:220px minmax(0,1fr);gap:var(--space-32);padding-block:var(--space-28)}
-.group-heading{align-self:start;position:sticky;top:84px}
+.library{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--space-48)}
+.library>.catalog-state{grid-column:1/-1}
+.catalog-group{display:flex;flex-direction:column;gap:var(--space-8);padding-block:var(--space-28)}
+.group-heading{align-self:start}
 .group-heading h3{font-size:var(--text-title-sm);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-tight)}
 .group-count{margin-left:var(--space-4);font-size:var(--text-body-sm);font-weight:var(--weight-regular);color:var(--color-text-body);font-variant-numeric:tabular-nums}
 .group-heading p{margin-top:var(--space-6);font-size:var(--text-body-sm);line-height:var(--leading-prose);color:var(--color-text-description)}
-.project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-8) var(--space-32)}
+.project-list{display:grid;gap:var(--space-4)}
 .project-row{position:relative;padding:var(--space-12) var(--space-32) var(--space-12) 0;border-radius:var(--radius-control)}
 .project-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2) var(--space-8)}
 .project-row h4{font-size:var(--text-body-lg);font-weight:var(--weight-semibold);line-height:var(--leading-heading)}
@@ -190,8 +192,7 @@ html[data-theme=dark]:has(.resume-home){color-scheme:dark}
  .intro{grid-template-columns:1fr;grid-template-areas:"id" "statement" "bio" "engage" "facts"}
  .engage{max-width:68ch}
  .process-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:var(--space-40)}
- .catalog-group{grid-template-columns:1fr;gap:var(--space-16)}
- .group-heading{position:static}
+ .library{grid-template-columns:1fr}
  .community-hero{grid-template-columns:1fr;gap:var(--space-40)}
 }
 @media(max-width:899px){
