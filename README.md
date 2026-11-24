@@ -8,10 +8,8 @@ A dependency-light portfolio, application catalog, and static application host d
 %%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":38,"rankSpacing":58},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
 flowchart LR
     PJ["projects-data.json<br/>project source"]:::yellow --> PL["Runtime catalog<br/>loader"]:::blue
-    PL --> H["Portfolio home<br/>projects by title"]:::purple
-    PL --> A["/apps/<br/>full catalog"]:::green
+    PL --> H["Portfolio home<br/>#apps catalog · #community"]:::purple
     H --> GP["GitHub Pages"]:::yellow
-    A --> GP
     classDef yellow fill:#FFF4A3,stroke:#C9A227,stroke-width:2px,color:#172B4D
     classDef blue fill:#D9EAFD,stroke:#4C78A8,stroke-width:2px,color:#172B4D
     classDef pink fill:#FFE1E6,stroke:#C96A7B,stroke-width:2px,color:#172B4D
@@ -37,15 +35,14 @@ flowchart LR
 
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Portfolio profile and projects sorted by title | Root HTML plus shared project catalog |
-| `/apps/` | Application catalog grouped by purpose | `js/projects-data.json` |
+| `/` | Single page: profile, `#apps` searchable catalog grouped by purpose, `#community` open-source contributions | Root HTML plus `js/projects-data.json` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
 The Workers study apps ship a self-contained copy of `/404.html` (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari). After changing the 404 design, update each copy by hand; the generator that inlined this site's CSS (`scripts/export_standalone_404.py`) is only in git history.
 
-Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly.
+Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. The retired `/apps/` and `/community/` routes have no files: `/404.html` loads `js/legacy-route-redirect.js`, which forwards them to `/#apps` and `/#community`, keeping the query string and any in-page hash.
 
 The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
@@ -53,7 +50,7 @@ Every sitemap route must have canonical metadata, a meaningful description, requ
 
 ### Shared catalog architecture
 
-`js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. Both the home page and `/apps/` wait for the same readiness promise before rendering.
+`js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. The home page `#apps` catalog waits for its readiness promise before rendering.
 
 ### Repository layout
 
@@ -61,8 +58,6 @@ Every sitemap route must have canonical metadata, a meaningful description, requ
 thangldw.github.io/
 ├── index.html
 ├── 404.html
-├── apps/
-│   └── index.html
 ├── japan-pr-guide/           # Generated Japan PR Guide app
 ├── assets/                    # Social images and local fonts
 │   └── fonts/licenses/        # Upstream font notices and provenance
@@ -87,7 +82,7 @@ Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather
 
 ### Verification
 
-The validators, audits and smoke tests formerly in `scripts/` were removed; they remain in git history. Before pushing to `master`, serve the site locally and check Home, Apps and any changed route in both themes and at mobile width, and that every link and `js/projects-data.json` entry resolves.
+The validators, audits and smoke tests formerly in `scripts/` were removed; they remain in git history. Before pushing to `master`, serve the site locally and check Home (including `#apps` and `#community`) and any changed route in both themes and at mobile width, and that every link and `js/projects-data.json` entry resolves.
 
 ### Updating projects
 
@@ -99,9 +94,9 @@ Edit only `js/projects-data.json`.
 4. Check the changed routes locally.
 5. Commit and push.
 
-Home preserves the complete one-page profile, working approach, languages, contact links, and a side-project carousel that shows all `featured` projects in a fresh random order on each load, auto-rotating every 7 s with a pause/resume button (rotation stops on hover, focus, manual navigation, or `prefers-reduced-motion`). The full catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
+Home preserves the complete one-page profile, working approach, languages, contact links, followed by two sections reachable from the header navigation: `#apps`, the full project catalog, and `#community`, the open-source contributions record. The catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
 
-Do not duplicate project descriptions in `index.html` or `apps/index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
+Do not duplicate project descriptions in `index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
 
 ### Support dialog and asset provenance
 
@@ -109,7 +104,7 @@ All HTML pages load the shared support assets with cache version `20261105-qr`; 
 
 The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages.
 
-Home (sidebar) and Apps (header) mount the support trigger inline through `<div id="supportSlot">`, so neither page has a floating button. Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Keep that file in sync with `tokens.css` by hand; the generator (`scripts/generate_support_tokens.py`) is only in git history.
+Home mounts the support trigger inline in the header through `<div id="supportSlot">`, so there is no floating button. Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Keep that file in sync with `tokens.css` by hand; the generator (`scripts/generate_support_tokens.py`) is only in git history.
 
 The support trigger is text-only with a `--color-support` background and `--color-on-support` text (white on `#b83a06`, 5.8:1). The previously used Ko-fi cup asset is retained for cached versions.
 
@@ -162,7 +157,6 @@ Keep changes route-focused, accessible, responsive, and independently verifiable
 | Route | Trách nhiệm | Nguồn chuẩn |
 | --- | --- | --- |
 | `/` | Portfolio và các dự án theo thứ tự tên | Root HTML và catalog project dùng chung |
-| `/apps/` | Danh mục ứng dụng có search/filter | `js/projects-data.json` |
 | `/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
 | `/404.html` | Fallback của GitHub Pages | Source repository |
 
@@ -170,7 +164,7 @@ Mọi route trong sitemap phải có canonical, description, Open Graph và soci
 
 ### Kiến trúc catalog dùng chung
 
-`js/projects-data.json` là nguồn duy nhất cho metadata project. Loader kiểm tra và fetch JSON ở runtime; trang chủ và `/apps/` cùng chờ một readiness promise trước khi render.
+`js/projects-data.json` là nguồn duy nhất cho metadata project. Loader kiểm tra và fetch JSON ở runtime; catalog `#apps` trên trang chủ chờ readiness promise trước khi render. `/apps/` và `/community/` đã gộp vào trang chủ (`#apps`, `#community`); `/404.html` chuyển hướng các link cũ.
 
 ### Cấu trúc và phát triển local
 
@@ -184,7 +178,7 @@ Mở [http://localhost:4173/](http://localhost:4173/). Phải dùng HTTP server 
 
 ### Cổng chất lượng
 
-Các validator và smoke test trước đây trong `scripts/` đã bị xoá (xem git history). Kiểm tra thủ công trang chủ, Apps và route thay đổi ở cả hai theme và mobile.
+Các validator và smoke test trước đây trong `scripts/` đã bị xoá (xem git history). Kiểm tra thủ công trang chủ (gồm `#apps`, `#community`) và route thay đổi ở cả hai theme và mobile.
 
 ### Cập nhật project
 
@@ -218,7 +212,6 @@ Thay đổi cần tập trung theo route, accessible, responsive và test đư�
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
 | `/` | Portfolio とタイトル順のプロジェクト | Root HTML と shared project catalog |
-| `/apps/` | Search/filter 可能な application catalog | `js/projects-data.json` |
 | `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
@@ -228,7 +221,7 @@ Sitemap route には canonical、description、Open Graph、必要な social ima
 
 ### Shared catalog architecture
 
-`js/projects-data.json` が project metadata の唯一の source です。Loader が runtime に validation/fetch し、home page と `/apps/` は同じ readiness promise 後に render します。
+`js/projects-data.json` が project metadata の唯一の source です。Loader が runtime に validation/fetch し、home page の `#apps` catalog は readiness promise 後に render します。`/apps/` と `/community/` は home page（`#apps`、`#community`）に統合され、旧 URL は `/404.html` が転送します。
 
 ### Local development と verification
 
@@ -238,7 +231,7 @@ English セクションの directory tree を参照してください。Python 3
 python3 -m http.server 4173
 ```
 
-JSON runtime loading のため file を直接開かず HTTP server を使います。以前 `scripts/` にあった validator と smoke test は削除済みです（git history 参照）。Home、Apps、変更した route を両 theme と mobile 幅で手動確認してください。
+JSON runtime loading のため file を直接開かず HTTP server を使います。以前 `scripts/` にあった validator と smoke test は削除済みです（git history 参照）。Home（`#apps`、`#community` を含む）と変更した route を両 theme と mobile 幅で手動確認してください。
 
 ### Project の更新
 
@@ -256,17 +249,17 @@ Secret、credential、private dataset、learner backup、machine-specific path �
 
 ## Canonical homepage design — 2026-10-10
 
-The homepage is the design reference for `/apps/` and the application catalog. Maintain each application shell in its owning source repository.
+The homepage is the design reference for the application catalog. Maintain each application shell in its owning source repository.
 
 - Visual register: minimal portfolio, restrained separators, no decorative cards.
 - Light default on every homepage load; dark mode is an explicit user action. Use the shared `site-shell.js` theme control and `themechange` event.
 - Canonical runtime token owner: `css/tokens.css`; shared recipes: `css/site-shell.css`; full contract: [DESIGN.md](DESIGN.md). Light: canvas `#ffffff`, text `#23291f`, muted `#535e4b`, accent `#965025`, border `#d1d7c9`, controls `#e9ede3`. Dark: canvas `#11150e`, text `#e5e6df`, muted `#b9bdb5`, accent `#e69d6b`, border `#32382d`, controls `#20261c`. Home and Apps consume the same tokens; generated Cert receives shared shell and catalog aliases through the existing integration stylesheet.
 - Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px (compact density), with 16px mobile prose. No clipped content or forced hidden document overflow.
-- Layout: sidebar plus fluid main column, About paragraphs fill the available column and wrap naturally. At wider screens the frame grows to 1800px. Mobile reflows vertically.
+- Layout: shared sticky header over one centered 1120px column; the intro statement follows the `t:>` prompt. Mobile reflows vertically and the header becomes static.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
-- Project source: existing shared catalog loader. Home shows `featured` projects in a carousel shuffled once per load (5/3/2/1 visible by width), auto-rotating with a pause/resume control; the full A–Z catalog lives at `/apps/`.
+- Project source: existing shared catalog loader. Home shows the full A–Z catalog in `#apps` with search and group filters (`?group=`, `?q=`).
 - The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`.
-- Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting `/apps/` and other application sources. Preserve route-specific information architecture and application behavior.
+- Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting application sources. Preserve route-specific information architecture and application behavior.
 
 Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
 
