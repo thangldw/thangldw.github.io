@@ -11,7 +11,7 @@
 .nf-error { color: #ff9b8f; }
 .nf-hint { margin-bottom: 4px; color: #e8eeff; }
 .nf-routes { display: grid; gap: 2px; margin: 4px 0 0; padding: 0; list-style: none; }
-.nf-routes li { display: grid; grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); gap: 16px; }
+.nf-routes li { display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: 16px; }
 .nf-routes span { color: #8d9bb8; }
 .not-found-terminal a { color: #8aa8ff; text-decoration: none; }
 .not-found-terminal a:hover { text-decoration: underline; }
