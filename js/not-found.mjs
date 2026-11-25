@@ -4,6 +4,10 @@ export const routes = [
   ['/apps/', 'Apps'],
   ['/community/', 'Open-source contributions'],
   ['/japan-pr-guide/', 'Japan PR Guide'],
+  ['/igo/', 'Igo'],
+  ['/bizroll/', 'Bizroll'],
+  ['/jetrise/', 'Jetrise'],
+  ['/neon-glider/', 'Neon Glider'],
 ];
 
 const slug = path => path.toLowerCase().replace(/index\.html$/, '').replace(/^\/+|\/+$/g, '');

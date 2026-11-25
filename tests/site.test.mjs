@@ -24,10 +24,14 @@ test('shared header, footer and asset versions are in sync', () => {
   }
 });
 
+// Project sites served from their own repositories under the same origin.
+const projectSites = ['/igo/', '/bizroll/', '/jetrise/', '/neon-glider/'];
+
 test('every local href and src resolves to a file', () => {
   const missing = [];
   for (const page of pages) {
     for (const [, url] of read(page).matchAll(/(?:href|src)="(\/[^"/][^"]*)"/g)) {
+      if (projectSites.includes(url)) continue;
       const path = decodeURIComponent(url.split(/[?#]/)[0]);
       const target = path.endsWith('/') ? join(path, 'index.html') : path;
       if (!existsSync(join(root, target))) missing.push(`${page}: ${url}`);
@@ -101,12 +105,13 @@ test('locale files define the same keys in every language', async () => {
 
 test('404 suggestions point at real pages and catch typos', async () => {
   const { routes, closest } = await import('../js/not-found.mjs');
-  for (const [route] of routes) assert.ok(existsSync(join(root, route.endsWith('/') ? join(route, 'index.html') : route)), route);
+  for (const [route] of routes.filter(([r]) => !projectSites.includes(r))) assert.ok(existsSync(join(root, route.endsWith('/') ? join(route, 'index.html') : route)), route);
   const html = read('404.html');
   for (const [route] of routes) assert.ok(html.includes(`href="${route}"`), `404.html lacks ${route}`);
   assert.equal(closest('/app'), '/apps/');
   assert.equal(closest('/Apps/index.html'), '/apps/');
   assert.equal(closest('/communty/'), '/community/');
+  assert.equal(closest('/neon-glidr/'), '/neon-glider/');
   assert.equal(closest('/zzzzzzzz'), null);
   assert.equal(closest('/'), null);
 });
