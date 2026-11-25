@@ -80,12 +80,12 @@ html:root[data-theme] #siteHeader .site-theme-toggle:hover:not(:disabled){backgr
 .page-title{font-size:48px;line-height:1.1;font-weight:500;letter-spacing:-.035em;color:var(--color-text)}
 .page-lead{margin-top:16px;font-size:18px;line-height:1.65;color:var(--color-text-description);text-wrap:pretty}
 .page-note{margin-top:12px;font-size:14px;line-height:1.6;color:var(--color-text-body);text-wrap:pretty}
-.page-head{padding-top:56px}
+.page-head{padding-top:24px}
 
 /* Home. */
-.intro{padding-top:12px}
+.intro{padding-top:24px}
 .statement{font-size:48px;line-height:1.1;font-weight:500;letter-spacing:-.035em;text-wrap:balance}
-.hero-grid{margin-top:34px}
+.hero-grid{margin-top:30px}
 .hero-copy{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:48px;align-items:center}
 .bio{max-width:none}
 .bio p{font-size:17px;line-height:1.6;color:var(--color-text-description)}
@@ -100,8 +100,8 @@ html[data-theme=dark] .engage-links a:first-child{border-color:#e6ebf5;backgroun
 .hero-art{margin-top:16px}
 .hero-art div{overflow:hidden;border:1px solid var(--color-border);border-radius:14px;box-shadow:0 30px 60px -34px rgba(16,33,58,.55)}
 .hero-art :is(img,svg){display:block;width:100%;height:auto}
-.areas{margin-top:28px}
-.areas-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:16px}
+.areas{margin-top:24px}
+.areas-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:12px}
 .areas-grid h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
 .areas-grid p{margin-top:6px;font-size:14px;line-height:1.6;color:var(--color-text-description)}
 
@@ -186,9 +186,9 @@ html[data-theme=dark] .sr-mark{background:#e6ebf5;color:#10213a}
  .resume-home .home-header .site-nav{order:10;margin-inline:-10px 0}
  .resume-home .home-header .header-actions{gap:6px}
  html:root[data-theme] #siteHeader .locale-switch button{min-height:34px;padding:0 8px}
- .page-head{padding-top:32px}
+ .page-head{padding-top:28px}
  .page-title{font-size:34px;letter-spacing:-.03em}
- .intro{padding-top:36px}
+ .intro{padding-top:28px}
  .statement{font-size:36px;letter-spacing:-.03em}
  .hero-grid{margin-top:32px}
  .bio p{font-size:18px}
