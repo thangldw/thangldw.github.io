@@ -168,5 +168,12 @@ export default {
   "pr105Problem": "可复现性检查清单将有效宽度误写为 972 像素，正确值为 964，并有一个条目编号重复。",
   "pr105Decision": "修正宽度公式和清单编号，并增加文档同步回归检查。",
   "pr105WhyTradeoff": "几何公式影响实际布局，用测试约束文档中的不变量比只改文字更能防止问题再次出现。",
-  "pr105Value": "维护者确认改动已纳入合并的 #134，并保留作者署名。"
+  "pr105Value": "维护者确认改动已纳入合并的 #134，并保留作者署名。",
+  "integrationCommit": "提交",
+  "pr3426Title": "XML plist 键标识",
+  "pr3426Problem": "XML plist 字典的键没有以完整的字符数据名称保留。",
+  "pr3426Decision": "在解码器边界使用经验证的 DOM 键名作为标识并排除原型键，借助不冲突的别名实现；维护者采纳了测试和方案。",
+  "pr505Title": "RFC 6364 与 IS-05 FEC SDP",
+  "pr505Problem": "SDP 处理无法表达 RFC 6364 中的 SMPTE 2022-5 FEC 流，也无法映射到 IS-05 传输参数。",
+  "pr505Decision": "解析并生成 fec-source-flow、fec-repair-flow 和 repair-window，再将 FEC 传输参数映射到这些属性。",
 };

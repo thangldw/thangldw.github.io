@@ -1,8 +1,8 @@
 // Translations for the PR rows on the Community page.
 // Page chrome (document language, title, meta) is owned by homepage.js.
-import vi from './community-locales/vi.mjs?v=7f12ef93';
-import ja from './community-locales/ja.mjs?v=11e401ed';
-import zh from './community-locales/zh.mjs?v=874b381a';
+import vi from './community-locales/vi.mjs?v=297bfaa7';
+import ja from './community-locales/ja.mjs?v=f953bc3b';
+import zh from './community-locales/zh.mjs?v=1fe28445';
 import { bindLocaleSwitch } from './site-locale.mjs?v=6fd22c76';
 
 const messages = { en: {}, vi, ja, zh };
