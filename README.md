@@ -8,7 +8,7 @@ A dependency-light portfolio, application catalog, and static application host d
 %%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":38,"rankSpacing":58},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
 flowchart LR
     PJ["projects-data.json<br/>project source"]:::yellow --> PL["Runtime catalog<br/>loader"]:::blue
-    PL --> H["Portfolio home<br/>#apps catalog · #community"]:::purple
+    PL --> H["Portfolio<br/>Home · /apps/ · /community/"]:::purple
     H --> GP["GitHub Pages"]:::yellow
     classDef yellow fill:#FFF4A3,stroke:#C9A227,stroke-width:2px,color:#172B4D
     classDef blue fill:#D9EAFD,stroke:#4C78A8,stroke-width:2px,color:#172B4D
@@ -35,14 +35,16 @@ flowchart LR
 
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Single page: profile, `#apps` searchable catalog grouped by purpose, `#community` open-source contributions | Root HTML plus `js/projects-data.json` |
+| `/` | Overview: headline, bio, an animated graph of merged open-source pull requests, and areas of work | Root HTML, `js/hero-graph.mjs` |
+| `/apps/` | Project catalog as cards grouped by purpose, with group filters (`?group=`) | `apps/index.html` plus `js/projects-data.json` |
+| `/community/` | Security-reports placeholder and merged pull requests per upstream repository, one row per PR | `community/index.html` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
 | `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
 The Workers study apps ship a self-contained copy of `/404.html` (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari). After changing the 404 design, update each copy by hand; the generator that inlined this site's CSS (`scripts/export_standalone_404.py`) is only in git history.
 
-Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. The retired `/apps/` and `/community/` routes have no files: `/404.html` loads `js/legacy-route-redirect.js`, which forwards them to `/#apps` and `/#community`, keeping the query string and any in-page hash.
+Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. `/apps/` and `/community/` are real pages again. Old `/#apps` and `/#community` links are forwarded to them by `js/homepage.js`, keeping the query string.
 
 The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 
@@ -50,7 +52,7 @@ Every sitemap route must have canonical metadata, a meaningful description, requ
 
 ### Shared catalog architecture
 
-`js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. The home page `#apps` catalog waits for its readiness promise before rendering.
+`js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. The `/apps/` catalog waits for its readiness promise before rendering.
 
 ### Repository layout
 
@@ -257,11 +259,11 @@ The homepage is the design reference for the application catalog. Maintain each 
 - Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px (compact density), with 16px mobile prose. No clipped content or forced hidden document overflow.
 - Layout: shared sticky header over one centered 1120px column; the intro statement follows the `t:>` prompt. Mobile reflows vertically and the header becomes static.
 - Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
-- Project source: existing shared catalog loader. Home shows the full A–Z catalog in `#apps` with search and group filters (`?group=`, `?q=`).
+- Project source: existing shared catalog loader. `/apps/` shows the full A–Z catalog as cards with group filters (`?group=`).
 - The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`.
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting application sources. Preserve route-specific information architecture and application behavior.
 
-Homepage runtime files are `index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, and `js/home-project-order.mjs`. No production package installation or build is required.
+Portfolio runtime files are `index.html`, `apps/index.html`, `community/index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, `js/hero-graph.mjs`, `js/apps-catalog.js` and `js/community-section.mjs`. No production package installation or build is required.
 
 Technical standardization is documented in `DESIGN.md`; the automated design validator formerly in `scripts/` was removed. Light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration are now checked by hand. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
 
