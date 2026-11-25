@@ -7,7 +7,7 @@ if (!existsSync(path.join(pages, "js/support-dialog.js"))) throw new Error("Expe
 const target = path.join(pages, "japan-pr-guide");
 mkdirSync(target, { recursive: true });
 // Keep previous hashed assets so cached HTML remains valid during Pages propagation.
-cpSync(path.join(root, "dist/client"), target, { recursive: true });
+cpSync(path.join(root, "dist"), target, { recursive: true });
 // Keep the site font loading policy (swap) when rebuilding the route.
 for (const name of readdirSync(path.join(target, "assets"))) {
   if (!name.endsWith(".css")) continue;

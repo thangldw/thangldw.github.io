@@ -11,8 +11,6 @@ React 19 and Vite source of the Japan permanent-residence planning tool publishe
 | `src/components/` | UI; `ScoreCalculator.jsx` owns the five-step flow |
 | `src/scoreDefinitions.js`, `src/data/innovativeAsia.js` | MOJ scoring definitions and the Innovative Asia partner-university list |
 | `scripts/release-pages.mjs` | Copies the build into `../../japan-pr-guide/` with the portfolio shell |
-| `scripts/prepare-sites-build.mjs`, `worker/`, `.openai/hosting.json`, `tests/sites-worker.test.mjs` | Optional Sites hosting packaging |
-| `docs/japan-pr-guide-flow.html` | Diagram of the HSP-to-PR workflow |
 
 ## Commands
 
@@ -20,7 +18,7 @@ React 19 and Vite source of the Japan permanent-residence planning tool publishe
 npm ci
 npm run dev           # local dev server
 npm test              # domain and UI tests (vitest)
-npm run release:pages # tests, production build, Sites tests, then regenerate ../../japan-pr-guide/
+npm run release:pages # tests, production build into dist/, then regenerate ../../japan-pr-guide/
 ```
 
 After a release, from the repository root:

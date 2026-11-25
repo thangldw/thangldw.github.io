@@ -9,13 +9,6 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = file => readFileSync(join(root, file), 'utf8');
 const pages = ['404.html', 'index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html'];
 
-// Files that nothing in this repo references but other repositories load by URL.
-const externalConsumers = new Set([
-  'css/app-brand.css', // thangldw/cert product pages
-  'css/support-tokens.css', // isolated export for independent project sites (README)
-  'css/compact-footer.css', // opt-in footer for independent project sites (DESIGN.md)
-]);
-
 test('shared header, footer and asset versions are in sync', () => {
   try {
     execFileSync(process.execPath, [join(root, 'scripts/sync-shell.mjs'), '--check'], { encoding: 'utf8', stdio: 'pipe' });
@@ -46,12 +39,11 @@ test('sitemap lists only pages that exist', () => {
   for (const path of urls) assert.ok(existsSync(join(root, path.endsWith('/') ? join(path, 'index.html') : path)), path);
 });
 
-test('every stylesheet and script is used or deliberately kept for another repository', () => {
+test('every stylesheet and script is referenced', () => {
   const files = ['css', 'js', 'js/community-locales'].flatMap(dir =>
     readdirSync(join(root, dir)).map(name => `${dir}/${name}`).filter(file => statSync(join(root, file)).isFile()));
   const corpus = [...pages, ...files].map(read).join('\n');
-  const unused = files.filter(file => !externalConsumers.has(file)
-    && !corpus.includes(`/${file}`) && !corpus.includes(`./${file.split('/').pop()}`) && !corpus.includes(`/${file.split('/').pop()}`));
+  const unused = files.filter(file => !corpus.includes(`/${file}`) && !corpus.includes(`./${file.split('/').pop()}`) && !corpus.includes(`/${file.split('/').pop()}`));
   assert.deepEqual(unused, []);
 });
 

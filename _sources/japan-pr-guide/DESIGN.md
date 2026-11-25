@@ -12,7 +12,7 @@ what is specific to the tool.
 5. Prepare the application plan and evidence checklist.
 
 Future steps stay unavailable until reached. State is session-only React state: no `localStorage`, URL state, upload or remote
-persistence. The flow diagram is `docs/japan-pr-guide-flow.html`.
+persistence.
 
 ## Scoring rules
 

@@ -4,7 +4,7 @@ Personal portfolio and application catalog of Thang Luu, served as a static site
 There is no build step and no runtime dependency. Node scripts only check and synchronize files.
 
 - Production: <https://thangldw.github.io/>
-- Branch: `master`, published from the repository root by GitHub Pages (`.nojekyll` serves the tree as-is)
+- Branch: `master`, published from the repository root by GitHub Pages (`_config.yml` keeps sources, scripts, tests and Markdown out of the published tree)
 
 ## Routes
 
@@ -35,6 +35,7 @@ links are forwarded by `js/homepage.js`, and `js/legacy-route-redirect.js` forwa
 ├── tests/site.test.mjs                         Structural tests (node:test)
 ├── assets/                                     Social images, QR images, self-hosted fonts and licenses
 ├── DESIGN.md                                   Design system contract
+├── _config.yml                                 Jekyll excludes for the published tree
 └── robots.txt, sitemap.xml
 ```
 
@@ -62,12 +63,10 @@ npm test
 ```
 
 `npm test` runs `tests/site.test.mjs`: shell and version sync, local `href`/`src` resolution, sitemap entries,
-unused CSS/JS detection, CSP compliance (no inline styles or scripts), catalog schema and the 404 suggestions.
+detection of unreferenced CSS/JS, CSP compliance (no inline styles or scripts), catalog schema and the 404 suggestions.
 `.github/workflows/check.yml` runs the same command on every push and pull request to `master`.
 Before pushing, also open Home, Apps, Community and any changed route in light and dark themes and at mobile width.
 
-`css/app-brand.css`, `css/support-tokens.css` and `css/compact-footer.css` are not referenced by any page here; they are
-shared with other repositories and are allow-listed in the unused-file test.
 
 ## Project catalog
 
@@ -101,8 +100,7 @@ The generated route in `japan-pr-guide/` is produced by `npm run release:pages` 
 - No secrets, credentials or private datasets in the repository. Fonts and assets are self-hosted.
 - Catalog text is inserted with `textContent` or escaped before it reaches HTML.
 - Analytics is the single shared `js/analytics.js`; it runs only on the production host.
-- Because the whole tree is served, `_sources/` and `*.md` are reachable by URL. `robots.txt` keeps them out of search
-  engines but does not make them private.
+- Jekyll (`_config.yml`) excludes `_sources/`, scripts, tests and Markdown from the published site. Nothing in the repository is private: the source is public on GitHub.
 
 ## Deployment and rollback
 
