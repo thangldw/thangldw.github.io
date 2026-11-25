@@ -24,7 +24,7 @@ const derived = {
 };
 
 const titles = {
- home: t => `Thang Luu — ${t.roles[0][0]}`,
+ home: t => t.headline.replace(/[.。]$/, ''),
  apps: t => `${t.projects} — Thang Luu`,
  community: t => `${t.communityTitle} — Thang Luu`
 };
