@@ -168,5 +168,12 @@ export default {
   "pr105Problem": "Danh sách kiểm tra khả năng tái lập ghi chiều rộng hữu dụng là 972 thay vì 964 pixel, đồng thời lặp số thứ tự của một mục.",
   "pr105Decision": "Sửa công thức chiều rộng và thứ tự các mục; thêm kiểm thử hồi quy để các phần tài liệu luôn khớp nhau.",
   "pr105WhyTradeoff": "Công thức ảnh hưởng đến kích thước đầu ra thực tế. Kiểm thử điều kiện này giúp ngăn lỗi tái diễn tốt hơn việc chỉ sửa câu chữ.",
-  "pr105Value": "Người bảo trì xác nhận thay đổi đã được tích hợp vào #134 và giữ thông tin tác giả."
+  "pr105Value": "Người bảo trì xác nhận thay đổi đã được tích hợp vào #134 và giữ thông tin tác giả.",
+  "integrationCommit": "Commit",
+  "pr3426Title": "Danh tính khóa trong XML plist",
+  "pr3426Problem": "Khóa từ điển XML plist không được giữ nguyên thành tên đầy đủ từ dữ liệu ký tự.",
+  "pr3426Decision": "Dùng tên khóa từ DOM đã kiểm tra làm danh tính và để loại prototype, qua bí danh không va chạm tại ranh giới bộ giải mã; người bảo trì đã điều chỉnh kiểm thử và đề xuất.",
+  "pr505Title": "RFC 6364 và SDP FEC IS-05",
+  "pr505Problem": "Xử lý SDP chưa biểu diễn được luồng FEC SMPTE 2022-5 theo RFC 6364 hay ánh xạ chúng sang tham số truyền tải IS-05.",
+  "pr505Decision": "Phân tích và tạo fec-source-flow, fec-repair-flow, repair-window, rồi ánh xạ các tham số truyền tải FEC sang các thuộc tính đó.",
 };
