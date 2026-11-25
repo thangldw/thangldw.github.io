@@ -1,8 +1,10 @@
 // Hero for the home page: an isometric data platform (sources -> pipeline -> retrieval -> apps).
 // Each stage builds in turn, then a light idle loop keeps the flow moving.
 // Static when motion is reduced or on narrow screens.
+import { locales } from './home-locales.mjs?v=20261125-three';
+
 const NS = 'http://www.w3.org/2000/svg';
-const S = 25, OX = 150, OY = 100, C = Math.cos(Math.PI / 6);
+const S = 22, OX = 205, OY = 112, C = Math.cos(Math.PI / 6);
 const figure = document.getElementById('heroArt');
 const frame = figure?.querySelector('div');
 
@@ -25,14 +27,27 @@ function box(parent, x, y, z, w, d, h, top, left, right, extra = {}) {
 }
 
 // Centred under an isometric anchor point so each label sits against its own block.
-function tag(parent, label, anchor) {
- const g = el('g', {}, parent);
- const w = label.length * 6.2 + 16;
- const x = anchor[0] - w / 2, y = anchor[1] + 16;
- el('rect', { x, y: y - 11, width: w, height: 22, rx: 7, fill: '#fff' }, g);
- const t = el('text', { x: x + 8, y: y + 4, fill: '#10213a', 'font-size': 11.5, 'font-weight': 600 }, g);
- t.textContent = label;
- return g;
+// Callout cards tie each area of work to the part of the platform it describes.
+const CALLOUTS = [
+ { color: '#f59e0b', card: [14, 12, 176], hot: [.4, .5, 2.1], from: 'right' },
+ { color: '#16a36a', card: [14, 278, 176], hot: [4.3, .5, .46], from: 'right' },
+ { color: '#a78bfa', card: [410, 12, 176], hot: [7.6, .5, 3.75], from: 'left' },
+ { color: '#38bdf8', card: [410, 278, 176], hot: [10.8, .8, 1.55], from: 'left' }
+];
+
+function callout(parent, spec) {
+ const [x, y, w] = spec.card, h = 50;
+ const g = el('g', { class: 'callout' }, parent);
+ const [hx, hy] = P(...spec.hot);
+ const ax = spec.from === 'right' ? x + w : x, ay = y + h / 2;
+ const line = el('line', { x1: ax, y1: ay, x2: hx, y2: hy, stroke: spec.color, 'stroke-width': 1.8, 'stroke-dasharray': '2 5', 'stroke-linecap': 'round' }, g);
+ const card = el('g', {}, g);
+ el('rect', { x, y, width: w, height: h, rx: 9, fill: '#fff' }, card);
+ el('rect', { x, y: y + 9, width: 4, height: h - 18, rx: 2, fill: spec.color }, card);
+ const title = el('text', { x: x + 16, y: y + 21, fill: '#10213a', 'font-size': 12.5, 'font-weight': 700 }, card);
+ const sub = el('text', { x: x + 16, y: y + 37, fill: '#51607a', 'font-size': 10.5 }, card);
+ const dot = el('circle', { cx: hx, cy: hy, r: 5, fill: spec.color, stroke: '#fff', 'stroke-width': 2 }, g);
+ return { g, line, card, dot, title, sub };
 }
 
 const icons = {
@@ -48,7 +63,7 @@ const icons = {
 };
 
 function build() {
- const svg = el('svg', { viewBox: '0 0 520 360', role: 'img', 'aria-label': figure.querySelector('img')?.alt || '' });
+ const svg = el('svg', { viewBox: '0 0 600 340', role: 'img', 'aria-label': figure.querySelector('img')?.alt || '' });
  const defs = el('defs', {}, svg);
  const bg = el('linearGradient', { id: 'hg-bg', x1: 0, y1: 0, x2: 1, y2: 1 }, defs);
  el('stop', { offset: 0, 'stop-color': '#0e1c33' }, bg); el('stop', { offset: 1, 'stop-color': '#1c3a78' }, bg);
@@ -56,7 +71,7 @@ function build() {
  el('stop', { offset: 0, 'stop-color': '#3b6bef', 'stop-opacity': .45 }, glow); el('stop', { offset: 1, 'stop-color': '#3b6bef', 'stop-opacity': 0 }, glow);
  const dots = el('pattern', { id: 'hg-dots', width: 20, height: 20, patternUnits: 'userSpaceOnUse' }, defs);
  el('circle', { cx: 2, cy: 2, r: 1.2, fill: '#fff', opacity: .1 }, dots);
- for (const fill of ['url(#hg-bg)', 'url(#hg-dots)', 'url(#hg-glow)']) el('rect', { width: 520, height: 360, fill }, svg);
+ for (const fill of ['url(#hg-bg)', 'url(#hg-dots)', 'url(#hg-glow)']) el('rect', { width: 600, height: 340, fill }, svg);
 
  const plate = el('g', {}, svg);
  poly([P(-1.5, -2), P(12.5, -2), P(12.5, 3), P(-1.5, 3)], '#16294d', plate, { stroke: '#2c4a86' });
@@ -89,31 +104,32 @@ function build() {
   return { g, mark };
  });
 
- const tags = el('g', {}, svg);
- const labels = [tag(tags, 'Sources', P(.4, 1.6)), tag(tags, 'Pipeline', P(4.3, 1)), tag(tags, 'Retrieval', P(7.6, 1.6)), tag(tags, 'Applications', P(10.8, 3))];
- return { svg, plate, flow, slabs, pipe, chevrons, rag, sheets, lens, apps, labels };
+ const callouts = CALLOUTS.map(spec => callout(svg, spec));
+ return { svg, plate, flow, slabs, pipe, chevrons, rag, sheets, lens, apps, callouts };
 }
 
 function animate(s) {
  const ease = 'cubic-bezier(.2,.7,.2,1)', pop = 'cubic-bezier(.3,1.5,.5,1)';
  const rise = (n, delay, dy = 28) => n.animate([{ transform: `translateY(${dy}px)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 560, delay, easing: ease, fill: 'backwards' });
  const drop = (n, delay) => n.animate([{ transform: 'translateY(-44px)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1, offset: .55 }, { transform: 'translateY(-4px)', offset: .8 }, { transform: 'translateY(0)' }], { duration: 620, delay, easing: 'ease-in', fill: 'backwards' });
- const label = (n, delay) => n.animate([{ transform: 'translateX(-8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 380, delay, easing: ease, fill: 'backwards' });
  const grow = (n, delay) => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center'; n.animate([{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.2)', opacity: 1, offset: .7 }, { transform: 'scale(1)' }], { duration: 380, delay, easing: 'ease-out', fill: 'backwards' }); };
 
  s.plate.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, fill: 'backwards' });
  s.flow.animate([{ opacity: 0 }, { opacity: .9 }], { duration: 600, delay: 500, fill: 'backwards' });
  s.slabs.forEach((g, i) => drop(g, 450 + i * 220));
- label(s.labels[0], 1150);
  rise(s.pipe, 1300);
  s.chevrons.forEach((c, i) => c.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: 1750 + i * 120, fill: 'backwards' }));
- label(s.labels[1], 1650);
  rise(s.rag, 1950, 34);
  s.sheets.forEach((g, i) => drop(g, 2350 + i * 200));
  grow(s.lens, 2900);
- label(s.labels[2], 2550);
  s.apps.forEach(({ g, mark }, i) => { rise(g, 3100 + i * 200, 24); grow(mark, 3550 + i * 200); });
- label(s.labels[3], 3500);
+
+ const reveal = ({ card, line, dot }, delay) => {
+  grow(dot, delay);
+  line.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: delay + 150, fill: 'backwards' });
+  card.animate([{ transform: 'translateY(8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, delay: delay + 250, easing: ease, fill: 'backwards' });
+ };
+ [1300, 2000, 3000, 3900].forEach((t, i) => reveal(s.callouts[i], t));
 
  // idle: the flow keeps moving and the sheets float, started after the build
  s.flow.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -9 }], { duration: 700, iterations: Infinity, delay: 1100 });
@@ -126,7 +142,14 @@ if (figure && frame) {
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(max-width: 720px)').matches;
   frame.replaceChildren(scene.svg);
   if (!still && typeof scene.svg.animate === 'function') animate(scene);
-  document.addEventListener('homelocale', e => scene.svg.setAttribute('aria-label', e.detail.copy.heroAlt));
+  const setText = copy => {
+   scene.svg.setAttribute('aria-label', copy.heroAlt);
+   const items = copy.heroCallouts;
+   scene.callouts.forEach((c, i) => { c.title.textContent = items[i][0]; c.sub.textContent = items[i][1]; });
+  };
+  const lang = document.documentElement.lang === 'zh-CN' ? 'zh' : document.documentElement.lang;
+  setText(locales[lang] || locales.en);
+  document.addEventListener('homelocale', e => setText(e.detail.copy));
  } catch (error) {
   console.warn('Hero unavailable; keeping the static image.', error);
  }
