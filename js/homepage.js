@@ -1,4 +1,4 @@
-import { locales } from './home-locales.mjs?v=20261125-overview';
+import { locales } from './home-locales.mjs?v=20261125-city';
 import { bindLocaleSwitch } from './site-locale.mjs';
 
 const root = document.documentElement;
