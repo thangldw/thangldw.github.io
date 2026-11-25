@@ -39,12 +39,12 @@ flowchart LR
 | `/apps/` | Project catalog as cards grouped by purpose, with group filters (`?group=`) | `apps/index.html` plus `js/projects-data.json` |
 | `/community/` | Security-reports placeholder and merged pull requests per upstream repository, one row per PR | `community/index.html` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
-| `/ragops/`, `/proofline/`, `/awesome-maintainer-defense/`, `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
+| `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
 | `/404.html` | GitHub Pages fallback | Repository source |
 
 The Workers study apps ship a self-contained copy of `/404.html` (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari). After changing the 404 design, update each copy by hand; the generator that inlined this site's CSS (`scripts/export_standalone_404.py`) is only in git history.
 
-Redirect stub pages (for example the former `/apps/ragops/`) are not allowed; link to the canonical route directly. `/apps/` and `/community/` are real pages again. Old `/#apps` and `/#community` links are forwarded to them by `js/homepage.js`, keeping the query string.
+Redirect stub pages are not allowed; link to the canonical route directly. `/apps/` and `/community/` are real pages again. Old `/#apps` and `/#community` links are forwarded to them by `js/homepage.js`, keeping the query string.
 
 The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
 

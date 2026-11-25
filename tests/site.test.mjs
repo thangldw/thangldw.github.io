@@ -7,13 +7,13 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = file => readFileSync(join(root, file), 'utf8');
-const pages = ['404.html', 'index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html',
-  'proofline/index.html', 'ragops/index.html', 'awesome-maintainer-defense/index.html'];
+const pages = ['404.html', 'index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html'];
 
 // Files that nothing in this repo references but other repositories load by URL.
 const externalConsumers = new Set([
   'css/app-brand.css', // thangldw/cert product pages
   'css/support-tokens.css', // isolated export for independent project sites (README)
+  'css/compact-footer.css', // opt-in footer for independent project sites (DESIGN.md)
 ]);
 
 test('shared header, footer and asset versions are in sync', () => {
