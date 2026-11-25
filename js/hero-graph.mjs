@@ -7,7 +7,7 @@ const NS = 'http://www.w3.org/2000/svg';
 const C = Math.cos(Math.PI / 6);
 const figure = document.getElementById('heroArt');
 const frame = figure?.querySelector('div');
-const COLORS = ['#f59e0b', '#16a36a', '#a78bfa', '#38bdf8'];
+const COLORS = ['#f59e0b', '#a78bfa', '#38bdf8', '#16a36a'];
 const LAYOUTS = {
  wide: { w: 1232, h: 240, S: 24, cy: 108, card: { w: 250, h: 48, y: 182, title: 14, sub: 11.5 }, islands: [[170, 0], [470, 0], [770, 0], [1070, 0]] },
  compact: { w: 600, h: 560, S: 30, cy: 128, card: { w: 270, h: 58, y: 214, title: 16, sub: 13 }, islands: [[150, 0], [450, 0], [150, 280], [450, 280]] }
@@ -54,54 +54,70 @@ function build(layout) {
   }
   const rise = [], drop = [], pop = [], idle = [];
   let hot;
+  const muted = ['#b9c4dc', '#5b6b8c', '#46557a'];
   if (index === 0) {
-   [[-1.7, -1.5, 3], [.3, -.2, 2]].forEach(([x, y, n], s) => {
-    const size = s ? 1.6 : 1.9;
-    for (let q = 0; q < n; q++) {
-     const slab = box(g, x, y, q * .72, size, size, .5, '#a9c2ff', '#2f55c8', '#1f3fa0');
-     [0, 1, 2].forEach(i => { const p = P(x + .3 + i * .38, y + size, q * .72 + .26); el('circle', { cx: p[0], cy: p[1], r: 2 * k, fill: i === 0 ? '#5fe0a8' : '#cfe0ff' }, slab); });
-     drop.push(slab);
-    }
-    if (!s) hot = P(x + size / 2, y + size / 2, 2 * .72 + .5);
+   // Discover: scattered, mismatched sources and a question mark
+   [[-1.9, -1.9, .9], [.1, -2.1, 1.5], [-2, .1, .6], [-.5, -.6, 1.15], [1.2, .5, .75]].forEach(([x, y, th], q) => {
+    const crate = box(g, x, y, 0, 1.1 + (q % 2) * .3, 1.1, th, ...muted);
+    drop.push(crate);
    });
+   [[[-1.3, -1.3], [-.6, -.1], [.2, -.6]], [[.6, -1.5], [.5, .3], [1.5, 1.3]]].forEach(path => {
+    const d = path.map(([x, y], q) => `${q ? 'L' : 'M'}${P(x, y, .02).map(n => n.toFixed(1)).join(' ')}`).join('');
+    pop.push(el('path', { d, fill: 'none', stroke: '#8fb0ff', 'stroke-width': 1.6, 'stroke-dasharray': '1 5', 'stroke-linecap': 'round', opacity: .7 }, g));
+   });
+   const q = P(-.5 + .55, -.6 + .55, 3);
+   const mark = el('text', { x: q[0], y: q[1], fill: '#fff', 'font-size': 26 * k, 'font-weight': 800, 'text-anchor': 'middle' }, g);
+   mark.textContent = '?';
+   pop.push(mark); idle.push({ node: mark, bob: true });
+   hot = P(.05, -.05, 1.15);
   } else if (index === 1) {
-   const a = box(g, -2, -1, 0, 3.4, .9, .4, '#8fb0ff', '#2f55c8', '#1f3fa0');
-   const b = box(g, -1.1, .3, 0, 3, .8, .34, '#8fb0ff', '#2f55c8', '#1f3fa0');
-   rise.push(a, b);
-   for (let q = 0; q < 4; q++) { const x = -1.7 + q * .75; pop.push(el('polygon', { points: pts([[x, -.8, .41], [x + .35, -.55, .41], [x, -.3, .41], [x + .12, -.55, .41]]), fill: '#10213a' }, g)); }
-   const packet = box(g, -1.9, -.75, .4, .5, .5, .4, '#fff', '#c9d6f2', '#a9bce6');
-   idle.push({ node: packet, dx: 3 * C * S, dy: 1.5 * S });
-   hot = P(-.3, -.55, .4);
-  } else if (index === 2) {
-   rise.push(box(g, -.9, -1.5, 0, 1.9, 2, 1.7, '#b8ccff', '#3b6bef', '#2447b8'));
-   rise.push(box(g, 1.2, .4, 0, 1, 1, .65, '#cfe0ff', '#6f90e8', '#4a6fd0'));
-   [2.5, 3, 3.5].forEach((z, q) => drop.push(box(g, -.75 + q * .12, -1.25 + q * .1, z, 1.5, 1.7, .12, '#e6eeff', '#8fb0ff', '#6f90e8', { opacity: .95 })));
-   const lens = el('g', { stroke: '#fff', 'stroke-width': 3 * k, fill: 'none', 'stroke-linecap': 'round' }, g);
-   const lp = P(.0, .5, .85);
-   el('circle', { cx: lp[0], cy: lp[1], r: 9 * k }, lens);
-   el('line', { x1: lp[0] + 6.5 * k, y1: lp[1] + 6.5 * k, x2: lp[0] + 15 * k, y2: lp[1] + 15 * k }, lens);
-   pop.push(lens);
-   idle.push(...drop.map(n => ({ node: n, bob: true })));
-   hot = P(-.1, -.4, 3.7);
-  } else {
-   const tiles = [[-1.9, -1.9, 1.1, 'cross'], [-.2, -1.9, 1.5, 'book'], [-1.9, -.2, .8, 'molecule'], [-.2, -.2, 1.3, 'bars']];
-   tiles.forEach(([x, y, th, icon]) => {
-    const tile = el('g', {}, g);
-    box(tile, x, y, 0, 1.5, 1.5, th, '#ffffff', '#c9d6f2', '#a9bce6');
-    const c = P(x + .75, y + .75, th);
-    const m = el('g', {}, tile);
-    if (icon === 'cross') { m.setAttribute('fill', '#16a36a'); el('rect', { x: c[0] - 3.5 * k, y: c[1] - 9 * k, width: 7 * k, height: 18 * k, rx: 2 }, m); el('rect', { x: c[0] - 9 * k, y: c[1] - 3.5 * k, width: 18 * k, height: 7 * k, rx: 2 }, m); }
-    if (icon === 'book') { m.setAttribute('fill', '#1d4ed8'); el('path', { d: `M${c[0] - 10 * k} ${c[1] - 6 * k}q${10 * k} ${-5 * k} ${10 * k} 0v${10 * k}q0 ${-5 * k} ${-10 * k} 0z` }, m); el('path', { d: `M${c[0] + 10 * k} ${c[1] - 6 * k}q${-10 * k} ${-5 * k} ${-10 * k} 0v${10 * k}q0 ${-5 * k} ${10 * k} 0z`, opacity: .7 }, m); }
-    if (icon === 'molecule') {
-     m.setAttribute('stroke', '#5236c0'); m.setAttribute('stroke-width', 2.4 * k); m.setAttribute('fill', '#5236c0');
-     const p = [[c[0] - 8 * k, c[1] + 5 * k], [c[0] + 8 * k, c[1] + 5 * k], [c[0], c[1] - 8 * k]];
-     el('polygon', { points: p.map(q => q.join(',')).join(' '), fill: 'none' }, m);
-     p.forEach(([cx, cyy]) => el('circle', { cx, cy: cyy, r: 3.8 * k }, m));
-    }
-    if (icon === 'bars') { m.setAttribute('fill', '#e08a00'); [[-8, 2, 5], [-2, -3, 10], [4, -8, 15]].forEach(([dx, top, bh]) => el('rect', { x: c[0] + dx * k, y: c[1] + (top - 2) * k, width: 5 * k, height: bh * k, rx: 1 }, m)); }
-    rise.push(tile); pop.push(m);
+   // Design: a blueprint plane hovering over the site, with the architecture drawn on it
+   rise.push(box(g, -2, -2, 0, 4, 4, .22, '#2b4fb5', '#1f3fa0', '#16307f'));
+   const z = 1.7;
+   const plane = el('g', {}, g);
+   poly([[-1.9, -1.9, z], [1.9, -1.9, z], [1.9, 1.9, z], [-1.9, 1.9, z]], 'rgba(143,176,255,.2)', plane, { stroke: '#8fb0ff', 'stroke-width': 1.4 });
+   for (let i = -1; i <= 1; i++) for (const [m, n] of [[[i * 1.2, -1.9], [i * 1.2, 1.9]], [[-1.9, i * 1.2], [1.9, i * 1.2]]]) {
+    const [u, v] = [P(m[0], m[1], z), P(n[0], n[1], z)];
+    el('line', { x1: u[0], y1: u[1], x2: v[0], y2: v[1], stroke: '#8fb0ff', 'stroke-width': .7, opacity: .5 }, plane);
+   }
+   const nodes = [[-1.3, -1.3], [.5, -1.3], [-1.3, .4], [.5, .5]];
+   [[0, 1], [0, 2], [1, 3], [2, 3]].forEach(([i, j]) => {
+    const [u, v] = [P(nodes[i][0] + .3, nodes[i][1] + .3, z), P(nodes[j][0] + .3, nodes[j][1] + .3, z)];
+    el('line', { x1: u[0], y1: u[1], x2: v[0], y2: v[1], stroke: '#fff', 'stroke-width': 1.6 * k, 'stroke-linecap': 'round' }, plane);
    });
-   hot = P(-.2 + .75, -1.9 + .75, 1.5);
+   nodes.forEach(([x, y], q) => pop.push(box(plane, x, y, z, .7, .7, .3, ['#fff', '#cfe0ff', '#a9bce6'][0], '#8fb0ff', '#6f90e8')));
+   [[-1.9, -1.9], [1.9, -1.9], [1.9, 1.9], [-1.9, 1.9]].forEach(([x, y]) => { const [u, v] = [P(x, y, .22), P(x, y, z)]; el('line', { x1: u[0], y1: u[1], x2: v[0], y2: v[1], stroke: '#2c4a86', 'stroke-width': 1.4 }, g); });
+   rise.push(plane); idle.push({ node: plane, bob: true });
+   hot = P(.1, .1, z + .3);
+  } else if (index === 2) {
+   // Build: the platform goes up block by block, side by side with the customer's team
+   rise.push(box(g, -2.1, -2.1, 0, 4.2, 4.2, .25, '#2b4fb5', '#1f3fa0', '#16307f'));
+   const built = [[-1.7, -1.7, 1.2], [.1, -1.7, 1.9], [-1.7, .1, .9]];
+   built.forEach(([x, y, th]) => {
+    const blk = box(g, x, y, .25, 1.5, 1.5, th, '#b8ccff', '#3b6bef', '#2447b8');
+    drop.push(blk);
+   });
+   const slot = el('g', {}, g);
+   poly([[.1, .1, .25], [1.6, .1, .25], [1.6, 1.6, .25], [.1, 1.6, .25]], 'none', slot, { stroke: '#8fb0ff', 'stroke-width': 1.4, 'stroke-dasharray': '4 4' });
+   pop.push(slot);
+   const next = box(g, .35, .35, .25, 1, 1, 1, '#fff', '#c9d6f2', '#a9bce6');
+   idle.push({ node: next, drop: true });
+   hot = P(.85, -.95, 2.25 + .0);
+  } else {
+   // Run: a dependable system with evaluation gates passing
+   rise.push(box(g, -2.1, -2.1, 0, 4.2, 4.2, .25, '#2b4fb5', '#1f3fa0', '#16307f'));
+   const main = box(g, -1.6, -1.6, .25, 2, 2, 1.9, '#b8ccff', '#3b6bef', '#2447b8');
+   rise.push(main);
+   const cp = P(-.6, .4, 1.2);
+   const badge = el('g', {}, g);
+   el('circle', { cx: cp[0], cy: cp[1], r: 12 * k, fill: '#16a36a', stroke: '#fff', 'stroke-width': 2 }, badge);
+   el('path', { d: `M${cp[0] - 5.5 * k} ${cp[1]}l${4 * k} ${4 * k} ${7.5 * k} ${-8 * k}`, fill: 'none', stroke: '#fff', 'stroke-width': 2.6 * k, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, badge);
+   pop.push(badge);
+   [[.7, -1.2, .8], [.7, -.2, 1.3], [.7, .8, 1.8]].forEach(([x, y, th]) => rise.push(box(g, x, y, .25, .8, .8, th, '#b6f0d3', '#16a36a', '#0e7a4d')));
+   const gate = el('g', {}, g);
+   poly([[-1.9, 1.4, .25], [1.9, 1.4, .25], [1.9, 1.4, 1.1], [-1.9, 1.4, 1.1]], 'rgba(22,163,106,.18)', gate, { stroke: '#5fe0a8', 'stroke-width': 1.2, 'stroke-dasharray': '3 4' });
+   pop.push(gate);
+   hot = P(-.6, -.6, 2.15);
   }
 
   const cardX = ox - card.w / 2, cardY = card.y + dy;
@@ -143,7 +159,8 @@ function animate(scene) {
   isl.line.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: reveal + 150, fill: 'backwards' });
   isl.cardNode.animate([{ transform: 'translateY(8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, delay: reveal + 250, easing: ease, fill: 'backwards' });
   isl.idle.forEach((item, q) => {
-   if (item.bob) item.node.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)' }, { transform: 'translateY(0)' }], { duration: 3200, delay: 3600 + q * 350, iterations: Infinity, easing: 'ease-in-out' });
+   if (item.drop) item.node.animate([{ transform: 'translateY(-46px)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1, offset: .35 }, { transform: 'translateY(0)', opacity: 1, offset: .85 }, { transform: 'translateY(0)', opacity: 0 }], { duration: 3000, delay: t0 + 1500, iterations: Infinity, easing: 'ease-in' });
+   else if (item.bob) item.node.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)' }, { transform: 'translateY(0)' }], { duration: 3200, delay: 3600 + q * 350, iterations: Infinity, easing: 'ease-in-out' });
    else item.node.animate([{ transform: 'translate(0,0)', opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { transform: `translate(${item.dx}px,${item.dy}px)`, opacity: 0 }], { duration: 2600, delay: t0 + 1400, iterations: Infinity, easing: 'linear' });
   });
  });
