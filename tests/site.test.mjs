@@ -7,13 +7,13 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = file => readFileSync(join(root, file), 'utf8');
-const pages = ['404.html', 'index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html',
-  'proofline/index.html', 'ragops/index.html', 'awesome-maintainer-defense/index.html'];
+const pages = ['404.html', 'index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html'];
 
 // Files that nothing in this repo references but other repositories load by URL.
 const externalConsumers = new Set([
   'css/app-brand.css', // thangldw/cert product pages
   'css/support-tokens.css', // isolated export for independent project sites (README)
+  'css/compact-footer.css', // opt-in footer for independent project sites (DESIGN.md)
 ]);
 
 test('shared header, footer and asset versions are in sync', () => {
@@ -24,10 +24,14 @@ test('shared header, footer and asset versions are in sync', () => {
   }
 });
 
+// Project sites served from their own repositories under the same origin.
+const projectSites = ['/igo/', '/bizroll/', '/jetrise/', '/neon-glider/'];
+
 test('every local href and src resolves to a file', () => {
   const missing = [];
   for (const page of pages) {
     for (const [, url] of read(page).matchAll(/(?:href|src)="(\/[^"/][^"]*)"/g)) {
+      if (projectSites.includes(url)) continue;
       const path = decodeURIComponent(url.split(/[?#]/)[0]);
       const target = path.endsWith('/') ? join(path, 'index.html') : path;
       if (!existsSync(join(root, target))) missing.push(`${page}: ${url}`);
@@ -61,7 +65,7 @@ test('pages follow the CSP: no inline styles or inline scripts', () => {
 });
 
 test('shell pages carry the same landmarks', () => {
-  for (const page of ['index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html']) {
+  for (const page of ['index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html', '404.html']) {
     const html = read(page);
     for (const needle of ['id="siteHeader"', 'id="supportSlot"', 'id="themeToggle"', 'class="home-foot"', 'data-footer-year']) {
       assert.ok(html.includes(needle), `${page} is missing ${needle}`);
@@ -97,4 +101,17 @@ test('locale files define the same keys in every language', async () => {
     [lang, (await import(`../js/community-locales/${lang}.mjs`)).default])));
   const base = Object.keys(community.vi).sort();
   for (const lang of ['ja', 'zh']) assert.deepEqual(Object.keys(community[lang]).sort(), base, `community locale ${lang}`);
+});
+
+test('404 suggestions point at real pages and catch typos', async () => {
+  const { routes, closest } = await import('../js/not-found.mjs');
+  for (const [route] of routes.filter(([r]) => !projectSites.includes(r))) assert.ok(existsSync(join(root, route.endsWith('/') ? join(route, 'index.html') : route)), route);
+  const html = read('404.html');
+  for (const [route] of routes) assert.ok(html.includes(`href="${route}"`), `404.html lacks ${route}`);
+  assert.equal(closest('/app'), '/apps/');
+  assert.equal(closest('/Apps/index.html'), '/apps/');
+  assert.equal(closest('/communty/'), '/community/');
+  assert.equal(closest('/neon-glidr/'), '/neon-glider/');
+  assert.equal(closest('/zzzzzzzz'), null);
+  assert.equal(closest('/'), null);
 });

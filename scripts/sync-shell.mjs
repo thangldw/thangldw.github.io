@@ -17,13 +17,13 @@ export const shellPages = {
   'index.html': 'localized',
   'apps/index.html': 'localized',
   'community/index.html': 'localized',
+  '404.html': 'plain',
   'japan-pr-guide/index.html': 'plain',
   '_sources/japan-pr-guide/index.html': 'plain',
 };
 // Pages whose /css and /js references are version-stamped (shell pages plus the older product pages).
 const stampedPages = [
   '404.html', 'index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html',
-  'proofline/index.html', 'ragops/index.html', 'awesome-maintainer-defense/index.html',
 ];
 
 const read = file => readFileSync(join(root, file), 'utf8');
