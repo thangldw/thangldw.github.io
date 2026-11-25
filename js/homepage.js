@@ -23,10 +23,11 @@ const derived = {
  motto: t => t.motto.join(', ')
 };
 
+const tagline = t => t.headline.replace(/[.。]$/, '');
 const titles = {
- home: t => `Thang Luu — ${t.roles[0][0]}`,
- apps: t => `${t.projects} — Thang Luu`,
- community: t => `${t.communityTitle} — Thang Luu`
+ home: t => tagline(t),
+ apps: t => `${t.projects} — ${tagline(t)}`,
+ community: t => `${t.communityTitle} — ${tagline(t)}`
 };
 
 function renderLocale() {
