@@ -50,6 +50,9 @@ html:root[data-theme=dark]:has(.resume-home){background:#0c1424}
 .resume-home .sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .resume-home :lang(ja){font-family:var(--font-jp-sans);line-break:strict}
 .resume-home :lang(zh){font-family:var(--font-cn-sans);line-break:strict}
+/* The CJK rules above match every descendant, including icon glyph elements; keep the icon fonts. */
+.resume-home :is(.fa-solid,.fas,.fa-regular,.far){font-family:"Portfolio Icons"}
+.resume-home :is(.fa-brands,.fab){font-family:"Portfolio Brands"}
 
 /* Header: one cobalt bar on all three pages. */
 .resume-home .home-header{position:sticky;top:0;height:68px;background:var(--header-bg);color:#fff;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
