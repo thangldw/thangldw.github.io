@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   base: "/japan-pr-guide/",
   build: {
-    outDir: "dist/client",
+    outDir: "dist",
   },
   optimizeDeps: {
     include: ["react", "react-dom/client"],

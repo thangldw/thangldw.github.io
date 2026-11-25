@@ -1,0 +1,11 @@
+# Jekyll is used only to keep non-site files out of the published tree; no page uses Liquid or front matter.
+exclude:
+  - _sources
+  - .github
+  - scripts
+  - shared
+  - tests
+  - node_modules
+  - package.json
+  - README.md
+  - DESIGN.md

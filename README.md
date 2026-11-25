@@ -1,282 +1,112 @@
 # thangldw.github.io
 
-[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
+Personal portfolio and application catalog of Thang Luu, served as a static site by GitHub Pages.
+There is no build step and no runtime dependency. Node scripts only check and synchronize files.
 
-A dependency-light portfolio, application catalog, and static application host deployed with GitHub Pages.
+- Production: <https://thangldw.github.io/>
+- Branch: `master`, published from the repository root by GitHub Pages (`_config.yml` keeps sources, scripts, tests and Markdown out of the published tree)
 
-```mermaid
-%%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":38,"rankSpacing":58},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
-flowchart LR
-    PJ["projects-data.json<br/>project source"]:::yellow --> PL["Runtime catalog<br/>loader"]:::blue
-    PL --> H["Portfolio<br/>Home · /apps/ · /community/"]:::purple
-    H --> GP["GitHub Pages"]:::yellow
-    classDef yellow fill:#FFF4A3,stroke:#C9A227,stroke-width:2px,color:#172B4D
-    classDef blue fill:#D9EAFD,stroke:#4C78A8,stroke-width:2px,color:#172B4D
-    classDef pink fill:#FFE1E6,stroke:#C96A7B,stroke-width:2px,color:#172B4D
-    classDef purple fill:#E9DDF7,stroke:#8064A2,stroke-width:2px,color:#172B4D
-    classDef green fill:#DDF5E3,stroke:#4F9D69,stroke-width:2px,color:#172B4D
-    classDef orange fill:#FFE2C3,stroke:#C97A2B,stroke-width:2px,color:#172B4D
-    classDef cyan fill:#D9F3F0,stroke:#3B8F87,stroke-width:2px,color:#172B4D
-```
+## Routes
 
-## English
-
-### Purpose and operating model
-
-`thangldw.github.io` is a static personal portfolio and application host. GitHub Pages hosts the static shell. Root-site maintenance does not require a package-manager build, while generated apps are built in their source repositories. GitHub Pages serves committed HTML, CSS, JavaScript, JSON, fonts, images, and generated application artifacts.
-
-- Production: [https://thangldw.github.io/](https://thangldw.github.io/)
-- Default branch: `master`
-- Runtime: standards-based browser APIs
-- Deployment: GitHub Pages from the repository root
-- Analytics: shared local script included once on every page, except study apps with an explicit no-tracking policy
-
-### Public routes
-
-| Route | Responsibility | Source of truth |
+| Route | Content | Source |
 | --- | --- | --- |
-| `/` | Overview: headline, bio, an animated isometric city of my work areas (data platforms, software engineering, generative AI, forward deployed engineering, AI in manufacturing), and areas of work | Root HTML, `js/hero-graph.mjs` |
-| `/apps/` | Project catalog as cards grouped by purpose, with group filters (`?group=`) | `apps/index.html` plus `js/projects-data.json` |
-| `/community/` | Security-reports placeholder and merged pull requests per upstream repository, one row per PR | `community/index.html` |
-| `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
-| `/macinity/`, `/kakeflow/` | Product introductions | Portfolio shell or canonical product source |
-| `/404.html` | GitHub Pages fallback | Repository source |
+| `/` | Profile, hero graph, areas of work, contact | `index.html`, `js/homepage.js`, `js/hero-graph.mjs` |
+| `/apps/` | Project cards grouped by purpose, filterable with `?group=` | `apps/index.html`, `js/projects-data.json` |
+| `/community/` | Merged open-source pull requests per upstream repository | `community/index.html`, `js/community-section.mjs` |
+| `/japan-pr-guide/` | Standalone Japan permanent-residence planning tool (generated) | `_sources/japan-pr-guide/` |
+| `/404.html` | Terminal-style not-found page that lists the real routes and suggests the closest one | `404.html`, `css/404.css`, `js/not-found.mjs` |
 
-The Workers study apps ship a self-contained copy of `/404.html` (`scripts/standalone-404.html` in the Next.js apps, `release/reading/404.html` in Kotonari). After changing the 404 design, update each copy by hand; the generator that inlined this site's CSS (`scripts/export_standalone_404.py`) is only in git history.
+Other apps (Igo, Bizroll, JetRise, Neon Glider, Kakeflow, Macinity) live in their own repositories under the same origin.
+The 404 page lists their routes; the Cloudflare Workers study apps are linked from the catalog.
+Redirect stub pages are not allowed: link to the canonical route. Old `/#apps` and `/#community`
+links are forwarded by `js/homepage.js`, and `js/legacy-route-redirect.js` forwards retired `/cert/` routes from the 404 page.
 
-Redirect stub pages are not allowed; link to the canonical route directly. `/apps/` and `/community/` are real pages again. Old `/#apps` and `/#community` links are forwarded to them by `js/homepage.js`, keeping the query string.
-
-The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
-
-Every sitemap route must have canonical metadata, a meaningful description, required Open Graph fields, and a valid local social image where applicable.
-
-### Shared catalog architecture
-
-`js/projects-data.json` is the only durable source for project metadata. `js/projects-data.js` validates and loads it at runtime with revalidation. The `/apps/` catalog waits for its readiness promise before rendering.
-
-### Repository layout
+## Repository layout
 
 ```text
-thangldw.github.io/
-├── index.html
-├── 404.html
-├── japan-pr-guide/           # Generated Japan PR Guide app
-├── assets/                    # Social images and local fonts
-│   └── fonts/licenses/        # Upstream font notices and provenance
-├── css/                       # Tokens, shared shell, and route styles
-├── js/
-│   ├── projects-data.json     # Project metadata source of truth
-│   ├── projects-data.js       # Runtime loader and schema guard
-│   └── shared behavior
-├── robots.txt
-└── sitemap.xml
+.
+├── index.html, apps/, community/, 404.html     Pages that carry the shared shell
+├── japan-pr-guide/                             Generated Japan PR Guide (do not edit by hand)
+├── _sources/japan-pr-guide/                    React/Vite source of the Japan PR Guide
+├── css/                                        tokens.css, site-shell.css, support-dialog.css, route styles
+├── js/                                         Shared behaviour, locales, project data
+├── shared/shell.mjs                            Canonical header and footer markup
+├── scripts/sync-shell.mjs                      Shell sync and asset version stamping
+├── tests/site.test.mjs                         Structural tests (node:test)
+├── assets/                                     Social images, QR images, self-hosted fonts and licenses
+├── DESIGN.md                                   Design system contract
+├── _config.yml                                 Jekyll excludes for the published tree
+└── robots.txt, sitemap.xml
 ```
 
-### Local development
+## Shared shell
 
-Requirements: Python 3 (for a local static server). No dependency installation is required.
+`shared/shell.mjs` holds the single copy of the header and footer. `scripts/sync-shell.mjs` writes it into every
+page listed in `shellPages` (`localized` variant on Home, Apps and Community; `plain` on 404 and Japan PR Guide)
+and appends a content-hash `?v=` to every `/css` and `/js` reference, including module imports, so a changed file
+always gets a new URL.
 
-```bash
+```sh
+node scripts/sync-shell.mjs          # write changes
+node scripts/sync-shell.mjs --check  # fail if anything would change (used by npm test and CI)
+```
+
+Run it after editing `shared/shell.mjs`, any file under `css/` or `js/`, or after rebuilding the Japan PR Guide.
+
+## Development and verification
+
+Requirements: Node 22 and any static server. Serve over HTTP because the catalog loads JSON at runtime.
+
+```sh
 python3 -m http.server 4173
+npm test
 ```
 
-Open [http://localhost:4173/](http://localhost:4173/). Use a local server rather than opening files directly because runtime JSON loading requires HTTP.
+`npm test` runs `tests/site.test.mjs`: shell and version sync, local `href`/`src` resolution, sitemap entries,
+detection of unreferenced CSS/JS, CSP compliance (no inline styles or scripts), catalog schema and the 404 suggestions.
+`.github/workflows/check.yml` runs the same command on every push and pull request to `master`.
+Before pushing, also open Home, Apps, Community and any changed route in light and dark themes and at mobile width.
 
-### Verification
 
-The validators, audits and smoke tests formerly in `scripts/` were removed; they remain in git history. Before pushing to `master`, serve the site locally and check Home (including `#apps` and `#community`) and any changed route in both themes and at mobile width, and that every link and `js/projects-data.json` entry resolves.
+## Project catalog
 
-### Updating projects
+`js/projects-data.json` is the only source of project metadata. `js/projects-data.js` validates it and exposes
+`portfolioProjectsReady`; the Apps page renders after that promise resolves.
 
-Edit only `js/projects-data.json`.
+1. Keep `id` unique and stable.
+2. Fill every required field and use an `https://` or root-relative destination.
+3. Add translations for the card in `js/project-translations.mjs` (vi, ja, zh).
+4. Run `npm test` and check `/apps/` locally.
 
-1. Keep IDs unique and stable.
-2. Provide all required catalog fields and a safe destination URL.
-3. The home page includes all current projects in title order (English collation, numeric titles first). Keep `featured` metadata for other consumers.
-4. Check the changed routes locally.
-5. Commit and push.
+## Localization
 
-Home preserves the complete one-page profile, working approach, languages, contact links, followed by two sections reachable from the header navigation: `#apps`, the full project catalog, and `#community`, the open-source contributions record. The catalog uses compact cards of equal height, search, and group filters for Engineering, Utilities, Learning, and Experiments via `catalogGroup`. `catalogDescription` optionally supplies concise catalog copy. Email contacts use `mailto:`. Shared click events record only fixed project IDs and page locations.
+Home, Apps and Community support EN, VI, JA and ZH through `js/site-locale.mjs`, `js/home-locales.mjs`,
+`js/community-locales/` and `js/project-translations.mjs`. Product names and identifiers stay untranslated.
 
-Do not duplicate project descriptions in `index.html`. The JSON loader uses `cache: "no-store"`, so content updates do not require changing HTML cache keys. Loader/schema cache keys change only when loader behavior changes.
+## Support dialog
 
-### Support dialog and asset provenance
+`js/support-dialog.js` and `css/support-dialog.css` provide one shared dialog with a Ko-fi QR (global) and a ShopeePay QR
+(Vietnam). Pages with `<div id="supportSlot">` in the header get an inline trigger; on narrow screens it becomes a compact
+icon button. Pages without a slot get a floating button. Payment destinations must not change without the owner's approval.
 
-All HTML pages load the shared support assets with cache version `20261105-qr`; the Japan PR Guide exporter preserves this integration.
+## Japan PR Guide
 
-The support button follows the active HTML language (EN/VI/JA/ZH), updates on language changes, and falls back to English for unsupported languages.
+Source, tests and release instructions are in [`_sources/japan-pr-guide/README.md`](_sources/japan-pr-guide/README.md).
+The generated route in `japan-pr-guide/` is produced by `npm run release:pages` in that directory.
 
-Home mounts the support trigger inline in the header through `<div id="supportSlot">`, so there is no floating button. Portfolio support components inherit canonical tokens through `site-shell.css`. Independent project sites use the isolated `support-tokens.css` export so their host palette remains unchanged. Keep that file in sync with `tokens.css` by hand; the generator (`scripts/generate_support_tokens.py`) is only in git history.
+## Security and privacy
 
-The support trigger is text-only with a `--color-support` background and `--color-on-support` text (white on `#b83a06`, 5.8:1). The previously used Ko-fi cup asset is retained for cached versions.
+- Content Security Policy: `style-src 'self'`; no inline styles or inline scripts on public pages.
+- No secrets, credentials or private datasets in the repository. Fonts and assets are self-hosted.
+- Catalog text is inserted with `textContent` or escaped before it reaches HTML.
+- Analytics is the single shared `js/analytics.js`; it runs only on the production host.
+- Jekyll (`_config.yml`) excludes `_sources/`, scripts, tests and Markdown from the published site. Nothing in the repository is private: the source is public on GitHub.
 
-The shared Support dialog shows the user-supplied local Ko-fi QR (`assets/support-kofi.png`) and ShopeePay QR, labeled Global and Vietnam. The Ko-fi QR decodes to `https://ko-fi.com/F4N224DDUV/?ref=qr&v=2`. There is no Ko-fi iframe or external script request. Both QR codes remain visible on desktop and mobile; headings are not interactive. Restricted study pages use the same local images without changing their CSP. The static site does not collect payment credentials.
+## Deployment and rollback
 
-The portfolio home includes an optional Support dialog. Ko-fi uses a local QR image, and Vietnamese wallet support uses the user-supplied `assets/support-shopeepay.jpg` image. Keep payment destinations explicit, never collect payment credentials in this static site, and verify the QR destination before every release that changes the image.
+Push to `master`; GitHub Pages publishes the root. Verify production HTML and the changed routes once the Pages build
+is `built`. To roll back, revert the focused commit and push.
 
-Self-hosted font provenance and upstream license texts live under `assets/fonts/licenses/`. Keep only these durable license documents plus the root README and `DESIGN.md`; temporary Markdown reports and QA screenshots must stay outside the repository.
+## License
 
-### Deployment and rollback
-
-GitHub Pages publishes the `master` branch root directly (Settings → Pages → Source: *Deploy from a branch*); `.nojekyll` serves the tree as-is. There is no GitHub Actions workflow in this repository, so nothing validates a push remotely. After merging, confirm the deploy in the Actions tab ("pages build and deployment") or check the `last-modified` header of `https://thangldw.github.io/`; changing the Pages source does not build by itself, only a push to `master` does.
-
-Because the whole tree is served, internal paths (`_sources/`, `*.md`) are reachable by URL even though nothing links to them. `robots.txt` disallows them for crawlers, which keeps them out of search indexes but does not restrict access. Making them genuinely private requires deploying a filtered artifact (Pages source *GitHub Actions*) instead of the repository root.
-
-1. Start from a clean working tree and review all generated changes.
-2. Check the affected routes locally.
-3. Commit a focused change and push `master`.
-4. Monitor GitHub Pages until its state is `built`.
-5. Verify production HTML, JSON responses, and critical rendered content.
-
-Do not silently replace generated assets in an unrelated commit. If production is broken, revert the focused commit or publish a corrective commit, rerun validation, and verify deployment again. Avoid force pushes.
-
-### Security and privacy
-
-- Never commit secrets, credentials, private datasets, learner backups, or machine-specific paths.
-- Keep fonts and production assets local; external font dependencies are rejected.
-- Validate all JSON before rendering and escape catalog text inserted into HTML.
-- Keep question banks out of Pages; controlled content requires network access. Browser-visible material remains copyable.
-- Certification learner data remains in browser storage; the website does not collect or synchronize it.
-- Analytics must not run on study pages declaring `data-analytics="off"`; it must appear exactly once elsewhere. Learning exports retain their restrictive CSP and no-tracking policy.
-
-### Contribution policy
-
-Keep changes route-focused, accessible, responsive, and independently verifiable. Shared visual behavior belongs in tokens or shared styles rather than inline presentation. New routes require sitemap, canonical, Open Graph, social-image, and analytics updates, plus the manual checks described under Deploy.
-
-## Tiếng Việt
-
-### Mục đích và mô hình vận hành
-
-`thangldw.github.io` là portfolio và host ứng dụng tĩnh. Pages host shell tĩnh; nội dung chứng chỉ được API Cloudflare bên ngoài cấp có kiểm soát. Root website không cần bước build bằng package manager; app đã sinh được build tại repo source riêng. GitHub Pages phục vụ trực tiếp HTML, CSS, JavaScript, JSON, font, ảnh và artifact ứng dụng đã sinh.
-
-- Production: [https://thangldw.github.io/](https://thangldw.github.io/)
-- Default branch: `master`
-- Runtime: API chuẩn của trình duyệt
-- Deploy: GitHub Pages từ root repository
-
-### Route công khai
-
-| Route | Trách nhiệm | Nguồn chuẩn |
-| --- | --- | --- |
-| `/` | Portfolio và các dự án theo thứ tự tên | Root HTML và catalog project dùng chung |
-| `/japan-pr-guide/` | Công cụ lập kế hoạch thường trú | Static asset riêng của route |
-| `/404.html` | Fallback của GitHub Pages | Source repository |
-
-Mọi route trong sitemap phải có canonical, description, Open Graph và social image hợp lệ khi cần.
-
-### Kiến trúc catalog dùng chung
-
-`js/projects-data.json` là nguồn duy nhất cho metadata project. Loader kiểm tra và fetch JSON ở runtime; catalog `#apps` trên trang chủ chờ readiness promise trước khi render. `/apps/` và `/community/` đã gộp vào trang chủ (`#apps`, `#community`); `/404.html` chuyển hướng các link cũ.
-
-### Cấu trúc và phát triển local
-
-Dùng cây thư mục ở phần English. Cần Python 3. Không cần cài dependency.
-
-```bash
-python3 -m http.server 4173
-```
-
-Mở [http://localhost:4173/](http://localhost:4173/). Phải dùng HTTP server vì browser fetch JSON ở runtime.
-
-### Cổng chất lượng
-
-Các validator và smoke test trước đây trong `scripts/` đã bị xoá (xem git history). Kiểm tra thủ công trang chủ (gồm `#apps`, `#community`) và route thay đổi ở cả hai theme và mobile.
-
-### Cập nhật project
-
-Chỉ sửa `js/projects-data.json`. Giữ ID duy nhất/ổn định, khai báo đủ field và URL an toàn, giữ `featured` cho các nơi còn sử dụng. Trang chủ sắp xếp theo tên với English collation và numeric ordering. Kiểm tra thủ công rồi push. Không copy description vào HTML. Content JSON dùng `cache: "no-store"`, nên không cần đổi cache key HTML mỗi lần.
-
-### Support và nguồn gốc asset
-
-Trang chủ có dialog Support tùy chọn. Ko-fi dùng ảnh QR local, và ủng hộ qua ShopeePay dùng ảnh local `assets/support-shopeepay.jpg`. Website tĩnh không thu thập thông tin thanh toán. Phải xác minh người nhận QR trước mỗi release thay đổi ảnh. Hồ sơ nguồn và license font tự host nằm trong `assets/fonts/licenses/`; report Markdown và ảnh QA tạm không được commit.
-
-### Deploy, bảo mật và đóng góp
-
-Luôn bắt đầu từ working tree sạch, kiểm tra generated diff, chạy test, commit tập trung, push `master`, chờ Pages deploy và xác minh HTML/JSON/UI production. Nếu lỗi, revert commit tập trung hoặc tạo corrective commit; không force-push.
-
-Không commit secret, credential, private dataset, learner backup hoặc đường dẫn máy. Font và asset phải local. JSON phải được validate và text phải escape trước khi chèn HTML. Bank không được deploy lên Pages; API cần kết nối mạng và nội dung đã hiển thị vẫn có thể sao chép. Dữ liệu học nằm trong browser storage và không được website đồng bộ.
-
-Thay đổi cần tập trung theo route, accessible, responsive và test được. Route mới phải cập nhật sitemap, canonical, Open Graph, social image, analytics và qua các bước kiểm tra thủ công ở mục Deploy.
-
-## 日本語
-
-### Purpose と operating model
-
-`thangldw.github.io` は static portfolio と application host です。Pages は static shell を host します。Root site 自体は package-manager build 不要ですが、generated app は各 source repo で build します。GitHub Pages が committed HTML、CSS、JavaScript、JSON、font、image、generated artifact を配信します。
-
-- Production: [https://thangldw.github.io/](https://thangldw.github.io/)
-- Default branch: `master`
-- Runtime: standard browser API
-- Deployment: repository root から GitHub Pages
-
-### Public route
-
-| Route | Responsibility | Source of truth |
-| --- | --- | --- |
-| `/` | Portfolio とタイトル順のプロジェクト | Root HTML と shared project catalog |
-| `/japan-pr-guide/` | 永住計画 tool | Route-local static asset |
-| `/404.html` | GitHub Pages fallback | Repository source |
-
-The Cloudflare Workers study apps (Kotonari `https://kotonari.cert-apps.workers.dev/`, Claude Cert Prep `https://claude.cert-apps.workers.dev/`, G検定 Prep `https://gkentei.cert-apps.workers.dev/`, PMP Cert Prep `https://pmp.cert-apps.workers.dev/`) are not served from this domain; there are no `/kotonari/`, `/bjt/`, `/g/`, `/pmp/` or `/guide/` routes here. JETRISE (`/jetrise/`) and BizRoll (`/bizroll/`) publish from separate project repositories. Update the owning source and validate its release artifact before publication. Pages deployment status records publication. The project CI or local release receipt records application-level validation.
-
-Sitemap route には canonical、description、Open Graph、必要な social image を設定します。
-
-### Shared catalog architecture
-
-`js/projects-data.json` が project metadata の唯一の source です。Loader が runtime に validation/fetch し、home page の `#apps` catalog は readiness promise 後に render します。`/apps/` と `/community/` は home page（`#apps`、`#community`）に統合され、旧 URL は `/404.html` が転送します。
-
-### Local development と verification
-
-English セクションの directory tree を参照してください。Python 3 が必要です。Dependency install は不要です。
-
-```bash
-python3 -m http.server 4173
-```
-
-JSON runtime loading のため file を直接開かず HTTP server を使います。以前 `scripts/` にあった validator と smoke test は削除済みです（git history 参照）。Home（`#apps`、`#community` を含む）と変更した route を両 theme と mobile 幅で手動確認してください。
-
-### Project の更新
-
-Project metadata は `js/projects-data.json` だけで編集します。Stable unique ID、required field、安全な URL を設定します。ホームは英語の照合順で数値を考慮してタイトルを並べます。`featured` は他の利用箇所のために保持し、テスト後に push します。JSON content update のたびに HTML cache key を変える必要はありません。
-
-Home の optional Support dialog は local Ko-fi QR、local ShopeePay QR を使用します。Static site は payment credential を収集しません。QR image を変更する release では recipient を検証します。Self-hosted font の provenance と upstream license は `assets/fonts/licenses/` に保存し、temporary report と QA screenshot は repository に commit しません。
-
-### Deployment、security、contribution
-
-Clean working tree、generated diff review、全 test、focused commit、`master` push、Pages completion、production HTML/JSON/UI verification の順で進めます。障害時は focused revert または corrective commit を使い、force-push を避けます。
-
-Secret、credential、private dataset、learner backup、machine-specific path を commit しません。Font/asset は local に置き、JSON を validate し、HTML 挿入前に text を escape します。Bank は Pages に配置しません。API content は network 接続を必要とし、表示済み content のコピーを防止する保証はありません。Learner data は browser storage 内に留まります。
-
-変更は route-focused、accessible、responsive、independently verifiable にします。新 route では sitemap、canonical、Open Graph、social image、analytics を更新し、Deploy 節の手動確認を行います。
-
-## Canonical homepage design — 2026-10-10
-
-The homepage is the design reference for the application catalog. Maintain each application shell in its owning source repository.
-
-- Visual register: minimal portfolio, restrained separators, no decorative cards.
-- Light default on every homepage load; dark mode is an explicit user action. Use the shared `site-shell.js` theme control and `themechange` event.
-- Canonical runtime token owner: `css/tokens.css`; shared recipes: `css/site-shell.css`; full contract: [DESIGN.md](DESIGN.md). Light: canvas `#ffffff`, text `#23291f`, muted `#535e4b`, accent `#965025`, border `#d1d7c9`, controls `#e9ede3`. Dark: canvas `#11150e`, text `#e5e6df`, muted `#b9bdb5`, accent `#e69d6b`, border `#32382d`, controls `#20261c`. Home and Apps consume the same tokens; generated Cert receives shared shell and catalog aliases through the existing integration stylesheet.
-- Typography: self-hosted Inter for Latin scripts; Japanese and Chinese use script-capable system stacks. Desktop main body stays at 14px (compact density), with 16px mobile prose. No clipped content or forced hidden document overflow.
-- Layout: shared sticky header over one centered 1120px column; the intro statement follows the `t:>` prompt. Mobile reflows vertically and the header becomes static.
-- Language: EN/VN/JP/CN buttons; English default, locale applies to owned copy, project descriptions, accessibility labels, and document language. Proper names remain unchanged. Japanese uses consistent polite prose; Chinese uses Simplified Chinese. This is a global technical portfolio with multilingual support, not a Japan-only regulated service.
-- Project source: existing shared catalog loader. `/apps/` shows the full A–Z catalog as cards with group filters (`?group=`).
-- The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`.
-- Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting application sources. Preserve route-specific information architecture and application behavior.
-
-Portfolio runtime files are `index.html`, `apps/index.html`, `community/index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, `js/project-translations.mjs`, `js/hero-graph.mjs`, `js/apps-catalog.js` and `js/community-section.mjs`. No production package installation or build is required.
-
-Maintenance scripts use only Node (no dependencies). The shared header and footer live once in `shared/shell.mjs`; after editing it, or any `css/` or `js/` file, run `npm run sync-shell`. That rewrites the shell on Home, Apps, Community and Japan PR Guide and stamps every `/css` and `/js` reference with a content hash. After rebuilding Japan PR Guide with `_sources/japan-pr-guide/scripts/release-pages.mjs`, run it again. `npm test` checks the shell, local links, the sitemap, unused assets, CSP rules, project translations and locale keys, and CI runs it on every pull request. `css/app-brand.css` and `css/support-tokens.css` have no consumer here; other repositories load them, so keep them.
-
-Technical standardization is documented in `DESIGN.md`; the automated design validator formerly in `scripts/` was removed. Light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration are now checked by hand. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
-
-Official CSS entry point: `css/site-shell.css` → `css/tokens.css`. Every public route inherits this foundation; page CSS owns composition. Do not redefine core tokens anywhere in authored `css/`. See [mandatory inheritance contract](DESIGN.md#mandatory-inheritance-contract).
-
-
-
-### Retired study publishing — 2026-11-06
-
-The former study library and its generated routes, public metadata, learning workspace, and content APIs are retired. Keep its source data and archived artifacts in the private source repository. Do not restore the retired routes, shared bundles, catalog discovery, or Cloudflare deployments during routine portfolio publication. Kotonari and Claude Cert Prep publish independently.
-
-Thư viện ôn thi cũ, các route sinh tự động, metadata công khai, workspace học tập và content API đã ngừng công bố. Dữ liệu và archive chỉ lưu trong repo nguồn private. Không khôi phục các thành phần này khi publish portfolio. Kotonari và Claude Cert Prep tiếp tục publish độc lập.
-
-旧学習ライブラリの生成ルート、公開メタデータ、学習ワークスペース、content API は公開を終了しました。データとアーカイブは非公開のソースリポジトリで管理し、通常の portfolio 公開時に復元しないでください。Kotonari と Claude Cert Prep は独立して公開します。
+Apache License 2.0; see `LICENSE` and `NOTICE`. Fonts and icons keep their own licenses under `assets/fonts/licenses/`.
