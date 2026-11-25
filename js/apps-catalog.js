@@ -1,7 +1,8 @@
 // Project catalog for the Apps page: group filter and one card per project.
 // Page chrome (document language, title, theme label, skip link) is owned by homepage.js.
-import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261125-apps';
-import { bindLocaleSwitch } from './site-locale.mjs';
+import { locales } from '/js/home-locales.mjs?v=b7a0b716';
+import { projectTranslations } from '/js/project-translations.mjs?v=4bdac196';
+import { bindLocaleSwitch } from './site-locale.mjs?v=6fd22c76';
 const copy = {
  en: { intro:'Tools, utilities, study apps and games I built. The engineering tools link to their source and README on GitHub.', all:'All', search:'Find an app, topic, or tool…', searchLabel:'Search apps and projects', open:'Open', external:'external site', loading:'Loading projects…', failed:'Projects could not be loaded.', retry:'Try again', empty:'No projects found', hint:'Try another keyword or clear the filters.', clear:'Clear filters', browse:'Browse project groups', count:n=>`${n} ${n===1?'project':'projects'}`, more:n=>`View all ${n} learning projects`, names:['Engineering','Utilities','Learning','Games and experiments'], descriptions:['Build, evaluate, and protect software.','A little help with everyday tasks.','Study by topic and practise at your own pace.','Games and things to explore.'] },
  vi: {intro:'Công cụ, tiện ích, ứng dụng học tập và trò chơi do tôi xây dựng. Các công cụ kỹ thuật liên kết thẳng tới mã nguồn và README trên GitHub.',all:'Tất cả',search:'Tìm ứng dụng, chủ đề hoặc công cụ…',searchLabel:'Tìm ứng dụng và dự án',open:'Mở',external:'trang web bên ngoài',loading:'Đang tải dự án…',failed:'Không tải được danh sách dự án.',retry:'Thử lại',empty:'Không tìm thấy dự án',hint:'Thử từ khóa khác hoặc bỏ bộ lọc.',clear:'Bỏ bộ lọc',browse:'Lọc theo nhóm dự án',count:n=>`${n} dự án`,more:n=>`Xem tất cả ${n} dự án học tập`,names:['Kỹ thuật','Tiện ích','Học tập','Trò chơi và thử nghiệm'],descriptions:['Xây dựng, đánh giá và bảo vệ phần mềm.','Hỗ trợ những công việc hằng ngày.','Học theo chủ đề, luyện tập theo nhịp của bạn.','Trò chơi và những điều để khám phá.']},
