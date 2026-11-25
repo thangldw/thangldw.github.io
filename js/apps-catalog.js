@@ -1,6 +1,6 @@
 // Project catalog for the Apps page: group filter and one card per project.
 // Page chrome (document language, title, theme label, skip link) is owned by homepage.js.
-import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261125-apps';
+import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261125-overview';
 import { bindLocaleSwitch } from './site-locale.mjs';
 const copy = {
  en: { intro:'Tools, utilities, study apps and games I built. The engineering tools link to their source and README on GitHub.', all:'All', search:'Find an app, topic, or tool…', searchLabel:'Search apps and projects', open:'Open', external:'external site', loading:'Loading projects…', failed:'Projects could not be loaded.', retry:'Try again', empty:'No projects found', hint:'Try another keyword or clear the filters.', clear:'Clear filters', browse:'Browse project groups', count:n=>`${n} ${n===1?'project':'projects'}`, more:n=>`View all ${n} learning projects`, names:['Engineering','Utilities','Learning','Games and experiments'], descriptions:['Build, evaluate, and protect software.','A little help with everyday tasks.','Study by topic and practise at your own pace.','Games and things to explore.'] },

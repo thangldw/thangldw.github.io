@@ -35,7 +35,7 @@ flowchart LR
 
 | Route | Responsibility | Source of truth |
 | --- | --- | --- |
-| `/` | Overview: headline, bio, an animated graph of merged open-source pull requests, and areas of work | Root HTML, `js/hero-graph.mjs` |
+| `/` | Overview: headline, bio, an animated career overview (done, now, next: data platforms, software engineering, generative AI, forward deployed engineering, AI in manufacturing), and areas of work | Root HTML, `js/hero-graph.mjs` |
 | `/apps/` | Project catalog as cards grouped by purpose, with group filters (`?group=`) | `apps/index.html` plus `js/projects-data.json` |
 | `/community/` | Security-reports placeholder and merged pull requests per upstream repository, one row per PR | `community/index.html` |
 | `/japan-pr-guide/` | Standalone permanent-residence planning tool | Route-local static assets |
