@@ -492,3 +492,19 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible { 
 body.support-compact .support-floating-trigger:not(:hover):not(:focus-visible) { width: 44px; height: 44px; padding: 0; gap: 0; justify-content: center; }
 body.support-compact .support-floating-trigger:not(:hover):not(:focus-visible) > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 body.support-compact .support-floating-trigger:not(:hover):not(:focus-visible)::before { content: "\2665\FE0E"; font-size: 18px; line-height: 1; }
+
+/* Shared portfolio shell supplies the site header; this bar only names the tool. */
+.app-header { height: auto; min-height: 52px; padding: 0 0 var(--space-12); border-bottom: 1px solid var(--rule); background: transparent; }
+.app-header .app-brand strong { font-size: var(--text-title); font-weight: var(--weight-bold); }
+.app-header .header-actions a { color: var(--color-accent); font-weight: var(--weight-bold); }
+/* The aliases above resolve at :root (terracotta); re-resolve them under the shared navy/cobalt palette. */
+.resume-home {
+ --rule: var(--color-border); --soft-rule: var(--color-border); --paper: var(--color-canvas);
+ --teal: var(--color-accent); --teal-dark: var(--color-accent); --teal-soft: var(--color-surface-subtle);
+ --orange: var(--color-accent); --orange-dark: var(--color-accent); --orange-soft: var(--color-accent-soft);
+ --blue: var(--color-info); --blue-soft: var(--color-info-soft);
+}
+.resume-home .calculator-shell { max-width: calc(var(--home-width) + 2 * var(--home-gutter)); padding-inline: var(--home-gutter); }
+@media (max-width: 760px) { .resume-home .calculator-shell { padding-inline: var(--space-16); } }
+/* Keep the score dock below the sticky shared header (the header is static on phones). */
+@media (min-width: 721px) { .resume-home .score-dock { top: 68px; } }

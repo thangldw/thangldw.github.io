@@ -263,7 +263,9 @@ The homepage is the design reference for the application catalog. Maintain each 
 - The homepage envelope opens Gmail’s web composer directly for `thangldw@gmail.com`.
 - Cross-route adoption: reuse these semantic colors, typography, brand, theme, language, focus, and spacing contracts when adapting application sources. Preserve route-specific information architecture and application behavior.
 
-Portfolio runtime files are `index.html`, `apps/index.html`, `community/index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, `js/hero-graph.mjs`, `js/apps-catalog.js` and `js/community-section.mjs`. No production package installation or build is required.
+Portfolio runtime files are `index.html`, `apps/index.html`, `community/index.html`, `css/homepage.css`, `js/homepage.js`, `js/home-locales.mjs`, `js/project-translations.mjs`, `js/hero-graph.mjs`, `js/apps-catalog.js` and `js/community-section.mjs`. No production package installation or build is required.
+
+Maintenance scripts use only Node (no dependencies). The shared header and footer live once in `shared/shell.mjs`; after editing it, or any `css/` or `js/` file, run `npm run sync-shell`. That rewrites the shell on Home, Apps, Community and Japan PR Guide and stamps every `/css` and `/js` reference with a content hash. After rebuilding Japan PR Guide with `_sources/japan-pr-guide/scripts/release-pages.mjs`, run it again. `npm test` checks the shell, local links, the sitemap, unused assets, CSP rules, project translations and locale keys, and CI runs it on every pull request. `css/app-brand.css` and `css/support-tokens.css` have no consumer here; other repositories load them, so keep them.
 
 Technical standardization is documented in `DESIGN.md`; the automated design validator formerly in `scripts/` was removed. Light/dark token/document drift, typography and palette literals in native route CSS, shared logo/control states, and Home/Apps/Cert integration are now checked by hand. Generated assessment internals retain their source-owned styles until that workflow is migrated; generated bundles are never edited by the portfolio release.
 

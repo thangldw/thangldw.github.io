@@ -4,7 +4,7 @@
 // manufacturing at the front. Numbered markers match localized cards on either side. The city
 // builds in sequence, then traffic, data and machines keep moving. Static when motion is reduced
 // and on the compact (stacked) layout.
-import { locales } from './home-locales.mjs?v=20261125-city2';
+import { locales } from './home-locales.mjs?v=5932586c';
 
 const NS = 'http://www.w3.org/2000/svg';
 const C = Math.cos(Math.PI / 6);

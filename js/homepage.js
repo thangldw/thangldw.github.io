@@ -1,5 +1,5 @@
-import { locales } from './home-locales.mjs?v=20261125-city2';
-import { bindLocaleSwitch } from './site-locale.mjs';
+import { locales } from './home-locales.mjs?v=5932586c';
+import { bindLocaleSwitch } from './site-locale.mjs?v=6fd22c76';
 
 const root = document.documentElement;
 const page = document.body.dataset.page;

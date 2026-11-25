@@ -1,5 +1,5 @@
-import { locales } from '/js/home-locales.mjs';
-import { bindLocaleSwitch } from './site-locale.mjs';
+import { locales } from '/js/home-locales.mjs?v=5932586c';
+import { bindLocaleSwitch } from './site-locale.mjs?v=6fd22c76';
 
 const messages = {
  en: {
