@@ -98,3 +98,15 @@ test('locale files define the same keys in every language', async () => {
   const base = Object.keys(community.vi).sort();
   for (const lang of ['ja', 'zh']) assert.deepEqual(Object.keys(community[lang]).sort(), base, `community locale ${lang}`);
 });
+
+test('404 suggestions point at real pages and catch typos', async () => {
+  const { routes, closest } = await import('../js/not-found.mjs');
+  for (const [route] of routes) assert.ok(existsSync(join(root, route.endsWith('/') ? join(route, 'index.html') : route)), route);
+  const html = read('404.html');
+  for (const [route] of routes) assert.ok(html.includes(`href="${route}"`), `404.html lacks ${route}`);
+  assert.equal(closest('/app'), '/apps/');
+  assert.equal(closest('/Apps/index.html'), '/apps/');
+  assert.equal(closest('/communty/'), '/community/');
+  assert.equal(closest('/zzzzzzzz'), null);
+  assert.equal(closest('/'), null);
+});

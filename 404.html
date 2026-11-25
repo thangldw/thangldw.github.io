@@ -20,11 +20,12 @@
   <link rel="stylesheet" href="/css/support-dialog.css?v=dab9a941">
   <link rel="stylesheet" href="/css/homepage.css?v=6430a4d7">
   <link rel="stylesheet" href="/css/site-shell.css?v=1beef933">
-  <link rel="stylesheet" href="/css/404.css?v=d072c19f">
+  <link rel="stylesheet" href="/css/404.css?v=ba745335">
   <script src="/js/site-shell.js?v=a49bf5ba"></script>
   <script defer src="/js/support-dialog.js?v=230ad0b3"></script>
   <script defer src="/js/analytics.js?v=de8ae68e"></script>
   <script defer src="/js/legacy-route-redirect.js?v=c222725b"></script>
+  <script type="module" src="/js/not-found.mjs?v=5570c660"></script>
   <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body class="site-page resume-home not-found-page" data-page-kind="product">
@@ -37,21 +38,29 @@
   </div>
 </div></header>
 <main id="main" class="home">
-  <section class="not-found" aria-labelledby="notFoundTitle">
-    <div class="not-found-copy">
+  <section class="not-found" aria-labelledby="notFoundTitle" data-not-found>
+    <header class="not-found-head">
       <p class="not-found-code" aria-label="Error 404"><strong>404</strong><span>Page on parental leave</span></p>
       <h1 class="page-title" id="notFoundTitle">Dad’s on duty. This page slipped away.</h1>
-      <p class="page-lead">Between a bottle, a cuddle, and one very urgent tiny sock, the page you were looking for wandered off. Let’s get you somewhere useful.</p>
-      <nav class="not-found-actions" aria-label="Where to go next">
-        <a class="not-found-primary" href="/">Return home</a>
-        <a href="/apps/">Browse apps</a>
-        <a href="/community/">Open source</a>
-      </nav>
-      <p class="page-note"><strong>Good news:</strong> the baby is happy. The missing page is the only thing we couldn’t find.</p>
+      <p class="page-lead">Between a bottle, a cuddle, and one very urgent tiny sock, the page you were looking for wandered off. These ones are still here.</p>
+    </header>
+    <div class="not-found-terminal" role="region" aria-label="Pages on this site">
+      <div data-nf-output>
+        <p class="nf-line"><span class="nf-prompt">t:&gt;</span> ls</p>
+        <ul class="nf-routes">
+          <li><a href="/">/</a><span>Home</span></li>
+          <li><a href="/apps/">/apps/</a><span>Apps</span></li>
+          <li><a href="/community/">/community/</a><span>Open-source contributions</span></li>
+          <li><a href="/japan-pr-guide/">/japan-pr-guide/</a><span>Japan PR Guide</span></li>
+          <li><a href="/ragops/">/ragops/</a><span>RAGOps</span></li>
+          <li><a href="/proofline/">/proofline/</a><span>Proofline</span></li>
+          <li><a href="/awesome-maintainer-defense/">/awesome-maintainer-defense/</a><span>Maintainer Defense Kit</span></li>
+        </ul>
+      </div>
     </div>
     <figure class="not-found-scene">
       <img src="/assets/404-dad-on-duty.webp" width="1693" height="929" alt="A busy father reaching for his laptop while securely holding his smiling baby">
-      <figcaption>One hand for the baby. One hand for everything else.</figcaption>
+      <figcaption>Good news: the baby is happy. The missing page is the only thing we couldn’t find.</figcaption>
     </figure>
   </section>
 </main>
