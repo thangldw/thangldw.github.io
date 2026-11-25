@@ -1,7 +1,7 @@
 // Hero for the home page: a row of four isometric islands (sources, pipeline, retrieval, apps)
 // joined by a data flow, each with a localized callout card. The islands build in sequence,
 // then packets keep moving along the flow. Static when motion is reduced.
-import { locales } from './home-locales.mjs?v=20261125-three';
+import { locales } from './home-locales.mjs?v=20261125-apps';
 
 const NS = 'http://www.w3.org/2000/svg';
 const C = Math.cos(Math.PI / 6);

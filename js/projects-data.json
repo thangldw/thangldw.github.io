@@ -39,7 +39,7 @@
       "ariaLabel": "Play JETRISE",
       "icon": "fa-plane",
       "accent": "blue",
-      "status": "Live",
+      "status": "v0.2.0",
       "tags": [
         "Airline management",
         "Fleet & routes",
@@ -101,13 +101,13 @@
     {
       "id": "macinity",
       "title": "Macinity",
-      "description": "A native macOS workspace for monitoring, hardware sensors, files, applications, Wi-Fi/LAN and reviewed utility actions.",
+      "description": "A native macOS workspace for monitoring, hardware sensors, files, applications, Wi-Fi/LAN and reviewed utility actions, now with a menu-bar quick panel, ⌘K tool search, opt-in clipboard and snippets, and a weekly Mac report.",
       "featuredDescription": "Your Mac. Everything connected: monitoring, diagnostics and everyday utilities.",
       "href": "https://thangldw.github.io/macinity/",
       "ariaLabel": "Open the Macinity website",
       "icon": "fa-cubes-stacked",
       "accent": "blue",
-      "status": "v3.1.0",
+      "status": "v3.2.0",
       "tags": [
         "macOS",
         "Monitoring",
@@ -120,7 +120,7 @@
       "featured": true,
       "featuredOrder": 4,
       "catalogGroup": "utilities",
-      "catalogDescription": "Monitor your Mac, inspect hardware and networks, manage files and packages, and preview Work Profiles in one local-first workspace."
+      "catalogDescription": "Monitor your Mac from the menu bar, search every tool with ⌘K, keep text-only clipboard history and snippets, and get a weekly Mac report, all in one local-first workspace."
     },
     {
       "id": "ragops",
@@ -156,7 +156,7 @@
       "ariaLabel": "View Awesome Maintainer Defense on GitHub",
       "icon": "fa-shield-halved",
       "accent": "rust",
-      "status": "v1.1.1",
+      "status": "v1.2.0",
       "tags": [
         "OSS security",
         "Offline auditor",
@@ -199,13 +199,13 @@
     {
       "id": "kakeflow",
       "title": "KakeFlow",
-      "description": "An open-source, Apache-2.0-licensed local-first household finance app for macOS. It turns bank, card, wallet, receipt, spreadsheet, PDF, and securities data into a reviewable ledger with source evidence and reconciliation.",
+      "description": "An open-source, Apache-2.0-licensed local-first household finance app for macOS. It turns bank, card, wallet, receipt, spreadsheet, PDF, and securities data into a reviewable ledger with source evidence and reconciliation, plus read-only integrity checks and planning aids.",
       "featuredDescription": "Open-source local-first household finance for macOS, with reviewable reconciliation and source evidence.",
       "href": "https://thangldw.github.io/kakeflow/",
       "ariaLabel": "Open the KakeFlow website",
       "icon": "fa-wallet",
       "accent": "ochre",
-      "status": "v1.2.1",
+      "status": "v1.3.0",
       "tags": [
         "Household finance",
         "Local-first",
@@ -219,7 +219,7 @@
       "featuredOrder": 2,
       "catalogGroup": "utilities",
       "evidenceLabel": "Released product · synthetic workflow evidence",
-      "catalogDescription": "Bring household finances into a local macOS ledger, with reconciliation and source evidence."
+      "catalogDescription": "Bring household finances into a local macOS ledger, with reconciliation, source evidence, read-only integrity checks and planning aids such as safe-to-spend and payment reminders."
     },
     {
       "id": "igo",
@@ -231,7 +231,7 @@
       "ariaLabel": "Open Igo",
       "icon": "fa-chess-board",
       "accent": "green",
-      "status": "Live",
+      "status": "v1.0.0",
       "tags": [
         "Go / Baduk",
         "Vietnamese",
@@ -352,6 +352,29 @@
       "featured": true,
       "featuredOrder": 10,
       "catalogGroup": "learning"
+    },
+    {
+      "id": "thrum",
+      "title": "Thrum",
+      "description": "A quiet desktop app for Facebook Messenger on macOS, Windows and Linux. It runs Messenger's own web client in a dedicated window, without the News Feed, and adds an app lock.",
+      "featuredDescription": "Messenger on your desktop, without the News Feed.",
+      "catalogDescription": "Chat on Facebook Messenger from a dedicated desktop window on macOS, Windows and Linux, without the News Feed and with an optional app lock.",
+      "href": "https://github.com/thangldw/thrum",
+      "ariaLabel": "View Thrum on GitHub",
+      "icon": "fa-paper-plane",
+      "accent": "indigo",
+      "status": "v0.4.1",
+      "tags": [
+        "Desktop app",
+        "Messenger",
+        "App lock",
+        "macOS · Windows · Linux"
+      ],
+      "category": "developer-tools",
+      "categoryLabel": "Desktop app",
+      "cta": "View Thrum on GitHub",
+      "featured": false,
+      "catalogGroup": "utilities"
     }
   ],
   "learningCollections": []

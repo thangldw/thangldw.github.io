@@ -1,6 +1,6 @@
 // Project catalog for the Apps page: group filter and one card per project.
 // Page chrome (document language, title, theme label, skip link) is owned by homepage.js.
-import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261125-three';
+import { locales, projectTranslations } from '/js/home-locales.mjs?v=20261125-apps';
 import { bindLocaleSwitch } from './site-locale.mjs';
 const copy = {
  en: { intro:'Tools, utilities, study apps and games I built. The engineering tools link to their source and README on GitHub.', all:'All', search:'Find an app, topic, or tool…', searchLabel:'Search apps and projects', open:'Open', external:'external site', loading:'Loading projects…', failed:'Projects could not be loaded.', retry:'Try again', empty:'No projects found', hint:'Try another keyword or clear the filters.', clear:'Clear filters', browse:'Browse project groups', count:n=>`${n} ${n===1?'project':'projects'}`, more:n=>`View all ${n} learning projects`, names:['Engineering','Utilities','Learning','Games and experiments'], descriptions:['Build, evaluate, and protect software.','A little help with everyday tasks.','Study by topic and practise at your own pace.','Games and things to explore.'] },
@@ -41,7 +41,7 @@ function render(){
  count.textContent=c.count(visible.length);
  library.innerHTML=groups.map((id,i)=>{
   const members=visible.filter(p=>p.catalogGroup===id);if(!members.length)return '';
-  const cards=members.map(p=>{const ext=isExternal(p);return '<a class="app-card" href="'+escapeHtml(p.href)+'" data-project-id="'+escapeHtml(p.id)+'" aria-label="'+escapeHtml(p.ariaLabel+(ext?' ('+c.external+')':''))+'"><span class="glyph" aria-hidden="true">'+escapeHtml(initials(p.title))+'</span><h3>'+escapeHtml(p.title)+'</h3><span class="app-cat">'+escapeHtml(p.categoryLabel)+'</span><p>'+escapeHtml(description(p))+'</p>'+chips(p)+'<span class="app-go" aria-hidden="true">'+escapeHtml(p.cta)+'</span></a>';}).join('');
+  const cards=members.map(p=>{const ext=isExternal(p);return '<a class="app-card" href="'+escapeHtml(p.href)+'" data-project-id="'+escapeHtml(p.id)+'" aria-label="'+escapeHtml(p.ariaLabel+(ext?' ('+c.external+')':''))+'"><span class="glyph" aria-hidden="true">'+escapeHtml(initials(p.title))+'</span><h3>'+escapeHtml(p.title)+'</h3><span class="app-cat">'+escapeHtml(p.categoryLabel+(/^v\d/.test(p.status)?' · '+p.status:''))+'</span><p>'+escapeHtml(description(p))+'</p>'+chips(p)+'<span class="app-go" aria-hidden="true">'+escapeHtml(p.cta)+'</span></a>';}).join('');
   return '<section class="catalog-group tone-'+id+'" aria-labelledby="'+id+'-title"><h2 class="section-heading" id="'+id+'-title">'+c.names[i]+'</h2><div class="card-grid">'+cards+'</div></section>';
  }).join('');
  if(!visible.length)library.innerHTML='<div class="catalog-state"><h3>'+c.empty+'</h3><p>'+c.hint+'</p><button type="button" class="ui-button" data-clear>'+c.clear+'</button></div>';
