@@ -15,52 +15,46 @@
   <meta property="og:image" content="https://thangldw.github.io/assets/social-home.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg?v=20261125b" type="image/svg+xml">
-  <link rel="stylesheet" href="/css/support-dialog.css?v=dab9a941"><link rel="stylesheet" href="/css/reset.css?v=4d357f68">
   <link rel="stylesheet" href="/css/icons.css?v=c35781d4">
   <link rel="stylesheet" href="/css/tokens.css?v=1a39b95d">
-  <link rel="stylesheet" href="/css/404.css?v=551c33ed">
-  <link rel="stylesheet" href="/css/compact-footer.css?v=e521de6c">
-  <link rel="stylesheet" href="/css/app-design-system.css?v=350a38c2">
+  <link rel="stylesheet" href="/css/support-dialog.css?v=dab9a941">
+  <link rel="stylesheet" href="/css/homepage.css?v=6430a4d7">
   <link rel="stylesheet" href="/css/site-shell.css?v=1beef933">
+  <link rel="stylesheet" href="/css/404.css?v=d072c19f">
   <script src="/js/site-shell.js?v=a49bf5ba"></script>
+  <script defer src="/js/support-dialog.js?v=230ad0b3"></script>
   <script defer src="/js/analytics.js?v=de8ae68e"></script>
+  <script defer src="/js/legacy-route-redirect.js?v=c222725b"></script>
   <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-<script defer src="/js/support-dialog.js?v=230ad0b3"></script><script defer src="/js/legacy-route-redirect.js?v=c222725b"></script></head>
-<body class="site-page portfolio-app not-found-page" data-page-kind="product">
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="site-shell-inner">
-      <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a><nav class="site-nav" aria-label="Site"><a href="/apps/" data-site-nav="apps">Apps</a><a href="/community/" data-site-nav="community">Community</a></nav>
-      <div class="site-theme-controls"><span id="supportSlot"></span><button type="button" id="themeToggle" class="site-theme-toggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button></div>
+</head>
+<body class="site-page resume-home not-found-page" data-page-kind="product">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header home-header" id="siteHeader"><div class="site-shell-inner">
+  <a class="site-brand" href="/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>Thang Luu</span></a><nav class="site-nav" aria-label="Site"><a href="/apps/" data-site-nav="apps">Apps</a><a href="/community/" data-site-nav="community">Community</a></nav>
+  <div class="header-actions">
+    <span id="supportSlot"></span>
+    <button type="button" class="site-theme-toggle" id="themeToggle" aria-label="Switch to dark theme"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
+  </div>
+</div></header>
+<main id="main" class="home">
+  <section class="not-found" aria-labelledby="notFoundTitle">
+    <div class="not-found-copy">
+      <p class="not-found-code" aria-label="Error 404"><strong>404</strong><span>Page on parental leave</span></p>
+      <h1 class="page-title" id="notFoundTitle">Dad’s on duty. This page slipped away.</h1>
+      <p class="page-lead">Between a bottle, a cuddle, and one very urgent tiny sock, the page you were looking for wandered off. Let’s get you somewhere useful.</p>
+      <nav class="not-found-actions" aria-label="Where to go next">
+        <a class="not-found-primary" href="/">Return home</a>
+        <a href="/apps/">Browse apps</a>
+        <a href="/community/">Open source</a>
+      </nav>
+      <p class="page-note"><strong>Good news:</strong> the baby is happy. The missing page is the only thing we couldn’t find.</p>
     </div>
-  </header>
-  <main class="content-shell" id="main">
-    <section class="dad-hero" aria-labelledby="notFoundTitle">
-      <div class="dad-copy">
-        <span class="content-eyebrow">404 · Dad mode activated</span>
-        <div class="dad-error-code" aria-label="Error 404">
-          <strong>404</strong>
-          <span>Page on parental leave</span>
-        </div>
-        <h1 id="notFoundTitle">Dad’s on duty. This page slipped away.</h1>
-        <p class="content-lead">Between a bottle, a cuddle, and one very urgent tiny sock, the page you were looking for wandered off. Let’s get you somewhere useful.</p>
-        <div class="content-actions">
-          <a class="btn btn-primary" href="/">Return home</a>
-          <a class="btn" href="/apps/">Browse applications</a>
-        </div>
-        <p class="dad-reassurance"><strong>Good news:</strong> the baby is happy. The missing page is the only thing we couldn’t find.</p>
-      </div>
-      <figure class="dad-scene">
-        <img src="/assets/404-dad-on-duty.webp" width="1693" height="929" alt="A busy father reaching for his laptop while securely holding his smiling baby">
-        <figcaption>
-          <span><i aria-hidden="true"></i> Dad mode · active</span>
-          <strong>One hand for the baby. One hand for everything else.</strong>
-        </figcaption>
-      </figure>
-    </section>
-
-  </main>
-<footer class="site-foot compact-footer" id="footer">
-  <p class="footer-signature"><span><strong translate="no">404</strong> © <span data-footer-year>2026</span> <a name="supportSlot" href="/">thang.</a></span> <span lang="en" translate="no">crafted with care. stay steadfast, stay free</span></p>
-</footer></body>
+    <figure class="not-found-scene">
+      <img src="/assets/404-dad-on-duty.webp" width="1693" height="929" alt="A busy father reaching for his laptop while securely holding his smiling baby">
+      <figcaption>One hand for the baby. One hand for everything else.</figcaption>
+    </figure>
+  </section>
+</main>
+<footer class="home-foot"><p class="footer-signature"><span>Crafted with care, stay steadfast, stay free</span><span>© <span data-footer-year>2026</span> Thang Luu</span></p></footer>
+</body>
 </html>

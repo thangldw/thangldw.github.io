@@ -61,7 +61,7 @@ test('pages follow the CSP: no inline styles or inline scripts', () => {
 });
 
 test('shell pages carry the same landmarks', () => {
-  for (const page of ['index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html']) {
+  for (const page of ['index.html', 'apps/index.html', 'community/index.html', 'japan-pr-guide/index.html', '404.html']) {
     const html = read(page);
     for (const needle of ['id="siteHeader"', 'id="supportSlot"', 'id="themeToggle"', 'class="home-foot"', 'data-footer-year']) {
       assert.ok(html.includes(needle), `${page} is missing ${needle}`);

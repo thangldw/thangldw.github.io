@@ -17,6 +17,7 @@ export const shellPages = {
   'index.html': 'localized',
   'apps/index.html': 'localized',
   'community/index.html': 'localized',
+  '404.html': 'plain',
   'japan-pr-guide/index.html': 'plain',
   '_sources/japan-pr-guide/index.html': 'plain',
 };
