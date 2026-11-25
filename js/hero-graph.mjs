@@ -2,8 +2,8 @@
 // Five districts share one island joined by data roads: data platforms at the back feed software
 // engineering, the generative AI core and the customer's site, and everything flows on to AI in
 // manufacturing at the front. Numbered markers match localized cards on either side. The city
-// builds in sequence, then traffic, data and machines keep moving. Static when motion is reduced
-// and on the compact (stacked) layout.
+// builds in sequence, then traffic, data, screens and machines keep moving. Static only when the
+// visitor asks for reduced motion.
 import { locales } from './home-locales.mjs?v=5932586c';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -89,6 +89,7 @@ function build(layout) {
   const sx = rnd() * w, sy = rnd() * h, r = (.6 + rnd() * 1.4) * k;
   sparkles.push(el('circle', { cx: f(sx), cy: f(sy), r: f(r), fill: rnd() > .8 ? '#a5f3fc' : '#fff', opacity: f(.15 + rnd() * .45) }, sky));
  }
+ const meteors = [0, 1].map(() => el('line', { x1: 0, y1: 0, x2: f(-46 * k), y2: f(-20 * k), stroke: '#e0f2fe', 'stroke-width': 1.6, 'stroke-linecap': 'round', opacity: 0 }, svg));
  const leaderLayer = el('g', {}, svg);
 
  // Drawing helpers anchored at a grid offset, so each district is drawn in its own local units.
@@ -130,12 +131,14 @@ function build(layout) {
   };
   const windows = (parent, x, y, z, bw, bd, rows, cols, lit = '#fef9c3') => {
    const g = el('g', {}, parent);
+   g.lit = [];
    const rowH = .32, gap = (bw - cols * .22) / (cols + 1), gapD = (bd - cols * .22) / (cols + 1);
    for (let r2 = 0; r2 < rows; r2++) for (let c2 = 0; c2 < cols; c2++) {
     const zz = z + .25 + r2 * (rowH + .14);
     const on = rnd() > .25;
     const a = x + gap + c2 * (.22 + gap), b = y + gapD + c2 * (.22 + gapD);
-    poly([[a, y + bd + .01, zz + rowH], [a + .22, y + bd + .01, zz + rowH], [a + .22, y + bd + .01, zz], [a, y + bd + .01, zz]], on ? lit : '#334a6e', g, { opacity: on ? .95 : .7 });
+    const pane = poly([[a, y + bd + .01, zz + rowH], [a + .22, y + bd + .01, zz + rowH], [a + .22, y + bd + .01, zz], [a, y + bd + .01, zz]], on ? lit : '#334a6e', g, { opacity: on ? .95 : .7 });
+    if (on) g.lit.push(pane);
     poly([[x + bw + .01, b, zz + rowH], [x + bw + .01, b + .22, zz + rowH], [x + bw + .01, b + .22, zz], [x + bw + .01, b, zz]], on ? '#dbeafe' : '#26385a', g, { opacity: on ? .75 : .7 });
    }
    return g;
@@ -263,6 +266,7 @@ function build(layout) {
    box(lake, -1.75, .05, .2, 1.95, 1.7, .06, '#7dd3fc', '#38bdf8', '#0ea5e9');
    [[.35, .55], [.2, .3]].forEach(([r]) => { const [lx, ly] = L(-.78, .9, .27); el('ellipse', { cx: f(lx), cy: f(ly), rx: f(r * R2 * C * S), ry: f(r * R2 * .5 * S), fill: 'none', stroke: '#fff', 'stroke-opacity': .55, 'stroke-width': .9 }, lake); });
    rise.push(lake);
+   [0, 1].forEach(q => { const [lx, ly] = L(-.78, .9, .27); const rp = el('ellipse', { cx: f(lx), cy: f(ly), rx: f(.5 * R2 * C * S), ry: f(.5 * R2 * .5 * S), fill: 'none', stroke: '#e0f2fe', 'stroke-width': 1.2, opacity: 0 }, g); idle.push({ node: rp, ripple: true, q }); });
    shadow(g, -1.7, -1.7, 1.25, 1.25, .75);
    const etl = el('g', {}, g);
    box(etl, -1.7, -1.7, .2, 1.25, 1.25, .75, ...blue);
@@ -281,7 +285,7 @@ function build(layout) {
    pop.push(pipes); idle.push({ node: flow, flow: true });
    // dashboard hologram with bars and a trend line
    const dash = holo(g, -1.45, .25, -1.85, 1.3, 2.05);
-   [[.25, .3], [.55, .55], [.85, .4], [1.15, .75], [1.45, .6]].forEach(([x, hh]) => poly([[-1.45 + x, -1.85, 1.4 + hh * .7], [-1.45 + x + .18, -1.85, 1.4 + hh * .7], [-1.45 + x + .18, -1.85, 1.4], [-1.45 + x, -1.85, 1.4]], '#bae6fd', dash, { opacity: .9 }));
+   [[.25, .3], [.55, .55], [.85, .4], [1.15, .75], [1.45, .6]].forEach(([x, hh], q) => idle.push({ bar: true, q, node: poly([[-1.45 + x, -1.85, 1.4 + hh * .7], [-1.45 + x + .18, -1.85, 1.4 + hh * .7], [-1.45 + x + .18, -1.85, 1.4], [-1.45 + x, -1.85, 1.4]], '#bae6fd', dash, { opacity: .9 }) }));
    path(dash, [[-1.3, -1.85, 1.75], [-.9, -1.85, 1.85], [-.5, -1.85, 1.78], [-.1, -1.85, 1.95]], { stroke: '#fde68a', 'stroke-width': 1.6 * k });
    pop.push(dash); idle.push({ node: dash, bob: true });
    hot = L(.35, -1.35, 1.7);
@@ -300,7 +304,7 @@ function build(layout) {
    const face = -1.65 + .14 + .012;
    [[.35, .9, '#a78bfa'], [.55, 1.3, '#e2e8f0'], [.75, .7, '#38bdf8'], [.95, 1.45, '#e2e8f0'], [1.15, 1.0, '#f59e0b'], [1.35, .55, '#e2e8f0']].forEach(([z, len], q, arr) => {
     const x0 = .18 + (q % 3 === 1 ? .2 : 0);
-    seg(wall, [x0, face, z + .2], [x0 + len * .9, face, z + .2], { stroke: arr[q][2], 'stroke-width': 2.2 * k, opacity: .95 });
+    idle.push({ type: true, q, node: seg(wall, [x0, face, z + .2], [x0 + len * .9, face, z + .2], { stroke: arr[q][2], 'stroke-width': 2.2 * k, opacity: .95, pathLength: 1 }) });
    });
    rise.push(wall);
    // shipped containers
@@ -309,6 +313,7 @@ function build(layout) {
     const ct = box(g, x, y, .2 + z, 1.3, .6, .4, ...c3);
     for (let r2 = 1; r2 < 6; r2++) seg(ct, [x + r2 * .22, y + .61, .24 + z], [x + r2 * .22, y + .61, .56 + z], { stroke: '#000', 'stroke-opacity': .18, 'stroke-width': 1 });
     dropN.push(ct);
+    if (z) idle.push({ node: ct, lift: true });
    });
    // CI checks along the front
    [[-1.55, .45], [-1.55, .95], [-1.55, 1.45]].forEach(([x, y], q) => {
@@ -318,6 +323,7 @@ function build(layout) {
     el('circle', { cx: f(px), cy: f(py), r: f(5.5 * k), fill: '#22c55e', stroke: '#fff', 'stroke-width': 1.2 }, post);
     el('path', { d: `M${f(px - 2.6 * k)} ${f(py)}l${f(1.9 * k)} ${f(1.9 * k)} ${f(3.4 * k)} ${f(-3.6 * k)}`, fill: 'none', stroke: '#fff', 'stroke-width': 1.5 * k, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, post);
     pop.push(post);
+    idle.push({ node: post.lastChild.previousSibling, ping: true, q }, { node: post.lastChild, ping: true, q });
    });
    hot = L(.9, -1.6, 1.85);
   } else if (index === 2) {
@@ -342,7 +348,8 @@ function build(layout) {
    const nodes = [[-26, -6], [-16, -22], [8, -26], [26, -12], [24, 10], [-22, 12]];
    nodes.forEach(([dx, dy]) => el('line', { x1: f(ox2), y1: f(oy2), x2: f(ox2 + dx * k), y2: f(oy2 + dy * k), stroke: '#ddd6fe', 'stroke-width': 1, opacity: .7 }, orbG));
    nodes.forEach(([dx, dy], q) => { const a = nodes[(q + 1) % nodes.length]; el('line', { x1: f(ox2 + dx * k), y1: f(oy2 + dy * k), x2: f(ox2 + a[0] * k), y2: f(oy2 + a[1] * k), stroke: '#c4b5fd', 'stroke-width': .8, opacity: .45 }, orbG); });
-   nodes.forEach(([dx, dy]) => el('circle', { cx: f(ox2 + dx * k), cy: f(oy2 + dy * k), r: f(2.6 * k), fill: '#fff' }, orbG));
+   nodes.forEach(([dx, dy], q) => idle.push({ node: el('circle', { cx: f(ox2 + dx * k), cy: f(oy2 + dy * k), r: f(2.6 * k), fill: '#fff' }, orbG), twinkle: true, q }));
+   for (let q = 0; q < 3; q++) idle.push({ node: el('circle', { r: f(2.4 * k), fill: '#f5f3ff', opacity: 0 }, g), along: `M${f(ox2)} ${f(oy2 - 12 * k)}V0`, dur: 2400, q });
    pop.push(orbG); idle.push({ node: halo, pulse: true });
    const ring2 = el('ellipse', { cx: f(ox2), cy: f(oy2 + 4 * k), rx: f(36 * k), ry: f(12 * k), fill: 'none', stroke: '#fde68a', 'stroke-width': 1.3 * k, 'stroke-dasharray': `${3 * k} ${7 * k}`, opacity: .85 }, g);
    pop.push(ring2); idle.push({ node: ring1, flow: true }, { node: ring2, flow: true, reverse: true });
@@ -358,6 +365,8 @@ function build(layout) {
     const mx = (u[0] + v[0]) / 2 - 12 * k, my = Math.min(u[1], v[1]) - (16 + q * 14) * k;
     const arc = el('path', { d: `M${f(u[0])} ${f(u[1])}Q${f(mx)} ${f(my)} ${f(v[0])} ${f(v[1])}`, fill: 'none', stroke: '#fde68a', 'stroke-width': 1.6 * k, 'stroke-dasharray': `${2 * k} ${5 * k}`, 'stroke-linecap': 'round' }, g);
     pop.push(arc); idle.push({ node: arc, flow: true });
+    const chip = el('rect', { x: f(-4 * k), y: f(-3 * k), width: f(8 * k), height: f(6 * k), rx: 1.5, fill: '#fef3c7', stroke: '#f59e0b', 'stroke-width': 1, opacity: 0 }, g);
+    idle.push({ node: chip, along: arc.getAttribute('d'), dur: 2200, q: q * 2 });
    });
    // vector store and eval cubes
    shadow(g, .9, .9, .7, .7, .7);
@@ -369,7 +378,7 @@ function build(layout) {
    shadow(g, -1.75, -1.75, 1.45, 1.45, 2.8);
    const hq = el('g', {}, g);
    box(hq, -1.75, -1.75, .2, 1.45, 1.45, 2.8, '#e2ebff', '#8fa6d6', '#5f78ad');
-   windows(hq, -1.75, -1.75, .2, 1.45, 1.45, 5, 3);
+   windows(hq, -1.75, -1.75, .2, 1.45, 1.45, 5, 3).lit.filter((_, q) => q % 3 === 1).forEach((n, q) => idle.push({ node: n, flicker: true, q }));
    box(hq, -1.45, -1.45, 3, .85, .85, .14, '#cbd5e1', '#94a3b8', '#64748b');
    seg(hq, [-1.05, -1.05, 3.14], [-1.05, -1.05, 3.6], { stroke: '#cbd5e1', 'stroke-width': 1.4 * k });
    const [ax, ay] = L(-1.05, -1.05, 3.6);
@@ -385,7 +394,7 @@ function build(layout) {
    shadow(g, .35, .35, 1.25, 1.25, .85);
    const pod = el('g', {}, g);
    box(pod, .35, .35, .2, 1.25, 1.25, .85, ...blue);
-   for (let r2 = 1; r2 < 4; r2++) seg(pod, [.35, 1.61, .2 + r2 * .2], [1.6, 1.61, .2 + r2 * .2], { stroke: '#7dd3fc', 'stroke-width': 1.2 * k, opacity: .9 });
+   for (let r2 = 1; r2 < 4; r2++) idle.push({ node: seg(pod, [.35, 1.61, .2 + r2 * .2], [1.6, 1.61, .2 + r2 * .2], { stroke: '#7dd3fc', 'stroke-width': 1.2 * k, opacity: .9 }), twinkle: true, q: r2 });
    for (let r2 = 1; r2 < 4; r2++) seg(pod, [1.61, .35 + r2 * .3, .25], [1.61, .35 + r2 * .3, 1], { stroke: '#7dd3fc', 'stroke-width': 1 * k, opacity: .6 });
    dropN.push(pod);
    const cable = path(g, [[.35, .9, .3], [-.6, .9, .3], [-.6, -.25, .3]], { stroke: '#93c5fd', 'stroke-width': 2 * k, 'stroke-dasharray': `${2 * k} ${5 * k}` });
@@ -461,6 +470,8 @@ function build(layout) {
    poly(wire.map(([x, y]) => [x, y, tz1]), 'none', twin, { stroke: '#5fe0a8', 'stroke-width': 1.2 });
    wire.forEach(([x, y]) => seg(twin, [x, y, tz0], [x, y, tz1], { stroke: '#5fe0a8', 'stroke-width': 1 }));
    [[-1.3, tz1], [-.5, tz1 + .3], [.3, tz1]].reduce((a2, b2) => { seg(twin, [a2[0], -1.3, a2[1]], [b2[0], -1.3, b2[1]], { stroke: '#86efac', 'stroke-width': 1, 'stroke-dasharray': '3 3' }); return b2; });
+   const scan = poly(wire.map(([x, y]) => [x, y, tz0]), '#5fe0a8', twin, { opacity: .35 });
+   idle.push({ node: scan, scan: true, dy: -(tz1 - tz0) * S });
    pop.push(twin); idle.push({ node: twin, bob: true });
    hot = L(1.55, -.8, 1.3);
   }
@@ -482,6 +493,7 @@ function build(layout) {
   d.marker = el('g', { filter: 'url(#hg-drop)' }, markers);
   el('line', { x1: f(mx), y1: f(my0), x2: f(mx), y2: f(my + 10), stroke: '#fff', 'stroke-width': 1.6, 'stroke-opacity': .9 }, d.marker);
   el('circle', { cx: f(mx), cy: f(my0), r: 2.6, fill: '#fff' }, d.marker);
+  d.ring = el('circle', { cx: f(mx), cy: f(my), r: 12, fill: 'none', stroke: COLORS[i], 'stroke-width': 2, opacity: 0 }, markers);
   el('circle', { cx: f(mx), cy: f(my), r: 12, fill: COLORS[i], stroke: '#fff', 'stroke-width': 2.5 }, d.marker);
   el('text', { x: f(mx), y: f(my + 4.5), fill: '#fff', 'font-size': 13, 'font-weight': 800, 'text-anchor': 'middle' }, d.marker).textContent = String(i + 1);
   const [cardX, cardY] = layout.cards[i];
@@ -490,6 +502,7 @@ function build(layout) {
    const sx = right ? cardX : cardX + card.w, sy = cardY + card.h / 2;
    const elbow = right ? sx - 26 : sx + 26;
    d.leader = el('path', { d: `M${f(sx)} ${f(sy)}H${f(elbow)}L${f(mx)} ${f(my)}`, fill: 'none', stroke: COLORS[i], 'stroke-width': 1.5, 'stroke-dasharray': '3 5', 'stroke-linecap': 'round', opacity: .85 }, leaderLayer);
+   d.spark = el('circle', { r: 3, fill: COLORS[i], opacity: 0, filter: 'url(#hg-gl)' }, leaderLayer);
   }
   d.cardNode = el('g', { filter: 'url(#hg-drop)' }, svg);
   el('rect', { x: cardX, y: cardY, width: card.w, height: card.h, rx: 12, fill: '#fff' }, d.cardNode);
@@ -501,7 +514,7 @@ function build(layout) {
   d.title = el('text', { x: cardX + 47, y: cardY + 43, fill: '#10213a', 'font-size': card.title, 'font-weight': 700 }, d.cardNode);
   d.sub = el('text', { x: cardX + 47, y: cardY + 59, fill: '#51607a', 'font-size': card.sub }, d.cardNode);
  });
- return { svg, ground, roads, traffic, vehicles, carLayer, decorNodes, districts, sparkles, idleAll };
+ return { svg, ground, roads, traffic, vehicles, carLayer, decorNodes, districts, sparkles, idleAll, meteors, w, h };
 }
 
 function animate(scene) {
@@ -527,8 +540,22 @@ function animate(scene) {
   d.idle.forEach(item => loop(item, t0 + 1300));
  });
  scene.idleAll.forEach(item => loop(item, 3200));
+ scene.districts.forEach((d, i) => {
+  d.ring.style.transformBox = 'fill-box'; d.ring.style.transformOrigin = 'center';
+  d.ring.animate([{ transform: 'scale(1)', opacity: .8 }, { transform: 'scale(2.2)', opacity: 0 }], { duration: 2200, delay: 4200 + i * 440, iterations: Infinity, easing: 'ease-out' });
+  if (d.leader) loop({ node: d.spark, along: d.leader.getAttribute('d'), dur: 2600, q: i, back: true }, 4400);
+  if (d.leader) d.leader.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: 16 }], { duration: 1100, delay: 4000, iterations: Infinity });
+ });
+ scene.meteors.forEach((m, q) => {
+  const x0 = scene.w * (.45 + q * .3), y0 = 18 + q * 30;
+  m.animate([{ transform: `translate(${x0}px,${y0}px)`, opacity: 0 }, { opacity: .9, offset: .15 }, { transform: `translate(${x0 - 260}px,${y0 + 110}px)`, opacity: 0, offset: .4 }, { transform: `translate(${x0 - 260}px,${y0 + 110}px)`, opacity: 0 }], { duration: 7000, delay: 5000 + q * 3500, iterations: Infinity, easing: 'ease-out' });
+ });
  scene.traffic.forEach(({ lane }) => lane.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -18 }], { duration: 900, iterations: Infinity }));
  scene.vehicles.forEach(({ node, dx, dy, i }) => {
+  const twin = node.cloneNode(true);
+  scene.carLayer.appendChild(twin);
+  const period = 2600 + (i % 3) * 500;
+  twin.animate([{ transform: 'translate(0,0)', opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .88 }, { transform: `translate(${f(dx)}px,${f(dy)}px)`, opacity: 0 }], { duration: period, delay: 3800 + (i % 4) * 520 + period / 2, iterations: Infinity, easing: 'linear' });
   node.animate([{ transform: 'translate(0,0)', opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .88 }, { transform: `translate(${f(dx)}px,${f(dy)}px)`, opacity: 0 }], { duration: 2600 + (i % 3) * 500, delay: 3800 + (i % 4) * 520, iterations: Infinity, easing: 'linear' });
  });
 
@@ -536,6 +563,19 @@ function animate(scene) {
   const n = item.node;
   if (item.bob) n.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-4px)' }, { transform: 'translateY(0)' }], { duration: 3400, delay, iterations: Infinity, easing: 'ease-in-out' });
   else if (item.blink) n.animate([{ opacity: .08 }, { opacity: .45 }, { opacity: .08 }], { duration: 1400, delay, iterations: Infinity, easing: 'ease-in-out' });
+  else if (item.ripple) { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center'; n.animate([{ transform: 'scale(.3)', opacity: .9 }, { transform: 'scale(1.5)', opacity: 0 }], { duration: 2800, delay: delay + item.q * 1400, iterations: Infinity, easing: 'ease-out' }); }
+  else if (item.bar) { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'bottom'; n.animate([{ transform: 'scaleY(1)' }, { transform: `scaleY(${(.45 + (item.q * 37 % 50) / 100).toFixed(2)})` }, { transform: 'scaleY(1.15)' }, { transform: 'scaleY(1)' }], { duration: 2600 + item.q * 300, delay, iterations: Infinity, easing: 'ease-in-out' }); }
+  else if (item.type) { n.setAttribute('stroke-dasharray', '1 1'); n.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0, offset: .35 }, { strokeDashoffset: 0, offset: .85 }, { strokeDashoffset: 1 }], { duration: 4200, delay: delay + item.q * 260, iterations: Infinity, easing: 'ease-out' }); }
+  else if (item.lift) n.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(0)', offset: .45 }, { transform: 'translateY(-16px)', offset: .62 }, { transform: 'translateY(-16px)', offset: .78 }, { transform: 'translateY(0)', offset: .95 }, { transform: 'translateY(0)' }], { duration: 5200, delay, iterations: Infinity, easing: 'ease-in-out' });
+  else if (item.ping) { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center'; n.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.45)', offset: .08 }, { transform: 'scale(1)', offset: .2 }, { transform: 'scale(1)' }], { duration: 2400, delay: delay + item.q * 800, iterations: Infinity, easing: 'ease-out' }); }
+  else if (item.twinkle) n.animate([{ opacity: 1 }, { opacity: .25 }, { opacity: 1 }], { duration: 1600 + item.q * 230, delay: delay + item.q * 180, iterations: Infinity, easing: 'ease-in-out' });
+  else if (item.flicker) n.animate([{ opacity: .95 }, { opacity: .95, offset: .6 }, { opacity: .15, offset: .64 }, { opacity: .15, offset: .9 }, { opacity: .95, offset: .94 }, { opacity: .95 }], { duration: 5000 + item.q * 1300, delay: delay + item.q * 700, iterations: Infinity });
+  else if (item.scan) n.animate([{ transform: 'translateY(0)', opacity: .1 }, { transform: `translateY(${f(item.dy)}px)`, opacity: .5 }, { transform: 'translateY(0)', opacity: .1 }], { duration: 3000, delay, iterations: Infinity, easing: 'ease-in-out' });
+  else if (item.along) {
+   n.style.offsetPath = `path("${item.along}")`; n.style.offsetRotate = '0deg';
+   const [from, to] = item.back ? ['100%', '0%'] : ['0%', '100%'];
+   n.animate([{ offsetDistance: from, opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .85 }, { offsetDistance: to, opacity: 0 }], { duration: item.dur, delay: delay + item.q * 600, iterations: Infinity, easing: 'ease-in-out' });
+  }
   else if (item.glowPulse) n.animate([{ opacity: .35 }, { opacity: .8 }, { opacity: .35 }], { duration: 2800, delay, iterations: Infinity, easing: 'ease-in-out' });
   else if (item.blinkFast) n.animate([{ opacity: 1 }, { opacity: .15 }, { opacity: 1 }], { duration: 1100, delay, iterations: Infinity });
   else if (item.pulse) { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center'; n.animate([{ transform: 'scale(.85)', opacity: .25 }, { transform: 'scale(1.25)', opacity: .5 }, { transform: 'scale(.85)', opacity: .25 }], { duration: 2600, delay, iterations: Infinity, easing: 'ease-in-out' }); }
@@ -552,7 +592,7 @@ if (figure && frame) {
   const compact = matchMedia('(max-width: 900px)').matches;
   const layout = compact ? LAYOUTS.compact : LAYOUTS.wide;
   const scene = build(layout);
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches || compact;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   frame.replaceChildren(scene.svg);
   if (!still && typeof scene.svg.animate === 'function') animate(scene);
   // Shrink a line that would overflow its card (long translations) instead of letting it spill.
