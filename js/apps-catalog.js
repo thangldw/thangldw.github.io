@@ -1,6 +1,6 @@
 // Project catalog for the Apps page: group filter and one card per project.
 // Page chrome (document language, title, theme label, skip link) is owned by homepage.js.
-import { locales } from '/js/home-locales.mjs?v=b7a0b716';
+import { locales } from '/js/home-locales.mjs?v=5932586c';
 import { projectTranslations } from '/js/project-translations.mjs?v=4bdac196';
 import { bindLocaleSwitch } from './site-locale.mjs?v=6fd22c76';
 const copy = {
