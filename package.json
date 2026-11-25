@@ -1,0 +1,11 @@
+{
+  "name": "thangldw.github.io",
+  "private": true,
+  "type": "module",
+  "description": "Static portfolio served by GitHub Pages. Scripts only check and sync files; there is no build and no dependency.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "sync-shell": "node scripts/sync-shell.mjs",
+    "check": "node scripts/sync-shell.mjs --check"
+  }
+}
