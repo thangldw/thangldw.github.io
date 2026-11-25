@@ -9,7 +9,7 @@ const figure = document.getElementById('heroArt');
 const frame = figure?.querySelector('div');
 const COLORS = ['#f59e0b', '#a78bfa', '#38bdf8', '#16a36a'];
 const LAYOUTS = {
- wide: { w: 1232, h: 240, S: 24, cy: 108, card: { w: 250, h: 48, y: 182, title: 14, sub: 11.5 }, islands: [[170, 0], [470, 0], [770, 0], [1070, 0]] },
+ wide: { w: 1232, h: 240, S: 26, cy: 112, card: { w: 244, h: 46, y: 188, title: 14, sub: 11.5 }, islands: [[170, 0], [470, 0], [770, 0], [1070, 0]] },
  compact: { w: 600, h: 560, S: 30, cy: 128, card: { w: 270, h: 58, y: 214, title: 16, sub: 13 }, islands: [[150, 0], [450, 0], [150, 280], [450, 280]] }
 };
 
@@ -87,6 +87,7 @@ function build(layout) {
    });
    nodes.forEach(([x, y], q) => pop.push(box(plane, x, y, z, .7, .7, .3, ['#fff', '#cfe0ff', '#a9bce6'][0], '#8fb0ff', '#6f90e8')));
    [[-1.9, -1.9], [1.9, -1.9], [1.9, 1.9], [-1.9, 1.9]].forEach(([x, y]) => { const [u, v] = [P(x, y, .22), P(x, y, z)]; el('line', { x1: u[0], y1: u[1], x2: v[0], y2: v[1], stroke: '#2c4a86', 'stroke-width': 1.4 }, g); });
+   [[-1.7, 1.0], [1.0, -1.7]].forEach(([x, y]) => rise.push(box(g, x, y, .22, .8, .8, .5, '#b8ccff', '#3b6bef', '#2447b8')));
    rise.push(plane); idle.push({ node: plane, bob: true });
    hot = P(.1, .1, z + .3);
   } else if (index === 2) {
@@ -113,10 +114,9 @@ function build(layout) {
    el('circle', { cx: cp[0], cy: cp[1], r: 12 * k, fill: '#16a36a', stroke: '#fff', 'stroke-width': 2 }, badge);
    el('path', { d: `M${cp[0] - 5.5 * k} ${cp[1]}l${4 * k} ${4 * k} ${7.5 * k} ${-8 * k}`, fill: 'none', stroke: '#fff', 'stroke-width': 2.6 * k, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, badge);
    pop.push(badge);
+   const ring = el('circle', { cx: cp[0], cy: cp[1], r: 12 * k, fill: 'none', stroke: '#5fe0a8', 'stroke-width': 2 }, g);
+   idle.push({ node: ring, pulse: true });
    [[.7, -1.2, .8], [.7, -.2, 1.3], [.7, .8, 1.8]].forEach(([x, y, th]) => rise.push(box(g, x, y, .25, .8, .8, th, '#b6f0d3', '#16a36a', '#0e7a4d')));
-   const gate = el('g', {}, g);
-   poly([[-1.9, 1.4, .25], [1.9, 1.4, .25], [1.9, 1.4, 1.1], [-1.9, 1.4, 1.1]], 'rgba(22,163,106,.18)', gate, { stroke: '#5fe0a8', 'stroke-width': 1.2, 'stroke-dasharray': '3 4' });
-   pop.push(gate);
    hot = P(-.6, -.6, 2.15);
   }
 
@@ -125,21 +125,25 @@ function build(layout) {
   const line = el('line', { x1: ox, y1: cardY, x2: hot[0], y2: hot[1], stroke: COLORS[index], 'stroke-width': 1.8, 'stroke-dasharray': '2 5', 'stroke-linecap': 'round' }, group);
   const cardNode = el('g', {}, group);
   el('rect', { x: cardX, y: cardY, width: card.w, height: card.h, rx: 10, fill: '#fff' }, cardNode);
-  el('rect', { x: cardX, y: cardY + 10, width: 4, height: card.h - 20, rx: 2, fill: COLORS[index] }, cardNode);
-  const title = el('text', { x: cardX + 18, y: cardY + card.h * .44, fill: '#10213a', 'font-size': card.title, 'font-weight': 700 }, cardNode);
-  const sub = el('text', { x: cardX + 18, y: cardY + card.h * .76, fill: '#51607a', 'font-size': card.sub }, cardNode);
+  el('circle', { cx: cardX + 22, cy: cardY + card.h / 2, r: 11, fill: COLORS[index] }, cardNode);
+  const num = el('text', { x: cardX + 22, y: cardY + card.h / 2 + 4.5, fill: '#fff', 'font-size': 13, 'font-weight': 800, 'text-anchor': 'middle' }, cardNode);
+  num.textContent = String(index + 1);
+  const title = el('text', { x: cardX + 42, y: cardY + card.h * .44, fill: '#10213a', 'font-size': card.title, 'font-weight': 700 }, cardNode);
+  const sub = el('text', { x: cardX + 42, y: cardY + card.h * .76, fill: '#51607a', 'font-size': card.sub }, cardNode);
   const dot = el('circle', { cx: hot[0], cy: hot[1], r: 5.5, fill: COLORS[index], stroke: '#fff', 'stroke-width': 2 }, group);
   return { g, plate, rise, drop, pop, idle, group, line, cardNode, dot, title, sub };
  });
 
  // data flow between neighbouring islands; the compact grid has no link from row one to row two
- const flows = [];
+ const flows = [], packets = [];
  const links = layout === LAYOUTS.wide ? [[0, 1], [1, 2], [2, 3]] : [[0, 1], [2, 3]];
  links.forEach(([a, b]) => {
   const [ax, ay] = layout.islands[a], [bx, by] = layout.islands[b];
-  flows.push(el('line', { x1: ax + 4.2 * C * S, y1: cy + ay, x2: bx - 4.2 * C * S, y2: cy + by, stroke: '#8fb0ff', 'stroke-width': 3, 'stroke-dasharray': '2 7', 'stroke-linecap': 'round', opacity: .9 }, svg));
+  const lx1 = ax + 4.2 * C * S, lx2 = bx - 4.2 * C * S;
+  flows.push(el('line', { x1: lx1, y1: cy + ay, x2: lx2, y2: cy + by, stroke: '#8fb0ff', 'stroke-width': 3, 'stroke-dasharray': '2 7', 'stroke-linecap': 'round', opacity: .9 }, svg));
+  packets.push({ node: el('circle', { cx: lx1, cy: cy + ay, r: 4.5, fill: '#fff', opacity: 0 }, svg), len: lx2 - lx1 });
  });
- return { svg, islands, flows };
+ return { svg, islands, flows, packets };
 }
 
 function animate(scene) {
@@ -159,10 +163,19 @@ function animate(scene) {
   isl.line.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: reveal + 150, fill: 'backwards' });
   isl.cardNode.animate([{ transform: 'translateY(8px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, delay: reveal + 250, easing: ease, fill: 'backwards' });
   isl.idle.forEach((item, q) => {
-   if (item.drop) item.node.animate([{ transform: 'translateY(-46px)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1, offset: .35 }, { transform: 'translateY(0)', opacity: 1, offset: .85 }, { transform: 'translateY(0)', opacity: 0 }], { duration: 3000, delay: t0 + 1500, iterations: Infinity, easing: 'ease-in' });
+   if (item.pulse) { item.node.style.transformBox = 'fill-box'; item.node.style.transformOrigin = 'center'; item.node.animate([{ transform: 'scale(1)', opacity: .9 }, { transform: 'scale(2.2)', opacity: 0 }], { duration: 1800, delay: t0 + 1800, iterations: Infinity, easing: 'ease-out' }); }
+   else if (item.drop) item.node.animate([{ transform: 'translateY(-46px)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1, offset: .35 }, { transform: 'translateY(0)', opacity: 1, offset: .85 }, { transform: 'translateY(0)', opacity: 0 }], { duration: 3000, delay: t0 + 1500, iterations: Infinity, easing: 'ease-in' });
    else if (item.bob) item.node.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)' }, { transform: 'translateY(0)' }], { duration: 3200, delay: 3600 + q * 350, iterations: Infinity, easing: 'ease-in-out' });
    else item.node.animate([{ transform: 'translate(0,0)', opacity: 0 }, { opacity: 1, offset: .1 }, { opacity: 1, offset: .9 }, { transform: `translate(${item.dx}px,${item.dy}px)`, opacity: 0 }], { duration: 2600, delay: t0 + 1400, iterations: Infinity, easing: 'linear' });
   });
+ });
+ scene.packets.forEach(({ node, len }, i) => {
+  const n = scene.packets.length, a = i / n, z = (i + 1) / n;
+  const frames = [{ offset: 0, opacity: 0, transform: 'translateX(0)' }];
+  if (a > 0) frames.push({ offset: a, opacity: 0, transform: 'translateX(0)' });
+  frames.push({ offset: a + .01, opacity: 1, transform: 'translateX(0)' }, { offset: z - .01, opacity: 1, transform: `translateX(${len}px)` }, { offset: z, opacity: 0, transform: `translateX(${len}px)` });
+  if (z < 1) frames.push({ offset: 1, opacity: 0, transform: `translateX(${len}px)` });
+  node.animate(frames, { duration: 2000 * n, delay: 4200, iterations: Infinity, easing: 'linear' });
  });
  scene.flows.forEach((f, i) => {
   f.animate([{ opacity: 0 }, { opacity: .9 }], { duration: 500, delay: 700 + i * 900, fill: 'backwards' });
