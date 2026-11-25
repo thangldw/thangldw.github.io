@@ -1,0 +1,27 @@
+<svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstract illustration of branches merging into a main line, ending in concentric rings">
+<defs>
+<linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10213a"/><stop offset="1" stop-color="#1c3a78"/></linearGradient>
+<radialGradient id="glow" cx="0.9" cy="0.5" r="0.6"><stop offset="0" stop-color="#3b6bef" stop-opacity=".55"/><stop offset="1" stop-color="#3b6bef" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#fff" opacity=".12"/></pattern>
+<clipPath id="c3"><rect width="520" height="360" rx="14"/></clipPath>
+</defs>
+<g clip-path="url(#c3)">
+<rect width="520" height="360" fill="url(#g3)"/><rect width="520" height="360" fill="url(#dots)"/><rect width="520" height="360" fill="url(#glow)"/>
+<g fill="none" stroke="#fff" opacity=".18"><circle cx="462" cy="190" r="34"/><circle cx="462" cy="190" r="62"/><circle cx="462" cy="190" r="92"/><circle cx="462" cy="190" r="126"/></g>
+<g fill="#6f9bff"><rect x="26" y="38" width="86" height="86" rx="20" opacity=".10" transform="rotate(-12 69 81)"/><rect x="44" y="52" width="86" height="86" rx="20" opacity=".10" transform="rotate(-12 87 95)"/><rect x="62" y="66" width="86" height="86" rx="20" opacity=".12" transform="rotate(-12 105 109)"/></g>
+<g fill="none" stroke-width="4" stroke-linecap="round">
+<path d="M150 190 C190 190 190 62 240 62 H330 C380 62 380 190 420 190" stroke="#8fb0ff" opacity=".9"/>
+<path d="M90 190 C130 190 130 120 180 120 H260 C300 120 300 190 340 190" stroke="#6f9bff"/>
+<path d="M120 190 C160 190 160 262 210 262 H290 C340 262 340 190 380 190" stroke="#16a36a"/>
+<path d="M200 190 C240 190 240 314 290 314 H390 C440 314 440 190 462 190" stroke="#6f9bff" opacity=".55"/>
+<path d="M30 190 H494" stroke="#fff" stroke-width="5" opacity=".95"/>
+</g>
+<g stroke="#10213a" stroke-width="3">
+<circle cx="220" cy="120" r="8" fill="#6f9bff"/><circle cx="285" cy="62" r="8" fill="#8fb0ff"/><circle cx="250" cy="262" r="8" fill="#16a36a"/><circle cx="340" cy="314" r="8" fill="#6f9bff"/>
+<circle cx="30" cy="190" r="10" fill="#fff"/><circle cx="90" cy="190" r="7" fill="#fff"/><circle cx="120" cy="190" r="7" fill="#fff"/><circle cx="150" cy="190" r="7" fill="#fff"/><circle cx="200" cy="190" r="7" fill="#fff"/>
+</g>
+<g stroke="#10213a" stroke-width="3"><circle cx="340" cy="190" r="12" fill="#16a36a"/><circle cx="380" cy="190" r="12" fill="#16a36a"/><circle cx="420" cy="190" r="12" fill="#16a36a"/></g>
+<g stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M334.5 190 l4 4 7-8"/><path d="M374.5 190 l4 4 7-8"/><path d="M414.5 190 l4 4 7-8"/></g>
+<circle cx="462" cy="190" r="20" fill="#fff"/><circle cx="462" cy="190" r="9" fill="#1d4ed8"/>
+<g fill="#fff" opacity=".85"><rect x="36" y="296" width="8" height="22" rx="3" opacity=".5"/><rect x="52" y="286" width="8" height="32" rx="3" opacity=".6"/><rect x="68" y="276" width="8" height="42" rx="3" opacity=".7"/><rect x="84" y="264" width="8" height="54" rx="3" opacity=".8"/><rect x="100" y="252" width="8" height="66" rx="3"/></g>
+</g></svg>

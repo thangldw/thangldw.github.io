@@ -1,4 +1,4 @@
-// Translations for the #community section of the home page.
+// Translations for the PR rows on the Community page.
 // Page chrome (document language, title, meta) is owned by homepage.js.
 import vi from './community-locales/vi.mjs?v=20261124-merge';
 import ja from './community-locales/ja.mjs?v=20261124-merge';
