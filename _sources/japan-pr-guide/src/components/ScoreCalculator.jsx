@@ -82,13 +82,11 @@ const iconByFactor = {
 export function CalculatorHeader() {
   return (
     <header className="app-header">
-      <div className="app-owner-group"><a className="site-brand app-owner-brand" href="/" aria-label="Trang chủ Thang Luu"><span className="site-brand-mark" aria-hidden="true">t:&gt;</span><span aria-hidden="true">thang<span className="site-brand-dot">.</span></span></a>
       <a className="app-brand app-owner-title" href="#calculator" aria-label="Japan PR Guide home">
         <strong>Japan PR Guide</strong>
-      </a></div>
+      </a>
       <div className="header-actions">
         <a href="#official-updates">Official sources <ArrowSquareOut size={15} /></a>
-        <button id="themeToggle" className="site-theme-toggle" type="button" aria-label="Switch to dark theme"><i className="fa-solid fa-moon" aria-hidden="true" /></button>
       </div>
     </header>
   );
