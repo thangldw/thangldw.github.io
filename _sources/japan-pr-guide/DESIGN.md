@@ -1,99 +1,50 @@
----
-version: alpha
-colors:
-  canvas: "#f6f5f1"
-  text: "#23291f"
-  muted: "#535e4b"
-  accent: "#965025"
-  border: "#d1d7c9"
-  control: "#e9ede3"
-  canvas-dark: "#11150e"
-  text-dark: "#e5e6df"
-  muted-dark: "#b9bdb5"
-  accent-dark: "#e69d6b"
-  border-dark: "#32382d"
-  control-dark: "#20261c"
-  support: "#b83a06"
-typography:
-  body: {fontFamily: "Inter", fontSize: "14px", lineHeight: "1.5"}
-  prose: {fontFamily: "Inter", fontSize: "16px", lineHeight: "1.6"}
-  caption: {fontFamily: "Inter", fontSize: "12px", lineHeight: "1.5"}
-  logo: {fontFamily: "Inter", fontSize: "22px", lineHeight: "1"}
-rounded:
-  control: "6px"
-  dialog: "12px"
-spacing:
-  small: "8px"
-  medium: "16px"
-  large: "24px"
-components:
-  logo: {typography: "logo"}
-  icon-button: {height: "36px"}
-  touch-button: {height: "44px"}
----
+# Japan PR Guide design and product contract
 
-## Overview
+Visual tokens, shell and theme come from the portfolio (`/css/site-shell.css`, `/js/site-shell.js`). This document covers only
+what is specific to the tool.
 
-Thang Luu's homepage is the visual reference for a multilingual Data/AI/FDE portfolio and its application catalog. The interface should feel restrained, readable, and deliberate. The signature is the `t:>` mark; the content carries the identity. Avoid ornamental gradients, decorative panels, and a competing visual system per route.
+## Product flow
 
-Official site design system (ownership model B): **`css/tokens.css` is the canonical runtime source**. This document mirrors accepted values and explains their purpose. `css/site-shell.css` owns reusable logo and control recipes. `css/support-dialog.css` owns the shared support overlay. Route CSS owns composition and responsive placement, and consumes tokens rather than another palette or type scale.
+1. Calculate the HSP score.
+2. Review score claims and proof coverage.
+3. Recalculate the score at the route-specific historical checkpoint.
+4. Confirm PR requirements.
+5. Prepare the application plan and evidence checklist.
 
-## Colors
+Future steps stay unavailable until reached. State is session-only React state: no `localStorage`, URL state, upload or remote
+persistence. The flow diagram is `docs/japan-pr-guide-flow.html`.
 
-The light and dark values above map respectively to `--color-canvas`, `--color-text`, `--color-text-body`, `--color-accent`, `--color-border`, and `--color-surface-subtle`. Light is the homepage default; dark is an explicit action. `--color-support` is a deliberately stable orange action with white text in both themes, distinct from the inline accent. Success, warning, danger, information, and data series retain their established semantic roles in the same file.
+## Scoring rules
 
-No route declares raw palette values. Root token specificity also protects the contract against historical tokens embedded in generated application CSS. Shared hover, active, focus-visible, selected, and disabled states use semantic control tokens.
+- One estimated HSP score per reference date. Evidence is shown as proof coverage (documented claims over active point claims) and never produces a second or adjusted score.
+- The total is uncapped; 100 is a route-comparison reference, not a ceiling.
+- A current 70-79 result selects the potential three-year route and recalculates at 18 August 2023 with a 70-point threshold. A current 80+ result selects the potential one-year route and recalculates at 18 August 2025 with an 80-point threshold.
+- Historical age, experience, remuneration, qualifications and additions are independently editable and scored by the same engine.
+- Every applicable item is always visible with criterion, selected value, maximum points, current points, historical value, historical points, required proof and overlap or dependency note.
+- Each of the three activity types exposes its own degree, experience, remuneration, age or position, research, qualification and bonus rules from the current MOJ table.
+- Innovative Asia partner universities are chosen through search over the official list (English name, Japanese name or country), not a Yes/No self-certification. University additions are capped at 10 points; the multiple-degree addition needs an eligible advanced degree in more than one field.
+- JICA training adds 5 points alongside Japanese-university graduation only when the training did not use Japanese university or graduate-school classes; otherwise the overlap removes the JICA addition.
+- Age is a manual field per reference date. Do not add date-of-birth input or DOB-based age calculation.
+- Do not make unsupported legal claims. Route labels say potential route or assessment path until requirements are confirmed.
 
-## Typography
+## Ownership
 
-The self-hosted Inter family is declared once as `--font-family-ui`, with legacy font names adapting to it. Japanese and Simplified Chinese use `--font-jp-sans` and `--font-cn-sans` with explicit script-capable system fallbacks.
+| Capability | Owner |
+| --- | --- |
+| Point math, itemized breakdown, overlap warnings, eligibility gates | `src/domain/scoring.js` |
+| Route checkpoint, reference date, historical defaults | `src/domain/historical.js` |
+| Date validation | `src/domain/policy.js`; the input is a native date-only field |
+| Enumerated factors | Native `select`; university search is an authored accessible combobox |
+| Theme persistence | Portfolio `js/site-shell.js`; `CalculatorHeader` only syncs its icon on `themechange` |
+| Proof coverage | `ClaimsScreen` in `src/components/ScoreCalculator.jsx` |
 
-The complete scale lives under `--text-*`. Main portfolio body is 14px for the approved single-screen desktop density; mobile prose is 16px. Caption is 12px; small supporting copy is 13px; titles use the registered 16–24px roles; display sizes use registered 26–56px roles. The application catalog uses the tokenized fluid page title. Domain-specific exam typography remains owned by its source application until that screen is migrated; the common shell and catalog already use shared recipes.
+React owns input state and renders engine results. UI option values are never summed directly.
 
-Family, size, line height, weight, and tracking are independent shared tokens. Use regular body, medium/semibold titles, and bold brand text. Text reflows naturally; do not shrink or clip essential copy just to suppress scrolling at zoom.
+## Layout and visuals
 
-## Layout
-
-Homepage: sidebar plus fluid main column, 1280 × 720 compact desktop target across EN/VN/JP/CN, growing frame on large screens, vertical reflow on mobile. Apps: searchable grouped catalog. Cert: its existing learning application layout.
-
-The `--space-*` tokens preserve accepted spacing while removing local literals; semantic legacy spacing aliases remain supported. Dimensions that express a layout (column width, breakpoint, or frame maximum) can stay route-specific. A shared fixed support action occupies the bottom-right safe area; page composition must keep it clear of essential links.
-
-## Elevation & Depth
-
-Content is flat and separated by restrained rules. Elevation is reserved for support and contact overlays. Reduced motion removes component transitions. Focus remains visible independently of elevation and color.
-
-## Shapes
-
-Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `--logo-radius`, with a 38px desktop mark and 32px mobile mark. Its text stays at 22px, with mark text at 15px/13px. No page invents a new logo size.
-
-## Components
-
-| Contract | Owner | Consumers |
-| --- | --- | --- |
-| Colors, type, spacing, shape, control/focus values | `css/tokens.css` | All public routes through the shared shell |
-| Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, generated Cert via the compatibility adapter |
-| Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, carousel, locale, contact; reusable on subsequent screens |
-| Floating support and overlay | `css/support-dialog.css`, `js/support-dialog.js` | Home and existing public route integrations |
-| Cert catalog aliases | Scoped compatibility adapter in `css/site-shell.css` | Existing generated `.certification-hub` shell |
-
-The logo never adopts link underline or changes its geometry on hover. Controls have hover, pressed, focus-visible and disabled recipes; keyboard/ARIA semantics remain the responsibility of runtime behavior. Touch controls are at least 44px high. Navigation links retain link semantics.
-
-The generated Cert bundle is not hand-edited. Its learning/assessment internals can be migrated in the source repository later without introducing another token source. This release establishes shared foundation and shell consistency, rather than changing exam workflows.
-
-Before release, check token/document drift, route literal debt, integration, shared recipes, and contrast by hand (the automated validators were removed with `scripts/`). Verify rendered Home/Apps/Cert in both themes and mobile as well.
-
-## Do's and Don'ts
-
-- Use semantic tokens and the existing shared shell. Change the owner once, then verify every consumer.
-- Keep layouts appropriate to their content; use the homepage's visual language, not its exact sidebar everywhere.
-- Keep names and domain identifiers intact across localization.
-- Do not copy theme palettes, logo rules, or button states into a route stylesheet.
-- Do not modify generated exam bundles or infer application state from a visual token.
-
-## Mandatory inheritance contract
-
-`css/site-shell.css` is the official public stylesheet entry point. It imports `css/tokens.css`, the sole owner of core design values. All public HTML pages load this entry point; route CSS consumes its custom properties and shared component classes through the CSS cascade. Do not copy the homepage stylesheet to create another design system, or import one route's layout into another route.
-
-Authoring order is shared foundations and components, then route composition. A route may set columns, widths, breakpoints and content placement. It must not redefine core `--color-*`, typography, spacing, logo, radius, control-size or focus tokens. A new reusable visual variant must be added to the shared owner first. Legacy aliases may reference canonical tokens, but cannot become an independent source of core values.
-
-The release validator rejects protected token definitions in every authored file under `css/`. Generated application assets retain their source ownership; migrate them in their source repository and preserve the shared integration adapter. Existing legacy route styles are compatibility debt, not an alternative approved standard; new or revised screens must use this contract.
+- Desktop (1440 x 1024 target): compact header with Official sources and a horizontal five-step rail; summary row with current score, selected route, required checkpoint and proof coverage; route selector; wide current-versus-historical table beside a narrow route checklist; MOJ source strip and guidance-only footer. No language toggle or Save plan action.
+- Mobile: the table becomes aligned current and historical rows without hiding any category; 44px minimum targets; no hover-only evidence; no horizontal page overflow.
+- Inter Variable at 14-16px, 22-28px page title; radii 6-8px; almost no shadow; no gradients, glass or nested card grids; Phosphor icons at 16-22px.
+- Reduced motion removes smooth scrolling and nonessential transitions.
+- Content is English and Vietnamese; Japanese and Chinese product translations are not implemented.
+- Keep the shared floating Support dialog. Do not show an "Explore more apps" link below the source notes.

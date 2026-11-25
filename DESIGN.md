@@ -48,7 +48,7 @@ No route declares raw palette values. Root token specificity also protects the c
 
 The self-hosted Inter family is declared once as `--font-family-ui`, with legacy font names adapting to it. Japanese and Simplified Chinese use `--font-jp-sans` and `--font-cn-sans` with explicit script-capable system fallbacks.
 
-The complete scale lives under `--text-*`. Main portfolio body is 14px for compact desktop density; mobile prose is 16px. Caption is 12px; small supporting copy is 13px; titles use the registered 16–24px roles; display sizes use registered 26–56px roles. The application catalog uses the tokenized fluid page title. Domain-specific exam typography remains owned by its source application until that screen is migrated; the common shell and catalog already use shared recipes.
+The complete scale lives under `--text-*`. Main portfolio body is 14px for compact desktop density; mobile prose is 16px. Caption is 12px; small supporting copy is 13px; titles use the registered 16–24px roles; display sizes use registered 26–56px roles. The application catalog uses the tokenized fluid page title.
 
 Family, size, line height, weight, and tracking are independent shared tokens. Use regular body, medium/semibold titles, and bold brand text. Text reflows naturally; do not shrink or clip essential copy just to suppress scrolling at zoom.
 
@@ -71,7 +71,7 @@ Controls use `--radius-control`; dialogs use `--radius-dialog`. The logo uses `-
 | Contract | Owner | Consumers |
 | --- | --- | --- |
 | Colors, type, spacing, shape, control/focus values | `css/tokens.css` | All public routes through the shared shell |
-| Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, generated Cert via the compatibility adapter |
+| Logo geometry and states | `.site-brand`, `.site-brand-mark` in `css/site-shell.css` | Home, Apps, Community, 404 and Japan PR Guide |
 | Site navigation (Apps · Community) | `.site-nav` in `css/site-shell.css`; labels and `aria-current` from `js/site-shell.js` | Apps, Community, product introductions, 404 |
 | Standard and icon controls | `.ui-button`, `.ui-icon-button`, shared legacy selectors in `css/site-shell.css` | Theme, locale and catalog filter controls; reusable on subsequent screens |
 | Floating support and overlay | `css/support-dialog.css`, `js/support-dialog.js` | Home and existing public route integrations |
@@ -81,7 +81,7 @@ The logo never adopts link underline or changes its geometry on hover. Controls 
 Across the shared shell, language selectors, theme toggles and lesson pagination use neutral text on a transparent background in both themes. The selected language has a 1px underline. Hover and press add a neutral fill, and keyboard focus shows an outline.
 
 
-Before release, check token/document drift, route literal debt, integration, shared recipes, and contrast by hand (the automated validators were removed with `scripts/`). Verify rendered Home/Apps in both themes and mobile as well.
+Before release, run `npm test` and check rendered Home, Apps, Community and 404 in both themes and at mobile width by hand.
 
 ## Do's and Don'ts
 
@@ -89,7 +89,7 @@ Before release, check token/document drift, route literal debt, integration, sha
 - Keep layouts appropriate to their content; use the homepage's visual language, not its exact composition everywhere.
 - Keep names and domain identifiers intact across localization.
 - Do not copy theme palettes, logo rules, or button states into a route stylesheet.
-- Do not modify generated exam bundles or infer application state from a visual token.
+- Do not hand-edit generated bundles (for example `japan-pr-guide/assets/`) or infer application state from a visual token.
 
 ## Mandatory inheritance contract
 
@@ -97,4 +97,4 @@ Before release, check token/document drift, route literal debt, integration, sha
 
 Authoring order is shared foundations and components, then route composition. A route may set columns, widths, breakpoints and content placement. It must not redefine core `--color-*`, typography, spacing, logo, radius, control-size or focus tokens. A new reusable visual variant must be added to the shared owner first. Legacy aliases may reference canonical tokens, but cannot become an independent source of core values.
 
-The release validator rejects protected token definitions in every authored file under `css/`. Generated application assets retain their source ownership; migrate them in their source repository and preserve the shared integration adapter. Existing legacy route styles are compatibility debt, not an alternative approved standard; new or revised screens must use this contract.
+Generated application assets keep their source ownership; migrate them in their source repository. Legacy route styles are compatibility debt, not an alternative standard; new or revised screens must use this contract.

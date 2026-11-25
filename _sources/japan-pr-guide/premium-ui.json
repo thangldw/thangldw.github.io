@@ -1,8 +1,0 @@
-{
-  "profile": "product-admin",
-  "canonicalMap": "UX-CONTRACT.md",
-  "ownership": {
-    "Date": "native",
-    "Select/Listbox": "native"
-  }
-}
