@@ -199,13 +199,3 @@ html[data-theme=dark] .sr-mark{background:#e6ebf5;color:#10213a}
  .app-card,.engage-links a{transition:none}
  .app-card:hover{transform:none}
 }
-
-/* Hero graph tooltip. */
-.hero-art{position:relative}
-.hero-tip{position:absolute;z-index:3;max-width:min(320px,90%);padding:6px 10px;border-radius:8px;background:#fff;color:#10213a;font-size:12px;line-height:1.4;pointer-events:none;box-shadow:0 10px 24px -10px rgba(16,33,58,.6);transform:translate(-50%,calc(-100% - 12px))}
-.hero-tip[hidden]{display:none}
-.hero-tip b{font-weight:600}
-.hero-art a{transition:transform .15s}
-.hero-art a:is(:hover,:focus-visible){transform:translateY(-3px)}
-.hero-art a:focus-visible polygon:last-child{stroke:#1d4ed8;stroke-width:3}
-.hero-art a{outline:0}
