@@ -1,5 +1,5 @@
 /* Not-found page. Shell, tokens and type scale come from homepage.css; this file lays out the message and the terminal. */
-.not-found { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-areas: "head head" "terminal scene"; gap: 32px 48px; align-items: start; padding-top: 24px; padding-bottom: 48px; }
+.not-found { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "head head" "terminal scene"; gap: 32px 40px; align-items: stretch; padding-top: 24px; padding-bottom: 48px; }
 .not-found-head { grid-area: head; max-width: 760px; }
 .not-found-code { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 .not-found-code strong { font: 700 clamp(56px, 7vw, 88px) / 0.9 var(--font-mono); letter-spacing: -0.06em; color: var(--color-accent); }
@@ -11,15 +11,19 @@
 .nf-error { color: #ff9b8f; }
 .nf-hint { margin-bottom: 4px; color: #e8eeff; }
 .nf-routes { display: grid; gap: 2px; margin: 4px 0 0; padding: 0; list-style: none; }
-.nf-routes li { display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: 16px; }
+.nf-routes { font-size: 14px; }
+.nf-routes li { display: grid; grid-template-columns: minmax(0, 10.5rem) minmax(0, 1fr); gap: 12px; }
 .nf-routes span { color: #8d9bb8; }
 .not-found-terminal a { color: #8aa8ff; text-decoration: none; }
 .not-found-terminal a:hover { text-decoration: underline; }
 .not-found-terminal a:focus-visible { outline: 2px solid #8aa8ff; outline-offset: 2px; border-radius: 2px; }
-.not-found-scene { grid-area: scene; margin: 0; }
-.not-found-scene img { display: block; width: 100%; height: auto; border: 1px solid var(--color-border); border-radius: 12px; }
+.not-found-scene { grid-area: scene; display: flex; flex-direction: column; min-width: 0; margin: 0; }
+.not-found-scene img { display: block; flex: 1 1 auto; width: 100%; min-height: 0; height: 100%; object-fit: cover; object-position: 50% 35%; border: 1px solid var(--color-border); border-radius: 12px; }
 .not-found-scene figcaption { margin-top: 10px; font-size: 14px; line-height: 1.6; color: var(--color-text-muted); }
 @media (max-width: 900px) {
+  .not-found-scene img { flex: none; height: auto; }
   .not-found { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "terminal" "scene"; gap: 24px; }
+}
+@media (max-width: 520px) {
   .nf-routes li { grid-template-columns: minmax(0, 1fr); gap: 0; margin-bottom: 6px; }
 }
