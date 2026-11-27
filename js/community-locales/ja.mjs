@@ -178,5 +178,12 @@ export default {
   "pr505Decision": "fec-source-flow、fec-repair-flow、repair-window を解析・生成し、FEC の転送パラメータをこれらの属性に対応付けました。",
   "pr2261Title": "継承されたJWKSキーIDを拒否",
   "pr2261Problem": "kid が constructor や __proto__ など Object.prototype の名前だと、JWKSキャッシュで鍵ではない継承値に解決され、検証が TypeError を投げて 401 ではなく 500 になっていました。",
-  "pr2261Decision": "キャッシュをプロトタイプなしのオブジェクトにし、そのような kid を未知として扱います。回帰テストを追加。"
+  "pr2261Decision": "キャッシュをプロトタイプなしのオブジェクトにし、そのような kid を未知として扱います。回帰テストを追加。",
+  "ghsaTitle": "LaTeXマクロ展開に上限がない問題",
+  "ghsaSeverity": "中程度 · CVSS 3.1 · CWE-400, CWE-776 · CVEなし",
+  "ghsaProblem": "LaTeXバックエンドがユーザー定義マクロを無制限に展開するため、数百バイトの .tex ファイルでメモリとCPUを使い果たせました。parse_timeout 後も解析スレッドが動き続けました。影響は docling 2.73.0〜2.153.x と docling-slim 2.92.0〜2.153.x。",
+  "fix": "修正",
+  "ghsaFix": "メンテナーが 2.154.0 で修正（#5610、#5611）：文書ごとのマクロ展開回数と展開文字数の上限、タイムアウト時に解析スレッドを協調的に停止。",
+  "disclosure": "公開",
+  "ghsaDisclosure": "メンテナーが2026-11-27に公開。報告者としてクレジット（0x-Apollyonと共同）。"
 };

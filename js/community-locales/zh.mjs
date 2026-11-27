@@ -178,5 +178,12 @@ export default {
   "pr505Decision": "解析并生成 fec-source-flow、fec-repair-flow 和 repair-window，再将 FEC 传输参数映射到这些属性。",
   "pr2261Title": "拒绝继承而来的 JWKS 密钥 ID",
   "pr2261Problem": "当 kid 为 constructor、__proto__ 等 Object.prototype 属性名时，会在 JWKS 缓存中解析为继承而来的非密钥值，导致验证抛出 TypeError，请求返回 500 而不是 401。",
-  "pr2261Decision": "密钥缓存改用无原型对象，使此类 kid 被视为未知；并添加回归测试。"
+  "pr2261Decision": "密钥缓存改用无原型对象，使此类 kid 被视为未知；并添加回归测试。",
+  "ghsaTitle": "LaTeX 宏展开没有上限",
+  "ghsaSeverity": "中危 · CVSS 3.1 · CWE-400、CWE-776 · 暂无 CVE",
+  "ghsaProblem": "LaTeX 后端对用户定义的宏展开没有限制，几百字节的 .tex 文件即可耗尽内存和 CPU；parse_timeout 之后解析线程仍继续运行。影响 docling 2.73.0 至 2.153.x 以及 docling-slim 2.92.0 至 2.153.x。",
+  "fix": "修复",
+  "ghsaFix": "维护者在 2.154.0 中修复（#5610、#5611）：为每个文档限制宏展开次数和展开字符数，并在超时时协作式停止解析线程。",
+  "disclosure": "披露",
+  "ghsaDisclosure": "由维护者于 2026-11-27 公布。署名为报告者，与 0x-Apollyon 共同。"
 };
