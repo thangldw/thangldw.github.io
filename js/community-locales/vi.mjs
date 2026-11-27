@@ -178,5 +178,12 @@ export default {
   "pr505Decision": "Phân tích và tạo fec-source-flow, fec-repair-flow, repair-window, rồi ánh xạ các tham số truyền tải FEC sang các thuộc tính đó.",
   "pr2261Title": "Từ chối kid kế thừa trong JWKS",
   "pr2261Problem": "Token có kid trùng tên thuộc tính của Object.prototype như constructor hay __proto__ bị phân giải thành giá trị kế thừa không phải khóa trong cache JWKS, khiến bước xác minh ném TypeError và yêu cầu trả về 500 thay vì 401.",
-  "pr2261Decision": "Dùng object không có prototype cho cache khóa để kid như vậy được coi là không xác định; thêm kiểm thử hồi quy."
+  "pr2261Decision": "Dùng object không có prototype cho cache khóa để kid như vậy được coi là không xác định; thêm kiểm thử hồi quy.",
+  "ghsaTitle": "Mở rộng macro LaTeX không giới hạn",
+  "ghsaSeverity": "Mức vừa · CVSS 3.1 · CWE-400, CWE-776 · chưa có CVE",
+  "ghsaProblem": "Backend LaTeX mở rộng macro do người dùng định nghĩa mà không có giới hạn, nên một tệp .tex vài trăm byte có thể làm cạn bộ nhớ và CPU; parse_timeout để luồng phân tích tiếp tục chạy. Ảnh hưởng docling 2.73.0 đến 2.153.x và docling-slim 2.92.0 đến 2.153.x.",
+  "fix": "Sửa",
+  "ghsaFix": "Maintainer sửa ở 2.154.0 (#5610, #5611): giới hạn số lần mở rộng và số ký tự sau mở rộng cho mỗi tài liệu, và dừng luồng phân tích theo cách hợp tác khi hết thời gian.",
+  "disclosure": "Công bố",
+  "ghsaDisclosure": "Maintainer công bố ngày 2026-11-27. Được ghi nhận là người báo cáo, cùng với 0x-Apollyon."
 };
