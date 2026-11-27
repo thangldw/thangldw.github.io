@@ -176,4 +176,7 @@ export default {
   "pr505Title": "RFC 6364 与 IS-05 FEC SDP",
   "pr505Problem": "SDP 处理无法表达 RFC 6364 中的 SMPTE 2022-5 FEC 流，也无法映射到 IS-05 传输参数。",
   "pr505Decision": "解析并生成 fec-source-flow、fec-repair-flow 和 repair-window，再将 FEC 传输参数映射到这些属性。",
+  "pr2261Title": "拒绝继承而来的 JWKS 密钥 ID",
+  "pr2261Problem": "当 kid 为 constructor、__proto__ 等 Object.prototype 属性名时，会在 JWKS 缓存中解析为继承而来的非密钥值，导致验证抛出 TypeError，请求返回 500 而不是 401。",
+  "pr2261Decision": "密钥缓存改用无原型对象，使此类 kid 被视为未知；并添加回归测试。"
 };

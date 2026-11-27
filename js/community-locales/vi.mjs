@@ -176,4 +176,7 @@ export default {
   "pr505Title": "RFC 6364 và SDP FEC IS-05",
   "pr505Problem": "Xử lý SDP chưa biểu diễn được luồng FEC SMPTE 2022-5 theo RFC 6364 hay ánh xạ chúng sang tham số truyền tải IS-05.",
   "pr505Decision": "Phân tích và tạo fec-source-flow, fec-repair-flow, repair-window, rồi ánh xạ các tham số truyền tải FEC sang các thuộc tính đó.",
+  "pr2261Title": "Từ chối kid kế thừa trong JWKS",
+  "pr2261Problem": "Token có kid trùng tên thuộc tính của Object.prototype như constructor hay __proto__ bị phân giải thành giá trị kế thừa không phải khóa trong cache JWKS, khiến bước xác minh ném TypeError và yêu cầu trả về 500 thay vì 401.",
+  "pr2261Decision": "Dùng object không có prototype cho cache khóa để kid như vậy được coi là không xác định; thêm kiểm thử hồi quy."
 };
