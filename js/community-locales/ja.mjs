@@ -176,4 +176,7 @@ export default {
   "pr505Title": "RFC 6364 と IS-05 FEC SDP",
   "pr505Problem": "SDP 処理は RFC 6364 の SMPTE 2022-5 FEC フローを表現できず、IS-05 の転送パラメータにも対応付けられませんでした。",
   "pr505Decision": "fec-source-flow、fec-repair-flow、repair-window を解析・生成し、FEC の転送パラメータをこれらの属性に対応付けました。",
+  "pr2261Title": "継承されたJWKSキーIDを拒否",
+  "pr2261Problem": "kid が constructor や __proto__ など Object.prototype の名前だと、JWKSキャッシュで鍵ではない継承値に解決され、検証が TypeError を投げて 401 ではなく 500 になっていました。",
+  "pr2261Decision": "キャッシュをプロトタイプなしのオブジェクトにし、そのような kid を未知として扱います。回帰テストを追加。"
 };
